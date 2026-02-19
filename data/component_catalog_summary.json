@@ -1,0 +1,2815 @@
+{
+  "total_components": 362,
+  "with_iterators": 253,
+  "classifications": {},
+  "components": {
+    "sam2fasta": {
+      "classification": "LGT",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "genbank2gff3": {
+      "classification": "RNA-Seq",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "gff3_to_annotab": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "annotab_output_list"
+      ],
+      "converters": 0
+    },
+    "outer_membrane_domain": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "align_tophat_split_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "metagenemark": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "gff_output_list"
+      ],
+      "converters": 0
+    },
+    "make_comparative_circleator_figure": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mpileup": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "mpileup_output_list"
+      ],
+      "converters": 0
+    },
+    "ncbi-blastx": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "bam2coverage": {
+      "classification": "RNA-Seq",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "combine_ncRNA_alignments": {
+      "classification": "",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 1
+    },
+    "celera-assembler": {
+      "classification": "sequence / assembly",
+      "has_iterator": false,
+      "output_formats": [
+        "asm_output_list",
+        "qc_output_list",
+        "chimera_summary_output_list",
+        "chimera_report_output_list",
+        "merge_log_output_list",
+        "scf_fasta_output_list"
+      ],
+      "converters": 0
+    },
+    "glimmerHMM": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "prok_pipeline_check": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "phobos": {
+      "classification": "sequence / masking",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 2
+    },
+    "update_ec_numbers": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "order_paired_list": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "samtools_file_convert": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "filter_bogus_genes": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "fsa_output_list"
+      ],
+      "converters": 0
+    },
+    "nucmer-show-snps": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "snps_output_list"
+      ],
+      "converters": 0
+    },
+    "snap": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "concatenate_files": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "fetch_genbank": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "qiime_fasta_mothur_cnvr": {
+      "classification": "preliminary",
+      "has_iterator": false,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "map_snp_query_pos": {
+      "classification": "snp",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "lgt_bwa_fq": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "sam_output_list"
+      ],
+      "converters": 0
+    },
+    "fastqc_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "restoredb": {
+      "classification": "database / loading",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "SPAdes": {
+      "classification": "assembly",
+      "has_iterator": false,
+      "output_formats": [
+        "fsa_output_list"
+      ],
+      "converters": 0
+    },
+    "mugsyalign": {
+      "classification": "clustering",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bam2bigwig": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 1
+    },
+    "create_cuffsuite_files": {
+      "classification": "RNA-Seq",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "genscan": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "sffinfo": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "accession_output_list",
+        "sequence_output_list",
+        "quality_output_list",
+        "flowgram_output_list",
+        "tab_output_list"
+      ],
+      "converters": 0
+    },
+    "rotate_molecule": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "split_fasta": {
+      "classification": "sequence / manipulation",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "alien_hunter": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "txt_output_list"
+      ],
+      "converters": 0
+    },
+    "sam2lca": {
+      "classification": "LGT",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "mothur_classify_seqs": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "tRNAscan-SE_compress": {
+      "classification": "feature prediction / tRNAs",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "clustalw": {
+      "classification": "alignment / multiple",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "gff3_to_fasta": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "fasta_output_list"
+      ],
+      "converters": 0
+    },
+    "genemark-es": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "gtf_output_list"
+      ],
+      "converters": 2
+    },
+    "profile_gff3": {
+      "classification": "profile",
+      "has_iterator": true,
+      "output_formats": [
+        "prof_output_list"
+      ],
+      "converters": 0
+    },
+    "restore_indices_and_constraints": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "condor_cogs_search": {
+      "classification": "database / manipulation",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "fastaToBsmlWorkingGeneModels": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "fast_tree": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [
+        "tree_output_list"
+      ],
+      "converters": 0
+    },
+    "bsml2ptt": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "ptt_output_list"
+      ],
+      "converters": 1
+    },
+    "mothur_rarefaction_single": {
+      "classification": "unclassified",
+      "has_iterator": true,
+      "output_formats": [
+        "rarefaction_output_list"
+      ],
+      "converters": 0
+    },
+    "chado_report_pages": {
+      "classification": "database / extraction",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "validate_genbank": {
+      "classification": "validation",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "fastx_trimming": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bsml2featurerelationships": {
+      "classification": "unclassified",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "454_mplex_seq_bin_trim": {
+      "classification": "sequence / manipulation",
+      "has_iterator": false,
+      "output_formats": [
+        "filtered_output_list",
+        "discarded_output_list"
+      ],
+      "converters": 0
+    },
+    "edgeR": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "targetp": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "repeatmasker": {
+      "classification": "sequence / masking",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 2
+    },
+    "filter_deseq": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mothur_dist_seqs": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "remove_indices_and_constraints": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bsml2gff3": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "gff3_output_list"
+      ],
+      "converters": 1
+    },
+    "bam_merge": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bwa_mem": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "sam_output_list"
+      ],
+      "converters": 0
+    },
+    "preserve_reads_in_fastq": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "genemark": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "mugsy_callsnps": {
+      "classification": "SNP",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "sfffile": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "sff_output_list"
+      ],
+      "converters": 0
+    },
+    "pick_otus_through_otu_table": {
+      "classification": "phylogenetic",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "selfsim": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "txt_output_list"
+      ],
+      "converters": 0
+    },
+    "bowtie": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "resistome": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "filter_lgt_class_c_genes": {
+      "classification": "LGT",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "ncbi-blastp": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "snp-add-gene-info": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "start_site_curation": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "only_changed_bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "percent_gc": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "ncbi-tblastn": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "elph": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "motif_output_list"
+      ],
+      "converters": 0
+    },
+    "basic_alignment_stats": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "muscle": {
+      "classification": "alignment / multiple",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "getorf": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "fsa_output_list"
+      ],
+      "converters": 0
+    },
+    "fgenesh": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "stap_classifier": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "blastn_plus": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list",
+        "m8_output_list"
+      ],
+      "converters": 3
+    },
+    "move_to_scratch": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "histogram_stacked": {
+      "classification": "visualization",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "genscan-plus": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "nucmer-snp2merged": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 1
+    },
+    "ngap": {
+      "classification": "sequence / properties",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "hmmls": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "htab_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "dump_fasta": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 1
+    },
+    "obo2chado": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "j_ortholog_clusters": {
+      "classification": "clustering",
+      "has_iterator": false,
+      "output_formats": [
+        "fasta_output_list"
+      ],
+      "converters": 0
+    },
+    "filter_fastq": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "fastq_output_list"
+      ],
+      "converters": 0
+    },
+    "trf": {
+      "classification": "feature prediction / tRNAs",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "curate_common_names": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "adjust_bsml_coordinates": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "get_bam_coverage_dx": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "avg_cov_output_list",
+        "breadth_output_list"
+      ],
+      "converters": 0
+    },
+    "create_paired_list_file": {
+      "classification": "RNA-Seq",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mothur_tree_shared": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "aragorn": {
+      "classification": "",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "parse_evidence": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "tab_output_list"
+      ],
+      "converters": 0
+    },
+    "wu-blastn": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "pepstats": {
+      "classification": "sequence / properties",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "soapdenovo": {
+      "classification": "assembly",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "lgt_build_bwa_index": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "fsa_output_list"
+      ],
+      "converters": 0
+    },
+    "sort_sam_by_name": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "lgt_create_validated_bam": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mummer": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "tab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "auto_gene_curation": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "pangenome_blast_parse": {
+      "classification": "unclassified",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bsml2mugsymap": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 1
+    },
+    "tblastn_plus": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list",
+        "m8_output_list"
+      ],
+      "converters": 3
+    },
+    "blast_seq_screen": {
+      "classification": "sequence manipulation",
+      "has_iterator": false,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "split_fastq": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mumi-reduce": {
+      "classification": "sequence / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "delete_bcp": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "complete_study_stage": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "split_paired_files": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "create_amoscmp_input": {
+      "classification": "sequence / assembly",
+      "has_iterator": false,
+      "output_formats": [
+        "fasta_output_list",
+        "qual_output_list"
+      ],
+      "converters": 0
+    },
+    "intergenic_analysis": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "sra2fastq": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 1
+    },
+    "bsml2fasta": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "metagene": {
+      "classification": "feature prediction / ORFs",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "fasta_output_list",
+        "raw_output_list",
+        "tbl_output_list",
+        "gbk_output_list"
+      ],
+      "converters": 1
+    },
+    "cleanse_sgc_database": {
+      "classification": "database / manipulation",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "RNAmmer": {
+      "classification": "feature prediction / RNAs",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "xml_output_list",
+        "gff_output_list",
+        "hmmreport_output_list"
+      ],
+      "converters": 2
+    },
+    "bsml2chado": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "cuffcompare": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "genezilla": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "phylip_dnadist": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "percent_mapped_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "pangenome_make_graphs": {
+      "classification": "unclassified",
+      "has_iterator": true,
+      "output_formats": [
+        "ps_output_list",
+        "eps_output_list"
+      ],
+      "converters": 0
+    },
+    "piecharts": {
+      "classification": "visualization",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "drop_chado_indexes": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mugsyprep": {
+      "classification": "clustering",
+      "has_iterator": false,
+      "output_formats": [
+        "bcp_output_list"
+      ],
+      "converters": 0
+    },
+    "legacy2bsml": {
+      "classification": "database / extraction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 1
+    },
+    "backupdb": {
+      "classification": "database / utilities",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "parse_mpileup_for_positions": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "stap_aligner": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "cufflinks": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "snp_verify": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "auto_annotate": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "cuffdiff_filter": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bepipred": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "psortb": {
+      "classification": "clustering",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "solsnp": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "vcf_output_list"
+      ],
+      "converters": 0
+    },
+    "jaccard": {
+      "classification": "clustering",
+      "has_iterator": true,
+      "output_formats": [
+        "fasta_output_list"
+      ],
+      "converters": 1
+    },
+    "infernal": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "ncbi-blastn_compress": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "create_map_file": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "gkpstore2fastq": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "fastq_output_list"
+      ],
+      "converters": 1
+    },
+    "htseq": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "pseudomolecule2glimmer3": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 2
+    },
+    "align_tophat_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "extract_snp_regions": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "tbl2asn": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "sqn_output_list",
+        "gbf_output_list",
+        "val_output_list",
+        "discrpt_output_list"
+      ],
+      "converters": 2
+    },
+    "uclust": {
+      "classification": "clustering",
+      "has_iterator": true,
+      "output_formats": [
+        "fasta_output_list",
+        "cluster_output_list",
+        "sorted_output_list"
+      ],
+      "converters": 0
+    },
+    "crossbow": {
+      "classification": "alignment",
+      "has_iterator": false,
+      "output_formats": [
+        "snps_output_list"
+      ],
+      "converters": 0
+    },
+    "iprscan": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "validate_bsml": {
+      "classification": "validation",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "split_file": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "make_circleator_figure": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "clovr_metagenomics_tables": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "table_output_list",
+        "paired_table_output_list",
+        "raw_antn_output_list"
+      ],
+      "converters": 0
+    },
+    "tabula_rasa": {
+      "classification": "omnidexterous",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "parse_for_ncRNAs": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "initdb": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "overlap_analysis": {
+      "classification": "structural prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "fastq_to_CA": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "frg_output_list"
+      ],
+      "converters": 0
+    },
+    "lipoprotein_motif": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "samtools_alignment_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "tRNAscan-SE": {
+      "classification": "feature prediction / RNAs",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "filter_merged_table": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "uclust_remove_replicates": {
+      "classification": "clustering",
+      "has_iterator": true,
+      "output_formats": [
+        "cluster_output_list",
+        "replicate_output_list"
+      ],
+      "converters": 0
+    },
+    "amoscmp": {
+      "classification": "sequence / assembly",
+      "has_iterator": true,
+      "output_formats": [
+        "contig_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 0
+    },
+    "cummerbund": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bsml2tbl": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "tbl_output_list"
+      ],
+      "converters": 1
+    },
+    "mothur_collect_single": {
+      "classification": "unclassified",
+      "has_iterator": true,
+      "output_formats": [
+        "sobs_output_list",
+        "simpson_output_list",
+        "shannon_output_list",
+        "np_shannon_output_list",
+        "jack_output_list",
+        "chao_output_list",
+        "ace_output_list"
+      ],
+      "converters": 0
+    },
+    "download_tcga": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "mumsgraph": {
+      "classification": "alignment / multiple",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "pangenome_do_analysis": {
+      "classification": "unclassified",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "ncbi-blastn": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "mothur_unique_seqs": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "names_output_list"
+      ],
+      "converters": 0
+    },
+    "mothur_filter_seqs": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "create_db_list_file": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "glimmer3": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "promote_gene_prediction": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "gff3_to_gbrowse": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "predict_prokaryotic_gene_function": {
+      "classification": "functional prediction",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "lipop": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "tmhmm": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "wrapper_align": {
+      "classification": "RNA-Seq",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bsml2interevidence_fasta": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "fsa_output_list"
+      ],
+      "converters": 1
+    },
+    "lgt_bwa_post_process": {
+      "classification": "LGT",
+      "has_iterator": false,
+      "output_formats": [
+        "mb_bam_output_list",
+        "lgt_h_bam_output_list",
+        "single_bam_output_list",
+        "no_map_bam_output_list",
+        "single_paired_bam_output_list"
+      ],
+      "converters": 0
+    },
+    "mugsycog": {
+      "classification": "clustering",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "wu-tblastn": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "fastortho": {
+      "classification": "clustering",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "metastats": {
+      "classification": "comparative",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "gsnap": {
+      "classification": "alignment",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "fastx_quality_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "samtools_merge": {
+      "classification": "LGT",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "clovr_16S_rdptables": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "table_output_list",
+        "paired_table_output_list"
+      ],
+      "converters": 0
+    },
+    "pileup_to_wig": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 1
+    },
+    "nucmer": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "nucmer_snps": {
+      "classification": "alignment / multiple",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "cuffdiff": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "predotar": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "bmtagger_index": {
+      "classification": "file / indexing",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mothur_summary": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "btab2taxon": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 1
+    },
+    "sam2bam": {
+      "classification": "RNA-Seq",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "blast2lca": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 1
+    },
+    "clovr_metagenomics_prep": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "celera2hawkeye": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "aat_na": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "gap2_output_list"
+      ],
+      "converters": 3
+    },
+    "phage_finder": {
+      "classification": "",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "seg": {
+      "classification": "sequence / masking",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "filter_sequences_by_id": {
+      "classification": "sequence / manipulation",
+      "has_iterator": true,
+      "output_formats": [
+        "seq_output_list"
+      ],
+      "converters": 0
+    },
+    "load_ber_for_manatee": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "aat_aa_masked": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "nap_output_list"
+      ],
+      "converters": 2
+    },
+    "mosaik": {
+      "classification": "alignment",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 0
+    },
+    "megablast": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "velvet_optimiser": {
+      "classification": "assembly",
+      "has_iterator": false,
+      "output_formats": [
+        "contig_output_list"
+      ],
+      "converters": 0
+    },
+    "glk2bsml": {
+      "classification": "database / extraction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 1
+    },
+    "db2fasta": {
+      "classification": "database / extraction",
+      "has_iterator": false,
+      "output_formats": [
+        "fasta_output_list"
+      ],
+      "converters": 0
+    },
+    "pathway_tools_input": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "update_euk_model_sequences": {
+      "classification": "database modification",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "xdformat": {
+      "classification": "file / indexing",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "delete_by_bcp": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "samtools_reference_index": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "train_for_glimmer3_iteration": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "cluster_mapping": {
+      "classification": "cluster analysis",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "chado2flatfile": {
+      "classification": "database / extraction",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "create_pseudomolecules": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "align_bowtie_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "scripture": {
+      "classification": "rnaseq",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "nucmer-delta-filter": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "delta_output_list"
+      ],
+      "converters": 0
+    },
+    "mask_by_analysis": {
+      "classification": "sequence / manipulation",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "fsa_output_list"
+      ],
+      "converters": 1
+    },
+    "mugsy_concat_fasta": {
+      "classification": "alignment / pairwise",
+      "has_iterator": false,
+      "output_formats": [
+        "fsa_output_list"
+      ],
+      "converters": 0
+    },
+    "velvet": {
+      "classification": "assembly",
+      "has_iterator": true,
+      "output_formats": [
+        "sequence_output_list",
+        "roadmap_output_list",
+        "contig_output_list",
+        "stats_output_list",
+        "graph_output_list",
+        "amos_output_list"
+      ],
+      "converters": 0
+    },
+    "mothur_screen_seqs": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "good_align_output_list",
+        "bad_align_output_list",
+        "good_groups_output_list",
+        "bad_groups_output_list",
+        "good_names_output_list",
+        "bad_names_output_list"
+      ],
+      "converters": 0
+    },
+    "prepare_paired_ends_for_velvet": {
+      "classification": "assembly",
+      "has_iterator": false,
+      "output_formats": [
+        "long_output_list",
+        "short_output_list"
+      ],
+      "converters": 0
+    },
+    "open_reading_frames": {
+      "classification": "feature prediction / ORFs",
+      "has_iterator": true,
+      "output_formats": [
+        "fna_output_list",
+        "faa_output_list"
+      ],
+      "converters": 0
+    },
+    "run_workflow": {
+      "classification": "omnidexterous",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "pipeline_summary": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "find_homopolymers": {
+      "classification": "sequence / masking",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 2
+    },
+    "genewise": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "fix_gene_symbols": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "hmmpfam3": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list",
+        "htab_output_list"
+      ],
+      "converters": 3
+    },
+    "genbank2bsml": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "mothur_unique_seq_limit": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "wait": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "download_sra": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "bcpconverter": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "bcp_output_list"
+      ],
+      "converters": 0
+    },
+    "prokpipe_consistency_checks": {
+      "classification": "validation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "split_fasta_fastq": {
+      "classification": "sequence / manipulation",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "hmmpfam": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list",
+        "htab_output_list"
+      ],
+      "converters": 3
+    },
+    "profile_bsml": {
+      "classification": "profile",
+      "has_iterator": true,
+      "output_formats": [
+        "prof_output_list"
+      ],
+      "converters": 0
+    },
+    "assert_disjoint_clusters": {
+      "classification": "cluster analysis",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "islandpath": {
+      "classification": "unclassified",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 2
+    },
+    "dump_table": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 2
+    },
+    "ncbi-tblastx": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "mothur_read_otu": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "rabund_output_list",
+        "shared_output_list"
+      ],
+      "converters": 0
+    },
+    "signalp": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list",
+        "gif_output_list",
+        "eps_output_list",
+        "ps_output_list",
+        "gnu_output_list"
+      ],
+      "converters": 5
+    },
+    "blast2go": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "rpsblast": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "extract_assembly_stats": {
+      "classification": "assembly",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "genbank2gtf": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 1
+    },
+    "mothur_trim_seqs": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "validate_euk_records": {
+      "classification": "database validation",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "scp_files": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "pangenome_merge_results": {
+      "classification": "unclassified",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "remove_db_gene_syms_with_hypos": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "pmarks2bsml": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 2
+    },
+    "filter_dups_lc_seqs": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "bam_output_list"
+      ],
+      "converters": 0
+    },
+    "validate_fasta": {
+      "classification": "validation",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "validate_sgc_records": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "phat": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list",
+        "gff_output_list"
+      ],
+      "converters": 2
+    },
+    "ps_scan": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "fuzznuc": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "htab_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "wga_maf2tree": {
+      "classification": "phylogeny",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "bulk_delete_chado": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "wu-blastx": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "panther": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "replace_defline_with_locusID": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "lgt_bwa": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "bam_output_list"
+      ],
+      "converters": 0
+    },
+    "augustus": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "blast_snp_regions": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "parsed_output_list"
+      ],
+      "converters": 0
+    },
+    "priam_ec_assignment": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list"
+      ],
+      "converters": 1
+    },
+    "ber": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "expression_plots": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "lgt_mpileup": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "mpileup_output_list"
+      ],
+      "converters": 0
+    },
+    "bowtie_build": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "leech": {
+      "classification": "visualization",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "parallel_sort": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "bmtagger": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "sighunt": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [
+        "txt_output_list"
+      ],
+      "converters": 0
+    },
+    "mothur_chimera_slayer": {
+      "classification": "alignment/classification/quality filtering",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "blast_lgt_finder": {
+      "classification": "LGT",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "summarize_mugsy_comparative_pipeline": {
+      "classification": "comparative",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "formatdb_snp": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "validate_chado_records": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "aat_na_masked": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "gap2_output_list"
+      ],
+      "converters": 3
+    },
+    "pangenome_make_profile": {
+      "classification": "unclassified",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "mothur_cluster": {
+      "classification": "clustering",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "blastp_plus": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list",
+        "m8_output_list"
+      ],
+      "converters": 3
+    },
+    "skiff": {
+      "classification": "visualization",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "ksnp": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "qiime_fastq_mothur_cnvr": {
+      "classification": "preliminary",
+      "has_iterator": false,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "p_func": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 1
+    },
+    "validate_gff3": {
+      "classification": "validation",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "make_snp_lists": {
+      "classification": "SNP",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "translate_sequence": {
+      "classification": "sequence / manipulation",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "fsa_output_list"
+      ],
+      "converters": 1
+    },
+    "htseq_count_reads": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "insert_pmarks_in_scaffolds": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "ncbi-blastall": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "fasta2bsml": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "usearch": {
+      "classification": "clustering",
+      "has_iterator": true,
+      "output_formats": [
+        "fasta_output_list",
+        "clusters_output_list",
+        "usearch_output_list"
+      ],
+      "converters": 0
+    },
+    "mothur_align_seqs": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "tophat": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "clean_fasta": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "antigenic": {
+      "classification": "functional prediction",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list",
+        "bsml_output_list"
+      ],
+      "converters": 2
+    },
+    "bwa": {
+      "classification": "alignment",
+      "has_iterator": true,
+      "output_formats": [
+        "bam_output_list"
+      ],
+      "converters": 0
+    },
+    "cvtermpath_closure": {
+      "classification": "unclassified",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "runsql": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "refresh_chado_mart": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "pangenome_make_table": {
+      "classification": "unclassified",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "predict_operons": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "gff3_output_list"
+      ],
+      "converters": 0
+    },
+    "bsml_qc": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [
+        "summary_output_list"
+      ],
+      "converters": 0
+    },
+    "pangenome_make_pangenome": {
+      "classification": "unclassified",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "tag_data": {
+      "classification": "utility",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "remove_subset_of_gis": {
+      "classification": "LGT",
+      "has_iterator": false,
+      "output_formats": [
+        "txt_output_list"
+      ],
+      "converters": 0
+    },
+    "bam2sam": {
+      "classification": "RNA-Seq",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "validate_asn": {
+      "classification": "validation",
+      "has_iterator": true,
+      "output_formats": [
+        "val_output_list",
+        "discrpt_output_list"
+      ],
+      "converters": 0
+    },
+    "run_command": {
+      "classification": "omnidexterous",
+      "has_iterator": false,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "pangenome_fix_headers": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "wu-blastp": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "identify_human_contaminants": {
+      "classification": "unclassified",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "core_qiime": {
+      "classification": "phylogenetic",
+      "has_iterator": false,
+      "output_formats": [
+        "results_output_list",
+        "table_output_list",
+        "paired_table_output_list"
+      ],
+      "converters": 0
+    },
+    "aat_aa": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "nap_output_list"
+      ],
+      "converters": 2
+    },
+    "geneid": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "gff3_output_list"
+      ],
+      "converters": 2
+    },
+    "uchime": {
+      "classification": "alignment/classification/quality filtering",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "psiblast": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "raw_output_list"
+      ],
+      "converters": 3
+    },
+    "quicktree": {
+      "classification": "",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "truncate_chado_mart": {
+      "classification": "database / manipulation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "sff_to_CA": {
+      "classification": "file / conversion",
+      "has_iterator": false,
+      "output_formats": [
+        "frg_output_list"
+      ],
+      "converters": 0
+    },
+    "RAPSearch2": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "btab_output_list",
+        "aln_output_list",
+        "m8_output_list"
+      ],
+      "converters": 3
+    },
+    "rrna_hmm_fs": {
+      "classification": "feature prediction / RNAs",
+      "has_iterator": true,
+      "output_formats": [
+        "rrna_hmm_output_list"
+      ],
+      "converters": 0
+    },
+    "split_multifasta": {
+      "classification": "sequence / manipulation",
+      "has_iterator": true,
+      "output_formats": [
+        "output_list"
+      ],
+      "converters": 0
+    },
+    "deseq": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "prodigal": {
+      "classification": "feature prediction / genes",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "raw_output_list"
+      ],
+      "converters": 2
+    },
+    "error_detector": {
+      "classification": "validation",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "chado2bsml": {
+      "classification": "database / extraction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 1
+    },
+    "assign_dbxref_ids": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "exonerate": {
+      "classification": "alignment / pairwise",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list"
+      ],
+      "converters": 0
+    },
+    "db2bsml": {
+      "classification": "database / extraction",
+      "has_iterator": true,
+      "output_formats": [
+        "bsml_output_list",
+        "fasta_output_list"
+      ],
+      "converters": 1
+    },
+    "mothur_get_oturep": {
+      "classification": "utility",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "rdp_classifier": {
+      "classification": "phylogeny",
+      "has_iterator": true,
+      "output_formats": [
+        "results_output_list"
+      ],
+      "converters": 0
+    },
+    "formatdb": {
+      "classification": "file / indexing",
+      "has_iterator": false,
+      "output_formats": [],
+      "converters": 0
+    },
+    "rpkm_coverage_stats": {
+      "classification": "RNA-Seq",
+      "has_iterator": true,
+      "output_formats": [],
+      "converters": 0
+    },
+    "genbank2fasta": {
+      "classification": "file / conversion",
+      "has_iterator": true,
+      "output_formats": [
+        "fsa_output_list"
+      ],
+      "converters": 1
+    },
+    "hmmer": {
+      "classification": "alignment / model",
+      "has_iterator": true,
+      "output_formats": [
+        "raw_output_list"
+      ],
+      "converters": 0
+    }
+  }
+}
