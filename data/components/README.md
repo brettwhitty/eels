@@ -1,20 +1,26 @@
 # Component JSON Files
 
-These 362 JSON files were created by Brett Whitty as part of the `dev-component` project (2017), which converted Ergatis component XML configurations to JSON format for easier programmatic analysis.
+These 362 JSON files were created by Brett Whitty as part of the `dev-component` project (2017), which converted Ergatis component XML configurations to JSON format for programmatic analysis and preservation.
 
 **Source:** `~/repos/eels/ergatis-eels-devel/dev-component/`
 
 **Original work:** Brett Whitty, 2017
 
-**Context:** Created during evaluation of modern workflow languages (Nextflow, etc.) which lacked proper component/subworkflow concepts. These JSON files preserve Ergatis's hierarchical composition model independently of any specific workflow language.
+**Historical Context:** Ergatis was developed at TIGR/JCVI/IGS (2002-2008), the world leader in producing "Gold-Standard" genome annotations. The system was engineered by talented developers at one of the US's leading Centers of Excellence in Genomics, implementing advanced Grid computing principles for HPC/HTPC environments.
 
-These files represent a complete conversion of the Ergatis component library from XML to structured JSON, preserving:
+**Advanced Features Preserved:**
+- **Hierarchical composition** - Workflows compose components (subworkflows), components compose tools
+- **Reusable subworkflows** - Components as first-class compositional units
+- **Iterator patterns** - Sophisticated parallelization strategies for batch processing
+- **Multi-step execution** - Tool execution, format conversion, validation within single component
+- **Data flow management** - Explicit dependencies and file-based communication
+- **Grid computing integration** - SGE/Grid Engine scheduling, shared filesystem architecture
+
+These JSON files preserve the complete component library structure:
 - Component configuration parameters
 - Tool execution chains
-- Iterator patterns
+- Iterator patterns and parallelization strategies
 - Input/output specifications
-- Converter usage
+- Converter usage and data transformations
 
-This conversion work predates the EELS project and is incorporated here as foundational data for knowledge extraction.
-
-**Important:** Ergatis's component model (2003-2005) is based on Grid computing principles documented in academic literature. Modern workflow languages (Snakemake, Nextflow, etc.) lack these concepts because they were developed without studying the Grid computing foundations.
+This conversion work predates the EELS project and serves as foundational data for knowledge extraction and preservation of institutional expertise from the genomics annotation community.
