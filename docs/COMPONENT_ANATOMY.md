@@ -371,28 +371,30 @@ workflow {
 
 **Components are serial execution units.** The parallelism in Ergatis happens at the **workflow XML level**, not within components. 
 
-When a component uses iterators (i1.xml, i2.xml), it's creating **sub-workflows** - potentially launching thousands of independent workflow instances. This is fundamentally different from modern workflow systems where scatter/gather is a language primitive.
+When a component uses iterators (i1.xml, i2.xml), it's creating **sub-workflows** that are managed by the TIGR Workflow Engine. The entire workflow tree runs within a single workflow engine instance, but the sub-workflows can be distributed across compute nodes.
 
 **Ergatis model:**
 - Workflow XML orchestrates parallel component execution
 - Components define serial processing logic
-- Iterators spawn new workflow instances (sub-workflows)
-- Each sub-workflow can be distributed to different compute nodes
+- Iterators create sub-workflows within the workflow tree
+- Sub-workflows managed by single workflow engine instance
+- Distribution happens at the execution level, not by spawning new engines
 
 **Modern equivalents:**
 - Nextflow: `process` with channel operators for parallelism
 - CWL: `scatter` directive on workflow steps
 - WDL: `scatter` blocks in workflow definitions
 
-The iterator pattern in components is not "implicit parallelization" - it's **explicit sub-workflow spawning**. The equivalent would be a Nextflow process launching 20,000+ Nextflow instances.
+The iterator pattern creates a workflow tree structure, not independent workflow instances.
 
 ### What Works Well
 
 1. **Modular templates** - Reusable iterator patterns
-2. **Explicit sub-workflow spawning** - GROUP_COUNT controls distribution
+2. **Explicit sub-workflow creation** - GROUP_COUNT controls distribution
 3. **Standard directory structure** - Predictable output locations
 4. **Variable inheritance** - Project → Component → Iterator
 5. **Separation of concerns** - Workflow-level parallelism vs component-level logic
+6. **Single engine manages entire workflow tree** - Centralized orchestration
 
 ### What's Complex
 
@@ -400,7 +402,7 @@ The iterator pattern in components is not "implicit parallelization" - it's **ex
 2. **Placeholder syntax** - `$;KEY$;` is verbose
 3. **XML verbosity** - Simple operations require many lines
 4. **Manual wiring** - No automatic output→input matching
-5. **Sub-workflow overhead** - Each iterator group spawns new workflow instance
+5. **Workflow tree structure** - Sub-workflows add complexity
 
 ## Files for Reference
 
