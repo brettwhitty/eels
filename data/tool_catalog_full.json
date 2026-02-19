@@ -1,0 +1,4420 @@
+[
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "01_generatePairLists",
+      "path" : "/usr/local/projects/jorvis/metaref/01_generatePairLists.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "02_runMUMi",
+      "path" : "/usr/local/projects/jorvis/metaref/02_runMUMi.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "03_MUMi",
+      "path" : "/usr/local/projects/jorvis/metaref/03_MUMi.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "04_aggregateScores",
+      "path" : "/usr/local/projects/jorvis/metaref/04_aggregateScores.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "05_clusterSequences",
+      "path" : "/usr/local/projects/jorvis/metaref/05_clusterSequences.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "load_ber_for_manatee"
+      ],
+      "name" : "add_blast_polypeptide_links",
+      "path" : "{{BIN_DIR}}/add_blast_polypeptide_links"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ber"
+      ],
+      "name" : "add_pvalue_to_praze_output",
+      "path" : "{{BIN_DIR}}/add_pvalue_to_praze_output"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "adjust_bsml_coordinates"
+      ],
+      "name" : "adjust_bsml_coordinates",
+      "path" : "{{BIN_DIR}}/adjust_bsml_coordinates"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "alien_hunter"
+      ],
+      "name" : "alien_hunter",
+      "path" : "/usr/local/packages/alien_hunter/alien_hunter"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "align_bowtie_stats"
+      ],
+      "name" : "align_bowtie_stats",
+      "path" : "{{BIN_DIR}}/align_bowtie_stats"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "stap_aligner"
+      ],
+      "name" : "align_to_rRNA_profile",
+      "path" : "/usr/local/packages/STAP/bin/align_to_rRNA_profile.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "align_tophat_split_stats"
+      ],
+      "name" : "align_tophat_split_stats",
+      "path" : "{{BIN_DIR}}/align_tophat_split_stats"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "align_tophat_stats"
+      ],
+      "name" : "align_tophat_stats",
+      "path" : "{{BIN_DIR}}/align_tophat_stats"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pick_otus_through_otu_table"
+      ],
+      "name" : "alpha_rarefaction",
+      "path" : "{{QIIME_PATH}}/bin/alpha_rarefaction.py"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "antigenic"
+      ],
+      "name" : "antigenic",
+      "path" : "/usr/local/packages/EMBOSS/bin/antigenic"
+   },
+   {
+      "biotools" : {
+         "id" : "aragorn",
+         "name" : "aragorn",
+         "url" : "https://bio.tools/aragorn"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "aragorn"
+      ],
+      "name" : "aragorn",
+      "path" : "/usr/local/devel/ANNOTATION/wnelson/aragorn"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_asn"
+      ],
+      "name" : "asndisc",
+      "path" : "/usr/local/bin/asndisc"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_asn"
+      ],
+      "name" : "asnval",
+      "path" : "/usr/local/bin/asnval"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "assert_disjoint_clusters"
+      ],
+      "name" : "assertClustersDisjoint",
+      "path" : "{{BIN_DIR}}/assertClustersDisjoint"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "assign_dbxref_ids"
+      ],
+      "name" : "assign_dbxref_ids",
+      "path" : "{{BIN_DIR}}/assign_dbxref_ids"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "priam_ec_assignment"
+      ],
+      "name" : "assign_ec_from_rps",
+      "path" : "{{BIN_DIR}}/assign_ec_from_rps"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2chado"
+      ],
+      "name" : "assign_pks",
+      "path" : "{{BIN_DIR}}/assign_pks"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "assign_taxa"
+      ],
+      "name" : "assign_taxa",
+      "path" : "{{BIN_DIR}}/assign_taxa"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "auto_annotate"
+      ],
+      "name" : "auto_annotate",
+      "path" : "{{BIN_DIR}}/auto_annotate"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "auto_gene_curation"
+      ],
+      "name" : "auto_gene_curation",
+      "path" : "{{BIN_DIR}}/auto_gene_curation"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bam2bigwig"
+      ],
+      "name" : "bam2bigwig",
+      "path" : "{{BIN_DIR}}/bam2bigwig"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bam2coverage"
+      ],
+      "name" : "bam2coverage",
+      "path" : "{{BIN_DIR}}/bam2coverage"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bam2sam"
+      ],
+      "name" : "bam2sam",
+      "path" : "{{BIN_DIR}}/bam2sam"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bam_merge"
+      ],
+      "name" : "bam_merge",
+      "path" : "{{BIN_DIR}}/bam_merge"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "celera2hawkeye"
+      ],
+      "name" : "bank-transact",
+      "path" : "/opt/opt-packages/bioinf-v1r4b1/AMOS/bin/bank-transact"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2chado",
+         "refresh_chado_mart"
+      ],
+      "name" : "bcpdir2iterator",
+      "path" : "{{BIN_DIR}}/bcpdir2iterator"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "bepipred"
+      ],
+      "name" : "bepipred",
+      "path" : "/local/projects/STREP/bepipred-1.0b/bepipred"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ber"
+      ],
+      "name" : "ber_blast_hit_selector",
+      "path" : "{{BIN_DIR}}/ber_blast_hit_selector"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "j_ortholog_clusters_distributed_work"
+      ],
+      "name" : "best_hit",
+      "path" : "{{BIN_DIR}}/best_hit"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pick_otus_through_otu_table"
+      ],
+      "name" : "beta_diversity_through_3d_plots",
+      "path" : "{{QIIME_PATH}}/bin/beta_diversity_through_3d_plots.py"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "core_qiime"
+      ],
+      "name" : "beta_diversity_through_plots",
+      "path" : "{{BIN_DIR}}/beta_diversity_through_plots"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "454_mplex_seq_bin_trim"
+      ],
+      "name" : "bin_and_trim_barcoded_seqs",
+      "path" : "{{BIN_DIR}}/bin_and_trim_barcoded_seqs"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "blast_snp_regions"
+      ],
+      "name" : "blast_snp_regions",
+      "path" : "{{BIN_DIR}}/blast_snp_regions"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ncbi-blastp",
+         "ncbi-blastn",
+         "ncbi-blastx",
+         "ncbi-blastn_compress",
+         "ncbi-tblastn",
+         "ncbi-tblastx",
+         "ncbi-blastall",
+         "panther"
+      ],
+      "name" : "blastall",
+      "path" : "/usr/bin/blastall"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-blastn"
+      ],
+      "name" : "blastn",
+      "path" : "/usr/local/common/blastn"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-blastp"
+      ],
+      "name" : "blastp",
+      "path" : "/usr/local/common/blastp"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ec_assignment",
+         "psiblast"
+      ],
+      "name" : "blastpgp",
+      "path" : "/usr/local/devel/ANNOTATION/elee/blast/stable/bin/blastpgp"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-blastx"
+      ],
+      "name" : "blastx",
+      "path" : "/usr/local/common/blastx"
+   },
+   {
+      "biotools" : {
+         "id" : "bmtagger",
+         "name" : "bmtagger",
+         "url" : "https://bio.tools/bmtagger"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bmtagger"
+      ],
+      "name" : "bmtagger",
+      "path" : "/usr/local/packages/bmtagger/bmtagger.sh"
+   },
+   {
+      "biotools" : {
+         "id" : "bmtagger",
+         "name" : "bmtagger",
+         "url" : "https://bio.tools/bmtagger"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bmtagger_index"
+      ],
+      "name" : "bmtool",
+      "path" : "/usr/local/packages/bmtagger/bmtool"
+   },
+   {
+      "biotools" : {
+         "id" : "bowtie",
+         "name" : "Bowtie",
+         "url" : "https://bio.tools/bowtie"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bowtie",
+         "tophat"
+      ],
+      "name" : "bowtie",
+      "path" : "/usr/local/bin/bowtie"
+   },
+   {
+      "biotools" : {
+         "id" : "bowtie",
+         "name" : "Bowtie",
+         "url" : "https://bio.tools/bowtie"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bowtie_build"
+      ],
+      "name" : "bowtie-build",
+      "path" : "/usr/local/bin/bowtie-build"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bowtie_build"
+      ],
+      "name" : "bowtie_build",
+      "path" : "{{BIN_DIR}}/bowtie_build"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml_qc"
+      ],
+      "name" : "bsml_qc",
+      "path" : "{{BIN_DIR}}/bsml_qc"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "btab2taxon"
+      ],
+      "name" : "btab2taxon",
+      "path" : "{{BIN_DIR}}/btab2taxon"
+   },
+   {
+      "biotools" : {
+         "id" : "bwa",
+         "name" : "BWA",
+         "url" : "https://bio.tools/bwa"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared",
+         "bwa",
+         "lgt_bwa",
+         "lgt_build_bwa_index"
+      ],
+      "name" : "bwa",
+      "path" : "/usr/local/packages/bwa-0.7.12/bwa"
+   },
+   {
+      "biotools" : {
+         "id" : "bwa",
+         "name" : "BWA",
+         "url" : "https://bio.tools/bwa"
+      },
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bwa_align"
+      ],
+      "name" : "bwa_align",
+      "path" : "/local/projects/ergatis/package-devel/bin/bwa_align.sh"
+   },
+   {
+      "biotools" : {
+         "id" : "bwa",
+         "name" : "BWA",
+         "url" : "https://bio.tools/bwa"
+      },
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bwa_index"
+      ],
+      "name" : "bwa_index",
+      "path" : "/local/projects/ergatis/package-devel/bin/bwa_index.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bwa"
+      ],
+      "name" : "bwa_wrapper",
+      "path" : "{{BIN_DIR}}/bwa_wrapper"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "ksnp",
+         "ber",
+         "ber",
+         "bsml2chado",
+         "gkpstore2fastq"
+      ],
+      "name" : "cat",
+      "path" : "cat"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "chado2flatfile"
+      ],
+      "name" : "chado2flatfile",
+      "path" : "{{BIN_DIR}}/chado2flatfile"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pathway_tools_input"
+      ],
+      "name" : "chado_aengine_dumper",
+      "path" : "{{BIN_DIR}}/chado_aengine_dumper"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "refresh_chado_mart"
+      ],
+      "name" : "chadoToChadoMart",
+      "path" : "{{BIN_DIR}}/chadoToChadoMart"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bulk_delete_chado"
+      ],
+      "name" : "checkAndDelete",
+      "path" : "{{BIN_DIR}}/checkAndDelete"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "initdb"
+      ],
+      "name" : "checkDatabase",
+      "path" : "{{BIN_DIR}}/checkDatabase"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bulk_delete_chado"
+      ],
+      "name" : "checkDeletedTableRecordCounts",
+      "path" : "{{BIN_DIR}}/checkDeletedTableRecordCounts"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_chado_records"
+      ],
+      "name" : "checkFeaturelocRecords",
+      "path" : "{{BIN_DIR}}/checkFeaturelocRecords"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_chado_records",
+         "validate_chado_records",
+         "validate_chado_records",
+         "validate_chado_records",
+         "validate_chado_records",
+         "validate_chado_records",
+         "validate_chado_records",
+         "validate_chado_records"
+      ],
+      "name" : "checkForDuplicatePropertyTuples",
+      "path" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_chado_records"
+      ],
+      "name" : "checkForFeatureResiduesSeqlenMismatches",
+      "path" : "{{BIN_DIR}}/checkForFeatureResiduesSeqlenMismatches"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "piecharts"
+      ],
+      "name" : "cherrypie",
+      "path" : "/opt/CherryPie/cherrypie"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "make_circleator_figure",
+         "make_comparative_circleator_figure"
+      ],
+      "name" : "circleator",
+      "path" : "/usr/local/packages/circleator/bin/circleator"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "filter_lgt_class_c_genes"
+      ],
+      "name" : "classify_class_c_genes",
+      "path" : "{{BIN_DIR}}/classify_class_c_genes"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "clean_fasta"
+      ],
+      "name" : "clean_fasta",
+      "path" : "{{BIN_DIR}}/clean_fasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "clovr_16S_rdptables"
+      ],
+      "name" : "clovr16S_rdp_tables",
+      "path" : "{{BIN_DIR}}/clovr16S_rdp_tables.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "clovr_metagenomics_prep"
+      ],
+      "name" : "clovr_metagenomics_prep",
+      "path" : "{{BIN_DIR}}/clovr_metagenomics_prep.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "clovr_metagenomics_tables"
+      ],
+      "name" : "clovr_metagenomics_tsvtables",
+      "path" : "{{BIN_DIR}}/clovr_metagenomics_tsvtables.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsy_callsnps_distributed"
+      ],
+      "name" : "clovr_snps_to_vcf",
+      "path" : "{{BIN_DIR}}/clovr_snps_to_vcf"
+   },
+   {
+      "biotools" : {
+         "id" : "clustalw",
+         "name" : "Clustal 1.8 (Clustal W, Clustal X)",
+         "url" : "https://bio.tools/clustalw"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "clustalw"
+      ],
+      "name" : "clustalw",
+      "path" : "/usr/local/devel/ANNOTATION/clustalw1.83/clustalw"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "jaccard"
+      ],
+      "name" : "cluster",
+      "path" : "/opt/ergatis/bin/cluster"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "jaccard"
+      ],
+      "name" : "clusterBsmlPairwiseAlignments",
+      "path" : "{{BIN_DIR}}/clusterBsmlPairwiseAlignments"
+   },
+   {
+      "biotools" : {
+         "id" : "infernal",
+         "name" : "Infernal",
+         "url" : "https://bio.tools/infernal"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "infernal"
+      ],
+      "name" : "cmsearch",
+      "path" : "/usr/local/bin/cmsearch"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "j_ortholog_clusters_distributed_work"
+      ],
+      "name" : "CogBsmlLoader",
+      "path" : "{{BIN_DIR}}/CogBsmlLoader"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsycog_distributed_work"
+      ],
+      "name" : "CogProteinFasta",
+      "path" : "{{BIN_DIR}}/CogProteinFasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "j_ortholog_clusters_distributed_work",
+         "jaccard"
+      ],
+      "name" : "CogProteinFastaNoMap",
+      "path" : "{{BIN_DIR}}/CogProteinFastaNoMap"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "combine_ncRNA_alignments"
+      ],
+      "name" : "combine_ncRNA_alignemnts",
+      "path" : "{{BIN_DIR}}/combine_ncRNA_alignemnts"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "remove_subset_of_gis"
+      ],
+      "name" : "comm",
+      "path" : "comm"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "complete_study_stage"
+      ],
+      "name" : "complete_study_stage",
+      "path" : "{{BIN_DIR}}/complete_study_stage"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "condor_cogs_search"
+      ],
+      "name" : "condor_cog_search",
+      "path" : "{{BIN_DIR}}/condor_cog_search"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "454_mplex_seq_bin_trim"
+      ],
+      "name" : "count_barcoded_seqs",
+      "path" : "{{BIN_DIR}}/count_barcoded_seqs"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_fasta"
+      ],
+      "name" : "countHeadersWithoutSequence",
+      "path" : "{{BIN_DIR}}/countHeadersWithoutSequence"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "muscle",
+         "dump_table",
+         "clustalw",
+         "aat_aa_masked",
+         "aat_aa"
+      ],
+      "name" : "cp",
+      "path" : "cp"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsycog_distributed_work"
+      ],
+      "name" : "cp {{GENOMIC_MULTIFASTA}} {{GENOMIC_FASTA_COPY}}",
+      "path" : "cp {{GENOMIC_MULTIFASTA}} {{GENOMIC_FASTA_COPY}}"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "create_amoscmp_input"
+      ],
+      "name" : "create_amoscmp_input",
+      "path" : "{{BIN_DIR}}/create_amoscmp_input"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ber",
+         "ber"
+      ],
+      "name" : "create_ber_db",
+      "path" : "{{BIN_DIR}}/create_ber_db.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "summarize_mugsy_comparative_pipeline"
+      ],
+      "name" : "create_comparative_summary_report",
+      "path" : "{{BIN_DIR}}/create_comparative_summary_report"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "create_cuffsuite_files"
+      ],
+      "name" : "create_cuffsuite_files",
+      "path" : "{{BIN_DIR}}/create_cuffsuite_files"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "create_map_file"
+      ],
+      "name" : "create_map_file",
+      "path" : "{{BIN_DIR}}/create_map_file"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "create_pseudomolecules"
+      ],
+      "name" : "create_pseudomolecules",
+      "path" : "{{BIN_DIR}}/create_pseudomolecules"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pathway_tools_input"
+      ],
+      "name" : "create_ptools_input_files",
+      "path" : "{{BIN_DIR}}/create_ptools_input_files"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "core_qiime",
+         "core_qiime",
+         "core_qiime",
+         "core_qiime",
+         "core_qiime"
+      ],
+      "name" : "Create_Qiime_tables",
+      "path" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bulk_delete_chado"
+      ],
+      "name" : "createSelectRecordCountsSQL",
+      "path" : "{{BIN_DIR}}/createSelectRecordCountsSQL"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bulk_delete_chado"
+      ],
+      "name" : "createViewsSQL",
+      "path" : "{{BIN_DIR}}/createViewsSQL"
+   },
+   {
+      "biotools" : {
+         "id" : "crossbow",
+         "name" : "Crossbow",
+         "url" : "https://bio.tools/crossbow"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "crossbow"
+      ],
+      "name" : "crossbow",
+      "path" : "/opt/crossbow/local/crossbow.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "cufflinks",
+         "name" : "Cufflinks",
+         "url" : "https://bio.tools/cufflinks"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cuffcompare"
+      ],
+      "name" : "cuffcompare",
+      "path" : "/usr/local/bin/cuffcompare"
+   },
+   {
+      "biotools" : {
+         "id" : "cufflinks",
+         "name" : "Cufflinks",
+         "url" : "https://bio.tools/cufflinks"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cuffdiff"
+      ],
+      "name" : "cuffdiff",
+      "path" : "/usr/local/bin/cuffdiff"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cuffdiff_filter"
+      ],
+      "name" : "cuffdiff_filter",
+      "path" : "{{BIN_DIR}}/cuffdiff_filter"
+   },
+   {
+      "biotools" : {
+         "id" : "cufflinks",
+         "name" : "Cufflinks",
+         "url" : "https://bio.tools/cufflinks"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cufflinks"
+      ],
+      "name" : "cufflinks",
+      "path" : "/usr/local/bin/cufflinks"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cuffmerge"
+      ],
+      "name" : "cuffmerge",
+      "path" : "/usr/local/bin/cuffmerge"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cummerbund"
+      ],
+      "name" : "cummerbund",
+      "path" : "{{BIN_DIR}}/cummerbund"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "curate_common_names"
+      ],
+      "name" : "curate_common_names",
+      "path" : "{{BIN_DIR}}/curate_common_names"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "qiime_fasta_mothur_cnvr"
+      ],
+      "name" : "dataprep_dual16S",
+      "path" : "{{BIN_DIR}}/dataprep_dual16S.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "drop_chado_indexes",
+         "drop_chado_indexes",
+         "restoredb",
+         "restoredb",
+         "restoredb",
+         "restoredb",
+         "restore_indices_and_constraints",
+         "restore_indices_and_constraints",
+         "initdb",
+         "initdb",
+         "initdb",
+         "initdb",
+         "initdb",
+         "initdb",
+         "initdb",
+         "remove_indices_and_constraints",
+         "remove_indices_and_constraints",
+         "truncate_chado_mart",
+         "delete_by_bcp",
+         "delete_by_bcp",
+         "bsml2chado",
+         "bsml2chado",
+         "bsml2chado",
+         "bsml2chado",
+         "bsml2chado",
+         "delete_bcp",
+         "delete_bcp",
+         "delete_bcp",
+         "runsql",
+         "bulk_delete_chado",
+         "bulk_delete_chado",
+         "bulk_delete_chado",
+         "bulk_delete_chado",
+         "bulk_delete_chado"
+      ],
+      "name" : "ddl2iterator",
+      "path" : "{{BIN_DIR}}/ddl2iterator"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "dds",
+      "path" : "/usr/local/devel/ANNOTATION/elee/bin/aat/dds"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "dump_table"
+      ],
+      "name" : "deleteOverlappingGenes",
+      "path" : "{{BIN_DIR}}/deleteOverlappingGenes"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "nucmer-delta-filter"
+      ],
+      "name" : "delta-filter",
+      "path" : "/usr/local/bin/delta-filter"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "update_euk_model_sequences"
+      ],
+      "name" : "deriveCDSSequences",
+      "path" : "{{BIN_DIR}}/deriveCDSSequences"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "deseq"
+      ],
+      "name" : "deseq",
+      "path" : "{{BIN_DIR}}/deseq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "phylip_dnadist"
+      ],
+      "name" : "dnadist_worker_wrapper",
+      "path" : "{{BIN_DIR}}/dnadist_worker_wrapper"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "download_sra"
+      ],
+      "name" : "download_sra",
+      "path" : "{{BIN_DIR}}/download_sra"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "download_tcga"
+      ],
+      "name" : "download_tcga",
+      "path" : "{{BIN_DIR}}/download_tcga"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked"
+      ],
+      "name" : "dps",
+      "path" : "/usr/local/devel/ANNOTATION/elee/bin/aat/dps"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "initdb"
+      ],
+      "name" : "dropChadoObjects",
+      "path" : "{{BIN_DIR}}/dropChadoObjects"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "dump_fasta"
+      ],
+      "name" : "dump_fasta",
+      "path" : "{{BIN_DIR}}/dump_fasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "dump_table",
+         "dump_table"
+      ],
+      "name" : "dump_table",
+      "path" : "{{BIN_DIR}}/dump_table"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "edgeR"
+      ],
+      "name" : "edgeR",
+      "path" : "{{BIN_DIR}}/edgeR"
+   },
+   {
+      "biotools" : {
+         "id" : "glimmer",
+         "name" : "Glimmer",
+         "url" : "https://bio.tools/glimmer"
+      },
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "train_for_glimmer3_iteration"
+      ],
+      "name" : "elph",
+      "path" : "/usr/local/bin/elph"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "rrna_hmm_fs"
+      ],
+      "name" : "env",
+      "path" : "env"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "error_detector"
+      ],
+      "name" : "error_detector",
+      "path" : "{{BIN_DIR}}/error_detector"
+   },
+   {
+      "biotools" : {
+         "id" : "exonerate",
+         "name" : "Exonerate",
+         "url" : "https://bio.tools/exonerate"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "exonerate"
+      ],
+      "name" : "exonerate",
+      "path" : "/usr/local/packages/exonerate/bin/exonerate"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "expression_plots"
+      ],
+      "name" : "expression_plots",
+      "path" : "{{BIN_DIR}}/expression_plots"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked",
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "ext",
+      "path" : "/usr/local/bin/ext"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked",
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "extCollapse",
+      "path" : "/usr/local/common/extCollapse.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "extract_assembly_stats"
+      ],
+      "name" : "extract_assembly_stats",
+      "path" : "{{BIN_DIR}}/extract_assembly_stats"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ber"
+      ],
+      "name" : "extract_blast_hits_by_id",
+      "path" : "{{BIN_DIR}}/extract_blast_hits_by_id"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2chado"
+      ],
+      "name" : "extract_checksums",
+      "path" : "{{BIN_DIR}}/extract_checksums"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "extract_snp_regions"
+      ],
+      "name" : "extract_snp_regions",
+      "path" : "{{BIN_DIR}}/extract_snp_regions"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumsgraph"
+      ],
+      "name" : "fasta2seqlen",
+      "path" : "{{BIN_DIR}}/fasta2seqlen"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "fastaToBsmlWorkingGeneModels"
+      ],
+      "name" : "fastaToBsmlWorkingGeneModels",
+      "path" : "{{BIN_DIR}}/fastaToBsmlWorkingGeneModels"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "fastortho_distributed"
+      ],
+      "name" : "FastOrtho",
+      "path" : "{{FASTORTHO_BIN}}/FastOrtho"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "fastortho"
+      ],
+      "name" : "fastortho_write_config",
+      "path" : "{{BIN_DIR}}/fastortho_write_config"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "fastq_to_CA"
+      ],
+      "name" : "fastq_to_CA",
+      "path" : "{{BIN_DIR}}/fastq_to_CA"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "fastqc_stats"
+      ],
+      "name" : "fastqc_stats",
+      "path" : "{{BIN_DIR}}/fastqc_stats"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fastq_to_CA"
+      ],
+      "name" : "fastqToCA",
+      "path" : "/usr/local/packages/wgs-assembler-6.1/Linux-amd64/bin/fastqToCA"
+   },
+   {
+      "biotools" : {
+         "id" : "fasttree",
+         "name" : "FastTree",
+         "url" : "https://bio.tools/fasttree"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fast_tree"
+      ],
+      "name" : "FastTree",
+      "path" : "/usr/local/bioinf/FastTree/FastTree"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fastx_quality_stat"
+      ],
+      "name" : "fastx_quality_stats",
+      "path" : "/usr/local/bin/fastx_quality_stats"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fastx_trimming"
+      ],
+      "name" : "fastx_trimmer",
+      "path" : "/usr/local/bin/fastx_trimmer"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "fastx_trimming"
+      ],
+      "name" : "fastx_trimming",
+      "path" : "{{BIN_DIR}}/fastx_trimming"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsycog_distributed_work"
+      ],
+      "name" : "featureindex.pl {{MUGSY_INDEX}}",
+      "path" : "{{MUGSY_MAPPING_INSTALL_DIR}}/featureindex.pl {{MUGSY_INDEX}}"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "fetch_genbank"
+      ],
+      "name" : "fetch_genbank",
+      "path" : "{{BIN_DIR}}/fetch_genbank"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "remove_subset_of_gis"
+      ],
+      "name" : "fetch_gis_from_taxon_id",
+      "path" : "{{BIN_DIR}}/fetch_gis_from_taxon_id"
+   },
+   {
+      "biotools" : {
+         "id" : "fgenesh",
+         "name" : "FGENESH",
+         "url" : "https://bio.tools/fgenesh"
+      },
+      "category" : "5. Closed-source private tools",
+      "category_id" : "closed_source",
+      "components" : [
+         "fgenesh"
+      ],
+      "name" : "fgenesh",
+      "path" : "/usr/local/devel/ANNOTATION/euk_genome_control/bin/fgenesh/Linux/fgenesh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked",
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "filter",
+      "path" : "/usr/local/common/filter.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "resistome"
+      ],
+      "name" : "filter_blast_output",
+      "path" : "{{BIN_DIR}}/filter_blast_output"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "filter_bogus_genes"
+      ],
+      "name" : "filter_bogus_genes",
+      "path" : "{{BIN_DIR}}/filter_bogus_genes"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "filter_deseq"
+      ],
+      "name" : "filter_deseq",
+      "path" : "{{BIN_DIR}}/filter_deseq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "filter_dups_lc_seqs"
+      ],
+      "name" : "filter_dups_lc_seqs",
+      "path" : "{{BIN_DIR}}/filter_dups_lc_seqs"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "filter_fastq"
+      ],
+      "name" : "filter_fastq",
+      "path" : "{{BIN_DIR}}/filter_fastq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "blast_lgt_finder"
+      ],
+      "name" : "filter_lgt_best_hit",
+      "path" : "{{BIN_DIR}}/filter_lgt_best_hit"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "filter_merged_table"
+      ],
+      "name" : "filter_merged_table",
+      "path" : "{{BIN_DIR}}/filter_merged_table"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "filter_sequences_by_id"
+      ],
+      "name" : "filter_sequences_by_id",
+      "path" : "{{BIN_DIR}}/filter_sequences_by_id"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "assign_taxa"
+      ],
+      "name" : "filter_subjects_based_on_align_score",
+      "path" : "{{BIN_DIR}}/filter_subjects_based_on_align_score"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumsgraph",
+         "mumsgraph"
+      ],
+      "name" : "filtermummer",
+      "path" : "{{BIN_DIR}}/filtermummer"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "trf",
+         "bsml2chado",
+         "iprscan"
+      ],
+      "name" : "find",
+      "path" : "find"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "find_homopolymers"
+      ],
+      "name" : "find_homopolymers",
+      "path" : "{{BIN_DIR}}/find_homopolymers.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "tbl2asn"
+      ],
+      "name" : "fix_gbk",
+      "path" : "{{BIN_DIR}}/fix_gbk"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "dump_table",
+         "fix_gene_symbols"
+      ],
+      "name" : "fix_gene_symbols",
+      "path" : "{{BIN_DIR}}/fix_gene_symbols"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2fasta"
+      ],
+      "name" : "fix_nuc_fasta",
+      "path" : "{{BIN_DIR}}/fix_nuc_fasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "uclust"
+      ],
+      "name" : "format_uclust_fasta_ids",
+      "path" : "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{BIN_DIR}}/format_uclust_fasta_ids"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "dump_table",
+         "dump_fasta"
+      ],
+      "name" : "format_velvet_assembled_AGP",
+      "path" : "{{BIN_DIR}}/format_velvet_assembled_AGP"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "formatdb"
+      ],
+      "name" : "formatdb",
+      "path" : "{{BIN_DIR}}/formatdb"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "formatdb_snp"
+      ],
+      "name" : "formatdb_snp",
+      "path" : "{{BIN_DIR}}/formatdb_snp"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "phat"
+      ],
+      "name" : "fullphat",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/phat/fullphat"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fuzznuc"
+      ],
+      "name" : "fuzznuc",
+      "path" : "/usr/local/packages/EMBOSS/bin/fuzznuc"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "gap2",
+      "path" : "/usr/local/bin/gap2"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "genbank2gtf"
+      ],
+      "name" : "genbank2gtf",
+      "path" : "{{BIN_DIR}}/genbank2gtf"
+   },
+   {
+      "biotools" : {
+         "id" : "geneid",
+         "name" : "Geneid",
+         "url" : "https://bio.tools/geneid"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "geneid"
+      ],
+      "name" : "geneid",
+      "path" : "/usr/local/packages/geneid/bin/geneid"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "chado_report_pages"
+      ],
+      "name" : "generateChadoReportPages",
+      "path" : "{{BIN_DIR}}/generateChadoReportPages"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_sgc_records"
+      ],
+      "name" : "generateCheckSmallGenomeDBReport",
+      "path" : "{{BIN_DIR}}/generateCheckSmallGenomeDBReport.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "genewise",
+         "name" : "GeneWise (EBI)",
+         "url" : "https://bio.tools/genewise"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "genewise"
+      ],
+      "name" : "genewise",
+      "path" : "/usr/local/devel/ANNOTATION/EGC_utilities/WISE2/wise2.2.0/src/bin/genewise"
+   },
+   {
+      "biotools" : {
+         "id" : "genezilla",
+         "name" : "GeneZilla",
+         "url" : "https://bio.tools/genezilla"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "genezilla"
+      ],
+      "name" : "genezilla",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/opt/genezilla"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ksnp"
+      ],
+      "name" : "genome_names",
+      "path" : "{{KSNP_DIR}}/genome_names.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "blast_seq_screen"
+      ],
+      "name" : "get_blast_querynames",
+      "path" : "{{BIN_DIR}}/get_blast_querynames.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "resistome"
+      ],
+      "name" : "get_filtered_reads",
+      "path" : "{{BIN_DIR}}/get_filtered_reads"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "resistome"
+      ],
+      "name" : "get_read_length",
+      "path" : "{{BIN_DIR}}/get_read_length"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "resistome"
+      ],
+      "name" : "get_resistome_table",
+      "path" : "{{BIN_DIR}}/get_resistome_table"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "metagene"
+      ],
+      "name" : "get_seq_by_metagene",
+      "path" : "{{BIN_DIR}}/get_seq_by_metagene"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "identify_human_contaminants"
+      ],
+      "name" : "get_seq_included",
+      "path" : "{{BIN_DIR}}/get_seq_included"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "getorf"
+      ],
+      "name" : "getorf",
+      "path" : "{{EMBOSS_BIN}}/getorf"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "gff3_to_annotab"
+      ],
+      "name" : "gff3_to_annotab",
+      "path" : "{{BIN_DIR}}/gff3_to_annotab"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "gff3_to_fasta"
+      ],
+      "name" : "gff3_to_fasta",
+      "path" : "{{BIN_DIR}}/gff3_to_fasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "gff3_to_gbrowse"
+      ],
+      "name" : "gff3_to_gbrowse",
+      "path" : "{{PYTHON_EXEC}} {{BIN_DIR}}/gff3_to_gbrowse.py"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "profile_gff3"
+      ],
+      "name" : "gff3Profiler",
+      "path" : "{{BIN_DIR}}/gff3Profiler"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_gff3"
+      ],
+      "name" : "gff3Valid",
+      "path" : "{{BIN_DIR}}/gff3Valid"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "gkpstore2fastq"
+      ],
+      "name" : "gkpstore2fastq",
+      "path" : "{{BIN_DIR}}/gkpstore2fastq"
+   },
+   {
+      "biotools" : {
+         "id" : "glimmer",
+         "name" : "Glimmer",
+         "url" : "https://bio.tools/glimmer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "glimmer3"
+      ],
+      "name" : "glimmer3",
+      "path" : "/usr/local/bin/glimmer3"
+   },
+   {
+      "biotools" : {
+         "id" : "glimmer-hmm",
+         "name" : "Glimmer-HMM",
+         "url" : "https://bio.tools/glimmer-hmm"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "glimmerHMM"
+      ],
+      "name" : "glimmerhmm",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/glimmerHMM/glimmerhmm"
+   },
+   {
+      "biotools" : {
+         "id" : "genemark",
+         "name" : "GeneMark",
+         "url" : "https://bio.tools/genemark"
+      },
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "genemark-es"
+      ],
+      "name" : "gm_es",
+      "path" : "/usr/local/packages/GeneMarkHMM_ES_64_v2.3a/gm_es.pl"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "gsnap"
+      ],
+      "name" : "gmap_setup",
+      "path" : "/usr/local/bin/gmap_setup"
+   },
+   {
+      "biotools" : {
+         "id" : "genemark",
+         "name" : "GeneMark",
+         "url" : "https://bio.tools/genemark"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "genemark"
+      ],
+      "name" : "gmhmme3",
+      "path" : "/usr/local/bin/gmhmme3"
+   },
+   {
+      "biotools" : {
+         "id" : "metagenemark",
+         "name" : "MetaGeneMark",
+         "url" : "https://bio.tools/metagenemark"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "metagenemark"
+      ],
+      "name" : "gmhmmp",
+      "path" : "/usr/local/packages/metagenemark/gmhmmp"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "gsnap"
+      ],
+      "name" : "gsnap",
+      "path" : "/usr/local/bin/gsnap"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "panther"
+      ],
+      "name" : "gunzip",
+      "path" : "/usr/bin/gunzip"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumsgraph"
+      ],
+      "name" : "gvpr",
+      "path" : "gvpr"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "uclust",
+         "uclust",
+         "uclust",
+         "uclust"
+      ],
+      "name" : "g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}",
+      "path" : "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "hadoop",
+      "path" : "/opt/hadoop/bin/hadoop"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "histogram_stacked"
+      ],
+      "name" : "histogram_stacked",
+      "path" : "/opt/histogram/histogram_stacked"
+   },
+   {
+      "biotools" : {
+         "id" : "HMMER2",
+         "name" : "HMMER2",
+         "url" : "https://bio.tools/HMMER2"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "hmmls"
+      ],
+      "name" : "hmmls",
+      "path" : "/usr/local/bin/hmmls"
+   },
+   {
+      "biotools" : {
+         "id" : "HMMER2",
+         "name" : "HMMER2",
+         "url" : "https://bio.tools/HMMER2"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "hmmpfam"
+      ],
+      "name" : "hmmpfam",
+      "path" : "/usr/bin/hmmpfam"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "hmmpfam"
+      ],
+      "name" : "hmmpfam2htab",
+      "path" : "{{BIN_DIR}}/hmmpfam2htab"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "hmmpfam3"
+      ],
+      "name" : "hmmpfam32htab",
+      "path" : "{{BIN_DIR}}/hmmpfam32htab"
+   },
+   {
+      "biotools" : {
+         "id" : "hmmer3",
+         "name" : "HMMER3",
+         "url" : "https://bio.tools/hmmer3"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "hmmpfam3"
+      ],
+      "name" : "hmmscan",
+      "path" : "/usr/local/packages/hmmer-3.0/bin/hmmscan"
+   },
+   {
+      "biotools" : {
+         "id" : "hmmer3",
+         "name" : "HMMER3",
+         "url" : "https://bio.tools/hmmer3"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "panther",
+         "hmmer"
+      ],
+      "name" : "hmmsearch",
+      "path" : "/usr/local/bin/hmmsearch"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "htseq"
+      ],
+      "name" : "htseq",
+      "path" : "{{BIN_DIR}}/htseq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "htseq_count_reads"
+      ],
+      "name" : "htseq_count_reads",
+      "path" : "{{BIN_DIR}}/htseq_count_reads.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "identify_human_contaminants"
+      ],
+      "name" : "identify_human_contaminants",
+      "path" : "{{BIN_DIR}}/identify_human_contaminants"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "insert_pmarks_in_scaffolds"
+      ],
+      "name" : "insert_pmarks_in_scaffolds",
+      "path" : "{{BIN_DIR}}/insert_pmarks_in_scaffolds"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "intergenic_analysis"
+      ],
+      "name" : "intergenic_analysis",
+      "path" : "{{BIN_DIR}}/intergenic_analysis"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "iprscan"
+      ],
+      "name" : "iprscan",
+      "path" : "/usr/local/packages/iprscan/bin/iprscan.sh"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "filter_dups_lc_seqs",
+         "rdp_classifier"
+      ],
+      "name" : "java",
+      "path" : "/usr/local/packages/java-jre-1.8.0/bin/java"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "solsnp"
+      ],
+      "name" : "java -jar {{SOLSNP_EXEC}}",
+      "path" : "java -jar {{SOLSNP_EXEC}}"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumsgraph"
+      ],
+      "name" : "join",
+      "path" : "join"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ksnp"
+      ],
+      "name" : "ksnp-add-gene-info",
+      "path" : "{{BIN_DIR}}/ksnp-add-gene-info"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ksnp"
+      ],
+      "name" : "ksnp_merge_reference",
+      "path" : "{{BIN_DIR}}/ksnp_merge_reference"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ksnp"
+      ],
+      "name" : "ksnp_to_addgeneinfo",
+      "path" : "{{BIN_DIR}}/ksnp_to_addgeneinfo"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "leech"
+      ],
+      "name" : "leech",
+      "path" : "/opt/leech/leech"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_build_bwa_index"
+      ],
+      "name" : "lgt_build_index",
+      "path" : "{{BIN_DIR}}/lgt_build_index"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_bwa",
+         "lgt_bwa_fq",
+         "lgt_bwa_fq"
+      ],
+      "name" : "lgt_bwa",
+      "path" : "{{BIN_DIR}}/lgt_bwa"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_bwa_post_process",
+         "lgt_bwa_fq"
+      ],
+      "name" : "lgt_bwa_post_process",
+      "path" : "{{BIN_DIR}}/lgt_bwa_post_process"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_bwa_fq"
+      ],
+      "name" : "lgt_bwa_rm",
+      "path" : "{{BIN_DIR}}/lgt_bwa_rm.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_bwa_fq"
+      ],
+      "name" : "lgt_bwa_zip",
+      "path" : "{{BIN_DIR}}/lgt_bwa_zip.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_create_validated_bam"
+      ],
+      "name" : "lgt_create_validated_bam",
+      "path" : "{{BIN_DIR}}/lgt_create_validated_bam"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_bwa"
+      ],
+      "name" : "lgt_filter_reads",
+      "path" : "{{BIN_DIR}}/lgt_filter_reads"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "blast_lgt_finder"
+      ],
+      "name" : "lgt_finder",
+      "path" : "{{BIN_DIR}}/lgt_finder"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lgt_mpileup"
+      ],
+      "name" : "lgt_mpileup",
+      "path" : "{{BIN_DIR}}/lgt_mpileup"
+   },
+   {
+      "biotools" : {
+         "id" : "lipop",
+         "name" : "LipoP",
+         "url" : "https://bio.tools/lipop"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "lipop"
+      ],
+      "name" : "LipoP",
+      "path" : "/usr/local/bin/LipoP"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "lipoprotein_motif"
+      ],
+      "name" : "lipoprotein_motif",
+      "path" : "{{BIN_DIR}}/lipoprotein_motif"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cleanse_sgc_database"
+      ],
+      "name" : "lipoprotein_update",
+      "path" : "{{BIN_DIR}}/lipoprotein_update"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsy_callsnps"
+      ],
+      "name" : "mafindex",
+      "path" : "{{MUGSY_MAPPING_INSTALL_DIR}}/mafindex.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsycog_distributed_work"
+      ],
+      "name" : "mafindex.pl {{MUGSY_INDEX}}",
+      "path" : "{{MUGSY_MAPPING_INSTALL_DIR}}/mafindex.pl {{MUGSY_INDEX}}"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "gsnap",
+         "gsnap",
+         "gsnap"
+      ],
+      "name" : "make",
+      "path" : "make"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "make_circleator_figure"
+      ],
+      "name" : "make_circleator_figure",
+      "path" : "{{BIN_DIR}}/make_circleator_figure"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "make_comparative_circleator_figure"
+      ],
+      "name" : "make_comparative_circleator_figure",
+      "path" : "{{BIN_DIR}}/make_comparative_circleator_figure"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "core_qiime",
+         "pick_otus_through_otu_table"
+      ],
+      "name" : "make_otu_heatmap_html",
+      "path" : "{{BIN_DIR}}/make_otu_heatmap_html"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pick_otus_through_otu_table"
+      ],
+      "name" : "make_otu_network",
+      "path" : "{{QIIME_PATH}}/bin/make_otu_network.py"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "make_snp_lists"
+      ],
+      "name" : "make_snp_lists",
+      "path" : "{{BIN_DIR}}/make_snp_lists"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "map_snp_query_pos"
+      ],
+      "name" : "map_query_pos",
+      "path" : "{{BIN_DIR}}/map_query_pos"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cluster_mapping"
+      ],
+      "name" : "mapClusters",
+      "path" : "{{BIN_DIR}}/mapClusters"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mask_by_analysis"
+      ],
+      "name" : "mask_by_analysis",
+      "path" : "{{BIN_DIR}}/mask_by_analysis"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "megablast"
+      ],
+      "name" : "megablast",
+      "path" : "/usr/bin/megablast"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2chado",
+         "bsml2chado"
+      ],
+      "name" : "merge_sorted_files",
+      "path" : "{{BIN_DIR}}/merge_sorted_files"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "metastats"
+      ],
+      "name" : "metastats",
+      "path" : "/opt/metastats/metastats"
+   },
+   {
+      "biotools" : {
+         "id" : "metagenemark",
+         "name" : "MetaGeneMark",
+         "url" : "https://bio.tools/metagenemark"
+      },
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "metagene"
+      ],
+      "name" : "mga_linux_ia32",
+      "path" : "/usr/local/bioinf/metagene/mga_linux_ia32"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cleanse_sgc_database"
+      ],
+      "name" : "molwt_update",
+      "path" : "{{BIN_DIR}}/molwt_update"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "mothur",
+      "path" : "/opt/opt-packages/mothur-1.12.0/mothur"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mothur_unique_seq_limit"
+      ],
+      "name" : "mothur_unique_seq_limit",
+      "path" : "{{BIN_DIR}}/mothur_unique_seq_limit.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "load_ber_for_manatee"
+      ],
+      "name" : "move_ber_files_for_manatee",
+      "path" : "{{BIN_DIR}}/move_ber_files_for_manatee"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "move_to_scratch"
+      ],
+      "name" : "move_to_scratch",
+      "path" : "{{BIN_DIR}}/move_to_scratch"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mpileup"
+      ],
+      "name" : "mpileup_wrapper",
+      "path" : "{{BIN_DIR}}/mpileup_wrapper"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "muscle",
+         "clustalw"
+      ],
+      "name" : "MSF2Bsml",
+      "path" : "{{BIN_DIR}}/MSF2Bsml"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsy_callsnps_distributed"
+      ],
+      "name" : "mugsy_callsnps",
+      "path" : "{{BIN_DIR}}/mugsy_callsnps"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsy_concat_fasta"
+      ],
+      "name" : "mugsy_concat_fasta",
+      "path" : "{{BIN_DIR}}/mugsy_concat_fasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsyprep"
+      ],
+      "name" : "mugsymap_complete.txt",
+      "path" : "for i in `cat {{OUTPUT_DIRECTORY}}/mugsymap.list`; do cat $i; done >> {{OUTPUT_DIRECTORY}}/mugsymap_complete.txt"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "mummer",
+      "path" : "/usr/local/bin/mummer"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mummer"
+      ],
+      "name" : "mummertab",
+      "path" : "{{BIN_DIR}}/mummertab"
+   },
+   {
+      "biotools" : {
+         "id" : "muscle",
+         "name" : "MUSCLE",
+         "url" : "https://bio.tools/muscle"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "muscle"
+      ],
+      "name" : "muscle",
+      "path" : "/usr/local/bin/muscle"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "mugsycog",
+         "dump_table",
+         "dump_table",
+         "dump_table",
+         "wga_maf2tree",
+         "aat_aa_masked",
+         "ksnp",
+         "ber",
+         "tbl2asn",
+         "genemark",
+         "aat_aa",
+         "mugsyalign"
+      ],
+      "name" : "mv",
+      "path" : "/bin/mv"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked"
+      ],
+      "name" : "nap",
+      "path" : "/usr/local/bin/nap"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ngap"
+      ],
+      "name" : "ngap",
+      "path" : "{{BIN_DIR}}/ngap"
+   },
+   {
+      "biotools" : {
+         "id" : "mummer",
+         "name" : "MUMmer",
+         "url" : "https://bio.tools/mummer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "create_pseudomolecules",
+         "nucmer"
+      ],
+      "name" : "nucmer",
+      "path" : "/usr/local/bin/nucmer"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "nucmer-snp2merged"
+      ],
+      "name" : "nucmer-snp2merged",
+      "path" : "{{BIN_DIR}}/nucmer-snp2merged"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "wga_maf2tree"
+      ],
+      "name" : "nw_display",
+      "path" : "{{NEWICK_UTILITIES}}/nw_display "
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cleanse_sgc_database"
+      ],
+      "name" : "omp_update",
+      "path" : "{{BIN_DIR}}/omp_update"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "open_reading_frames"
+      ],
+      "name" : "open_reading_frames",
+      "path" : "{{BIN_DIR}}/open_reading_frames"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "order_paired_list"
+      ],
+      "name" : "order_paired_list",
+      "path" : "{{BIN_DIR}}/order_paired_list"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "outer_membrane_domain"
+      ],
+      "name" : "outer_membrane_domain",
+      "path" : "{{BIN_DIR}}/outer_membrane_domain"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "overlap_analysis_distributed"
+      ],
+      "name" : "overlap_analysis",
+      "path" : "{{BIN_DIR}}/overlap_analysis"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pangenome_do_analysis",
+         "pangenome_blast_parse"
+      ],
+      "name" : "pangenome_blast_parse",
+      "path" : "{{BIN_DIR}}/pangenome_blast_parse"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pangenome_fix_headers"
+      ],
+      "name" : "pangenome_fix_headers",
+      "path" : "{{BIN_DIR}}/pangenome_fix_headers.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pangenome_make_graphs"
+      ],
+      "name" : "pangenome_make_graphs",
+      "path" : "{{BIN_DIR}}/pangenome_make_graphs"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pangenome_do_analysis_distributed_work",
+         "pangenome_make_pangenome_distributed_work"
+      ],
+      "name" : "pangenome_make_pangenome",
+      "path" : "{{BIN_DIR}}/pangenome_make_pangenome"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pangenome_make_profile_distributed_work",
+         "pangenome_do_analysis_distributed_work"
+      ],
+      "name" : "pangenome_make_profile",
+      "path" : "{{BIN_DIR}}/pangenome_make_profile"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pangenome_do_analysis_distributed_work",
+         "pangenome_make_table_distributed_work"
+      ],
+      "name" : "pangenome_make_table",
+      "path" : "{{BIN_DIR}}/pangenome_make_table"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pangenome_merge_results_distributed_work"
+      ],
+      "name" : "pangenome_merge_results",
+      "path" : "{{BIN_DIR}}/pangenome_merge_results"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "panther"
+      ],
+      "name" : "pantherScore",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/opt/pantherScore1.0/pantherScore.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "parse_evidence"
+      ],
+      "name" : "parse_evidence",
+      "path" : "{{BIN_DIR}}/parse_evidence"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "parse_for_ncRNAs"
+      ],
+      "name" : "parse_for_ncRNAs",
+      "path" : "{{BIN_DIR}}/parse_for_ncRNAs"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "parse_mpileup_for_positions"
+      ],
+      "name" : "parse_mpileup",
+      "path" : "{{BIN_DIR}}/parse_mpileup"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "blast_snp_regions"
+      ],
+      "name" : "parse_snp_blast",
+      "path" : "{{BIN_DIR}}/parse_snp_blast"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pepstats"
+      ],
+      "name" : "pepstats",
+      "path" : "{{BIN_DIR}}/pepstats.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "percent_gc"
+      ],
+      "name" : "percent_gc",
+      "path" : "{{BIN_DIR}}/percent_gc"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "percent_mapped_stats"
+      ],
+      "name" : "percent_mapped_stats",
+      "path" : "{{BIN_DIR}}/percent_mapped_stats"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "tbl2asn",
+         "clean_fasta"
+      ],
+      "name" : "perl",
+      "path" : "perl"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "pfscan",
+      "path" : "/usr/local/bin/pfscan"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "phobos"
+      ],
+      "name" : "phobos_64bit",
+      "path" : "/usr/local/bin/phobos_64bit"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "wga_maf2tree"
+      ],
+      "name" : "Phylomark_prep",
+      "path" : "cd {{OUTPUT_DIRECTORY}};source {{PHYLOMARK_DIR}}/phylomark_env.sh;{{PHYLOMARK_DIR}}/Phylomark_prep.py"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "core_qiime"
+      ],
+      "name" : "pick_open_reference_otus",
+      "path" : "{{BIN_DIR}}/pick_open_reference_otus"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pick_otus_through_otu_table"
+      ],
+      "name" : "pick_otus_through_otu_table",
+      "path" : "{{QIIME_PATH}}/bin/pick_otus_through_otu_table.py"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pileup_to_wig"
+      ],
+      "name" : "pileup2wig",
+      "path" : "{{BIN_DIR}}/pileup2wig"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "pipeline_summary_cloud"
+      ],
+      "name" : "pipeline_summary",
+      "path" : "{{BIN_DIR}}/pipeline_summary"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "ber"
+      ],
+      "name" : "praze",
+      "path" : "/usr/local/bin/praze"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "predict_operons"
+      ],
+      "name" : "predict_operons",
+      "path" : "{{BIN_DIR}}/predict_operons"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "predict_prokaryotic_gene_function"
+      ],
+      "name" : "predict_prokaryotic_gene_function",
+      "path" : "{{BIN_DIR}}/predict_prokaryotic_gene_function"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "predotar"
+      ],
+      "name" : "predotar",
+      "path" : "/usr/local/bin/predotar"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "qiime_fastq_mothur_cnvr"
+      ],
+      "name" : "prep_MiSeq_for_qiime",
+      "path" : "{{BIN_DIR}}/prep_MiSeq_for_qiime.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "genewise"
+      ],
+      "name" : "prepare_for_genewise_best_loc",
+      "path" : "{{BIN_DIR}}/prepare_for_genewise_best_loc"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "tbl2asn"
+      ],
+      "name" : "prepare_for_tbl2asn",
+      "path" : "{{BIN_DIR}}/prepare_for_tbl2asn"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "prepare_paired_ends_for_velvet"
+      ],
+      "name" : "prepare_paired_ends_for_velvet",
+      "path" : "{{BIN_DIR}}/prepare_paired_ends_for_velvet"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "dump_table",
+         "dump_fasta"
+      ],
+      "name" : "prepare_sbt_cmt",
+      "path" : "{{BIN_DIR}}/prepare_sbt_cmt"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsyprep"
+      ],
+      "name" : "prepfasta4mugsy",
+      "path" : "{{BIN_DIR}}/prepfasta4mugsy"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "preserve_reads_in_fastq"
+      ],
+      "name" : "preserve_reads_in_fastq",
+      "path" : "{{BIN_DIR}}/preserve_reads_in_fastq"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "filter_dups_lc_seqs"
+      ],
+      "name" : "prinseq-lite",
+      "path" : "/usr/local/packages/prinseq-lite/bin/prinseq-lite.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "tag_data"
+      ],
+      "name" : "printf",
+      "path" : "printf"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumsgraph"
+      ],
+      "name" : "printmatchgraph",
+      "path" : "{{BIN_DIR}}/printmatchgraph"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumsgraph"
+      ],
+      "name" : "printrepresentative",
+      "path" : "{{BIN_DIR}}/printrepresentative"
+   },
+   {
+      "biotools" : {
+         "id" : "prodigal",
+         "name" : "Prodigal",
+         "url" : "https://bio.tools/prodigal"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "prodigal"
+      ],
+      "name" : "prodigal",
+      "path" : "/usr/local/bin/prodigal"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "legacy2bsml",
+         "glk2bsml",
+         "profile_bsml",
+         "fastaToBsmlWorkingGeneModels",
+         "db2bsml"
+      ],
+      "name" : "profileBSMLFile",
+      "path" : "{{BIN_DIR}}/profileBSMLFile"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "prok_pipeline_check"
+      ],
+      "name" : "prok_pipeline_check",
+      "path" : "{{BIN_DIR}}/prok_pipeline_check"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "prokpipe_consistency_checks"
+      ],
+      "name" : "prokpipe_consistency_checks",
+      "path" : "{{BIN_DIR}}/prokpipe_consistency_checks"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "promote_gene_prediction"
+      ],
+      "name" : "promote_gene_prediction",
+      "path" : "{{BIN_DIR}}/promote_gene_prediction"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "prosite.dat",
+      "path" : "/usr/local/projects/db/prosite/prosite.dat"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "ps_scan",
+      "path" : "/usr/local/bin/ps_scan.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "psa2msa",
+      "path" : "/usr/local/bin/psa2msa"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "python3",
+      "path" : "/usr/local/packages/Python-3.4.3/bin/python3"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "qiime_fastq_mothur_cnvr",
+         "qiime_fasta_mothur_cnvr"
+      ],
+      "name" : "qiime_to_mothur_meta",
+      "path" : "{{BIN_DIR}}/qiime_to_mothur_meta.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2chado"
+      ],
+      "name" : "queries2Chado",
+      "path" : "{{BIN_DIR}}/queries2Chado"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "quicktree"
+      ],
+      "name" : "quicktree",
+      "path" : "/home/jinman/bin/quicktree"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared",
+         "pangenome_make_graphs"
+      ],
+      "name" : "R",
+      "path" : "/usr/bin/R"
+   },
+   {
+      "biotools" : {
+         "id" : "rapsearch",
+         "name" : "RAPSearch",
+         "url" : "https://bio.tools/rapsearch"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "RAPSearch2",
+         "RAPSearch2"
+      ],
+      "name" : "rapsearch",
+      "path" : "/usr/local/bin/rapsearch"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "make_circleator_figure",
+         "make_comparative_circleator_figure",
+         "wga_maf2tree"
+      ],
+      "name" : "rasterize-svg",
+      "path" : "/usr/local/packages/circleator/bin/rasterize-svg"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "remove_db_gene_syms_with_hypos"
+      ],
+      "name" : "remove_db_gene_syms_with_hypos",
+      "path" : "{{BIN_DIR}}/remove_db_gene_syms_with_hypos"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "remove_db_gene_syms_with_hypos"
+      ],
+      "name" : "remove_hypothetical_ec",
+      "path" : "{{BIN_DIR}}/remove_hypothetical_ec"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "make_comparative_circleator_figure"
+      ],
+      "name" : "remove_nonunique_snps",
+      "path" : "{{BIN_DIR}}/remove_nonunique_snps"
+   },
+   {
+      "biotools" : {
+         "id" : "repeatmasker",
+         "name" : "RepeatMasker",
+         "url" : "https://bio.tools/repeatmasker"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "repeatmasker"
+      ],
+      "name" : "RepeatMasker",
+      "path" : "/usr/local/bin/RepeatMasker"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2chado"
+      ],
+      "name" : "replace_checksums",
+      "path" : "{{BIN_DIR}}/replace_checksums"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "replace_defline_with_locusID"
+      ],
+      "name" : "replace_defline_with_locusID",
+      "path" : "{{BIN_DIR}}/replace_defline_with_locusID"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "hmmls",
+         "hmmls",
+         "bepipred",
+         "bepipred"
+      ],
+      "name" : "replace_fasta_headers",
+      "path" : "{{BIN_DIR}}/replace_fasta_headers.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsyalign"
+      ],
+      "name" : "replace_maf_ids",
+      "path" : "{{BIN_DIR}}/replace_maf_ids"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "clean_fasta"
+      ],
+      "name" : "replace_nuc_gaps",
+      "path" : "{{BIN_DIR}}/replace_nuc_gaps"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cleanse_sgc_database"
+      ],
+      "name" : "rewrite_seqs",
+      "path" : "{{BIN_DIR}}/rewrite_seqs"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "celera2hawkeye",
+         "dump_table",
+         "aat_aa_masked",
+         "aat_aa_masked",
+         "aat_aa_masked",
+         "aat_aa_masked",
+         "aat_aa_masked",
+         "ksnp",
+         "ksnp",
+         "aat_na",
+         "aat_na",
+         "aat_na",
+         "aat_na",
+         "phylip_dnadist",
+         "aat_aa",
+         "aat_aa",
+         "aat_aa",
+         "aat_aa",
+         "aat_aa",
+         "aat_na_masked",
+         "aat_na_masked",
+         "aat_na_masked",
+         "aat_na_masked"
+      ],
+      "name" : "rm",
+      "path" : "rm"
+   },
+   {
+      "biotools" : {
+         "id" : "rnammer",
+         "name" : "RNAmmer",
+         "url" : "https://bio.tools/rnammer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "RNAmmer"
+      ],
+      "name" : "rnammer",
+      "path" : "/usr/local/bioinf/rnammer/rnammer"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "rotate_molecule"
+      ],
+      "name" : "rotate_molecule",
+      "path" : "{{BIN_DIR}}/rotate_molecule"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "rpkm_coverage_stats"
+      ],
+      "name" : "rpkm_coverage_stats",
+      "path" : "{{BIN_DIR}}/rpkm_coverage_stats"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "rpsblast"
+      ],
+      "name" : "rpsblast",
+      "path" : "/usr/local/bin/rpsblast"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "rrna_hmm_fs"
+      ],
+      "name" : "rrna_hmm_fs",
+      "path" : "{{BIN_DIR}}/rrna_hmm_fs"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "stap_classifier"
+      ],
+      "name" : "rRNA_pipeline_for_one",
+      "path" : "/usr/local/packages/STAP/bin/rRNA_pipeline_for_one.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "blastn_plus",
+         "blastp_plus",
+         "tblastn_plus"
+      ],
+      "name" : "run_blast_plus",
+      "path" : "{{BIN_DIR}}/run_blast_plus"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bmtagger"
+      ],
+      "name" : "run_bmtagger",
+      "path" : "{{BIN_DIR}}/run_bmtagger"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "infernal"
+      ],
+      "name" : "run_cmsearch",
+      "path" : "{{BIN_DIR}}/run_cmsearch"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "genemark-es"
+      ],
+      "name" : "run_genemark-es",
+      "path" : "{{BIN_DIR}}/run_genemark-es"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ksnp"
+      ],
+      "name" : "run_kSNP_v2",
+      "path" : "/usr/local/packages/kSNP_v2_alt/run_kSNP_v2"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "phage_finder"
+      ],
+      "name" : "run_phage_finder",
+      "path" : "{{BIN_DIR}}/run_phage_finder"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sighunt"
+      ],
+      "name" : "run_sighunt",
+      "path" : "{{BIN_DIR}}/run_sighunt"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "SPAdes"
+      ],
+      "name" : "run_spades",
+      "path" : "{{BIN_DIR}}/run_spades"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "velvet_optimiser"
+      ],
+      "name" : "run_velvet_optimiser",
+      "path" : "{{BIN_DIR}}/run_velvet_optimiser"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "celera-assembler"
+      ],
+      "name" : "runCA",
+      "path" : "/usr/local/bioinf/celera-assembler/wgs-5.4/Linux-amd64/bin/runCA"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "celera-assembler-distributed"
+      ],
+      "name" : "runCA_wrapper",
+      "path" : "{{BIN_DIR}}/runCA_wrapper"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumsgraph"
+      ],
+      "name" : "runcc",
+      "path" : "{{BIN_DIR}}/runcc"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sam2bam"
+      ],
+      "name" : "sam2bam",
+      "path" : "{{BIN_DIR}}/sam2bam"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sam2lca_distributed"
+      ],
+      "name" : "sam2lca",
+      "path" : "{{BIN_DIR}}/sam2lca"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "samtools",
+      "path" : "/usr/local/bin/samtools"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "samtools_alignment_stats"
+      ],
+      "name" : "samtools_alignment_stats",
+      "path" : "{{BIN_DIR}}/samtools_alignment_stats"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "samtools_file_convert"
+      ],
+      "name" : "samtools_file_convert",
+      "path" : "{{BIN_DIR}}/samtools_file_convert"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "samtools_reference_index"
+      ],
+      "name" : "samtools_reference_index",
+      "path" : "{{BIN_DIR}}/samtools_reference_index"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "scp_files"
+      ],
+      "name" : "scp_files",
+      "path" : "{{BIN_DIR}}/scp_files"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "blast_seq_screen"
+      ],
+      "name" : "screen_seqs_by_ids",
+      "path" : "{{BIN_DIR}}/screen_seqs_by_ids.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "scripture"
+      ],
+      "name" : "scripture",
+      "path" : "{{BIN_DIR}}/scripture.sh"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "scripture"
+      ],
+      "name" : "scripture-beta2",
+      "path" : "/usr/local/packages/scripture-beta2/scripture-beta2.jar"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "seg"
+      ],
+      "name" : "seg",
+      "path" : "/usr/local/bin/seg"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "selfsim"
+      ],
+      "name" : "selfsim",
+      "path" : "{{BIN_DIR}}/selfsim"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sff_to_CA"
+      ],
+      "name" : "sff_to_CA",
+      "path" : "{{BIN_DIR}}/sff_to_CA"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sfffile"
+      ],
+      "name" : "sfffile",
+      "path" : "{{BIN_DIR}}/sfffile"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sffinfo"
+      ],
+      "name" : "sffinfo",
+      "path" : "{{BIN_DIR}}/sffinfo"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "sff_to_CA"
+      ],
+      "name" : "sffToCA",
+      "path" : "/usr/local/bioinf/celera-assembler/wgs-5.4/Linux-amd64/bin/sffToCA"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cleanse_sgc_database"
+      ],
+      "name" : "sgc_GC_content_load",
+      "path" : "{{BIN_DIR}}/sgc_GC_content_load"
+   },
+   {
+      "biotools" : {
+         "id" : "mummer",
+         "name" : "MUMmer",
+         "url" : "https://bio.tools/mummer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "create_pseudomolecules",
+         "nucmer"
+      ],
+      "name" : "show-coords",
+      "path" : "/usr/local/bin/show-coords"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "nucmer-show-snps"
+      ],
+      "name" : "show-snps",
+      "path" : "/usr/local/bin/show-snps"
+   },
+   {
+      "biotools" : {
+         "id" : "signalp",
+         "name" : "SignalP",
+         "url" : "https://bio.tools/signalp"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "signalp"
+      ],
+      "name" : "signalp",
+      "path" : "/usr/local/bin/signalp"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "signalp"
+      ],
+      "name" : "signalp_graphics_rename",
+      "path" : "{{BIN_DIR}}/signalp_graphics_rename"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cleanse_sgc_database"
+      ],
+      "name" : "signalP_update",
+      "path" : "{{BIN_DIR}}/signalP_update"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "skiff"
+      ],
+      "name" : "skiff",
+      "path" : "/opt/SKIFF/skiff"
+   },
+   {
+      "biotools" : {
+         "id" : "snap",
+         "name" : "SNAP",
+         "url" : "https://bio.tools/snap"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "snap"
+      ],
+      "name" : "snap",
+      "path" : "/usr/local/devel/ANNOTATION/EGC_utilities/SNAP/SNAP/snap"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "snp-add-gene-info"
+      ],
+      "name" : "snp-add-gene-info",
+      "path" : "{{BIN_DIR}}/snp-add-gene-info"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "snp_verify"
+      ],
+      "name" : "snp_verify",
+      "path" : "{{BIN_DIR}}/snp_verify"
+   },
+   {
+      "biotools" : {
+         "id" : "soapdenovo",
+         "name" : "SOAPdenovo",
+         "url" : "https://bio.tools/soapdenovo"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "soapdenovo"
+      ],
+      "name" : "SOAPdenovo",
+      "path" : "/opt/SOAPdenovo/SOAPdenovo"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "soapdenovo"
+      ],
+      "name" : "soapdenovo",
+      "path" : "{{BIN_DIR}}/soapdenovo"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "solsnp"
+      ],
+      "name" : "SolSNP",
+      "path" : "/usr/local/packages/solSNP/SolSNP.jar"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "mumsgraph",
+         "mumsgraph",
+         "mumsgraph",
+         "filter_lgt_class_c_genes",
+         "filter_lgt_class_c_genes",
+         "remove_subset_of_gis",
+         "remove_subset_of_gis"
+      ],
+      "name" : "sort",
+      "path" : "sort"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sort_sam_by_name"
+      ],
+      "name" : "sort_sam_by_name",
+      "path" : "{{BIN_DIR}}/sort_sam_by_name.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "wait"
+      ],
+      "name" : "spin_wait",
+      "path" : "{{BIN_DIR}}/spin_wait"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bsml2chado",
+         "bsml2chado",
+         "parallel_sort"
+      ],
+      "name" : "split",
+      "path" : "split"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "split_fasta"
+      ],
+      "name" : "split_fasta",
+      "path" : "{{BIN_DIR}}/split_fasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "split_fasta_fastq"
+      ],
+      "name" : "split_fasta_fastq",
+      "path" : "{{BIN_DIR}}/split_fasta_fastq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "split_fastq"
+      ],
+      "name" : "split_fastq",
+      "path" : "{{BIN_DIR}}/split_fastq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "split_file"
+      ],
+      "name" : "split_file",
+      "path" : "{{BIN_DIR}}/split_file"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "qiime_fasta_mothur_cnvr"
+      ],
+      "name" : "split_libraries",
+      "path" : "{{BIN_DIR}}/split_libraries"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "qiime_fastq_mothur_cnvr"
+      ],
+      "name" : "split_libraries_fastq",
+      "path" : "{{BIN_DIR}}/split_libraries_fastq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "split_multifasta"
+      ],
+      "name" : "split_multifasta",
+      "path" : "{{BIN_DIR}}/split_multifasta"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "split_paired_files"
+      ],
+      "name" : "split_paired_files",
+      "path" : "{{BIN_DIR}}/split_paired_files"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "sra2fastq"
+      ],
+      "name" : "sra2fastq",
+      "path" : "{{BIN_DIR}}/sra2fastq"
+   },
+   {
+      "biotools" : {
+         "id" : "bmtagger",
+         "name" : "bmtagger",
+         "url" : "https://bio.tools/bmtagger"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bmtagger_index"
+      ],
+      "name" : "srprism",
+      "path" : "/usr/local/packages/bmtagger/srprism"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "start_site_curation_distributed"
+      ],
+      "name" : "start_site_curation",
+      "path" : "{{BIN_DIR}}/start_site_curation"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "usearch"
+      ],
+      "name" : "stats.txt;",
+      "path" : "tail -10 {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.stderr >> {{OUTPUT_DIRECTORY}}/stats.txt;"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "initdb"
+      ],
+      "name" : "store_chado_version",
+      "path" : "{{BIN_DIR}}/store_chado_version"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "resistome",
+         "resistome"
+      ],
+      "name" : "store_read_dataset_info",
+      "path" : "{{BIN_DIR}}/store_read_dataset_info"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "summarize_mugsy_comparative_pipeline_distributed"
+      ],
+      "name" : "summarize_mugsy_comparative_pipeline",
+      "path" : "{{BIN_DIR}}/summarize_mugsy_comparative_pipeline"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "core_qiime",
+         "core_qiime",
+         "pick_otus_through_otu_table",
+         "pick_otus_through_otu_table",
+         "pick_otus_through_otu_table",
+         "pick_otus_through_otu_table",
+         "pick_otus_through_otu_table"
+      ],
+      "name" : "summarize_taxa",
+      "path" : "{{BIN_DIR}}/summarize_taxa"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "glimmer3_cloud",
+         "pipeline_summary_cloud"
+      ],
+      "name" : "syncdata.sh --synchronous",
+      "path" : "/opt/vappio-scripts/syncdata.sh --synchronous"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "tabula_rasa"
+      ],
+      "name" : "tabula_rasa",
+      "path" : "{{BIN_DIR}}/tabula_rasa"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "tag_data"
+      ],
+      "name" : "tag_data",
+      "path" : "{{BIN_DIR}}/tag_data"
+   },
+   {
+      "biotools" : {
+         "id" : "targetp",
+         "name" : "TargetP",
+         "url" : "https://bio.tools/targetp"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "targetp"
+      ],
+      "name" : "targetp",
+      "path" : "/usr/local/bin/targetp"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "dump_fasta",
+         "dump_table",
+         "tbl2asn"
+      ],
+      "name" : "tbl2asn",
+      "path" : "/usr/local/packages/tbl2asn/bin/tbl2asn"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-tblastn"
+      ],
+      "name" : "tblastn",
+      "path" : "/usr/local/common/tblastn"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-tblastx"
+      ],
+      "name" : "tblastx",
+      "path" : "/usr/local/common/tblastx"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "cleanse_sgc_database"
+      ],
+      "name" : "tm_update",
+      "path" : "{{BIN_DIR}}/tm_update"
+   },
+   {
+      "biotools" : {
+         "id" : "tmhmm",
+         "name" : "TMHMM",
+         "url" : "https://bio.tools/tmhmm"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "tmhmm"
+      ],
+      "name" : "tmhmm",
+      "path" : "/usr/local/bin/tmhmm"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "celera2hawkeye"
+      ],
+      "name" : "toAmos",
+      "path" : "/opt/opt-packages/bioinf-v1r4b1/AMOS/bin/toAmos"
+   },
+   {
+      "biotools" : {
+         "id" : "tophat",
+         "name" : "TopHat",
+         "url" : "https://bio.tools/tophat"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "tophat"
+      ],
+      "name" : "tophat",
+      "path" : "/usr/local/bin/tophat"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "aat_aa_masked",
+         "aat_na",
+         "aat_aa",
+         "aat_na_masked"
+      ],
+      "name" : "touch",
+      "path" : "touch"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "glimmer3_cloud"
+      ],
+      "name" : "train_for_glimmer3",
+      "path" : "{{BIN_DIR}}/train_for_glimmer3"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "train_for_glimmer3_iteration"
+      ],
+      "name" : "train_for_glimmer3_iteration",
+      "path" : "{{BIN_DIR}}/train_for_glimmer3_iteration"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "translate_sequence"
+      ],
+      "name" : "transeq",
+      "path" : "/usr/bin/transeq"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mugsycog_distributed_work"
+      ],
+      "name" : "transform_mugsycog",
+      "path" : "{{BIN_DIR}}/transform_mugsycog"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "translate_sequence"
+      ],
+      "name" : "translate_sequence",
+      "path" : "{{BIN_DIR}}/translate_sequence"
+   },
+   {
+      "biotools" : {
+         "id" : "trf",
+         "name" : "TRF",
+         "url" : "https://bio.tools/trf"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "trf"
+      ],
+      "name" : "trf",
+      "path" : "/usr/local/bin/trf"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "trf"
+      ],
+      "name" : "trf_wrapper",
+      "path" : "{{BIN_DIR}}/trf_wrapper"
+   },
+   {
+      "biotools" : {
+         "id" : "trnascan-se",
+         "name" : "Trnascan-SE",
+         "url" : "https://bio.tools/trnascan-se"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "tRNAscan-SE",
+         "tRNAscan-SE_compress"
+      ],
+      "name" : "tRNAscan-SE",
+      "path" : "/usr/local/bioinf/tRNAscan-SE/tRNAscan-SE"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "uchime"
+      ],
+      "name" : "uchime",
+      "path" : "/usr/local/packages/uchime/uchime"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "uclust"
+      ],
+      "name" : "uclust",
+      "path" : "/usr/local/bioinf/UCLUST/uclust"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "uclust_remove_replicates"
+      ],
+      "name" : "uclust_replicate_removal",
+      "path" : "{{BIN_DIR}}/uclust_replicate_removal"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "update_ec_numbers"
+      ],
+      "name" : "update_ec_numbers",
+      "path" : "{{BIN_DIR}}/update_ec_numbers"
+   },
+   {
+      "biotools" : {
+         "id" : "usearch",
+         "name" : "USEARCH",
+         "url" : "https://bio.tools/usearch"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "usearch"
+      ],
+      "name" : "usearch",
+      "path" : "/opt/usearch/usearch"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "muscle",
+         "clustalw"
+      ],
+      "name" : "validate_clustalw_output",
+      "path" : "{{BIN_DIR}}/validate_clustalw_output"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "validate_genbank"
+      ],
+      "name" : "validate_genbank",
+      "path" : "{{BIN_DIR}}/validate_genbank"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "qiime_fastq_mothur_cnvr"
+      ],
+      "name" : "validate_mapfile",
+      "path" : "{{BIN_DIR}}/validate_mapfile.sh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "velvet"
+      ],
+      "name" : "velvetg_post_processing",
+      "path" : "{{BIN_DIR}}/velvetg_post_processing"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "velvet"
+      ],
+      "name" : "velvetg_pre_processing",
+      "path" : "{{BIN_DIR}}/velvetg_pre_processing"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "velvet"
+      ],
+      "name" : "velveth_post_processing",
+      "path" : "{{BIN_DIR}}/velveth_post_processing"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "dump_table",
+         "dump_table",
+         "dump_fasta"
+      ],
+      "name" : "wrap_tbl2asn",
+      "path" : "{{BIN_DIR}}/wrap_tbl2asn"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "wrapper_align"
+      ],
+      "name" : "wrapper_align",
+      "path" : "{{BIN_DIR}}/wrapper_align"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "xdformat"
+      ],
+      "name" : "xdformat",
+      "path" : "/usr/local/common/xdformat"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "ncbi-blastn_compress"
+      ],
+      "name" : "zcat -f {{I_FILE_PATH}} | {{BLASTALL_EXEC}}",
+      "path" : "zcat -f {{I_FILE_PATH}} | {{BLASTALL_EXEC}}"
+   }
+]
