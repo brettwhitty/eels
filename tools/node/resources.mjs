@@ -19,13 +19,23 @@ if (args.includes('--rebuild') || !existsSync(mapFile)) {
 
 const data = JSON.parse(readFileSync(mapFile, 'utf8'));
 const typeFilter = args.find((a, i) => args[i - 1] === '--type')?.toLowerCase();
+const listTypes = args.includes('--types');
 
 console.log('\n' + box(
   'Runtime Resource Dependencies',
   'Hardcoded paths, external tools, databases, and libraries required by Ergatis components'
 ));
 
-if (!typeFilter) {
+if (listTypes) {
+  console.log(header('RESOURCE TYPES'));
+  const types = Object.entries(data.summary.by_type).sort((a, b) => b[1] - a[1]);
+  for (const [type, count] of types) {
+    const desc = data.summary.runtime_categories[type] || '';
+    console.log(`  ${chalk.bold(String(count).padStart(4))}  ${chalk.green(type)}`);
+    if (desc) console.log(`        ${chalk.dim(desc)}`);
+  }
+  console.log();
+} else if (!typeFilter) {
   // Overview
   console.log(header('RESOURCE TYPES'));
   const types = Object.entries(data.summary.by_type).sort((a, b) => b[1] - a[1]);
