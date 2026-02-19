@@ -52,13 +52,45 @@ ergatis-git/
 
 **Confusion:** Both components and pipelines live under `workflow/` directory. Single-component pipelines (like `workflow/ncbi-blastp/`) are essentially wrappers around components.
 
-### Template → Instance Flow
+### Template → Instance → Run Lifecycle
 
-1. **Template XML** - Blueprint with placeholders (`$;VARIABLE$;`)
-2. **Instantiation** - Ergatis substitutes placeholders with actual values
-3. **Instance XML** - Executable workflow with real paths/parameters
-4. **Execution** - RunWorkflow executes the instance
-5. **State tracking** - XML updated as jobs complete
+The pipeline XML goes through distinct stages, each managed by Ergatis Perl libraries:
+
+**1. Pipeline Template** (`pipeline.layout` + `component.token.config` files)
+- Equivalent to a paper "methods" section or a protocol
+- Defines which components to run, in what order (serial/parallel)
+- Contains placeholder parameters (`$;VARIABLE$;`)
+- Stored in `templates/pipelines/` as reusable recipes
+- Managed by `Ergatis::SavedPipeline->load_template()` / `write_template()`
+
+**2. Pipeline Instance** (template + configured run parameters)
+- Created by `Ergatis::SavedPipeline->write_pipeline()`
+- Assigns a pipeline ID, creates directory structure
+- Copies and resolves component configs with project-specific values
+- Generates `pipeline.xml` with real paths substituted for placeholders
+- Returns an `Ergatis::Pipeline` object ready to execute
+
+**3. Pipeline Run XML** (instance XML with runtime state)
+- Created/updated during execution by `Ergatis::Pipeline->run()`
+- State tracked by reading/writing `<state>` elements in the XML
+- States include: `incomplete`, `running`, `complete`, `error`, `failed`
+- Child process XML files contain pointers to stdout, stderr, log files
+- `Ergatis::Pipeline->pipeline_state()` reads the outermost `<state>` element
+- `Ergatis::Monitor` parses run XML to extract component status, error counts
+- Run XML can be gzip-compressed (`.xml.gz`) for completed pipelines
+
+The key insight: the same XML format serves all three stages. A template has placeholders and no state. An instance has resolved values but state is `incomplete`. Run XML has state updated as execution progresses, plus references to output files and logs.
+
+```
+Ergatis::SavedPipeline          Ergatis::Pipeline
+        │                              │
+  load_template()                   run()
+        │                              │
+  write_pipeline()              pipeline_state()
+        │                              │
+   template ──→ instance ──→ run XML (with state)
+   (protocol)   (configured)   (executing/complete)
+```
 
 ### Placeholder Systems
 
