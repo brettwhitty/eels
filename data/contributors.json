@@ -1,537 +1,279 @@
 {
-  "Amol Carl Shetty Bioinformatics Software Engineer II Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
-    "files": [
-      "blib/script/bam2bigwig.pl",
-      "blib/script/bowtie.pl",
-      "blib/script/bowtie_build.pl",
-      "blib/script/create_cuffsuite_files.pl",
-      "blib/script/create_euk_rnaseq_pipeline_config.pl",
-      "blib/script/create_euk_rnaseq_pipeline_configbeta.pl",
-      "blib/script/create_paired_iterator_list.pl",
-      "blib/script/create_paired_list_file.pl",
-      "blib/script/create_prok_rnaseq_pipeline_config.pl",
-      "blib/script/create_strictly_paired_iterator_list.pl",
-      "blib/script/cuffcompare.pl",
-      "blib/script/cuffdiff.pl",
-      "blib/script/cufflinks.pl",
-      "blib/script/deseq.pl",
-      "blib/script/fastx_quality_stats.pl",
-      "blib/script/fastx_trimming.pl",
-      "blib/script/genbank2gtf.pl",
-      "blib/script/generate_list_file.pl",
-      "blib/script/htseq.pl",
-      "blib/script/pileup2wig.pl",
-      "blib/script/rpkm_coverage_stats.pl",
-      "blib/script/samtools_alignment_stats.pl",
-      "blib/script/samtools_file_convert.pl",
-      "blib/script/samtools_reference_index.pl",
-      "blib/script/tophat.pl",
-      "src/perl/bam2bigwig.pl",
-      "src/perl/bowtie.pl",
-      "src/perl/bowtie_build.pl",
-      "src/perl/create_cuffsuite_files.pl",
-      "src/perl/create_euk_rnaseq_pipeline_config.pl",
-      "src/perl/create_euk_rnaseq_pipeline_configbeta.pl",
-      "src/perl/create_paired_iterator_list.pl",
-      "src/perl/create_paired_list_file.pl",
-      "src/perl/create_prok_rnaseq_pipeline_config.pl",
-      "src/perl/create_strictly_paired_iterator_list.pl",
-      "src/perl/cuffcompare.pl",
-      "src/perl/cuffdiff.pl",
-      "src/perl/cufflinks.pl",
-      "src/perl/deseq.pl",
-      "src/perl/fastx_quality_stats.pl",
-      "src/perl/fastx_trimming.pl",
-      "src/perl/genbank2gtf.pl",
-      "src/perl/generate_list_file.pl",
-      "src/perl/htseq.pl",
-      "src/perl/pileup2wig.pl",
-      "src/perl/rpkm_coverage_stats.pl",
-      "src/perl/samtools_alignment_stats.pl",
-      "src/perl/samtools_file_convert.pl",
-      "src/perl/samtools_reference_index.pl",
-      "src/perl/tophat.pl"
-    ],
-    "file_count": 50,
-    "emails": [],
-    "roles": [
-      "pod"
-    ]
-  },
-  "james robert white": {
-    "files": [
-      "blib/script/Create_Qiime_tables.pl",
-      "blib/script/clovr16S_rdp_tables.pl",
-      "blib/script/clovr_mapfasta_check.pl",
-      "blib/script/clovr_metagenomics_prep.pl",
-      "blib/script/clovr_metagenomics_tsvtables.pl",
-      "blib/script/dataprep_dual16S.pl",
-      "blib/script/get_blast_querynames.pl",
-      "blib/script/merge_mothur_chimera_ids.pl",
-      "blib/script/merge_rarefaction_data.pl",
-      "blib/script/merge_uchime_ids.pl",
-      "blib/script/mothur_unique_seq_limit.pl",
-      "blib/script/qiime_to_mothur_meta.pl",
-      "blib/script/screen_seqs_by_ids.pl",
-      "blib/script/uclust_replicate_removal.pl",
-      "components/clovr_metagenomics_prep/clovr_metagenomics_prep.pl",
-      "src/perl/Create_Qiime_tables.pl",
-      "src/perl/clovr16S_rdp_tables.pl",
-      "src/perl/clovr_mapfasta_check.pl",
-      "src/perl/clovr_metagenomics_prep.pl",
-      "src/perl/clovr_metagenomics_tsvtables.pl",
-      "src/perl/dataprep_dual16S.pl",
-      "src/perl/get_blast_querynames.pl",
-      "src/perl/merge_mothur_chimera_ids.pl",
-      "src/perl/merge_rarefaction_data.pl",
-      "src/perl/merge_uchime_ids.pl",
-      "src/perl/mothur_unique_seq_limit.pl",
-      "src/perl/qiime_to_mothur_meta.pl",
-      "src/perl/screen_seqs_by_ids.pl",
-      "src/perl/uclust_replicate_removal.pl"
-    ],
-    "file_count": 29,
-    "emails": [
-      "james.dna.white@gmail.com",
-      "whitej@umd.edu"
-    ],
-    "roles": [
-      "comment"
-    ]
-  },
-  "Jay Sundaram": {
-    "files": [
-      "blib/lib/GFF3/GFF3Builder.pm",
-      "blib/lib/GFF3/GFF3Record.pm",
-      "blib/lib/GFF3/GTFBuilder.pm",
-      "blib/lib/GFF3/GTFRecord.pm",
-      "blib/lib/OBO/OBOBuilder.pm",
-      "blib/lib/OBO/OBOParser.pm",
-      "blib/lib/OBO/OBORecord.pm",
-      "blib/lib/OBO/OBOTerm.pm",
-      "blib/lib/OBO/OBOTypedef.pm",
-      "blib/script/brcGff3ToBsml.pl",
-      "blib/script/check_logfiles.pl",
-      "blib/script/gatekeeper.pl",
-      "blib/script/notify_database_users.pl",
-      "blib/script/observer_script.pl",
-      "lib/GFF3/GFF3Builder.pm",
-      "lib/GFF3/GFF3Record.pm",
-      "lib/GFF3/GTFBuilder.pm",
-      "lib/GFF3/GTFRecord.pm",
-      "lib/OBO/OBOBuilder.pm",
-      "lib/OBO/OBOParser.pm",
-      "lib/OBO/OBORecord.pm",
-      "lib/OBO/OBOTerm.pm",
-      "lib/OBO/OBOTypedef.pm",
-      "src/perl/brcGff3ToBsml.pl",
-      "src/perl/check_logfiles.pl",
-      "src/perl/gatekeeper.pl",
-      "src/perl/notify_database_users.pl",
-      "src/perl/observer_script.pl"
-    ],
-    "file_count": 28,
-    "emails": [
-      "sundaram@jcvi.org",
-      "sundaram@tigr.org"
-    ],
-    "roles": [
-      "comment",
-      "pod"
-    ]
-  },
-  "Sonia Agrawal Bioinformatics Software Engineer II Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
-    "files": [
-      "blib/script/blast_snp_regions.pl",
-      "blib/script/configure_manatee.pl",
-      "blib/script/create_comparative_summary_report.pl",
-      "blib/script/create_summary_report.pl",
-      "blib/script/extract_snp_regions.pl",
-      "blib/script/filter_merged_table.pl",
-      "blib/script/lgt_build_index.pl",
-      "blib/script/lgt_filter_reads.pl",
-      "blib/script/make_snp_lists.pl",
-      "blib/script/replace_maf_ids.pl",
-      "blib/script/snp_verify.pl",
-      "blib/script/transform_mugsycog.pl",
-      "src/perl/blast_snp_regions.pl",
-      "src/perl/configure_manatee.pl",
-      "src/perl/create_comparative_summary_report.pl",
-      "src/perl/create_summary_report.pl",
-      "src/perl/extract_snp_regions.pl",
-      "src/perl/filter_merged_table.pl",
-      "src/perl/lgt_build_index.pl",
-      "src/perl/lgt_filter_reads.pl",
-      "src/perl/make_snp_lists.pl",
-      "src/perl/replace_maf_ids.pl",
-      "src/perl/snp_verify.pl",
-      "src/perl/transform_mugsycog.pl"
-    ],
-    "file_count": 24,
-    "emails": [
-      "sagrawal@som.umaryland.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Joshua Orvis": {
-    "files": [
-      "blib/lib/Ergatis/ConfigFile.pm",
-      "blib/lib/Ergatis/IdGenerator/CloudIdGenerator.pm",
-      "blib/lib/Ergatis/IdGenerator/DefaultIdGenerator.pm",
-      "blib/lib/Ergatis/IdGenerator/JCVIIdGenerator.pm",
-      "blib/lib/Ergatis/IdGenerator/RandomIdGenerator.pm",
-      "blib/lib/Ergatis/Pipeline.pm",
-      "blib/lib/Ergatis/SavedPipeline.pm",
-      "blib/lib/Ergatis/Validator.pm",
-      "lib/Ergatis/ConfigFile.pm",
-      "lib/Ergatis/IdGenerator/CloudIdGenerator.pm",
-      "lib/Ergatis/IdGenerator/DefaultIdGenerator.pm",
-      "lib/Ergatis/IdGenerator/JCVIIdGenerator.pm",
-      "lib/Ergatis/IdGenerator/RandomIdGenerator.pm",
-      "lib/Ergatis/Pipeline.pm",
-      "lib/Ergatis/SavedPipeline.pm",
-      "lib/Ergatis/Validator.pm"
-    ],
-    "file_count": 16,
-    "emails": [
-      "jorvis@tigr.org",
-      "jorvis@users.sf.net"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Amol Carl Shetty": {
-    "files": [
-      "blib/script/bam2bigwig.pl",
-      "blib/script/bam_merge.pl",
-      "blib/script/genbank2gtf.pl",
-      "blib/script/pileup2wig.pl",
-      "blib/script/rpkm_coverage_stats.pl",
-      "blib/script/split_fastq.pl",
-      "src/perl/bam2bigwig.pl",
-      "src/perl/bam_merge.pl",
-      "src/perl/genbank2gtf.pl",
-      "src/perl/pileup2wig.pl",
-      "src/perl/rpkm_coverage_stats.pl",
-      "src/perl/split_fastq.pl"
-    ],
-    "file_count": 12,
-    "emails": [
-      "ashetty@som.umaryland.edu"
-    ],
-    "roles": [
-      "copyright"
-    ]
-  },
-  "Sonia Agrawal Senior Bioinformatics Software Engineer Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
-    "files": [
-      "blib/script/download_sra.pl",
-      "blib/script/fix_gbk.pl",
-      "blib/script/fix_gene_symbols.pl",
-      "blib/script/sra2fastq.pl",
-      "blib/script/wrap_tbl2asn.pl",
-      "src/perl/download_sra.pl",
-      "src/perl/fix_gbk.pl",
-      "src/perl/fix_gene_symbols.pl",
-      "src/perl/sra2fastq.pl",
-      "src/perl/wrap_tbl2asn.pl"
-    ],
-    "file_count": 10,
-    "emails": [
-      "sagrawal@som.umaryland.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "# author: Jay Sundaram": {
-    "files": [
-      "blib/script/check_logfiles.pl",
-      "blib/script/gatekeeper.pl",
-      "blib/script/notify_database_users.pl",
-      "blib/script/observer_script.pl",
-      "src/perl/check_logfiles.pl",
-      "src/perl/gatekeeper.pl",
-      "src/perl/notify_database_users.pl",
-      "src/perl/observer_script.pl"
-    ],
-    "file_count": 8,
-    "emails": [
-      "sundaram@tigr.org"
-    ],
-    "roles": [
-      "comment"
-    ]
-  },
-  "Priti Kumari Bioinformatics Software Engineer I Institute for Genome Sciences University of Maryland Baltimore, Maryland 21201": {
-    "files": [
-      "blib/script/align_bowtie_stats.pl",
-      "blib/script/align_tophat_stats.pl",
-      "blib/script/fastqc_stats.pl",
-      "blib/script/percent_mapped_stats.pl",
-      "src/perl/align_bowtie_stats.pl",
-      "src/perl/align_tophat_stats.pl",
-      "src/perl/fastqc_stats.pl",
-      "src/perl/percent_mapped_stats.pl"
-    ],
-    "file_count": 8,
-    "emails": [],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Arthur Brady": {
-    "files": [
-      "blib/script/preserveGivenReadsInFastq.pl",
-      "blib/script/preserve_reads_in_fastq.pl",
-      "blib/script/processFastaForNewbler.pl",
-      "blib/script/splitFastq.pl",
-      "src/perl/preserveGivenReadsInFastq.pl",
-      "src/perl/preserve_reads_in_fastq.pl",
-      "src/perl/processFastaForNewbler.pl",
-      "src/perl/splitFastq.pl"
-    ],
-    "file_count": 8,
-    "emails": [
-      "abrady@umiacs.umd.edu"
-    ],
-    "roles": [
-      "copyright"
-    ]
-  },
-  "Priti Kumari Bioinformatics Software Engineer Institute for Genome Sciences University of Maryland Baltimore, Maryland 21201": {
-    "files": [
-      "blib/script/cummerbund.pl",
-      "blib/script/expression_plots.pl",
-      "blib/script/wrapper_align.pl",
-      "src/perl/cummerbund.pl",
-      "src/perl/expression_plots.pl",
-      "src/perl/wrapper_align.pl"
-    ],
-    "file_count": 6,
-    "emails": [],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Kevin Galens": {
-    "files": [
-      "blib/lib/Ergatis/IdGenerator/IGSIdGenerator.pm",
-      "blib/lib/IntervalTree.pm",
-      "blib/lib/SNP/MergedTable.pm",
-      "lib/Ergatis/IdGenerator/IGSIdGenerator.pm",
-      "lib/IntervalTree.pm",
-      "lib/SNP/MergedTable.pm"
-    ],
-    "file_count": 6,
-    "emails": [
-      "kgalens@gmail.com",
-      "kgalens@som.umaryland.edu",
-      "kgalens@tigr.org"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "David Riley": {
-    "files": [
-      "blib/lib/GiTaxon.pm",
-      "blib/script/split_file.pl",
-      "lib/GiTaxon.pm",
-      "src/perl/split_file.pl"
-    ],
-    "file_count": 4,
-    "emails": [
-      "driley@som.umaryland.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Mahesh Vangala": {
-    "files": [
-      "blib/script/filter_subjects_based_on_align_score.pl",
-      "blib/script/map_clovr_ergatis_comp_config.pl",
-      "src/perl/filter_subjects_based_on_align_score.pl",
-      "src/perl/map_clovr_ergatis_comp_config.pl"
-    ],
-    "file_count": 4,
-    "emails": [
-      "mvangala@som.umaryland.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "# Remove all spaces and then append the @tigr.org": {
-    "files": [
-      "blib/script/check_logfiles.pl",
-      "src/perl/check_logfiles.pl"
-    ],
-    "file_count": 2,
-    "emails": [],
-    "roles": [
-      "comment"
-    ]
-  },
-  "Priti Kumari Bioinformatics Software Engineer Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
-    "files": [
-      "blib/script/edgeR.pl",
-      "src/perl/edgeR.pl"
-    ],
-    "file_count": 2,
-    "emails": [],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Shaun Adkins": {
-    "files": [
-      "blib/script/clovr_map_MiSeq_check.pl",
-      "src/perl/clovr_map_MiSeq_check.pl"
-    ],
-    "file_count": 2,
-    "emails": [
-      "sadkins@som.umaryland.edu"
-    ],
-    "roles": [
-      "comment"
-    ]
-  },
-  "Weizhong Chang, Amol Carl Shetty Bioinformatics Software Engineer Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
-    "files": [
-      "blib/script/split_fastq.pl",
-      "src/perl/split_fastq.pl"
-    ],
-    "file_count": 2,
-    "emails": [],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Howard Hughes Medical Institute.": {
-    "files": [
-      "blib/script/hmmpfam32htab.pl",
-      "src/perl/hmmpfam32htab.pl"
-    ],
-    "file_count": 2,
-    "emails": [],
-    "roles": [
-      "copyright"
-    ]
-  },
-  "Shaun Adkind Bioinformatics Software Engineer Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
-    "files": [
-      "blib/script/prepare_sbt_cmt.pl",
-      "src/perl/prepare_sbt_cmt.pl"
-    ],
-    "file_count": 2,
-    "emails": [
-      "sadkins@som.umaryland.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Shaun Adkins Bioinformatics Software Engineer Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
-    "files": [
-      "blib/script/lgt_bwa.pl",
-      "src/perl/lgt_bwa.pl"
-    ],
-    "file_count": 2,
-    "emails": [
-      "sadkins@som.umaryland.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "# editor:": {
-    "files": [
-      "blib/script/generate_asmbl_list.pl",
-      "src/perl/generate_asmbl_list.pl"
-    ],
-    "file_count": 2,
-    "emails": [
-      "sundaram@tigr.org"
-    ],
-    "roles": [
-      "comment"
-    ]
-  },
-  "Weizhong Chang, Priti Kumari Bioinformatics Software Engineer I Institute for Genome Sciences University of Maryland Baltimore, Maryland 21201": {
-    "files": [
-      "blib/script/align_tophat_split_stats.pl",
-      "src/perl/align_tophat_split_stats.pl"
-    ],
-    "file_count": 2,
-    "emails": [],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Weizhong Chang Bioinformatics Software Engineer Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
-    "files": [
-      "blib/script/bam_merge.pl",
-      "src/perl/bam_merge.pl"
-    ],
-    "file_count": 2,
-    "emails": [],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Kemi Abolude": {
-    "files": [
-      "blib/script/split_paired_files.pl",
-      "src/perl/split_paired_files.pl"
-    ],
-    "file_count": 2,
-    "emails": [
-      "kabolude@som.umaryland.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Ian Korf": {
-    "files": [
-      "blib/lib/BPlite.pm",
-      "lib/BPlite.pm"
-    ],
-    "file_count": 2,
-    "emails": [
-      "ikorf@sapiens.wustl.edu"
-    ],
-    "roles": [
-      "pod"
-    ]
-  },
-  "Ian Korf. All Rights Reserved.": {
-    "files": [
-      "blib/lib/BPlite.pm",
-      "lib/BPlite.pm"
-    ],
-    "file_count": 2,
-    "emails": [],
-    "roles": [
-      "copyright"
-    ]
-  },
-  "Brett Whitty": {
-    "files": [
-      "blib/lib/Ergatis/IdGenerator.pm",
-      "lib/Ergatis/IdGenerator.pm"
-    ],
-    "file_count": 2,
-    "emails": [
-      "bwhitty@jcvi.org"
-    ],
-    "roles": [
-      "pod"
-    ]
-  }
+   "contributors" : [
+      {
+         "commits" : 1447,
+         "emails" : [
+            "jorvis@gmail.com"
+         ],
+         "first_commit" : "2004-11-16T19:50:33+00:00",
+         "last_commit" : "2015-09-30T10:15:23-05:00",
+         "name" : "Joshua Orvis"
+      },
+      {
+         "commits" : 1128,
+         "emails" : [
+            "sadkins@sadkins-lx.igs.umaryland.edu",
+            "sadkins@sadkinslt-osx.igs.umaryland.edu",
+            "sadkins@sadkinslt-osx.som.umaryland.edu",
+            "sadkins@som.umaryland.edu",
+            "shaun.adkins@gmail.com"
+         ],
+         "first_commit" : "2011-08-17T20:24:17+00:00",
+         "last_commit" : "2017-11-13T15:52:12-05:00",
+         "name" : "Shaun Adkins"
+      },
+      {
+         "commits" : 794,
+         "emails" : [],
+         "first_commit" : "2006-03-23T15:23:21+00:00",
+         "last_commit" : "2012-12-17T15:01:32+00:00",
+         "name" : "Kevin Galens"
+      },
+      {
+         "commits" : 681,
+         "emails" : [],
+         "first_commit" : "2003-07-15T18:16:57+00:00",
+         "last_commit" : "2009-07-14T15:27:58+00:00",
+         "name" : "Jay Sundaram"
+      },
+      {
+         "commits" : 627,
+         "emails" : [],
+         "first_commit" : "2003-04-01T23:58:26+00:00",
+         "last_commit" : "2011-06-29T14:23:52+00:00",
+         "name" : "Sam Angiuoli"
+      },
+      {
+         "commits" : 478,
+         "emails" : [],
+         "first_commit" : "2005-12-16T19:02:48+00:00",
+         "last_commit" : "2007-12-27T20:34:23+00:00",
+         "name" : "Brett Whitty"
+      },
+      {
+         "commits" : 252,
+         "emails" : [],
+         "first_commit" : "2008-04-16T19:58:35+00:00",
+         "last_commit" : "2013-06-07T20:52:43+00:00",
+         "name" : "David Riley"
+      },
+      {
+         "commits" : 218,
+         "emails" : [],
+         "first_commit" : "2006-03-24T14:58:45+00:00",
+         "last_commit" : "2011-03-10T18:40:31+00:00",
+         "name" : "Jin-Man"
+      },
+      {
+         "commits" : 196,
+         "emails" : [],
+         "first_commit" : "2005-08-19T18:06:26+00:00",
+         "last_commit" : "2011-05-25T22:46:05+00:00",
+         "name" : "Aaron Gussman"
+      },
+      {
+         "commits" : 154,
+         "emails" : [
+            "cesar.arze@gmail.com"
+         ],
+         "first_commit" : "2009-10-28T17:11:05+00:00",
+         "last_commit" : "2014-07-24T09:33:55-04:00",
+         "name" : "Cesar Arze"
+      },
+      {
+         "commits" : 145,
+         "emails" : [
+            "sagrawal@sagrawal-lx.igs.umaryland.edu"
+         ],
+         "first_commit" : "2011-02-08T18:14:54+00:00",
+         "last_commit" : "2015-09-30T11:11:19-04:00",
+         "name" : "Sonia Agrawal"
+      },
+      {
+         "commits" : 127,
+         "emails" : [],
+         "first_commit" : "2003-04-02T15:27:35+00:00",
+         "last_commit" : "2003-08-04T14:33:32+00:00",
+         "name" : "Chunhui Lu"
+      },
+      {
+         "commits" : 90,
+         "emails" : [
+            "jonathancrabtree@gmail.com"
+         ],
+         "first_commit" : "2003-10-16T13:27:22+00:00",
+         "last_commit" : "2017-02-17T11:40:53-05:00",
+         "name" : "Jonathan Crabtree"
+      },
+      {
+         "commits" : 76,
+         "emails" : [],
+         "first_commit" : "2010-10-05T14:05:50+00:00",
+         "last_commit" : "2012-02-10T17:45:55+00:00",
+         "name" : "Mahesh Vangala"
+      },
+      {
+         "commits" : 71,
+         "emails" : [],
+         "first_commit" : "2010-08-20T19:41:26+00:00",
+         "last_commit" : "2012-06-08T17:40:26+00:00",
+         "name" : "James Robert White"
+      },
+      {
+         "commits" : 68,
+         "emails" : [],
+         "first_commit" : "2005-05-26T18:14:04+00:00",
+         "last_commit" : "2007-03-26T21:37:25+00:00",
+         "name" : "Eric Lee"
+      },
+      {
+         "commits" : 47,
+         "emails" : [],
+         "first_commit" : "2003-06-17T16:52:30+00:00",
+         "last_commit" : "2004-05-13T17:35:19+00:00",
+         "name" : "Chris Hauser"
+      },
+      {
+         "commits" : 30,
+         "emails" : [],
+         "first_commit" : "2005-07-20T13:30:30+00:00",
+         "last_commit" : "2006-05-02T19:38:35+00:00",
+         "name" : "Phil Amedeo"
+      },
+      {
+         "commits" : 29,
+         "emails" : [],
+         "first_commit" : "2012-06-15T14:40:54+00:00",
+         "last_commit" : "2013-04-18T21:33:36+00:00",
+         "name" : "Amol Carl Shetty"
+      },
+      {
+         "commits" : 27,
+         "emails" : [],
+         "first_commit" : "2005-09-21T16:43:03+00:00",
+         "last_commit" : "2012-06-07T19:39:17+00:00",
+         "name" : "Todd Creasy"
+      },
+      {
+         "commits" : 22,
+         "emails" : [
+            "kabolude@som.umaryland.edu"
+         ],
+         "first_commit" : "2011-01-27T16:35:18+00:00",
+         "last_commit" : "2015-07-15T11:07:19-04:00",
+         "name" : "Kemi Abolude"
+      },
+      {
+         "commits" : 10,
+         "emails" : [],
+         "first_commit" : "2010-01-05T20:24:18+00:00",
+         "last_commit" : "2011-08-18T18:44:21+00:00",
+         "name" : "Mark Matalka"
+      },
+      {
+         "commits" : 10,
+         "emails" : [],
+         "first_commit" : "2012-05-30T14:26:55+00:00",
+         "last_commit" : "2013-02-04T20:52:09+00:00",
+         "name" : "Kent Shefchek"
+      },
+      {
+         "commits" : 9,
+         "emails" : [
+            "priti88@gwu.edu"
+         ],
+         "first_commit" : "2013-02-11T22:02:54+00:00",
+         "last_commit" : "2014-02-27T16:41:10-05:00",
+         "name" : "Priti Kumari"
+      },
+      {
+         "commits" : 9,
+         "emails" : [
+            "wchang@wchanglt-osx.igs.umaryland.edu",
+            "wchang@wchanglt-osx.som.umaryland.edu"
+         ],
+         "first_commit" : "2013-05-21T19:30:52+00:00",
+         "last_commit" : "2014-04-04T14:40:22-04:00",
+         "name" : "Weizhong Chang"
+      },
+      {
+         "commits" : 8,
+         "emails" : [],
+         "first_commit" : "2005-08-25T13:47:58+00:00",
+         "last_commit" : "2006-12-20T13:03:36+00:00",
+         "name" : "Brian Haas"
+      },
+      {
+         "commits" : 7,
+         "emails" : [],
+         "first_commit" : "2010-07-29T06:11:06+00:00",
+         "last_commit" : "2011-12-21T00:00:31+00:00",
+         "name" : "Chris Hemmeri"
+      },
+      {
+         "commits" : 7,
+         "emails" : [],
+         "first_commit" : "2007-04-19T18:07:52+00:00",
+         "last_commit" : "2007-06-12T20:06:26+00:00",
+         "name" : "GK Fan"
+      },
+      {
+         "commits" : 6,
+         "emails" : [],
+         "first_commit" : "2006-03-20T15:52:46+00:00",
+         "last_commit" : "2006-06-14T17:19:32+00:00",
+         "name" : "Kevin Childs"
+      },
+      {
+         "commits" : 5,
+         "emails" : [],
+         "first_commit" : "2010-05-17T18:06:49+00:00",
+         "last_commit" : "2011-03-31T04:58:53+00:00",
+         "name" : "Umar Farooq"
+      },
+      {
+         "commits" : 4,
+         "emails" : [],
+         "first_commit" : "2004-02-03T22:16:23+00:00",
+         "last_commit" : "2007-03-12T18:34:36+00:00",
+         "name" : "SGC"
+      },
+      {
+         "commits" : 4,
+         "emails" : [],
+         "first_commit" : "2006-02-01T13:55:51+00:00",
+         "last_commit" : "2006-04-10T20:22:48+00:00",
+         "name" : "Hamilton"
+      },
+      {
+         "commits" : 2,
+         "emails" : [],
+         "first_commit" : "2010-07-28T19:26:27+00:00",
+         "last_commit" : "2010-08-07T14:31:44+00:00",
+         "name" : "Brandi Cantarel"
+      },
+      {
+         "commits" : 1,
+         "emails" : [],
+         "first_commit" : "2008-12-16T19:34:00+00:00",
+         "last_commit" : "2008-12-16T19:34:00+00:00",
+         "name" : "Gaurav Jain"
+      },
+      {
+         "commits" : 1,
+         "emails" : [],
+         "first_commit" : "2003-09-08T17:27:12+00:00",
+         "last_commit" : "2003-09-08T17:27:12+00:00",
+         "name" : "Owen White"
+      },
+      {
+         "commits" : 1,
+         "emails" : [],
+         "first_commit" : "2003-04-01T23:58:26+00:00",
+         "last_commit" : "2003-04-01T23:58:26+00:00",
+         "name" : "(no author)"
+      }
+   ],
+   "source" : "git log from ergatis-git repository",
+   "total_commits" : 35
 }
