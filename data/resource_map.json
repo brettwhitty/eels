@@ -1,0 +1,8016 @@
+{
+  "description": "Runtime resource dependency map for Ergatis components",
+  "generated": "2026-02-19T21:30:37.121Z",
+  "summary": {
+    "total_resources": 598,
+    "by_type": {
+      "project_data": 11,
+      "database": 12,
+      "tool_or_data_path": 15,
+      "package_install": 13,
+      "package_config": 1,
+      "ergatis_script": 383,
+      "directory": 10,
+      "os_binary": 22,
+      "tool_bin_dir": 14,
+      "os_special": 1,
+      "ergatis_runtime": 2,
+      "user_path": 1,
+      "url_fragment": 1,
+      "library": 4,
+      "tool_executable": 91,
+      "parameter": 17
+    },
+    "runtime_categories": {
+      "ergatis_script": "Scripts from Ergatis install bin/ directory — included with Ergatis",
+      "tool_executable": "External tool binaries referenced via template variables — must be installed separately",
+      "tool_bin_dir": "Directories containing external tool binaries",
+      "tool_or_data_path": "Paths that may reference tools or data files",
+      "package_install": "Software installation directories (TIGR institutional paths)",
+      "database": "Reference databases required at runtime",
+      "os_binary": "Standard OS/system binaries (perl, sort, mv, etc.)",
+      "project_data": "Project-specific paths baked into configs — test/example data, not runtime deps",
+      "os_special": "Standard OS special files (/dev/null)",
+      "ergatis_runtime": "Ergatis workflow runtime paths — resolved during execution",
+      "package_config": "Tool configuration files relative to package install",
+      "url_fragment": "URL fragments parsed as filesystem paths",
+      "user_path": "User home directory paths — should be parameterized",
+      "directory": "Generic directory references",
+      "library": "Library/model file directories",
+      "parameter": "Other template variable references"
+    }
+  },
+  "resources": [
+    {
+      "type": "database",
+      "resource": "repository/ncbi/blast/20120414_001321/taxonomy/taxdump/",
+      "note": "TIGR /local/db — local node database cache",
+      "original_paths": [
+        "/local/db/repository/ncbi/blast/20120414_001321/taxonomy/taxdump/"
+      ],
+      "num_components": 3,
+      "components": [
+        "blast2lca",
+        "blast_lgt_finder",
+        "sam2lca"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "repository/ncbi/blast/20120414_001321/taxonomy/gi_taxid_nucl.dmp",
+      "note": "TIGR /local/db — local node database cache",
+      "original_paths": [
+        "/local/db/repository/ncbi/blast/20120414_001321/taxonomy/gi_taxid_nucl.dmp"
+      ],
+      "num_components": 3,
+      "components": [
+        "blast2lca",
+        "blast_lgt_finder",
+        "sam2lca"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "panda/AllGroup/AllGroup.niaa",
+      "note": "TIGR /usr/local/db — reference databases",
+      "original_paths": [
+        "/usr/local/db/panda/AllGroup/AllGroup.niaa"
+      ],
+      "num_components": 1,
+      "components": [
+        "aat_aa"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "/data_dbs/taxdump/names.dmp",
+      "note": "Taxonomy/reference database",
+      "original_paths": [
+        "/data_dbs/taxdump/names.dmp"
+      ],
+      "num_components": 1,
+      "components": [
+        "auto_gene_curation"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "/data_dbs/taxdump/nodes.dmp",
+      "note": "Taxonomy/reference database",
+      "original_paths": [
+        "/data_dbs/taxdump/nodes.dmp"
+      ],
+      "num_components": 1,
+      "components": [
+        "auto_gene_curation"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "repository/ncbi/blast/20110831_122720/taxonomy/taxdump/",
+      "note": "TIGR /local/db — local node database cache",
+      "original_paths": [
+        "/local/db/repository/ncbi/blast/20110831_122720/taxonomy/taxdump/"
+      ],
+      "num_components": 1,
+      "components": [
+        "btab2taxon"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "repository/ncbi/blast/20110831_122720/taxonomy/gi_taxid_nucl.dmp",
+      "note": "TIGR /local/db — local node database cache",
+      "original_paths": [
+        "/local/db/repository/ncbi/blast/20110831_122720/taxonomy/gi_taxid_nucl.dmp"
+      ],
+      "num_components": 1,
+      "components": [
+        "btab2taxon"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "clovr-greengenes-db/rep_set/97_otus.fasta",
+      "note": "CloVR staging — cloud reference data",
+      "original_paths": [
+        "/mnt/staging/data/clovr-greengenes-db/rep_set/97_otus.fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "core_qiime"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "common/ncbi_cogs/whog.1",
+      "note": "TIGR /usr/local/db — reference databases",
+      "original_paths": [
+        "/usr/local/db/common/ncbi_cogs/whog.1"
+      ],
+      "num_components": 1,
+      "components": [
+        "pipeline_summary"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "CHAR_DB",
+      "note": "Database reference",
+      "original_paths": [
+        "$;CHAR_DB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "start_site_curation"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "HMM_LIB_DB",
+      "note": "Database reference",
+      "original_paths": [
+        "$;HMM_LIB_DB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "start_site_curation"
+      ]
+    },
+    {
+      "type": "database",
+      "resource": "expasy/enzyme/latest/enzyme.dat",
+      "note": "TIGR /local/db — local node database cache",
+      "original_paths": [
+        "/local/db/expasy/enzyme/latest/enzyme.dat"
+      ],
+      "num_components": 1,
+      "components": [
+        "update_ec_numbers"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "BIN_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "$;BIN_DIR$;",
+        "{{BIN_DIR}}"
+      ],
+      "num_components": 340,
+      "components": [
+        "454_mplex_seq_bin_trim",
+        "RAPSearch2",
+        "RNAmmer",
+        "SPAdes",
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked",
+        "adjust_bsml_coordinates",
+        "align_bowtie_stats",
+        "align_tophat_split_stats",
+        "align_tophat_stats",
+        "amoscmp",
+        "antigenic",
+        "aragorn",
+        "assert_disjoint_clusters",
+        "assign_dbxref_ids",
+        "assign_taxa",
+        "augustus",
+        "auto_annotate",
+        "auto_gene_curation",
+        "backupdb",
+        "bam2bigwig",
+        "bam2coverage",
+        "bam2sam",
+        "bam_merge",
+        "bcpconverter",
+        "bepipred",
+        "ber",
+        "blast2lca",
+        "blast_lgt_finder",
+        "blast_seq_screen",
+        "blast_snp_regions",
+        "blastn_plus",
+        "blastp_plus",
+        "bmtagger",
+        "bowtie",
+        "bowtie_build",
+        "bsml2chado",
+        "bsml2fasta",
+        "bsml2featurerelationships",
+        "bsml2gff3",
+        "bsml2interevidence_fasta",
+        "bsml2mugsymap",
+        "bsml2ptt",
+        "bsml2tbl",
+        "bsml_qc",
+        "btab2taxon",
+        "bulk_delete_chado",
+        "bwa",
+        "celera-assembler",
+        "celera-assembler-distributed",
+        "chado2bsml",
+        "chado2flatfile",
+        "chado_report_pages",
+        "clean_fasta",
+        "cleanse_sgc_database",
+        "clovr_16S_rdptables",
+        "clovr_metagenomics_prep",
+        "clovr_metagenomics_tables",
+        "clustalw",
+        "cluster_mapping",
+        "combine_ncRNA_alignments",
+        "complete_study_stage",
+        "condor_cogs_search",
+        "core_qiime",
+        "create_amoscmp_input",
+        "create_cuffsuite_files",
+        "create_db_list_file",
+        "create_map_file",
+        "create_paired_list_file",
+        "create_pseudomolecules",
+        "crossbow",
+        "cuffcompare",
+        "cuffdiff",
+        "cuffdiff_filter",
+        "cufflinks",
+        "cummerbund",
+        "curate_common_names",
+        "cvtermpath_closure",
+        "db2bsml",
+        "db2fasta",
+        "delete_bcp",
+        "delete_by_bcp",
+        "deseq",
+        "download_sra",
+        "download_tcga",
+        "drop_chado_indexes",
+        "dump_fasta",
+        "dump_table",
+        "edgeR",
+        "error_detector",
+        "expression_plots",
+        "extract_assembly_stats",
+        "extract_snp_regions",
+        "fasta2bsml",
+        "fastaToBsmlWorkingGeneModels",
+        "fastortho",
+        "fastq_to_CA",
+        "fastqc_stats",
+        "fastx_quality_stats",
+        "fastx_trimming",
+        "fetch_genbank",
+        "fgenesh",
+        "filter_bogus_genes",
+        "filter_deseq",
+        "filter_dups_lc_seqs",
+        "filter_fastq",
+        "filter_lgt_class_c_genes",
+        "filter_merged_table",
+        "filter_sequences_by_id",
+        "find_homopolymers",
+        "fix_gene_symbols",
+        "formatdb",
+        "formatdb_snp",
+        "fuzznuc",
+        "genbank2bsml",
+        "genbank2fasta",
+        "genbank2gff3",
+        "genbank2gtf",
+        "geneid",
+        "genemark",
+        "genemark-es",
+        "genewise",
+        "genezilla",
+        "genscan",
+        "genscan-plus",
+        "gff3_to_annotab",
+        "gff3_to_fasta",
+        "gff3_to_gbrowse",
+        "gkpstore2fastq",
+        "glimmer3",
+        "glimmer3_cloud",
+        "glimmerHMM",
+        "glk2bsml",
+        "hmmls",
+        "hmmpfam",
+        "hmmpfam3",
+        "htseq",
+        "htseq_count_reads",
+        "identify_human_contaminants",
+        "infernal",
+        "initdb",
+        "insert_pmarks_in_scaffolds",
+        "intergenic_analysis",
+        "iprscan",
+        "islandpath",
+        "j_ortholog_clusters",
+        "j_ortholog_clusters_distributed_work",
+        "jaccard",
+        "ksnp",
+        "legacy2bsml",
+        "lgt_build_bwa_index",
+        "lgt_bwa",
+        "lgt_bwa_fq",
+        "lgt_bwa_post_process",
+        "lgt_create_validated_bam",
+        "lgt_mpileup",
+        "lipop",
+        "lipoprotein_motif",
+        "load_ber_for_manatee",
+        "make_circleator_figure",
+        "make_comparative_circleator_figure",
+        "make_snp_lists",
+        "map_snp_query_pos",
+        "mask_by_analysis",
+        "metagene",
+        "mothur_align_seqs",
+        "mothur_chimera_slayer",
+        "mothur_classify_seqs",
+        "mothur_cluster",
+        "mothur_collect_single",
+        "mothur_dist_seqs",
+        "mothur_filter_seqs",
+        "mothur_get_oturep",
+        "mothur_rarefaction_single",
+        "mothur_read_otu",
+        "mothur_screen_seqs",
+        "mothur_summary",
+        "mothur_tree_shared",
+        "mothur_trim_seqs",
+        "mothur_unique_seq_limit",
+        "mothur_unique_seqs",
+        "move_to_scratch",
+        "mpileup",
+        "mugsy_callsnps",
+        "mugsy_callsnps_distributed",
+        "mugsy_concat_fasta",
+        "mugsyalign",
+        "mugsycog",
+        "mugsycog_distributed_work",
+        "mugsyprep",
+        "mumi-reduce",
+        "mummer",
+        "mumsgraph",
+        "muscle",
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx",
+        "ngap",
+        "nucmer-snp2merged",
+        "obo2chado",
+        "open_reading_frames",
+        "order_paired_list",
+        "outer_membrane_domain",
+        "overlap_analysis",
+        "overlap_analysis_distributed",
+        "p_func",
+        "pangenome_blast_parse",
+        "pangenome_do_analysis",
+        "pangenome_do_analysis_distributed_work",
+        "pangenome_fix_headers",
+        "pangenome_make_graphs",
+        "pangenome_make_pangenome",
+        "pangenome_make_pangenome_distributed_work",
+        "pangenome_make_profile",
+        "pangenome_make_profile_distributed_work",
+        "pangenome_make_table",
+        "pangenome_make_table_distributed_work",
+        "pangenome_merge_results",
+        "pangenome_merge_results_distributed_work",
+        "panther",
+        "parse_evidence",
+        "parse_for_ncRNAs",
+        "parse_mpileup_for_positions",
+        "pathway_tools_input",
+        "pepstats",
+        "percent_gc",
+        "percent_mapped_stats",
+        "phage_finder",
+        "phat",
+        "phobos",
+        "phylip_dnadist",
+        "pick_otus_through_otu_table",
+        "pileup_to_wig",
+        "pipeline_summary",
+        "pipeline_summary_cloud",
+        "pmarks2bsml",
+        "predict_operons",
+        "predict_prokaryotic_gene_function",
+        "predotar",
+        "prepare_paired_ends_for_velvet",
+        "preserve_reads_in_fastq",
+        "priam_ec_assignment",
+        "prodigal",
+        "profile_bsml",
+        "profile_gff3",
+        "prok_pipeline_check",
+        "prokpipe_consistency_checks",
+        "promote_gene_prediction",
+        "ps_scan",
+        "pseudomolecule2glimmer3",
+        "psiblast",
+        "qiime_fasta_mothur_cnvr",
+        "qiime_fastq_mothur_cnvr",
+        "quicktree",
+        "refresh_chado_mart",
+        "remove_db_gene_syms_with_hypos",
+        "remove_indices_and_constraints",
+        "remove_subset_of_gis",
+        "repeatmasker",
+        "replace_defline_with_locusID",
+        "resistome",
+        "restore_indices_and_constraints",
+        "restoredb",
+        "rotate_molecule",
+        "rpkm_coverage_stats",
+        "rpsblast",
+        "rrna_hmm_fs",
+        "run_command",
+        "runsql",
+        "sam2bam",
+        "sam2fasta",
+        "sam2lca",
+        "sam2lca_distributed",
+        "samtools_alignment_stats",
+        "samtools_file_convert",
+        "samtools_merge",
+        "samtools_reference_index",
+        "scp_files",
+        "scripture",
+        "seg",
+        "selfsim",
+        "sff_to_CA",
+        "sfffile",
+        "sffinfo",
+        "sighunt",
+        "signalp",
+        "snap",
+        "snp-add-gene-info",
+        "snp_verify",
+        "soapdenovo",
+        "sort_sam_by_name",
+        "split_fasta",
+        "split_fasta_fastq",
+        "split_fastq",
+        "split_file",
+        "split_multifasta",
+        "split_paired_files",
+        "sra2fastq",
+        "start_site_curation",
+        "start_site_curation_distributed",
+        "summarize_mugsy_comparative_pipeline",
+        "summarize_mugsy_comparative_pipeline_distributed",
+        "tRNAscan-SE",
+        "tRNAscan-SE_compress",
+        "tabula_rasa",
+        "tag_data",
+        "targetp",
+        "tbl2asn",
+        "tblastn_plus",
+        "tmhmm",
+        "tophat",
+        "train_for_glimmer3_iteration",
+        "translate_sequence",
+        "trf",
+        "truncate_chado_mart",
+        "uclust",
+        "uclust_remove_replicates",
+        "update_ec_numbers",
+        "update_euk_model_sequences",
+        "validate_bsml",
+        "validate_chado_records",
+        "validate_euk_records",
+        "validate_fasta",
+        "validate_genbank",
+        "validate_gff3",
+        "validate_sgc_records",
+        "velvet",
+        "velvet_optimiser",
+        "wait",
+        "wrapper_align",
+        "wu-blastn",
+        "wu-blastp",
+        "wu-blastx",
+        "wu-tblastn"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "TMP_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "$;TMP_DIR$;",
+        "{{TMP_DIR}}"
+      ],
+      "num_components": 6,
+      "components": [
+        "btab2taxon",
+        "run_command",
+        "tRNAscan-SE",
+        "tag_data",
+        "uclust",
+        "usearch"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "DOCS_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "$;DOCS_DIR$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "db2bsml",
+        "legacy2bsml"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "VELVET_INSTALL_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "$;VELVET_INSTALL_DIR$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "prepare_paired_ends_for_velvet",
+        "velvet_optimiser"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "MUGSY_MAPPING_INSTALL_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "{{MUGSY_MAPPING_INSTALL_DIR}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "mugsy_callsnps",
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "AUGUSTUS_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "$;AUGUSTUS_DIR$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "RFAM_STOCKHOLM_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "$;RFAM_STOCKHOLM_DIR$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "infernal"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "TIGR_ROLES_DB_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "$;TIGR_ROLES_DB_DIR$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "p_func"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "KSNP_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "{{KSNP_DIR}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ]
+    },
+    {
+      "type": "directory",
+      "resource": "PHYLOMARK_DIR",
+      "note": "Directory reference",
+      "original_paths": [
+        "{{PHYLOMARK_DIR}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "ergatis_runtime",
+      "resource": "/workflow/runtime/",
+      "note": "Ergatis workflow runtime path — resolved at execution",
+      "original_paths": [
+        "/workflow/runtime/"
+      ],
+      "num_components": 2,
+      "components": [
+        "clustalw",
+        "muscle"
+      ]
+    },
+    {
+      "type": "ergatis_runtime",
+      "resource": "/output_repository/uclust/",
+      "note": "Ergatis workflow runtime path — resolved at execution",
+      "original_paths": [
+        "/output_repository/uclust/"
+      ],
+      "num_components": 1,
+      "components": [
+        "uclust_remove_replicates"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "dtdValid.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/dtdValid.pl"
+      ],
+      "num_components": 90,
+      "components": [
+        "RAPSearch2",
+        "RNAmmer",
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked",
+        "adjust_bsml_coordinates",
+        "antigenic",
+        "aragorn",
+        "augustus",
+        "auto_annotate",
+        "auto_gene_curation",
+        "bepipred",
+        "ber",
+        "blastn_plus",
+        "blastp_plus",
+        "chado2bsml",
+        "clustalw",
+        "combine_ncRNA_alignments",
+        "db2bsml",
+        "fastaToBsmlWorkingGeneModels",
+        "fgenesh",
+        "find_homopolymers",
+        "fuzznuc",
+        "geneid",
+        "genemark",
+        "genemark-es",
+        "genezilla",
+        "genscan",
+        "genscan-plus",
+        "glimmer3",
+        "glimmerHMM",
+        "glk2bsml",
+        "hmmls",
+        "hmmpfam",
+        "hmmpfam3",
+        "infernal",
+        "intergenic_analysis",
+        "iprscan",
+        "islandpath",
+        "legacy2bsml",
+        "lipop",
+        "lipoprotein_motif",
+        "mask_by_analysis",
+        "muscle",
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx",
+        "ngap",
+        "outer_membrane_domain",
+        "overlap_analysis",
+        "p_func",
+        "panther",
+        "parse_for_ncRNAs",
+        "pepstats",
+        "percent_gc",
+        "phat",
+        "phobos",
+        "pipeline_summary",
+        "pmarks2bsml",
+        "predotar",
+        "priam_ec_assignment",
+        "prodigal",
+        "promote_gene_prediction",
+        "ps_scan",
+        "pseudomolecule2glimmer3",
+        "psiblast",
+        "quicktree",
+        "repeatmasker",
+        "rpsblast",
+        "seg",
+        "signalp",
+        "snap",
+        "start_site_curation",
+        "tRNAscan-SE",
+        "tRNAscan-SE_compress",
+        "targetp",
+        "tblastn_plus",
+        "tmhmm",
+        "translate_sequence",
+        "trf",
+        "validate_bsml",
+        "wu-blastn",
+        "wu-blastp",
+        "wu-blastx",
+        "wu-tblastn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "analysis2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/analysis2bsml"
+      ],
+      "num_components": 82,
+      "components": [
+        "RAPSearch2",
+        "RNAmmer",
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked",
+        "antigenic",
+        "aragorn",
+        "augustus",
+        "auto_annotate",
+        "auto_gene_curation",
+        "bepipred",
+        "ber",
+        "blastn_plus",
+        "blastp_plus",
+        "clustalw",
+        "combine_ncRNA_alignments",
+        "fgenesh",
+        "find_homopolymers",
+        "fuzznuc",
+        "geneid",
+        "genemark",
+        "genemark-es",
+        "genezilla",
+        "genscan",
+        "genscan-plus",
+        "glimmer3",
+        "glimmerHMM",
+        "hmmls",
+        "hmmpfam",
+        "hmmpfam3",
+        "infernal",
+        "intergenic_analysis",
+        "iprscan",
+        "islandpath",
+        "lipop",
+        "lipoprotein_motif",
+        "mask_by_analysis",
+        "muscle",
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx",
+        "ngap",
+        "outer_membrane_domain",
+        "overlap_analysis",
+        "p_func",
+        "panther",
+        "pepstats",
+        "percent_gc",
+        "phat",
+        "phobos",
+        "pipeline_summary",
+        "pmarks2bsml",
+        "predotar",
+        "priam_ec_assignment",
+        "prodigal",
+        "promote_gene_prediction",
+        "ps_scan",
+        "pseudomolecule2glimmer3",
+        "psiblast",
+        "quicktree",
+        "repeatmasker",
+        "rpsblast",
+        "seg",
+        "signalp",
+        "snap",
+        "start_site_curation",
+        "tRNAscan-SE",
+        "tRNAscan-SE_compress",
+        "targetp",
+        "tblastn_plus",
+        "tmhmm",
+        "translate_sequence",
+        "trf",
+        "wu-blastn",
+        "wu-blastp",
+        "wu-blastx",
+        "wu-tblastn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_list_file",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_list_file"
+      ],
+      "num_components": 38,
+      "components": [
+        "454_mplex_seq_bin_trim",
+        "SPAdes",
+        "amoscmp",
+        "blast_lgt_finder",
+        "blast_seq_screen",
+        "bsml2chado",
+        "celera-assembler",
+        "clovr_16S_rdptables",
+        "clovr_metagenomics_tables",
+        "core_qiime",
+        "create_amoscmp_input",
+        "create_pseudomolecules",
+        "crossbow",
+        "download_tcga",
+        "fastq_to_CA",
+        "fetch_genbank",
+        "filter_lgt_class_c_genes",
+        "glimmer3_cloud",
+        "insert_pmarks_in_scaffolds",
+        "j_ortholog_clusters_distributed_work",
+        "lgt_bwa_post_process",
+        "make_circleator_figure",
+        "mugsy_callsnps",
+        "mugsy_concat_fasta",
+        "mugsycog_distributed_work",
+        "mugsyprep",
+        "parse_evidence",
+        "pick_otus_through_otu_table",
+        "pipeline_summary_cloud",
+        "predict_prokaryotic_gene_function",
+        "qiime_fasta_mothur_cnvr",
+        "qiime_fastq_mothur_cnvr",
+        "run_command",
+        "sam2lca",
+        "samtools_merge",
+        "sff_to_CA",
+        "split_paired_files",
+        "summarize_mugsy_comparative_pipeline"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "replace_template_keys",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/replace_template_keys"
+      ],
+      "num_components": 36,
+      "components": [
+        "amoscmp",
+        "backupdb",
+        "bcpconverter",
+        "bsml2chado",
+        "bulk_delete_chado",
+        "celera-assembler",
+        "cvtermpath_closure",
+        "delete_bcp",
+        "delete_by_bcp",
+        "drop_chado_indexes",
+        "fastortho",
+        "glimmer3_cloud",
+        "initdb",
+        "j_ortholog_clusters",
+        "mugsy_callsnps",
+        "mugsyalign",
+        "mugsycog",
+        "mugsyprep",
+        "mumi-reduce",
+        "obo2chado",
+        "pangenome_make_pangenome",
+        "pangenome_make_profile",
+        "pangenome_make_table",
+        "pangenome_merge_results",
+        "pipeline_summary_cloud",
+        "refresh_chado_mart",
+        "remove_indices_and_constraints",
+        "restore_indices_and_constraints",
+        "restoredb",
+        "runsql",
+        "sam2lca",
+        "samtools_merge",
+        "summarize_mugsy_comparative_pipeline",
+        "truncate_chado_mart",
+        "validate_euk_records",
+        "validate_sgc_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "compress_file",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/compress_file"
+      ],
+      "num_components": 32,
+      "components": [
+        "RAPSearch2",
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked",
+        "ber",
+        "blastn_plus",
+        "blastp_plus",
+        "clustalw",
+        "geneid",
+        "genscan",
+        "genscan-plus",
+        "muscle",
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx",
+        "psiblast",
+        "quicktree",
+        "rpsblast",
+        "seg",
+        "signalp",
+        "snap",
+        "tRNAscan-SE_compress",
+        "tblastn_plus",
+        "wu-blastn",
+        "wu-blastp",
+        "wu-blastx",
+        "wu-tblastn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_iterator_groups",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_iterator_groups"
+      ],
+      "num_components": 23,
+      "components": [
+        "amoscmp",
+        "backupdb",
+        "bcpconverter",
+        "bsml2chado",
+        "bulk_delete_chado",
+        "cvtermpath_closure",
+        "delete_bcp",
+        "delete_by_bcp",
+        "drop_chado_indexes",
+        "glimmer3_cloud",
+        "initdb",
+        "mugsyprep",
+        "mumi-reduce",
+        "obo2chado",
+        "pipeline_summary_cloud",
+        "refresh_chado_mart",
+        "remove_indices_and_constraints",
+        "restore_indices_and_constraints",
+        "restoredb",
+        "runsql",
+        "truncate_chado_mart",
+        "validate_euk_records",
+        "validate_sgc_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "blast2btab",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/blast2btab"
+      ],
+      "num_components": 16,
+      "components": [
+        "blastn_plus",
+        "blastp_plus",
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx",
+        "psiblast",
+        "rpsblast",
+        "tblastn_plus",
+        "wu-blastn",
+        "wu-blastp",
+        "wu-blastx",
+        "wu-tblastn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mothur",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mothur"
+      ],
+      "num_components": 15,
+      "components": [
+        "mothur_align_seqs",
+        "mothur_chimera_slayer",
+        "mothur_classify_seqs",
+        "mothur_cluster",
+        "mothur_collect_single",
+        "mothur_dist_seqs",
+        "mothur_filter_seqs",
+        "mothur_get_oturep",
+        "mothur_rarefaction_single",
+        "mothur_read_otu",
+        "mothur_screen_seqs",
+        "mothur_summary",
+        "mothur_tree_shared",
+        "mothur_trim_seqs",
+        "mothur_unique_seqs"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "blast2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/blast2bsml"
+      ],
+      "num_components": 14,
+      "components": [
+        "blastn_plus",
+        "blastp_plus",
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx",
+        "tblastn_plus",
+        "wu-blastn",
+        "wu-blastp",
+        "wu-blastx",
+        "wu-tblastn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "ddl2iterator",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/ddl2iterator"
+      ],
+      "num_components": 12,
+      "components": [
+        "bsml2chado",
+        "bulk_delete_chado",
+        "delete_bcp",
+        "delete_by_bcp",
+        "drop_chado_indexes",
+        "initdb",
+        "refresh_chado_mart",
+        "remove_indices_and_constraints",
+        "restore_indices_and_constraints",
+        "restoredb",
+        "runsql",
+        "truncate_chado_mart"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_file_iterator_list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_file_iterator_list"
+      ],
+      "num_components": 10,
+      "components": [
+        "bsml2chado",
+        "delete_bcp",
+        "delete_by_bcp",
+        "glimmer3_cloud",
+        "initdb",
+        "mugsyprep",
+        "mumi-reduce",
+        "obo2chado",
+        "pipeline_summary_cloud",
+        "restoredb"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "profileBSMLFile",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/profileBSMLFile"
+      ],
+      "num_components": 5,
+      "components": [
+        "db2bsml",
+        "fastaToBsmlWorkingGeneModels",
+        "glk2bsml",
+        "legacy2bsml",
+        "profile_bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "blastbtab2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/blastbtab2bsml"
+      ],
+      "num_components": 3,
+      "components": [
+        "RAPSearch2",
+        "psiblast",
+        "rpsblast"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_blast_plus",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_blast_plus"
+      ],
+      "num_components": 3,
+      "components": [
+        "blastn_plus",
+        "blastp_plus",
+        "tblastn_plus"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml3_1.dtd",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml3_1.dtd"
+      ],
+      "num_components": 2,
+      "components": [
+        "db2bsml",
+        "legacy2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "nap2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/nap2bsml"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "gap22bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/gap22bsml"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_na",
+        "aat_na_masked"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_table_iterator_list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_table_iterator_list"
+      ],
+      "num_components": 2,
+      "components": [
+        "backupdb",
+        "bcpconverter"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "replace_fasta_headers.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/replace_fasta_headers.pl"
+      ],
+      "num_components": 2,
+      "components": [
+        "bepipred",
+        "hmmls"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bcpdir2iterator",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bcpdir2iterator"
+      ],
+      "num_components": 2,
+      "components": [
+        "bsml2chado",
+        "refresh_chado_mart"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "validate_clustalw_output",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/validate_clustalw_output"
+      ],
+      "num_components": 2,
+      "components": [
+        "clustalw",
+        "muscle"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "MSF2Bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/MSF2Bsml"
+      ],
+      "num_components": 2,
+      "components": [
+        "clustalw",
+        "muscle"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_iterator_list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_iterator_list"
+      ],
+      "num_components": 2,
+      "components": [
+        "cvtermpath_closure",
+        "validate_sgc_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prepare_sbt_cmt",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prepare_sbt_cmt"
+      ],
+      "num_components": 2,
+      "components": [
+        "dump_fasta",
+        "dump_table"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "format_velvet_assembled_AGP",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/format_velvet_assembled_AGP"
+      ],
+      "num_components": 2,
+      "components": [
+        "dump_fasta",
+        "dump_table"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "wrap_tbl2asn",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/wrap_tbl2asn"
+      ],
+      "num_components": 2,
+      "components": [
+        "dump_fasta",
+        "dump_table"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fix_gene_symbols",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fix_gene_symbols"
+      ],
+      "num_components": 2,
+      "components": [
+        "dump_table",
+        "fix_gene_symbols"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genscan2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genscan2bsml"
+      ],
+      "num_components": 2,
+      "components": [
+        "genscan",
+        "genscan-plus"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "glimmer32bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/glimmer32bsml"
+      ],
+      "num_components": 2,
+      "components": [
+        "glimmer3",
+        "pseudomolecule2glimmer3"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "CogProteinFastaNoMap",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/CogProteinFastaNoMap"
+      ],
+      "num_components": 2,
+      "components": [
+        "j_ortholog_clusters_distributed_work",
+        "jaccard"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_bwa",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_bwa"
+      ],
+      "num_components": 2,
+      "components": [
+        "lgt_bwa",
+        "lgt_bwa_fq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_bwa_post_process",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_bwa_post_process"
+      ],
+      "num_components": 2,
+      "components": [
+        "lgt_bwa_fq",
+        "lgt_bwa_post_process"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mafindex.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mafindex.pl"
+      ],
+      "num_components": 2,
+      "components": [
+        "mugsy_callsnps",
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_blast_parse",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_blast_parse"
+      ],
+      "num_components": 2,
+      "components": [
+        "pangenome_blast_parse",
+        "pangenome_do_analysis"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_make_table",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_make_table"
+      ],
+      "num_components": 2,
+      "components": [
+        "pangenome_do_analysis_distributed_work",
+        "pangenome_make_table_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_make_profile",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_make_profile"
+      ],
+      "num_components": 2,
+      "components": [
+        "pangenome_do_analysis_distributed_work",
+        "pangenome_make_profile_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "qiime_to_mothur_meta.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/qiime_to_mothur_meta.pl"
+      ],
+      "num_components": 2,
+      "components": [
+        "qiime_fasta_mothur_cnvr",
+        "qiime_fastq_mothur_cnvr"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "tRNAscan-SE2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/tRNAscan-SE2bsml"
+      ],
+      "num_components": 2,
+      "components": [
+        "tRNAscan-SE",
+        "tRNAscan-SE_compress"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "config",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/config"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "b2gPipe.properties",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/b2gPipe.properties"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast2go"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "work_dir",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/work_dir"
+      ],
+      "num_components": 1,
+      "components": [
+        "genewise"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "runcommand.stdout",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/runcommand.stdout"
+      ],
+      "num_components": 1,
+      "components": [
+        "run_command"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "runcommand.stderr",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/runcommand.stderr"
+      ],
+      "num_components": 1,
+      "components": [
+        "run_command"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_sighunt.R",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_sighunt.R"
+      ],
+      "num_components": 1,
+      "components": [
+        "sighunt"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "all.motif",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/all.motif"
+      ],
+      "num_components": 1,
+      "components": [
+        "train_for_glimmer3_iteration"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "uclust.sorted.list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/uclust.sorted.list"
+      ],
+      "num_components": 1,
+      "components": [
+        "uclust_remove_replicates"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bin_and_trim_barcoded_seqs",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bin_and_trim_barcoded_seqs"
+      ],
+      "num_components": 1,
+      "components": [
+        "454_mplex_seq_bin_trim"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "count_barcoded_seqs",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/count_barcoded_seqs"
+      ],
+      "num_components": 1,
+      "components": [
+        "454_mplex_seq_bin_trim"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "RAPSearch2btab",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/RAPSearch2btab"
+      ],
+      "num_components": 1,
+      "components": [
+        "RAPSearch2"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "rnammer2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/rnammer2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "RNAmmer"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_spades",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_spades"
+      ],
+      "num_components": 1,
+      "components": [
+        "SPAdes"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "adjust_bsml_coordinates",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/adjust_bsml_coordinates"
+      ],
+      "num_components": 1,
+      "components": [
+        "adjust_bsml_coordinates"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "align_bowtie_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/align_bowtie_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "align_bowtie_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "align_tophat_split_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/align_tophat_split_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "align_tophat_split_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "align_tophat_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/align_tophat_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "align_tophat_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_amoscmp_iterator_list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_amoscmp_iterator_list"
+      ],
+      "num_components": 1,
+      "components": [
+        "amoscmp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "antigenic2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/antigenic2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "antigenic"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "aragorn2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/aragorn2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "aragorn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "assertClustersDisjoint",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/assertClustersDisjoint"
+      ],
+      "num_components": 1,
+      "components": [
+        "assert_disjoint_clusters"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "assign_dbxref_ids",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/assign_dbxref_ids"
+      ],
+      "num_components": 1,
+      "components": [
+        "assign_dbxref_ids"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_subjects_based_on_align_score",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_subjects_based_on_align_score"
+      ],
+      "num_components": 1,
+      "components": [
+        "assign_taxa"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "assign_taxa",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/assign_taxa"
+      ],
+      "num_components": 1,
+      "components": [
+        "assign_taxa"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "augustus2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/augustus2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "auto_annotate",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/auto_annotate"
+      ],
+      "num_components": 1,
+      "components": [
+        "auto_annotate"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "auto_gene_curation",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/auto_gene_curation"
+      ],
+      "num_components": 1,
+      "components": [
+        "auto_gene_curation"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bam2bigwig",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bam2bigwig"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam2bigwig"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bam2coverage",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bam2coverage"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam2coverage"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bam2sam",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bam2sam"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam2sam"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bam_merge",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bam_merge"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam_merge"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bepipred2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bepipred2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "bepipred"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "ber_blast_hit_selector",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/ber_blast_hit_selector"
+      ],
+      "num_components": 1,
+      "components": [
+        "ber"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "extract_blast_hits_by_id",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/extract_blast_hits_by_id"
+      ],
+      "num_components": 1,
+      "components": [
+        "ber"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_ber_db.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_ber_db.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "ber"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "add_pvalue_to_praze_output",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/add_pvalue_to_praze_output"
+      ],
+      "num_components": 1,
+      "components": [
+        "ber"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "berbtab2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/berbtab2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "ber"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "blast2lca",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/blast2lca"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast2lca"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_lgt_best_hit",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_lgt_best_hit"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast_lgt_finder"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_finder",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_finder"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast_lgt_finder"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "get_blast_querynames.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/get_blast_querynames.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast_seq_screen"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "screen_seqs_by_ids.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/screen_seqs_by_ids.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast_seq_screen"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "blast_snp_regions",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/blast_snp_regions"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast_snp_regions"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "parse_snp_blast",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/parse_snp_blast"
+      ],
+      "num_components": 1,
+      "components": [
+        "blast_snp_regions"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_bmtagger",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_bmtagger"
+      ],
+      "num_components": 1,
+      "components": [
+        "bmtagger"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bowtie",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bowtie"
+      ],
+      "num_components": 1,
+      "components": [
+        "bowtie"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bowtie_build",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bowtie_build"
+      ],
+      "num_components": 1,
+      "components": [
+        "bowtie_build"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "queries2Chado",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/queries2Chado"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "extract_checksums",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/extract_checksums"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "merge_sorted_files",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/merge_sorted_files"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "assign_pks",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/assign_pks"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "replace_checksums",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/replace_checksums"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fix_nuc_fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fix_nuc_fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2featurerelationships",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2featurerelationships"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2featurerelationships"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2gff3",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2gff3"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2gff3"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2interevidence_fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2interevidence_fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2interevidence_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2mugsymap",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2mugsymap"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2mugsymap"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2ptt",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2ptt"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2ptt"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2tbl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2tbl"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2tbl"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml_qc",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml_qc"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml_qc"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "btab2taxon",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/btab2taxon"
+      ],
+      "num_components": 1,
+      "components": [
+        "btab2taxon"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "checkAndDelete",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/checkAndDelete"
+      ],
+      "num_components": 1,
+      "components": [
+        "bulk_delete_chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "createSelectRecordCountsSQL",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/createSelectRecordCountsSQL"
+      ],
+      "num_components": 1,
+      "components": [
+        "bulk_delete_chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "createViewsSQL",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/createViewsSQL"
+      ],
+      "num_components": 1,
+      "components": [
+        "bulk_delete_chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "checkDeletedTableRecordCounts",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/checkDeletedTableRecordCounts"
+      ],
+      "num_components": 1,
+      "components": [
+        "bulk_delete_chado"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bwa_wrapper",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bwa_wrapper"
+      ],
+      "num_components": 1,
+      "components": [
+        "bwa"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "runCA_wrapper",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/runCA_wrapper"
+      ],
+      "num_components": 1,
+      "components": [
+        "celera-assembler-distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "chado2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/chado2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "chado2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "chado2flatfile",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/chado2flatfile"
+      ],
+      "num_components": 1,
+      "components": [
+        "chado2flatfile"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "generateChadoReportPages",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/generateChadoReportPages"
+      ],
+      "num_components": 1,
+      "components": [
+        "chado_report_pages"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "clean_fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/clean_fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "clean_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "replace_nuc_gaps",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/replace_nuc_gaps"
+      ],
+      "num_components": 1,
+      "components": [
+        "clean_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "rewrite_seqs",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/rewrite_seqs"
+      ],
+      "num_components": 1,
+      "components": [
+        "cleanse_sgc_database"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sgc_GC_content_load",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sgc_GC_content_load"
+      ],
+      "num_components": 1,
+      "components": [
+        "cleanse_sgc_database"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "molwt_update",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/molwt_update"
+      ],
+      "num_components": 1,
+      "components": [
+        "cleanse_sgc_database"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "signalP_update",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/signalP_update"
+      ],
+      "num_components": 1,
+      "components": [
+        "cleanse_sgc_database"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lipoprotein_update",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lipoprotein_update"
+      ],
+      "num_components": 1,
+      "components": [
+        "cleanse_sgc_database"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "tm_update",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/tm_update"
+      ],
+      "num_components": 1,
+      "components": [
+        "cleanse_sgc_database"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "omp_update",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/omp_update"
+      ],
+      "num_components": 1,
+      "components": [
+        "cleanse_sgc_database"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "clovr16S_rdp_tables.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/clovr16S_rdp_tables.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "clovr_16S_rdptables"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "clovr_metagenomics_prep.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/clovr_metagenomics_prep.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "clovr_metagenomics_prep"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "clovr_metagenomics_tsvtables.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/clovr_metagenomics_tsvtables.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "clovr_metagenomics_tables"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mapClusters",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mapClusters"
+      ],
+      "num_components": 1,
+      "components": [
+        "cluster_mapping"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "combine_ncRNA_alignemnts",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/combine_ncRNA_alignemnts"
+      ],
+      "num_components": 1,
+      "components": [
+        "combine_ncRNA_alignments"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "complete_study_stage",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/complete_study_stage"
+      ],
+      "num_components": 1,
+      "components": [
+        "complete_study_stage"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "condor_cog_search",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/condor_cog_search"
+      ],
+      "num_components": 1,
+      "components": [
+        "condor_cogs_search"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pick_open_reference_otus",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pick_open_reference_otus"
+      ],
+      "num_components": 1,
+      "components": [
+        "core_qiime"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "make_otu_heatmap_html",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/make_otu_heatmap_html"
+      ],
+      "num_components": 1,
+      "components": [
+        "core_qiime"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "summarize_taxa",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/summarize_taxa"
+      ],
+      "num_components": 1,
+      "components": [
+        "core_qiime"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "Create_Qiime_tables.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/Create_Qiime_tables.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "core_qiime"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "beta_diversity_through_plots",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/beta_diversity_through_plots"
+      ],
+      "num_components": 1,
+      "components": [
+        "core_qiime"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_amoscmp_input",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_amoscmp_input"
+      ],
+      "num_components": 1,
+      "components": [
+        "create_amoscmp_input"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_cuffsuite_files",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_cuffsuite_files"
+      ],
+      "num_components": 1,
+      "components": [
+        "create_cuffsuite_files"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_db_list_file",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_db_list_file"
+      ],
+      "num_components": 1,
+      "components": [
+        "create_db_list_file"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_map_file",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_map_file"
+      ],
+      "num_components": 1,
+      "components": [
+        "create_map_file"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_paired_list_file",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_paired_list_file"
+      ],
+      "num_components": 1,
+      "components": [
+        "create_paired_list_file"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_pseudomolecules",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_pseudomolecules"
+      ],
+      "num_components": 1,
+      "components": [
+        "create_pseudomolecules"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "cuffcompare",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/cuffcompare"
+      ],
+      "num_components": 1,
+      "components": [
+        "cuffcompare"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "cuffdiff",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/cuffdiff"
+      ],
+      "num_components": 1,
+      "components": [
+        "cuffdiff"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "cuffdiff_filter",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/cuffdiff_filter"
+      ],
+      "num_components": 1,
+      "components": [
+        "cuffdiff_filter"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "cufflinks",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/cufflinks"
+      ],
+      "num_components": 1,
+      "components": [
+        "cufflinks"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "cummerbund",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/cummerbund"
+      ],
+      "num_components": 1,
+      "components": [
+        "cummerbund"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "curate_common_names",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/curate_common_names"
+      ],
+      "num_components": 1,
+      "components": [
+        "curate_common_names"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "db2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/db2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "db2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "db2fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/db2fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "db2fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "deseq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/deseq"
+      ],
+      "num_components": 1,
+      "components": [
+        "deseq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "download_sra",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/download_sra"
+      ],
+      "num_components": 1,
+      "components": [
+        "download_sra"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "download_tcga",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/download_tcga"
+      ],
+      "num_components": 1,
+      "components": [
+        "download_tcga"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "dump_fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/dump_fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "dump_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "dump_table",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/dump_table"
+      ],
+      "num_components": 1,
+      "components": [
+        "dump_table"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "deleteOverlappingGenes",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/deleteOverlappingGenes"
+      ],
+      "num_components": 1,
+      "components": [
+        "dump_table"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "edgeR",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/edgeR"
+      ],
+      "num_components": 1,
+      "components": [
+        "edgeR"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "error_detector",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/error_detector"
+      ],
+      "num_components": 1,
+      "components": [
+        "error_detector"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "expression_plots",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/expression_plots"
+      ],
+      "num_components": 1,
+      "components": [
+        "expression_plots"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "extract_assembly_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/extract_assembly_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "extract_assembly_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "extract_snp_regions",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/extract_snp_regions"
+      ],
+      "num_components": 1,
+      "components": [
+        "extract_snp_regions"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fasta2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fasta2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "fasta2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fastaToBsmlWorkingGeneModels",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fastaToBsmlWorkingGeneModels"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastaToBsmlWorkingGeneModels"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fastortho_write_config",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fastortho_write_config"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastortho"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "FastOrtho",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/FastOrtho"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastortho_distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fastq_to_CA",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fastq_to_CA"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastq_to_CA"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fastqc_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fastqc_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastqc_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fastx_quality_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fastx_quality_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastx_quality_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fastx_trimming",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fastx_trimming"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastx_trimming"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fetch_genbank",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fetch_genbank"
+      ],
+      "num_components": 1,
+      "components": [
+        "fetch_genbank"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fgenesh2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fgenesh2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "fgenesh"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_bogus_genes",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_bogus_genes"
+      ],
+      "num_components": 1,
+      "components": [
+        "filter_bogus_genes"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_deseq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_deseq"
+      ],
+      "num_components": 1,
+      "components": [
+        "filter_deseq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_dups_lc_seqs",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_dups_lc_seqs"
+      ],
+      "num_components": 1,
+      "components": [
+        "filter_dups_lc_seqs"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_fastq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_fastq"
+      ],
+      "num_components": 1,
+      "components": [
+        "filter_fastq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "classify_class_c_genes",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/classify_class_c_genes"
+      ],
+      "num_components": 1,
+      "components": [
+        "filter_lgt_class_c_genes"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_merged_table",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_merged_table"
+      ],
+      "num_components": 1,
+      "components": [
+        "filter_merged_table"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_sequences_by_id",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_sequences_by_id"
+      ],
+      "num_components": 1,
+      "components": [
+        "filter_sequences_by_id"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "find_homopolymers.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/find_homopolymers.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "find_homopolymers"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "findhomopolymers2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/findhomopolymers2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "find_homopolymers"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "formatdb",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/formatdb"
+      ],
+      "num_components": 1,
+      "components": [
+        "formatdb"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "formatdb_snp",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/formatdb_snp"
+      ],
+      "num_components": 1,
+      "components": [
+        "formatdb_snp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fuzznuc2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fuzznuc2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "fuzznuc"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genbank2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genbank2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "genbank2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genbank2fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genbank2fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "genbank2fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genbank2gff3",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genbank2gff3"
+      ],
+      "num_components": 1,
+      "components": [
+        "genbank2gff3"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genbank2gtf",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genbank2gtf"
+      ],
+      "num_components": 1,
+      "components": [
+        "genbank2gtf"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "geneidgff32bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/geneidgff32bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "geneid"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_genemark-es",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_genemark-es"
+      ],
+      "num_components": 1,
+      "components": [
+        "genemark-es"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genemarkes2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genemarkes2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "genemark-es"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genemark2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genemark2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "genemark"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prepare_for_genewise_best_loc",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prepare_for_genewise_best_loc"
+      ],
+      "num_components": 1,
+      "components": [
+        "genewise"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genezilla2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genezilla2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "genezilla"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "getorf",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/getorf"
+      ],
+      "num_components": 1,
+      "components": [
+        "getorf"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "gff3_to_annotab",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/gff3_to_annotab"
+      ],
+      "num_components": 1,
+      "components": [
+        "gff3_to_annotab"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "gff3_to_fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/gff3_to_fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "gff3_to_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "gff3_to_gbrowse.py",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/gff3_to_gbrowse.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "gff3_to_gbrowse"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "gkpstore2fastq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/gkpstore2fastq"
+      ],
+      "num_components": 1,
+      "components": [
+        "gkpstore2fastq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "train_for_glimmer3",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/train_for_glimmer3"
+      ],
+      "num_components": 1,
+      "components": [
+        "glimmer3_cloud"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "glimmerHMM2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/glimmerHMM2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "glimmerHMM"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "glk2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/glk2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "glk2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "hmmls2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/hmmls2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmls"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "hmmpfam2htab",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/hmmpfam2htab"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "hmmpfam2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/hmmpfam2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "hmmpfam32htab",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/hmmpfam32htab"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam3"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "hmmpfam32bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/hmmpfam32bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam3"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "htseq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/htseq"
+      ],
+      "num_components": 1,
+      "components": [
+        "htseq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "htseq_count_reads.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/htseq_count_reads.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "htseq_count_reads"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "identify_human_contaminants",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/identify_human_contaminants"
+      ],
+      "num_components": 1,
+      "components": [
+        "identify_human_contaminants"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "get_seq_included",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/get_seq_included"
+      ],
+      "num_components": 1,
+      "components": [
+        "identify_human_contaminants"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_cmsearch",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_cmsearch"
+      ],
+      "num_components": 1,
+      "components": [
+        "infernal"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "infernal2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/infernal2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "infernal"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "checkDatabase",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/checkDatabase"
+      ],
+      "num_components": 1,
+      "components": [
+        "initdb"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "dropChadoObjects",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/dropChadoObjects"
+      ],
+      "num_components": 1,
+      "components": [
+        "initdb"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "store_chado_version",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/store_chado_version"
+      ],
+      "num_components": 1,
+      "components": [
+        "initdb"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "insert_pmarks_in_scaffolds",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/insert_pmarks_in_scaffolds"
+      ],
+      "num_components": 1,
+      "components": [
+        "insert_pmarks_in_scaffolds"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "intergenic_analysis",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/intergenic_analysis"
+      ],
+      "num_components": 1,
+      "components": [
+        "intergenic_analysis"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "iprscan2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/iprscan2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "iprscan"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "islandpath2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/islandpath2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "islandpath"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "CogBsmlLoader",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/CogBsmlLoader"
+      ],
+      "num_components": 1,
+      "components": [
+        "j_ortholog_clusters_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "best_hit",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/best_hit"
+      ],
+      "num_components": 1,
+      "components": [
+        "j_ortholog_clusters_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "bsml2idlookup",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/bsml2idlookup"
+      ],
+      "num_components": 1,
+      "components": [
+        "jaccard"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "clusterBsmlPairwiseAlignments",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/clusterBsmlPairwiseAlignments"
+      ],
+      "num_components": 1,
+      "components": [
+        "jaccard"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "ksnp_merge_reference",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/ksnp_merge_reference"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "genome_names.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/genome_names.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "ksnp_to_addgeneinfo",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/ksnp_to_addgeneinfo"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "ksnp-add-gene-info",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/ksnp-add-gene-info"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "legacy2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/legacy2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "legacy2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_build_index",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_build_index"
+      ],
+      "num_components": 1,
+      "components": [
+        "lgt_build_bwa_index"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_filter_reads",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_filter_reads"
+      ],
+      "num_components": 1,
+      "components": [
+        "lgt_bwa"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_bwa_zip.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_bwa_zip.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "lgt_bwa_fq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_bwa_rm.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_bwa_rm.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "lgt_bwa_fq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_create_validated_bam",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_create_validated_bam"
+      ],
+      "num_components": 1,
+      "components": [
+        "lgt_create_validated_bam"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lgt_mpileup",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lgt_mpileup"
+      ],
+      "num_components": 1,
+      "components": [
+        "lgt_mpileup"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lipop2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lipop2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "lipop"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "lipoprotein_motif",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/lipoprotein_motif"
+      ],
+      "num_components": 1,
+      "components": [
+        "lipoprotein_motif"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "add_blast_polypeptide_links",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/add_blast_polypeptide_links"
+      ],
+      "num_components": 1,
+      "components": [
+        "load_ber_for_manatee"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "move_ber_files_for_manatee",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/move_ber_files_for_manatee"
+      ],
+      "num_components": 1,
+      "components": [
+        "load_ber_for_manatee"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "make_circleator_figure",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/make_circleator_figure"
+      ],
+      "num_components": 1,
+      "components": [
+        "make_circleator_figure"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "remove_nonunique_snps",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/remove_nonunique_snps"
+      ],
+      "num_components": 1,
+      "components": [
+        "make_comparative_circleator_figure"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "make_comparative_circleator_figure",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/make_comparative_circleator_figure"
+      ],
+      "num_components": 1,
+      "components": [
+        "make_comparative_circleator_figure"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "make_snp_lists",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/make_snp_lists"
+      ],
+      "num_components": 1,
+      "components": [
+        "make_snp_lists"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "map_query_pos",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/map_query_pos"
+      ],
+      "num_components": 1,
+      "components": [
+        "map_snp_query_pos"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mask_by_analysis",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mask_by_analysis"
+      ],
+      "num_components": 1,
+      "components": [
+        "mask_by_analysis"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "metagene2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/metagene2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "metagene"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "get_seq_by_metagene",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/get_seq_by_metagene"
+      ],
+      "num_components": 1,
+      "components": [
+        "metagene"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mothur_unique_seq_limit.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mothur_unique_seq_limit.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "mothur_unique_seq_limit"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "move_to_scratch",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/move_to_scratch"
+      ],
+      "num_components": 1,
+      "components": [
+        "move_to_scratch"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mpileup_wrapper",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mpileup_wrapper"
+      ],
+      "num_components": 1,
+      "components": [
+        "mpileup"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mugsy_callsnps",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mugsy_callsnps"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsy_callsnps_distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "clovr_snps_to_vcf",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/clovr_snps_to_vcf"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsy_callsnps_distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mugsy_concat_fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mugsy_concat_fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsy_concat_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "replace_maf_ids",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/replace_maf_ids"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsyalign"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "featureindex.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/featureindex.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mapfeatures.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mapfeatures.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "transform_mugsycog",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/transform_mugsycog"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "CogProteinFasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/CogProteinFasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mugsymap.list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mugsymap.list"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsyprep"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mugsymap_complete.txt",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mugsymap_complete.txt"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsyprep"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prepfasta4mugsy",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prepfasta4mugsy"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsyprep"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "mummertab",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/mummertab"
+      ],
+      "num_components": 1,
+      "components": [
+        "mummer"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fasta2seqlen",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fasta2seqlen"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumsgraph"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filtermummer",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filtermummer"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumsgraph"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "printmatchgraph",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/printmatchgraph"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumsgraph"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "runcc",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/runcc"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumsgraph"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "printrepresentative",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/printrepresentative"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumsgraph"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "ngap",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/ngap"
+      ],
+      "num_components": 1,
+      "components": [
+        "ngap"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "nucmer-snp2merged",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/nucmer-snp2merged"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer-snp2merged"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "open_reading_frames",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/open_reading_frames"
+      ],
+      "num_components": 1,
+      "components": [
+        "open_reading_frames"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "order_paired_list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/order_paired_list"
+      ],
+      "num_components": 1,
+      "components": [
+        "order_paired_list"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "outer_membrane_domain",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/outer_membrane_domain"
+      ],
+      "num_components": 1,
+      "components": [
+        "outer_membrane_domain"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "overlap_analysis",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/overlap_analysis"
+      ],
+      "num_components": 1,
+      "components": [
+        "overlap_analysis_distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_make_pangenome",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_make_pangenome"
+      ],
+      "num_components": 1,
+      "components": [
+        "pangenome_do_analysis_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_fix_headers.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_fix_headers.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "pangenome_fix_headers"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_make_graphs",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_make_graphs"
+      ],
+      "num_components": 1,
+      "components": [
+        "pangenome_make_graphs"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_make_pangenome.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_make_pangenome.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "pangenome_make_pangenome_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pangenome_merge_results",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pangenome_merge_results"
+      ],
+      "num_components": 1,
+      "components": [
+        "pangenome_merge_results_distributed_work"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "panther2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/panther2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "panther"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "parse_evidence",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/parse_evidence"
+      ],
+      "num_components": 1,
+      "components": [
+        "parse_evidence"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "parse_for_ncRNAs",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/parse_for_ncRNAs"
+      ],
+      "num_components": 1,
+      "components": [
+        "parse_for_ncRNAs"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "parse_mpileup",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/parse_mpileup"
+      ],
+      "num_components": 1,
+      "components": [
+        "parse_mpileup_for_positions"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "chado_aengine_dumper",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/chado_aengine_dumper"
+      ],
+      "num_components": 1,
+      "components": [
+        "pathway_tools_input"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_ptools_input_files",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_ptools_input_files"
+      ],
+      "num_components": 1,
+      "components": [
+        "pathway_tools_input"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pepstats.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pepstats.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "pepstats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pepstats2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pepstats2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "pepstats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "percent_gc",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/percent_gc"
+      ],
+      "num_components": 1,
+      "components": [
+        "percent_gc"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "percent_mapped_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/percent_mapped_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "percent_mapped_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_phage_finder",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_phage_finder"
+      ],
+      "num_components": 1,
+      "components": [
+        "phage_finder"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "phobos2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/phobos2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "phobos"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "dnadist_worker_wrapper",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/dnadist_worker_wrapper"
+      ],
+      "num_components": 1,
+      "components": [
+        "phylip_dnadist"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pileup2wig",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pileup2wig"
+      ],
+      "num_components": 1,
+      "components": [
+        "pileup_to_wig"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pipeline_summary",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pipeline_summary"
+      ],
+      "num_components": 1,
+      "components": [
+        "pipeline_summary_cloud"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "pmarks2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/pmarks2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "pmarks2bsml"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "predict_operons",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/predict_operons"
+      ],
+      "num_components": 1,
+      "components": [
+        "predict_operons"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "predict_prokaryotic_gene_function",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/predict_prokaryotic_gene_function"
+      ],
+      "num_components": 1,
+      "components": [
+        "predict_prokaryotic_gene_function"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "predotar2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/predotar2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "predotar"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prepare_paired_ends_for_velvet",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prepare_paired_ends_for_velvet"
+      ],
+      "num_components": 1,
+      "components": [
+        "prepare_paired_ends_for_velvet"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "preserve_reads_in_fastq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/preserve_reads_in_fastq"
+      ],
+      "num_components": 1,
+      "components": [
+        "preserve_reads_in_fastq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "assign_ec_from_rps",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/assign_ec_from_rps"
+      ],
+      "num_components": 1,
+      "components": [
+        "priam_ec_assignment"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prodigal2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prodigal2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "prodigal"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "gff3Profiler",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/gff3Profiler"
+      ],
+      "num_components": 1,
+      "components": [
+        "profile_gff3"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prok_pipeline_check",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prok_pipeline_check"
+      ],
+      "num_components": 1,
+      "components": [
+        "prok_pipeline_check"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prokpipe_consistency_checks",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prokpipe_consistency_checks"
+      ],
+      "num_components": 1,
+      "components": [
+        "prokpipe_consistency_checks"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "promote_gene_prediction",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/promote_gene_prediction"
+      ],
+      "num_components": 1,
+      "components": [
+        "promote_gene_prediction"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "ps_scan2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/ps_scan2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "ps_scan"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "dataprep_dual16S.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/dataprep_dual16S.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "qiime_fasta_mothur_cnvr"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_libraries",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_libraries"
+      ],
+      "num_components": 1,
+      "components": [
+        "qiime_fasta_mothur_cnvr"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prep_MiSeq_for_qiime.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prep_MiSeq_for_qiime.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "qiime_fastq_mothur_cnvr"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "validate_mapfile.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/validate_mapfile.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "qiime_fastq_mothur_cnvr"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_libraries_fastq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_libraries_fastq"
+      ],
+      "num_components": 1,
+      "components": [
+        "qiime_fastq_mothur_cnvr"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "quicktree2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/quicktree2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "quicktree"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "chadoToChadoMart",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/chadoToChadoMart"
+      ],
+      "num_components": 1,
+      "components": [
+        "refresh_chado_mart"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "remove_hypothetical_ec",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/remove_hypothetical_ec"
+      ],
+      "num_components": 1,
+      "components": [
+        "remove_db_gene_syms_with_hypos"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "remove_db_gene_syms_with_hypos",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/remove_db_gene_syms_with_hypos"
+      ],
+      "num_components": 1,
+      "components": [
+        "remove_db_gene_syms_with_hypos"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fetch_gis_from_taxon_id",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fetch_gis_from_taxon_id"
+      ],
+      "num_components": 1,
+      "components": [
+        "remove_subset_of_gis"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "repeatmasker2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/repeatmasker2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "repeatmasker"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "replace_defline_with_locusID",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/replace_defline_with_locusID"
+      ],
+      "num_components": 1,
+      "components": [
+        "replace_defline_with_locusID"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "store_read_dataset_info",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/store_read_dataset_info"
+      ],
+      "num_components": 1,
+      "components": [
+        "resistome"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "get_read_length",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/get_read_length"
+      ],
+      "num_components": 1,
+      "components": [
+        "resistome"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "filter_blast_output",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/filter_blast_output"
+      ],
+      "num_components": 1,
+      "components": [
+        "resistome"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "get_resistome_table",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/get_resistome_table"
+      ],
+      "num_components": 1,
+      "components": [
+        "resistome"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "get_filtered_reads",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/get_filtered_reads"
+      ],
+      "num_components": 1,
+      "components": [
+        "resistome"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "rotate_molecule",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/rotate_molecule"
+      ],
+      "num_components": 1,
+      "components": [
+        "rotate_molecule"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "rpkm_coverage_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/rpkm_coverage_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "rpkm_coverage_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "rrna_hmm_fs",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/rrna_hmm_fs"
+      ],
+      "num_components": 1,
+      "components": [
+        "rrna_hmm_fs"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sam2bam",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sam2bam"
+      ],
+      "num_components": 1,
+      "components": [
+        "sam2bam"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sam2fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sam2fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "sam2fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sam2lca",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sam2lca"
+      ],
+      "num_components": 1,
+      "components": [
+        "sam2lca_distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "samtools_alignment_stats",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/samtools_alignment_stats"
+      ],
+      "num_components": 1,
+      "components": [
+        "samtools_alignment_stats"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "samtools_file_convert",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/samtools_file_convert"
+      ],
+      "num_components": 1,
+      "components": [
+        "samtools_file_convert"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "samtools_reference_index",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/samtools_reference_index"
+      ],
+      "num_components": 1,
+      "components": [
+        "samtools_reference_index"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "scp_files",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/scp_files"
+      ],
+      "num_components": 1,
+      "components": [
+        "scp_files"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "scripture.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/scripture.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "scripture"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "seg2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/seg2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "seg"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "selfsim",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/selfsim"
+      ],
+      "num_components": 1,
+      "components": [
+        "selfsim"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sff_to_CA",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sff_to_CA"
+      ],
+      "num_components": 1,
+      "components": [
+        "sff_to_CA"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sfffile",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sfffile"
+      ],
+      "num_components": 1,
+      "components": [
+        "sfffile"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sffinfo",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sffinfo"
+      ],
+      "num_components": 1,
+      "components": [
+        "sffinfo"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_sighunt",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_sighunt"
+      ],
+      "num_components": 1,
+      "components": [
+        "sighunt"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "signalp_graphics_rename",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/signalp_graphics_rename"
+      ],
+      "num_components": 1,
+      "components": [
+        "signalp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "signalp2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/signalp2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "signalp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "snap2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/snap2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "snap"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "snp-add-gene-info",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/snp-add-gene-info"
+      ],
+      "num_components": 1,
+      "components": [
+        "snp-add-gene-info"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "snp_verify",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/snp_verify"
+      ],
+      "num_components": 1,
+      "components": [
+        "snp_verify"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "soapdenovo",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/soapdenovo"
+      ],
+      "num_components": 1,
+      "components": [
+        "soapdenovo"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sort_sam_by_name.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sort_sam_by_name.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "sort_sam_by_name"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_fasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_fasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "split_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_fasta_fastq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_fasta_fastq"
+      ],
+      "num_components": 1,
+      "components": [
+        "split_fasta_fastq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_fastq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_fastq"
+      ],
+      "num_components": 1,
+      "components": [
+        "split_fastq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_file",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_file"
+      ],
+      "num_components": 1,
+      "components": [
+        "split_file"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_multifasta",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_multifasta"
+      ],
+      "num_components": 1,
+      "components": [
+        "split_multifasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "split_paired_files",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/split_paired_files"
+      ],
+      "num_components": 1,
+      "components": [
+        "split_paired_files"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "sra2fastq",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/sra2fastq"
+      ],
+      "num_components": 1,
+      "components": [
+        "sra2fastq"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "start_site_curation",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/start_site_curation"
+      ],
+      "num_components": 1,
+      "components": [
+        "start_site_curation_distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_comparative_summary_report",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_comparative_summary_report"
+      ],
+      "num_components": 1,
+      "components": [
+        "summarize_mugsy_comparative_pipeline"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "summarize_mugsy_comparative_pipeline",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/summarize_mugsy_comparative_pipeline"
+      ],
+      "num_components": 1,
+      "components": [
+        "summarize_mugsy_comparative_pipeline_distributed"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "tabula_rasa",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/tabula_rasa"
+      ],
+      "num_components": 1,
+      "components": [
+        "tabula_rasa"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "tag_data",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/tag_data"
+      ],
+      "num_components": 1,
+      "components": [
+        "tag_data"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "targetp2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/targetp2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "targetp"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "prepare_for_tbl2asn",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/prepare_for_tbl2asn"
+      ],
+      "num_components": 1,
+      "components": [
+        "tbl2asn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "fix_gbk",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/fix_gbk"
+      ],
+      "num_components": 1,
+      "components": [
+        "tbl2asn"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "tmhmm2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/tmhmm2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "tmhmm"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "tophat",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/tophat"
+      ],
+      "num_components": 1,
+      "components": [
+        "tophat"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "train_for_glimmer3_iteration",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/train_for_glimmer3_iteration"
+      ],
+      "num_components": 1,
+      "components": [
+        "train_for_glimmer3_iteration"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "translate_sequence",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/translate_sequence"
+      ],
+      "num_components": 1,
+      "components": [
+        "translate_sequence"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "trf_wrapper",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/trf_wrapper"
+      ],
+      "num_components": 1,
+      "components": [
+        "trf"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "trf2bsml",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/trf2bsml"
+      ],
+      "num_components": 1,
+      "components": [
+        "trf"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "format_uclust_fasta_ids",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/format_uclust_fasta_ids"
+      ],
+      "num_components": 1,
+      "components": [
+        "uclust"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "uclust_replicate_removal",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/uclust_replicate_removal"
+      ],
+      "num_components": 1,
+      "components": [
+        "uclust_remove_replicates"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "update_ec_numbers",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/update_ec_numbers"
+      ],
+      "num_components": 1,
+      "components": [
+        "update_ec_numbers"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "deriveCDSSequences",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/deriveCDSSequences"
+      ],
+      "num_components": 1,
+      "components": [
+        "update_euk_model_sequences"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "stats.txt",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/stats.txt"
+      ],
+      "num_components": 1,
+      "components": [
+        "usearch"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "checkForDuplicatePropertyTuples",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/checkForDuplicatePropertyTuples"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_chado_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "checkFeaturelocRecords",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/checkFeaturelocRecords"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_chado_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "checkForFeatureResiduesSeqlenMismatches",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/checkForFeatureResiduesSeqlenMismatches"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_chado_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "create_legacy2bsml_iterator_list",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/create_legacy2bsml_iterator_list"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_euk_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "countHeadersWithoutSequence",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/countHeadersWithoutSequence"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_fasta"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "validate_genbank",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/validate_genbank"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_genbank"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "gff3Valid",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/gff3Valid"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_gff3"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "generateCheckSmallGenomeDBReport.pl",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/generateCheckSmallGenomeDBReport.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_sgc_records"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "velveth_post_processing",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/velveth_post_processing"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "velvetg_pre_processing",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/velvetg_pre_processing"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "velvetg_post_processing",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/velvetg_post_processing"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "run_velvet_optimiser",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/run_velvet_optimiser"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet_optimiser"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "spin_wait",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/spin_wait"
+      ],
+      "num_components": 1,
+      "components": [
+        "wait"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "phylomark_env.sh",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/phylomark_env.sh"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "Phylomark_prep.py",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/Phylomark_prep.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "nw_display",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/nw_display"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "ergatis_script",
+      "resource": "wrapper_align",
+      "note": "Ergatis install bin/ script",
+      "original_paths": [
+        "/wrapper_align"
+      ],
+      "num_components": 1,
+      "components": [
+        "wrapper_align"
+      ]
+    },
+    {
+      "type": "library",
+      "resource": "PYTHON_LIB",
+      "note": "Library/model directory",
+      "original_paths": [
+        "$;PYTHON_LIB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "htseq"
+      ]
+    },
+    {
+      "type": "library",
+      "resource": "SIMPLE_REPEAT_LIB",
+      "note": "Library/model directory",
+      "original_paths": [
+        "$;SIMPLE_REPEAT_LIB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "repeatmasker"
+      ]
+    },
+    {
+      "type": "library",
+      "resource": "TMHMM_LIB",
+      "note": "Library/model directory",
+      "original_paths": [
+        "$;TMHMM_LIB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "tmhmm"
+      ]
+    },
+    {
+      "type": "library",
+      "resource": "TRNASCAN_LIB",
+      "note": "Library/model directory",
+      "original_paths": [
+        "{{TRNASCAN_LIB}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tRNAscan-SE"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "mv",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/mv"
+      ],
+      "num_components": 5,
+      "components": [
+        "dump_table",
+        "mugsyalign",
+        "mugsycog",
+        "tbl2asn",
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "perl",
+      "note": "System binary",
+      "original_paths": [
+        "/usr/bin/perl"
+      ],
+      "num_components": 2,
+      "components": [
+        "clean_fasta",
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "augustus",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/augustus"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "/usr/local/bin",
+      "note": "/usr/local/bin directory",
+      "original_paths": [
+        "/usr/local/bin"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam_merge"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "dimob.pl",
+      "note": "/usr/local/bin — system-installed tool",
+      "original_paths": [
+        "/usr/local/bin/dimob.pl"
+      ],
+      "num_components": 1,
+      "components": [
+        "islandpath"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "sort",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/sort"
+      ],
+      "num_components": 1,
+      "components": [
+        "p_func"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "find",
+      "note": "System binary",
+      "original_paths": [
+        "/usr/bin/find"
+      ],
+      "num_components": 1,
+      "components": [
+        "bsml2chado"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "cp",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/cp"
+      ],
+      "num_components": 1,
+      "components": [
+        "dump_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "rm",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/rm"
+      ],
+      "num_components": 1,
+      "components": [
+        "dump_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "cat",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/cat"
+      ],
+      "num_components": 1,
+      "components": [
+        "gkpstore2fastq"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "glimmer3",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/glimmer3"
+      ],
+      "num_components": 1,
+      "components": [
+        "glimmer3"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "gunzip",
+      "note": "System binary",
+      "original_paths": [
+        "/usr/bin/gunzip"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "mummer",
+      "note": "/usr/local/bin — system-installed tool",
+      "original_paths": [
+        "/usr/local/bin/mummer"
+      ],
+      "num_components": 1,
+      "components": [
+        "mummer"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "pick_otus_through_otu_table.py",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/pick_otus_through_otu_table.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "make_otu_heatmap_html.py",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/make_otu_heatmap_html.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "make_otu_network.py",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/make_otu_network.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "summarize_taxa.py",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/summarize_taxa.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "alpha_rarefaction.py",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/alpha_rarefaction.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "beta_diversity_through_3d_plots.py",
+      "note": "System binary",
+      "original_paths": [
+        "/bin/beta_diversity_through_3d_plots.py"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "asnval",
+      "note": "/usr/local/bin — system-installed tool",
+      "original_paths": [
+        "/usr/local/bin/asnval"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_asn"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "asndisc",
+      "note": "/usr/local/bin — system-installed tool",
+      "original_paths": [
+        "/usr/local/bin/asndisc"
+      ],
+      "num_components": 1,
+      "components": [
+        "validate_asn"
+      ]
+    },
+    {
+      "type": "os_binary",
+      "resource": "blastn",
+      "note": "/usr/local/bin — system-installed tool",
+      "original_paths": [
+        "/usr/local/bin/blastn"
+      ],
+      "num_components": 1,
+      "components": [
+        "wu-blastn"
+      ]
+    },
+    {
+      "type": "os_special",
+      "resource": "/dev/null",
+      "note": "Standard null device",
+      "original_paths": [
+        "/dev/null"
+      ],
+      "num_components": 2,
+      "components": [
+        "celera-assembler",
+        "genbank2bsml"
+      ]
+    },
+    {
+      "type": "package_config",
+      "resource": "/extrinsic/extrinsic.cfg",
+      "note": "Tool configuration file — relative to package install",
+      "original_paths": [
+        "/extrinsic/extrinsic.cfg"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "vappio-scripts/syncdata.sh",
+      "note": "/opt — optional packages (CloVR, QIIME, etc.)",
+      "original_paths": [
+        "/opt/vappio-scripts/syncdata.sh"
+      ],
+      "num_components": 2,
+      "components": [
+        "glimmer3_cloud",
+        "pipeline_summary_cloud"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "BS",
+      "note": "TIGR /usr/local/common — shared tool symlinks",
+      "original_paths": [
+        "/usr/local/common/BS"
+      ],
+      "num_components": 1,
+      "components": [
+        "aat_aa_masked"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "opt-packages/qiime-1.8/qiime-1.8.0-release",
+      "note": "/opt — optional packages (CloVR, QIIME, etc.)",
+      "original_paths": [
+        "/opt/opt-packages/qiime-1.8/qiime-1.8.0-release"
+      ],
+      "num_components": 1,
+      "components": [
+        "core_qiime"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "GeneFinding/species/aedes/genezilla/grape.iso",
+      "note": "TIGR /usr/local/annotation — annotation-specific tools/data",
+      "original_paths": [
+        "/usr/local/annotation/GeneFinding/species/aedes/genezilla/grape.iso"
+      ],
+      "num_components": 1,
+      "components": [
+        "genezilla"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "ANNOTATION/GlimmerHMM/trained_dir",
+      "note": "TIGR /local/devel — development installs",
+      "original_paths": [
+        "/local/devel/ANNOTATION/GlimmerHMM/trained_dir"
+      ],
+      "num_components": 1,
+      "components": [
+        "glimmerHMM"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "ANNOTATION/phage_finder",
+      "note": "TIGR /usr/local/devel — development/staging installs",
+      "original_paths": [
+        "/usr/local/devel/ANNOTATION/phage_finder"
+      ],
+      "num_components": 1,
+      "components": [
+        "phage_finder"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "opt-packages/bioinf-v1r4b1/qiime",
+      "note": "/opt — optional packages (CloVR, QIIME, etc.)",
+      "original_paths": [
+        "/opt/opt-packages/bioinf-v1r4b1/qiime"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "rdp_classifier",
+      "note": "TIGR /usr/local/bioinf — bioinformatics tools",
+      "original_paths": [
+        "/usr/local/bioinf/rdp_classifier"
+      ],
+      "num_components": 1,
+      "components": [
+        "rdp_classifier"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "EMBOSS/bin/antigenic",
+      "note": "TIGR /usr/local/packages — versioned software installs",
+      "original_paths": [
+        "/usr/local/packages/EMBOSS/bin/antigenic"
+      ],
+      "num_components": 1,
+      "components": [
+        "antigenic"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "leech/leech",
+      "note": "/opt — optional packages (CloVR, QIIME, etc.)",
+      "original_paths": [
+        "/opt/leech/leech"
+      ],
+      "num_components": 1,
+      "components": [
+        "leech"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "nucmer",
+      "note": "TIGR /usr/local/common — shared tool symlinks",
+      "original_paths": [
+        "/usr/local/common/nucmer"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer_snps"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "delta-filter",
+      "note": "TIGR /usr/local/common — shared tool symlinks",
+      "original_paths": [
+        "/usr/local/common/delta-filter"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer_snps"
+      ]
+    },
+    {
+      "type": "package_install",
+      "resource": "show-snps",
+      "note": "TIGR /usr/local/common — shared tool symlinks",
+      "original_paths": [
+        "/usr/local/common/show-snps"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer_snps"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "OUTPUT_DIRECTORY",
+      "note": "Template variable",
+      "original_paths": [
+        "{{OUTPUT_DIRECTORY}}"
+      ],
+      "num_components": 3,
+      "components": [
+        "mugsyprep",
+        "usearch",
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "ITERATOR_NAME",
+      "note": "Template variable",
+      "original_paths": [
+        "{{ITERATOR_NAME}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "uclust",
+        "usearch"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "GROUP_NUMBER",
+      "note": "Template variable",
+      "original_paths": [
+        "{{GROUP_NUMBER}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "uclust",
+        "usearch"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "INPUT_FILE_LIST",
+      "note": "Template variable",
+      "original_paths": [
+        "{{INPUT_FILE_LIST}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "concatenate_files"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "OUTPUT_FILE",
+      "note": "Template variable",
+      "original_paths": [
+        "{{OUTPUT_FILE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "concatenate_files"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "MUGSY_MAP_FILE",
+      "note": "Template variable",
+      "original_paths": [
+        "{{MUGSY_MAP_FILE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "MUGSY_INDEX",
+      "note": "Template variable",
+      "original_paths": [
+        "{{MUGSY_INDEX}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "GENOMIC_MULTIFASTA",
+      "note": "Template variable",
+      "original_paths": [
+        "{{GENOMIC_MULTIFASTA}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "GENOMIC_FASTA_COPY",
+      "note": "Template variable",
+      "original_paths": [
+        "{{GENOMIC_FASTA_COPY}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "COMPONENT_NAME",
+      "note": "Template variable",
+      "original_paths": [
+        "{{COMPONENT_NAME}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phat"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "DNADIST_SORT",
+      "note": "Template variable",
+      "original_paths": [
+        "{{DNADIST_SORT}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phylip_dnadist"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "PSORTB_EXE",
+      "note": "Template variable",
+      "original_paths": [
+        "{{PSORTB_EXE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "psortb"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "INPUT_COMMAND",
+      "note": "Template variable",
+      "original_paths": [
+        "{{INPUT_COMMAND}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "run_command"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "PIPELINE_NAME",
+      "note": "Template variable",
+      "original_paths": [
+        "{{PIPELINE_NAME}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tag_data"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "PIPELINEID",
+      "note": "Template variable",
+      "original_paths": [
+        "{{PIPELINEID}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tag_data"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "I_FILE_BASE",
+      "note": "Template variable",
+      "original_paths": [
+        "{{I_FILE_BASE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "usearch"
+      ]
+    },
+    {
+      "type": "parameter",
+      "resource": "NEWICK_UTILITIES",
+      "note": "Template variable",
+      "original_paths": [
+        "{{NEWICK_UTILITIES}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/usr/local/projects/16SrRNA_454Multiplex/barcodes/barcodes-v1.txt",
+      "note": "TIGR project-specific path",
+      "original_paths": [
+        "/usr/local/projects/16SrRNA_454Multiplex/barcodes/barcodes-v1.txt"
+      ],
+      "num_components": 1,
+      "components": [
+        "454_mplex_seq_bin_trim"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/test.sorted.bam",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/test.sorted.bam"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam2coverage"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/gasalab49.gff",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/gasalab49.gff"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam2coverage"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/sam2bam/185_default/test.name_sorted.bam",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/sam2bam/185_default/test.name_sorted.bam"
+      ],
+      "num_components": 1,
+      "components": [
+        "bam2sam"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects-t3/HLGT/TCGA/key_dir/cghub.key",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects-t3/HLGT/TCGA/key_dir/cghub.key"
+      ],
+      "num_components": 1,
+      "components": [
+        "download_tcga"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/NC_000117.1.gb",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/NC_000117.1.gb"
+      ],
+      "num_components": 1,
+      "components": [
+        "genbank2gff3"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/NC_000117.1.rRNA.gff3",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/NC_000117.1.rRNA.gff3"
+      ],
+      "num_components": 1,
+      "components": [
+        "genbank2gff3"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects/ifx_core/rna_seq/tcreasy/prok_test_data/s_pyogenese/sam/test.sam",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects/ifx_core/rna_seq/tcreasy/prok_test_data/s_pyogenese/sam/test.sam"
+      ],
+      "num_components": 1,
+      "components": [
+        "sam2bam"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/local/projects/STREP/bepipred-1.0b/bepipred",
+      "note": "TIGR project-specific path — test/example data",
+      "original_paths": [
+        "/local/projects/STREP/bepipred-1.0b/bepipred"
+      ],
+      "num_components": 1,
+      "components": [
+        "bepipred"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/mnt/projects/clovr/workflow/runtime/",
+      "note": "CloVR project mount",
+      "original_paths": [
+        "/mnt/projects/clovr/workflow/runtime/"
+      ],
+      "num_components": 1,
+      "components": [
+        "tag_data"
+      ]
+    },
+    {
+      "type": "project_data",
+      "resource": "/mnt/projects/clovr/workflow/runtime/pipeline/",
+      "note": "CloVR project mount",
+      "original_paths": [
+        "/mnt/projects/clovr/workflow/runtime/pipeline/"
+      ],
+      "num_components": 1,
+      "components": [
+        "tag_data"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "SAMTOOLS_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;SAMTOOLS_BIN$;"
+      ],
+      "num_components": 8,
+      "components": [
+        "bam2bigwig",
+        "bowtie",
+        "percent_mapped_stats",
+        "rpkm_coverage_stats",
+        "samtools_alignment_stats",
+        "samtools_file_convert",
+        "samtools_reference_index",
+        "tophat"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "R_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;R_BIN$;"
+      ],
+      "num_components": 4,
+      "components": [
+        "cummerbund",
+        "deseq",
+        "edgeR",
+        "expression_plots"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "BEDTOOLS_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;BEDTOOLS_BIN$;"
+      ],
+      "num_components": 3,
+      "components": [
+        "bam2bigwig",
+        "percent_mapped_stats",
+        "rpkm_coverage_stats"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "BOWTIE_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;BOWTIE_BIN$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "bowtie",
+        "tophat"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "FASTX_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;FASTX_BIN$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "fastx_quality_stats",
+        "fastx_trimming"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "BOWTIE_BUILD_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;BOWTIE_BUILD_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "bowtie_build"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "CUFFCOMPARE_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;CUFFCOMPARE_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "cuffcompare"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "CUFFDIFF_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;CUFFDIFF_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "cuffdiff"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "CUFFLINKS_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;CUFFLINKS_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "cufflinks"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "FASTQC_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;FASTQC_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastqc_stats"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "PYTHON_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;PYTHON_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "htseq"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "TOPHAT_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "$;TOPHAT_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "tophat"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "FASTORTHO_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "{{FASTORTHO_BIN}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastortho_distributed"
+      ]
+    },
+    {
+      "type": "tool_bin_dir",
+      "resource": "EMBOSS_BIN",
+      "note": "Tool binary directory",
+      "original_paths": [
+        "{{EMBOSS_BIN}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "getorf"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BLASTALL_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BLASTALL_EXEC}}"
+      ],
+      "num_components": 7,
+      "components": [
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "EXT_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{EXT_EXEC}}"
+      ],
+      "num_components": 4,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "EXT_COLLAPSE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{EXT_COLLAPSE_EXEC}}"
+      ],
+      "num_components": 4,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "FILTER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{FILTER_EXEC}}"
+      ],
+      "num_components": 4,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "DPS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{DPS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "NAP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{NAP_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "DDS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{DDS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_na",
+        "aat_na_masked"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SAMTOOLS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{SAMTOOLS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "basic_alignment_stats",
+        "samtools_merge_distributed_work"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "HMMLS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{HMMLS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "hmmer",
+        "hmmls"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "TRNASCANSE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{TRNASCANSE_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "tRNAscan-SE",
+        "tRNAscan-SE_compress"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SOAPDENOVO_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "$;SOAPDENOVO_EXEC$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "soapdenovo"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "RAPSEARCH_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{RAPSEARCH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "RAPSearch2"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "RNAMMER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{RNAMMER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "RNAmmer"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "ALIEN_HUNTER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{ALIEN_HUNTER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "alien_hunter"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "ARAGORN_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{ARAGORN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "aragorn"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PRAZE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PRAZE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ber"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BMTOOL_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BMTOOL_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bmtagger_index"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SRPRISM_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{SRPRISM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bmtagger_index"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MAKEBLASTDB_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MAKEBLASTDB_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bmtagger_index"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BWA_ALIGN_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BWA_ALIGN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bwa_align"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BWA_INDEX_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BWA_INDEX_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bwa_index"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BWA_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BWA_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bwa_mem"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "TOAMOS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{TOAMOS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "celera2hawkeye"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BANK_TRANSACT_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BANK_TRANSACT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "celera2hawkeye"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "CLUSTALW_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{CLUSTALW_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "clustalw"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "HADOOP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{HADOOP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "crossbow"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "CROSSBOW_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{CROSSBOW_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "crossbow"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "ELPH_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{ELPH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "elph"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "EXONERATE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{EXONERATE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "exonerate"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "FASTTREE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{FASTTREE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fast_tree"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "FGENESH_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{FGENESH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fgenesh"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "FUZZNUC_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{FUZZNUC_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fuzznuc"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GENEID_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GENEID_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "geneid"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GENEZILLA_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GENEZILLA_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "genezilla"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GENSCAN_PLUS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GENSCAN_PLUS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "genscan-plus"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GENSCAN_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GENSCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "genscan"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BAM_COVERAGE_DX_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BAM_COVERAGE_DX_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "get_bam_coverage_dx"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PYTHON_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PYTHON_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "gff3_to_gbrowse"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GLIMMERHMM_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GLIMMERHMM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "glimmerHMM"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GMAP_SETUP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GMAP_SETUP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "gsnap"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GSNAP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GSNAP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "gsnap"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "HMMPFAM_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{HMMPFAM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "HMMSCAN_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{HMMSCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam3"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "IPRSCAN_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{IPRSCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "iprscan"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "KSNP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{KSNP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "LIPOP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{LIPOP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "lipop"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MEGABLAST_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MEGABLAST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "megablast"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "METAGENE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{METAGENE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "metagene"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "METAGENEMARK_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{METAGENEMARK_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "metagenemark"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MOSAIK_BUILD_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MOSAIK_BUILD_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MOSAIK_ALIGNER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MOSAIK_ALIGNER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MOSAIK_SORT_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MOSAIK_SORT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MOSAIK_ASSEMBLER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MOSAIK_ASSEMBLER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MOSAIK_TEXT_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MOSAIK_TEXT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MUGSY_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MUGSY_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsyalign_distributed_work"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MUMI_SCORE_AGGREGATOR_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MUMI_SCORE_AGGREGATOR_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumi-reduce"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MUMI_CLUSTERING_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MUMI_CLUSTERING_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumi-reduce"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "GENERATE_REDUCED_DB_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{GENERATE_REDUCED_DB_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumi-reduce"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "MUSCLE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{MUSCLE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "muscle"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "DELTA_FILTER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{DELTA_FILTER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer-delta-filter"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SHOW_SNPS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{SHOW_SNPS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer-show-snps"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "NUCMER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{NUCMER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "COORDS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{COORDS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PANTHER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PANTHER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "panther"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "FULLPHAT_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{FULLPHAT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phat"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PHOBOS_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PHOBOS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phobos"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PREDOTAR_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PREDOTAR_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "predotar"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PRODIGAL_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PRODIGAL_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "prodigal"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PS_SCAN_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PS_SCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ps_scan"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "PSIBLAST_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{PSIBLAST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "psiblast"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "QUICKTREE_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{QUICKTREE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "quicktree"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "JAVA_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{JAVA_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "rdp_classifier"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "REPEATMASKER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{REPEATMASKER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "repeatmasker"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "RPSBLAST_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{RPSBLAST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "rpsblast"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SEG_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{SEG_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "seg"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SIGNALP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{SIGNALP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "signalp"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SNAP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{SNAP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "snap"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "SOLSNP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{SOLSNP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "solsnp"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "STAP_ALIGNER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{STAP_ALIGNER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "stap_aligner"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "STAP_CLASSIFIER_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{STAP_CLASSIFIER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "stap_classifier"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "TARGETP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{TARGETP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "targetp"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "TMHMM_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{TMHMM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tmhmm"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "UCHIME_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{UCHIME_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "uchime"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "UCLUST_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{UCLUST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "uclust"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "USEARCH_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{USEARCH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "usearch"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "VELVETH_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{VELVETH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "VELVETG_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{VELVETG_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BLASTP_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BLASTP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wu-blastp"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "BLASTX_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{BLASTX_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wu-blastx"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "TBLASTN_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{TBLASTN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wu-tblastn"
+      ]
+    },
+    {
+      "type": "tool_executable",
+      "resource": "XDFORMAT_EXEC",
+      "note": "External tool binary — must be installed",
+      "original_paths": [
+        "{{XDFORMAT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "xdformat"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "R_SCRIPT_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "$;R_SCRIPT_PATH$;"
+      ],
+      "num_components": 4,
+      "components": [
+        "cummerbund",
+        "deseq",
+        "edgeR",
+        "expression_plots"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "DATABASE_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "$;DATABASE_PATH$;"
+      ],
+      "num_components": 3,
+      "components": [
+        "aat_aa",
+        "aat_na",
+        "aat_na_masked"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "ITER_FILE_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "$;ITER_FILE_PATH$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "run_command",
+        "tabula_rasa"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "AUGUSTUS_CONFIG_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "$;AUGUSTUS_CONFIG_PATH$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "CM_FILE_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "$;CM_FILE_PATH$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "infernal"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "PROSITE_DAT_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "$;PROSITE_DAT_PATH$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "ps_scan"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "AUGUSTUS_BINARY_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{AUGUSTUS_BINARY_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "HIST_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{HIST_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "histogram_stacked"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "DIMOB_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{DIMOB_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "islandpath"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "METASTATS_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{METASTATS_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "metastats"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "I_FILE_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{I_FILE_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ncbi-blastn_compress"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "QIIME_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{QIIME_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "pick_otus_through_otu_table"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "PIECHART_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{PIECHART_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "piecharts"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "SKIFF_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{SKIFF_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "skiff"
+      ]
+    },
+    {
+      "type": "tool_or_data_path",
+      "resource": "RASTERIZER_PATH",
+      "note": "Tool or data path — check component docs",
+      "original_paths": [
+        "{{RASTERIZER_PATH}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ]
+    },
+    {
+      "type": "url_fragment",
+      "resource": "/manatee.igs.umaryland.edu/tigr-scripts/chado_prok_manatee/delete_gene.cgi",
+      "note": "URL fragment parsed as path",
+      "original_paths": [
+        "/manatee.igs.umaryland.edu/tigr-scripts/chado_prok_manatee/delete_gene.cgi"
+      ],
+      "num_components": 1,
+      "components": [
+        "dump_table"
+      ]
+    },
+    {
+      "type": "user_path",
+      "resource": "/home/ksieber/bin/",
+      "note": "User home directory — should be parameterized",
+      "original_paths": [
+        "/home/ksieber/bin/"
+      ],
+      "num_components": 1,
+      "components": [
+        "download_tcga"
+      ]
+    }
+  ]
+}

@@ -28,6 +28,10 @@ run = "node tools/node/tree.mjs"
 description = "Inspect component or check runnability: mise run inspect -- <component> | --runnable"
 run = "node tools/node/inspect.mjs"
 
+[tasks.resources]
+description = "Show runtime resource dependency map: mise run resources [--type TYPE]"
+run = "node tools/node/resources.mjs"
+
 [tasks.search]
 description = "Search components: mise run search -- <query> [--category CAT] [--biotools] [--verbose]"
 run = "node tools/node/search.mjs"
