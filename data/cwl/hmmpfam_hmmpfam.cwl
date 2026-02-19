@@ -2,7 +2,7 @@ cwlVersion: v1.2
 class: CommandLineTool
 id: hmmpfam_hmmpfam
 label: hmmpfam from hmmpfam component
-doc: Tool execution from Ergatis hmmpfam component
+doc: Tool execution from Ergatis hmmpfam component (TIGR/JCVI/IGS)
 baseCommand:
 - hmmpfam
 inputs:
