@@ -24,9 +24,9 @@ run = "node tools/node/stats.mjs"
 description = "Display component classification tree"
 run = "node tools/node/tree.mjs"
 
-[tasks.coverage]
-description = "Display coverage report across all artifact types"
-run = "node tools/node/coverage.mjs"
+[tasks.inspect]
+description = "Inspect component or check runnability: mise run inspect -- <component> | --runnable"
+run = "node tools/node/inspect.mjs"
 
 [tasks.search]
 description = "Search components: mise run search -- <query> [--category CAT] [--biotools] [--verbose]"
