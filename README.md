@@ -10,14 +10,17 @@ Extract and preserve 20+ years of production genomics annotation knowledge encod
 
 ## What is Ergatis?
 
-Ergatis is a complete bioinformatics workflow platform including:
-- **Component library** - 362 reusable workflow components
-- **Converter library** - 91+ scripts transforming tool output to BSML XML
-- **Workflow templates** - 40 production pipeline templates
-- **Web interface** - Pipeline builder and monitoring
-- **BSML format** - XML data exchange for Chado database loading
+Ergatis is a web-based utility that is used to create, run, and monitor reusable computational analysis pipelines. It contains pre-built components for common bioinformatics analysis tasks. These components can be arranged graphically to form highly-configurable pipelines. Each analysis component supports multiple output formats, including the Bioinformatic Sequence Markup Language (BSML). The current implementation includes support for data loading into project databases following the CHADO schema, a highly normalized, community-supported schema for storage of biological annotation data.
 
-This is production-tested software representing institutional knowledge from TIGR/JCVI/IGS genomics annotation pipelines.
+Ergatis uses the Workflow engine to process its work on a compute grid. Workflow provides an XML language and processing engine for specifying the steps of a computational pipeline. It provides detailed execution status and logging for process auditing, facilitates error recovery from point of failure, and is highly scalable with support for distributed computing environments. The XML format employed enables commands to be run serially, in parallel, and in any combination or nesting level.
+
+This framework has been employed in the annotation of several large, eukaryotic organisms, including *Aedes aegypti* and *Trichomonas vaginalis*.
+
+**Related projects:** [CloVR](http://clovr.org) is a virtual appliance for automated sequence analysis that supports cloud computing platforms, including Amazon EC2. The CloVR VM includes a dynamically scalable Ergatis installation with Sun Grid Engine.
+
+**Citation:** Orvis J, Crabtree J, Galens K, Gussman A, Inman JM, Lee E, Nampally S, Riley D, Sundaram JP, Felix V, Whitty B, Mahurkar A, Wortman J, White O, Angiuoli SV. Ergatis: A web interface and scalable software system for bioinformatics workflows. *Bioinformatics*. 2010 Jun 15;26(12).
+
+**Website:** https://ergatis.sourceforge.net/
 
 ## Progress
 
