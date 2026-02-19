@@ -13,7 +13,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - Reusable, maintainable workflow components
 - Scalability for large-scale HPC/HTPC infrastructure
 - Flexibility for complex multi-step biological analyses
-- Production reliability for regulatory submissions (FDA-approved workflows)
+- Production reliability for institutional genomics annotation
 
 **Deployment Flexibility:** While designed for institutional HPC environments, Ergatis could be deployed at any scale:
 - **Production scale:** Multi-institutional HPC clusters with SGE/Grid Engine
@@ -54,7 +54,7 @@ These JSON files preserve the complete component library structure:
 - **CAMERA metagenomics pipelines** - Environmental metagenomics (developed by Brett Whitty)
 - **Human Microbiome Project pipelines** - Large-scale microbiome analysis (developed by Brett Whitty)
 - **Pangenome analysis pipeline** - Group B Streptococcus pangenome (Tettelin & Medini paper, developed by Brett Whitty)
-- 56 total workflow templates representing production genomics annotation pipelines
+- 40 production pipeline templates representing institutional genomics annotation workflows
 
 These workflows represent the institutional knowledge from hundreds of genome annotation projects at the world's leading genomics center.
 
