@@ -39,7 +39,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - **Shared resource management** - Multi-user environment with resource prioritization and authentication
 - **Production-grade security** - User authentication and authorization for multi-institutional HPC environments
 - **Web-based interface** - AJAX-driven UI using prototype.js (developed by Josh Orvis) for pipeline building, monitoring, and management
-- **Publication-quality visualization** - Sybil: SVG-based comparative genomics plots suitable for publications (developed by Jonathan Crabtree)
+- **Comparative genomics pipelines** - Ergatis includes the comparative analysis pipelines that produce data for visualization tools like Sybil (a separate SVG-based comparative genomics viewer developed by Jonathan Crabtree)
 
 These JSON files preserve the complete component library structure:
 - Component configuration parameters
@@ -50,7 +50,7 @@ These JSON files preserve the complete component library structure:
 
 **Notable Workflows Included:**
 - **All TIGR/JCVI/IGS Gold-Standard genome annotations** - Every production genome annotated from system development (~2003) through institutional split and beyond
-- **Sybil pipelines** - Comparative genomics analysis and visualization
+- **Sybil pipelines** - Comparative genomics analysis (Sybil visualization is a separate tool that consumes this data)
 - **CAMERA metagenomics pipelines** - Environmental metagenomics (developed by Brett Whitty)
 - **Human Microbiome Project pipelines** - Large-scale microbiome analysis (developed by Brett Whitty)
 - **Pangenome analysis pipeline** - Group B Streptococcus pangenome (Tettelin & Medini paper, developed by Brett Whitty)

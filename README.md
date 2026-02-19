@@ -17,7 +17,7 @@ Ergatis is a complete bioinformatics workflow platform including:
 - **Web interface** - Pipeline builder and monitoring
 - **BSML format** - XML data exchange for Chado database loading
 
-This is production-tested, FDA-approved software representing institutional knowledge from TIGR/JCVI/IGS genomics annotation pipelines.
+This is production-tested software representing institutional knowledge from TIGR/JCVI/IGS genomics annotation pipelines.
 
 ## Progress
 

@@ -128,7 +128,7 @@ To run a component you need:
 **Ergatis:**
 - Modern web UI (AJAX, prototype.js)
 - Better builder interface (drag-and-drop components)
-- Better monitoring (real-time, Sybil visualization)
+- Better monitoring (real-time pipeline status)
 - Ganglia integration (cluster resource monitoring)
 - Uses TIGR-Workflow execution engine underneath
 
