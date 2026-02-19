@@ -1,6 +1,6 @@
 # EELLMS Work Plan
 
-**Project:** Ergatis Extended Lifetime Support - Knowledge Extraction
+**Project:** EELS - Ergatis Extended Lifetime Support
 **Date:** 2026-02-18
 **Lead:** Brett Whitty <brett@gnomatix.com> (GNOMATIX)
 
