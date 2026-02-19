@@ -69,7 +69,7 @@ const maxClass = classEntries[0]?.[1] || 1;
 // --- Output ---
 const boxW = 70;
 const l1 = '   EELS \u2014 Ergatis Extended Lifetime Support'.padEnd(boxW);
-const l2 = '   Preserving 20+ years of bioinformatics workflow engineering'.padEnd(boxW);
+const l2 = '   Preserving the Golden Age of bioinformatics workflow engineering'.padEnd(boxW);
 console.log(`\n${c.bold}${c.cyan}  \u2554${'═'.repeat(boxW)}\u2557${c.reset}`);
 console.log(`${c.bold}${c.cyan}  \u2551${c.reset}${c.bold}${l1}${c.bold}${c.cyan}\u2551${c.reset}`);
 console.log(`${c.bold}${c.cyan}  \u2551${c.reset}${c.dim}${l2}${c.bold}${c.cyan}\u2551${c.reset}`);
