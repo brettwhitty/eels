@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EELS — Ergatis Explorer</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --border: #30363d; --text: #c9d1d9; --text2: #8b949e;
+  --blue: #58a6ff; --green: #3fb950; --red: #f85149; --yellow: #d29922; --purple: #bc8cff;
+  --cyan: #39d2c0; --magenta: #f778ba; --orange: #f0883e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; background: var(--bg); color: var(--text); font-size: 13px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.app { display: flex; height: 100vh; }
+.sidebar { width: 280px; min-width: 280px; border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+.main { flex: 1; overflow-y: auto; padding: 1.5rem; }
+
+.header { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); background: var(--surface); }
+.header h1 { font-size: 0.95rem; color: var(--green); font-weight: 600; }
+.header .sub { font-size: 0.7rem; color: var(--text2); margin-top: 2px; }
+
+.nav { display: flex; border-bottom: 1px solid var(--border); background: var(--surface); }
+.nav-tab { padding: 0.5rem 0.75rem; cursor: pointer; font-size: 0.75rem; color: var(--text2); border-bottom: 2px solid transparent; }
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+.search { padding: 0.5rem; border-bottom: 1px solid var(--border); }
+.search input { width: 100%; padding: 0.4rem 0.6rem; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-family: inherit; font-size: 0.8rem; }
+.search input:focus { outline: none; border-color: var(--blue); }
+
+.list { flex: 1; overflow-y: auto; }
+.list-item { padding: 0.35rem 0.75rem; cursor: pointer; border-bottom: 1px solid var(--border); }
+.list-item:hover { background: #1c2128; }
+.list-item.active { background: #1f6feb22; border-left: 2px solid var(--blue); }
+.list-item .name { font-size: 0.8rem; }
+.list-item .meta { font-size: 0.65rem; color: var(--text2); }
+.list-count { padding: 0.3rem 0.75rem; font-size: 0.7rem; color: var(--text2); border-bottom: 1px solid var(--border); background: var(--surface); }
+
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; margin-bottom: 1rem; }
+.panel h2 { font-size: 0.9rem; color: var(--blue); margin-bottom: 0.75rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+
+.steps { width: 100%; border-collapse: collapse; }
+.steps th { text-align: left; padding: 0.3rem 0.5rem; color: var(--text2); font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.steps td { padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.steps tr:hover { background: #1c2128; }
+
+.exe-unresolved { color: var(--red); }
+.exe-ergatis { color: var(--cyan); }
+.exe-os { color: var(--text2); }
+.exe-bare { color: var(--text); }
+.exe-institutional { color: var(--magenta); }
+.exe-template { color: var(--yellow); }
+
+.badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.7rem; }
+.badge-tool_execution { background: #238636; color: #fff; }
+.badge-converter { background: #1f6feb; color: #fff; }
+.badge-provenance { background: #8957e5; color: #fff; }
+.badge-compression { background: #484f58; color: #c9d1d9; }
+.badge-validation { background: #9e6a03; color: #fff; }
+.badge-infrastructure { background: #388bfd26; color: var(--cyan); border: 1px solid var(--cyan); }
+
+.params { width: 100%; border-collapse: collapse; }
+.params td { padding: 0.25rem 0.5rem; border-bottom: 1px solid var(--border); font-size: 0.8rem; }
+.pname { color: var(--text); font-weight: 600; white-space: nowrap; }
+.pval { color: var(--yellow); word-break: break-all; }
+.pval-path { color: var(--magenta); }
+.pval-tpl { color: var(--cyan); }
+.pval-empty { color: var(--text2); font-style: italic; }
+
+.tag { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.65rem; margin: 0.1rem; }
+.tag-bt { background: #238636; color: #fff; }
+.tag-edam { background: #8957e5; color: #fff; }
+.tag-naming { background: #9e6a03; color: #fff; }
+
+.pipe-step { padding: 0.3rem 0.5rem; border-left: 2px solid var(--border); margin-left: 0.5rem; margin-bottom: 0.25rem; }
+.pipe-comp { color: var(--cyan); cursor: pointer; }
+.pipe-comp:hover { text-decoration: underline; }
+.pipe-group { margin: 0.5rem 0; }
+.pipe-group-name { color: var(--purple); font-weight: 600; font-size: 0.8rem; margin-bottom: 0.25rem; }
+
+.res-item { padding: 0.3rem 0 0.3rem 0.5rem; border-bottom: 1px solid var(--border); }
+.res-name { color: var(--yellow); }
+.res-path { color: var(--text2); font-size: 0.7rem; }
+.res-comps { color: var(--text2); font-size: 0.7rem; }
+
+.empty { text-align: center; padding: 3rem; color: var(--text2); }
+
+/* D3 tree */
+svg text { font-family: inherit; font-size: 11px; fill: var(--text); }
+svg .link { fill: none; stroke: var(--border); stroke-width: 1.5; }
+svg .node circle { fill: var(--surface); stroke: var(--blue); stroke-width: 2; }
+svg .node:hover circle { stroke: var(--green); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sidebar">
+    <div class="header">
+      <h1>EELS</h1>
+      <div class="sub">Ergatis Extended Lifetime Support</div>
+    </div>
+    <div class="nav">
+      <div class="nav-tab active" data-view="components">Components</div>
+      <div class="nav-tab" data-view="pipelines">Pipelines</div>
+      <div class="nav-tab" data-view="resources">Resources</div>
+    </div>
+    <div class="search"><input type="text" id="filter" placeholder="Filter..." autofocus></div>
+    <div class="list-count" id="list-count"></div>
+    <div class="list" id="list"></div>
+  </div>
+  <div class="main" id="main"><div class="empty">Loading...</div></div>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const esc = s => { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; };
+const norm = s => (s || '').replace(/\$;([^$]+)\$;/g, '{{$1}}');
+
+let view = 'components';
+
+// ── Data loading ──
+/*__EELS_DATA__*/
+async function init() {
+  if (typeof D === 'undefined') {
+    $('#main').innerHTML = '<div class="empty">Run: node viewer/build.mjs</div>';
+    return;
+  }
+  renderList();
+  $('#main').innerHTML = '<div class="empty">Select an item to explore</div>';
+}
+
+// ── Nav ──
+$$('.nav-tab').forEach(tab => tab.addEventListener('click', () => {
+  $$('.nav-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  view = tab.dataset.view;
+  $('#filter').value = '';
+  renderList();
+  $('#main').innerHTML = '<div class="empty">Select an item to explore</div>';
+}));
+
+$('#filter').addEventListener('input', () => renderList());
+
+// ── List ──
+function renderList() {
+  const f = $('#filter').value.toLowerCase();
+  const list = $('#list');
+  const count = $('#list-count');
+
+  if (view === 'components') {
+    const names = Object.keys(D.components).sort().filter(n => !f || n.includes(f));
+    count.textContent = `${names.length} components`;
+    list.innerHTML = names.map(n => {
+      const c = D.components[n];
+      const bt = D.biotools[n];
+      return `<div class="list-item" data-id="${n}" onclick="showComponent('${n}')">
+        <div class="name">${n}</div>
+        <div class="meta">${c.classification || ''}${bt ? ' · ' + bt.name : ''}</div>
+      </div>`;
+    }).join('');
+
+  } else if (view === 'pipelines') {
+    const names = Object.keys(D.pipelines).sort().filter(n => !f || n.toLowerCase().includes(f));
+    count.textContent = `${names.length} pipelines`;
+    list.innerHTML = names.map(n => {
+      const p = D.pipelines[n];
+      const ns = (p.components || p.steps || []).length;
+      return `<div class="list-item" data-id="${n}" onclick="showPipeline('${n}')">
+        <div class="name">${n}</div>
+        <div class="meta">${ns} steps</div>
+      </div>`;
+    }).join('');
+
+  } else if (view === 'resources') {
+    const types = {};
+    for (const r of D.resourceMap) {
+      const k = r.subtype ? `${r.type}/${r.subtype}` : r.type;
+      (types[k] ??= []).push(r);
+    }
+    const keys = Object.keys(types).sort().filter(k => !f || k.includes(f));
+    count.textContent = `${keys.length} resource types`;
+    list.innerHTML = keys.map(k => `<div class="list-item" data-id="${k}" onclick="showResources('${k}')">
+      <div class="name">${k}</div>
+      <div class="meta">${types[k].length} resources</div>
+    </div>`).join('');
+  }
+}
+
+function setActive(id) {
+  $$('.list-item').forEach(e => e.classList.toggle('active', e.dataset.id === id));
+}
+
+// ── Exe classification ──
+function exeClass(exe) {
+  if (/^\{\{[^}]+\}\}$/.test(exe) && !exe.includes('/')) return 'exe-unresolved';
+  if (/^\{\{BIN_DIR\}\}\//.test(exe)) return 'exe-ergatis';
+  if (/^\/(bin|usr\/bin)\//.test(exe)) return 'exe-os';
+  if (/^\/(usr\/local\/(packages|common|devel)|opt)\//.test(exe)) return 'exe-institutional';
+  if (/^\/usr\/local\/bin\//.test(exe)) return 'exe-template';
+  if (/^\{\{/.test(exe)) return 'exe-template';
+  if (/^\//.test(exe)) return 'exe-os';
+  return 'exe-bare';
+}
+
+// ── Component detail ──
+window.showComponent = function(name) {
+  setActive(name);
+  const c = D.components[name], s = D.steps[name], bt = D.biotools[name], ed = D.edam[name];
+  if (!c) return;
+  const main = $('#main');
+  let h = '';
+
+  // Header
+  h += `<div class="panel"><h2>${esc(name)}</h2>`;
+  if (c.classification) h += `<div style="margin-bottom:0.5rem">${esc(c.classification)}</div>`;
+  if (bt) h += `<span class="tag tag-bt"><a href="https://bio.tools/${bt.id}" target="_blank" style="color:#fff">bio.tools: ${esc(bt.name)}</a></span> `;
+  if (ed?.operations?.length) h += ed.operations.map(o => `<span class="tag tag-edam">${esc(o)}</span>`).join(' ');
+  const nc = D.naming?.mixed_case_exceptions?.find(e => e.name === name);
+  if (nc) h += `<div style="margin-top:0.5rem"><span class="tag tag-naming">naming: ${esc(nc.reason)}${nc.note ? ' — ' + esc(nc.note) : ''}</span></div>`;
+  h += '</div>';
+
+  // Steps
+  if (s?.steps?.length) {
+    h += '<div class="panel"><h2>Workflow Steps</h2><table class="steps"><tr><th>#</th><th>Name</th><th>Category</th><th>Executable</th></tr>';
+    for (const st of s.steps) {
+      const exe = norm(st.executable || '');
+      const rt = st.run_type ? ` <span class="tag" style="background:var(--red);color:#fff">${esc(st.run_type)}</span>` : '';
+      h += `<tr><td>${st.idx}</td><td>${esc(st.name || '')}${rt}</td>
+        <td><span class="badge badge-${st.category}">${esc(st.category)}</span></td>
+        <td class="${exeClass(exe)}">${esc(exe)}</td></tr>`;
+    }
+    h += '</table></div>';
+  }
+
+  // Parameters
+  const skip = /^(PIPELINEID|OUTPUT_TOKEN|COMPONENT_NAME|WORKFLOW_REPOSITORY|OUTPUT_DIRECTORY|TMP_DIR|ITERATOR1?|GROUP_COUNT|NODISTRIB|DOCS_DIR|BIN_DIR|COMPONENT_CONFIG)/;
+  const params = (c.parameters || []).filter(p => !skip.test(p.name || p.key || ''));
+  if (params.length) {
+    h += '<div class="panel"><h2>Parameters</h2><table class="params">';
+    for (const p of params) {
+      const k = p.name || p.key || '';
+      let v = norm(p.default || p.value || '');
+      let cls = v ? (v.match(/^\//) ? 'pval-path' : v.match(/\{\{/) ? 'pval-tpl' : 'pval') : 'pval-empty';
+      h += `<tr><td class="pname">${esc(k)}</td><td class="${cls}">${v ? esc(v) : '(empty)'}</td></tr>`;
+    }
+    h += '</table></div>';
+  }
+
+  // Pipelines using this component
+  const using = Object.entries(D.pipelines).filter(([, p]) =>
+    (p.components || p.steps || []).some(s => (s.component || s.name || '').replace(/\s.*/, '') === name)
+  ).map(([n]) => n);
+  if (using.length) {
+    h += '<div class="panel"><h2>Used in Pipelines</h2>';
+    for (const pn of using) h += `<div><a href="#" onclick="event.preventDefault();navPipeline('${pn}')">${esc(pn)}</a></div>`;
+    h += '</div>';
+  }
+
+  main.innerHTML = h;
+};
+
+// ── Pipeline detail ──
+window.showPipeline = function(name) {
+  setActive(name);
+  const p = D.pipelines[name];
+  if (!p) return;
+
+  let h = `<div class="panel"><h2>${esc(name)}</h2></div>`;
+  const psteps = p.components || p.steps || [];
+
+  // D3 flow diagram
+  h += `<div class="panel"><h2>Pipeline Flow</h2><div id="pipe-svg"></div></div>`;
+
+  // Step list
+  if (psteps.length) {
+    const groups = {};
+    for (const s of psteps) { (groups[s.group || s.workflow_group || 'default'] ??= []).push(s); }
+    h += '<div class="panel"><h2>Steps</h2>';
+    for (const [g, gs] of Object.entries(groups)) {
+      if (Object.keys(groups).length > 1) h += `<div class="pipe-group"><div class="pipe-group-name">${esc(g)}</div>`;
+      for (const s of gs) {
+        const comp = (s.component || s.name || '').replace(/\s.*/, '');
+        const has = D.components[comp];
+        h += `<div class="pipe-step">${has
+          ? `<span class="pipe-comp" onclick="navComponent('${comp}')">${esc(s.component || s.name)}</span>`
+          : esc(s.component || s.name)
+        }${s.token ? ` <span style="color:var(--text2)">[${esc(s.token)}]</span>` : ''}</div>`;
+      }
+      if (Object.keys(groups).length > 1) h += '</div>';
+    }
+    h += '</div>';
+  }
+
+  $('#main').innerHTML = h;
+
+  // Render D3 pipeline flow
+  if (psteps.length) renderPipelineFlow(psteps);
+};
+
+function renderPipelineFlow(steps) {
+  const container = document.getElementById('pipe-svg');
+  if (!container) return;
+
+  const w = container.clientWidth || 800;
+  const stepH = 28, pad = 20;
+  const h = steps.length * stepH + pad * 2;
+
+  const svg = d3.select(container).append('svg').attr('width', w).attr('height', h);
+  const g = svg.append('g').attr('transform', `translate(${pad},${pad})`);
+
+  steps.forEach((s, i) => {
+    const y = i * stepH;
+    const comp = (s.component || s.name || '').replace(/\s.*/, '');
+    const has = D.components[comp];
+
+    // Connector line
+    if (i > 0) {
+      g.append('line').attr('x1', 8).attr('y1', y - stepH + 10).attr('x2', 8).attr('y2', y + 5)
+        .attr('stroke', '#30363d').attr('stroke-width', 2);
+    }
+
+    // Node
+    g.append('circle').attr('cx', 8).attr('cy', y + 8).attr('r', 4)
+      .attr('fill', has ? '#238636' : '#484f58').attr('stroke', has ? '#3fb950' : '#8b949e').attr('stroke-width', 1.5);
+
+    // Label
+    const text = g.append('text').attr('x', 20).attr('y', y + 12)
+      .text(s.component || s.name || '')
+      .attr('fill', has ? '#39d2c0' : '#8b949e')
+      .style('cursor', has ? 'pointer' : 'default');
+
+    if (has) text.on('click', () => navComponent(comp));
+  });
+}
+
+// ── Resources detail ──
+window.showResources = function(key) {
+  setActive(key);
+  const items = D.resourceMap.filter(r => (r.subtype ? `${r.type}/${r.subtype}` : r.type) === key)
+    .sort((a, b) => b.num_components - a.num_components);
+
+  const desc = D.resourceSummary?.runtime_categories?.[key.split('/')[0]] || '';
+  let h = `<div class="panel"><h2>${esc(key)} (${items.length})</h2>`;
+  if (desc) h += `<div style="margin-bottom:0.75rem;color:var(--text2)">${esc(desc)}</div>`;
+
+  for (const r of items) {
+    h += `<div class="res-item"><span class="res-name">${esc(r.resource)}</span>`;
+    if (r.original_paths?.length && r.original_paths[0] !== r.resource) {
+      h += `<br><span class="res-path">${r.original_paths.map(esc).join(', ')}</span>`;
+    }
+    h += `<br><span class="res-comps">${r.components.map(c =>
+      D.components[c] ? `<a href="#" onclick="event.preventDefault();navComponent('${c}')">${c}</a>` : c
+    ).join(', ')}</span></div>`;
+  }
+  h += '</div>';
+  $('#main').innerHTML = h;
+};
+
+// ── Navigation helpers ──
+window.navComponent = function(name) {
+  $$('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.view === 'components'));
+  view = 'components';
+  $('#filter').value = '';
+  renderList();
+  showComponent(name);
+};
+
+window.navPipeline = function(name) {
+  $$('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.view === 'pipelines'));
+  view = 'pipelines';
+  $('#filter').value = '';
+  renderList();
+  showPipeline(name);
+};
+
+init();
+</script>
+</body>
+</html>

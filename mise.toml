@@ -5,16 +5,12 @@ node = "lts"
 FORCE_COLOR = "1"
 
 [tasks."viewer:build"]
-description = "Build component_index.json for the web viewer"
-run = "node viewer/build_index.js"
+description = "Build self-contained viewer/index.html"
+run = "node viewer/build.mjs"
 
 [tasks."viewer:serve"]
-description = "Build index and serve the Ergatis Component Viewer"
-run = """
-node viewer/build_index.js
-echo "Serving viewer at http://localhost:8080/viewer/"
-npx -y serve . -l 8080
-"""
+description = "Serve the Ergatis Explorer locally"
+run = "node tools/node/serve.mjs"
 
 [tasks.stats]
 description = "Display EELS repository dashboard"

@@ -1,5 +1,5 @@
 ergatis-eels-devel
 ergatis-eels-devel/**
-wiki/
-viewer/component_index.json
 node_modules/
+viewer/component_index.json
+wiki/
