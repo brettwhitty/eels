@@ -38,13 +38,13 @@ See `CONTRIBUTORS.md` for attribution of the 33 identified contributors.
 - JSON Schema for component data → `data/schemas/`
 
 **Generated Translations:**
-- 362 CWL tool definitions → `generated/cwl_improved/`
-- 383 Nextflow process definitions → `generated/nextflow/`
-- 40 Nextflow pipeline workflows → `generated/nextflow/pipelines/`
-- 362 BioCompute Objects → `generated/bco/`
-- 40 pipeline BioCompute Objects → `generated/bco_pipelines/`
-- 362 Ergatis Lite notations → `generated/ergatis_lite/`
-- 40 pipeline Ergatis Lite notations → `generated/ergatis_lite_pipelines/`
+- 362 CWL tool definitions → `generated/wfl-lang/cwl/components/`
+- 383 Nextflow process definitions → `generated/wfl-lang/nextflow/components/`
+- 40 Nextflow pipeline workflows → `generated/wfl-lang/nextflow/pipeline_templates/`
+- 362 BioCompute Objects → `generated/docs/bco/components/`
+- 40 pipeline BioCompute Objects → `generated/docs/bco/pipeline_templates/`
+- 362 Ergatis Lite notations → `generated/wfl-lang/ergatis_lite/components/`
+- 40 pipeline Ergatis Lite notations → `generated/wfl-lang/ergatis_lite/pipeline_templates/`
 
 **Tools & Viewer:**
 - Web-based component viewer → `viewer/`
@@ -77,12 +77,20 @@ eels/
 │   └── contributors.json        # 33 contributors
 │
 ├── generated/                   # Translated formats
-│   ├── bco/                     # Component BioCompute Objects (362)
-│   ├── bco_pipelines/           # Pipeline BioCompute Objects (40)
-│   ├── cwl_improved/            # CWL tool definitions (362)
-│   ├── ergatis_lite/            # Component Ergatis Lite notation (362)
-│   ├── ergatis_lite_pipelines/  # Pipeline Ergatis Lite notation (40)
-│   └── nextflow/                # Nextflow processes (383) + pipelines (40)
+│   ├── docs/
+│   │   └── bco/                 # BioCompute Objects (IEEE 2791)
+│   │       ├── components/      # Component BCOs (362)
+│   │       └── pipeline_templates/  # Pipeline BCOs (40)
+│   │
+│   └── wfl-lang/                # Workflow language translations
+│       ├── cwl/
+│       │   └── components/      # CWL tool definitions (362)
+│       ├── ergatis_lite/
+│       │   ├── components/      # Component Ergatis Lite notation (362)
+│       │   └── pipeline_templates/  # Pipeline template Ergatis Lite (40)
+│       └── nextflow/
+│           ├── components/      # Nextflow processes (383)
+│           └── pipeline_templates/  # Nextflow pipeline workflows (40)
 │
 ├── viewer/                      # Web-based component viewer (HTML/JS)
 │
