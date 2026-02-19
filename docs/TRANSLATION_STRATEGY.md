@@ -1,274 +1,173 @@
 # EELS Multi-Format Translation Strategy
 
-## Three-Tier Representation
+## Primary Format: Component JSON
 
-### Tier 1: Ergatis Lite (Minimal)
-**Purpose:** Compact, human-readable workflow structure  
-**Use case:** Quick reference, command-line composition, workflow sketching
+**Source:** `data/components/*.json` (362 files from dev-component project, 2017)
+
+**Example:** `data/components/aat_na.json`
+```json
+{
+  "name": "aat_na",
+  "classification": "alignment / pairwise",
+  "tool_execution": [
+    {"name": "dds", "executable": "$;DDS_EXEC$;"},
+    {"name": "ext", "executable": "$;EXT_EXEC$;"},
+    {"name": "filter", "executable": "$;FILTER_EXEC$;"}
+  ],
+  "converters": {
+    "iterator": [
+      {"script": "gap22bsml", "input": "*.btab", "output": "*.bsml"}
+    ]
+  },
+  "output_formats": ["bsml_output_list", "btab_output_list"],
+  "has_iterator": true,
+  "group_count": "150"
+}
+```
+
+**This is the canonical representation.** All other formats are derived from this.
+
+## Derived Formats
+
+### Tier 1: Ergatis Lite (Minimal Notation)
+**Purpose:** Compact, human-readable representation  
+**Derived from:** Component JSON
 
 **Format:**
 ```
 (
-  <split_fasta:input=genome.fsa>,
-  {
-    <blast:database=/db/nr.fasta:evalue=1e-5>,
-    <hmmpfam:database=/db/Pfam.hmm>
-  },
-  <merge_annotations>
+  <dds:executable=$;DDS_EXEC$;>,
+  <ext:executable=$;EXT_EXEC$;>,
+  <filter:executable=$;FILTER_EXEC$;>,
+  <gap22bsml:input=*.btab:output=*.bsml>
 )
 ```
 
 **Captures:**
-- Component ordering (serial/parallel)
-- Minimal I/O (input files, output destinations)
-- Required databases and reference assemblies
-- Essential parameters (e-value, thresholds)
-- Default settings for common use cases
+- Component execution order (from `tool_execution` array)
+- Converter chain (from `converters` object)
+- Minimal parameters
+- Serial/parallel structure
 
-**Benefits:**
-- Minimal syntax (mathematical notation)
-- One-liner capable
-- Easy to read and modify
-- Natural representation of Ergatis structure
+### Tier 2: CWL (Tool Parameter Documentation)
+**Purpose:** Type-safe parameter documentation for individual tools  
+**Derived from:** Component JSON `tool_execution` entries
 
-### Tier 2: CWL (Component Configuration)
-**Purpose:** Capture individual tool configurations and parameters  
-**Use case:** Tool-level parameter documentation, type validation
+**Scope:** ONE CWL file per tool in `tool_execution` array
 
-**Format:**
+**Example:** From `aat_na.json` → generate `dds.cwl`, `ext.cwl`, `filter.cwl`
+
 ```yaml
+# dds.cwl
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [blastp]
+baseCommand: [$DDS_EXEC]
 inputs:
   query:
     type: File
-    inputBinding:
-      prefix: -query
   database:
-    type: string
-    default: /db/nr.fasta
-    inputBinding:
-      prefix: -db
-  evalue:
-    type: float
-    default: 1e-5
-    inputBinding:
-      prefix: -evalue
-outputs:
-  alignments:
     type: File
-    outputBinding:
-      glob: "*.raw"
+outputs:
+  raw_output:
+    type: File
 ```
 
-**Captures:**
-- Individual tool parameters (not multi-step workflows)
-- Type definitions (File, string, int, float, etc.)
-- Default values and flags
-- Input/output bindings for single tools
-- Tool-specific requirements
+**Does NOT capture:**
+- Multi-step execution (that's in Component JSON)
+- Converter chains (that's in Component JSON)
+- Workflow composition (that's in Component JSON)
 
-**Scope:**
-- ONE tool per CWL file
-- Component configs → multiple CWL CommandLineTools
-- Multi-step execution → Ergatis Lite or BCO, NOT CWL Workflow
-
-**Benefits:**
-- Type safety for tool parameters
-- Validation of individual tool configs
-- Reusable tool definitions
-
-### Tier 3: BioCompute Object (Documentation)
-**Purpose:** Regulatory compliance, provenance, full documentation  
-**Use case:** FDA submissions, publication, long-term preservation
+### Tier 3: BioCompute Object (Regulatory Documentation)
+**Purpose:** IEEE 2791-2020 standard for regulatory compliance  
+**Derived from:** Component JSON + CONTRIBUTORS.md + git history
 
 **Format:**
 ```json
 {
-  "object_id": "https://example.org/bco/blast_annotation",
-  "spec_version": "1.4.0",
   "provenance_domain": {
-    "name": "BLAST Protein Annotation Pipeline",
-    "version": "1.0",
-    "created": "2024-01-01T00:00:00Z",
-    "modified": "2024-01-01T00:00:00Z",
-    "contributors": [
-      {
-        "name": "Brett Whitty",
-        "affiliation": "TIGR",
-        "contribution": ["createdBy"]
-      }
-    ],
-    "license": "Artistic-2.0"
+    "name": "AAT Nucleotide Alignment",
+    "contributors": [/* from CONTRIBUTORS.md */]
   },
-  "usability_domain": [
-    "Protein sequence annotation using BLAST against nr database",
-    "Identifies homologous proteins and transfers functional annotations"
-  ],
   "description_domain": {
-    "keywords": ["alignment", "protein", "BLAST", "annotation"],
     "pipeline_steps": [
-      {
-        "step_number": 1,
-        "name": "BLAST protein alignment",
-        "description": "Run NCBI BLASTP against nr database",
-        "version": "2.2.26",
-        "input_list": [
-          {"uri": "query.fasta"}
-        ],
-        "output_list": [
-          {"uri": "blast.raw"}
-        ]
-      }
+      {"step_number": 1, "name": "dds"},
+      {"step_number": 2, "name": "ext"},
+      {"step_number": 3, "name": "filter"},
+      {"step_number": 4, "name": "gap22bsml"}
     ]
   },
-  "parametric_domain": [
-    {
-      "param": "evalue",
-      "value": "1e-5",
-      "step": "1"
-    },
-    {
-      "param": "database",
-      "value": "/db/nr.fasta",
-      "step": "1"
-    }
-  ],
+  "parametric_domain": [/* from component .config */],
   "io_domain": {
-    "input_subdomain": [
-      {
-        "uri": {
-          "filename": "query.fasta",
-          "uri": "file:///input/query.fasta"
-        }
-      }
-    ],
     "output_subdomain": [
-      {
-        "mediatype": "application/xml",
-        "uri": {
-          "filename": "blast.bsml",
-          "uri": "file:///output/blast.bsml"
-        }
-      }
+      {"mediatype": "application/xml", "uri": "*.bsml"}
     ]
-  },
-  "execution_domain": {
-    "script": [
-      {"uri": "https://example.org/blast_component.xml"}
-    ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [
-      {
-        "name": "NCBI BLAST+",
-        "version": "2.2.26",
-        "uri": "https://blast.ncbi.nlm.nih.gov/"
-      }
-    ],
-    "environment_variables": {
-      "BLASTDB": "/db"
-    }
   }
 }
 ```
 
 **Captures:**
-- Complete provenance (who, when, why)
-- Full parameter documentation
-- Tool versions and dependencies
-- Environment requirements
-- Error handling strategies
-- Validation criteria
-- Human-readable descriptions
+- Full multi-step execution (from `tool_execution` + `converters`)
+- Provenance and attribution
+- Complete parameter documentation
 - Regulatory compliance metadata
-
-**Benefits:**
-- IEEE 2791-2020 standard
-- FDA submission ready
-- Complete documentation
-- Provenance tracking
-- Long-term preservation
 
 ## Translation Workflow
 
-### From Ergatis Component
+### From Component JSON (Primary Source)
 
-**Important:** Ergatis components contain multi-step execution (tool + converters + validation). This multi-step nature is captured in Ergatis Lite and BCO, NOT in CWL.
+**Input:** `data/components/*.json` (362 files)
 
-1. **Extract to Ergatis Lite:**
-   - Parse component XML (full multi-step execution)
-   - Identify serial/parallel structure
-   - Extract required databases from `.config`
-   - Document default parameters
-   - Create minimal notation showing ALL steps
+1. **Generate Ergatis Lite:**
+   - Read `tool_execution` array → serial execution steps
+   - Read `converters` object → converter chain
+   - Extract parameters from component `.config` files
+   - Create minimal notation
 
 2. **Generate CWL (per tool):**
-   - ONE CWL file per tool in component
-   - Map tool executable to `baseCommand`
-   - Extract parameters from `.config` → CWL inputs
-   - Define types (File, string, int, float)
-   - Add requirements (Docker, resources)
-   - **DO NOT** create CWL Workflow for multi-step component
+   - For each entry in `tool_execution` array:
+     - Create ONE CWL CommandLineTool file
+     - Map `executable` to `baseCommand`
+     - Extract parameters from `.config`
+     - Define input/output types
+   - Result: Multiple CWL files per component
 
 3. **Generate BCO:**
-   - Capture full multi-step execution in pipeline_steps
-   - Extract provenance from git history
-   - Map contributors from `CONTRIBUTORS.md`
-   - Document tool versions from production
-   - Create execution domain from component XML (all steps)
-   - Add parametric domain from `.config`
-   - Build I/O domain from input/output specs
+   - Map `tool_execution` array → `pipeline_steps`
+   - Map `converters` → additional pipeline steps
+   - Add provenance from `CONTRIBUTORS.md`
+   - Add parameters from `.config` files
+   - Build I/O domain from `output_formats`
+   - Result: One BCO per component
 
-### Example: BLAST Component (Multi-Step)
+### Example: aat_na Component
 
-**Ergatis Component Structure:**
-1. Run BLAST (tool)
-2. Convert to BTAB (converter)
-3. Convert to BSML (converter)
-4. Validate BSML (validation)
+**Source:** `data/components/aat_na.json`
 
-**Ergatis Lite (captures all steps):**
+**Generated Ergatis Lite:**
 ```
 (
-  <blast:query=$INPUT:database=/db/nr.fasta:evalue=1e-5>,
-  <blast2btab:input=blast.raw:output=blast.btab>,
-  <blast2bsml:input=blast.raw:output=blast.bsml>,
-  <validate:input=blast.bsml>
+  <dds:executable=$;DDS_EXEC$;>,
+  <ext:executable=$;EXT_EXEC$;>,
+  <filter:executable=$;FILTER_EXEC$;>,
+  <gap22bsml:input=*.btab:output=*.bsml>
 )
 ```
 
-**CWL (one per tool, NOT workflow):**
-- `blast.cwl` - BLAST tool only
-- `blast2btab.cwl` - Converter tool only
-- `blast2bsml.cwl` - Converter tool only
-- `validate.cwl` - Validation tool only
+**Generated CWL files:**
+- `dds.cwl` (from tool_execution[0])
+- `ext.cwl` (from tool_execution[1])
+- `filter.cwl` (from tool_execution[2])
+- `gap22bsml.cwl` (from converters.iterator[0])
 
-**BCO (captures full multi-step execution):**
+**Generated BCO:**
 ```json
 {
   "description_domain": {
     "pipeline_steps": [
-      {
-        "step_number": 1,
-        "name": "BLAST protein alignment",
-        "description": "Run NCBI BLASTP"
-      },
-      {
-        "step_number": 2,
-        "name": "Convert to BTAB",
-        "description": "Parse BLAST raw to tabular format"
-      },
-      {
-        "step_number": 3,
-        "name": "Convert to BSML",
-        "description": "Parse BLAST raw to BSML XML"
-      },
-      {
-        "step_number": 4,
-        "name": "Validate BSML",
-        "description": "DTD validation of BSML output"
-      }
+      {"step_number": 1, "name": "dds"},
+      {"step_number": 2, "name": "ext"},
+      {"step_number": 3, "name": "filter"},
+      {"step_number": 4, "name": "gap22bsml"}
     ]
   }
 }
@@ -296,18 +195,19 @@ outputs:
 
 ## Implementation Plan
 
-1. **Phase 1:** Extract Ergatis Lite notation for all 362 components
-2. **Phase 2:** Generate CWL for 10-20 representative components
-3. **Phase 3:** Create BCO templates for common component types
-4. **Phase 4:** Full BCO generation for complete workflows
+1. **Phase 1:** Component JSON is already complete (362 files, 2017)
+2. **Phase 2:** Generate Ergatis Lite notation from Component JSON
+3. **Phase 3:** Generate CWL CommandLineTools from Component JSON `tool_execution` arrays
+4. **Phase 4:** Generate BCO from Component JSON + CONTRIBUTORS.md + .config files
 5. **Phase 5:** Validation and testing
 
 ## Benefits of Multi-Format Approach
 
-- **Ergatis Lite:** Preserves original design philosophy (minimal, mathematical), captures multi-step execution
-- **CWL:** Documents individual tool parameters with type safety (NOT for multi-step workflows)
-- **BCO:** Ensures regulatory compliance, captures full multi-step execution, long-term preservation
-- **Together:** Complete knowledge transfer - Ergatis Lite and BCO for workflows, CWL for tool configs
+- **Component JSON:** Primary canonical format (already complete, 362 components)
+- **Ergatis Lite:** Human-readable minimal notation derived from JSON
+- **CWL:** Type-safe tool parameter documentation (one per tool in component)
+- **BCO:** Regulatory compliance, full provenance, IEEE standard
+- **Together:** Complete knowledge preservation with multiple access points
 
 ## References
 
