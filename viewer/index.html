@@ -54,9 +54,9 @@ a:hover { text-decoration: underline; }
 .steps tr:hover { background: #1c2128; }
 
 .exe-unresolved { color: var(--red); }
-.exe-ergatis { color: var(--cyan); }
-.exe-os { color: var(--text2); }
-.exe-bare { color: var(--text); }
+.exe-ergatis { color: var(--green); }
+.exe-system { color: var(--cyan); }
+.exe-known { color: var(--green); }
 .exe-institutional { color: var(--magenta); }
 .exe-template { color: var(--yellow); }
 
@@ -203,12 +203,13 @@ function setActive(id) {
 function exeClass(exe) {
   if (/^\{\{[^}]+\}\}$/.test(exe) && !exe.includes('/')) return 'exe-unresolved';
   if (/^\{\{BIN_DIR\}\}\//.test(exe)) return 'exe-ergatis';
-  if (/^\/(bin|usr\/bin)\//.test(exe)) return 'exe-os';
+  if (/^\[\/bin\/env\]/.test(exe)) return 'exe-system';
+  if (/^\/(bin|usr\/bin)\//.test(exe)) return 'exe-system';
   if (/^\/(usr\/local\/(packages|common|devel)|opt)\//.test(exe)) return 'exe-institutional';
-  if (/^\/usr\/local\/bin\//.test(exe)) return 'exe-template';
+  if (/^\/usr\/local\/bin\//.test(exe)) return 'exe-known';
   if (/^\{\{/.test(exe)) return 'exe-template';
-  if (/^\//.test(exe)) return 'exe-os';
-  return 'exe-bare';
+  if (/^\//.test(exe)) return 'exe-known';
+  return 'exe-known';
 }
 
 // ── Component detail ──
@@ -230,11 +231,11 @@ window.showComponent = function(name) {
 
   // Steps
   if (s?.steps?.length) {
-    h += '<div class="panel"><h2>Workflow Steps</h2><table class="steps"><tr><th>#</th><th>Name</th><th>Category</th><th>Executable</th></tr>';
+    h += '<div class="panel"><h2>Workflow Steps</h2><table class="steps"><tr><th>#</th><th>Run Type</th><th>Name</th><th>Category</th><th>Executable</th></tr>';
     for (const st of s.steps) {
       const exe = norm(st.executable || '');
-      const rt = st.run_type ? ` <span class="tag" style="background:var(--red);color:#fff">${esc(st.run_type)}</span>` : '';
-      h += `<tr><td>${st.idx}</td><td>${esc(st.name || '')}${rt}</td>
+      const rt = st.run_type || 'RunUnixCommand';
+      h += `<tr><td>${st.idx}</td><td style="font-size:0.7rem;color:var(--text2)">${esc(rt)}</td><td>${esc(st.name || '')}</td>
         <td><span class="badge badge-${st.category}">${esc(st.category)}</span></td>
         <td class="${exeClass(exe)}">${esc(exe)}</td></tr>`;
     }
@@ -249,8 +250,22 @@ window.showComponent = function(name) {
     for (const p of params) {
       const k = p.name || p.key || '';
       let v = norm(p.default || p.value || '');
-      let cls = v ? (v.match(/^\//) ? 'pval-path' : v.match(/\{\{/) ? 'pval-tpl' : 'pval') : 'pval-empty';
-      h += `<tr><td class="pname">${esc(k)}</td><td class="${cls}">${v ? esc(v) : '(empty)'}</td></tr>`;
+      let display;
+      if (!v) {
+        display = '<span class="pval-empty">(empty)</span>';
+      } else if (v === '0' || v === '1') {
+        // Boolean flag
+        display = v === '1'
+          ? `<span style="color:var(--green)">${esc(v)} (TRUE)</span>`
+          : `<span style="color:var(--red)">${esc(v)} (FALSE)</span>`;
+      } else if (v.match(/^\//)) {
+        display = `<span class="pval-path">${esc(v)}</span>`;
+      } else if (v.match(/\{\{/)) {
+        display = `<span class="pval-tpl">${esc(v)}</span>`;
+      } else {
+        display = `<span class="pval">${esc(v)}</span>`;
+      }
+      h += `<tr><td class="pname">${esc(k)}</td><td>${display}</td></tr>`;
     }
     h += '</table></div>';
   }
