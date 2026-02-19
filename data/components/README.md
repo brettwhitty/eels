@@ -49,10 +49,13 @@ These JSON files preserve the complete component library structure:
 - Converter usage and data transformations
 
 **Notable Workflows Included:**
+- **All TIGR/JCVI/IGS Gold-Standard genome annotations** - Every production genome annotated from system development (~2003) through institutional split and beyond
 - **Sybil pipelines** - Comparative genomics analysis and visualization
 - **CAMERA metagenomics pipelines** - Environmental metagenomics (developed by Brett Whitty)
 - **Human Microbiome Project pipelines** - Large-scale microbiome analysis (developed by Brett Whitty)
 - **Pangenome analysis pipeline** - Group B Streptococcus pangenome (Tettelin & Medini paper, developed by Brett Whitty)
 - 56 total workflow templates representing production genomics annotation pipelines
+
+These workflows represent the institutional knowledge from hundreds of genome annotation projects at the world's leading genomics center.
 
 This conversion work predates the EELS project and serves as foundational data for knowledge extraction and preservation of institutional expertise from the genomics annotation community.
