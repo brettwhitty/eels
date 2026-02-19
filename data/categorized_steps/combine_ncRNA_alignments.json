@@ -1,0 +1,24 @@
+{
+   "component" : "combine_ncRNA_alignments",
+   "source_file" : "combine_ncRNA_alignments.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/combine_ncRNA_alignemnts",
+         "idx" : 0,
+         "name" : "combine_ncRNA_alignments"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

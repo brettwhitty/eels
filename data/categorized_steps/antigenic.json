@@ -1,0 +1,30 @@
+{
+   "component" : "antigenic",
+   "source_file" : "antigenic.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/local/packages/EMBOSS/bin/antigenic",
+         "idx" : 0,
+         "name" : "antigenic"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/antigenic2bsml",
+         "idx" : 1,
+         "name" : "antigenic2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

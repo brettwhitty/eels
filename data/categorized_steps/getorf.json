@@ -1,0 +1,12 @@
+{
+   "component" : "getorf",
+   "source_file" : "getorf.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{EMBOSS_BIN}}/getorf",
+         "idx" : 0,
+         "name" : "Run EMBOSS getorf"
+      }
+   ]
+}

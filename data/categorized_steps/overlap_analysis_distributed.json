@@ -1,0 +1,24 @@
+{
+   "component" : "overlap_analysis_distributed",
+   "source_file" : "overlap_analysis_distributed.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "mkdir"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "mkdir"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/overlap_analysis",
+         "idx" : 2,
+         "name" : "analyze overlaps"
+      }
+   ]
+}

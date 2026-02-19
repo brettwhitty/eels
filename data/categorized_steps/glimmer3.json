@@ -1,0 +1,30 @@
+{
+   "component" : "glimmer3",
+   "source_file" : "glimmer3.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GLIMMER3_DIR}}/bin/glimmer3",
+         "idx" : 0,
+         "name" : "glimmer3"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/glimmer32bsml",
+         "idx" : 1,
+         "name" : "glimmer32bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "update_ec_numbers",
+   "source_file" : "update_ec_numbers.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/update_ec_numbers",
+         "idx" : 0,
+         "name" : "update ec numbers"
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+   "component" : "nucmer-show-snps",
+   "source_file" : "nucmer-show-snps.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{SHOW_SNPS_EXEC}}",
+         "idx" : 2,
+         "name" : "delta-filter"
+      }
+   ]
+}

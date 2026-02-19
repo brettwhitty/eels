@@ -1,0 +1,18 @@
+{
+   "component" : "remove_db_gene_syms_with_hypos",
+   "source_file" : "remove_db_gene_syms_with_hypos.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/remove_hypothetical_ec",
+         "idx" : 0,
+         "name" : "remove_hypothetical_ec"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/remove_db_gene_syms_with_hypos",
+         "idx" : 1,
+         "name" : "remove_db_gene_syms_with_hypotheticals"
+      }
+   ]
+}

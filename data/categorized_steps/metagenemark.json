@@ -1,0 +1,12 @@
+{
+   "component" : "metagenemark",
+   "source_file" : "metagenemark.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{METAGENEMARK_EXEC}}",
+         "idx" : 0,
+         "name" : "metagenemark"
+      }
+   ]
+}

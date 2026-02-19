@@ -1,0 +1,12 @@
+{
+   "component" : "edgeR",
+   "source_file" : "edgeR.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/edgeR",
+         "idx" : 0,
+         "name" : "edgeR"
+      }
+   ]
+}

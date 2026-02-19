@@ -1,0 +1,12 @@
+{
+   "component" : "bam2bigwig",
+   "source_file" : "bam2bigwig.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bam2bigwig",
+         "idx" : 0,
+         "name" : "bam2bigwig"
+      }
+   ]
+}

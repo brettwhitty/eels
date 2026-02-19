@@ -1,0 +1,66 @@
+{
+   "component" : "mugsyprep",
+   "source_file" : "mugsyprep.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create fasta output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 2,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 3,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 4,
+         "name" : "create iterator ITERATOR1 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 5,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 7,
+         "name" : "create sorted files list"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "for i in `cat {{OUTPUT_DIRECTORY}}/mugsymap.list`; do cat $i; done >> {{OUTPUT_DIRECTORY}}/mugsymap_complete.txt",
+         "idx" : 8,
+         "name" : "concatenate_files"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/prepfasta4mugsy",
+         "idx" : 9,
+         "name" : "prep fasta for mugsy"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 10,
+         "name" : "create fasta list file"
+      }
+   ]
+}

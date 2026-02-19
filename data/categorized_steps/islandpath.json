@@ -1,0 +1,30 @@
+{
+   "component" : "islandpath",
+   "source_file" : "islandpath.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{DIMOB_PATH}}",
+         "idx" : 0,
+         "name" : "dimob"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/islandpath2bsml",
+         "idx" : 1,
+         "name" : "islandpath2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

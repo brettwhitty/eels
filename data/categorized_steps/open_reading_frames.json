@@ -1,0 +1,12 @@
+{
+   "component" : "open_reading_frames",
+   "source_file" : "open_reading_frames.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/open_reading_frames",
+         "idx" : 0,
+         "name" : "open_reading_frames"
+      }
+   ]
+}

@@ -1,0 +1,36 @@
+{
+   "component" : "tRNAscan-SE_compress",
+   "source_file" : "tRNAscan-SE_compress.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{TRNASCANSE_EXEC}}",
+         "idx" : 0,
+         "name" : "tRNAscan-SE_compress"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/tRNAscan-SE2bsml",
+         "idx" : 1,
+         "name" : "tRNAscan-SE2bsml"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 2,
+         "name" : "compress raw output"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 3,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 4,
+         "name" : "dtd validation"
+      }
+   ]
+}

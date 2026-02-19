@@ -1,0 +1,24 @@
+{
+   "component" : "error_detector",
+   "source_file" : "error_detector.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/error_detector",
+         "idx" : 2,
+         "name" : "error detector"
+      }
+   ]
+}

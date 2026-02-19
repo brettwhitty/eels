@@ -1,0 +1,18 @@
+{
+   "component" : "cluster_mapping",
+   "source_file" : "cluster_mapping.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directories"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mapClusters",
+         "idx" : 1,
+         "name" : "Generate mapping between clusters for analysis_id1 '{{ANALYSIS_ID1}}' and analysis_id2 '{{ANALYSIS_ID2}}' on database '{{DATABASE}}' server '{{SERVER}}'"
+      }
+   ]
+}

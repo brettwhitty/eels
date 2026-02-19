@@ -1,0 +1,12 @@
+{
+   "component" : "hmmer",
+   "source_file" : "hmmer.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HMMLS_EXEC}}",
+         "idx" : 0,
+         "name" : "hmmls"
+      }
+   ]
+}

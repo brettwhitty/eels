@@ -1,0 +1,24 @@
+{
+   "component" : "bmtagger_index",
+   "source_file" : "bmtagger_index.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BMTOOL_EXEC}}",
+         "idx" : 0,
+         "name" : "Make index for bmfilter"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{SRPRISM_EXEC}}",
+         "idx" : 1,
+         "name" : "Make index for srprism"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MAKEBLASTDB_EXEC}}",
+         "idx" : 2,
+         "name" : "Make blastdb for BLAST"
+      }
+   ]
+}

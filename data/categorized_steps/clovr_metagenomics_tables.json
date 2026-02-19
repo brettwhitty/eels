@@ -1,0 +1,36 @@
+{
+   "component" : "clovr_metagenomics_tables",
+   "source_file" : "clovr_metagenomics_tables.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/clovr_metagenomics_tsvtables.pl",
+         "idx" : 1,
+         "name" : "create summary tables"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 2,
+         "name" : "create tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create paired tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create raw annotation list"
+      }
+   ]
+}

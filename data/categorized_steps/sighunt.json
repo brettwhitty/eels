@@ -1,0 +1,12 @@
+{
+   "component" : "sighunt",
+   "source_file" : "sighunt.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/run_sighunt",
+         "idx" : 0,
+         "name" : "SigHunt"
+      }
+   ]
+}

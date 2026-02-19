@@ -1,0 +1,12 @@
+{
+   "component" : "mothur_unique_seqs",
+   "source_file" : "mothur_unique_seqs.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mothur",
+         "idx" : 0,
+         "name" : "unique seqs"
+      }
+   ]
+}

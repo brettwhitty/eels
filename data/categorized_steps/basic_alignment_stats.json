@@ -1,0 +1,18 @@
+{
+   "component" : "basic_alignment_stats",
+   "source_file" : "basic_alignment_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{SAMTOOLS_EXEC}}",
+         "idx" : 0,
+         "name" : "samtools idxstats"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{SAMTOOLS_EXEC}}",
+         "idx" : 1,
+         "name" : "samtools flagstat"
+      }
+   ]
+}

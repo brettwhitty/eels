@@ -1,0 +1,24 @@
+{
+   "component" : "priam_ec_assignment",
+   "source_file" : "priam_ec_assignment.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/assign_ec_from_rps",
+         "idx" : 0,
+         "name" : "priam_ec_assignment"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

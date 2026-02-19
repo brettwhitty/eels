@@ -1,0 +1,36 @@
+{
+   "component" : "hmmpfam",
+   "source_file" : "hmmpfam.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HMMPFAM_EXEC}}",
+         "idx" : 0,
+         "name" : "hmmpfam"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/hmmpfam2htab",
+         "idx" : 1,
+         "name" : "hmmpfam2htab"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/hmmpfam2bsml",
+         "idx" : 2,
+         "name" : "hmmpfam2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 3,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 4,
+         "name" : "dtd validation"
+      }
+   ]
+}

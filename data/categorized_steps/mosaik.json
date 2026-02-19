@@ -1,0 +1,66 @@
+{
+   "component" : "mosaik",
+   "source_file" : "mosaik.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MOSAIK_BUILD_EXEC}}",
+         "idx" : 2,
+         "name" : "MosaikBuild Refs"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MOSAIK_BUILD_EXEC}}",
+         "idx" : 3,
+         "name" : "MosaikBuild Reads"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MOSAIK_ALIGNER_EXEC}}",
+         "idx" : 4,
+         "name" : "MosaikAligner"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MOSAIK_SORT_EXEC}}",
+         "idx" : 5,
+         "name" : "MosaikSort"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 6,
+         "name" : "create assembly file output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MOSAIK_ASSEMBLER_EXEC}}",
+         "idx" : 7,
+         "name" : "MosaikAssembler"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MOSAIK_TEXT_EXEC}}",
+         "idx" : 8,
+         "name" : "MosaikText"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/bin/gunzip",
+         "idx" : 9,
+         "name" : "Gunzip SAM file"
+      }
+   ]
+}

@@ -1,0 +1,48 @@
+{
+   "component" : "lgt_bwa_fq",
+   "source_file" : "lgt_bwa_fq.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_bwa",
+         "idx" : 2,
+         "name" : "BWA Execution"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_bwa",
+         "idx" : 3,
+         "name" : "BWA Execution"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_bwa_post_process",
+         "idx" : 4,
+         "name" : "POST PROCESSING"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_bwa_zip.sh",
+         "idx" : 5,
+         "name" : "ZIP FILES"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_bwa_rm.sh",
+         "idx" : 6,
+         "name" : "REMOVE FASTQ FILES"
+      }
+   ]
+}

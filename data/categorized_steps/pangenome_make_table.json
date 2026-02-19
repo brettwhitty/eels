@@ -1,0 +1,24 @@
+{
+   "component" : "pangenome_make_table",
+   "source_file" : "pangenome_make_table.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 2,
+         "name" : "replace template keys"
+      }
+   ]
+}

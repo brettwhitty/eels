@@ -1,0 +1,42 @@
+{
+   "component" : "make_circleator_figure",
+   "source_file" : "make_circleator_figure.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/make_circleator_figure",
+         "idx" : 2,
+         "name" : "make_circleator_figure"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create svg file list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create pdf file list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 5,
+         "name" : "create jpg file list"
+      }
+   ]
+}

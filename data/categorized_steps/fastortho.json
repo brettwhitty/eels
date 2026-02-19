@@ -1,0 +1,30 @@
+{
+   "component" : "fastortho",
+   "source_file" : "fastortho.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fastortho_write_config",
+         "idx" : 2,
+         "name" : "write FastOrtho config file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 3,
+         "name" : "replace template keys"
+      }
+   ]
+}

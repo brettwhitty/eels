@@ -1,0 +1,12 @@
+{
+   "component" : "align_tophat_stats",
+   "source_file" : "align_tophat_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/align_tophat_stats",
+         "idx" : 0,
+         "name" : "align_tophat_stats"
+      }
+   ]
+}

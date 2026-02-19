@@ -1,0 +1,12 @@
+{
+   "component" : "btab2taxon",
+   "source_file" : "btab2taxon.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/btab2taxon",
+         "idx" : 0,
+         "name" : "btab2taxon"
+      }
+   ]
+}

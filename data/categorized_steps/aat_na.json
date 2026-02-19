@@ -1,0 +1,96 @@
+{
+   "component" : "aat_na",
+   "source_file" : "aat_na.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{DDS_EXEC}}",
+         "idx" : 0,
+         "name" : "dds"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{EXT_EXEC}}",
+         "idx" : 1,
+         "name" : "ext"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{EXT_COLLAPSE_EXEC}}",
+         "idx" : 2,
+         "name" : "ext collapse"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{FILTER_EXEC}}",
+         "idx" : 3,
+         "name" : "filter"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GAP2_EXEC}}",
+         "idx" : 4,
+         "name" : "gap2"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 5,
+         "name" : "remove raw dds output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 6,
+         "name" : "remove raw ext output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 7,
+         "name" : "remove raw ext collapsed output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 8,
+         "name" : "remove raw filter output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "touch",
+         "idx" : 9,
+         "name" : "ensure btab existence"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/gap22bsml",
+         "idx" : 10,
+         "name" : "gap22bsml"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 11,
+         "name" : "compress gap2 btab"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 12,
+         "name" : "compress gap2"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 13,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 14,
+         "name" : "dtd validation"
+      }
+   ]
+}

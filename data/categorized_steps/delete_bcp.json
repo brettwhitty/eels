@@ -1,0 +1,120 @@
+{
+   "component" : "delete_bcp",
+   "source_file" : "delete_bcp.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 2,
+         "name" : "Create chado table iterator list file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 3,
+         "name" : "create iterator ITERATOR1 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 4,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 6,
+         "name" : "Drop tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 7,
+         "name" : "create iterator drop_foreign_key_constraints groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 8,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 10,
+         "name" : "Drop tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 11,
+         "name" : "create iterator drop_non_primary_key_indices groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 12,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 14,
+         "name" : "create iterator ITERATOR3 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 15,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 17,
+         "name" : "Drop primary key indices"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 18,
+         "name" : "create iterator drop_primary_key_indices groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 19,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 21,
+         "name" : "Create indices and foreign key constraints list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 22,
+         "name" : "create iterator create_indices groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 23,
+         "name" : "replace template keys"
+      }
+   ]
+}

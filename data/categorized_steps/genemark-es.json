@@ -1,0 +1,30 @@
+{
+   "component" : "genemark-es",
+   "source_file" : "genemark-es.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/run_genemark-es",
+         "idx" : 0,
+         "name" : "genemark"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/genemarkes2bsml",
+         "idx" : 1,
+         "name" : "genemarkes2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

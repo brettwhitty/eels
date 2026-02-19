@@ -1,0 +1,96 @@
+{
+   "component" : "iprscan",
+   "source_file" : "iprscan.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 0,
+         "name" : "blastprodom"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 1,
+         "name" : "coils"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 2,
+         "name" : "hmmpir"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 3,
+         "name" : "hmmpfam"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 4,
+         "name" : "hmmsmart"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 5,
+         "name" : "hmmtigr"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 6,
+         "name" : "fprintscan"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 7,
+         "name" : "scanregexp"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 8,
+         "name" : "profilescan"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 9,
+         "name" : "superfamily"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{IPRSCAN_EXEC}}",
+         "idx" : 10,
+         "name" : "seg"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "find",
+         "idx" : 11,
+         "name" : "combine raw output"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/iprscan2bsml",
+         "idx" : 12,
+         "name" : "iprscan2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 13,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 14,
+         "name" : "dtd validation"
+      }
+   ]
+}

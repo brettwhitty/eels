@@ -1,0 +1,12 @@
+{
+   "component" : "bowtie_build",
+   "source_file" : "bowtie_build.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bowtie_build",
+         "idx" : 0,
+         "name" : "bowtie_build"
+      }
+   ]
+}

@@ -1,0 +1,18 @@
+{
+   "component" : "condor_cogs_search",
+   "source_file" : "condor_cogs_search.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create database output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/condor_cog_search",
+         "idx" : 1,
+         "name" : "condor_cog_search.dbi"
+      }
+   ]
+}

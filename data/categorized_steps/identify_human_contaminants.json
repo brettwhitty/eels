@@ -1,0 +1,30 @@
+{
+   "component" : "identify_human_contaminants",
+   "source_file" : "identify_human_contaminants.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/identify_human_contaminants",
+         "idx" : 2,
+         "name" : "identify_human_contaminants"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/get_seq_included",
+         "idx" : 3,
+         "name" : "create singleton fasta file"
+      }
+   ]
+}

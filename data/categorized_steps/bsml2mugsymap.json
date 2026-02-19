@@ -1,0 +1,18 @@
+{
+   "component" : "bsml2mugsymap",
+   "source_file" : "bsml2mugsymap.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2mugsymap",
+         "idx" : 1,
+         "name" : "bsml2mugsymap"
+      }
+   ]
+}

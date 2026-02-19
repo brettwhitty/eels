@@ -1,0 +1,12 @@
+{
+   "component" : "tabula_rasa",
+   "source_file" : "tabula_rasa.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/tabula_rasa",
+         "idx" : 0,
+         "name" : "tabula_rasa"
+      }
+   ]
+}

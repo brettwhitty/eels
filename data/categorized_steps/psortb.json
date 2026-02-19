@@ -1,0 +1,12 @@
+{
+   "component" : "psortb",
+   "source_file" : "psortb.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{PSORTB_EXE}}",
+         "idx" : 0,
+         "name" : "tmhmm"
+      }
+   ]
+}

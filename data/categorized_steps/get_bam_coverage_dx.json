@@ -1,0 +1,36 @@
+{
+   "component" : "get_bam_coverage_dx",
+   "source_file" : "get_bam_coverage_dx.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 2,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 3,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BAM_COVERAGE_DX_EXEC}}",
+         "idx" : 4,
+         "name" : "Get BAM Coverage"
+      }
+   ]
+}

@@ -1,0 +1,66 @@
+{
+   "component" : "ksnp",
+   "source_file" : "ksnp.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ksnp_merge_reference",
+         "idx" : 1,
+         "name" : "merge contigs"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{KSNP_DIR}}/genome_names.pl",
+         "idx" : 2,
+         "name" : "parse reference fasta header"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cat",
+         "idx" : 3,
+         "name" : "merge input and reference"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{KSNP_EXEC}}",
+         "idx" : 4,
+         "name" : "ksnp"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "mv",
+         "idx" : 5,
+         "name" : "create raw output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ksnp_to_addgeneinfo",
+         "idx" : 6,
+         "name" : "convert ksnp to nucmer output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ksnp-add-gene-info",
+         "idx" : 7,
+         "name" : "convert nucmer output to snp add gene info"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 8,
+         "name" : "remove temp dir"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 9,
+         "name" : "remove fsplit dir"
+      }
+   ]
+}

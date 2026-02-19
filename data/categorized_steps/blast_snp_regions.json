@@ -1,0 +1,18 @@
+{
+   "component" : "blast_snp_regions",
+   "source_file" : "blast_snp_regions.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/blast_snp_regions",
+         "idx" : 0,
+         "name" : "ncbi-blastn"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/parse_snp_blast",
+         "idx" : 1,
+         "name" : "parse raw BLAST results"
+      }
+   ]
+}

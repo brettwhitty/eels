@@ -1,0 +1,12 @@
+{
+   "component" : "align_bowtie_stats",
+   "source_file" : "align_bowtie_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/align_bowtie_stats",
+         "idx" : 0,
+         "name" : "align_bowtie_stats"
+      }
+   ]
+}

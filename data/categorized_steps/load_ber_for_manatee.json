@@ -1,0 +1,24 @@
+{
+   "component" : "load_ber_for_manatee",
+   "source_file" : "load_ber_for_manatee.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/add_blast_polypeptide_links",
+         "idx" : 1,
+         "name" : "load ber analysis"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/move_ber_files_for_manatee",
+         "idx" : 2,
+         "name" : "move files"
+      }
+   ]
+}

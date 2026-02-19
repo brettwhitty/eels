@@ -1,0 +1,96 @@
+{
+   "component" : "refresh_chado_mart",
+   "source_file" : "refresh_chado_mart.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 2,
+         "name" : "Create truncate chado-mart tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 3,
+         "name" : "create iterator truncate groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 4,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/chadoToChadoMart",
+         "idx" : 6,
+         "name" : "Generate chado-mart data"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 7,
+         "name" : "Create drop chado-mart indices and constraints list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 8,
+         "name" : "create iterator drop_indices groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 9,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bcpdir2iterator",
+         "idx" : 11,
+         "name" : "list bcp files"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 12,
+         "name" : "create iterator load groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 13,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 15,
+         "name" : "Create chado-mart indices and constraints list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 16,
+         "name" : "create iterator create_indices groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 17,
+         "name" : "replace template keys"
+      }
+   ]
+}

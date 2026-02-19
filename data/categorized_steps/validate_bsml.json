@@ -1,0 +1,12 @@
+{
+   "component" : "validate_bsml",
+   "source_file" : "validate_bsml.i1.json",
+   "steps" : [
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 0,
+         "name" : "DTD validation"
+      }
+   ]
+}

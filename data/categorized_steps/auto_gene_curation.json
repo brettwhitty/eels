@@ -1,0 +1,36 @@
+{
+   "component" : "auto_gene_curation",
+   "source_file" : "auto_gene_curation.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/auto_gene_curation",
+         "idx" : 0,
+         "name" : "auto gene curation"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 4,
+         "name" : "dtd validation"
+      }
+   ]
+}

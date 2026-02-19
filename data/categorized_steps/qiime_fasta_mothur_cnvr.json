@@ -1,0 +1,42 @@
+{
+   "component" : "qiime_fasta_mothur_cnvr",
+   "source_file" : "qiime_fasta_mothur_cnvr.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/dataprep_dual16S.pl",
+         "idx" : 2,
+         "name" : "preprocess input data for split libraries"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/split_libraries",
+         "idx" : 3,
+         "name" : "split libraries for Qiime workflows"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/qiime_to_mothur_meta.pl",
+         "idx" : 4,
+         "name" : "create input files for mothur components"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 5,
+         "name" : "create results list"
+      }
+   ]
+}

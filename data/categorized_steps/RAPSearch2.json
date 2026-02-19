@@ -1,0 +1,48 @@
+{
+   "component" : "RAPSearch2",
+   "source_file" : "RAPSearch2.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{RAPSEARCH_EXEC}}",
+         "idx" : 0,
+         "name" : "RAPSearch2"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/RAPSearch2btab",
+         "idx" : 1,
+         "name" : "convert m8 to btab"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/blastbtab2bsml",
+         "idx" : 2,
+         "name" : "convert btab to bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 3,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 4,
+         "name" : "compress m8 output"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 5,
+         "name" : "compress aln output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 6,
+         "name" : "dtd validation"
+      }
+   ]
+}

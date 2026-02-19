@@ -1,0 +1,78 @@
+{
+   "component" : "mumi-reduce",
+   "source_file" : "mumi-reduce.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create the toplevel output directory."
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "Create a temporary working directory on the scratch partition."
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 2,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 3,
+         "name" : "create iterator {{ITERATOR_NAME}} groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 4,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 6,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 7,
+         "name" : "create iterator {{ITERATOR_NAME}} groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 8,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 10,
+         "name" : "Create a directory in which to store all final MUMi scores."
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUMI_SCORE_AGGREGATOR_EXEC}}",
+         "idx" : 11,
+         "name" : "Collect all pairwise MUMi scores into a single file."
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUMI_CLUSTERING_EXEC}}",
+         "idx" : 12,
+         "name" : "Transitively cluster all sequence pairs S, T where MUMi_score(S,T) <= {{CLUSTER_THRESHOLD}}."
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GENERATE_REDUCED_DB_EXEC}}",
+         "idx" : 13,
+         "name" : "Pick a representative genome for each cluster, then concatenate all representatives into a single output file."
+      }
+   ]
+}

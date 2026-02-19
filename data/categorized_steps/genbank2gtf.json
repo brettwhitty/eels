@@ -1,0 +1,12 @@
+{
+   "component" : "genbank2gtf",
+   "source_file" : "genbank2gtf.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/genbank2gtf",
+         "idx" : 0,
+         "name" : "genbank2gtf"
+      }
+   ]
+}

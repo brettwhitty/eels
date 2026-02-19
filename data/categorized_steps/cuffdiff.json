@@ -1,0 +1,12 @@
+{
+   "component" : "cuffdiff",
+   "source_file" : "cuffdiff.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/cuffdiff",
+         "idx" : 0,
+         "name" : "cuffdiff"
+      }
+   ]
+}

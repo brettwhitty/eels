@@ -1,0 +1,12 @@
+{
+   "component" : "exonerate",
+   "source_file" : "exonerate.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{EXONERATE_EXEC}}",
+         "idx" : 0,
+         "name" : "exonerate"
+      }
+   ]
+}

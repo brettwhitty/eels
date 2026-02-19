@@ -1,0 +1,18 @@
+{
+   "component" : "rotate_molecule",
+   "source_file" : "rotate_molecule.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/rotate_molecule",
+         "idx" : 1,
+         "name" : "rotate_molecule"
+      }
+   ]
+}

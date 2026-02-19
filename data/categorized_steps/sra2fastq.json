@@ -1,0 +1,24 @@
+{
+   "component" : "sra2fastq",
+   "source_file" : "sra2fastq.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/sra2fastq",
+         "idx" : 2,
+         "name" : "Convert sra file to fastq"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "snp_verify",
+   "source_file" : "snp_verify.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/snp_verify",
+         "idx" : 0,
+         "name" : "snp_verify"
+      }
+   ]
+}

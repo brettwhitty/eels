@@ -1,0 +1,12 @@
+{
+   "component" : "alien_hunter",
+   "source_file" : "alien_hunter.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{ALIEN_HUNTER_EXEC}}",
+         "idx" : 0,
+         "name" : "alien_hunter"
+      }
+   ]
+}

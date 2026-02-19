@@ -1,0 +1,30 @@
+{
+   "component" : "j_ortholog_clusters_distributed_work",
+   "source_file" : "j_ortholog_clusters_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/CogBsmlLoader",
+         "idx" : 0,
+         "name" : "parse bsml input"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/best_hit",
+         "idx" : 1,
+         "name" : "best hit"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/CogProteinFastaNoMap",
+         "idx" : 2,
+         "name" : "cogs2fasta"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create fasta list"
+      }
+   ]
+}

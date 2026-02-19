@@ -1,0 +1,12 @@
+{
+   "component" : "htseq_count_reads",
+   "source_file" : "htseq_count_reads.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/htseq_count_reads.sh",
+         "idx" : 0,
+         "name" : "HTSeq counting"
+      }
+   ]
+}

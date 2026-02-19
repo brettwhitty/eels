@@ -1,0 +1,12 @@
+{
+   "component" : "filter_deseq",
+   "source_file" : "filter_deseq.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_deseq",
+         "idx" : 0,
+         "name" : "filter_deseq"
+      }
+   ]
+}

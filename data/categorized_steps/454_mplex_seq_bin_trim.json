@@ -1,0 +1,42 @@
+{
+   "component" : "454_mplex_seq_bin_trim",
+   "source_file" : "454_mplex_seq_bin_trim.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bin_and_trim_barcoded_seqs",
+         "idx" : 2,
+         "name" : "bin and trim barcoded sequences"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/count_barcoded_seqs",
+         "idx" : 3,
+         "name" : "summarize/check output"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create filtered files list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 5,
+         "name" : "create discarded files list"
+      }
+   ]
+}

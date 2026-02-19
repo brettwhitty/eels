@@ -1,0 +1,24 @@
+{
+   "component" : "velvet_optimiser",
+   "source_file" : "velvet_optimiser.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/run_velvet_optimiser",
+         "idx" : 2,
+         "name" : "run velvet optimiser"
+      }
+   ]
+}

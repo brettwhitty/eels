@@ -1,0 +1,24 @@
+{
+   "component" : "bam2coverage",
+   "source_file" : "bam2coverage.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bam2coverage",
+         "idx" : 2,
+         "name" : "bam2coverage"
+      }
+   ]
+}

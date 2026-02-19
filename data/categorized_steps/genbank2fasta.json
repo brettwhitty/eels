@@ -1,0 +1,24 @@
+{
+   "component" : "genbank2fasta",
+   "source_file" : "genbank2fasta.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/genbank2fasta",
+         "idx" : 2,
+         "name" : "genbank2fasta"
+      }
+   ]
+}

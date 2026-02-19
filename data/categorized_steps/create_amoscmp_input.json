@@ -1,0 +1,36 @@
+{
+   "component" : "create_amoscmp_input",
+   "source_file" : "create_amoscmp_input.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/create_amoscmp_input",
+         "idx" : 2,
+         "name" : "run create_amoscmp_input"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create fasta list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create qual list"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "make_snp_lists",
+   "source_file" : "make_snp_lists.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/make_snp_lists",
+         "idx" : 0,
+         "name" : "make_snp_lists"
+      }
+   ]
+}

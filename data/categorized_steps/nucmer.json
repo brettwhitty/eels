@@ -1,0 +1,30 @@
+{
+   "component" : "nucmer",
+   "source_file" : "nucmer.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create group temp folder"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create group output folder"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{NUCMER_EXEC}}",
+         "idx" : 2,
+         "name" : "nucmer"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{COORDS_EXEC}}",
+         "idx" : 3,
+         "name" : "create coordinates file"
+      }
+   ]
+}

@@ -1,0 +1,252 @@
+{
+   "component" : "bulk_delete_chado",
+   "source_file" : "bulk_delete_chado.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkAndDelete",
+         "idx" : 2,
+         "name" : "check whether the workflow should  be executed"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 3,
+         "name" : "Revoke permissions"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 4,
+         "name" : "create iterator ITERATOR1 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 5,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 7,
+         "name" : "create counts directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/createSelectRecordCountsSQL",
+         "idx" : 8,
+         "name" : "create table count SQL files"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 9,
+         "name" : "create iterator ITERATOR2 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 10,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 12,
+         "name" : "create iterator ITERATOR3 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 13,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 15,
+         "name" : "create iterator ITERATOR4 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 16,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 18,
+         "name" : "create directory for SQL files for views"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/createViewsSQL",
+         "idx" : 19,
+         "name" : "Create the views"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 20,
+         "name" : "create iterator ITERATOR5 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 21,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 23,
+         "name" : "create iterator ITERATOR6 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 24,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 26,
+         "name" : "create iterator ITERATOR7 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 27,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 29,
+         "name" : "Truncate tables"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 30,
+         "name" : "create iterator ITERATOR8 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 31,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 33,
+         "name" : "Drop indices and constraints"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 34,
+         "name" : "create iterator ITERATOR9 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 35,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 37,
+         "name" : "create iterator ITERATOR10 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 38,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 40,
+         "name" : "Restore indices and constraints"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 41,
+         "name" : "create iterator ITERATOR11 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 42,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 44,
+         "name" : "create iterator ITERATOR12 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 45,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 47,
+         "name" : "create iterator ITERATOR13 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 48,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkDeletedTableRecordCounts",
+         "idx" : 50,
+         "name" : "Verify counts"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 51,
+         "name" : "Grant permissions"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 52,
+         "name" : "create iterator ITERATOR14 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 53,
+         "name" : "replace template keys"
+      }
+   ]
+}

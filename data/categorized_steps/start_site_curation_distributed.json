@@ -1,0 +1,24 @@
+{
+   "component" : "start_site_curation_distributed",
+   "source_file" : "start_site_curation_distributed.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/start_site_curation",
+         "idx" : 2,
+         "name" : "start_site_curation"
+      }
+   ]
+}

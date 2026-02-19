@@ -1,0 +1,42 @@
+{
+   "component" : "geneid",
+   "source_file" : "geneid.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GENEID_EXEC}}",
+         "idx" : 0,
+         "name" : "geneid"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/geneidgff32bsml",
+         "idx" : 1,
+         "name" : "geneidgff32bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 3,
+         "name" : "compress bsml output"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 4,
+         "name" : "compress gff3 output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 5,
+         "name" : "dtd validation"
+      }
+   ]
+}

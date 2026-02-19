@@ -1,0 +1,54 @@
+{
+   "component" : "resistome",
+   "source_file" : "resistome.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/store_read_dataset_info",
+         "idx" : 2,
+         "name" : "store read and source map query"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/store_read_dataset_info",
+         "idx" : 3,
+         "name" : "store read and source map db"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/get_read_length",
+         "idx" : 4,
+         "name" : "fetch read length"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_blast_output",
+         "idx" : 5,
+         "name" : "filter blast output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/get_resistome_table",
+         "idx" : 6,
+         "name" : "get resistome table"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/get_filtered_reads",
+         "idx" : 7,
+         "name" : "get filtered reads"
+      }
+   ]
+}

@@ -1,0 +1,66 @@
+{
+   "component" : "glimmer3_cloud",
+   "source_file" : "glimmer3_cloud.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 2,
+         "name" : "create staging directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/train_for_glimmer3",
+         "idx" : 3,
+         "name" : "train_for_glimmer"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/opt/vappio-scripts/syncdata.sh --synchronous",
+         "idx" : 4,
+         "name" : "sync staging directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 5,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 6,
+         "name" : "create iterator {{ITERATOR_NAME}} groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 7,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 9,
+         "name" : "create bsml list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 10,
+         "name" : "create raw list"
+      }
+   ]
+}

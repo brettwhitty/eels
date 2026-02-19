@@ -1,0 +1,54 @@
+{
+   "component" : "crossbow",
+   "source_file" : "crossbow.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HADOOP_EXEC}}",
+         "idx" : 2,
+         "name" : "upload input file to HFS"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HADOOP_EXEC}}",
+         "idx" : 3,
+         "name" : "create reference directory on HFS"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HADOOP_EXEC}}",
+         "idx" : 4,
+         "name" : "upload reference jar to HFS"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{CROSSBOW_EXEC}}",
+         "idx" : 5,
+         "name" : "crossbow"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HADOOP_EXEC}}",
+         "idx" : 6,
+         "name" : "download crossbow output"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 7,
+         "name" : "create snps list"
+      }
+   ]
+}

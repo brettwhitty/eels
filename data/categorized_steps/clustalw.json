@@ -1,0 +1,48 @@
+{
+   "component" : "clustalw",
+   "source_file" : "clustalw.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "cp",
+         "idx" : 0,
+         "name" : "relocate query file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{CLUSTALW_EXEC}}",
+         "idx" : 1,
+         "name" : "clustalw"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/validate_clustalw_output",
+         "idx" : 2,
+         "name" : "validate clustalw output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/MSF2Bsml",
+         "idx" : 3,
+         "name" : "msf2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 4,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 5,
+         "name" : "compress raw output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 6,
+         "name" : "dtd validation"
+      }
+   ]
+}

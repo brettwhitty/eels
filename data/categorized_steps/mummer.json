@@ -1,0 +1,18 @@
+{
+   "component" : "mummer",
+   "source_file" : "mummer.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/local/bin/mummer",
+         "idx" : 0,
+         "name" : "mummer"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mummertab",
+         "idx" : 1,
+         "name" : "mummertab"
+      }
+   ]
+}

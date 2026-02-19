@@ -1,0 +1,12 @@
+{
+   "component" : "skiff",
+   "source_file" : "skiff.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{SKIFF_PATH}}",
+         "idx" : 0,
+         "name" : "skiff clustering"
+      }
+   ]
+}

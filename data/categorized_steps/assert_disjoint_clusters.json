@@ -1,0 +1,18 @@
+{
+   "component" : "assert_disjoint_clusters",
+   "source_file" : "assert_disjoint_clusters.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directories"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/assertClustersDisjoint",
+         "idx" : 1,
+         "name" : "assert the clusters for analysis_id '{{ANALYSIS_ID}}' are disjoint"
+      }
+   ]
+}

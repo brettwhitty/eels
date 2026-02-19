@@ -1,0 +1,42 @@
+{
+   "component" : "bepipred",
+   "source_file" : "bepipred.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/replace_fasta_headers.pl",
+         "idx" : 0,
+         "name" : "replace fasta headers"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/local/projects/STREP/bepipred-1.0b/bepipred",
+         "idx" : 1,
+         "name" : "bepipred"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/replace_fasta_headers.pl",
+         "idx" : 2,
+         "name" : "fix output file"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bepipred2bsml",
+         "idx" : 3,
+         "name" : "bepipred2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 4,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 5,
+         "name" : "dtd validation"
+      }
+   ]
+}

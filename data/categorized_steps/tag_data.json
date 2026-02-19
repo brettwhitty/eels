@@ -1,0 +1,36 @@
+{
+   "component" : "tag_data",
+   "source_file" : "tag_data.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "tar -czf {{TMP_DIR}}/{{PIPELINE_NAME}}_workflow_xml.tar.gz $(find /mnt/projects/clovr/workflow/runtime/*/{{PIPELINEID}}_* /mnt/projects/clovr/workflow/runtime/pipeline/{{PIPELINEID}} -type d) || true",
+         "idx" : 2,
+         "name" : "tarring workflow xml paths"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "printf",
+         "idx" : 3,
+         "name" : "select files to tag"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/tag_data",
+         "idx" : 4,
+         "name" : "tag_data"
+      }
+   ]
+}

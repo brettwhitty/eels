@@ -1,0 +1,24 @@
+{
+   "component" : "bam2sam",
+   "source_file" : "bam2sam.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "Create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bam2sam",
+         "idx" : 2,
+         "name" : "bam2sam"
+      }
+   ]
+}

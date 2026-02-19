@@ -1,0 +1,24 @@
+{
+   "component" : "predict_prokaryotic_gene_function",
+   "source_file" : "predict_prokaryotic_gene_function.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/predict_prokaryotic_gene_function",
+         "idx" : 1,
+         "name" : "predict function"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 2,
+         "name" : "create bsml list"
+      }
+   ]
+}

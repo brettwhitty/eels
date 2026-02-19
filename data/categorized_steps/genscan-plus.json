@@ -1,0 +1,42 @@
+{
+   "component" : "genscan-plus",
+   "source_file" : "genscan-plus.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GENSCAN_PLUS_EXEC}}",
+         "idx" : 0,
+         "name" : "genscan-plus"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/genscan2bsml",
+         "idx" : 1,
+         "name" : "genscan2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 3,
+         "name" : "compress raw output"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 4,
+         "name" : "compress bsml output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 5,
+         "name" : "dtd validation"
+      }
+   ]
+}

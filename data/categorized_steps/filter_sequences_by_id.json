@@ -1,0 +1,12 @@
+{
+   "component" : "filter_sequences_by_id",
+   "source_file" : "filter_sequences_by_id.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_sequences_by_id",
+         "idx" : 0,
+         "name" : "filter"
+      }
+   ]
+}

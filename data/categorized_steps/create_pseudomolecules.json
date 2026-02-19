@@ -1,0 +1,30 @@
+{
+   "component" : "create_pseudomolecules",
+   "source_file" : "create_pseudomolecules.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/create_pseudomolecules",
+         "idx" : 2,
+         "name" : "create_pseudomolecules"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create pseudomolecules file list"
+      }
+   ]
+}

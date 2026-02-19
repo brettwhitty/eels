@@ -1,0 +1,18 @@
+{
+   "component" : "nucmer-snp2merged",
+   "source_file" : "nucmer-snp2merged.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/nucmer-snp2merged",
+         "idx" : 1,
+         "name" : "nucmer-snp2merged"
+      }
+   ]
+}

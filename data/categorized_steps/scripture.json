@@ -1,0 +1,24 @@
+{
+   "component" : "scripture",
+   "source_file" : "scripture.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "Create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/scripture.sh",
+         "idx" : 2,
+         "name" : "Scripture wrapper script"
+      }
+   ]
+}

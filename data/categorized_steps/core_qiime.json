@@ -1,0 +1,108 @@
+{
+   "component" : "core_qiime",
+   "source_file" : "core_qiime.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pick_open_reference_otus",
+         "idx" : 2,
+         "name" : "pick open-reference otus"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create otu_table list file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create fasttree list file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/make_otu_heatmap_html",
+         "idx" : 5,
+         "name" : "make_otu_heatmap_html_file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 6,
+         "name" : "create otu_table summary output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/summarize_taxa",
+         "idx" : 7,
+         "name" : "summarizing taxa analysis (phyla)"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+         "idx" : 8,
+         "name" : "reformatting phyla assignment matrix"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+         "idx" : 9,
+         "name" : "reformatting classes assignment matrix"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+         "idx" : 10,
+         "name" : "reformatting orders assignment matrix"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+         "idx" : 11,
+         "name" : "reformatting families assignment matrix"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/summarize_taxa",
+         "idx" : 12,
+         "name" : "summarizing taxa analysis (genus)"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+         "idx" : 13,
+         "name" : "reformatting genera assignment matrix"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 14,
+         "name" : "create tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 15,
+         "name" : "create paired tables list"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/beta_diversity_through_plots",
+         "idx" : 16,
+         "name" : "create beta diversity and PCoA plots"
+      }
+   ]
+}

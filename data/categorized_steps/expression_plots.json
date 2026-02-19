@@ -1,0 +1,12 @@
+{
+   "component" : "expression_plots",
+   "source_file" : "expression_plots.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/expression_plots",
+         "idx" : 0,
+         "name" : "expression_plots"
+      }
+   ]
+}

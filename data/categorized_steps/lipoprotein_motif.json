@@ -1,0 +1,24 @@
+{
+   "component" : "lipoprotein_motif",
+   "source_file" : "lipoprotein_motif.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lipoprotein_motif",
+         "idx" : 0,
+         "name" : "lipoprotein_motif"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

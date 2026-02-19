@@ -1,0 +1,24 @@
+{
+   "component" : "prok_pipeline_check",
+   "source_file" : "prok_pipeline_check.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/prok_pipeline_check",
+         "idx" : 2,
+         "name" : "prok_pipeline_check"
+      }
+   ]
+}

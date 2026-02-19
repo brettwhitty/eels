@@ -1,0 +1,18 @@
+{
+   "component" : "parse_mpileup_for_positions",
+   "source_file" : "parse_mpileup_for_positions.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/parse_mpileup",
+         "idx" : 1,
+         "name" : "parse_mpileup"
+      }
+   ]
+}

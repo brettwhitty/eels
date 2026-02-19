@@ -1,0 +1,12 @@
+{
+   "component" : "fastqc_stats",
+   "source_file" : "fastqc_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fastqc_stats",
+         "idx" : 0,
+         "name" : "fastqc_stats"
+      }
+   ]
+}

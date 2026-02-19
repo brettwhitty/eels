@@ -1,0 +1,42 @@
+{
+   "component" : "ncbi-blastn_compress",
+   "source_file" : "ncbi-blastn_compress.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "zcat -f {{I_FILE_PATH}} | {{BLASTALL_EXEC}}",
+         "idx" : 0,
+         "name" : "ncbi-blastn_compress"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/blast2btab",
+         "idx" : 1,
+         "name" : "convert raw to btab"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/blast2bsml",
+         "idx" : 2,
+         "name" : "convert raw to bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 3,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 4,
+         "name" : "compress btab output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 5,
+         "name" : "dtd validation"
+      }
+   ]
+}

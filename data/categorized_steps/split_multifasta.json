@@ -1,0 +1,18 @@
+{
+   "component" : "split_multifasta",
+   "source_file" : "split_multifasta.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/split_multifasta",
+         "idx" : 1,
+         "name" : "split_multifasta"
+      }
+   ]
+}

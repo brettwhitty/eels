@@ -1,0 +1,24 @@
+{
+   "component" : "move_to_scratch",
+   "source_file" : "move_to_scratch.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/move_to_scratch",
+         "idx" : 2,
+         "name" : "move_to_scratch"
+      }
+   ]
+}

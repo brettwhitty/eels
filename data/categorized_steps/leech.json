@@ -1,0 +1,12 @@
+{
+   "component" : "leech",
+   "source_file" : "leech.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "/opt/leech/leech",
+         "idx" : 0,
+         "name" : "leech plotting"
+      }
+   ]
+}

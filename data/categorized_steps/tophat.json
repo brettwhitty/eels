@@ -1,0 +1,12 @@
+{
+   "component" : "tophat",
+   "source_file" : "tophat.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/tophat",
+         "idx" : 0,
+         "name" : "tophat"
+      }
+   ]
+}

@@ -1,0 +1,30 @@
+{
+   "component" : "RNAmmer",
+   "source_file" : "RNAmmer.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{RNAMMER_EXEC}}",
+         "idx" : 0,
+         "name" : "RNAmmer"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/rnammer2bsml",
+         "idx" : 1,
+         "name" : "RNAmmer2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

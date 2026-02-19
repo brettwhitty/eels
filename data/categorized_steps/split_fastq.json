@@ -1,0 +1,12 @@
+{
+   "component" : "split_fastq",
+   "source_file" : "split_fastq.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/split_fastq",
+         "idx" : 0,
+         "name" : "split_fastq"
+      }
+   ]
+}

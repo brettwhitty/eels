@@ -1,0 +1,24 @@
+{
+   "component" : "create_map_file",
+   "source_file" : "create_map_file.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/create_map_file",
+         "idx" : 2,
+         "name" : "create map file"
+      }
+   ]
+}

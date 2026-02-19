@@ -1,0 +1,30 @@
+{
+   "component" : "pathway_tools_input",
+   "source_file" : "pathway_tools_input.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/chado_aengine_dumper",
+         "idx" : 2,
+         "name" : "create gbk files"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/create_ptools_input_files",
+         "idx" : 3,
+         "name" : "create pathway tools input files"
+      }
+   ]
+}

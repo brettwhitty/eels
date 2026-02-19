@@ -1,0 +1,60 @@
+{
+   "component" : "wga_maf2tree",
+   "source_file" : "wga_maf2tree.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl -ne 's/^s\\s+[^\\.]+\\.(\\S+)/s $1/;print' ",
+         "idx" : 2,
+         "name" : "fix maf"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 3,
+         "name" : "create fasta dir"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/bin/perl ",
+         "idx" : 4,
+         "name" : "create fasta dir"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cd {{OUTPUT_DIRECTORY}};source {{PHYLOMARK_DIR}}/phylomark_env.sh;{{PHYLOMARK_DIR}}/Phylomark_prep.py",
+         "idx" : 5,
+         "name" : "create tree"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/mv",
+         "idx" : 6,
+         "name" : "Move file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{NEWICK_UTILITIES}}/nw_display ",
+         "idx" : 7,
+         "name" : "Convert newick tree to svg"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{RASTERIZER_PATH}} ",
+         "idx" : 8,
+         "name" : "Convert newick tree to pdf"
+      }
+   ]
+}

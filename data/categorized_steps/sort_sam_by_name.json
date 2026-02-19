@@ -1,0 +1,12 @@
+{
+   "component" : "sort_sam_by_name",
+   "source_file" : "sort_sam_by_name.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/sort_sam_by_name.sh",
+         "idx" : 0,
+         "name" : "sort sam by read name"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "cuffdiff_filter",
+   "source_file" : "cuffdiff_filter.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/cuffdiff_filter",
+         "idx" : 0,
+         "name" : "cuffdiff_filter"
+      }
+   ]
+}

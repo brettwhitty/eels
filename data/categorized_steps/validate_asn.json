@@ -1,0 +1,30 @@
+{
+   "component" : "validate_asn",
+   "source_file" : "validate_asn.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create the asnval and asndisc temp output directories"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "Create the asnval and asndisc output directories"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/local/bin/asnval",
+         "idx" : 2,
+         "name" : "Run asnval"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/local/bin/asndisc",
+         "idx" : 3,
+         "name" : "Run asndisc"
+      }
+   ]
+}

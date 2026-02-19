@@ -1,0 +1,96 @@
+{
+   "component" : "pick_otus_through_otu_table",
+   "source_file" : "pick_otus_through_otu_table.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/pick_otus_through_otu_table.py",
+         "idx" : 2,
+         "name" : "pick_otus_through_otu_table"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create otu_table list file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create fasttree list file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/make_otu_heatmap_html.py",
+         "idx" : 5,
+         "name" : "make_otu_heatmap_html_file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/make_otu_network.py",
+         "idx" : 6,
+         "name" : "make_otu_network"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 7,
+         "name" : "create otu_table summary output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/summarize_taxa.py",
+         "idx" : 8,
+         "name" : "summarizing taxa analysis (phyla)"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/summarize_taxa.py",
+         "idx" : 9,
+         "name" : "summarizing taxa analysis (class)"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/summarize_taxa.py",
+         "idx" : 10,
+         "name" : "summarizing taxa analysis (order)"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/summarize_taxa.py",
+         "idx" : 11,
+         "name" : "summarizing taxa analysis (family)"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/summarize_taxa.py",
+         "idx" : 12,
+         "name" : "summarizing taxa analysis (genus)"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/alpha_rarefaction.py",
+         "idx" : 13,
+         "name" : "create alpha rarefaction curves"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{QIIME_PATH}}/bin/beta_diversity_through_3d_plots.py",
+         "idx" : 14,
+         "name" : "create beta diversity and PCoA plots"
+      }
+   ]
+}

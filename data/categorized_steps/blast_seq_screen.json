@@ -1,0 +1,36 @@
+{
+   "component" : "blast_seq_screen",
+   "source_file" : "blast_seq_screen.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/get_blast_querynames.pl",
+         "idx" : 2,
+         "name" : "preprocess input data"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/screen_seqs_by_ids.pl",
+         "idx" : 3,
+         "name" : "screen out queries with blast hits"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create results list"
+      }
+   ]
+}

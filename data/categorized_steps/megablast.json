@@ -1,0 +1,12 @@
+{
+   "component" : "megablast",
+   "source_file" : "megablast.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MEGABLAST_EXEC}}",
+         "idx" : 0,
+         "name" : "megablast"
+      }
+   ]
+}

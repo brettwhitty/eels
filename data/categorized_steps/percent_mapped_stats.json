@@ -1,0 +1,12 @@
+{
+   "component" : "percent_mapped_stats",
+   "source_file" : "percent_mapped_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/percent_mapped_stats",
+         "idx" : 0,
+         "name" : "percent_mapped_stats"
+      }
+   ]
+}

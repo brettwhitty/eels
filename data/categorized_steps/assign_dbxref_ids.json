@@ -1,0 +1,12 @@
+{
+   "component" : "assign_dbxref_ids",
+   "source_file" : "assign_dbxref_ids.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/assign_dbxref_ids",
+         "idx" : 0,
+         "name" : "assign dbxref IDs"
+      }
+   ]
+}

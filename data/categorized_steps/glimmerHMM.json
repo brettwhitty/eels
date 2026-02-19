@@ -1,0 +1,30 @@
+{
+   "component" : "glimmerHMM",
+   "source_file" : "glimmerHMM.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GLIMMERHMM_EXEC}}",
+         "idx" : 0,
+         "name" : "glimmerHMM"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/glimmerHMM2bsml",
+         "idx" : 1,
+         "name" : "glimmerHMM2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

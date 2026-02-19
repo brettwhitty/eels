@@ -1,0 +1,12 @@
+{
+   "component" : "mothur_cluster",
+   "source_file" : "mothur_cluster.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mothur",
+         "idx" : 0,
+         "name" : "cluster"
+      }
+   ]
+}

@@ -1,0 +1,30 @@
+{
+   "component" : "assign_taxa",
+   "source_file" : "assign_taxa.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_subjects_based_on_align_score",
+         "idx" : 2,
+         "name" : "filter subjects based on alignment length"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/assign_taxa",
+         "idx" : 3,
+         "name" : "assign taxa"
+      }
+   ]
+}

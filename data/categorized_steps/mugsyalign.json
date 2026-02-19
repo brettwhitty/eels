@@ -1,0 +1,30 @@
+{
+   "component" : "mugsyalign",
+   "source_file" : "mugsyalign.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 1,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/replace_maf_ids",
+         "idx" : 3,
+         "name" : "Replace organism ids in maf"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/mv",
+         "idx" : 4,
+         "name" : "Move file"
+      }
+   ]
+}

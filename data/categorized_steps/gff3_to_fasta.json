@@ -1,0 +1,12 @@
+{
+   "component" : "gff3_to_fasta",
+   "source_file" : "gff3_to_fasta.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/gff3_to_fasta",
+         "idx" : 0,
+         "name" : "gff3_to_fasta"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "bsml2gff3",
+   "source_file" : "bsml2gff3.i1.json",
+   "steps" : [
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2gff3",
+         "idx" : 0,
+         "name" : "bsml2gff3"
+      }
+   ]
+}

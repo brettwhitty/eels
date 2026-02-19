@@ -1,0 +1,24 @@
+{
+   "component" : "glk2bsml",
+   "source_file" : "glk2bsml.i1.json",
+   "steps" : [
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/glk2bsml",
+         "idx" : 0,
+         "name" : "glk2bsml"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 1,
+         "name" : "DTD validation"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/profileBSMLFile",
+         "idx" : 2,
+         "name" : "profileBSMLFile"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "predict_operons",
+   "source_file" : "predict_operons.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/predict_operons",
+         "idx" : 0,
+         "name" : "predict_operons"
+      }
+   ]
+}

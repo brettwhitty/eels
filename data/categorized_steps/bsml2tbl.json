@@ -1,0 +1,12 @@
+{
+   "component" : "bsml2tbl",
+   "source_file" : "bsml2tbl.i1.json",
+   "steps" : [
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2tbl",
+         "idx" : 0,
+         "name" : "bsml2tbl"
+      }
+   ]
+}

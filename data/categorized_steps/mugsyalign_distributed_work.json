@@ -1,0 +1,12 @@
+{
+   "component" : "mugsyalign_distributed_work",
+   "source_file" : "mugsyalign_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUGSY_EXEC}}",
+         "idx" : 0,
+         "name" : "run mugsy"
+      }
+   ]
+}

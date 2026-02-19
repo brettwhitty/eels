@@ -1,0 +1,12 @@
+{
+   "component" : "uclust_remove_replicates",
+   "source_file" : "uclust_remove_replicates.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/uclust_replicate_removal",
+         "idx" : 0,
+         "name" : "uclust replicate removal"
+      }
+   ]
+}

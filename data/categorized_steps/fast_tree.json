@@ -1,0 +1,12 @@
+{
+   "component" : "fast_tree",
+   "source_file" : "fast_tree.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{FASTTREE_EXEC}}",
+         "idx" : 0,
+         "name" : "fast_tree"
+      }
+   ]
+}

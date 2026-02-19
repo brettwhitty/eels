@@ -1,0 +1,252 @@
+{
+   "component" : "initdb",
+   "source_file" : "initdb.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkDatabase",
+         "idx" : 2,
+         "name" : "check database"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 3,
+         "name" : "Drop chado-mart tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 4,
+         "name" : "create iterator drop_chado_mart_tables groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 5,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 7,
+         "name" : "Drop chado-mart views list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 8,
+         "name" : "create iterator drop_chado_mart_views groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 9,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 11,
+         "name" : "Drop tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 12,
+         "name" : "create iterator drop_tables groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 13,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/dropChadoObjects",
+         "idx" : 15,
+         "name" : "Drop all remaining tables"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 16,
+         "name" : "Create tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 17,
+         "name" : "create iterator create_core_chado_tables groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 18,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 20,
+         "name" : "Create chado-mart views list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 21,
+         "name" : "create iterator create_chado_mart_views groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 22,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 24,
+         "name" : "Create chado-mart tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 25,
+         "name" : "create iterator create_chado_mart_tables groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 26,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 28,
+         "name" : "Partition tables"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 29,
+         "name" : "create iterator partition_core_chado_tables groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 30,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 32,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 33,
+         "name" : "create iterator parse_obo_files groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 34,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 36,
+         "name" : "Create indexes list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 37,
+         "name" : "create iterator create_core_chado_indices groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 38,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 40,
+         "name" : "Grant all permissions list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 41,
+         "name" : "create iterator grant_permission_core_chado groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 42,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 44,
+         "name" : "Grant all permissions on all chado-mart tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 45,
+         "name" : "create iterator grant_permissions_chado_mart_tables groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 46,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 48,
+         "name" : "Grant all permissions on all chado-mart views list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 49,
+         "name" : "create iterator grant_permissions_chado_mart_views groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 50,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/store_chado_version",
+         "idx" : 52,
+         "name" : "Store chado revision number"
+      }
+   ]
+}

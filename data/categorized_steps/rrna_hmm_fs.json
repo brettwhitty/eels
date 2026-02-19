@@ -1,0 +1,18 @@
+{
+   "component" : "rrna_hmm_fs",
+   "source_file" : "rrna_hmm_fs.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/rrna_hmm_fs",
+         "idx" : 0,
+         "name" : "rRNA_hmm_fs"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "env",
+         "idx" : 1,
+         "name" : "check env variables"
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+   "component" : "gkpstore2fastq",
+   "source_file" : "gkpstore2fastq.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/gkpstore2fastq",
+         "idx" : 1,
+         "name" : "gkpstore2fastq"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/cat",
+         "idx" : 2,
+         "name" : "cat files"
+      }
+   ]
+}

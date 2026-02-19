@@ -1,0 +1,24 @@
+{
+   "component" : "usearch",
+   "source_file" : "usearch.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{USEARCH_EXEC}}",
+         "idx" : 1,
+         "name" : "usearch"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "tail -10 {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.stderr >> {{OUTPUT_DIRECTORY}}/stats.txt;",
+         "idx" : 2,
+         "name" : "extract stats"
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+   "component" : "metagene",
+   "source_file" : "metagene.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{METAGENE_EXEC}}",
+         "idx" : 0,
+         "name" : "metagene"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/metagene2bsml",
+         "idx" : 1,
+         "name" : "metagene2bsml"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/get_seq_by_metagene",
+         "idx" : 2,
+         "name" : "get_seq_by_metagene"
+      }
+   ]
+}

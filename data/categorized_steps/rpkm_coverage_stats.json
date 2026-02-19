@@ -1,0 +1,12 @@
+{
+   "component" : "rpkm_coverage_stats",
+   "source_file" : "rpkm_coverage_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/rpkm_coverage_stats",
+         "idx" : 0,
+         "name" : "rpkm_coverage_stats"
+      }
+   ]
+}

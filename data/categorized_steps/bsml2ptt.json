@@ -1,0 +1,12 @@
+{
+   "component" : "bsml2ptt",
+   "source_file" : "bsml2ptt.i1.json",
+   "steps" : [
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2ptt",
+         "idx" : 0,
+         "name" : "bsml2ptt"
+      }
+   ]
+}

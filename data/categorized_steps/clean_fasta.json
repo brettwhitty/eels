@@ -1,0 +1,36 @@
+{
+   "component" : "clean_fasta",
+   "source_file" : "clean_fasta.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create clean_fasta directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/bin/perl",
+         "idx" : 1,
+         "name" : "remove CR line breaks"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/clean_fasta",
+         "idx" : 2,
+         "name" : "clean_fasta"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 3,
+         "name" : "create cf directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/replace_nuc_gaps",
+         "idx" : 4,
+         "name" : "replace_gaps_in_nucleotides"
+      }
+   ]
+}

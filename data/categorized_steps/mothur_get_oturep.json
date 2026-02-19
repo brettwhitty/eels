@@ -1,0 +1,12 @@
+{
+   "component" : "mothur_get_oturep",
+   "source_file" : "mothur_get_oturep.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mothur",
+         "idx" : 0,
+         "name" : "get oturep"
+      }
+   ]
+}

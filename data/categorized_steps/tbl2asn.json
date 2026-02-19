@@ -1,0 +1,42 @@
+{
+   "component" : "tbl2asn",
+   "source_file" : "tbl2asn.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create the tbl2asn output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/prepare_for_tbl2asn",
+         "idx" : 1,
+         "name" : "Copy files to working directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{TBL2ASN_EXEC}}",
+         "idx" : 2,
+         "name" : "Run tbl2asn"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl",
+         "idx" : 3,
+         "name" : "Fix locus name"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fix_gbk",
+         "idx" : 4,
+         "name" : "Fix GenBank"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/mv ",
+         "idx" : 5,
+         "name" : "Move GenBank"
+      }
+   ]
+}

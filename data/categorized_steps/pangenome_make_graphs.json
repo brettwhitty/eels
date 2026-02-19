@@ -1,0 +1,18 @@
+{
+   "component" : "pangenome_make_graphs",
+   "source_file" : "pangenome_make_graphs.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_make_graphs",
+         "idx" : 1,
+         "name" : "prep the R input file"
+      }
+   ]
+}

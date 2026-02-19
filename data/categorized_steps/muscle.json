@@ -1,0 +1,54 @@
+{
+   "component" : "muscle",
+   "source_file" : "muscle.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cp",
+         "idx" : 1,
+         "name" : "relocate query file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUSCLE_EXEC}}",
+         "idx" : 2,
+         "name" : "muscle"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/validate_clustalw_output",
+         "idx" : 3,
+         "name" : "validate muscle output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/MSF2Bsml",
+         "idx" : 4,
+         "name" : "msf2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 5,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 6,
+         "name" : "compress raw output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 7,
+         "name" : "dtd validation"
+      }
+   ]
+}

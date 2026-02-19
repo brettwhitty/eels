@@ -1,0 +1,18 @@
+{
+   "component" : "overlap_analysis",
+   "source_file" : "overlap_analysis.i1.json",
+   "steps" : [
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 0,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 1,
+         "name" : "dtd validation"
+      }
+   ]
+}

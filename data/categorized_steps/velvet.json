@@ -1,0 +1,48 @@
+{
+   "component" : "velvet",
+   "source_file" : "velvet.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create velveth temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create velvetg temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{VELVETH_EXEC}}",
+         "idx" : 2,
+         "name" : "velveth"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/velveth_post_processing",
+         "idx" : 3,
+         "name" : "velveth post-processing"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/velvetg_pre_processing",
+         "idx" : 4,
+         "name" : "velvetg pre-processing"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{VELVETG_EXEC}}",
+         "idx" : 5,
+         "name" : "velvetg"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/velvetg_post_processing",
+         "idx" : 6,
+         "name" : "velvetg post-processing"
+      }
+   ]
+}

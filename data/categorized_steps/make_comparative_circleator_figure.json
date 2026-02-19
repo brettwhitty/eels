@@ -1,0 +1,18 @@
+{
+   "component" : "make_comparative_circleator_figure",
+   "source_file" : "make_comparative_circleator_figure.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/remove_nonunique_snps",
+         "idx" : 0,
+         "name" : "remove_non_unique_snps"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/make_comparative_circleator_figure",
+         "idx" : 1,
+         "name" : "make_comparative_circleator_figure"
+      }
+   ]
+}

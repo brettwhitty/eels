@@ -1,0 +1,12 @@
+{
+   "component" : "piecharts",
+   "source_file" : "piecharts.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{PIECHART_PATH}}",
+         "idx" : 0,
+         "name" : "Create pie chart"
+      }
+   ]
+}

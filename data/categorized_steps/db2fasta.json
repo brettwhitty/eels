@@ -1,0 +1,24 @@
+{
+   "component" : "db2fasta",
+   "source_file" : "db2fasta.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directories"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/db2fasta",
+         "idx" : 1,
+         "name" : "Generate FASTA files from database '{{DATABASE}}' on server '{{SERVER}}'"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "find",
+         "idx" : 2,
+         "name" : "Create FASTA file list"
+      }
+   ]
+}

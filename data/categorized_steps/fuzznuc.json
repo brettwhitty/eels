@@ -1,0 +1,30 @@
+{
+   "component" : "fuzznuc",
+   "source_file" : "fuzznuc.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{FUZZNUC_EXEC}}",
+         "idx" : 0,
+         "name" : "fuzznuc"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/fuzznuc2bsml",
+         "idx" : 1,
+         "name" : "fuzznuc2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+   "component" : "ngap",
+   "source_file" : "ngap.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ngap",
+         "idx" : 0,
+         "name" : "ngap"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

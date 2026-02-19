@@ -1,0 +1,30 @@
+{
+   "component" : "find_homopolymers",
+   "source_file" : "find_homopolymers.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/find_homopolymers.pl",
+         "idx" : 0,
+         "name" : "find_homopolymers"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/findhomopolymers2bsml",
+         "idx" : 1,
+         "name" : "findhomopolymers2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

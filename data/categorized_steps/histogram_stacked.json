@@ -1,0 +1,12 @@
+{
+   "component" : "histogram_stacked",
+   "source_file" : "histogram_stacked.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HIST_PATH}}",
+         "idx" : 0,
+         "name" : "Stacked histogram visualization"
+      }
+   ]
+}

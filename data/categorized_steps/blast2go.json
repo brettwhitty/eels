@@ -1,0 +1,12 @@
+{
+   "component" : "blast2go",
+   "source_file" : "blast2go.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "java",
+         "idx" : 0,
+         "name" : "blast2go"
+      }
+   ]
+}

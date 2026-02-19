@@ -1,0 +1,30 @@
+{
+   "component" : "db2bsml",
+   "source_file" : "db2bsml.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create the FASTA output directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/db2bsml",
+         "idx" : 1,
+         "name" : "db2bsml"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "DTD validation"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/profileBSMLFile",
+         "idx" : 3,
+         "name" : "profileBSMLFile"
+      }
+   ]
+}

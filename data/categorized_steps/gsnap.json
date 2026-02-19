@@ -1,0 +1,54 @@
+{
+   "component" : "gsnap",
+   "source_file" : "gsnap.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 2,
+         "name" : "create gmapdb directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GMAP_SETUP_EXEC}}",
+         "idx" : 3,
+         "name" : "gmap_setup"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "make",
+         "idx" : 4,
+         "name" : "gmapdb Makefiles"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "make",
+         "idx" : 5,
+         "name" : "gmapdb Makefiles"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "make",
+         "idx" : 6,
+         "name" : "gmapdb Makefiles"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GSNAP_EXEC}}",
+         "idx" : 7,
+         "name" : "gsnap"
+      }
+   ]
+}

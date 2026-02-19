@@ -1,0 +1,12 @@
+{
+   "component" : "pangenome_merge_results_distributed_work",
+   "source_file" : "pangenome_merge_results_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_merge_results",
+         "idx" : 0,
+         "name" : "merge pangenome data"
+      }
+   ]
+}

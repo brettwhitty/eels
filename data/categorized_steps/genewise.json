@@ -1,0 +1,12 @@
+{
+   "component" : "genewise",
+   "source_file" : "genewise.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/prepare_for_genewise_best_loc",
+         "idx" : 0,
+         "name" : "prepare for genewise"
+      }
+   ]
+}

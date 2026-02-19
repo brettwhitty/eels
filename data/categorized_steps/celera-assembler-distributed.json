@@ -1,0 +1,24 @@
+{
+   "component" : "celera-assembler-distributed",
+   "source_file" : "celera-assembler-distributed.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/runCA_wrapper",
+         "idx" : 2,
+         "name" : "runCA"
+      }
+   ]
+}

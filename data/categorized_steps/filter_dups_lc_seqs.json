@@ -1,0 +1,24 @@
+{
+   "component" : "filter_dups_lc_seqs",
+   "source_file" : "filter_dups_lc_seqs.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_dups_lc_seqs",
+         "idx" : 2,
+         "name" : "Filter duplicate and low complexity sequences"
+      }
+   ]
+}

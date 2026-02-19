@@ -1,0 +1,12 @@
+{
+   "component" : "mothur_classify_seqs",
+   "source_file" : "mothur_classify_seqs.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mothur",
+         "idx" : 0,
+         "name" : "classify seqs"
+      }
+   ]
+}

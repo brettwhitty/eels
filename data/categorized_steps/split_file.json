@@ -1,0 +1,24 @@
+{
+   "component" : "split_file",
+   "source_file" : "split_file.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/split_file",
+         "idx" : 1,
+         "name" : "split file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "find",
+         "idx" : 2,
+         "name" : "Create file list"
+      }
+   ]
+}

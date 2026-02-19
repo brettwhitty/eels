@@ -1,0 +1,12 @@
+{
+   "component" : "parallel_sort",
+   "source_file" : "parallel_sort.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "split",
+         "idx" : 0,
+         "name" : "split"
+      }
+   ]
+}

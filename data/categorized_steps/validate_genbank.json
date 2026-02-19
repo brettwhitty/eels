@@ -1,0 +1,12 @@
+{
+   "component" : "validate_genbank",
+   "source_file" : "validate_genbank.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/validate_genbank",
+         "idx" : 0,
+         "name" : "validate_genbank"
+      }
+   ]
+}

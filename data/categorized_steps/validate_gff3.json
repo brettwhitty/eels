@@ -1,0 +1,12 @@
+{
+   "component" : "validate_gff3",
+   "source_file" : "validate_gff3.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/gff3Valid",
+         "idx" : 0,
+         "name" : "Validation of GFF3 file"
+      }
+   ]
+}

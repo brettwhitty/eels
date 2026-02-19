@@ -1,0 +1,12 @@
+{
+   "component" : "extract_snp_regions",
+   "source_file" : "extract_snp_regions.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/extract_snp_regions",
+         "idx" : 0,
+         "name" : "extract_snp_regions"
+      }
+   ]
+}

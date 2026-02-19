@@ -1,0 +1,18 @@
+{
+   "component" : "adjust_bsml_coordinates",
+   "source_file" : "adjust_bsml_coordinates.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/adjust_bsml_coordinates",
+         "idx" : 0,
+         "name" : "adjust_bsml_coordinates"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 1,
+         "name" : "dtd validation"
+      }
+   ]
+}

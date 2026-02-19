@@ -1,0 +1,12 @@
+{
+   "component" : "mothur_collect_single",
+   "source_file" : "mothur_collect_single.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mothur",
+         "idx" : 0,
+         "name" : "collect single"
+      }
+   ]
+}

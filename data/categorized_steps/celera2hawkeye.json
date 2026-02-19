@@ -1,0 +1,36 @@
+{
+   "component" : "celera2hawkeye",
+   "source_file" : "celera2hawkeye.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{TOAMOS_EXEC}}",
+         "idx" : 2,
+         "name" : "toAmos"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BANK_TRANSACT_EXEC}}",
+         "idx" : 3,
+         "name" : "bank-transact"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 4,
+         "name" : "cleanup afg file"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "profile_gff3",
+   "source_file" : "profile_gff3.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/gff3Profiler",
+         "idx" : 0,
+         "name" : "Profile GFF3 file"
+      }
+   ]
+}

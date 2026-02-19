@@ -1,0 +1,24 @@
+{
+   "component" : "profile_bsml",
+   "source_file" : "profile_bsml.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create the temp output directories"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "Create the output directories"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/profileBSMLFile",
+         "idx" : 2,
+         "name" : "Profile BSML file"
+      }
+   ]
+}

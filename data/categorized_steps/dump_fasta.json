@@ -1,0 +1,30 @@
+{
+   "component" : "dump_fasta",
+   "source_file" : "dump_fasta.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/dump_fasta",
+         "idx" : 0,
+         "name" : "dump fasta"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/prepare_sbt_cmt",
+         "idx" : 1,
+         "name" : "create sbt and cmt files"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/format_velvet_assembled_AGP",
+         "idx" : 2,
+         "name" : "create agp"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/wrap_tbl2asn",
+         "idx" : 3,
+         "name" : "run tbl2asn"
+      }
+   ]
+}

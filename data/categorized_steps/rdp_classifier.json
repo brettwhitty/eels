@@ -1,0 +1,12 @@
+{
+   "component" : "rdp_classifier",
+   "source_file" : "rdp_classifier.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{JAVA_EXEC}}",
+         "idx" : 0,
+         "name" : "RDP classifier"
+      }
+   ]
+}

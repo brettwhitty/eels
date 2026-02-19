@@ -1,0 +1,24 @@
+{
+   "component" : "nucmer_snps",
+   "source_file" : "nucmer_snps.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/local/common/nucmer",
+         "idx" : 0,
+         "name" : "NUCmer"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/local/common/delta-filter",
+         "idx" : 1,
+         "name" : "delta-filter"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/local/common/show-snps",
+         "idx" : 2,
+         "name" : "show-snps"
+      }
+   ]
+}

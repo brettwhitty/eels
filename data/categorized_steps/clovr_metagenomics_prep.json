@@ -1,0 +1,18 @@
+{
+   "component" : "clovr_metagenomics_prep",
+   "source_file" : "clovr_metagenomics_prep.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/clovr_metagenomics_prep.pl",
+         "idx" : 1,
+         "name" : "clovr_metagenomics_prep"
+      }
+   ]
+}

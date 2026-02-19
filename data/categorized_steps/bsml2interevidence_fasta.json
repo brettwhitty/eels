@@ -1,0 +1,12 @@
+{
+   "component" : "bsml2interevidence_fasta",
+   "source_file" : "bsml2interevidence_fasta.i1.json",
+   "steps" : [
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2interevidence_fasta",
+         "idx" : 0,
+         "name" : "bsml2interevidence_fasta"
+      }
+   ]
+}

@@ -1,0 +1,84 @@
+{
+   "component" : "dump_table",
+   "source_file" : "dump_table.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/dump_table",
+         "idx" : 0,
+         "name" : "dump table"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/prepare_sbt_cmt",
+         "idx" : 1,
+         "name" : "create sbt and cmt files"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/wrap_tbl2asn",
+         "idx" : 2,
+         "name" : "run tbl2asn"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/cp",
+         "idx" : 3,
+         "name" : "copy discrep file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/deleteOverlappingGenes",
+         "idx" : 4,
+         "name" : "delete overlapping genes"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/dump_table",
+         "idx" : 5,
+         "name" : "dump table"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fix_gene_symbols",
+         "idx" : 6,
+         "name" : "fix gene symbols in tbl"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/format_velvet_assembled_AGP",
+         "idx" : 7,
+         "name" : "create agp"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/rm",
+         "idx" : 8,
+         "name" : "remove tbl file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/mv",
+         "idx" : 9,
+         "name" : "move tbl file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/mv",
+         "idx" : 10,
+         "name" : "move fsa file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/bin/mv",
+         "idx" : 11,
+         "name" : "move agp file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/wrap_tbl2asn",
+         "idx" : 12,
+         "name" : "rerun tbl2asn"
+      }
+   ]
+}

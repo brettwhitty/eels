@@ -1,0 +1,30 @@
+{
+   "component" : "lgt_bwa",
+   "source_file" : "lgt_bwa.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_bwa",
+         "idx" : 2,
+         "name" : "BWA alignment"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_filter_reads",
+         "idx" : 3,
+         "name" : "Filter reads"
+      }
+   ]
+}

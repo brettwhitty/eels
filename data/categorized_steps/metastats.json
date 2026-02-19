@@ -1,0 +1,12 @@
+{
+   "component" : "metastats",
+   "source_file" : "metastats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{METASTATS_PATH}}",
+         "idx" : 0,
+         "name" : "Metastats statistical comparison"
+      }
+   ]
+}

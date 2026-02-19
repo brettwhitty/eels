@@ -1,0 +1,12 @@
+{
+   "component" : "summarize_mugsy_comparative_pipeline_distributed",
+   "source_file" : "summarize_mugsy_comparative_pipeline_distributed.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/summarize_mugsy_comparative_pipeline",
+         "idx" : 0,
+         "name" : "summarize_mugsy_comparative_pipeline"
+      }
+   ]
+}

@@ -1,0 +1,30 @@
+{
+   "component" : "genezilla",
+   "source_file" : "genezilla.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{GENEZILLA_EXEC}}",
+         "idx" : 0,
+         "name" : "genezilla"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/genezilla2bsml",
+         "idx" : 1,
+         "name" : "genezilla2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

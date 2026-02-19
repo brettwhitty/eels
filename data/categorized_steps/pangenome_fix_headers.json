@@ -1,0 +1,18 @@
+{
+   "component" : "pangenome_fix_headers",
+   "source_file" : "pangenome_fix_headers.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_fix_headers.sh",
+         "idx" : 1,
+         "name" : "fix headers"
+      }
+   ]
+}

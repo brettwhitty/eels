@@ -1,0 +1,18 @@
+{
+   "component" : "soapdenovo",
+   "source_file" : "soapdenovo.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/soapdenovo",
+         "idx" : 1,
+         "name" : "soapdenovo"
+      }
+   ]
+}

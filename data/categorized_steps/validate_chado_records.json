@@ -1,0 +1,72 @@
+{
+   "component" : "validate_chado_records",
+   "source_file" : "validate_chado_records.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 1,
+         "name" : "Check for duplicate analysisprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 2,
+         "name" : "Check for duplicate dbxrefprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 3,
+         "name" : "Check for duplicate featureprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 4,
+         "name" : "Check for duplicate feature_cvtermprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 5,
+         "name" : "Check for duplicate feature_relationshipprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 6,
+         "name" : "Check for duplicate organismprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 7,
+         "name" : "Check for duplicate phylonodeprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForDuplicatePropertyTuples",
+         "idx" : 8,
+         "name" : "Check for duplicate pubprop records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkFeaturelocRecords",
+         "idx" : 9,
+         "name" : "Check for fmin>fmax and valid strand featureloc records"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/checkForFeatureResiduesSeqlenMismatches",
+         "idx" : 10,
+         "name" : "Check for feature residues-seqlen mismatches"
+      }
+   ]
+}

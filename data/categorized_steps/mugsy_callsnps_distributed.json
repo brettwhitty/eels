@@ -1,0 +1,18 @@
+{
+   "component" : "mugsy_callsnps_distributed",
+   "source_file" : "mugsy_callsnps_distributed.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mugsy_callsnps",
+         "idx" : 0,
+         "name" : "call snps"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/clovr_snps_to_vcf",
+         "idx" : 1,
+         "name" : "convert to VCF"
+      }
+   ]
+}

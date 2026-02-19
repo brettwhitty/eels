@@ -1,0 +1,12 @@
+{
+   "component" : "samtools_alignment_stats",
+   "source_file" : "samtools_alignment_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/samtools_alignment_stats",
+         "idx" : 0,
+         "name" : "samtools_alignment_stats"
+      }
+   ]
+}

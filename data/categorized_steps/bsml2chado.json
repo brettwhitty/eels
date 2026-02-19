@@ -1,0 +1,318 @@
+{
+   "component" : "bsml2chado",
+   "source_file" : "bsml2chado.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 2,
+         "name" : "create cache directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 3,
+         "name" : "create parse temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/queries2Chado",
+         "idx" : 4,
+         "name" : "Cache primary keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 5,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 6,
+         "name" : "create iterator ITERATOR1 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 7,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "/usr/bin/find",
+         "idx" : 9,
+         "name" : "list bcp files"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cat",
+         "idx" : 10,
+         "name" : "trim dups files"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "echo",
+         "idx" : 11,
+         "name" : "create tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 12,
+         "name" : "create iterator ITERATOR2 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 13,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/extract_checksums",
+         "idx" : 15,
+         "name" : "extract checksums"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 16,
+         "name" : "mkdir splitchecksums"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "split",
+         "idx" : 17,
+         "name" : "split"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 18,
+         "name" : "create file list of split checkums.out"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 19,
+         "name" : "create sort_checksums temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 20,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 21,
+         "name" : "create iterator ITERATOR8 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 22,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 24,
+         "name" : "create sorted files list"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/merge_sorted_files",
+         "idx" : 25,
+         "name" : "merge sorted split checksum files"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/assign_pks",
+         "idx" : 26,
+         "name" : "assign primary keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 27,
+         "name" : "create splitoffsets directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "split",
+         "idx" : 28,
+         "name" : "split"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 29,
+         "name" : "create file list of spit checkums.out"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_file_iterator_list",
+         "idx" : 30,
+         "name" : "create_file_iterator_list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 31,
+         "name" : "create iterator ITERATOR9 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 32,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 34,
+         "name" : "create sorted files list"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/merge_sorted_files",
+         "idx" : 35,
+         "name" : "merge sorted split checksum files"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 36,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/replace_checksums",
+         "idx" : 37,
+         "name" : "replace checksums"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 38,
+         "name" : "Drop chado-mart indices"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 39,
+         "name" : "create iterator ITERATOR7 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 40,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 42,
+         "name" : "Drop indexes"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 43,
+         "name" : "create iterator ITERATOR3 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 44,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bcpdir2iterator",
+         "idx" : 46,
+         "name" : "list bcp files"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 47,
+         "name" : "create iterator ITERATOR4 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 48,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 50,
+         "name" : "Rebuild indexes"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 51,
+         "name" : "create iterator ITERATOR5 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 52,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 54,
+         "name" : "Restore chado-mart indices"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 55,
+         "name" : "create iterator ITERATOR6 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 56,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ddl2iterator",
+         "idx" : 58,
+         "name" : "List tables"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 59,
+         "name" : "create iterator ITERATOR10 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 60,
+         "name" : "replace template keys"
+      }
+   ]
+}

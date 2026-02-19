@@ -1,0 +1,54 @@
+{
+   "component" : "cleanse_sgc_database",
+   "source_file" : "cleanse_sgc_database.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create database output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/rewrite_seqs",
+         "idx" : 1,
+         "name" : "rewrite_seqs.dbi"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/sgc_GC_content_load",
+         "idx" : 2,
+         "name" : "sgc_GC_content_load.spl"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/molwt_update",
+         "idx" : 3,
+         "name" : "molwt_update.dbi"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/signalP_update",
+         "idx" : 4,
+         "name" : "signalP_update.dbi"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lipoprotein_update",
+         "idx" : 5,
+         "name" : "lipoprotein_update.dbi"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/tm_update",
+         "idx" : 6,
+         "name" : "tm_update.dbi"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/omp_update",
+         "idx" : 7,
+         "name" : "omp_update.dbi"
+      }
+   ]
+}

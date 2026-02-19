@@ -1,0 +1,12 @@
+{
+   "component" : "fastortho_distributed",
+   "source_file" : "fastortho_distributed.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{FASTORTHO_BIN}}/FastOrtho",
+         "idx" : 0,
+         "name" : "run FastOrtho"
+      }
+   ]
+}

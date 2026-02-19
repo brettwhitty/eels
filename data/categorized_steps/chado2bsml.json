@@ -1,0 +1,24 @@
+{
+   "component" : "chado2bsml",
+   "source_file" : "chado2bsml.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create the FASTA output directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/chado2bsml",
+         "idx" : 1,
+         "name" : "chado2bsml"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "DTD validation"
+      }
+   ]
+}

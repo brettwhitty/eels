@@ -1,0 +1,18 @@
+{
+   "component" : "xdformat",
+   "source_file" : "xdformat.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{XDFORMAT_EXEC}}",
+         "idx" : 1,
+         "name" : "xdformat"
+      }
+   ]
+}

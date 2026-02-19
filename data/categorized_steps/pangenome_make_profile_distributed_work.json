@@ -1,0 +1,12 @@
+{
+   "component" : "pangenome_make_profile_distributed_work",
+   "source_file" : "pangenome_make_profile_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_make_profile",
+         "idx" : 0,
+         "name" : "make profile"
+      }
+   ]
+}

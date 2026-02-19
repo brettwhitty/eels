@@ -1,0 +1,36 @@
+{
+   "component" : "mugsy_callsnps",
+   "source_file" : "mugsy_callsnps.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUGSY_MAPPING_INSTALL_DIR}}/mafindex.pl",
+         "idx" : 2,
+         "name" : "index maf file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 3,
+         "name" : "replace template keys"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 5,
+         "name" : "create VCF list"
+      }
+   ]
+}

@@ -1,0 +1,30 @@
+{
+   "component" : "phat",
+   "source_file" : "phat.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{FULLPHAT_EXEC}}",
+         "idx" : 0,
+         "name" : "phat"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/{{COMPONENT_NAME}}2bsml",
+         "idx" : 1,
+         "name" : "phat2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

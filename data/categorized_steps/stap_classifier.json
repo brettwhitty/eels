@@ -1,0 +1,12 @@
+{
+   "component" : "stap_classifier",
+   "source_file" : "stap_classifier.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{STAP_CLASSIFIER_EXEC}}",
+         "idx" : 0,
+         "name" : "rRNA_pipeline_for_one.pl"
+      }
+   ]
+}

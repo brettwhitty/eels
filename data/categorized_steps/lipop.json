@@ -1,0 +1,30 @@
+{
+   "component" : "lipop",
+   "source_file" : "lipop.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{LIPOP_EXEC}}",
+         "idx" : 0,
+         "name" : "lipop"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/lipop2bsml",
+         "idx" : 1,
+         "name" : "lipop2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

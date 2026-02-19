@@ -1,0 +1,24 @@
+{
+   "component" : "intergenic_analysis",
+   "source_file" : "intergenic_analysis.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/intergenic_analysis",
+         "idx" : 0,
+         "name" : "intergenic_analysis"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

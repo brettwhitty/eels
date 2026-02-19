@@ -1,0 +1,18 @@
+{
+   "component" : "create_db_list_file",
+   "source_file" : "create_db_list_file.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_db_list_file",
+         "idx" : 1,
+         "name" : "create db list file"
+      }
+   ]
+}

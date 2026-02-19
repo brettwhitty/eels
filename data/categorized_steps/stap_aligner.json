@@ -1,0 +1,12 @@
+{
+   "component" : "stap_aligner",
+   "source_file" : "stap_aligner.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{STAP_ALIGNER_EXEC}}",
+         "idx" : 0,
+         "name" : "align_to_rRNA_profile.pl"
+      }
+   ]
+}

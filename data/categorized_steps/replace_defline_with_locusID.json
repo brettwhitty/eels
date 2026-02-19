@@ -1,0 +1,18 @@
+{
+   "component" : "replace_defline_with_locusID",
+   "source_file" : "replace_defline_with_locusID.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/replace_defline_with_locusID",
+         "idx" : 1,
+         "name" : "replace_defline_with_locusID"
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+   "component" : "pangenome_do_analysis_distributed_work",
+   "source_file" : "pangenome_do_analysis_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_make_table",
+         "idx" : 0,
+         "name" : "make table"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_make_profile",
+         "idx" : 1,
+         "name" : "make profile"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_make_pangenome",
+         "idx" : 2,
+         "name" : "make pangenome"
+      }
+   ]
+}

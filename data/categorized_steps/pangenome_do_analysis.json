@@ -1,0 +1,18 @@
+{
+   "component" : "pangenome_do_analysis",
+   "source_file" : "pangenome_do_analysis.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_blast_parse",
+         "idx" : 1,
+         "name" : "parse blast results"
+      }
+   ]
+}

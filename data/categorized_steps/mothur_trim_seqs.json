@@ -1,0 +1,12 @@
+{
+   "component" : "mothur_trim_seqs",
+   "source_file" : "mothur_trim_seqs.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mothur",
+         "idx" : 0,
+         "name" : "trim seqs"
+      }
+   ]
+}

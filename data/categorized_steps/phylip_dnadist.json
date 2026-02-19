@@ -1,0 +1,24 @@
+{
+   "component" : "phylip_dnadist",
+   "source_file" : "phylip_dnadist.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/dnadist_worker_wrapper",
+         "idx" : 0,
+         "name" : "dnadist_worker_wrapper"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{DNADIST_SORT}}",
+         "idx" : 1,
+         "name" : "sort output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 2,
+         "name" : "remove unsorted output"
+      }
+   ]
+}

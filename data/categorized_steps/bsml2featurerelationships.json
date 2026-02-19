@@ -1,0 +1,18 @@
+{
+   "component" : "bsml2featurerelationships",
+   "source_file" : "bsml2featurerelationships.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2featurerelationships",
+         "idx" : 1,
+         "name" : "bsml2feature_relationships"
+      }
+   ]
+}

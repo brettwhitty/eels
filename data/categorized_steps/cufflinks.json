@@ -1,0 +1,12 @@
+{
+   "component" : "cufflinks",
+   "source_file" : "cufflinks.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/cufflinks",
+         "idx" : 0,
+         "name" : "cufflinks"
+      }
+   ]
+}

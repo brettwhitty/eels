@@ -1,0 +1,30 @@
+{
+   "component" : "fgenesh",
+   "source_file" : "fgenesh.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{FGENESH_EXEC}}",
+         "idx" : 0,
+         "name" : "fgenesh"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/fgenesh2bsml",
+         "idx" : 1,
+         "name" : "fgenesh2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

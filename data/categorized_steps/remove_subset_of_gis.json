@@ -1,0 +1,42 @@
+{
+   "component" : "remove_subset_of_gis",
+   "source_file" : "remove_subset_of_gis.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fetch_gis_from_taxon_id",
+         "idx" : 2,
+         "name" : "fetch GIs of taxon ID"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "sort",
+         "idx" : 3,
+         "name" : "sort large GI list"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "sort",
+         "idx" : 4,
+         "name" : "sort small GI list"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "comm",
+         "idx" : 5,
+         "name" : "Suppress subset of GI"
+      }
+   ]
+}

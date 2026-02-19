@@ -1,0 +1,24 @@
+{
+   "component" : "order_paired_list",
+   "source_file" : "order_paired_list.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/order_paired_list",
+         "idx" : 2,
+         "name" : "order_paired_list"
+      }
+   ]
+}

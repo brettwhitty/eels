@@ -1,0 +1,30 @@
+{
+   "component" : "augustus",
+   "source_file" : "augustus.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{AUGUSTUS_BINARY_PATH}}",
+         "idx" : 0,
+         "name" : "augustus"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/augustus2bsml",
+         "idx" : 1,
+         "name" : "augustus2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

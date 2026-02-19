@@ -1,0 +1,12 @@
+{
+   "component" : "mothur_unique_seq_limit",
+   "source_file" : "mothur_unique_seq_limit.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mothur_unique_seq_limit.pl",
+         "idx" : 0,
+         "name" : "mothur check for unique seq limit"
+      }
+   ]
+}

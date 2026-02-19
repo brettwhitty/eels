@@ -1,0 +1,24 @@
+{
+   "component" : "wrapper_align",
+   "source_file" : "wrapper_align.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/wrapper_align",
+         "idx" : 2,
+         "name" : "wrapper_align"
+      }
+   ]
+}

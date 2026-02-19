@@ -1,0 +1,12 @@
+{
+   "component" : "fastx_quality_stats",
+   "source_file" : "fastx_quality_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fastx_quality_stats",
+         "idx" : 0,
+         "name" : "fastx_quality_stats"
+      }
+   ]
+}

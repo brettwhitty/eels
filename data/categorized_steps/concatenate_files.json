@@ -1,0 +1,18 @@
+{
+   "component" : "concatenate_files",
+   "source_file" : "concatenate_files.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "for i in `cat {{INPUT_FILE_LIST}}`; do cat $i; done >> {{OUTPUT_FILE}}",
+         "idx" : 1,
+         "name" : "concatenate_files"
+      }
+   ]
+}

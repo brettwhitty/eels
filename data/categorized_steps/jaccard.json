@@ -1,0 +1,36 @@
+{
+   "component" : "jaccard",
+   "source_file" : "jaccard.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2idlookup",
+         "idx" : 1,
+         "name" : "make asmbl lookup"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/clusterBsmlPairwiseAlignments",
+         "idx" : 2,
+         "name" : "generate clusters"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/CogProteinFastaNoMap",
+         "idx" : 3,
+         "name" : "jaccard2fasta"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "find",
+         "idx" : 4,
+         "name" : "create fasta list"
+      }
+   ]
+}

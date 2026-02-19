@@ -1,0 +1,12 @@
+{
+   "component" : "samtools_file_convert",
+   "source_file" : "samtools_file_convert.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/samtools_file_convert",
+         "idx" : 0,
+         "name" : "samtools_file_convert"
+      }
+   ]
+}

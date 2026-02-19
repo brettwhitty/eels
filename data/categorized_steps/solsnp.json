@@ -1,0 +1,12 @@
+{
+   "component" : "solsnp",
+   "source_file" : "solsnp.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "java -jar {{SOLSNP_EXEC}}",
+         "idx" : 0,
+         "name" : "solsnp"
+      }
+   ]
+}

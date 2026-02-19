@@ -1,0 +1,18 @@
+{
+   "component" : "elph",
+   "source_file" : "elph.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create group output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{ELPH_EXEC}}",
+         "idx" : 1,
+         "name" : "elph"
+      }
+   ]
+}

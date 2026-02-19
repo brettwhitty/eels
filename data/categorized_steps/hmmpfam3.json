@@ -1,0 +1,36 @@
+{
+   "component" : "hmmpfam3",
+   "source_file" : "hmmpfam3.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{HMMSCAN_EXEC}}",
+         "idx" : 0,
+         "name" : "hmmpfam3"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/hmmpfam32htab",
+         "idx" : 1,
+         "name" : "hmmpfam32htab"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/hmmpfam32bsml",
+         "idx" : 2,
+         "name" : "hmmpfam32bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 3,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 4,
+         "name" : "dtd validation"
+      }
+   ]
+}

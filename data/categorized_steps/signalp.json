@@ -1,0 +1,72 @@
+{
+   "component" : "signalp",
+   "source_file" : "signalp.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "Create scratch dir for signalp output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{SIGNALP_EXEC}}",
+         "idx" : 1,
+         "name" : "Run signalp"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/signalp_graphics_rename",
+         "idx" : 2,
+         "name" : "Rename signalp graphics files"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/signalp2bsml",
+         "idx" : 3,
+         "name" : "Convert signalp raw output to BSML"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 4,
+         "name" : "store config params for SignalP Best"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 5,
+         "name" : "store config params for SignalP NoTM"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 6,
+         "name" : "store config params for SignalP NN"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 7,
+         "name" : "store config params for SignalP HMM"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 8,
+         "name" : "compress raw output"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 9,
+         "name" : "compress gnuplot output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 10,
+         "name" : "dtd validation"
+      }
+   ]
+}

@@ -1,0 +1,12 @@
+{
+   "component" : "htseq",
+   "source_file" : "htseq.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/htseq",
+         "idx" : 0,
+         "name" : "htseq"
+      }
+   ]
+}

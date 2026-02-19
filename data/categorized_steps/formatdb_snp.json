@@ -1,0 +1,12 @@
+{
+   "component" : "formatdb_snp",
+   "source_file" : "formatdb_snp.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/formatdb_snp",
+         "idx" : 0,
+         "name" : "formatdb"
+      }
+   ]
+}

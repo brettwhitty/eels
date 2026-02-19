@@ -1,0 +1,24 @@
+{
+   "component" : "blast_lgt_finder",
+   "source_file" : "blast_lgt_finder.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_lgt_best_hit",
+         "idx" : 0,
+         "name" : "Filter BLAST for best hits"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 1,
+         "name" : "Create list of filtered files"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/lgt_finder",
+         "idx" : 2,
+         "name" : "Find LGT"
+      }
+   ]
+}

@@ -1,0 +1,30 @@
+{
+   "component" : "repeatmasker",
+   "source_file" : "repeatmasker.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{REPEATMASKER_EXEC}}",
+         "idx" : 0,
+         "name" : "repeatmasker"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/repeatmasker2bsml",
+         "idx" : 1,
+         "name" : "repeatmasker2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

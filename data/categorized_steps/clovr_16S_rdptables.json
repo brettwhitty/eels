@@ -1,0 +1,30 @@
+{
+   "component" : "clovr_16S_rdptables",
+   "source_file" : "clovr_16S_rdptables.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/clovr16S_rdp_tables.pl",
+         "idx" : 1,
+         "name" : "create rdp summary tables"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 2,
+         "name" : "create tables list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 3,
+         "name" : "create paired tables list"
+      }
+   ]
+}

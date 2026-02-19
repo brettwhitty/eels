@@ -1,0 +1,12 @@
+{
+   "component" : "samtools_reference_index",
+   "source_file" : "samtools_reference_index.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/samtools_reference_index",
+         "idx" : 0,
+         "name" : "samtools_reference_index"
+      }
+   ]
+}

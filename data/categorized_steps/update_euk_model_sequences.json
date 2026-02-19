@@ -1,0 +1,12 @@
+{
+   "component" : "update_euk_model_sequences",
+   "source_file" : "update_euk_model_sequences.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/deriveCDSSequences",
+         "idx" : 0,
+         "name" : "deriveCDSSequences"
+      }
+   ]
+}

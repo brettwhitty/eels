@@ -1,0 +1,12 @@
+{
+   "component" : "uchime",
+   "source_file" : "uchime.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{UCHIME_EXEC}}",
+         "idx" : 0,
+         "name" : "uchime chimera checker"
+      }
+   ]
+}

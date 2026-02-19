@@ -1,0 +1,12 @@
+{
+   "component" : "selfsim",
+   "source_file" : "selfsim.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/selfsim",
+         "idx" : 0,
+         "name" : "selfsim"
+      }
+   ]
+}

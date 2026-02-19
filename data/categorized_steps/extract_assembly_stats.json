@@ -1,0 +1,18 @@
+{
+   "component" : "extract_assembly_stats",
+   "source_file" : "extract_assembly_stats.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/extract_assembly_stats",
+         "idx" : 1,
+         "name" : "extract_assembly_stats"
+      }
+   ]
+}

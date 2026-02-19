@@ -1,0 +1,12 @@
+{
+   "component" : "fastx_trimming",
+   "source_file" : "fastx_trimming.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fastx_trimming",
+         "idx" : 0,
+         "name" : "fastx_trimming"
+      }
+   ]
+}

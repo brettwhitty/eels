@@ -1,0 +1,36 @@
+{
+   "component" : "filter_lgt_class_c_genes",
+   "source_file" : "filter_lgt_class_c_genes.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "sort",
+         "idx" : 1,
+         "name" : "get best blast hit by bitscore - \"sister\""
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "sort",
+         "idx" : 2,
+         "name" : "get best blast hit by bitscore - \"outsie\""
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/classify_class_c_genes",
+         "idx" : 3,
+         "name" : "calculate h-score and classify c-class genes"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 4,
+         "name" : "create class-c m8 list"
+      }
+   ]
+}

@@ -1,0 +1,48 @@
+{
+   "component" : "qiime_fastq_mothur_cnvr",
+   "source_file" : "qiime_fastq_mothur_cnvr.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/prep_MiSeq_for_qiime.sh",
+         "idx" : 2,
+         "name" : "preprocess input data for split libraries"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/validate_mapfile.sh",
+         "idx" : 3,
+         "name" : "Validate input mapping file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/split_libraries_fastq",
+         "idx" : 4,
+         "name" : "split libraries for QIIME - FastQ"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/qiime_to_mothur_meta.pl",
+         "idx" : 5,
+         "name" : "create input files for mothur components"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 6,
+         "name" : "create results list"
+      }
+   ]
+}

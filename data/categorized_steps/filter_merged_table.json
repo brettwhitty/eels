@@ -1,0 +1,12 @@
+{
+   "component" : "filter_merged_table",
+   "source_file" : "filter_merged_table.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_merged_table",
+         "idx" : 0,
+         "name" : "filter_merged_table"
+      }
+   ]
+}

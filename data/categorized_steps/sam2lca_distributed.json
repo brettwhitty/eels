@@ -1,0 +1,12 @@
+{
+   "component" : "sam2lca_distributed",
+   "source_file" : "sam2lca_distributed.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/sam2lca",
+         "idx" : 0,
+         "name" : "Get lowest common ancestor from SAM reads"
+      }
+   ]
+}

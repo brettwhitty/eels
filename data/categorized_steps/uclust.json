@@ -1,0 +1,36 @@
+{
+   "component" : "uclust",
+   "source_file" : "uclust.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}",
+         "idx" : 0,
+         "name" : "sort"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}",
+         "idx" : 1,
+         "name" : "cluster"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}",
+         "idx" : 2,
+         "name" : "convert to fasta"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{BIN_DIR}}/format_uclust_fasta_ids",
+         "idx" : 3,
+         "name" : "format fasta"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}",
+         "idx" : 4,
+         "name" : "format clustering file"
+      }
+   ]
+}

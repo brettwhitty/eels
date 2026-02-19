@@ -1,0 +1,12 @@
+{
+   "component" : "validate_fasta",
+   "source_file" : "validate_fasta.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/countHeadersWithoutSequence",
+         "idx" : 0,
+         "name" : "Validation of FASTA file"
+      }
+   ]
+}

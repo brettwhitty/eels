@@ -1,0 +1,24 @@
+{
+   "component" : "mugsy_concat_fasta",
+   "source_file" : "mugsy_concat_fasta.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/mugsy_concat_fasta",
+         "idx" : 1,
+         "name" : "concat fasta"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 2,
+         "name" : "create fsa list"
+      }
+   ]
+}

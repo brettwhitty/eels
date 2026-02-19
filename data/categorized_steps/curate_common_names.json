@@ -1,0 +1,12 @@
+{
+   "component" : "curate_common_names",
+   "source_file" : "curate_common_names.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/curate_common_names",
+         "idx" : 0,
+         "name" : "curate common names"
+      }
+   ]
+}

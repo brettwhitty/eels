@@ -1,0 +1,12 @@
+{
+   "component" : "pangenome_make_pangenome_distributed_work",
+   "source_file" : "pangenome_make_pangenome_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pangenome_make_pangenome.sh",
+         "idx" : 0,
+         "name" : "make pangenome"
+      }
+   ]
+}

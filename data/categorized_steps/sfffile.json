@@ -1,0 +1,12 @@
+{
+   "component" : "sfffile",
+   "source_file" : "sfffile.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/sfffile",
+         "idx" : 0,
+         "name" : "sfffile"
+      }
+   ]
+}

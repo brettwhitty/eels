@@ -1,0 +1,12 @@
+{
+   "component" : "samtools_merge_distributed_work",
+   "source_file" : "samtools_merge_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{SAMTOOLS_EXEC}}",
+         "idx" : 0,
+         "name" : "merge BAM files"
+      }
+   ]
+}

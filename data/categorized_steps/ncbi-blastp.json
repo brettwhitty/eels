@@ -1,0 +1,48 @@
+{
+   "component" : "ncbi-blastp",
+   "source_file" : "ncbi-blastp.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BLASTALL_EXEC}}",
+         "idx" : 1,
+         "name" : "ncbi-blastp"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/blast2btab",
+         "idx" : 2,
+         "name" : "convert raw to btab"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/blast2bsml",
+         "idx" : 3,
+         "name" : "convert raw to bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 4,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 5,
+         "name" : "compress raw output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 6,
+         "name" : "dtd validation"
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+   "component" : "bsml2fasta",
+   "source_file" : "bsml2fasta.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/bsml2fasta",
+         "idx" : 1,
+         "name" : "bsml2fasta"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fix_nuc_fasta",
+         "idx" : 2,
+         "name" : "Fix fasta (nucleotide only)"
+      }
+   ]
+}

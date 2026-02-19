@@ -1,0 +1,24 @@
+{
+   "component" : "download_sra",
+   "source_file" : "download_sra.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/download_sra",
+         "idx" : 2,
+         "name" : "Download SRA Reads"
+      }
+   ]
+}

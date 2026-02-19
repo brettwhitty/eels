@@ -1,0 +1,18 @@
+{
+   "component" : "fasta2bsml",
+   "source_file" : "fasta2bsml.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/fasta2bsml",
+         "idx" : 1,
+         "name" : "fasta2bsml"
+      }
+   ]
+}

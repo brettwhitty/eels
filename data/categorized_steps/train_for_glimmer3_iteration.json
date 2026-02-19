@@ -1,0 +1,24 @@
+{
+   "component" : "train_for_glimmer3_iteration",
+   "source_file" : "train_for_glimmer3_iteration.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/train_for_glimmer3_iteration",
+         "idx" : 2,
+         "name" : "train for glimmer3 iteration"
+      }
+   ]
+}

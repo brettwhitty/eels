@@ -1,0 +1,12 @@
+{
+   "component" : "cuffcompare",
+   "source_file" : "cuffcompare.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/cuffcompare",
+         "idx" : 0,
+         "name" : "cuffcompare"
+      }
+   ]
+}

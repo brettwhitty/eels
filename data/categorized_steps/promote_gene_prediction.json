@@ -1,0 +1,24 @@
+{
+   "component" : "promote_gene_prediction",
+   "source_file" : "promote_gene_prediction.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/promote_gene_prediction",
+         "idx" : 0,
+         "name" : "promote gene prediction"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

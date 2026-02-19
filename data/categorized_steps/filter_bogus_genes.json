@@ -1,0 +1,12 @@
+{
+   "component" : "filter_bogus_genes",
+   "source_file" : "filter_bogus_genes.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filter_bogus_genes",
+         "idx" : 0,
+         "name" : "filter_bogus_genes"
+      }
+   ]
+}

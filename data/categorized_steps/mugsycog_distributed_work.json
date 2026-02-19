@@ -1,0 +1,78 @@
+{
+   "component" : "mugsycog_distributed_work",
+   "source_file" : "mugsycog_distributed_work.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 2,
+         "name" : "create transform directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUGSY_MAPPING_INSTALL_DIR}}/featureindex.pl {{MUGSY_INDEX}}",
+         "idx" : 3,
+         "name" : "add mugsymap features to mugsy index"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "perl -ne 's/^s\\s+[^\\.]+\\.(\\S+)/s $1/;print' ",
+         "idx" : 4,
+         "name" : "fix maf"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUGSY_MAPPING_INSTALL_DIR}}/mafindex.pl {{MUGSY_INDEX}}",
+         "idx" : 5,
+         "name" : "index alignment"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cp {{GENOMIC_MULTIFASTA}} {{GENOMIC_FASTA_COPY}}",
+         "idx" : 6,
+         "name" : "copy fasta"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{MUGSY_MAPPING_INSTALL_DIR}}/mapfeatures.pl {{MUGSY_INDEX}} {{GENOMIC_FASTA_COPY}} --skipframeshifts",
+         "idx" : 7,
+         "name" : "map features to alignment"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/transform_mugsycog",
+         "idx" : 8,
+         "name" : "fix mugsycog output file"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/CogProteinFasta",
+         "idx" : 9,
+         "name" : "cogs2fasta"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 10,
+         "name" : "create fasta list"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_list_file",
+         "idx" : 11,
+         "name" : "create fasta list"
+      }
+   ]
+}

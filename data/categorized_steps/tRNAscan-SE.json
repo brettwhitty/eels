@@ -1,0 +1,30 @@
+{
+   "component" : "tRNAscan-SE",
+   "source_file" : "tRNAscan-SE.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "export TMPDIR={{TMP_DIR}}; perl -I {{TRNASCAN_LIB}} {{TRNASCANSE_EXEC}}",
+         "idx" : 0,
+         "name" : "tRNAscan-SE"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/tRNAscan-SE2bsml",
+         "idx" : 1,
+         "name" : "tRNAscan-SE2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

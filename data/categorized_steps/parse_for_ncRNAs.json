@@ -1,0 +1,18 @@
+{
+   "component" : "parse_for_ncRNAs",
+   "source_file" : "parse_for_ncRNAs.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/parse_for_ncRNAs",
+         "idx" : 0,
+         "name" : "parse_for_ncRNAs"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 1,
+         "name" : "dtd validation"
+      }
+   ]
+}

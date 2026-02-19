@@ -1,0 +1,12 @@
+{
+   "component" : "pileup_to_wig",
+   "source_file" : "pileup_to_wig.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/pileup2wig",
+         "idx" : 0,
+         "name" : "pileup2wig script"
+      }
+   ]
+}

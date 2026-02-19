@@ -1,0 +1,30 @@
+{
+   "component" : "aragorn",
+   "source_file" : "aragorn.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{ARAGORN_EXEC}}",
+         "idx" : 0,
+         "name" : "aragorn"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/aragorn2bsml",
+         "idx" : 1,
+         "name" : "aragorn2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 2,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 3,
+         "name" : "dtd validation"
+      }
+   ]
+}

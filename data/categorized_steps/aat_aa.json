@@ -1,0 +1,114 @@
+{
+   "component" : "aat_aa",
+   "source_file" : "aat_aa.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{DPS_EXEC}}",
+         "idx" : 0,
+         "name" : "dps"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{EXT_EXEC}}",
+         "idx" : 1,
+         "name" : "ext"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{EXT_COLLAPSE_EXEC}}",
+         "idx" : 2,
+         "name" : "ext collapse"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{FILTER_EXEC}}",
+         "idx" : 3,
+         "name" : "filter"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cp",
+         "idx" : 4,
+         "name" : "relocate query seq"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{NAP_EXEC}}",
+         "idx" : 5,
+         "name" : "nap"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 6,
+         "name" : "remove temp query seq"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 7,
+         "name" : "remove raw dps output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 8,
+         "name" : "remove raw ext output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 9,
+         "name" : "remove raw ext collapsed output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "rm",
+         "idx" : 10,
+         "name" : "remove raw filter output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "touch",
+         "idx" : 11,
+         "name" : "ensure btab existence"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "mv",
+         "idx" : 12,
+         "name" : "relocate btab"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/nap2bsml",
+         "idx" : 13,
+         "name" : "nap2bsml"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 14,
+         "name" : "compress nap btab"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 15,
+         "name" : "compress nap"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 16,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 17,
+         "name" : "dtd validation"
+      }
+   ]
+}

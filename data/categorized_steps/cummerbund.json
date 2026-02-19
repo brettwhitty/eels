@@ -1,0 +1,12 @@
+{
+   "component" : "cummerbund",
+   "source_file" : "cummerbund.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/cummerbund",
+         "idx" : 0,
+         "name" : "cummerbund"
+      }
+   ]
+}

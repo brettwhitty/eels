@@ -1,0 +1,90 @@
+{
+   "component" : "mumsgraph",
+   "source_file" : "mumsgraph.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/fasta2seqlen",
+         "idx" : 2,
+         "name" : "mummer"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "sort",
+         "idx" : 3,
+         "name" : "sort seqlens"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filtermummer",
+         "idx" : 4,
+         "name" : "filter on query coverage"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "sort",
+         "idx" : 5,
+         "name" : "sort mummertab"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "join",
+         "idx" : 6,
+         "name" : "join tab"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "echo",
+         "idx" : 7,
+         "name" : "create list"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/filtermummer",
+         "idx" : 8,
+         "name" : "filter on query coverage"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/printmatchgraph",
+         "idx" : 9,
+         "name" : "print match graph"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/runcc",
+         "idx" : 10,
+         "name" : "find connected components"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "gvpr",
+         "idx" : 11,
+         "name" : "print components"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "sort",
+         "idx" : 12,
+         "name" : "sort clusters"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/printrepresentative",
+         "idx" : 13,
+         "name" : "print reps"
+      }
+   ]
+}

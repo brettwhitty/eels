@@ -1,0 +1,12 @@
+{
+   "component" : "phage_finder",
+   "source_file" : "phage_finder.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/run_phage_finder",
+         "idx" : 0,
+         "name" : "phage finder"
+      }
+   ]
+}

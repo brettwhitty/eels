@@ -1,0 +1,12 @@
+{
+   "component" : "blast2lca",
+   "source_file" : "blast2lca.i1.json",
+   "steps" : [
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/blast2lca",
+         "idx" : 0,
+         "name" : "Get lowest common ancestor from blast hits"
+      }
+   ]
+}

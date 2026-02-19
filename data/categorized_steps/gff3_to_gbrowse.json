@@ -1,0 +1,12 @@
+{
+   "component" : "gff3_to_gbrowse",
+   "source_file" : "gff3_to_gbrowse.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{PYTHON_EXEC}} {{BIN_DIR}}/gff3_to_gbrowse.py",
+         "idx" : 0,
+         "name" : "gff32GBrowse"
+      }
+   ]
+}

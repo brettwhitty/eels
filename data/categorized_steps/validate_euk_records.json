@@ -1,0 +1,30 @@
+{
+   "component" : "validate_euk_records",
+   "source_file" : "validate_euk_records.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output and temporary directories"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_legacy2bsml_iterator_list",
+         "idx" : 1,
+         "name" : "Create validate_euk_records master iterator list file"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/create_iterator_groups",
+         "idx" : 2,
+         "name" : "create iterator ITERATOR1 groupings"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "{{BIN_DIR}}/replace_template_keys",
+         "idx" : 3,
+         "name" : "replace template keys"
+      }
+   ]
+}

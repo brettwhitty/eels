@@ -1,0 +1,24 @@
+{
+   "component" : "outer_membrane_domain",
+   "source_file" : "outer_membrane_domain.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/outer_membrane_domain",
+         "idx" : 0,
+         "name" : "outer_membrane_domain"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

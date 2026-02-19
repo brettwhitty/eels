@@ -1,0 +1,18 @@
+{
+   "component" : "chado2flatfile",
+   "source_file" : "chado2flatfile.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/chado2flatfile",
+         "idx" : 1,
+         "name" : "chado2flatfile"
+      }
+   ]
+}

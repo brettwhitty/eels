@@ -1,0 +1,84 @@
+{
+   "component" : "ber",
+   "source_file" : "ber.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/ber_blast_hit_selector",
+         "idx" : 0,
+         "name" : "filter hits"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/extract_blast_hits_by_id",
+         "idx" : 1,
+         "name" : "filter additional hits"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cat",
+         "idx" : 2,
+         "name" : "append to filtered hits"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/create_ber_db.sh",
+         "idx" : 3,
+         "name" : "create mini db"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "cat",
+         "idx" : 4,
+         "name" : "append to mini db"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/create_ber_db.sh",
+         "idx" : 5,
+         "name" : "create nuc db"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{PRAZE_EXEC}}",
+         "idx" : 6,
+         "name" : "praze"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/add_pvalue_to_praze_output",
+         "idx" : 7,
+         "name" : "fix praze output"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "mv",
+         "idx" : 8,
+         "name" : "rename fixed praze output"
+      },
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/berbtab2bsml",
+         "idx" : 9,
+         "name" : "berbtab2bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 10,
+         "name" : "store config params"
+      },
+      {
+         "category" : "compression",
+         "executable" : "{{BIN_DIR}}/compress_file",
+         "idx" : 11,
+         "name" : "compress raw output"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 12,
+         "name" : "dtd validation"
+      }
+   ]
+}

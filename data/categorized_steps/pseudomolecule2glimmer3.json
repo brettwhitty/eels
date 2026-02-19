@@ -1,0 +1,24 @@
+{
+   "component" : "pseudomolecule2glimmer3",
+   "source_file" : "pseudomolecule2glimmer3.i1.json",
+   "steps" : [
+      {
+         "category" : "converter",
+         "executable" : "{{BIN_DIR}}/glimmer32bsml",
+         "idx" : 0,
+         "name" : "glimmer32bsml"
+      },
+      {
+         "category" : "provenance",
+         "executable" : "{{BIN_DIR}}/analysis2bsml",
+         "idx" : 1,
+         "name" : "store config params"
+      },
+      {
+         "category" : "validation",
+         "executable" : "{{BIN_DIR}}/dtdValid.pl",
+         "idx" : 2,
+         "name" : "dtd validation"
+      }
+   ]
+}

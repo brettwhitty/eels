@@ -1,0 +1,24 @@
+{
+   "component" : "snp-add-gene-info",
+   "source_file" : "snp-add-gene-info.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 0,
+         "name" : "create output directory"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "mkdir",
+         "idx" : 1,
+         "name" : "create temp directory"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/snp-add-gene-info",
+         "idx" : 2,
+         "name" : "snp-add-gene-info"
+      }
+   ]
+}

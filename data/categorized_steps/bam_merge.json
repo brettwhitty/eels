@@ -1,0 +1,12 @@
+{
+   "component" : "bam_merge",
+   "source_file" : "bam_merge.i1.json",
+   "steps" : [
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BIN_DIR}}/bam_merge",
+         "idx" : 0,
+         "name" : "bam_merge"
+      }
+   ]
+}
