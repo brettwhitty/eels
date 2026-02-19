@@ -29,8 +29,9 @@ This is production-tested, FDA-approved software representing institutional know
 - 56 workflows cataloged → `data/workflow_catalog.json` (108 XML files)
 - 472 utility scripts cataloged → `data/utility_catalog.json`
 - 91 converters identified → `data/converter_catalog.json`
-- 65 converter manpages extracted → `data/manpages/*.txt`
 - 28 contributors identified → `data/contributors.json`
+
+**Note:** Converter manpages exist in `ergatis-install/man/man1/*2bsml.pl.1p` (65 files)
 
 **Documentation:**
 - Component anatomy walkthrough → `docs/COMPONENT_ANATOMY.md`
