@@ -1,0 +1,231 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: refresh_chado_mart
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - refresh_chado_mart.config
+  - refresh_chado_mart.xml
+  - component_docs/refresh_chado_mart.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  <p>
+      This component loads the chadomart tables cm_proteins, cm_clusters and cm_cluster_members
+      from an already existing and loaded chado instance. 
+  </p>
+  
+  <h3>parameters</h3>
+  <p>
+     <ul>
+      <li><span style='font-weight: bold;'>database</span> - Name of the chado database to be affected. </li>
+      <li><span style='font-weight: bold;'>server</span> - The name of the server on which the database resides.</li>
+      <li><span style='font-weight: bold;'>database_type</span> - Relational database management system type e.g. sybase or postgresql</li>
+      <li><span style='font-weight: bold;'>username</span> - Username with write permissions on the database.</li>
+      <li><span style='font-weight: bold;'>password</span> - Password for said username.</li>
+      <li><span style='font-weight: bold;'>cluster_analysis_id</span> - This parameter can be used to specify the analysis_ids
+          for clustering analyses loaded into the chado instance. It can be a single value or a comma separated list.</li>
+      <li><span style='font-weight: bold;'>program</span> - An alternative to cluster_analysis_id this  parameter can be used
+          to specify the program name used to generate the clusters (i.e. clustalw). The program name is specified in the analysis
+          table and was at one point the name of the multiple sequence alignment tool. The program has more recently been loaded 
+          to refer to the cluster strategy (j_ortholog_clusters).
+      </li>
+      <li><span style='font-weight: bold;'>blast_analysis_id</span> - This parameter is used to specify the analysis id referring
+          to the blast data used to generate the ortholog/paralog clusters. It can be found in the analysis table.
+      </li>
+      <li><span style='font-weight: bold;'>use_cm_blast</span> - Utilize a prepopulated cm_blast table to generate the cm_cluster records. 
+          This is quite fast for large data sets provided the cm_blast table is populated correctly and the indices are in place.
+     </ul>
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / manipulation
+  parameters:
+    # Name of the chado database to be affected.
+    DATABASE: $;PROJECT$;
+    # The name of the server on which the database resides.
+    SERVER: ""
+    # Relational database management system type e.g. sybase or postgresql
+    RDBMS: sybase
+    USERNAME: ""
+    PASSWORD: ""
+    # The chado-mart table BCP files will be gzipped.
+    GZIP_BCP: 1
+    # The analysis_id to which all blast data is tied to.
+    # The create_blast_query_view_bcp.pl script will generate BCP records
+    # to be loaded into the chado-mart table: cm_blast. This value will also be used
+    # to generate the cm_clusters statistics so it should correspond to the analysis used
+    # to generate the clusters.
+    BLAST_ANALYSIS_ID: ""
+    # The analysis_id associated with the data to be prepared for insertion into the chado-mart tables.
+    # This parameter can accept comma separated lists: 4,5,6. Alternatively, the user can specify the 
+    # program.  If both are provided, the analysis_id will
+    # override the program value.  The chadoToChadoMart.pl program will generate BCP records to be 
+    # loaded into the chado-mart tables: cm_proteins, cm_clusters, cm_cluster_members.
+    CLUSTER_ANALYSIS_ID: ""
+    PROGRAM: ""
+    # Sybase bcp utility batch size
+    BCP_BATCH_SIZE: 30000
+    # Utilize a prepopulated cm_blast table to generate the cm_cluster records. This is quite fast for large
+    # data sets provided the cm_blast table is populated correctly and the indices are in place.
+    USE_CM_BLAST: 0
+  input:
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;TMP_DIR$;
+  component:
+    COMPONENT_NAME: refresh_chado_mart
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4794 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: truncate
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.sqlforce.xml
+    ITERATOR2: drop_indices
+    ITERATOR2_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.sqlforce.xml
+    ITERATOR3: load
+    ITERATOR3_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.load.xml
+    ITERATOR4: create_indices
+    ITERATOR4_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.sqlforce.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    # no-distrib = 0 ensures that all executes in series and never parallel
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator1 for truncating all chado-mart tables
+    - Iterator2 for dropping all chado-mart indices and constraints
+    - Iterator3 for loading all chado-mart tables
+    - Iterator4 for restoring all chado-mart indices and constraints
+  command_sets:
+    - refresh_chado_mart workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=truncate,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/truncate.list,$;NODISTRIB$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=drop_indices,$;ITERATOR_XML$;=ITERATOR2_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/drop_indices.list,$;NODISTRIB$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=load,$;ITERATOR_XML$;=ITERATOR3_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/bcp.out.list,$;NODISTRIB$;=1,$;GROUP_NUMBER$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=create_indices,$;ITERATOR_XML$;=ITERATOR4_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/create_indices.list,$;NODISTRIB$;=1\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create truncate chado-mart tables list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: --outfile
+          value: $;TMP_DIR$;/truncate.list
+        - key: --logfile
+          value: $;TMP_DIR$;/ddl2iterator.pl.truncate_cm_tables.log
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --infile
+          value: $;DOCS_DIR$;/ddls/$;RDBMS$;/truncate_cm_tables.$;RDBMS$;.ddl
+        - key: stdout
+          value: $;TMP_DIR$;/ddl2iterator.pl.truncate_cm_tables.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/ddl2iterator.pl.truncate_cm_tables.stderr
+    - name: Generate chado-mart data
+      type: RunDistributedCommand
+      executable: $;BIN_DIR$;/chadoToChadoMart
+      params:
+        - key: --blast_analysis_id
+          value: $;BLAST_ANALYSIS_ID$;
+        - key: --cluster_analysis_id
+          value: $;CLUSTER_ANALYSIS_ID$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: "'$;PASSWORD$;'"
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --batch_size
+          value: 1000
+        - key: --cm_proteins
+          value: 1
+        - key: --outdir
+          value: $;TMP_DIR$;
+        - key: --program
+          value: $;PROGRAM$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --use_cm_blast
+          value: $;USE_CM_BLAST$;
+        - key: --iteratorlist
+          value: 1
+        - key: --logfile
+          value: $;TMP_DIR$;/chadoToChadoMart.pl.log
+        - key: stdout
+          value: $;TMP_DIR$;/chadoToChadoMart.pl.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/chadoToChadoMart.pl.stderr
+    - name: Create drop chado-mart indices and constraints list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --outfile
+          value: $;TMP_DIR$;/drop_indices.list
+        - key: --logfile
+          value: $;TMP_DIR$;/ddl2iterator.pl.drop_cm_indices.log
+        - key: --infile
+          value: $;DOCS_DIR$;/ddls/$;RDBMS$;/drop_cm_indices.$;RDBMS$;.ddl
+        - key: stdout
+          value: $;TMP_DIR$;/ddl2iterator.pl.drop_cm_indices.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/ddl2iterator.pl.drop_cm_indices.stderr
+    - name: list bcp files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bcpdir2iterator
+      params:
+        - key: --bcp_directory
+          value: $;TMP_DIR$;
+        - key: --bcp_extension
+          value: out
+        - key: --output_iterator_list
+          value: $;TMP_DIR$;/bcp.out.list
+    - name: Create chado-mart indices and constraints list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --outfile
+          value: $;TMP_DIR$;/create_indices.list
+        - key: --logfile
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_cm_indices.log
+        - key: --infile
+          value: $;DOCS_DIR$;/ddls/$;RDBMS$;/create_cm_indices.$;RDBMS$;.ddl
+        - key: stdout
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_cm_indices.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_cm_indices.stderr

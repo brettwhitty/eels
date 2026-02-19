@@ -1,0 +1,210 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: metagenemark
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - metagenemark.config
+  - metagenemark.xml
+  - metagenemark.i1.xml
+  - component_docs/metagenemark.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+      MetaGeneMark is an ab initio gene prediction tool designed for metagenomic sequences.  The following
+      is the abstract from the paper (PMID: 20403810)
+  </p>
+  <blockquote>
+      We describe an algorithm for gene identification in DNA sequences derived from shotgun 
+      sequencing of microbial communities. Accurate ab initio gene prediction in a short 
+      nucleotide sequence of anonymous origin is hampered by uncertainty in model parameters. 
+      While several machine learning approaches could be proposed to bypass this difficulty, 
+      one effective method is to estimate parameters from dependencies, formed in evolution, 
+      between frequencies of oligonucleotides in protein-coding regions and genome nucleotide 
+      composition. Original version of the method was proposed in 1999 and has been used since 
+      for (i) reconstructing codon frequency vector needed for gene finding in viral genomes 
+      and (ii) initializing parameters of self-training gene finding algorithms. With advent 
+      of new prokaryotic genomes en masse it became possible to enhance the original approach 
+      by using direct polynomial and logistic approximations of oligonucleotide frequencies, 
+      as well as by separating models for bacteria and archaea. These advances have increased 
+      the accuracy of model reconstruction and, subsequently, gene prediction. We describe 
+      the refined method and assess its accuracy on known prokaryotic genomes split into short 
+      sequences. Also, we show that as a result of application of the new method, several 
+      thousands of new genes could be added to existing annotations of several human and 
+      mouse gut metagenomes.
+  </blockquote>
+  <p>
+      This component has been modified to output GFF rather than the default format.
+  </p>
+  
+  <h3>reference</h3>
+  <p>
+      Zhu W, Lomsadze A, Borodovsky M.<br>
+      Ab initio gene identification in metagenomic sequences.<br>
+      <a href='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=20403810'>Nucleic Acids Res. 2010 Jul 1;38(12):e132. Epub 2010 Apr 19.</a>
+  </p>
+  
+  <h3>required license file</h3>
+  <p>
+      MetaGeneMark requires a license file (gm_key) to be located in either the working directory
+      or saved as ~/.gm_key.   This is a requirement created by the tool's author, not Ergatis.
+  </p>
+  
+  <h3>input</h3>
+  <p>
+      Metagenemark takes a FASTA file as its input. Using this component, you can define 
+      multiple iterations over a larger input set using either an input list file or defining a 
+      directory of sequence files ending with the '.fsa' extension (by default).
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / genes
+  parameters:
+    # Path to the parameter model to use
+    TRAINING_MODEL: $;MGM_DEFAULT_MODEL$;
+    # Enter any other options.  Mostly commonly, -a writes a protein seq file and -d writes a nucleotide file
+    #  (GFF output is hard-coded)
+    OTHER_OPTS: -a -d
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    GFF_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.gff.list
+  component:
+    COMPONENT_NAME: metagenemark
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - metagenemark workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create GFF list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.gff\""
+        - key: --output_list
+          value: $;GFF_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - metagenemark compute
+  steps:
+    - name: metagenemark
+      type: RunUnixCommand
+      executable: $;METAGENEMARK_EXEC$;
+      arg: $;OTHER_OPTS$; -f g -m $;TRAINING_MODEL$; $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.metagenemark.gff
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

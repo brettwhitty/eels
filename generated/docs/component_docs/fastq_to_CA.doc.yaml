@@ -1,0 +1,243 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: fastq_to_CA
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - fastq_to_CA.config
+  - fastq_to_CA.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    # The UID of the library these reads belong to
+    LIBRARY: ""
+    # Type of fastq (options are 'sanger', 'solexa' or 'illumina')
+    FASTQ_TYPE: illumina
+    # Mates are on average i +- d basepairs apart (Must provide integers for i and d here)
+    INSERT_SIZE: ""
+    # Paired end orientation.
+    # If 5'-3' <-> 3'-5' parameter should be set to 'innie' (Usually for paired-end reads)
+    # If 3'-5' <-> 5'-3' parameter should be set to 'outtie' (Usually for mate-pair reads)
+    ORIENTATION: innie
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FRG_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.frg.list
+  component:
+    COMPONENT_NAME: fastq_to_CA
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Post-processing
+  command_sets:
+    - fastq_to_CA workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: fastqToCA
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fastq_to_CA
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/fastqToCA.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/fastqToCA.stderr
+        - key: --fastq_to_CA_exe
+          value: $;FASTQTOCA_EXEC$;
+        - key: --fastq_file
+          value: $;INPUT_FILE$;
+        - key: --fastq_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --insert_size
+          value: "&quot;$;INSERT_SIZE$;&quot;"
+        - key: --library
+          value: $;LIBRARY$;
+        - key: --type
+          value: $;FASTQ_TYPE$;
+        - key: --reads_orientation
+          value: $;ORIENTATION$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;LIBRARY$;.frg
+    - name: create fragment list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.frg\""
+        - key: --output_list
+          value: $;FRG_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: fastq_to_CA.pl
+    pod: |
+  =head1 NAME
+  
+  fastq_to_CA.pl - runs the fastqToCA utility found in the wgs-assembler software package. This script acts as a wrapper to ensure that input and 
+                   command-line parameters are handled correctly while running this utility through the Ergatis framework. 
+  
+  =head1 SYNOPSIS
+  
+  USAGE: fastq_to_CA.pl
+              --fastq_to_CA_exe=/path/to/fastqToCA/binary
+              --fastq_file=/path/to/fastq/file
+              --fastq_file_list=/path/to/fastq/file/list
+              --library=<library name>
+              --type=<fastq type>
+              --insert_size=<mate insert size>
+              --reads_orientation=<paired end reads orientation>
+             [--log=/path/to/log/file
+              --debug=<debug level>]
+              
+  =head1 OPTIONS
+  
+  B<--fastq_file, -f> 
+      A single fastq input file.
+  
+  B<--fastq_file_list, -fl>
+      A tab delimited list of fastq mated reads.
+      
+  B<--fastq_to_CA_exe, -exe>
+      Path to the fastqToCA executable.
+      
+  B<--library, -lib>
+      The UID of the library these reads are added to.
+      
+  B<--type, -t>
+      fastq type; can be one of the three options:
+          * sanger - QV's are PHRED, offset=33 '!', NCBI SRA data.
+          * solexa - QV's are PHRED, offset=33 '!', NCBI SRA data.
+          * illumina - QV's are PHRED, offset=64 '@', Illumina reads from version 1.3 on.
+  
+  B<--insert_size, -is>
+      Mates are on average i +- d bp apart. Must provide the i and d numeric parameters
+  
+  B<--reads_orientation, -r>
+      Orientation of paired-end reads. If 5'-3' <-> 3'-5' set parameter to 'innie.' 
+      If 3'-5' <-> 5'-3' set parameter to 'outtie'
+  
+  B<--output, -o>
+      Output path where fragment files will be placed.
+      
+  B<--log, -l>
+      Log file
+  
+  B<--debug>
+      Debug level
+              
+  =head1 DESCRIPTION
+  
+  Wrapper for the fastqtoCA executable. Ensures that input and parameters are correctly formatted for use in the Ergatis framework.
+  
+  =head1 INPUT
+  
+  Either a single or list of fastq files that will comprise a single assembly.
+  
+  =head1 OUTPUT 
+  
+  Fragment files that are ready to be supplied to the celera-assembler
+  
+  =head1 CONTACT
+      
+      Cesar Arze
+      carze@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

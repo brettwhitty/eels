@@ -1,0 +1,277 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pangenome_blast_parse
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pangenome_blast_parse.config
+  - pangenome_blast_parse.xml
+  - pangenome_blast_parse.i1.xml
+  - component_docs/pangenome_blast_parse.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component does pangenome analysis. More documentation to follow.
+  </p>
+  <h3>references</h3>
+  <p>
+      To be completed.
+  </p>
+  <h3>input</h3>
+  <p>
+      Input is a set of all-vs-all blast results for a set of genomes. Usually this would
+      include results from both NCBI-BLASTP and NCBI-TBLASTN.
+  
+      Analysis can be performed on a subset of genomes without re-running the BLASTs by
+      providing an optional list of genome-encoding BSML documents (eg: legacy2bsml output)
+      for the set of genomes to analyze.
+  </p>
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+      no bsml output defined for this component
+  </div>
+  <h3>output</h3>
+  <p>
+      To be completed.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+    COVERAGE_CUTOFF: 50
+    SIMILARITY_CUTOFF: 50
+    DB_LIST: ""
+    ORGANISM_TO_DB_MAPPING: ""
+  input:
+    # INPUT FILE LIST can take comma-separated lists
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bsml
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: pangenome_blast_parse
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator
+  command_sets:
+    - wu-blastp workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create stored blast data list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.blast\\.stored\""
+        - key: --output_list
+          value: $;OUTPUT_DIRECTORY$;/pangenome.stored.list
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - pangenome compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: parse blast results
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/pangenome_blast_parse
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --coverage_cutoff
+          value: $;COVERAGE_CUTOFF$;
+        - key: --similarity_cutoff
+          value: $;SIMILARITY_CUTOFF$;
+        - key: --output_path
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --db_list
+          value: $;DB_LIST$;
+        - key: --organism_to_db_mapping
+          value: $;ORGANISM_TO_DB_MAPPING$;
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: pangenome_blast_parse.pl
+    pod: |
+  =head1  NAME
+  
+  pangenome_blast_parse.pl - Parses BLAST BSML output files and extracts data needed for pangenome analysis.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: pangenome_query_list.pl
+          --input=/path/to/somefile.bsml
+          --output_path=/path/to/output/directory/
+          --coverage_cutoff=50
+          --similarity_cutoff=50
+        [ --log=/path/to/some/log
+          --organism_to_db_mapping=/path/to/organism_to_db_mapping.txt
+          --db_list=/path/to/database.list
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      BSML file containing BLAST results to parse.
+  
+  B<--output_path,-o>
+      Directory to write stored file
+  
+  B<--coverage_cutoff>
+      Coverage cutoff. Hits below this will not be considered hits.
+  
+  B<--similarity_cutoff>
+      Similarity cutoff. Hits below this will not be considered hits.
+  
+  B<--organism_to_db_mapping>
+      Mapping file of the format:
+      Genus Species strain uniquename_prefix
+      Streptococcus pneumoniae TIGR4 sptigr4
+  
+  B<--db_list>
+      List of uniquename prefixes that should be included in the analysis.
+      It is not necessary to include this list if you are filtering with the
+      organism_to_db_mapping file.
+  
+  B<--log,-d>
+      optional. Will create a log file with summaries of all actions performed.
+  
+  B<--debug>
+      optional. Will display verbose status messages to STDERR if logging is disabled.
+  
+  B<--help,-h>
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      This script parses the BSML output from WU-BLASTP and WU-TBLASTN runs for pangenome analysis
+      and serializes the prepared data so that it can be later unserialized for the analysis step.
+  
+  =head1 INPUT
+  
+      The input should be one of the set of BSML files containing BLAST results from a pangenome
+      pipeline run.
+  
+  =head1 OUTPUT
+  
+      There is no output unless you use the --log option.
+  
+  =head1 CONTACT
+  
+      Brett Whitty
+      bwhitty@tigr.org

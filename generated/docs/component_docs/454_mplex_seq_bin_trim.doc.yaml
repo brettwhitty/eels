@@ -1,0 +1,621 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: 454_mplex_seq_bin_trim
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - 454_mplex_seq_bin_trim.config
+  - 454_mplex_seq_bin_trim.xml
+  - component_docs/454_mplex_seq_bin_trim.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  <p>
+  This component is a special-purpose program for binning (demultiplexing) barcoded sequences
+  from a multiplex 454 sequencing run.
+  
+  It takes a set of barcoded sequences, groups them by barcode and trims primers.  The component
+  takes as input a single multi-FASTA file of sequences and divides them amongst a set of
+  output files based on the persence of an embedded sequence barcode (e.g., "ACACACTG").
+  The component will trim the barcode sequence off each sequence, in addition to trimming 
+  the reverse and forward primers (REVERSE_PRIMER and FORWARD_PRIMER), if they can
+  be found.  The TRIM option can be used to specify the trimming behavior: trim neither
+  the barcode nor the primers, trim only the barcode, or trim both the primers and the
+  barcode.
+  
+  Each sequence with a recognizable barcode will be placed in an output file whose name
+  contains both the barcode and also the well/sample ID specified for that barcode in 
+  the BARCODE_FILE.  For example, if the input sequence file is "input.fsa", the barcode
+  detected in the sequence is "TGCATCGA", and the sample id that corresponds to that 
+  barcode is "H12" then the (trimmed) sequence will be placed in one of the following 
+  two files:
+  
+  input.fsa.H12.TGCATCGA.filtered
+  input.fsa.H12.TGCATCGA.discarded
+  
+  A sequence will be placed in the ".filtered" file if both the barcode and the reverse
+  primer can be found (within MAX_EDIT_DIST), and the length of the sequence after 
+  trimming is greater than or equal to the minimum value specified by MIN_LENGTH.
+  If the reverse primer cannot be found or the length of the sequence after trimming is
+  below the threshold then the (perhaps partially trimmed) sequence will be placed in 
+  the ".discarded" file.  (If reverse primer trimming is disabled then the presence of
+  the reverse primer isn't required for the sequence to be placed in the ".filtered"
+  file.)  Any sequence without a recognizable barcode will be placed in a discard
+  file named based solely on the input file, e.g.:
+  
+  test.fsa.discarded
+  
+  The FASTA header line of the sequences (in both the .filtered and .discarded files) 
+  will be updated to reflect the trimming and barcode/primer matching.  For example, 
+  in the following defline:
+  
+  >000123_456_789 length=261 uaccno=XXFABC40343|E01|CTGAGTGT|trimmed_length:232|rev_primer_mismatches:0|fwd_primer_mismatches:NA
+  
+  The new fields are:
+  
+  E01: 
+   well/sample id that corresponds to the barcode 'CTGAGTGT'
+  CTGAGTGT: 
+   literal barcode that was identified in the sequence (and trimmed, unless TRIM=none)
+  trimmed_length
+   the length of the sequence after trimming the barcode and/or primers
+  rev_primer_mismatches: 
+   edit distance between the canonical reverse primer given by REVERSE_PRIMER and the 
+   primer found in the sequence.  should always be <= MAX_EDIT_DIST.  "NA" means that
+   the primer was not found.
+  fwd_primer_mismatches:
+   edit distance between the canonical forward primer given by FORWARD_PRIMER and the 
+   primer found in the sequence.  this value will always be either 0 (exact match) or 
+   "NA" (no match) since approximate matching of forward primers is not yet supported.
+  </p>
+  
+  <h3>references</h3>
+  <p>
+  <!--
+    <ul>
+     <li></li>
+    </ul>
+  -->
+  </p>
+  
+  <h3>algorithm</h3>
+      The component uses a combination of exact string matching (for the barcode and forward primer) and 
+      approximate string matching with the Perl module Text::LevenshteinXS (for the reverse primer and 
+      optional linker sequence).
+  
+  <h3>input</h3>
+  <p>
+      The component accepts a multi-FASTA file of multiplex 454 sequences as input.
+  </p>
+  
+  <h3>implemented options</h3>
+  <p>
+     <ul>
+          <li><span style='font-weight: bold;'>$;INPUT_FILE$;</span> - multi-FASTA file of input sequences<li>
+          <li><span style='font-weight: bold;'>$;BARCODE_FILE$;</span> - whitespace delimited file mapping sequence barcodes to well/sample ids<li>
+          <li><span style='font-weight: bold;'>$;MAX_BARCODE_OFFSET$;</span> - maximum number of characterst to allow at the beginning of the sequence before matching a barcode<li>
+          <li><span style='font-weight: bold;'>$;REVERSE_PRIMER$;</span> - reverse primer sequence that should match immediately after the barcode sequence<li>
+          <li><span style='font-weight: bold;'>$;MAX_EDIT_DIST$;</span> - maximum number of substitutions and indels to allow when matching REVERSE_PRIMER<li>
+          <li><span style='font-weight: bold;'>$;FORWARD_PRIMER$;</span> - forward primer sequence to search for somewhere after the REVERSE_PRIMER in the sequence <li>
+          <li><span style='font-weight: bold;'>$;TRIM$;</span> - either 'all', 'barcodes', or 'none'<li>
+          <li><span style='font-weight: bold;'>$;MIN_LENGTH$;</span> - minimum sequence length after trimming<li>
+     </ul>
+  </p>
+  
+  <h3>output</h3>
+  <p>
+  
+  A set of multi-FASTA formatted files as described above.  The script also prints the 
+  following information to STDOUT:
+  
+  Levenshtein edit distance histogram for reverse RNA primer:
+  
+      distance      num_seqs
+             0        239058
+             1          5014
+             2*          289
+  
+         total        244361
+  * - setting for --max_edit_dist
+  
+  Indel count histogram for reverse RNA primer:
+  
+        indels      num_seqs
+            -2           155
+            -1          1925
+             0        241723
+             1           503
+             2            55
+  
+         total        244361
+  
+  Number of reverse primers that match exactly except for missing CA linker: 45
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / manipulation
+  input:
+    # Path to a multi-FASTA file of nucleotide sequences from a 454 multiplex sequencing run.
+    # Each sequence will be checked for the barcode and primer sequences specified below.
+    # PLEASE NOTE: currently all input sequences MUST be in all-uppercase.
+    # 
+    INPUT_FILE: ""
+  parameters:
+    # Path to a whitespace-delimited text file that specifies the barcodes used to identify 
+    # sequences in the INPUT_FILE.  Each line of the file must have two columns: the first
+    # specifies the (unique) DNA sequence barcode and the second specifies the well number
+    # or sample id that corresponds to that barcode.  For example:
+    # 
+    # ACACACTG    A01
+    # ACACGTCA    A02
+    # ACAGACAG    A03
+    # ACAGCTCA    A04
+    # 
+    BARCODE_FILE: /usr/local/projects/16SrRNA_454Multiplex/barcodes/barcodes-v1.txt
+    # The maximum sequence position at which the component will look for the (start of) a 
+    # barcode sequence in each of the input sequences.  The default setting of 4 allows 
+    # at most 4 nucleotides to appear at the beginning of the sequence before the barcode 
+    # sequence  begins.  If multiple barcodes match within the specified range then the 
+    # first (in order of occurrence) will be chosen.
+    # 
+    MAX_BARCODE_OFFSET: 4
+    # Reverse primer sequence (and optional dinucleotide linker).  The component will look
+    # for this sequence immediately following the barcode in each sequence.  (Although note 
+    # that the default setting; of the MAX_EDIT_DIST parameter allows for a small number of 
+    # insertions between the barcode sequence and the reverse primer.)
+    # 
+    # Default value = 'CA' dinucleotide linker sequence plus the broadly-conserved bacterial
+    # 16S rRNA primer 338R.
+    # 
+    REVERSE_PRIMER: CATGCTGCCTCCCGTAGGAGT
+    # Maximum number of insertions, deletions and/or substitutions to permit when matching
+    # the beginning of each sequence (after the barcode) against REVERSE_PRIMER.
+    # 
+    MAX_EDIT_DIST: 2
+    # Forward primer sequence.  The component will look for this sequence to appear anywhere
+    # after the REVERSE_PRIMER.  Currently no mismatches are allowed when matching the forward
+    # primer sequence.  If the forward primer sequence is not found this will not be considered
+    # a serious error.
+    # 
+    # Default value = reverse complement of the broadly-conserved bacterial 16S rRNA primer 27F.
+    # 
+    FORWARD_PRIMER: CTGAGCCAGGATCAAACTCT
+    # Specifies what to trim off the sequences:
+    #   'all' (the default) - trim both the barcode and the primer(s)
+    #   'barcodes' - trim only the barcode but leave the primer(s) intact
+    #   'none' - bin the sequences based on barcode but do not do any barcode or primer trimming
+    # Note that the forward primer may not always be present (e.g., when the read length of the 
+    # underlying sequencing technology is significantly shorter than the expected insert size.)
+    # 
+    TRIM: all
+    # Minimum sequence length, AFTER trimming the barcode and/or primers.  Any sequence that
+    # fails to meet this length threshold will be placed in a discard file (i.e., an output 
+    # file with the suffix ".discarded".)
+    # 
+    MIN_LENGTH: 200
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FILTERED_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.filtered.list
+    DISCARDED_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.discarded.list
+  component:
+    COMPONENT_NAME: 454_mplex_seq_bin_trim
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Run script (not distributed)
+    - summarize/check binned output
+    - create list files
+  command_sets:
+    - bin and trim 454 multiplex sequence data
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: bin and trim barcoded sequences
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bin_and_trim_barcoded_seqs
+      params:
+        - key: --input_file
+          value: $;INPUT_FILE$;
+        - key: --barcode_file
+          value: $;BARCODE_FILE$;
+        - key: --reverse_primer
+          value: $;REVERSE_PRIMER$;
+        - key: --forward_primer
+          value: $;FORWARD_PRIMER$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --min_length
+          value: $;MIN_LENGTH$;
+        - key: --max_edit_dist
+          value: $;MAX_EDIT_DIST$;
+        - key: --max_barcode_offset
+          value: $;MAX_BARCODE_OFFSET$;
+        - key: --trim
+          value: $;TRIM$;
+        - key: --log
+          value: $;TMP_DIR$;/bin_and_trim_barcoded_seqs.log
+        - key: stdout
+          value: $;TMP_DIR$;/bin_and_trim_barcoded_seqs.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/bin_and_trim_barcoded_seqs.stderr
+    - name: summarize/check output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/count_barcoded_seqs
+      params:
+        - key: --input_file
+          value: $;INPUT_FILE$;
+        - key: --barcode_file
+          value: $;BARCODE_FILE$;
+        - key: --input_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/summary.txt
+        - key: --log
+          value: $;TMP_DIR$;/count_barcoded_seqs.log
+        - key: stdout
+          value: $;TMP_DIR$;/count_barcoded_seqs.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/count_barcoded_seqs.stderr
+    - name: create filtered files list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.filtered\""
+        - key: --output_list
+          value: $;FILTERED_OUTPUT_LIST$;
+    - name: create discarded files list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.discarded\""
+        - key: --output_list
+          value: $;DISCARDED_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: bin_and_trim_barcoded_seqs.pl
+    pod: |
+  =head1 NAME
+  
+  bin_and_trim_barcoded_seqs.pl - Take a set of barcoded sequences, group them by barcode and trim primers.
+  
+  =head1 SYNOPSIS
+  
+  bin_and_trim_barcoded_seqs.pl 
+           --input_file=/path/to/input_seqs.fasta
+           --reverse_primer='CATGCTGCCTCCCGTAGGAGT'
+           --forward_primer='CTGAGCCAGGATCAAACTCT'
+           --barcode_file=/path/to/barcodes.txt
+          [--output_dir=/path/to/output_dir
+           --min_length=200
+           --max_edit_dist=2
+           --max_barcode_offset=4
+           --trim=all
+           --log=/path/to/some.log
+           --debug=4
+           --help ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file, -i>
+      a multi-FASTA file containing the barcoded sequences to bin and trim.  currently the 
+      input sequences MUST be in all-uppercase.
+  
+  B<--reverse_primer, -r>
+      the reverse primer sequence to search for at the beginning of each sequence (following
+      the barcode).  if a linker sequence appears between the sequence barcode and the reverse
+      primer it should be included in the --reverse_primer sequence.  the script assumes that
+      the first two bases of --reverse_primer are a dinucleotide linker sequences, but the 
+      only place where this information is used is in a special-case check to see how many 
+      sequences contain the barcode and the reverse primer, but NOT the first two characters
+      of the reverse primer (the presumed linker sequence)
+  
+  B<--forward_primer, -f>
+      the (reverse complement of) the forward primer sequence to search for at the end of each 
+      sequence.
+  
+  B<--barcode_file,-b>
+      a whitespace-delimited text file that specifies the barcodes used to identify sequences in
+      --input_file.  each line of the file has two columns: the first specifies the (unique)
+      DNA sequence barcode and the second specifies the corresponding well number or sample ID, 
+      as needed.  for example:
+  
+      ACACACTG    A01
+      ACACGTCA    A02
+      ACAGACAG    A03
+      ACAGCTCA    A04
+      
+  B<--output_dir, -o>
+  	optional.  directory where the output files will be stored.  this directory will be created
+      if it does not exist.  if this option is not specified then the directory that contains 
+      --input_file will be used for the output. 
+      
+  B<--min_length, -m>
+      optional.  minimum sequence length required after trimming.  (default is 200 bp)
+  
+  B<--max_edit_dist, -D>
+      maximum edit distance between reverse primer and sequence. (default is 2)
+  
+  B<--max_barcode_offset, -B>
+      maximum sequence position at which to look for the (start of) the barcode sequence. (default is 4)
+      for example, to ensure that the barcode always starts at the very beginning of each sequence, set
+      --max_barcode_offset=0
+  
+  B<--trim, -t>
+      optional. specifies what to trim off the sequences:
+        'all' (the default) - trim both the barcode and the primer(s)
+        'barcodes' - trim only the barcode but leave the primer(s) intact
+        'none' - bin the sequences based on barcode but do not do any barcode or primer trimming
+      Note that the forward primer may not always be present (e.g., when the read length of the 
+      underlying sequencing technology is significantly shorter than the expected insert size.)
+  
+  B<--log,-l>
+      optional.  path to a log file the script should create.  will be overwritten if
+      it already exists.
+  
+  B<--debug,-d>
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h>
+      This help message/documentation.
+  
+  =head1  DESCRIPTION
+  
+  Take a set of barcoded sequences, group them by barcode and trim primers.  The script
+  takes as input a single multi-FASTA file of sequences and divides them amongst a set of
+  output files based on the persence of an embedded sequence barcode (e.g., "ACACACTG").
+  The script will trim the barcode sequence off each sequence, in addition to trimming 
+  the reverse and forward primers (--reverse_primer and --forward_primer), if they can
+  be found.  The --trim option can be used to specify the trimming behavior: trim neither
+  the barcode nor the primers, trim only the barcode, or trim both the primers and the
+  barcode.
+  
+  Each sequence with a recognizable barcode will be placed in an output file whose name
+  contains both the barcode and also the well/sample ID specified for that barcode in 
+  the --barcode_file.  For example, if the input sequence file is "input.fsa", the barcode
+  detected in the sequence is "TGCATCGA", and the sample id that corresponds to that 
+  barcode is "H12" then the (trimmed) sequence will be placed in one of the following 
+  two files:
+  
+  input.fsa.H12.TGCATCGA.filtered
+  input.fsa.H12.TGCATCGA.discarded
+  
+  A sequence will be placed in the ".filtered" file if both the barcode and the reverse
+  primer can be found (within --max_edit_dist), and the length of the sequence after 
+  trimming is greater than or equal to the minimum value specified by --min_length.  
+  If the reverse primer cannot be found or the length of the sequence after trimming is
+  below the threshold then the (perhaps partially trimmed) sequence will be placed in 
+  the ".discarded" file.  (If reverse primer trimming is disabled then the presence of
+  the reverse primer isn't required for the sequence to be placed in the ".filtered"
+  file.)  Any sequence without a recognizable barcode will be placed in a discard
+  file named based solely on the input file, e.g.:
+  
+  test.fsa.discarded
+  
+  The FASTA header line of the sequences (in both the .filtered and .discarded files) 
+  will be updated to reflect the trimming and barcode/primer matching.  For example, 
+  in the following defline:
+  
+  >000123_456_789 length=261 uaccno=XXFABC40343|E01|CTGAGTGT|trimmed_length:232|rev_primer_mismatches:0|fwd_primer_mismatches:NA
+  
+  The new fields are:
+  
+  E01: 
+   well/sample id that corresponds to the barcode 'CTGAGTGT'
+  CTGAGTGT: 
+   literal barcode that was identified in the sequence (and trimmed, unless --trim=none)
+  trimmed_length
+   the length of the sequence after trimming the barcode and/or primers
+  rev_primer_mismatches: 
+   edit distance between the canonical reverse primer given by --reverse_primer and the 
+   primer found in the sequence.  should always be <= --max_edit_dist.  "NA" means that
+   the primer was not found.
+  fwd_primer_mismatches:
+   edit distance between the canonical forward primer given by --forward_primer and the 
+   primer found in the sequence.  this value will always be either 0 (exact match) or 
+   "NA" (no match) since approximate matching of forward primers is not yet supported.
+  
+  =head1  INPUT
+  
+  A multi-FASTA formatted file of sequences to bin and trim (specified by --input_file) 
+  and a set of unique barcodes (specified by --barcode_file).  Currently the input sequences,
+  barcodes, and primers must be all-uppercase.
+  
+  =head1  OUTPUT
+  
+  A set of multi-FASTA formatted files as described above.  The script also prints the 
+  following information to STDOUT:
+  
+  Levenshtein edit distance histogram for reverse RNA primer:
+  
+      distance      num_seqs
+             0        239058
+             1          5014
+             2*          289
+  
+         total        244361
+  * - setting for --max_edit_dist
+  
+  Indel count histogram for reverse RNA primer:
+  
+        indels      num_seqs
+            -2           155
+            -1          1925
+             0        241723
+             1           503
+             2            55
+  
+         total        244361
+  
+  Number of reverse primers that match exactly except for missing CA linker: 45
+  
+  =head1  CONTACT
+  
+      William Hsiao
+      william.hsiao@gmail.com
+  
+  =head2 TODO:
+  -Check additional barcodes beyond the first (in the case of multiple matches) if choosing
+   the first one fails to match the primer sequence(s)
+  -Relax requirement that all the input sequences and primers have to be all-uppercase.
+  -Allow approximate matches to the forward primer.
+  -Check the product size in cases where both primers are found?
+  - script: count_barcoded_seqs.pl
+    pod: |
+  =head1 NAME
+  
+  count_barcoded_seqs.pl - Summarize the output of bin_and_trim_barcoded_seqs.pl in tabular form.
+  
+  =head1 SYNOPSIS
+  
+  count_barcoded_seqs.pl
+           --input_dir=/path/to/bin_and_trim_barcoded_seqs/output_dir
+           --input_file=/path/to/input_seqs.fasta
+           --barcode_file=/path/to/barcodes.txt
+           --output_file=/path/to/summary-report.txt
+          [--log=/path/to/some.log
+           --debug=4
+           --help ]
+  
+  =head1 OPTIONS
+  
+  B<--input_dir, -D>
+      directory into which bin_and_trim_barcoded_seqs.pl wrote the output sequence files
+  
+  B<--input_file,-i>
+      path to the same --input_file used by bin_and_trim_barcoded_seqs.pl
+  
+  B<--barcode_file,-b>
+      path to the same --barcode_file used by bin_and_trim_barcoded_seqs.pl
+  
+  B<--output_file,-o>
+      path to the file in which to write the tabular summary
+  
+  B<--log,-l>
+      optional.  path to a log file the script should create.  will be overwritten if
+      it already exists.
+  
+  B<--debug,-d>
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h>
+      This help message/documentation.
+  
+  =head1  DESCRIPTION
+  
+  Summarize the output of bin_and_trim_barcoded_seqs.pl in tabular form.
+  
+  =head1  INPUT
+  
+  The output of bin_and_trim_barcoded_seqs.pl.
+  
+  =head1  OUTPUT
+  
+  A table listing, among other things, the number of trimmed and discarded sequences for each barcode.
+  
+  =head1  CONTACT
+  
+      Jonathan Crabtree
+      jonathancrabtree@gmail.com
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

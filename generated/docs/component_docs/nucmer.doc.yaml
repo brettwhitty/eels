@@ -1,0 +1,370 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: nucmer
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - nucmer.config
+  - nucmer.xml
+  - nucmer.i1.xml
+  - workflow/nucmer-master.ini
+  - workflow/nucmer.ini
+  - workflow/nucmerconf.ini
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  parameters:
+    # Any configuration options to be supplied to nucmer
+    CONFIG_OPTIONS: -maxmatch -c 100
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    # The genome to be aligned against.
+    REFERENCE_GENOME: ""
+    # Alternatively a list of reference genomes can be supplied. Each genome will be aligned against each input
+    REFERENCE_GENOME_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    NUCMER_DELTA_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.delta.list
+  component:
+    COMPONENT_NAME: nucmer
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - nucmer workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/nucmer_iterator.list\" /"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create nucmer iterator list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_nucmer_iterator_list
+      arg: --sequence_file=$;INPUT_FILE$; --sequence_list=$;INPUT_FILE_LIST$; --reference_genome=$;REFERENCE_GENOME$; --reference_genome_list=$;REFERENCE_GENOME_LIST$; --output=$;TMP_DIR$;/nucmer_iterator.list --log=$;TMP_DIR$;/create_nucmer_iterator_list.log --debug=4
+    - name: create nucmer delta file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.delta\""
+        - key: --output_list
+          value: $;NUCMER_DELTA_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - nucmer compute
+  steps:
+    - name: create group temp folder
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create group output folder
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: nucmer
+      type: RunUnixCommand
+      executable: $;NUCMER_EXEC$;
+      arg: $;CONFIG_OPTIONS$; -p $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;UNIQUE_BASE$; $;REFERENCE_GENOME$; $;I_FILE_PATH$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stderr
+    - name: create coordinates file
+      type: RunUnixCommand
+      executable: $;COORDS_EXEC$;
+      arg: "-T $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;UNIQUE_BASE$;.delta > $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;UNIQUE_BASE$;.coords"
+
+# Workflow INI: nucmer-master.ini
+workflow_ini_nucmer-master.ini:
+  create_bsml_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--regex: "\".*.$;NAME$;.bsml\""
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--output_list: $;BSML_OUTPUT_LIST$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_output_directory:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: nucmer.ini
+workflow_ini_nucmer.ini:
+  NUCmer:
+    # Run nucmer
+    param.command: /usr/local/common/nucmer
+    param.--prefix: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;
+    param.--breaklen: $;BREAKLEN$;
+    param.--mincluster: $;MINCLUSTER$;
+    param.--diagfactor: $;DIAGFACTOR$;
+    param.--maxgap: $;MAXGAP$;
+    param.--minmatch: $;MINMATCH$;
+    arg: $;DATABASE_FILE$;
+    arg: $;ITER_FILE_PATH$;
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+  empty:
+  mummer2bsml:
+    # encode nucmer output into BSML doc
+    param.command: $;BIN_DIR$;/mummer2bsml
+    param.--mummer_coords: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.nucmer_coords
+    param.--mummer_type: 3
+    param.--output: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--database: $;DATABASE$;
+    param.--class: assembly
+  show-coords:
+    # Run show-coords to produce tab delimited output
+    param.command: /usr/local/common/show-coords
+    arg: -THrcl
+    arg: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.delta
+    param.stdout: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.nucmer_coords
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    param.--analysis_id: $;NAME$;_analysis
+
+# Workflow INI: nucmerconf.ini
+workflow_ini_nucmerconf.ini:
+  _header:
+    # configuration file for the NUCmer workflow
+  include nucmer:
+    $;SHARED_CONFIG$;: ""
+  input nucmer:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: fsa
+    $;DATABASE_FILE$;: ""
+  output nucmer:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;BSML_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+  parameters nucmer:
+    $;BREAKLEN$;: 200
+    $;MINCLUSTER$;: 65
+    $;DIAGFACTOR$;: 0.12
+    $;MAXGAP$;: 90
+    $;MINMATCH$;: 20
+  workflowdocs nucmer:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: nucmer
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/nucmer-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/nucmer-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/nucmer.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/nucmer_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_nucmer_iterator_list.pl
+    pod: |
+  =head1 NAME
+  
+  create_nucmer_iterator_list.pl - Default output is a workflow iterator that can be used to iterate over input for nucmer
+  
+  =head1 SYNOPSIS
+  
+  USAGE: ./create_nucmer_iterator_list.pl --sequence_list=/path/to/sequence/file/list --reference_genome=/path/to/reference/genome
+  										--reference_genome_list=/path/to/reference/genome/list --output=/path/to/output/iterator
+  										
+  =head1 OPTIONS
+  
+  B<--sequence_file, -i>
+      A single sequence file.
+  
+  B<--sequence_list, -s>
+  	A list of sequence files that should be aligned using nucmer.
+  	
+  B<--reference_genome, -r>
+  	A reference genome to align the target sequences against.
+  	
+  B<--reference_genome_list, -rl>
+  	A list of reference genome that every target input sequence should be aligned against.
+  
+  B<--output, -o>
+  	Output iterator file.
+  	
+  B<--log, -l>
+  	Optional. Log file.
+  	
+  B<--debug, -d>	
+  	Optional. Debug level.
+  	
+  B<--help, -h>
+  	Print perldocs for this script.
+  	
+  =head1 DESCRIPTION
+  
+  Creates an ergatis/workflow iterator list file for a distributed nucmer job. This iterator contains the parameters needed to run nucmer.
+  
+  =head1 INPUT
+  
+  A list of sequence files in FASTA format and a single reference genome (in FASTA format) AND/OR a list of reference genomes.
+  
+  =head1 OUTPUT
+  
+  The output ergatis iterator list will be written to the file specified by the --output parameter.
+  
+  =head1 CONTACT
+  
+  	Cesar Arze
+  	carze@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

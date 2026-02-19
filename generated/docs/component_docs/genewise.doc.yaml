@@ -1,0 +1,484 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: genewise
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - genewise.config
+  - genewise.xml
+  - genewise.i1.xml
+  - genewise.i2.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / genes
+  parameters:
+    OTHER_OPTS: -sum -pretty
+    # work_dir is the location where an asmbl_id subdir is created and the .fsa and .pep files are posted for each protein best hit and corresponding genome location substring. 
+    WORK_DIR: $;OUTPUT_DIRECTORY$;/work_dir
+    # length of sequence to extend each end of a genomic location to be aligned
+    PADDING_LENGTH: 500
+    # minimum score for a protein alignment chain to be considered for realignment using genewise
+    MIN_CHAIN_SCORE: 50
+    # the number of best protein alignments to find per location
+    NUM_TIERS: 3
+    # percentage length candidate protein must align
+    MIN_PERCENT_ALIGN_CHAIN: 70
+  input:
+    # BSML files containing database match output (eg: aat_aa) for preparing genewise input
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # don't change this.  this component generates its own input list
+    GENEWISE_INPUT_LIST: $;OUTPUT_DIRECTORY$;/genewise.input_file_listing
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: genewise
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    ITERATOR2: i2
+    ITERATOR2_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR2$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterators
+    - Postprocessing
+  command_sets:
+    - genewise workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;INPUT_FILE_LIST$;=$;GENEWISE_INPUT_LIST$;,$;ITERATOR_NAME$;=ITERATOR2,$;ITERATOR_XML$;=ITERATOR2_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create input list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;/work_dir
+        - key: --regex
+          value: "\".*\\.fsa\""
+        - key: --output_list
+          value: $;GENEWISE_INPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - prepare_for_genewise compute
+  steps:
+    - name: prepare for genewise
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/prepare_for_genewise_best_loc
+      params:
+        - key: --bsml_file
+          value: $;I_FILE_PATH$;
+        - key: --project
+          value: $;PROJECT$;
+        - key: --work_dir
+          value: $;WORK_DIR$;
+        - key: --PADDING_LENGTH
+          value: $;PADDING_LENGTH$;
+        - key: --MIN_CHAIN_SCORE
+          value: $;MIN_CHAIN_SCORE$;
+        - key: --num_tiers
+          value: $;NUM_TIERS$;
+        - key: --MIN_PERCENT_CHAIN_ALIGN
+          value: $;MIN_PERCENT_ALIGN_CHAIN$;
+        - key: stdout
+          value: $;TMP_DIR$;/prepare_for_genewise_best_loc.$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/prepare_for_genewise_best_loc.$;I_FILE_BASE$;.stderr
+
+# Iterator i2 - per-input processing steps
+iterator_i2:
+  command_sets:
+    - genewise compute
+  steps:
+    - name: genewise
+      type: RunUnixCommand
+      executable: $;GENEWISE_EXEC$;
+      arg: $;I_DIR$;/$;I_FILE_BASE$;.pep $;I_FILE_PATH$; -gff -quiet $;OTHER_OPTS$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+    - name: genewise2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/genewise2bsml
+      params:
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --input_seq
+          value: $;I_FILE_PATH$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --project
+          value: $;PROJECT$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: genewise2bsml.pl
+    pod: |
+  =head1 NAME
+  
+  genewise2bsml.pl
+  
+  =head1 SYNOPSIS
+  
+  USAGE: genewise2bsml.pl
+               --input_file|-i
+               --input_seq|-s
+               --output|-o
+               --project|-p
+               --id_repository|r
+               --help|-h
+               --log|-l
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      Input is a genewise raw file.
+  
+  B<--input_seq,-s>
+      File used as input to genewise and containing the genomic fasta sequence.
+  
+  B<--output,-o>
+      Output BSML file name.
+  
+  B<--project,-p>
+      Project/database name used to create feature identifiers.
+  
+  B<--id_repository,-r>
+      Path to the id repository for the named project.
+  
+  B<--help,-h>
+      This help documentation
+  
+  B<--log,-l>
+      Path to intended log file.
+  
+  =head1 DESCRIPTION
+  
+  This script parses GFF output from genewise and writes it out 
+  as BSML suitable for import into CHADO/legacy DBs.  Specifically,
+  this 2bsml script is meant to accompany the genewise executable in
+  the genewise_best_loc pipeline.  It expects the input fasta to contain
+  the coordinates mapping it back to the larger genome molecule, as such is the
+  way genewise_best_loc works.  It splits the genomic data into regions around previously
+  described aat search hits, then uses those proteins and the respective regions
+  they hit on as the input for genewise.  Because of this, we must stitch
+  the hits back into the overall assemblies by adjusting the coords
+  to compensate for the truncation of the sequence by the script
+  'prepare_for_genwise_best_loc.pl'.  
+  
+  
+  =head1 INPUT
+  
+  Current assumption is that input files are syntactically correct with respect 
+  to the GFF spec, (at least as far as that produced by genewise with -gff goes) 
+  and that they are encoding predicted gene features.
+  
+  =head1 OUTPUT
+  
+  Output will be BSML encoding the geneid predicted gene models.  By the time
+  the data is in bsml, it is 'standalone' and no more tricks need be played
+  with it.  It can be loaded by a standard loader like bsml2legacydb or bsml2chado.
+  
+  =head1 CONTACT
+  
+      Jason Inman 
+      jinman@jcvi.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.
+  - script: prepare_for_genewise_best_loc.pl
+    pod: |
+  =head1 NAME
+  
+  prepare_for_geneWise.dbi
+  
+  =head1 SYNOPSIS
+  
+  USAGE: prepare_for_geneWise.dbi
+             --project|-p                   aa1 
+             --bsml_list|-i                 aat_aa.bsml.list
+             --bsml_file|-I                 aat_aa_bsml_file
+             --work_dir|-w                  working_directory
+          [  --verbose|-v
+             --PADDING_LENGTH               500
+             --MIN_CHAIN_SCORE              50
+             --MIN_PERCENT_CHAIN_ALIGN      70
+             --num_tiers|n                  2
+             --JUST_PRINT_BEST_LOCATIONS
+           ]
+  
+  
+  =head1 OPTIONS
+  
+  B<--project,-p>
+      Name of the project database 
+  
+  B<--bsml_list,-i>
+      BSML list file as output by an aat_aa run
+  
+  B<--bsml_file,-I>
+      BSML file, a sinlge output of an aat_aa run
+  
+  B<--work_dir,-w>
+      Working directory to post the genome sequence segments and proteins to
+      be aligned using genewise
+  
+  B<--verbose,-v>
+      Verbose mode 
+  
+  B<--PADDING_LENGTH>
+      number of basepairs to extend the genome location on each end (default: 500)
+  
+  B<--MIN_CHAIN_SCORE>
+      minimum score for an alignment chain to be considered a candidate for genewise realignment.
+      chain_score = sum (per_id * segment_length)
+      default minimum score = 50
+  
+  B<--MIN_PERCENT_CHAIN_ALIGN>
+      mimimum percent of the matching proteins length that aligns to the genome in a single alignment chain.
+      default: 70%
+  
+  B<--num_tiers,-n>
+      number of overlapping best location hits.
+      default: 2 (only the two best hits per location is extracted)
+  
+  B<--JUST_PRINT_BEST_LOCATIONS>
+      The best matches are reported to stdout.  No files are written.
+  
+  B<--DUMP_CHAIN_STATS>
+      All AAT alignments retrieved from the database are printed to a file \$asmbl_id.chain_stats.
+  
+  B<--help,-h>
+      This help documentation
+  
+  =head1 DESCRIPTION
+  
+  The best protein match to a given genomic region is extracted along with the genomic 
+  sequence corresponding to that region to be realigned using the genewise program.
+  
+  The algorithm for finding the best match per location is as follows:  The results of an 
+  AAT search of a protein database against a genome assembly should be available for querying
+  from the evidence table.  All alignment chains are retrieved from the database and scored 
+  as the sum of (per_id * length) for each alignment segment.  The chains are sorted by score
+  and tiled to the genome, disallowing overlap among alignment chains along the genome.  Matches
+  to the top and bottom strands of the genome are tiled separately.  The first tier on each
+  strand contains the best hits per location.  Set --num_tiers > 1 to extract multiple best hits per
+  location.
+  
+  Each protein is retrieved from the protein database fasta file using the cdbyank utility.  Each 
+  genome region is extracted as a substring of the genome sequence.  Both the protein and genome
+  sequence substring are written as fasta files in the working directory, structured like so:
+  
+  {WORKING_DIRECTORY}/{asmbl_id}/{database}.assembly.{asmbl_id}.{counter}.pep
+  
+  {WORKING_DIRECTORY}/{asmbl_id}/{database}.assembly.{asmbl_id}.{counter}.fsa
+  
+  for the protein and genome sequence region, respectively.  The counter is an integer incremented for
+  each genome location on each asmbl_id.
+  
+  The header of the .fsa file is constructed like so:
+  
+  {database}.assembly.{asmbl_id}.{end5}.{end3}
+  
+  so that, by extracting the header for this entry, the exact genome coordinates can be inferred.
+  
+  NOTE: this script is modified version of the old database-dependent prepare_for_genewise script.
+  
+  =head1 CONTACT
+  
+      Brett Whitty
+      bwhitty@tigr.org

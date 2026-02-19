@@ -1,0 +1,154 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bcpconverter
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bcpconverter.config
+  - bcpconverter.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    # Input and output format examples sybase or postgresql.
+    # File extensions examples .out or .bcp (default is .sybase.bcp for sybase and .psql.bcp for postgresql).
+    # Input directory must be specified.
+    # If user specifies table, then only the tab-delimited file corresponding with that table will processed.
+    INPUT_FORMAT: ""
+    INPUT_FILE_EXTENSION: ""
+    INDIR: ""
+    OUTPUT_FORMAT: ""
+    OUTPUT_FILE_EXTENSION: ""
+    TABLE: ""
+  input:
+    # Here is the list of core chado tables and chado-mart materialized views that will be backed up.
+    # The conversion process will execute on the local machine.
+    TABLE_LIST: "tableinfo,project,db,cv,cvterm,dbxrefprop,cvtermprop,pub,synonym,pubprop,pub_relationship,pub_dbxref,pubauthor,organism,organismprop,organism_dbxref,cvtermpath,cvtermsynonym,cvterm_relationship,cvterm_dbxref,feature_pub,featureprop_pub,feature_synonym,feature_cvterm,feature_cvterm_dbxref,feature_cvterm_pub,feature_cvtermprop,feature_relationship_pub,feature_relationshipprop,feature_relprop_pub,analysis,analysisprop,phylotree,phylotree_pub,phylonode,phylonode_dbxref,phylonode_pub,phylonode_organism,phylonodeprop,phylonode_relationship,cm_blast,cm_proteins,cm_clusters,cm_cluster_members"
+    # Here is the list of core chado tables that typically have large data content. 
+    # For this reason, the conversion processes for these will execute on the grid.
+    LARGE_TABLES_LIST: "dbxref,feature,featureprop,feature_dbxref,featureloc,feature_relationship,analysisfeature"
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BCP_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bcp.list
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  input:
+    # Here is the list of core chado tables and chado-mart materialized views that will be backed up.
+    # The conversion process will execute on the local machine.
+    TABLE_LIST: "tableinfo,project,db,cv,cvterm,dbxrefprop,cvtermprop,pub,synonym,pubprop,pub_relationship,pub_dbxref,pubauthor,organism,organismprop,organism_dbxref,cvtermpath,cvtermsynonym,cvterm_relationship,cvterm_dbxref,feature_pub,featureprop_pub,feature_synonym,feature_cvterm,feature_cvterm_dbxref,feature_cvterm_pub,feature_cvtermprop,feature_relationship_pub,feature_relationshipprop,feature_relprop_pub,analysis,analysisprop,phylotree,phylotree_pub,phylonode,phylonode_dbxref,phylonode_pub,phylonode_organism,phylonodeprop,phylonode_relationship,cm_blast,cm_proteins,cm_clusters,cm_cluster_members"
+    # Here is the list of core chado tables that typically have large data content. 
+    # For this reason, the conversion processes for these will execute on the grid.
+    LARGE_TABLES_LIST: "dbxref,feature,featureprop,feature_dbxref,featureloc,feature_relationship,analysisfeature"
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BCP_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bcp.list
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: bcpconverter
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: convertbcp
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    ITERATOR2: convertlargebcp
+    ITERATOR2_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR2$;.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    # no-distrib = 0 ensures that all executes in series and never parallel
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator1 for converting regular size bcp files
+    - Iterator2 for converting large size bcp files
+  command_sets:
+    - backupdb workflow
+    - Create list for local bcp conversion process
+    - Create list for distributed bcp conversion process
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=convertbcp,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/bcp.list,$;NODISTRIB$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=convertlargebcp,$;ITERATOR_XML$;=ITERATOR2_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/large_bcp.list,$;NODISTRIB$;=0\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create list for local bcp conversion process
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_table_iterator_list
+      params:
+        - key: --table_list
+          value: $;TABLE_LIST$;
+        - key: --output_iter_list
+          value: $;TMP_DIR$;/bcp.list
+        - key: stdout
+          value: $;TMP_DIR$;/create_bcp_iterator_list.bcp.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/create_bcp_iterator_list.bcp.stderr
+    - name: Create list for distributed bcp conversion process
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_table_iterator_list
+      params:
+        - key: --table_list
+          value: $;LARGE_TABLES_LIST$;
+        - key: --output_iter_list
+          value: $;TMP_DIR$;/large_bcp.list
+        - key: stdout
+          value: $;TMP_DIR$;/create_table_iterator_list.large-bcp.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/create_table_iterator_list.large-bcp.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_table_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_table_iterator_list.pl - 
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  create_table_iterator_list
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

@@ -1,0 +1,149 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pangenome_make_table
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pangenome_make_table.config
+  - pangenome_make_table.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+    # The following two parameters are options that can be used to sample the
+    # blast data. Use only 1 of them if you want sampling and the other to 0.
+    # If you want all the data to be analyzed, set both to 0
+    MULTIPLICITY: ""
+    COMPARISONS: ""
+    NUM_THREADS: ""
+  input:
+    # Pangenome profile matrix file created from pangenome_make_profile
+    INPUT_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: pangenome_make_table
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - hack to make sure these following commands will run other than master node
+  command_sets:
+    - pangenome_make_table workflow
+    - pangenome_make_table distributed work
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: replace template keys
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_template_keys
+      params:
+        - key: --template_xml
+          value: $;DOCS_DIR$;/pangenome_make_table_distributed_work.xml
+        - key: --component_conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --output_xml
+          value: $;WORKFLOW_REPOSITORY$;/pangenome_make_table_distributed_work.xml.gz
+        - key: --distribopts
+          value: nodistrib=$;NODISTRIB$;
+        - key: stdout
+          value: $;TMP_DIR$;/replace_template_keys.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/replace_template_keys.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: pangenome_make_table.pl
+    pod: |
+  =head1  NAME
+  
+  pangenome_make_table.pl - Creates counts of new and core genes per pangenome size
+  
+  =head1 SYNOPSIS
+  
+  USAGE: pangenome_make_table.pl
+          --input_list=/path/to/somefile.dat.list
+          --output=/path/to/output.list
+        [ --log=/path/to/some/log ]
+  
+  =head1 OPTIONS
+  
+  B<--blast_stored_file,-b>
+      List of files containing serialized array of BLAST data.
+  
+  B<--output_path,-o>
+      Path to which output files will be written.
+  
+  B<--output_file,-o>
+      Full path and name of pangenome data output file.
+  
+  B<--multiplicity,-m>
+      The multiplicity value to be used in data sampling.
+  
+  B<--comparisons,-c>
+      The number of comparisons to sample.
+  
+  B<--num_threads,-t>
+      Optional.  Enable multithreading, using the specified number of threads.
+  
+  B<--log,-d>
+      optional. Will create a log file with summaries of all actions performed.
+  
+  B<--debug>
+      optional. Will display verbose status messages to STDERR if logging is disabled.
+  
+  B<--help,-h>
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      The pangenome analysis script creates an array of BLAST results data which is then
+      processed to create pangenome data.
+  
+  =head1 INPUT
+  
+      The input should be a list of files containing serialized BLAST results array data.
+  
+  =head1 OUTPUT
+  
+      There is no output unless you use the --log option.
+  
+  =head1 CONTACT
+  
+  	Shaun Adkins
+  	sadkins@som.umaryland.edu

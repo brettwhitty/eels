@@ -1,0 +1,214 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: cuffcompare
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - cuffcompare.config
+  - cuffcompare.xml
+  - cuffcompare.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to annotation file in GTF format
+    ANNOTATION_FILE: ""
+    # prefix for output files
+    PREFIX: cuffcmp
+    # path to Cufflinks package binary directory
+    CUFFLINKS_BIN_DIR: $;CUFFCOMPARE_BIN$;
+    # additonal Cufflinks parameters
+    OTHER_PARAMS: -R
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to Cufflinks GTF file or listfile of Cufflinks GTF files
+    INPUT_FILE: ""
+    # path to list of Cufflinks GTF files or list of sets of Cufflinks GTF files.
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple Cufflinks GTF files.
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: gtf
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of combined GTF files for each comparison instance
+    OUTPUT_COMBINED_GTF: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.combined.gtf.list
+  component:
+    COMPONENT_NAME: cuffcompare
+    DESCRIPTION: generates cuffcompare analysis for the given Cufflinks GTF file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # Cufflinks version
+    VERSION: Cufflinks version 1.3.0
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - cuffcompare
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create combined gtf list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.combined.gtf\""
+        - key: --output_list
+          value: $;OUTPUT_COMBINED_GTF$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - cuffcompare
+  steps:
+    - name: cuffcompare
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/cuffcompare
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --gtffile
+          value: $;I_FILE_PATH$;
+        - key: --annotation
+          value: "'$;ANNOTATION_FILE$;'"
+        - key: --prefix
+          value: $;PREFIX$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --cufflinks_bin_dir
+          value: $;CUFFLINKS_BIN_DIR$;
+        - key: --args
+          value: "'$;OTHER_PARAMS$;'"
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/cuffcompare.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/cuffcompare.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: cuffcompare.pl
+    pod: |
+  =head1 NAME
+  
+  cuffcompare.pl - script to compare Cufflinks transcript GTF files against a reference or within samples.
+  
+  =head1 SYNOPSIS
+  
+      cuffcompare.pl --i cufflinks_gtf] [--a annotation_file] [--p outprefix]
+      		       [--o outdir] [--cb cufflinks_bin_dir] [--v] 
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --i <cufflinks_gtf>            = /path/to/cufflinks gtf file for a single sample or 
+                                       a listfile of cufflinks gtf files for multiple samples.
+                                       The gtf filename should be in the format /path/to/<sample_name>.*.transcripts.gtf
+  
+      --a <annotation_file>          = /path/to/annotation file in GTF format. Optional
+  
+      --p <prefix>                   = Output files prefix. Optional. [cuffcmp]
+  
+      --o <output dir>               = /path/to/output directory. Optional. [present working directory]
+  
+      --cb <cufflinks_bin_dir>       = /path/to/cufflinks binary directory. Optional. [/usr/local/bin]
+  
+      --args <other_params>          = additional Cuffcompare parameters. Optional. Refer Cufflinks manual.
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script executes the cuffcompare script from the Cufflinks RNA-Seq Analysis package.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

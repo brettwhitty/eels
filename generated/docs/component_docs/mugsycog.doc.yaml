@@ -1,0 +1,110 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mugsycog
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mugsycog.config
+  - mugsycog.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: clustering
+  parameters:
+    MAX_MULTI_ALIGNMENT: 100
+    # set this to 1 if the Seq-data-import.identifiers in the input BSML are not guaranteed to match the
+    # ids of the corresponding linked features
+    USE_FEATURE_IDS_IN_FASTA: 1
+    # The minimum %coverage/identity values for mapping genes into clusters.
+    COVERAGE: 0.7
+    IDENTITY: 0.6
+    QUERY_COVERAGE: 0
+  input:
+    # the mugsymap file
+    MUGSY_MAP_FILE: ""
+    # alignment file (.maf) from mugsy
+    MUGSY_ALIGNMENT: ""
+    # a fasta file containing all of the genomic sequences
+    GENOMIC_MULTIFASTA: ""
+    # a list of the bsml files so that the cog file can be converted to multifasta
+    BSML_FILE_LIST: ""
+  output mugsycog:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    GENOMIC_FASTA_COPY: $;TMP_DIR$;/allseqs.fsa
+    FIXED_MUGSY_ALIGNMENT: $;TMP_DIR$;/mugsyalignment.maf.fixed
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+    TRANSFORM_DIR: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;_transform/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # feature and lcb index
+    MUGSY_INDEX: $;TMP_DIR$;/mugsycog.index
+  component:
+    COMPONENT_NAME: mugsycog
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6107 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - hack to make sure these following commands will run other than master node
+  command_sets:
+    - mugsy cog
+    - mugsycog distributed work
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: replace template keys
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_template_keys
+      params:
+        - key: --template_xml
+          value: $;DOCS_DIR$;/mugsycog_distributed_work.xml
+        - key: --component_conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --output_xml
+          value: $;WORKFLOW_REPOSITORY$;/mugsycog_distributed_work.xml.gz
+        - key: --distribopts
+          value: nodistrib=$;NODISTRIB$;
+        - key: stdout
+          value: $;TMP_DIR$;/replace_template_keys.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/replace_template_keys.stderr
+    - name: Fix mugsy_map file
+      type: RunUnixCommand
+      executable: "awk '$3!=\"-\" &amp;&amp; $4!=\"-\" &amp;&amp; $5!=\"-\" &amp;&amp; $6!=\"-\" &amp;&amp; $7!=\"-\"' $;MUGSY_MAP_FILE$;"
+      params:
+        - key: stdout
+          value: $;MUGSY_MAP_FILE$;.tmp
+    - name: Move mugsy_map file
+      type: RunUnixCommand
+      executable: /bin/mv
+      arg: $;MUGSY_MAP_FILE$;.tmp $;MUGSY_MAP_FILE$;

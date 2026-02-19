@@ -1,0 +1,416 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: dump_fasta
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - dump_fasta.config
+  - dump_fasta.xml
+  - dump_fasta.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Name of the database server.
+    SERVER: jabba
+    # Database username 
+    USERNAME: ""
+    # Database password
+    PASSWORD: ""
+    # Optional. Read password from file if the password should not be publicly seen.
+    PASSWORD_FILE: ""
+    # Sequence on which to split sequences into contigs
+    LINKER_SEQUENCE: NNNNNCACACACTTAATTAATTAAGTGTGTGNNNNN
+    # Optional. String to use in constructing contig ids 
+    CONTIG_STRING: contig
+    # Optional. Perl-style substitution to apply to contig ids.
+    CONTIG_ID_REPLACEMENT: gene
+    # Optional. Specify other tbl2asn parameters. Defaults specified in the script currently are -p, -t, -r, -a, -V, -Z, -j
+    OTHER_TBL2ASN_OPTS: ""
+    # Number of Ns to split the contig sequence. Default is 10 
+    SPLIT_NUM: 10
+    # Minimum contig length allowed in fasta and tbl files. Contigs less than this length will be deleted. Default is 200
+    MIN_CONTIG_LEN: 200
+  input:
+    INPUT_FILE: ""
+    INPUT_FILE_LIST: ""
+    INPUT_DIRECTORY: ""
+    INPUT_EXTENSION: txt
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    DB_OUTPUT_DIR_LIST: $;OUTPUT_DIRECTORY$;/genbank_submission.list
+  component:
+    COMPONENT_NAME: dump_fasta
+    DESCRIPTION: Dump a database into a fasta file with contigs and prepares it for GenBank submission
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - dump fasta workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create dump database directory list
+      type: RunUnixCommand
+      executable: /bin/ls
+      arg: "-d $;OUTPUT_DIRECTORY$;/*/*/*/ > $;DB_OUTPUT_DIR_LIST$;"
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - dump fasta iterator
+  steps:
+    - name: dump fasta
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dump_fasta
+      params:
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --database_list
+          value: $;I_FILE_PATH$;
+        - key: --linker_sequence
+          value: $;LINKER_SEQUENCE$;
+        - key: --contig_string
+          value: $;CONTIG_STRING$;
+        - key: --contig_id_replacement
+          value: $;CONTIG_ID_REPLACEMENT$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+    - name: create sbt and cmt files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/prepare_sbt_cmt
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.prepare_sbt_cmt.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.prepare_sbt_cmt.stderr
+    - name: create agp
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/format_velvet_assembled_AGP
+      params:
+        - key: --fsa_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;/$;I_FILE_BASE$;.fsa
+        - key: --split_param
+          value: $;SPLIT_NUM$;
+        - key: --min_contig_len
+          value: $;MIN_CONTIG_LEN$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+    - name: run tbl2asn
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/wrap_tbl2asn
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --input_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+        - key: --utility_path
+          value: $;TBL2ASN_PATH$;
+        - key: --opts
+          value: $;OTHER_TBL2ASN_OPTS$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.wrap_tbl2asn.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.wrap_tbl2asn.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: dump_fasta.pl
+    pod: |
+  =head1 NAME
+  
+  dump_fasta.pl - Dump the contents of an IGS MySQL Chado annotation database into .fsa files that can be processed by NCBI's tbl2asn utility.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: dump_fasta.pl
+         --database_list=/path/to/database.list
+         --username=db_user1
+         --password=db_password1
+         --server=annot_db.someplace.org
+       [ --linker_sequence=NNNNNCACACACTTAATTAATTAAGTGTGTGNNNNN
+         --contig_string='contig'
+         --contig_id_replacement='_contigs\.ctg/.ctg'
+         --output_dir=TIGR_moore
+         --log=/path/to/file.log
+         --help
+         --test
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--database_list,-d>
+      The path to a list file with newline-seperated names of chado-compliant annotation databases that reside on the MySQL database server specified by --server.
+      If a comma (,) is added after the database name, then the user can specify a database_abbreviation.  This is essentially a shorter version of the database name that is used to generate contig ids.
+      If the generated contig ids are too long then they will clash with the sequence length in the LOCUS line of the GenBank flat file generated by tbl2asn.
+  
+  B<--username,-u>
+      The MySQL username of a user with SELECT permissions on --database.
+  
+  B<--password,-p>
+      The MySQL password for the username specified by --username on the MySQL server --server.
+  
+  B<--server,-s>
+      The MySQL server on which the database specified by the --database option resides.
+  
+  B<--linker_sequence,-k>
+      Optional.  Sequence on which to split sequences into contigs.  Set to the IGS "pmark" sequence
+      (NNNNNCACACACTTAATTAATTAAGTGTGTGNNNNN) by default.
+  
+  B<--contig_string,-n>
+      Optional.  String to use in constructing contig ids.  Default is "contig".  e.g., dbname.contig.0,
+      dbname.contig.1, dbname.contig.2, etc.
+  
+  B<--contig_id_replacement,-r>
+      Optional.  Perl-style substitution to apply to contig ids.  This can be used to ensure that dump_table.pl
+      does not produce contig ids that are too long for tbl2asn to output to GenBank format, for example by
+      setting the replacement to '_contigs\.ctg/.ctg' in order to remove "_contigs" from each contig
+      name.  Note that the replacement string must contain exactly one "/" character to separate the string
+      being replaced from the replacement string.
+  
+  B<--output_dir,-o>
+      Optional.  Directory into which to write the target .fsa and .tbl files.  Default is to use
+      the current working directory.  Each database in the list will have a directory created
+      within this output directory
+  
+  B<--log,-l>
+      Optional.  Location of a log file to which error messages/warnings should be written.
+  
+  B<--help,-h>
+      Optional.  Print this documentation.
+  
+  B<--test,-t>
+      Optional.  Tests the contig-splitting code on synthetic data.
+  
+  =head1  DESCRIPTION
+  
+  Dumps the contents of an IGS MySQL Chado annotation database into .fsa
+  files that can be processed by NCBI's tbl2asn utility.  The
+  sequences read from the database will be split into contigs using the
+  specified linker sequence (--linker_sequence) and any contigs that are
+  composed entirely of Ns (or are empty) will be discarded and will not
+  be included in the output.
+  
+  This is actually a stripped-down version of dump_table.pl, which also outputs .tbl files
+  
+  =head1 INPUT
+  
+  A MySQL Chado annotation database list.
+  
+  database1
+  database2,db2
+  
+  In this case, database2 will have the contigs renamed to the abbreviation, db2.
+  
+  =head1 OUTPUT
+  
+  Generates two files in the directory specified by --output_dir:
+  
+  1. database.fsa - multi-FASTA file of contig sequences
+  
+  =head1  CONTACT
+  
+      Shaun Adkins
+      sadkins@som.umaryland.edu
+  - script: prepare_sbt_cmt.pl
+    pod: |
+  =head1 NAME
+  
+  prepare_sbt_cmt.pl - Script to take precompiled tabular data and submit to the NCBI Genbank Submission Template
+  
+  =head1 SYNOPSIS
+  
+  # USAGE : 
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  =head1 DESCRIPTION
+  
+  
+  =head1 INPUT
+  
+  =head1 OUTPUT
+  
+  =head1 AUTHOR
+  
+  	Shaun Adkind
+  	Bioinformatics Software Engineer
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sadkins@som.umaryland.edu
+  
+  ==cut
+  - script: format_velvet_assembled_AGP.pl
+    pod: |
+  =head1 NAME
+  
+  format_velvet_assembled.pl - Program to format velvet assembled, annotated genomes to split the contigs at the sequence of N (gaps) 
+  			     and modify the original .tbl and .fsa files. 
+  
+  =head1 SYNOPSIS
+  
+  	format_velvet_assembled.pl --tbl_file <tbl_file> --fsa_file <fsa_file> --split_param <num_of_N> --output_dir <output_directory> --min_contig_len <minimum_contig_length_allowed>
+  
+  =head1 OPTIONS
+  	
+  	--tbl_file <tbl_file>		= /path/to/tbl_file. Path to the original .tbl file generated
+  				  	  for submission after annotation.  Optional
+  
+  	--fsa_file <fsa_file>		= /path/to/fsa_file. Path to the original multi FASTA file
+  				          containing assembled contig sequences with Ns.
+  
+  	--split_param <num_of_N>	= Integer. Number of Ns to be used for splitting the contigs.
+  					  Default is 10.
+  
+  	--output_dir <output_directory>	= /path/to/output_dir. Output directory to store newly formatted
+  					  files.
+  
+  	--min_contig_len <min_length>	= Integer. Minimum allowed length of the contig. All contigs less than
+  					  this specified length and the annotation associated will be deleted.
+  					  Default is 200bp.
+  
+  	--log <log_file>		= /path/to/log_file. Log file. Optional
+  
+  =head1 DESCRIPTION
+  
+  This program reads in originally created .tbl and .fsa files and formats them to remove a series of Ns (gaps)
+  from the contig sequences, splitting them further into contigs and adjusts the annotation coordinates accordingly.
+  It also creates a .agp containing the mapping where contigs were split and number of Ns removed.
+  
+  =head1  CONTACT
+  
+  Sonia Agrawal
+  sagrawal@som.umaryland.edu
+  - script: wrap_tbl2asn.pl
+    pod: |
+  =head1 NAME
+  
+  fix_gene_symbols.pl - Script to remove upper case, duplicate gene symbols as well replace existing gene symbols in DB with new ones provided in the rules file
+  
+  =head1 SYNOPSIS
+  
+  # USAGE : perl fix_gene_symbols.pl -i <meta data file> [ -o <path to output dir>  -u <database username> -p <database password> -s <database server> -t <path to .tbl file> -l <path to log file> ]
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  	-i <input_file>	:	Path to input meta data file containing one row for a database. Mandatory
+  [	
+  	-o <output_dir>	:	Path to the output directory where the corrected tbl file will be created. Mandatory if change required in only tbl file
+  
+  	-u <username>	:	Username for the database server. Mandatory if change required in the database only.
+  
+  	-p <password>	:	Password for the database server. Mandatory if change required in the database only.
+  
+  	-s <host>	:	Name of the database server. Mandatory if change required in the database only.
+  
+  	-t <tbl_file>	:	Path to the original .tbl file to be corrected for gene symbols. Mandatory if change required in only tbl file
+  
+  	-l <log>	: 	Path to log file. Optional
+  
+  ] 
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  	Required input is the meta data file with the following columns in a row for a database:
+  		[0] = Db name
+  		[1] = NCBI locus tag
+  		[2] = Path to rules file
+  		[3] = Path to gene symbols file
+  		[4] = Bioproject Id
+  		[5] = Organism name
+  		[6] = strain name
+  		[7] = Organism serotype
+  		[8] = Host
+  		[9] = Date
+  		[10]= Country
+  		[11]= Assembly method
+  		[12]= Genome Coverage
+  		[13]= Sequencing platform
+  		[14]= Contact person's name. Last name\sFirst name
+  		[15]= Contact person's email address
+  		[16]= Comma-separated author list. Each name should be Last name\sFirst name\sMiddle Initial
+  		[17]= Title of the publication
+  	For this script only column [0] and [3] needs to be have valid values.
+  
+  	If .tbl file needs to be changed, then provide the original tbl file dumped from manatee database. If directly database needs to changed 
+  	then pass the required database parameters to the script. Either .tbl file or database parameters needs to be present but not both.
+  
+  =head1 OUTPUT
+  
+  	Corrected .tbl file if original tbl file was passed. Otherwise, gene symbol changes happen in the database provided in the input meta data file.
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Senior Bioinformatics Software Engineer
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut

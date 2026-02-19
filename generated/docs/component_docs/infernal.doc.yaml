@@ -1,0 +1,531 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: infernal
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - infernal.config
+  - infernal.xml
+  - infernal.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / genes
+  parameters:
+    # --local for local alignment
+    # Include a cutoff for cmsearch (defaults to --tc: trusted cutoff)
+    OTHER_OPTS: --cut_tc
+    # Input sequence list used for hmmpfam run (fasta file list)
+    SEQUENCE_LIST: ""
+    # Annotation BSML list - Used to add the genome tag to the output bsml. 
+    # If this is left blank the genome tag will not be added to the bsml.
+    # Leaving it blank is appropriate if used with the prokaryotic
+    # annotation pipeline where the output will be collated with pipeline_summary.
+    # However if this output is to be loaded directly into an existing database then
+    # this parameter must be set.
+    ANNOT_BSML_LIST: ""
+    # HMM->CM lookup file, or directory to CMs (see documentation for specifics).
+    HMM_CM_TABLE: ""
+    # Location to a single CM file
+    CM_FILE: $;CM_FILE_PATH$;
+    # Location of the stockholm alignment files used to generate the
+    # HMMs. These files need to be individually named by their Rfam ID.
+    STOCKHOLM_PATH: $;RFAM_STOCKHOLM_DIR$;
+    # Default sequence type to use if a suitable SO type is not found
+    DEFAULT_TYPE: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+    COMPRESS_BSML_OUTPUT: 0
+  component:
+    COMPONENT_NAME: infernal
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - infernal workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - infernal compute
+  steps:
+    - name: infernal
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/run_cmsearch
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --tmp_dir
+          value: $;TMP_DIR$;
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --sequence_list
+          value: $;SEQUENCE_LIST$;
+        - key: --flanking_sequence
+          value: 50
+        - key: --hmm_cm_table
+          value: $;HMM_CM_TABLE$;
+        - key: --cm_file
+          value: $;CM_FILE$;
+        - key: --other_opts
+          value: $;OTHER_OPTS$;
+        - key: --cmsearch_bin
+          value: $;CMSEARCH_EXEC$;
+    - name: infernal2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/infernal2bsml
+      params:
+        - key: --query_file_path
+          value: $;I_FILE_PATH$;
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw.tbl
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --project
+          value: $;PROJECT$;
+        - key: --stockholm_path
+          value: $;STOCKHOLM_PATH$;
+        - key: --annot_bsml_list
+          value: $;ANNOT_BSML_LIST$;
+        - key: --default_type
+          value: $;DEFAULT_TYPE$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --gzip_output
+          value: $;COMPRESS_BSML_OUTPUT$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: run_cmsearch.pl
+    pod: |
+  =head1 NAME
+  
+  run_cmsearch.pl - Takes hmmpfam files as input and runs the hits against
+      cmsearch.  Optimization for cmsearch.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: run_cmsearch.pl 
+                --input_list=/path/hmmpfam/results.raw.list
+                --input_file=/path/hmmpfam/result.raw
+                --tmp_dir=/path/to/tmpdir/
+                --output_file=/path/to/infernal.raw
+                --flanking_seq=50
+                --hmm_cm_table=/path/to/some/file.table
+                --cmsearch_bin=/path/to/cmsearch
+            [   --other_opts=cmsearch options
+                --log=/path/to/some/file.log
+                --debug= > 2 for verbose
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input_list,-l>
+      A list of hmmpfam raw output files to be formatted and run with cmsearch
+  
+  B<--input_file,-i>
+  	With --hmm_processing enabled:
+      An input file (hmmpfam) raw output
+  	With --hmm_processing_disbled:
+  	A polypeptide fasta file
+  
+  B<--tmp_dir,-t>
+      Directory to write temporary files.  Will be cleaned up if --clean_up is enabled.
+  	Is required if --hmm_preprocessing is enabled
+  
+  B<--output_file,-o>
+      The output file for cmsearch results to go into.  Will concate all results to this file.
+  
+  B<--flanking_seq,-f>
+      The number of nucleotides on either side of the hmmpfam hit to parse out of database for 
+      cmsearch run. Default: 50.  Only works with the --hmm_preprocessing flag set
+  
+  B<--hmm_cm_table,-c>
+      File containing a lookup for covariance models given an hmm model.  See input section of perldoc
+      more specific details on this file.  Can only be used with HMM preprocessing
+  
+  B<--hmm_preprocessing, -h>
+  	If flag is enabled, will accept HMM raw results as input, process the results in order to 
+  	obtain subsequences from --sequence_list to run cm_search on
+  
+  B<--cmsearch_bin,-b>
+      Path to the cmsearch binary. If not it will be assumed that the binary is in the PATH.
+  
+  B<--cm_file, -C>
+  	Instead of mapping the HMMs or passing in a directory of CMs, just pass in a single CM file.
+  	Best use case is if you are unsure what to compare against and just want to compare against
+  	all available RFams.  Can be used with or without HMM_preprocessing
+  
+  B<--sequence_list,-s>
+      A list of absolute paths to files which contain the input fasta sequence from the HMMER search.
+      In most cases will be the chromosome/assembly sequence used as input. Used to grab extra flanking
+      sequence. If not running with HMM preprocessing, just pass a single file as --input_file
+  
+  B<--other_opts,-e>
+      Other options to be passed into the cmsearch program.  
+      *Note: The -W option is used by this script and therefore will be parsed out of the other_opts
+      string prior to running cmsearch.  This program uses the length of the sequence found by the
+      hmmpfam run (plus extraSeq) as the window size.
+  
+  B<--clean_up>
+  	Remove temp files and the temp directory
+  
+  B<--debug> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log> 
+      Log file
+  
+  B<--help,>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  The program infernal is used to search covariance models against biological sequences
+  (see infernal userguide: oryx.ulb.ac.be/infernal.pdf).  More specifically infernal uses
+  profiles of RNA secondary structure for sequence analysis.  The program is computationally
+  intensive when used with large genomic sequences.  
+  
+  At its most basic form, run_cmsearch.pl will simply take a polypeptide fasta sequence and a CM file and 
+  run Infernal's 'cmsearch' script.
+  
+  Optionally, run_cmsearch.pl will take in a set of hmmpfam results as an initial screening to infernal.  
+  RNA HMMs can quickly identify regions where RNA is located, and these sections can then be further
+  refined by running this section through cmsearch (infernal).  With a set of HMMs and CMs created from
+  the same alignments, infernal can be used in a high-throughput manner.
+  
+  =head1  INPUT
+  
+  =head2 HMM_preprocessing flag on
+  
+  The main input for run_cmsearch is either a list of hmmpfam raw results or one hmmpfam raw result.
+  The sequences are then parsed from these hmmpfam results and the database queryed.  The sequence
+  identifier is taken from the name of the file (which is reliable in the ergatis naming scheme, but
+  probably could be made more general in the future).  The name of the HMMs are also parsed from these
+  files.  Important to note that the HMM names are not the same as the file names (since hmmpfam can
+  use a multi-hmm file for searching).  This becomes important in the creation of the hmm_cm_table.
+  
+  If a hit was found with an HMM file, the related CM file will be used to search that portion of the
+  sequence.  To do this, the program must know which HMMs relate to which CMs.  There are two ways
+  to provide this information.  This by providing a tab-delimited file with HMM name (not file name,
+  but the name found in the HMM header and the one used in hmmpfam output) and CM (actual path to file)
+  on each line.  For example:
+  
+      RF00001.HMM     /usr/local/db/RFAM/CMs/RF00001.cm
+      RF00002.HMM     /usr/local/db/RFAM/CMs/RF00002.cm
+      ...
+  
+  The other option is to provide the program with the directory where all the covariance models are
+  stored.  The program will then look in that directory for a covariance model that contains the first
+  word of the HMM name (not file name, but actual id name found in hmmpfam results).  
+  
+  =head2 HMM_preprocessing flag off
+  
+  The --input_file instead will be replaced by a fasta sequence file.  All that is required is this
+  fasta file and the covariance matrix (CM) file path marked by --cm_file.  
+  
+  =head1  OUTPUT
+  
+  The program will create individual fasta files for each hmmpfam hit provided in the input and is 
+  cleaned up later.  All the cmsearch results (all the stdout from the program run) is written to
+  output_file.  See infernal userguide: oryx.ulb.ac.be/infernal.pdf for more information on output format.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: infernal2bsml.pl
+    pod: |
+  =head1 NAME
+  
+  infernal.pl - Turns infernal raw output into bsml. 
+  
+  =head1 SYNOPSIS
+  
+  USAGE: template.pl
+              --input_file=/path/to/some/transterm.raw
+              --output=/path/to/transterm.bsml
+              --project=aa1
+              --id_repository=/some/id_repository/dir
+              --query_file_path=/input/file.fsa
+              --gzip_output=1
+            [ --infernal_v1
+              --annot_bsml_list=/path/to/annot_bsml.list
+              --stockholm_path=/path/to/stockholm/files
+              --default_type=ncRNA
+              --log=/path/to/file.log
+              --debug=4
+              --help
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The table output from Infernal's 'cmsearch' run.
+  
+  B<--output,-o>
+      Where the output bsml file should be
+  
+  B<--project,-p>
+      [DEPRECATED] The script will parse the project from the sequence id.
+      Used in id generation.  It's the first token in the id.  (Ex. project.class.number.version)
+  
+  B<--id_repository,-r>
+      Used to make the ids (See Ergatis::IdGenerator for details)
+  
+  B<--query_file_path,-q>
+      Path to the query file (input fasta file) for infernal.
+  
+  B<--gzip_output,-g>
+      A non-zero value will result in compressed bsml output.  If no .gz is on the end of the bsml output name, one will
+      be added.
+  
+  B<--infernal_v1,-v1>
+      Whether or not to expect infernal 1.0 or later output. If left off then the assumption is that the input is 
+      pre-infernal 1.0
+  
+  B<--annot_bsml_list,-v1>
+      A list file containing the existing annotation bsml. This will activate the appending of the genome tag to the output bsml.
+  
+  B<--stockholm_path,-sp>
+      The path to the stockholm files that contain the alignments for the Rfam CMs. This is required if you want a good type to 
+      be assigned to your hits.  Can be a directory with the CM IDs in the file names, or a file with all CMs. 
+  
+  B<--default_type,-dt>
+      The default SO type to be assigned to either all hits or only those hits that don't have a valid SO mapping in their 
+      stockholm file (if --stockholm_path is specified).
+  
+  B<--log,-l>
+      In case you wanted a log file.
+  
+  B<--debug,-d>
+      There are no debug statements in this program.  Sorry.
+  
+  B<--help,-h>
+      Displays this message.
+  
+  =head1  DESCRIPTION
+  
+      Reads in infernal output and produces a bsml representation of the matches.  
+  
+  =head1  INPUT
+  
+      The tbl output of infernal. Can be obtained by appending --tblout <filename> to the 'cmsearch' command 
+  
+  =head1  OUTPUT
+  
+      Generates a BSML document representing the ps_scan matches.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

@@ -1,0 +1,236 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: sff_to_CA
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - sff_to_CA.config
+  - sff_to_CA.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    LIBRARY: ""
+    # Either flx or titanium
+    LINKER: ""
+    # Can be either none, soft, hard, chop
+    TRIM: hard
+    # Can be either all, 454, none, n, pair-of-n, or discard-n
+    CLEAR: 454
+    # Two digit parameters i and d used here.
+    INSERT_SIZE: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FRG_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.frg.list
+  component:
+    COMPONENT_NAME: sff_to_CA
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - sff_to_CA workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: sffToCA
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/sff_to_CA
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/sff_to_CA.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/sff_to_CA.stderr
+        - key: --sff_to_CA_exe
+          value: $;SFFTOCA_EXEC$;
+        - key: --sff_file
+          value: $;INPUT_FILE$;
+        - key: --sff_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --library
+          value: $;LIBRARY$;
+        - key: --linker
+          value: $;LINKER$;
+        - key: --trim
+          value: $;TRIM$;
+        - key: --clear
+          value: $;CLEAR$;
+        - key: --insert_size
+          value: "&quot;$;INSERT_SIZE$;&quot;"
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;LIBRARY$;.frg
+    - name: create fragment list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.frg\""
+        - key: --output_list
+          value: $;FRG_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: sff_to_CA.pl
+    pod: |
+  =head1 NAME
+  
+  sff_to_CA.pl - run sffToCA from the wgs-assembler software package. This script acts as a wrapper to ensure input is handled correctly in the Ergatis framework.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: sff_to_CA.pl
+  
+  =head1 OPTIONS
+  
+  B<--sff_file, -s> 
+      A single sff file input.
+  
+  B<--sff_file_list, -sl>
+      A list of sff files to act as input to a single CA assembly run.
+      
+  B<--sff_to_CA_exe, -exe>
+      Path to the sffToCA executable.
+      
+  B<--library, -lib>
+      The UID of the library these reads are added to.
+      
+  B<--clear, -c>
+      Can be one of four options:
+          * none 
+          * soft
+          * hard
+          * chop
+  
+  B<--linker, -lk>
+      Search for linker, created mated reads.
+  
+  B<--trim, -t>
+      Trim back a specific amount of bases before the first N.
+  
+  B<--insert_size, -is>
+      Mates are on average i +- d bp apart.
+  
+  B<--output, -o>
+      Output path where fragment files will be placed.
+      
+  B<--log, -l>
+      Log file
+  
+  B<--debug>
+      Debug level
+              
+  =head1 DESCRIPTION
+  
+  Wrapper for the sffToCA executable. Ensures that input and parameters are correctly formatted for use in the Ergatis framework.
+  
+  =head1 INPUT
+  
+  Either a single or list of SFF files that will comprise a single assembly.
+  
+  =head1 OUTPUT 
+  
+  Fragment files that are ready to be supplied to the celera-assembler
+  
+  =head1 CONTACT
+      
+      Cesar Arze
+      carze@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

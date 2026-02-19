@@ -1,0 +1,473 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mask_by_analysis
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mask_by_analysis.config
+  - mask_by_analysis.xml
+  - mask_by_analysis.i1.xml
+  - workflow/mask_by_analysis-master.ini
+  - workflow/mask_by_analysis.ini
+  - workflow/mask_by_analysisconf.ini
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / manipulation
+  parameters:
+    MASK_CHARACTER: X
+    # REQUIRED: at least one analysis type must be specified (eg: aat_aa)
+    # multiple values can be provided seperated by commas or whitespace
+    ANALYSIS_TYPES: ""
+    # OPTIONAL: feature class(es) to mask on
+    # multiple values can be provided seperated by commas or whitespace
+    FEATURE_CLASSES: ""
+    # to soft mask (to lowercase) the sequence set SOFTMASK=1 
+    SOFTMASK: 0
+    # to mask NT sequence with random bases set RANDOM=1
+    RANDOM: 0
+    # compress bsml output files
+    COMPRESS_BSML: 1
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bsml
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    FSA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+  component:
+    COMPONENT_NAME: mask_by_analysis
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - mask_by_analysis workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create fsa list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fsa\""
+        - key: --output_list
+          value: $;FSA_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - mask_by_analysis compute
+  steps:
+    - name: mask_by_analysis
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/mask_by_analysis
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --output_prefix
+          value: $;I_FILE_BASE$;.$;COMPONENT_NAME$;
+        - key: --analysis_types
+          value: "'$;ANALYSIS_TYPES$;'"
+        - key: --feature_types
+          value: "'$;FEATURE_CLASSES$;'"
+        - key: --mask_char
+          value: "'$;MASK_CHARACTER$;'"
+        - key: --random
+          value: "'$;RANDOM$;'"
+        - key: --softmask
+          value: "'$;SOFTMASK$;'"
+        - key: --gzip_output
+          value: $;COMPRESS_BSML$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Workflow INI: mask_by_analysis-master.ini
+workflow_ini_mask_by_analysis-master.ini:
+  create_bsml_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--regex: "\".*\\.bsml\""
+    param.--output_list: $;BSML_OUTPUT_LIST$;
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_fsa_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--regex: "\".*\\.fsa\""
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--output_list: $;FSA_OUTPUT_LIST$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: mask_by_analysis.ini
+workflow_ini_mask_by_analysis.ini:
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+  empty:
+  mask_by_analysis:
+    # Execute the mask_by_analysis search
+    param.command: $;BIN_DIR$;/mask_by_analysis
+    param.--input: $;ITER_FILE_PATH$;
+    param.--output: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;
+    param.--output_bsml: $;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--analysis_types: "'$;ANALYSIS_TYPES$;'"
+    param.--feature_types: "'$;FEATURE_CLASSES$;'"
+    param.--mask_char: "'$;MASK_CHARACTER$;'"
+    param.--random: $;RANDOM$;
+    param.--softmask: $;SOFTMASK$;
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    param.--analysis_id: $;NAME$;_analysis
+
+# Workflow INI: mask_by_analysisconf.ini
+workflow_ini_mask_by_analysisconf.ini:
+  _header:
+    # configuration file for the mask_by_analysis workflow
+  include mask_by_analysis:
+    $;SHARED_CONFIG$;: ""
+  input mask_by_analysis:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: bsml
+  output mask_by_analysis:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;BSML_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    $;FSA_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.fsa.list
+  parameters mask_by_analysis:
+    $;MASK_CHARACTER$;: X
+    # REQUIRED: at least one analysis type must be specified (eg: aat_aa)
+    # multiple values can be provided seperated by commas or whitespace
+    $;ANALYSIS_TYPES$;: ""
+    # OPTIONAL: feature class(es) to mask on
+    # multiple values can be provided seperated by commas or whitespace
+    $;FEATURE_CLASSES$;: ""
+    # to soft mask (to lowercase) the sequence set SOFTMASK=1 
+    $;SOFTMASK$;: 0
+    # to mask NT sequence with random bases set RANDOM=1
+    $;RANDOM$;: 0
+  workflowdocs mask_by_analysis:
+    $;VERSION$;: current
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;ALGORITHM$;: mask_by_analysis
+    $;NAME$;: mask_by_analysis
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/mask_by_analysis-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/mask_by_analysis-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/mask_by_analysis.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/mask_by_analysis_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: mask_by_analysis.pl
+    pod: |
+  =head1 NAME
+  mask_by_analysis.pl  - mask FASTA sequences using results from an analysis
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  mask_by_analysis.pl -i analysis_bsml.bsml -o masked_sequence_bsml.bsml -a analysisname,... 
+                           [-f featureclass,...] [-x N] [-l /path/to/logfile.log]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      The input BSML file with sequences to be masked and analysis to mask with.
+  
+  B<--output,-o>
+      The output path.
+  
+  B<--output_prefix,-b>
+      Output file name prefix (for BSML output).
+  
+  B<--mask_char,-x>
+      The character to mask with (default = X).
+  
+  B<--analysis_types,-a>
+      Comma or whitespace delimitted list of Analysis types for masking (eg: wu-blastp).
+      
+  B<--feature_types,-f>
+      Comma or whitespace delimitted list of Feature classes for masking (eg: exon).
+      [optional]
+  
+  B<--random>
+      Mask NA sequences with random bases (0 = no, 1 = yes: default 0).
+  
+  B<--softmask>
+      Soft-mask the sequence.    
+  
+  B<--gzip_output,-g>
+      Optional. Write compressed BSML output.
+      
+  B<--log,-l>
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script can be used to mask a fasta sequence file based on the results of
+  some analysis. All Seq-pair-alignment regions, and/or Feature interval-loc
+  regions produced by a given analysis method can be masked on the input sequence.
+  
+  NOTE:
+  
+  Calling the script name with no options or --help will display the syntax requirements.
+  
+  =head1  OUTPUT
+  
+  The sequence produces fasta format sequence files for each sequence on which
+  masking is performed. An accompanying BSML document is produced which describes
+  these sequence files.
+  
+  =head1  CONTACT
+          Brett Whitty
+          bwhitty@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

@@ -1,0 +1,108 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: concatenate_files
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - concatenate_files.config
+  - concatenate_files.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  input:
+    # all files in input list will be concatenated into output file
+    INPUT_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;OUTPUT_TOKEN$;.out
+  component:
+    COMPONENT_NAME: concatenate_files
+    DESCRIPTION: Concanate the content of all files in an input file list into a single output file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - concatenate_files workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: concatenate_files
+      type: RunUnixCommand
+      executable: "for i in `cat $;INPUT_FILE_LIST$;`; do cat $i; done >> $;OUTPUT_FILE$;"
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: concatenate_files.pl
+    pod: |
+  =head1 NAME
+  
+  concatenate_files.pl - will concatenate files.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: concatenate_files.pl
+      --input_files=/path/to/file.1.tab,/path/to/file2.tab
+      --input_lists=/path/to/list1,/path/to/list2
+      --output=/path/to/new.file.tab
+      [ --log=/path/to/file.log
+        --debug=4
+        --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--input_files,-f>
+      A comma separated list of files.  Will cat each file.
+  
+  B<--input_lists,-l>
+      A comma separated list of lists.  Will cat each files in the list.
+  
+  B<--output,-o>
+      Output file
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+      Can be any type of input.  Will simply cat the files and append to same output
+  
+  =head1 OUTPUT
+      All the input files specified in one file
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu

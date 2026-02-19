@@ -1,0 +1,153 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: create_cuffsuite_files
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - create_cuffsuite_files.config
+  - create_cuffsuite_files.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to single reference GTF file to be used with all cuffdiff comparisons
+    GTFFILE: ""
+    # path to list file with information on all cufflinks or cuffcompare GTF files
+    GTF_LISTFILE: ""
+    # path to list info file with information on all alignment SAM files sorted by position
+    SAM_LISTFILE: ""
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to sample info file with information on all samples to be analyzed
+    SAMPLE_INFO: ""
+    # Cuffsuite program (Cuffcompare or Cuffdiff) to create files for
+    CUFF_PROG: ""
+    # string of groups to compare. e.g. "GRP#2vsGRP#1,GRP#3vsGRP#1"
+    GRP_COMP: ""
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of cuffsuite input files for subsequent cuffcompare or cuffdiff component
+    OUTPUT_PAIRED_LIST_FILE: $;OUTPUT_DIRECTORY$;/cuffsuite_input_file.list
+  component:
+    COMPONENT_NAME: create_cuffsuite_files
+    DESCRIPTION: Generates cuffcompare and cuffdiff input list files
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # script version
+    VERSION: create_cuffsuite_files version 1.0.0
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - PreProcessing
+    - Processing
+  command_sets:
+    - create_cuffsuite_files
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create_cuffsuite_files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_cuffsuite_files
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --infile
+          value: $;SAMPLE_INFO$;
+        - key: --cuff_prog
+          value: $;CUFF_PROG$;
+        - key: --comp_grps
+          value: $;GRP_COMP$;
+        - key: --gtf
+          value: $;GTFFILE$;
+        - key: --gtflist
+          value: $;GTF_LISTFILE$;
+        - key: --samlist
+          value: $;SAM_LISTFILE$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/create_cuffsuite_files.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/create_cuffsuite_files.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_cuffsuite_files.pl
+    pod: |
+  =head1 NAME
+  
+  create_cuffsuite_files.pl - script to create cuffcompare and cuffdiff input files.
+  
+  =head1 SYNOPSIS
+  
+      create_cuffsuite_files.pl --i input_samples_file --p cuffcompare|cuffdiff --g comparison_groups
+                                [--gtf reference_gtf] [--c gtf_listfile] [--s sam_listfile] [--o outdir] [--v] 
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --i <input_samples_file>       = /path/to/input tab-delimited file with the following sample information.
+                                       #Sample_Name    Group_Name    [Alignment_SAM_File/Cufflinks_GTF_File]
+  
+      --p <cuffcompare|cuffdiff>     = Cuffsuite program (Cuffcompare or Cuffdiff) to create files for.
+  
+      --g <comparison_groups>        = string of groups to compare. e.g. "GRP#2vsGRP#1,GRP#3vsGRP#1".
+                                       Group Ids SHOULD match Group Names in column 2 of the sample info file
+  
+      --gtf <reference_gtf>          = Single reference GTF annotation to be used with all cuffdiff comparisons.
+  
+      --c <gtf_listfile>             = /path/to/listfile of cufflinks or cuffcompare GTF files.
+                                       The cufflinks filename should be in the format /path/to/<sample_name>*.gtf. Optional if specified in the sample file itself.
+                                       The cuffcompare filename should be in the format /path/to/GRP#2vsGRP#1*.gtf.
+  
+      --s <sam_listfile>             = /path/to/listfile of alignment SAM files sorted by position.
+                                       The SAM alignment filename should be in the format /path/to/<sample_name>*.sam.
+                                       Optional if specified in the sample file itself.
+  
+      --o <output dir>               = /path/to/output directory. Optional. [present working directory]
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script creates the input files for the cuffcompare and cuffdiff ergatis components.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

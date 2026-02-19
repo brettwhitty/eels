@@ -1,0 +1,457 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: tRNAscan-SE_compress
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - tRNAscan-SE_compress.config
+  - tRNAscan-SE_compress.xml
+  - tRNAscan-SE_compress.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / tRNAs
+  parameters:
+    # default is Eukaryotic model, else (B = bacterial, A = archaeal, O = organellar, G general/all)
+    SEARCH_TYPE: G
+    OTHER_OPTS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    # this will be the root of the IDs generated, usually just the project abbreviation.
+    ID_ROOT: $;PROJECT$;
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: tRNAscan-SE_compress
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - tRNAscan-SE workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - tRNAscan-SE compute
+  steps:
+    - name: tRNAscan-SE_compress
+      type: RunUnixCommand
+      executable: $;TRNASCANSE_EXEC$;
+      arg: -q $;OTHER_OPTS$; -b -$;SEARCH_TYPE$; $;I_FILE_PATH$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: stderr
+          value: $;TMP_DIR$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+    - name: tRNAscan-SE2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/tRNAscan-SE2bsml
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --project
+          value: $;PROJECT$;
+        - key: --fasta_input
+          value: $;I_FILE_PATH$;
+        - key: --project
+          value: $;ID_ROOT$;
+        - key: --gzip_output
+          value: 1
+    - name: compress raw output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --compress
+          value: 1
+        - key: --list_file
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw.list
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: tRNAscan-SE2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  tRNAscan-SE2bsml.pl - convert tRNAcan-SE output to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE: tRNAscan-SE2bsml.pl 
+          --input=/path/to/tRNAscanfile 
+          --output=/path/to/output.bsml
+          --fasta_input=/path/to/fastafile
+          --id_repository=/path/to/id_repository
+          --project=aa1 
+          [ --gzip_output=1       
+            --log=/path/to/logfile 
+            --debug=3
+          ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i> 
+      Input file file from a tRNAscan-SE search.
+  
+  B<--output,-o> 
+      Output BSML file (will be created, must not exist)
+  
+  B<--fasta_input,-a>
+      The input file that was used as input for the tRNAscan-SE run
+  
+  B<--id_repository,-r>
+      Path to the project's id repository
+  
+  B<--gzip_output,-g>
+      Optional. A non-zero value will make compressed output.
+      
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--project,-p> 
+      Required. Project ID.  Used in creating feature ids. 
+      If 'aa1' is passed, repeat feature IDs created are like aa1.repeat_region.4231.1
+      If 'parse' is passed, will parse from already present ids.
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert the output from a tRNAscan-SE search into BSML.
+  
+  =head1 INPUT
+  
+  tRNAscan-SE can be run using multiple input sequences simultaneously, and this
+  script supports parsing single or multiple input result sets.  Usual tRNAscan-SE
+  output looks like:
+  
+      Sequence                tRNA            Bounds          tRNA    Anti    Intron Bounds   Cove
+      Name            tRNA #  Begin           End             Type    Codon   Begin   End     Score
+      --------        ------  ----            ------          ----    -----   -----   ----    ------
+      51595           1       101064          101137          Asn     GTT     0       0       82.29
+      51595           2       705796          705868          Ala     AGC     0       0       68.12
+      ...
+      51595           13      3488675         3488743         Pseudo  GTA     0       0       22.49
+      51595           14      3493468         3493555         Ser     GCT     3493506 3493513 40.19
+  
+  You can elimate the headers in the original tRNAscan-SE output file by running 
+  tRNAscan-SE using the -b option.  If they are present, they should be ignored by 
+  this script.
+  
+  You define the input file using the --input option.  This file does not need any
+  special file extension.
+  
+  =head1 OUTPUT
+  
+  After parsing the input file, a file specified by the --output option is created.  This script
+  will fail if it already exists.  The file is created, and temporary IDs are created for
+  each result element.  They are only unique to the document, and will need to be replaced
+  before any database insertion.
+  
+  Base positions from the input file are renumbered so that positions start at zero.  The
+  current output elements from tRNAscan-SE that are not represented in the BSML file are:
+  
+      tRNA type
+      Anti Codon
+      Cove Score
+  
+  These need to be included later.
+  
+  =head1 CONTACT
+  
+      Jason Inman
+      jinman@tigr.org
+  - script: compress_file.pl
+    pod: |
+  =head1  NAME 
+  
+  compress_file.pl - wrapper to gzip an output file
+  
+  =head1 SYNOPSIS
+  
+  USAGE: compress_file.pl 
+          --file=/path/to/some.file 
+        [ --output=/path/to/output
+          --compress=1
+          --list_file=/path/to/some.list
+          --log=/path/to/some.log
+          --debug=4
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--file,-f> 
+      The path to any file you wish to compress.
+  
+  B<--compress,-c>
+      Optional.  If 0, the compression will not be performed.
+  
+  B<--remove_source,-r>
+      Optional.  Controls whether source file is removed when compressing (default = 1)
+  
+  B<--list_file,-s>
+      Optional.  Writes a list file of the gzipped file created.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used as a gzip wrapper to compress a file.
+  
+  =head1 INPUT
+  
+  The input is any file you wish to compress, usually a text file such
+  as alignment data.  This file is passed with the --file option.
+  
+  The --compress option exists so that this script can be incorporated
+  into workflow.  Since Workflow is not a logic-based system, it cannot
+  call gzip on output *sometimes*.  So we call this script all the time,
+  and just pass --compress 1 or 0 depending on whether we actually want
+  the compression done.
+  
+  The --list_file options allows us to create a list file containing the
+  full path to the list file created.  This is useful because a workflow
+  may create a list file for the raw output, but if we zip it, we want to
+  overwrite that single-entry list file with the gzip'ed path before it
+  is merged.
+  
+  Some checks are performed to handle common problems found handling compression
+  in production - each handling cases where previous compression attempts
+  have left partial files.
+  
+  If neither input or output exists the script will die.  If the input file
+  exists and output doesn't, normal compression will occur.  If the output file
+  exists and the input file doesn't, a warning is issued and the script completes
+  successfully.  
+  
+  =head1 OUTPUT
+  
+  The output file will be named the same but with the .gz extension
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

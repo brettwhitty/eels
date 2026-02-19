@@ -1,0 +1,262 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: assign_dbxref_ids
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - assign_dbxref_ids.config
+  - assign_dbxref_ids.xml
+  - assign_dbxref_ids.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    SERVER: ""
+    USERNAME: ""
+    PASSWORD: ""
+    # Read password from file if the password should not be publicly seen. (optional)
+    PASSWORD_FILE: ""
+    # This corresponds to the db.name field for ID reference source.
+    DB_NAME: NCBI_locus_tag
+    # A map file containing molecule uniquename and id_prefixes.  (optional)
+    ID_PREFIX_MAP: ""
+    # Feature type on which to assign dbxref IDs. (optional)
+    FEATURE_TYPE: gene
+    # Only process a specific organism_id (optional)
+    ORGANISM_ID: ""
+    # Will search for the db name, version, prefix given and only assign features which don't have an entry for that db. (optional)
+    ASSIGN_MISSING: 0
+    # Enter a value to represent the version of the ID set. (optional)
+    VERSION: public_locus
+    # Defines number of digits IDs will be zero-padded
+    ZERO_PAD: 4
+    # Accessions are assigned sequentially along molecules of this passed type. (optional)
+    MOLECULE_TYPE: assembly
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    INPUT_EXTENSION: txt
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;OUTPUT_TOKEN$;.out
+  component:
+    COMPONENT_NAME: assign_dbxref_ids
+    DESCRIPTION: Assign ID prefixes to dbxref table in database
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - assign_dbxref_ids workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - assign dbxref IDs iterator
+  steps:
+    - name: assign dbxref IDs
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/assign_dbxref_ids
+      params:
+        - key: --input_map_file
+          value: $;I_FILE_PATH$;
+        - key: --user
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --password_file
+          value: $;PASSWORD_FILE$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --db_name
+          value: $;DB_NAME$;
+        - key: --id_prefix_map
+          value: $;ID_PREFIX_MAP$;
+        - key: --feat_type
+          value: $;FEATURE_TYPE$;
+        - key: --organism_id
+          value: $;ORGANISM_ID$;
+        - key: --assign_missing
+          value: $;ASSIGN_MISSING$;
+        - key: --version
+          value: $;VERSION$;
+        - key: --zero_pad
+          value: $;ZERO_PAD$;
+        - key: --molecule_type
+          value: $;MOLECULE_TYPE$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: assign_dbxref_ids.pl
+    pod: |
+  =head1 NAME
+  
+  assign_dbxref_ids.pl - creates dbxref IDs (such as locus accessions) within a chado database
+  
+  =head1 SYNOPSIS
+  
+  USAGE: assign_dbxref_ids.pl
+  	    --input_map_file=/path/to/input/map.txt
+              --user=someuser
+              --password=somepass
+              --db_name=IGS
+            [--id_prefix_map=/path/to/mapfile.txt
+              --feat_type=gene
+              --server=SYBTIGR
+              --password_file=/path/to/password.txt
+              --organism_id=all
+              --assign_missing=1
+              --version=locus
+              --zero_pad=6
+              --log=/path/to/some.log ]
+  
+  
+  =head1 OPTIONS
+  
+  B<--input_map_file, -i>
+      Either a comma-separated or tab-separated file containing the following columns:
+      1) Name of Database
+      2) Locus_tag ID prefix
+      3) Path to a curate_common_names rules file
+      4+) Any other DB related information (to come later)
+  
+  B<--user,-u>
+      User account with select, insert, and update privileges on the specified database.
+  
+  B<--password,-p>
+      Password for user account specified.
+      
+  B<--password_file, -P>
+      Optional - Read password from a file rather than use the --password option.  Useful if using --password results in the password
+      being publicly visible.  If both --password_file and --password are provided, the entry from --password_file will take priority
+  
+  B<--db_name,-b>
+      This corresponds to the db.name field for ID reference source.
+  
+  B<--id_prefix_map,-I>
+      Optional. A map file containing molecule uniquename and id_prefixes.  Two column, tab-delimited file. If
+      a molecule exists in the database and is not in the mapping file, script will use the value of the --id_prefix
+      option for prefix.  If the --id_prefix option was not given, the script will fail.
+  
+  B<--feat_type,-t>
+      Optional.  Feature type on which to assign dbxref IDs (default = gene).
+  
+  B<--server,-s>
+      Optional.  Sybase server to connect to (default = localhost).
+  
+  B<--organism_id,-o>
+      Optional.  Only process a specific organism_id (default = all).
+  
+  B<--assign_missing,-a>
+      Optional. Will search for the db name, version, prefix given and only assign features
+      which don't have an entry for that db.
+  
+  B<--version,-v>
+      Optional.  Enter a value to represent the version of the ID set.  This will be inserted
+      into the dbxref.version field for all entries. (default = locus)
+  
+  B<--zero_pad,-z>
+      Optional.  Defines number of digits IDs will be zero-padded (default = 6).
+  
+  B<--molecule_type,-m>
+      Optional.  Accessions are assigned sequentially along molecules of this passed type.  Features
+      assigned to multiple molecules of the same type aren't allowed (default = assembly). Can also be
+      a comma separated list of molecule types.  Ex. assembly,plasmid,contig
+  
+  B<--log,-l> 
+      Optional.  Full path to a log file to create.
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  There are occasions where an active project needs to have identifiers (such as locus names)
+  for software display purposes or tracking.  This script can be used to create actual locus
+  identifiers or internal identifers.
+  
+  Within chado, both internal and locus ID references are stored in a common way:
+  
+      feature.feature_id -> feature_dbxref.feature_id -> 
+      feature_dbxref.dbxref_id -> dbxref.dbxref_id -> dbxref.db_id -> db.db_id
+  
+  Entering an id_prefix_map will give the user the ability to assign locus identifiers with 
+  different prefixes for different molecules in the same database.  Each prefix gets its own
+  set of numbers (each prefix represents its own namespace).
+      
+  =head1  INPUT
+  
+  The only input required is the information necessary to connect to the database and information
+  about the IDs to create.  If the db_name passed doesn't exist in the chado 'db' table it will
+  be created.  
+  
+  The id_prefix_map should be in the following format:
+      prefix1_    db.assembly_uniquename.1
+      prefix2_    db.assembly_uniquename.2
+      ...
+  
+  Currently assumes an input database in MySQL of the chado schema.  Will first check (and fail)
+  if there are already entries in the database with the passed db_name, feat_type and version.
+  
+  Considers only those features of the passed feature type (default transcript) where 
+  feature.is_obsolete = 0
+  
+  Because this script assigns dbxrefs sequentially along each molecule (top strand first) it doesn't
+  support features located on multiple assemblies.
+  
+  =head1  OUTPUT
+  
+  This script will produce progress information on STDERR, and will write a log of all
+  statements performed if the --log option is used.
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net

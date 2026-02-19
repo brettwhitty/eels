@@ -1,0 +1,143 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: scp_files
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - scp_files.config
+  - scp_files.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Flag to signal BER files copying complete
+    COPY_BER_FLAG: ""
+  input:
+    # Directory from which files will be copied
+    INPUTDIR: ""
+    # Directory where files will be copied to
+    OUTDIR: ""
+    # Server the files will be copied to
+    OUTPUT_HOST: ""
+    # Comma separated list of file extensions to include
+    # If not provided, will scp all files in the directory
+    FILE_EXTENSION_FILTERS: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    BTAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.btab.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: scp_files
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - scp_files workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: scp_files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/scp_files
+      params:
+        - key: --input_directory
+          value: $;INPUTDIR$;
+        - key: --output_directory
+          value: $;OUTDIR$;
+        - key: --output_host
+          value: "'$;OUTPUT_HOST$;'"
+        - key: --tmp_dir
+          value: $;TMP_DIR$;
+        - key: --file_extension_filters
+          value: "'$;FILE_EXTENSION_FILTERS$;'"
+        - key: --flag
+          value: "&apos;$;COPY_BER_FLAG$;&apos;"
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: scp_files.pl
+    pod: |
+  =head1 NAME
+  
+  scp_files.pl - Will scp some files.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: scp_files.pl 
+        --input_directory=/path/to/input_dir
+        --output_directory=/path/to/output
+      [ --file_extension_filters=btab,list
+        --output_host=destination_server
+        --tmp_dir=/tmp
+        --flag=1
+        --log 
+        --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--input_directory,-i>
+      Directory where the files originate
+  
+  B<--output_directory,-o>
+      Directory where the files will end up
+  
+  B<--file_extension_filters,-f>
+      Script will filter files based on the presence of these extensions. Comma separated list.
+      If not specified, will take all files
+  
+  B<--output_host,-O>
+      Server files will be copied to. If not specified, assumes local
+  
+  B<--tmp,-t>
+      Tmp directory. Files will be copied to this directory and a gzipped tarball will be created there.
+      Default=/tmp
+  
+  B<--flag,-F>
+      Flag to signal copying of BER files is completed from output_repository to /local/scratch area.
+  
+  B<--log,-o> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu

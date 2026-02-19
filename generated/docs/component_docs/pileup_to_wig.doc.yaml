@@ -1,0 +1,224 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pileup_to_wig
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pileup_to_wig.config
+  - pileup_to_wig.xml
+  - pileup_to_wig.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  parameters:
+  input:
+    # the file containing pileup output from samtools pileup
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: pileup.txt
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    WIG_FILE_LIST: $;OUTPUT_DIRECTORY$;/wig_file_list.txt
+  component:
+    COMPONENT_NAME: pileup_to_wig
+    DESCRIPTION: parses samtools pileup and outputs a wig file with entries for any base-pairs with coverage
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Processing
+    - Iterator
+    - Postprocessing
+    - Postprocessing
+  command_sets:
+    - pileup_to_wig
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create wig file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_multi_file_list_file.pl
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.wig\""
+        - key: --output_list
+          value: $;WIG_FILE_LIST$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/create_wig_file_list.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/create_wig_file_list.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - pileup2wig script
+  steps:
+    - name: pileup2wig script
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/pileup2wig
+      arg: --v --p $;I_FILE_PATH$; --o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.pileup2wig.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.pileup2wig.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_multi_file_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_multi_file_list_file.pl - script to create a list of files or groups of file given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  If multiple matches are found in a subdirectory, they will
+      be printed as comma-separated entries on the same line.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Umar Farooq
+      ufarooq@som.umaryland.edu
+  - script: pileup2wig.pl
+    pod: |
+  =head1 NAME
+  
+  pileup2wig.pl - program to convert a pileup file to a wig format file.
+  
+  =head1 SYNOPSIS
+  
+      pileup2wig.pl --p <pileup file> [--o <outdir>] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --p <pileup file>      = /path/to/pileup_file.
+  
+      --o <outdir>           = /path/to/output directory. Optional
+  
+      --v                    = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  This program converts a pileup file into wig format file
+  
+  =head1 DIAGNOSTICS
+  
+  =head1 CONFIGURATION AND ENVIRONMENT
+  
+  =head1 DEPENDENCIES
+  
+  =head1 INCOMPATIBILITIES
+  
+  =head1 BUGS AND LIMITATIONS
+  
+  There are no known bugs in this module. Please report problems to Amol Shetty
+  (ashetty@som.umaryland.edu). Patches are welcome.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  
+  =head1 LICENSE AND COPYRIGHT
+  
+  Copyright (c) 2011 Amol Carl Shetty (<ashetty@som.umaryland.edu>). All rights
+  reserved.
+  
+  This program is free software; you can distribute it and/or modify it under
+  GNU-GPL licenscing terms.
+  
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTIBILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

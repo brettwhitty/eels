@@ -1,0 +1,678 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: ncbi-blastx
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - ncbi-blastx.config
+  - ncbi-blastx.xml
+  - ncbi-blastx.i1.xml
+  - component_docs/ncbi-blastx.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component does a translating nucleotide-protein comparison between the query
+      sequence and subject database using the NCBI BLAST blastall executable.
+  </p>
+  <h3>references</h3>
+  <p>
+      <a href='http://www.ncbi.nlm.nih.gov/blast/docs/blastall.html'></a>
+  </p>
+  <h3>input</h3>
+  <p>
+      blastall takes a FASTA-formatted query input file (which can contain multiple sequences)
+      and a formatdb prepared database.
+  </p>
+  <h3>implemented options</h3>
+  <p>
+  <ul>
+      <li>-e - expectation value
+      <li>-F - filter string ('T' to turn on hard-masking, 'm L' to turn on soft-masking)
+      <li>-b - number of database sequences to show alignments for
+      <li>-v - number of database sequences to show one-line descriptions for
+      <li>-M - scoring matrix to be used in protein related searches
+  
+  </ul>
+  </p>
+  <h3>output</h3>
+  <p class="subsection_header">
+      Output
+  </p>
+  <p>
+      The raw output from the blastall suite looks as follows:
+  </p>
+  <p class="code">
+  BLASTP 2.2.10 [Oct-19-2004]
+  
+  
+  Reference: Altschul, Stephen F., Thomas L. Madden, Alejandro A. Schaffer,
+  Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997),
+  "Gapped BLAST and PSI-BLAST: a new generation of protein database search
+  programs",  Nucleic Acids Res. 25:3389-3402.
+  
+  Query= gi|181726|gb|AAA02729.1| antigen, T-cell receptor
+           (30 letters)
+  
+  Database: seq
+             1 sequences; 30 total letters
+  
+  Searching.done
+  
+                                                                   Score    E
+  Sequences producing significant alignments:                      (bits) Value
+  
+  gb|AAA02729.1| antigen, T-cell receptor                                71   4e-19
+  
+  >gb|AAA02729.1| antigen, T-cell receptor
+            Length = 30
+  
+   Score = 70.9 bits (172), Expect = 4e-19
+   Identities = 30/30 (100%), Positives = 30/30 (100%)
+  
+  Query: 1  CATWDGPEWHYKKLFGSGTTLVVTDKQLDA 30
+            CATWDGPEWHYKKLFGSGTTLVVTDKQLDA
+  Sbjct: 1  CATWDGPEWHYKKLFGSGTTLVVTDKQLDA 30
+  
+  
+    Database: seq
+      Posted date:  Jun 9, 2005  4:39 PM
+    Number of letters in database: 30
+    Number of sequences in database:  1
+  
+  Lambda     K      H
+     0.318    0.135    0.474
+  
+  Gapped
+  Lambda     K      H
+     0.267   0.0410    0.140
+  
+  
+  Matrix: BLOSUM62
+  Gap Penalties: Existence: 11, Extension: 1
+  Number of Hits to DB: 28
+  Number of Sequences: 1
+  Number of extensions: 1
+  Number of successful extensions: 1
+  Number of sequences better than 10.0: 1
+  Number of HSP's better than 10.0 without gapping: 1
+  Number of HSP's successfully gapped in prelim test: 0
+  Number of HSP's that attempted gapping in prelim test: 0
+  Number of HSP's gapped (non-prelim): 1
+  length of query: 30
+  length of database: 30
+  effective HSP length: 0
+  effective length of query: 30
+  effective length of database: 30
+  effective search space:      900
+  effective search space used:      900
+  T: 11
+  A: 40
+  X1: 5 ( 2.3 bits)
+  X2: 38 (14.6 bits)
+  X3: 64 (24.7 bits)
+  S1: 5 ( 5.2 bits)
+  S2: 5 ( 6.5 bits)
+  </p>
+  
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+  <p class="code">
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;!DOCTYPE Bsml PUBLIC "-//EBI//Labbook, Inc. BSML DTD//EN" "http://www.labbook.com/dtd/bsml3_1.dtd"&gt;
+  
+  &lt;Bsml&gt;
+    &lt;Definitions&gt;
+      &lt;Sequences&gt;
+        &lt;Sequence length="30" class="assembly" title="gi|181726|gb|AAA02729.1|" id="gi|181726|gb|AAA02729.1|" molecule="aa"&gt;&lt;/Sequence&gt;
+  
+        &lt;Sequence class="assembly" title="antigen, T-cell receptor" id="gb_AAA02729_1_" molecule="aa"&gt;&lt;/Sequence&gt;
+      &lt;/Sequences&gt;
+      &lt;Tables id="BsmlTables"&gt;
+        &lt;Seq-pair-alignment refend="30" compseq="gb_AAA02729_1_" compxref="seq:gb_AAA02729_1_" refseq="gi|181726|gb|AAA02729.1|" refstart="0" reflength="30" refxref=":gi|181726|gb|AAA02729.1|" method="BLASTP"&gt;
+          &lt;Seq-pair-run refcomplement="0" runprob="30" comppos="0" refpos="0" runlength="30" compcomplement="0" comprunlength="30" runscore="172"&gt;
+            &lt;Attribute name="p_value" content="4e-19"&gt;&lt;/Attribute&gt;
+  
+            &lt;Attribute name="chain_number" content="70.9"&gt;&lt;/Attribute&gt;
+            &lt;Attribute name="percent_identity" content="100.0"&gt;&lt;/Attribute&gt;
+            &lt;Attribute name="segment_number" content=""&gt;&lt;/Attribute&gt;
+            &lt;Attribute name="percent_similarity" content="100.0"&gt;&lt;/Attribute&gt;
+          &lt;/Seq-pair-run&gt;
+  
+        &lt;/Seq-pair-alignment&gt;
+      &lt;/Tables&gt;
+    &lt;/Definitions&gt;
+  &lt;/Bsml&gt;
+  </p>
+  
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment / pairwise
+  parameters:
+    MATRIX: BLOSUM62
+    # -e  Expectation value (E) default = 10.0
+    EXPECT: 1e-5
+    # -F  Filter query sequence (DUST with blastn, SEG with others) default = T
+    FILTER: T
+    # -b  Number of database sequence to show alignments for (B) default=250
+    DATABASE_MATCHES: 150
+    # -v Number of database sequences to show one-line descriptions for default=500
+    DESCRIPTIONS: 150
+    OTHER_OPTS: ""
+    COMPRESS_RAW_OUTPUT: 0
+    COMPRESS_BSML_OUTPUT: 0
+    # Split output to one query sequence per file
+    SPLIT_BSML: 0
+    SPLIT_BTAB: 0
+    # Filter the HSPs for use in the %identity/similarity/coverage for each seq-pair-alignment in the output bsml. Setting this to 0 could show very low scores on the seq-pair-alignment despite having a very high scoring HSP.
+    FILTER_HSPS_FOR_STATS: 1
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    DATABASE_PATH: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    BTAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.btab.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: ncbi-blastx
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # 
+    # To only produce raw blast output add;
+    # $;SKIP_WF_COMMAND$;=add create bsml list,convert btab to bsml,store config params,dtd validation
+    # 
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - ncbi-blastx workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+    - name: create btab list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.btab\""
+        - key: --output_list
+          value: $;BTAB_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - ncbi-blastx compute
+  steps:
+    - name: ncbi-blastx
+      type: RunUnixCommand
+      executable: $;BLASTALL_EXEC$;
+      arg: -p blastx -i $;I_FILE_PATH$; -d $;DATABASE_PATH$; -e $;EXPECT$; -F '$;FILTER$;' -b $;DATABASE_MATCHES$; -v $;DESCRIPTIONS$; -M $;MATRIX$; $;OTHER_OPTS$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+    - name: convert raw to btab
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/blast2btab
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.btab
+        - key: --split
+          value: $;SPLIT_BTAB$;
+    - name: convert raw to bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/blast2bsml
+      params:
+        - key: --query_file_path
+          value: $;I_FILE_PATH$;
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --pvalue
+          value: $;EXPECT$;
+        - key: --filter_hsps_for_stats
+          value: $;FILTER_HSPS_FOR_STATS$;
+        - key: --class
+          value: polypeptide
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+        - key: --split
+          value: $;SPLIT_BSML$;
+        - key: --gzip_output
+          value: $;COMPRESS_BSML_OUTPUT$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;REPOSITORY_ROOT$;/workflow/runtime/pipeline/$;PIPELINEID$;/pipeline.xml
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: compress raw output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --compress
+          value: $;COMPRESS_RAW_OUTPUT$;
+        - key: --list_file
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw.list
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: blast2btab.pl
+    pod: |
+  =head1 NAME
+  
+  blast2btab.pl - convert a raw wu-blast output file to btab.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: blast2btab.pl 
+              --input=/path/to/input_file.raw
+              --output=/path/to/output_file.btab
+            [ --log=/path/to/logfile
+              --debug=N
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      The input raw blast output from the wu-blastp suite.
+  
+  B<--output,-o>
+      The file to which the parsed output will be written.
+  
+  B<--split,-s>
+      Split output to one file per query. Writes files with names basename --output/queryname.btab
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to parse a raw output file from the wu-blast suite of programs into
+  btab format.  The Bioperl package is used to perform this parse, as BPlite does not
+  currently have all the functionality necessary.
+  
+  =head1  INPUT
+  
+  The input to this sequence is defined using the --input option.  This should point
+  to the raw wu-blast output file.
+  
+  =head1  OUTPUT
+  
+  The output is defined using the --output option.  The file created is tab-delimited and
+  composed of the following columns.
+  
+      1   query_name
+      2   date
+      3   query_length
+      4   algorithm
+      5   database_name
+      6   hit_name
+      7   qry_start
+      8   qry_end
+      9   hit_start
+      10  hit_end
+      11  percent_identity
+      12  percent_similarity
+      13  raw_score
+      14  bit_score
+      15  NULL
+      16  hit_description
+      17  blast_frame
+      18  qry_strand (Plus | Minus)
+      19  hit_length
+      20  e_value
+      21  p_value
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: blast2bsml.pl
+    pod: |
+  =head1  NAME
+  
+  blast2bsml.pl  - convert raw blast output to BSML documents
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  blast2bsml.pl -i blastp.raw -o blastp.bsml -q /path/to/query_file.fsa -l /path/to/logfile.log
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      The input raw blast output from the wu-blast suite.
+  
+  B<--output,-o>
+      The output BSML file name.
+  
+  B<--query_file_path,-q>
+      The full path to the query FASTA file (used to populate refxref)
+      [When used in workflow should be passed ITER_FILE_PATH]
+  
+  B<--gzip_output,-g>
+      Compress the bsml output.  If there is not .gz extension on the the output file
+      one will be added (optional).
+  
+  B<--max_hsp_count,-m> Maximum number of HSPs stored per alignment (optional)
+  
+  B<--pvalue,-p> Maximum P-value at and above which to exclude HSPs (optional)
+  
+  B<--filter_hsps_for_stats,-F> Whether to filter the HSPs by best Sum(P) when calculating the %id/coverage/similarity for the seq-pair-alignment
+  
+  B<--class,-c> The ref/comp sequence type.  Default is 'assembly'
+  
+  B<--split,-s> Split the output into one file per query sequence even if the BLAST output represents multiple query sequences.  Default is off.
+  
+  B<--debug,-d>
+      Debug level.  Use a large number to turn on verbose debugging.
+  
+  B<--log,-l>
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  blastbtab2bsml.pl takes raw output from WU-BLAST and translates it to BSML.
+  In the case of an empty results set, a sequence stub and analysis link will
+  still be created for the query sequence.
+  
+  NOTE:
+  
+  Calling the script name with NO flags/options or --help will display the syntax requirement.
+  
+  =head1  CONTACT
+      Brett Whitty
+      bwhitty@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.
+  - script: compress_file.pl
+    pod: |
+  =head1  NAME 
+  
+  compress_file.pl - wrapper to gzip an output file
+  
+  =head1 SYNOPSIS
+  
+  USAGE: compress_file.pl 
+          --file=/path/to/some.file 
+        [ --output=/path/to/output
+          --compress=1
+          --list_file=/path/to/some.list
+          --log=/path/to/some.log
+          --debug=4
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--file,-f> 
+      The path to any file you wish to compress.
+  
+  B<--compress,-c>
+      Optional.  If 0, the compression will not be performed.
+  
+  B<--remove_source,-r>
+      Optional.  Controls whether source file is removed when compressing (default = 1)
+  
+  B<--list_file,-s>
+      Optional.  Writes a list file of the gzipped file created.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used as a gzip wrapper to compress a file.
+  
+  =head1 INPUT
+  
+  The input is any file you wish to compress, usually a text file such
+  as alignment data.  This file is passed with the --file option.
+  
+  The --compress option exists so that this script can be incorporated
+  into workflow.  Since Workflow is not a logic-based system, it cannot
+  call gzip on output *sometimes*.  So we call this script all the time,
+  and just pass --compress 1 or 0 depending on whether we actually want
+  the compression done.
+  
+  The --list_file options allows us to create a list file containing the
+  full path to the list file created.  This is useful because a workflow
+  may create a list file for the raw output, but if we zip it, we want to
+  overwrite that single-entry list file with the gzip'ed path before it
+  is merged.
+  
+  Some checks are performed to handle common problems found handling compression
+  in production - each handling cases where previous compression attempts
+  have left partial files.
+  
+  If neither input or output exists the script will die.  If the input file
+  exists and output doesn't, normal compression will occur.  If the output file
+  exists and the input file doesn't, a warning is issued and the script completes
+  successfully.  
+  
+  =head1 OUTPUT
+  
+  The output file will be named the same but with the .gz extension
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net

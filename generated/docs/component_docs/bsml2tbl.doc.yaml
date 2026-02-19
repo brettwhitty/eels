@@ -1,0 +1,263 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bsml2tbl
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bsml2tbl.config
+  - bsml2tbl.xml
+  - bsml2tbl.i1.xml
+  - component_docs/bsml2tbl.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This is a component used to convert BSML to NCBI tbl format.
+  </p>
+  <h3>references</h3>
+  <p>
+      <a href='http://www.ncbi.nlm.nih.gov/Sequin/table.html#Table%20Layout'>tbl format</a>
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    # include mRNA features in output
+    EXPORT_MRNA_FEATURES: 0
+    # extract all ec numbers (including incomplete e.g. #.#.#.-)
+    ALL_EC_NUMBERS: 0
+    # features above this cutoff will be excluded
+    PERCENT_N_CUTOFF: 10
+    OTHER_OPTS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bsml
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    TBL_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.tbl.list
+    SUMMARY_FILE: $;OUTPUT_DIRECTORY$;/summary_report.txt
+  component:
+    COMPONENT_NAME: bsml2tbl
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - bsml2tbl workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create summary report
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_summary_report
+      params:
+        - key: --bsml_file
+          value: $;INPUT_FILE$;
+        - key: --bsml_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --bsml_dir
+          value: $;INPUT_DIRECTORY$;
+        - key: --bsml_ext
+          value: $;INPUT_EXTENSION$;
+        - key: --output_file
+          value: $;SUMMARY_FILE$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stderr
+    - name: create tbl list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.tbl\""
+        - key: --output_list
+          value: $;TBL_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - bsml2tbl compute
+  steps:
+    - name: bsml2tbl
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bsml2tbl
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.tbl
+        - key: --mrna
+          value: $;EXPORT_MRNA_FEATURES$;
+        - key: --ec_all
+          value: $;ALL_EC_NUMBERS$;
+        - key: --percent_n_cutoff
+          value: $;PERCENT_N_CUTOFF$;
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_summary_report.pl
+    pod: |
+  =head1 NAME
+  
+  create_summary_report.pl - Script to generate a summary report for the Microbe pipeline
+  
+  =head1 SYNOPSIS
+  
+  USAGE : perl create_summary_report -bsml_file <input bsml file> -output_file <output file> [ -bsml_list <input bsml list> -bsml_dir <input bsml dir> -bsml_ext <bsml extension> -log <log file> -help ]
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  	-bsml_file	=	Input BSML file containing the annotation pipeline summary
+  	
+  	-output_file	=	Output summary report file
+  
+  	-bsml_list	=	List of BSML files containing annotation pipeline summary for each molecule
+  
+  	-bsml_dir	=	Directory of BSML files containing annotation pipeline summary for each molecule
+  
+  	-bsml_ext	=	File extension to be used in case bsml_dir is provided as an argument. Default: bsml
+  
+  	-log		=	Log file
+  
+  =head1 DESCRIPTION
+  
+  The script is used to generate a summary report for the clovr microbial pipeline.
+  
+  =head1 INPUT
+  
+  Pipeline summary BSML file
+  
+  =head1 OUTPUT
+  
+  Summary report file conating following information:
+  1. Contig Ids	Size(Kbp)	Number of CDS in the contig - This list only includes contigs greater than 5Kbp
+  2. Total number of contigs/scaffolds in the genome.
+  3. Mean contig size in Kbp
+  4. Median contig size in Kbp
+  5. Total genome size in Mbp
+  6. Total numbmer of CDS predicted in the genome
+  7. Total number of tRNAs predicted in the genome
+  8. Total number of rRNAs predicted in the genome 
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Bioinformatics Software Engineer II
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

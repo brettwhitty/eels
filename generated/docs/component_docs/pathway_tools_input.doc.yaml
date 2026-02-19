@@ -1,0 +1,382 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pathway_tools_input
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pathway_tools_input.config
+  - pathway_tools_input.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    DATABASE: ""
+    DB_HOST: ""
+    USERNAME: ""
+    PASSWORD: ""
+    PASSWORD_FILE: ""
+    LOCUS_DB: ""
+    ORGANISM_NAME: ""
+    TAXON_ID: ""
+  input:
+    # Inputs do nothing
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    BTAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.btab.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: pathway_tools_input
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - pathway_tools_input workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create gbk files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/chado_aengine_dumper
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --user
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --password_file
+          value: $;PASSWORD_FILE$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --format
+          value: gbk
+        - key: --locus_db
+          value: $;LOCUS_DB$;
+        - key: --server
+          value: $;DB_HOST$;
+    - name: create pathway tools input files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_ptools_input_files
+      params:
+        - key: --gbk_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --organism_name
+          value: "&apos;$;ORGANISM_NAME$;&apos;"
+        - key: --database
+          value: $;DATABASE$;
+        - key: --taxon_id
+          value: $;TAXON_ID$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: chado_aengine_dumper.pl
+    pod: |
+  =head1 NAME
+  
+      chado_aengine_dumper.pl - creates a genbank or GFF file from a prokaryotic annotation stored
+      in chado.
+  
+  =head1 SYNOPSIS
+  
+    USAGE: assign_dbxref_ids.pl
+      --database=abs2
+      --user=someuser
+      --password=somepass
+      --output_directory=/some/dir
+      --format=gbk
+      [ --locus_db=IGS_bba1
+      --locus_db_version=current
+      --translation_table=11
+      --server=khan.igs.umaryland.edu
+      --database_type=postgreqsql
+      --comment="This is a temporary/private release"
+      --source=IGS
+      --organism_id=all
+      --use_assembly_names
+      --cgi_mode=1
+      --log=/path/to/some.log ]
+  
+  
+  =head1 OPTIONS
+  
+  B<--database>
+      Database name to connect to.
+  
+  B<--user>
+      User account with select, insert, and update privileges on the specified database.
+  
+  B<--password>
+      Password for user account specified.
+  
+  B<--password_file>
+      File which contains the password you want to provide.  Useful if you do not want to publicly reveal your password
+  
+  B<--output_directory>
+      Output directory.
+  
+  B<--format>
+      Output format desired.  Value should be either 'gbk', 'gff' or 'tbl'.
+  
+  B<--locus_db>
+      Optional.  If passed, corresponds to the db.name entry that should be used as the source
+      for locus identifiers.  All other dbxref entries will be encoded as db_xref GBK attributes
+  
+  B<--locus_db_version>
+      Optional. Must specify if using locus_db option. This will specify the version of the
+      dbxrefs used for locus_tag.
+  
+  B<--translation_table>
+      Optional.  Numeric value for translations table (default = 11)
+  
+  B<--intergenic_regions>
+  	Optional.  Add intergenic region features to the output when enabled.
+  
+  B<--server>
+      Optional.  Server to connect to (default = localhost).
+  
+  B<--database_type>
+      Optional.  Database type (vendor.)  Currently supports 'mysql' or 'postgresql' (default = mysql).
+  
+  B<--comment>
+      Optional.  Populates the COMMENT field within each file written. (default = none).
+  
+  B<--source>
+      Optional.  Only used when exporting GFF - populates column 2 for all gene and CDS features. (default = none).
+  
+  B<--organism_id>
+      Optional.  Only process a specific organism_id (default = all).
+  
+  B<--use_assembly_names>
+      Optional flag. If included, will use the feature.name field for ids for assemblies rather than uniquenames.
+  
+  B<--cgi_mode>
+      Optional.  Transforms output mode of script to be suitable for CGI execution.  All output is written as a
+      single stream to STDOUT, with a header that forces the user to download as a file.
+  
+  B<--log>
+      Optional.  Full path to a log file to create.
+  
+  B<--help>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+      description needed
+  
+  =head1  INPUT
+  
+      Schema assumptions: Generally, this expects that an Annotation Engine genome has been run and
+      loaded using Ergatis with representation in chado as defined by Coati/Prism loader conventions.
+  
+      Specifically, reference sequences are of type 'assembly' and CDS  feature 'derived_from' their
+      transcripts via the feature_relationship table.
+  
+      Almost all features are only exported if the the values of their is_obsolete and is_analysis fields
+      in the feature table are 0.  The only exception currently are rRNA features, which can be either.
+  
+      =head1  OUTPUT
+  
+      One file is written per assembly/sequence and is named using the feature.uniquename of the
+      sequence with the gbk|gff extension added.  The Genbank output is probably a bit more complete -
+      the addition is GFF is a recent feature and usage conventions are still being worked out.
+  
+      Example output of each feature type (double-spaces between each block added only for ease of reading
+      in this documentation.)
+  
+      1830	2966	gene
+      gene	dnaN
+      locus_tag     OBB_0002
+      1830	2966	CDS
+      product	DNA-directed DNA polymerase III beta chain
+      EC_number	2.7.7.7
+      protein_id	gnl|ncbi|OBB_0002
+  
+      91493	93058	gene
+      gene	rrsA
+      locus_tag     OBB_0089
+      91493	93058	rRNA
+      product	16S ribosomal RNA
+  
+  
+      96468	96543	gene
+      gene	trnV
+      locus_tag     OBB_0092
+      96468	96543	tRNA
+      product	tRNA-Val
+  
+  
+      This is taken from:
+  
+    http://www.ncbi.nlm.nih.gov/Genbank/genomesubmit-Examples.html#fig2
+  
+  
+  
+  =head1 TEST INFO
+  
+      bioperl howto:
+  
+  http://www.bioperl.org/wiki/HOWTO:Feature-Annotation#Building_Your_Own_Sequences
+  
+      Entrez entry using as reference:
+  
+    http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=157844830
+  
+      commands used for testing:
+  
+      ./chado_aengine_dumper.pl --database=b_theta --database_type=postgresql --user=driley --password=whatever --organism_id=1 --server=driley-lx.igs.umaryland.edu --output_directory=/tmp/gbktest --locus_db='Btheta_' --source=IGS
+      ./chado_aengine_dumper.pl --database=hik|cgsp --database_type=mysql --user=jorvis --password=whatever --organism_id=1 --server=localhost --output_directory=/tmp/gbktest --locus_db='TIGR_moore' --source=IGS --format=gff
+  
+      db_id 1 feature counts:
+  
+      name     | count
+      -------------+-------
+      gene        |  6028
+      exon        |  6028
+      CDS         |  6028
+      tRNA        |    77
+      assembly    |     2
+      polypeptide |  5951
+      transcript  |  5951
+  
+      =head1 TO DO
+  
+      - need to respect is_obsolete for all feature queries.  mysql and postgres treat these differently
+  
+      - BRC column 9 convention example:
+  
+      ID=bhbCDS.3517814;Name=FTF0002;gene_symbol=dnaN;Ontology_term=GO:0003677,GO:0003887,GO:0005737,GO:0006260,GO:0006261,GO:0008408,GO:0009360;Dbxref=NCBI_NP:YP_666216.1,Swiss-Prot:Q14K60,EC:2.7.7.7;Parent=bhb|gene.3517811;description=DNA polymerase III beta chain
+  
+      should test with gff3_to_annotab (at aaron's request)
+  
+      CVTERMS ( in gcj1099 )
+  
+      gene_product_name = 68
+      frameshift = 34754
+      point_mutation = 35139
+  
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net
+  - script: create_ptools_input_files.pl
+    pod: |
+  =head1 NAME
+  
+  create_ptools_input_files.pl 
+  
+  =head1 SYNOPSIS
+  
+    USAGE: prepare_for_auto_annotate.pl  
+      --gbk_dir=/path/to/dir/with/molecule.gbk
+      --organism_name='Genus species strain'
+      --database=db123
+      --taxon_id=12334
+      --output_dir=/path/to/output/dir
+      [ --help ]
+  
+  =head1 OPTIONS
+  
+  B<--gbk_dir,-g>
+      Path to a directory containing the organism's gbk files
+  
+  B<--organism_name,-n>
+      Name of the organism. Must contain Genus and species, strain is optional
+  
+  B<--database,-d>
+      Name of the database
+  
+  B<--taxon_id,-t>
+      NCBI taxon id.  If unknown, enter closest related.
+  
+  B<--output_dir,-o>
+      Directory to print the two output files:
+      organism-params.dat
+      genetic-elements.dat
+  
+  B<--log,-l>
+      Logfile name
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      Will print 2 files based on input information:
+      
+      organism-params.dat:
+      ID      DB123
+      STORAGE FILE
+      NAME    Genus species strain
+      ABBREV-NAME     G. species 
+      DOMAIN  TAX-12334
+      RANK    |strain|
+      CODON-TABLE     11
+      MITO-CODON-TABLE        0
+      DBNAME  Db123Cyc
+      NCBI-TAXON-ID   12334
+  
+      genetic-elements.dat
+      ID      CHROM-1
+      NAME    db123.assembly.1
+      TYPE    :CHRSM
+      CIRCULAR?       N
+      ANNOT-FILE      db123.assembly.1.gbk
+      SEQ-FILE        db123.assembly.1.fsa
+      //
+  
+  =head1  INPUT
+  
+      Input GBK files should be named according to molecule and contain only one molecule per file.
+      The fasta file used for input to pathway-tools should be named the same as the gbk files found.
+  
+  =head1 OUTPUT
+  
+      See above
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

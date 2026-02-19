@@ -1,0 +1,210 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mothur_rarefaction_single
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mothur_rarefaction_single.config
+  - mothur_rarefaction_single.xml
+  - mothur_rarefaction_single.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+    OTU_FORMAT: "[ rabund|sabund|list ]"
+    CONFIG_OPTIONS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    RAREFACTION_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.rarefaction.list
+  component:
+    COMPONENT_NAME: mothur_rarefaction_single
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801$"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Pre-Processing
+    - Processing
+    - Iterator
+    - Post-Processing
+  command_sets:
+    - mothur rarefaction single
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create rarefaction curve list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.rarefaction\""
+        - key: --output_list
+          value: $;RAREFACTION_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - mothur rarefaction single compute
+  steps:
+    - name: rarefaction single
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/mothur
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stderr
+        - key: --mothur_exe
+          value: $;MOTHUR_EXEC$;
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --args
+          value: "\"#read.otu($;OTU_FORMAT$;=$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_NAME$;); rarefaction.single($;CONFIG_OPTIONS$;)\""
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: mothur.pl
+    pod: |
+  =head1 NAME
+  
+  mother.pl - Wrapper to facilitate the execution of mothur through ergatis.
+  
+  =head1 SYNOPSIS
+  
+  USAGE ./mothur.pl --mothur_exe=/path/to/mothur --input_file=/path/to/input --output_file=/path/to/output --args=<MOTHUR ARGS>
+  
+  =head1 OPTIONS
+  
+  B<--mothur_exe, -m>
+  	Path to the mothur executable.
+  	
+  B<--input_file, -i> 
+  	Input file that to be fed into mothur
+  	
+  B<--output_dir, -o>
+  	Desired directory where mothur output should go
+  
+  B<--args, -a> 
+  	Any command-line arguments that should be passed to mothur
+  
+  B<--log, -l>
+  	OPTIONAL. Log file
+  	
+  =head1 DESCRIPTION
+  
+  This wrapper is written to get around the funky way that mothur handles where it writes any output to. The output directory
+  is not user-controlled in the normal sense with output being written to the directory where the primary input file is house.
+  The primary input file is different depending on the mothur command invoked.
+  
+  =head1 INPUT
+  
+  Input file for the mothur command to be invoked; this can be anything from a dist file to a FASTA file.
+  
+  =head1 CONTACT
+  
+  	Cesar Arze
+  	carze@som.umaryland.edu

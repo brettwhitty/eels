@@ -1,0 +1,91 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: paired_list_iterator_template
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - paired_list_iterator_template.xml
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/$;ITERATOR_NAME$;.list\" /"
+  steps:
+    - name: create_paired_iterator_list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_paired_iterator_list
+      params:
+        - key: --input_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --input_file1
+          value: $;INPUT_FILE_1$;
+        - key: --input_file2
+          value: $;INPUT_FILE_2$;
+        - key: --input_directory
+          value: $;INPUT_DIRECTORY$;
+        - key: --input_directory_extension
+          value: $;INPUT_EXTENSION$;
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/$;ITERATOR_NAME$;.list
+        - key: stdout
+          value: $;TMP_DIR$;/create_paired_iterator_list.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/create_paired_iterator_list.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_paired_iterator_list.pl
+    pod: |
+  =head1 NAME
+  
+  create_paired_iterator_list.pl - generates list file from various input sources of filenames.
+  
+  =head1 SYNOPSIS
+  
+      create_paired_iterator_list.pl --input_file_list path/to/listfile --input_file1 path/to/listfile 
+                                     --input_file2 path/to/listfile input_directory path/to/directory of input files 
+                                     --input_directory_extension input file extension --output_iter_list path/to/output_iter_file
+                                     [--log /path/to/logfile] [--timestamp] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --input_file_list <path/to/listfile>               = /path/to/listfile for paired input files.
+      
+      --input_file1 <path/to/listfile>                   = /path/to/input file 1.
+  
+      --input_file2 <path/to/listfile>                   = /path/to/input file 2.
+  
+      --input_directory <path/to/file directory>         = /path/to/directory containing input files.
+  
+      --input_directory_extension <input file extension> = input file extension. Required with --input_directory.
+  
+      --output_iter_list <path/to/output_iter_file>      = /path/to/output iteration file.
+  
+      --log </path/to/logfile>                           = /path/to/output log file. Optional.
+  
+      --timestamp                                        = sybase timestamp. Optional.
+  
+      --v                                                = generate runtime messages. Optional.
+  
+  =head1   DESCRIPTION
+  	
+  	Modified from ./create_file_iterator_list.pl.
+  	
+      This script is used to accept a selection of inputs from either an input list or multiple input 
+      fields. These inputs will then be distributed randomly across a certain number of groups.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

@@ -1,0 +1,329 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: tabula_rasa
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - tabula_rasa.config
+  - tabula_rasa.xml
+  - tabula_rasa.i1.xml
+  - workflow/tabula_rasa-master.ini
+  - workflow/tabula_rasa.ini
+  - workflow/tabula_rasaconf.ini
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: omnidexterous
+  parameters:
+    # use the following variables in your INPUT_COMMAND:
+    #  $;ITER_FILE_PATH$;
+    #  $;ITER_FILE_BASE$;
+    #  $;ITER_FILE_EXT$;
+    #  $;ITER_FILE_NAME$;
+    #  $;ITER_DIR$;
+    #  $;OUTPUT_DIRECTORY$;
+    INPUT_COMMAND: touch $;ITER_FILE_PATH$;
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: ""
+  output:
+    OUTPUT_TOKEN: default
+    # note: an $;OUTPUT_EXTENSION$; of "out" or some other common extension for intermediate files may add unintended files to $;OUTPUT_LIST$;
+    OUTPUT_EXTENSION: out
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.$;OUTPUT_EXTENSION$;.list
+    # compressed input files handled in tabula_rasa
+    COMPRESS_OUTPUT: 1
+  component:
+    COMPONENT_NAME: tabula_rasa
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - tabula_rasa workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create OUTPUT_EXTENSION list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.$;OUTPUT_EXTENSION$;\""
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - wu-blastp compute
+  steps:
+    - name: tabula_rasa
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/tabula_rasa
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+        - key: --input_command
+          value: "'$;INPUT_COMMAND$;'"
+        - key: --iter_file_path
+          value: $;I_FILE_PATH$;
+        - key: --iter_file_base
+          value: $;I_FILE_BASE$;
+        - key: --iter_file_ext
+          value: $;I_FILE_EXT$;
+        - key: --iter_file_name
+          value: $;I_FILE_NAME$;
+        - key: --iter_dir
+          value: $;I_DIR$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+
+# Workflow INI: tabula_rasa-master.ini
+workflow_ini_tabula_rasa-master.ini:
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_output_list:
+    # skip for now
+    # [create_bsml_list]
+    # param.command=$;BIN_DIR$;/create_list_file
+    # param.--directory=$;OUTPUT_DIRECTORY$;
+    # param.--regex=".*\.bsml"
+    # param.--output_list=$;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    # [create_fasta_list]
+    # param.command=$;BIN_DIR$;/create_list_file
+    # param.--directory=$;OUTPUT_DIRECTORY$;
+    # param.--regex=".*\.fsa"
+    # param.--output_list=$;OUTPUT_DIRECTORY$;/$;NAME$;.fasta.list
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--regex: "\".*\\.$;OUTPUT_EXTENSION$;\""
+    param.--output_list: $;OUTPUT_LIST$;
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: tabula_rasa.ini
+workflow_ini_tabula_rasa.ini:
+  empty:
+  tabula_rasa:
+    # [user_command]
+    # Execute the modified user command
+    # param.command=$;COMMAND_STRING$;
+    # param.stdout=$;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.out
+    # [store_config_params]
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    # param.command=$;BIN_DIR$;/analysis2bsml
+    # param.--ergatis_control_file=$;ERGATIS_DIR$;.ini
+    # param.--conf=$;COMPONENT_CONFIG$;
+    # param.--bsml_file=$;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    # param.--componenturl=$;WORKFLOW_REPOSITORY$;/pipeline.xml
+    # param.--pipelineurl=$;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    # param.--analysis_id=$;NAME$;_analysis
+    # [compress_output]
+    # make the tmp directory
+    # param.command=$;BIN_DIR$;/compress_file
+    # param.--file=$;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.$;OUTPUT_EXTENSION$;
+    # param.--compress=$;COMPRESS_BSML_OUTPUT$;
+    # param.--list_file=$;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.$;OUTPUT_EXTENSION$;.list
+    # Execute tabula_rasa.pl to perform substitutions on user supplied variables
+    # and then execute the command
+    # doesn't need any parameters?
+    param.command: $;BIN_DIR$;/tabula_rasa
+    param.stdout: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.out
+    param.--input_command: "'$;INPUT_COMMAND$;'"
+    param.--iter_file_path: $;ITER_FILE_PATH$;
+    param.--iter_file_base: $;ITER_FILE_BASE$;
+    param.--iter_file_ext: $;ITER_FILE_EXT$;
+    param.--iter_file_name: $;ITER_FILE_NAME$;
+    param.--iter_dir: $;ITER_DIR$;
+    param.--output_directory: $;OUTPUT_DIRECTORY$;
+
+# Workflow INI: tabula_rasaconf.ini
+workflow_ini_tabula_rasaconf.ini:
+  _header:
+    # configuration file for the tabula_rasa workflow
+  include tabula_rasa:
+    $;SHARED_CONFIG$;: ""
+  input tabula_rasa:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: ""
+  output tabula_rasa:
+    $;OUTPUT_TOKEN$;: default
+    # note: an $;OUTPUT_EXTENSION$; of "out" or some other common extension for intermediate files may add unintended files to $;OUTPUT_LIST$;
+    $;OUTPUT_EXTENSION$;: out
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.$;OUTPUT_EXTENSION$;.list
+    # compressed input files handled in tabula_rasa
+    $;COMPRESS_OUTPUT$;: 1
+  parameters tabula_rasa:
+    # use the following variables:
+    # $;ITER_FILE_PATH$;
+    # $;ITER_FILE_BASE$;
+    # $;ITER_FILE_EXT$;
+    # $;ITER_FILE_NAME$;
+    # $;ITER_DIR$;
+    # $;OUTPUT_DIRECTORY$;
+    $;INPUT_COMMAND$;: touch $;ITER_FILE_PATH$;
+  workflowdocs tabula_rasa:
+    $;VERSION$;: 1.0
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: tabula_rasa
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/tabula_rasa-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/tabula_rasa-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/tabula_rasa.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/tabula_rasa_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

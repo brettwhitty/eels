@@ -1,0 +1,394 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: lgt_bwa
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - lgt_bwa.config
+  - lgt_bwa.xml
+  - lgt_bwa.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # Path to the query file to be aligned
+    QUERY_FILE: ""
+    # Input 1 to use bwa-mem.  Input 0 or leave blank to use bwa_aln
+    USE_MEM: 0
+    # Mismatch Penalty.
+    MISMATCH_PENALTY: 3
+    # Maximum Gap Opens.
+    MAX_GAP_OPENS: 1
+    # Maximum number of gap extensions.
+    MAX_GAP_EXTNS: -1
+    # Gap Open Penalty.
+    GAP_OPEN_PENALTY: 11
+    # Gap Extension Penality.
+    GAP_EXTN_PENALTY: 4
+    # Maximum Number of Threads. Multi-threading mode.
+    MAX_THREADS: 1
+    # This is the maximum number of alignments for each read.
+    MAX_ALIGN: 1
+    # Minimum threshold length of soft-clipping in reads to keep read
+    SOFTCLIP_MIN: 24
+    # Specify whether to filter out paired-end reads where both ends are mapped
+    KEEP_MM: 1
+    # If input file is a BAM file, indicates if file is for paired-end or single-end reads
+    PAIRED: ""
+    # Argments for the various bwa utilities (aln, sampe, samse)
+    BWA_ARGS: ""
+    # Argments for 'samtools view' utility
+    SAM_VIEW_ARGS: ""
+    # Arguments for the 'samtools sort' utility
+    SAM_SORT_ARGS: ""
+  input:
+    # Input is a reference fasta that has been indexed by BWA.  Fasta reference must be in the same directory as the indexing files.  INPUT_FILE_LIST accepts a list of reference fasta files
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BAM_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bam.list
+  component:
+    COMPONENT_NAME: lgt_bwa
+    DESCRIPTION: Lateral Genome Transfer
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator1
+    - Iterator Done
+  command_sets:
+    - LGT workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create filtered BAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.filtered\\.bam\""
+        - key: --output_list
+          value: $;BAM_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Processing
+  command_sets:
+    - bwa Iterator workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: BWA alignment
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_bwa
+      params:
+        - key: --input_file
+          value: $;QUERY_FILE$;
+        - key: --reference
+          value: $;I_FILE_PATH$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --use_mem
+          value: $;USE_MEM$;
+        - key: --misMsc
+          value: $;MISMATCH_PENALTY$;
+        - key: --maxGapO
+          value: $;MAX_GAP_OPENS$;
+        - key: --maxGapE
+          value: $;MAX_GAP_EXTNS$;
+        - key: --gapOsc
+          value: $;GAP_OPEN_PENALTY$;
+        - key: --gapEsc
+          value: $;GAP_EXTN_PENALTY$;
+        - key: --nThrds
+          value: $;MAX_THREADS$;
+        - key: --num_aligns
+          value: $;MAX_ALIGN$;
+        - key: --bwa_path
+          value: $;BWA_EXEC$;
+        - key: --samtools_path
+          value: $;SAMTOOLS_EXEC$;
+        - key: --bwa_params
+          value: $;BWA_ARGS$;
+        - key: --samtools_params
+          value: $;SAM_VIEW_ARGS$;
+        - key: --bam_paired
+          value: $;PAIRED$;
+        - key: --tmp_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_align.stderr
+    - name: Filter reads
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_filter_reads
+      params:
+        - key: --input_file
+          value: ""
+        - key: --input_list
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/bam.list
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --softclip_min
+          value: $;SOFTCLIP_MIN$;
+        - key: --samtools_path
+          value: $;SAMTOOLS_EXEC$;
+        - key: --samtools_params
+          value: $;SAM_SORT_ARGS$;
+        - key: --keep_mm_reads
+          value: $;KEEP_MM$;
+        - key: --tmp_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_filter.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_filter.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: lgt_bwa.pl
+    pod: |
+  =head1 NAME
+  
+  # Name of the script and a 1 line desc
+  
+  =head1 SYNOPSIS
+  
+  # USAGE :
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  B<--reference,-r>
+  	Name of the fasta reference to align against.  Multiple files can be specified if seperated by commas
+  
+  B<--reference_list, -R>
+  	List of fasta references to align against.  The list is looped over and each reference aligned to individually.
+  
+  B<--input_file, -i>
+  	Fastq or BAM input file.  A list file pointing to input is also accepted.
+  
+  B<--input_dir,-I>
+  	Input directory where either fastq files or BAM input files can be found
+  
+  B<--output_dir, -o>
+  	Directory to store the output contents
+  
+  B<--misMsc>
+  	(Optional) Mismatch penalty. BWA will not search for suboptimal hits with a score lower than (bestScore-misMsc).  Default is 3
+  
+  B<--maxGapO>
+      (Optional)  Maximum number of gap opens.  Default is 1
+  
+  B<--maxGapE>
+  	(Optional) Maximum number of gap extensions, -1 for k-difference mode (disallowing long gaps).  Default is -1
+  
+  B<--maxOcc>
+  	(Optional) Maximum edit distance if the value is INT, or the fraction of missing alignments given 2% uniform base error rate if FLOAT. In the latter case, the maximum edit distance is automatically chosen for different read lengths. Default is 0.04
+  
+  B<--gapOsc>
+  	(Optional) Gap open penalty. Default is 11
+  
+  B<--gapEsc>
+  	(Optional) Gap extension penalty. Default is 4
+  
+  B<--nThrds, -t>
+  	(Optional) Number of threads used in multi-threading mode.  Not necessary if calling via Ergatis. Default is 1
+  
+  B<--bwa_params, -B>
+  	Extra parameters for the "bwa" program
+  
+  B<--samtools_params, -S>
+  	Extra parameters for the "samtools" program
+  
+  B<--bwa_path, -b>
+  	Path to the "bwa" executable
+  
+  B<--samtools_path, -s>
+  	Path to the "samtools" executable
+  
+  B<--use_mem, -m>
+  	Set to 1 to indicate that the "bwa mem" algorithm should be used instead of "bwa aln"
+  
+  B<--bam_paired, -p>
+  	If set to 1, this indicates the input BAM is from paired-end data
+  
+  B<--tmp_dir, -T>
+      If set, this will become the "TMP_DIR" environment variable value for the BWA aln/mem run
+  
+  B<--log, -l>
+  	Path to writable log file
+  
+  B<--help, -h>
+  	Prints this help doc
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  
+  
+  =head1 OUTPUT
+  
+  
+  
+  =head1 AUTHOR
+  
+  	Shaun Adkins
+  	Bioinformatics Software Engineer
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sadkins@som.umaryland.edu
+  
+  ==cut
+  - script: lgt_filter_reads.pl
+    pod: |
+  =head1 NAME
+  
+  # Name of the script and a 1 line desc
+  
+  =head1 SYNOPSIS
+  
+  # USAGE :
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  
+  
+  =head1 OUTPUT
+  
+  
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Bioinformatics Software Engineer II
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut

@@ -1,0 +1,321 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pmarks2bsml
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pmarks2bsml.config
+  - pmarks2bsml.xml
+  - pmarks2bsml.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Used in id generation when generating pmarks bsml
+    PROJECT_ABBREVIATION: $;PROJECT$;
+  input:
+    # List of paths to pseudomolecules 
+    INPUT_FILE_LIST: ""
+    # Pseudomolecule file
+    INPUT_FILE: ""
+    # Directory containing pseudomolecule files
+    INPUT_DIRECTORY: ""
+    # The following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fasta
+    # Tab-delimited file containing pmark positions corresponding to the input pseudomolecule
+    PMARKS_INPUT: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: pmarks2bsml
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - pmarks2bsml workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create pmarks2bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - generate pmarks2bsml
+  steps:
+    - name: pmarks2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/pmarks2bsml
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;.pmarks
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.pmarks.bsml
+        - key: --project
+          value: $;PROJECT_ABBREVIATION$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --fasta_input
+          value: $;I_FILE_PATH$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.pmarks.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: pseudomolecule_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.pmarks.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: pmarks2bsml.pl
+    pod: |
+  =head1 NAME
+  
+  pmarks2bsml.pl - Creates a bsml document for pmarks location on a pseudomolecule
+  
+  =head1 SYNOPSIS
+  
+  USAGE: pmarks2bsml.pl
+              --input_file=/path/to/some/pseudomol.pmarks
+              --output=/path/to/pmarks.bsml
+              --id_repository=/path/to/id_repository
+            [ --fasta_input=/path/to/pseudomolecule.fsa
+              --log=/path/to/file.log
+              --debug=4
+              --help
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-f>
+      Input pmarks positions file
+  
+  B<--output,-o>
+      The output bsml file.
+  
+  B<--id_repository,-r>
+      Id repository for use by Workflow::IdGenerator.pm
+  
+  B<--fasta_input,-a>
+      The input file that was used to locate pmarks location in a pseudomolecule
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to convert the output from a create_pseudomolecule script specifying the pmarks location into BSML.
+  
+  =head1  INPUT
+  
+  You define the input file using the --input option.  This file does not need any
+  special file extension.  The regular output of create_pseudomolecule looks like this:
+  
+  
+  >zma1.assembly.5808
+  1	30
+  174	204 
+  430	460  
+  1258    1288 
+  1541    1571 
+  2153    2183 
+  
+  Where the columns from left to right contain:
+  start_position   end_position 
+  
+  =head1 OUTPUT
+  
+  After parsing the input file, a file specified by the --output option is created. 
+  The file is created, and temporary IDs are created for each result element.  
+  They are only unique to the document, and will need to be replaced
+  before any database insertion.
+  
+  =head1  CONTACT
+  
+      Sonia Agrawal
+      sagrawal@som.umaryland.edu
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

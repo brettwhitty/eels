@@ -1,0 +1,412 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: split_multifasta
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - split_multifasta.config
+  - split_multifasta.xml
+  - split_multifasta.i1.xml
+  - component_docs/split_multifasta.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+       This connector component takes one or more input FASTA files and splits them into individual, 
+       single-entry (by default) FASTA files. This should eventually be transparent to the end-user, since all 
+       multi-input files should be split for some components.  The component also has a SEQS_PER_FILE
+       (default 1) variable so the user can specify more than one sequence in each output file.
+  </p>
+  <h3>input</h3>
+  <p>
+       The input is defined with --input_file and should be a single fasta file. File extensions are 
+       ignored. When creating this multi-entry FASTA file, one should take care to make the first *word* 
+       after the &gt; symbol a unique value, as it will be used as the file name for that sequence. For 
+       example:
+  </p>
+  <div class='code_container'>
+       >gi53791237 Tragulus javanicus p97bcnt gene for p97Bcnt 
+       ACAGGAGAAGAGACTGAAGAGACACGTTCAGGAGAAGAGCAAGAGAAGCCTAAAGAAATGCAAGAAGTTA 
+       AACTCACCAAATCACTTGTTGAAGAAGTCAGGTAACATGACATTCACAAACTTCAAAACTAGTTCTTTAA 
+       AAAGGAACATCTCTCTTTTAATATGTATGCATTATTAATTTATTTACTCATTGGCGTGGAGGAGGAAATG 
+       
+       >gi|15387669|emb|AJ308231.1|CCA308231 Corynebacterium callunae pCC1 plasmid 
+       ATGCATGCTAGTGTGGTGAGTATGAGCACACACATTCATGGGCACCGCCGGGGTGCAGGGGGGCTTGCCC 
+       CTTGTCCATGCGGGGTGTGGGGCTTGCCCCGCCGATAGAGACCGGCCACCACCATGGCACCCGGTCGCGG 
+       GGTGATCGGCCACCACCACCGCCCCCGGCCACTCTCCCCCTGTCTAGGCCATATTTCAGGCCGTCCACTG
+       
+  </div>
+  <p>
+       Whitespace is ignored within the input file. See the Output section for more on creation of output
+       files and how these headers would be handled.
+  </p>
+  
+  <h3>output</h3>
+  <p>
+       Because we are splitting a single file into multiple files, we must devise a way of naming the 
+       resultant files. The file names are pulled from the header of each FASTA sequence. Specifically, 
+       the first *word* after the "&gt;" symbol, defined as all the characters until the first whitespace, 
+       is used as the ID of that sequence. When creating the file all illegal characters in the ID are 
+       replaced with underscores. This is only done for the file name; the original FASTA header within 
+       the created file is left intact. The extention .fsa is added to each ID to complete the file name.
+  </p>
+  <p>
+      The legal characters are a-z A-Z 0-9 . - _
+  </p>
+  <p>
+      For the example above, two files would be created with the following names:
+  </p>
+  <div class='code_container'>
+      gi53791237.fsa 
+      gi_15387669_emb_AJ308231.1_CCA308231.fsa
+      
+  </div>
+  <p>
+       If you pass a file with the optional --list_file parameter this script will also create a text 
+       file listing the file names of each of the output files it creates. When running as a step in a 
+       serial compute, this could be useful to pass as input to the next component.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / manipulation
+  parameters:
+    SEQS_PER_FILE: 1
+    # optionally specify how many output fasta files you'd like. 
+    # cannot be defined in conjunction with SEQS_PER_FILE.
+    TOTAL_FILES: ""
+    FILES_PER_DIRECTORY: 0
+    # optionally compress fasta output files
+    COMPRESS_OUTPUT: 0
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+  component:
+    COMPONENT_NAME: split_multifasta
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - split_multifasta workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: merge list files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/merge_lists
+      params:
+        - key: --input_dir
+          value: $;OUTPUT_DIRECTORY$;/i1
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+        - key: --glob
+          value: "'$;COMPONENT_NAME$;.list'"
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - split_multifasta compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;
+    - name: split_multifasta
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/split_multifasta
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;
+        - key: --output_list
+          value: $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.list
+        - key: --output_file_prefix
+          value: "'$;I_FILE_BASE$;_'"
+        - key: --seqs_per_file
+          value: $;SEQS_PER_FILE$;
+        - key: --total_files
+          value: $;TOTAL_FILES$;
+        - key: --output_subdir_size
+          value: $;FILES_PER_DIRECTORY$;
+        - key: --compress_output
+          value: $;COMPRESS_OUTPUT$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: merge_lists.pl
+    pod: |
+  =head1 NAME
+  
+  merge_lists.pl - Iterate through a directory of lists and merge them into a single list.
+  
+  =head1 SYNOPSIS
+  
+      USAGE: merge_lists.pl 
+                  --input_dir=/some/dir/
+                  --output_list=/some/path/something.list
+                [ --glob='*.list' ]
+  
+  =head1 OPTIONS
+  
+  B<--input_dir,-i>
+      The input directory containing the list files.
+  
+  B<--output_list,-o>
+      The file to which the output list will be written.
+  
+  B<--glob,-g>
+      Searches for file names with this pattern within --input_dir
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  Because distributed processes cannot all write to the same list file, each write their
+  own and we use this script to merge them into a single file, after the iteration steps
+  are finished.  Of course, this can also be used outside of workflow if you simply have
+  files that you want to merge.
+  
+  Why not use just cat with a redirector?  We could, but this allows us to log each file
+  as it is merged into the final version as well as do any needed sanity checking.
+  
+  =head1  INPUT
+  
+  The required input is simply a directory path, specified by --input_dir, containing the files 
+  you want to merge.  This will merge every file in the directory into the output
+  file unless you also pass a filter with the --glob option.  Glob allows one to specify
+  many of the same patterns for file identification as using grep on the command line, such
+  as * ? [ ] .
+  
+  =head1  OUTPUT
+  
+  Each of the files will be concatenated, with no content modification, onto the end of the
+  output file, specified with the --output_list option.  If the output file already exists
+  it will be overwritten.
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: split_multifasta.pl
+    pod: |
+  =head1 NAME
+  
+  split_multifasta.pl - split a single FASTA file containing multiple sequences into separate files.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: split_multifasta.pl 
+              --input_file=/path/to/some_file.fsa 
+              --output_dir=/path/to/somedir
+            [ --output_list=/path/to/somefile.list 
+              --output_subdir_size=1000
+              --output_subdir_prefix=fasta
+              --seqs_per_file=1
+              --total_files=1
+              --compress_output=1
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The input multi-fasta file to split.
+  
+  B<--output_dir,-o>
+      The directory to which the output files will be written.
+  
+  B<--output_list,-s>
+      Write a list file containing the paths of each of the regular output files.  This may be useful
+      for later scripts that can accept a list as input.
+  
+  B<--output_file_prefix,-f>
+      If defined, each file created will have this string prepended to its name.  This is ignored unless
+      writing multiple sequences to each output file using the --seqs_per_file option with a value greater
+      than 1, else each file created will just be a number.
+  
+  B<--output_subdir_size,-u>
+      If defined, this script will create numbered subdirectories in the output directory, each
+      containing this many sequences files.  Once this limit is reached, another subdirectory
+      is created.
+  
+  B<--output_subdir_prefix,-p>
+      To be used along with --output_subdir_size, this allows more control of the names of the
+      subdirectories created.  Rather than just incrementing numbers (like 10), each subdirectory 
+      will be named with this prefix (like prefix10).
+  
+  B<--total_files, -t>
+      Used if the user wants to specify the total outputs files to be created. The script will
+      determine the amount of sequences per file to meet this parameter. Cannot be used in conjunction
+      with the seqs_per_file parameter.
+  
+  B<--compress_output,-c>
+      Output fasta files will be gzipped when written.
+      
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to split a single FASTA file containing multiple sequences into separate
+  files containing one sequence each.
+  
+  =head1  INPUT
+  
+  The input is defined with --input_file and should be a single fasta file.  File extensions are
+  ignored.  When creating this multi-entry FASTA file, one should take care to make the first
+  *word* after the > symbol a unique value, as it will be used as the file name for that sequence.
+  For example:
+  
+      >gi53791237 Tragulus javanicus p97bcnt gene for p97Bcnt
+      ACAGGAGAAGAGACTGAAGAGACACGTTCAGGAGAAGAGCAAGAGAAGCCTAAAGAAATGCAAGAAGTTA
+      AACTCACCAAATCACTTGTTGAAGAAGTCAGGTAACATGACATTCACAAACTTCAAAACTAGTTCTTTAA
+      AAAGGAACATCTCTCTTTTAATATGTATGCATTATTAATTTATTTACTCATTGGCGTGGAGGAGGAAATG
+  
+      >gi15387669 Corynebacterium callunae pCC1 plasmid
+      ATGCATGCTAGTGTGGTGAGTATGAGCACACACATTCATGGGCACCGCCGGGGTGCAGGGGGGCTTGCCC
+      CTTGTCCATGCGGGGTGTGGGGCTTGCCCCGCCGATAGAGACCGGCCACCACCATGGCACCCGGTCGCGG
+      GGTGATCGGCCACCACCACCGCCCCCGGCCACTCTCCCCCTGTCTAGGCCATATTTCAGGCCGTCCACTG
+  
+  Whitespace is ignored within the input file.  See the OUTPUT section for more on creation of 
+  output files.
+  
+  =head1  OUTPUT
+  
+  The name of each output sequence file is pulled from the FASTA header of that sequence.  The
+  first *word* after the > symbol will be used as the file name, along with the extension .fsa.
+  The word is defined as all the text after the > symbol up to the first whitespace.
+  
+  If the above example were your input file, two files would be created:
+  
+      gi53791237.fsa
+      gi15387669.fsa
+  
+  Any characters other than a-z A-Z 0-9 . _ - in the ID will be changed into an
+  underscore.  This only occurs in the file name; the original FASTA header within the file
+  will be unmodified.
+  
+  You can pass a path to the optional --output_list to create a text file containing the full paths
+  to each of the FASTA files created by this script.
+  
+  Two other optional arguments, --output_subdir_size and --output_subdir_prefix, can be used
+  on input sets that are too large to write out to one directory.  This depends on the limitations
+  of your file system, but you usually don't want 100,000 files written in the same directory.
+  
+  If you have an FASTA file containing 95000 sequences, and use the following option:
+  
+      --output_dir=/some/path
+      --output_subdir_size=30000
+      
+  The following will be created:
+  
+      directory              file count
+      ---------------------------------
+      /some/path/1/          30000
+      /some/path/2/          30000
+      /some/path/3/          30000
+      /some/path/4/           5000
+  
+  If you choose to create a list file (and you probably want to), it will contain these proper paths.
+  
+  You may not want the subdirectories to simply be numbers, as above, so you can use the
+  --output_subdir_prefix option.  For example:        
+  
+      --output_dir=/some/path
+      --output_subdir_size=30000
+      --output_subdir_prefix=fasta
+      
+  The following will be created:
+  
+      directory              file count
+      ---------------------------------
+      /some/path/fasta1/     30000
+      /some/path/fasta2/     30000
+      /some/path/fasta3/     30000
+      /some/path/fasta4/      5000
+  
+  Finally, you can write multiple sequences to each output file using the --seqs_per_file option, which
+  can be used along with --outupt_subdir_size and --output_subdir_prefix.  The main difference to note
+  is that, if you use --seqs_per_file, the fasta file created will no longer be named using values
+  taken from the header, since it will contain multiple headers.  Instead, the file will simply be
+  named using sequential numbers starting at 1 (like 1.fsa).  For example: 
+  
+      --output_dir=/some/path
+      --output_subdir_size=3000
+      --output_subdir_prefix=fasta
+      --seqs_per_file=10
+      
+  The following will be created:
+  
+      directory              file count
+      ---------------------------------
+      /some/path/fasta1/     3000
+      /some/path/fasta2/     3000
+      /some/path/fasta3/     3000
+      /some/path/fasta4/      500
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org

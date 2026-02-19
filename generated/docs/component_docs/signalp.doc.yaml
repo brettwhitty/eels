@@ -1,0 +1,755 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: signalp
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - signalp.config
+  - signalp.xml
+  - signalp.i1.xml
+  - component_docs/signalp.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+  "SignalP predicts the presence  and  location of signal peptide  cleavage sites
+  in  amino acid  sequences  from  different organisms:  Gram-positive bacteria,
+  Gram-negative bacteria,  and eukaryotes.  The method incorporates a prediction
+  of  cleavage sites and  a signal peptide/non-signal peptide  prediction  based
+  on a combination of  several artificial neural networks.  It also incorporates
+  predictions done by a hidden Markov model specifically designed to distinguish
+  between signal peptides, non-secretory proteins, and (for eukaryotes only)
+  uncleaved signal anchors."
+  </p>
+  <h3>reference</h3>
+  <p>
+      Bendtsen JD, Nielsen H, von Heijne G, Brunak S.
+      Improved prediction of signal peptides: SignalP 3.0. 
+      J Mol Biol. 2004 Jul 16;340(4):783-95.
+      PMID: <a href='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15174128&query_hl=2'>15223320</a>
+  </p>
+  <h3>input</h3>
+  <p>
+  Input is amino acid sequence(s) in FASTA format.
+  </p>
+  <h3>implemented options</h3>
+  <p>
+  Organism type [-t]: 'euk', 'gram-', 'gram+'<br/>
+  Prediction method [-m]: 'nn', 'hmm', 'nn+hmm'(default)<br/>
+  Graphics mode [-graphics]: 'gif', 'eps', 'gif+eps', 'ps'<br/>
+  Truncate sequence to length 'X' from n-terminus [-trunc]: 'X'<br/>
+  </p>
+  <h3>output</h3>
+  <p>
+  Raw output is formatted as provided by the "-f summary" option.
+  Example output:
+  </p>
+  <p class="code">
+  *********************** SignalP 3.0 predictions ***********************
+  Using neural networks (NN) and hidden Markov models (HMM) trained on eukaryotes
+  
+  ----------------------------------------------------------------------
+  >bma1.model.12480_00113
+  
+  SignalP-NN result:
+  >bma1.model.12480_001  length = 552
+  # Measure  Position  Value  Cutoff  signal peptide?
+    max. C    19       0.784   0.32   YES
+    max. Y    19       0.763   0.33   YES
+    max. S    12       0.967   0.87   YES
+    mean S     1-18    0.826   0.48   YES
+         D     1-18    0.794   0.43   YES
+  # Most likely cleavage site between pos. 18 and 19: VGA-IV
+  
+  SignalP-HMM result:
+  >bma1.model.12480_00113
+  Prediction: Signal peptide
+  Signal peptide probability: 0.599
+  Signal anchor probability: 0.000
+  Max cleavage site probability: 0.442 between pos. 18 and 19
+  </p>
+  <p>
+  Also produced, depending on the option selected for graphics output, are graphics files to accompany each sequence analysis. The following files may be produced:<br/>
+  FILE_PREFIX.signalp.gnu (a gnuplot script file used to generate gif+ps files)<br/>
+  FILE_PREFIX.signalp.gif<br/>
+  FILE_PREFIX.signalp.eps<br/>
+  FILE_PREFIX.signalp.ps<br/>
+  Note that there is an either/or relationship between producing GIF/EPS and PS files.
+  </p>
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+  &lt;?xml version="1.0"?&gt;
+  
+  &lt;Bsml&gt;
+    &lt;Definitions&gt;
+  
+      &lt;Sequences&gt;
+        &lt;Sequence class="polypeptide" id="bma1.model.12483_00025" molecule="aa"&gt;
+          &lt;Feature-tables&gt;
+            &lt;Feature-table id="Bsml0"&gt;
+              &lt;Feature class="signal_peptide" id="ir.sma1.signal_peptide.84173453.
+  1"&gt;
+                &lt;Attribute name="maxc_signal_peptide" content="YES"&gt;&lt;/Attribute&gt;
+  
+                &lt;Attribute name="d_signal_peptide" content="YES"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="d_pos" content="1-21"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxy_value" content="0.813"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="cleavage_site_position" content="21-22"&gt;&lt;/Attribu
+  te&gt;
+                &lt;Attribute name="means_cutoff" content="0.48"&gt;&lt;/Attribute&gt;
+  
+                &lt;Attribute name="maxs_signal_peptide" content="YES"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="means_value" content="0.959"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxy_pos" content="22"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="means_pos" content="1-21"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="d_value" content="0.886"&gt;&lt;/Attribute&gt;
+  
+                &lt;Attribute name="d_cutoff" content="0.43"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxs_pos" content="13"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="means_signal_peptide" content="YES"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxs_cutoff" content="0.87"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxc_cutoff" content="0.32"&gt;&lt;/Attribute&gt;
+  
+                &lt;Attribute name="maxy_cutoff" content="0.33"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxs_value" content="0.996"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxc_pos" content="22"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxc_value" content="0.894"&gt;&lt;/Attribute&gt;
+                &lt;Attribute name="maxy_signal_peptide" content="YES"&gt;&lt;/Attribute&gt;
+  
+                &lt;Link rel="analysis" href="#signalp_nn_analysis" role="created_by"
+  &gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+              &lt;Feature class="signal_peptide" id="ir.sma1.signal_peptide.84173453.
+  2"&gt;
+                &lt;Attribute name="signal_peptide_probability" content="1.000"&gt;&lt;/Att
+  ribute&gt;
+                &lt;Attribute name="cleavage_site_position" content="21-22"&gt;&lt;/Attribu
+  te&gt;
+  
+                &lt;Attribute name="max_cleavage_site_probability" content="0.977"&gt;&lt;/
+  Attribute&gt;
+                &lt;Attribute name="signal_anchor_probability" content="0.000"&gt;&lt;/Attr
+  ibute&gt;
+                &lt;Attribute name="prediction" content="Signal peptide"&gt;&lt;/Attribute&gt;
+                &lt;Link rel="analysis" href="#signalp_hmm_analysis" role="created_by
+  "&gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+  
+            &lt;/Feature-table&gt;
+          &lt;/Feature-tables&gt;
+          &lt;Link rel="analysis" href="#signalp_nn_analysis" role="input_of"&gt;&lt;/Link&gt;
+          &lt;Link rel="analysis" href="#signalp_hmm_analysis" role="input_of"&gt;&lt;/Link
+  &gt;
+        &lt;/Sequence&gt;
+  
+      &lt;/Sequences&gt;
+    &lt;/Definitions&gt;
+  
+    &lt;Research&gt;
+      &lt;Analyses&gt;
+        &lt;Analysis id="signalp_nn_analysis"&gt;
+                  .... (and all the config file params)
+        &lt;/Analysis&gt;
+  
+        &lt;Analysis id="signalp_hmm_analysis"&gt;
+                  .... (and all the config file params)
+        &lt;/Analysis&gt;
+      &lt;/Analyses&gt;
+    &lt;/Research&gt;
+  &lt;/Bsml&gt;
+  
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: functional prediction
+  parameters:
+    # Valid organism type choices: 'euk', 'gram-', 'gram+'
+    ORGANISM_TYPE: euk
+    # either 'best' to include transmembrane proteins, or 'notm' for none
+    PREDICTION_METHOD: best
+    # Truncate each sequence maximally to the given number of N-terminal residues
+    # (0 to disable, but signalP will fail on polypeptides >6000 residues)
+    # [Author recommends running with a truncated length of 50-70 bases.]
+    TRUNCATED_LENGTH: 70
+    # Set the following to 1 to have most outputs compressed
+    COMPRESS_RAW_OUTPUT: 1
+    # Any other supported options (do not define -T, it is already handled within the component)
+    ARGS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    BTAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.btab.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+    GIF_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.gif.list
+    EPS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.eps.list
+    PS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.ps.list
+    GNU_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.gnu.list
+  component:
+    COMPONENT_NAME: signalp
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - signalp workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create gnu list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.gnu\""
+        - key: --output_list
+          value: $;GNU_OUTPUT_LIST$;
+    - name: create gif list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.(nn|hmm)\\..*\\.gif\""
+        - key: --output_list
+          value: $;GIF_OUTPUT_LIST$;
+    - name: create eps list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.(nn|hmm)\\..*\\.eps\""
+        - key: --output_list
+          value: $;EPS_OUTPUT_LIST$;
+    - name: create ps list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.ps\""
+        - key: --output_list
+          value: $;PS_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - signalp compute
+  steps:
+    - name: Create scratch dir for signalp output
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+    - name: Run signalp
+      type: RunUnixCommand
+      executable: $;SIGNALP_EXEC$;
+      arg: -t $;ORGANISM_TYPE$; -s '$;PREDICTION_METHOD$;' -c $;TRUNCATED_LENGTH$; -T $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$; -f summary $;ARGS$; $;I_FILE_PATH$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+    - name: Rename signalp graphics files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/signalp_graphics_rename
+      params:
+        - key: --input_path
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+        - key: --output_path
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --output_prefix
+          value: $;I_FILE_BASE$;.$;COMPONENT_NAME$;
+    - name: Convert signalp raw output to BSML
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/signalp2bsml
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --query_file_path
+          value: $;I_FILE_PATH$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --project
+          value: $;PROJECT$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+    - name: store config params for SignalP Best
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_best_analysis
+    - name: store config params for SignalP NoTM
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_notm_analysis
+    - name: store config params for SignalP NN
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_nn_analysis
+    - name: store config params for SignalP HMM
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_hmm_analysis
+    - name: compress raw output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --compress
+          value: $;COMPRESS_RAW_OUTPUT$;
+        - key: --list_file
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw.list
+    - name: compress gnuplot output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gnu
+        - key: --compress
+          value: $;COMPRESS_RAW_OUTPUT$;
+        - key: --list_file
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gnu.list
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: signalp_graphics_rename.pl
+    pod: |
+  =head1  NAME 
+  
+  rename_signalp_graphics_output.pl - renames gif, eps, ps, and gnu output files
+  
+  =head1 SYNOPSIS
+  
+  USAGE: signalp_graphics_rename.pl 
+          --input_path=/path/to/signalp/output_dir 
+          --output_path=/path/to/output/destination
+          --output_prefix=OUTPUT_FILE_PREFIX
+          --log=/path/to/some.log
+          --debug=4
+  
+  =head1 OPTIONS
+  
+  B<--input_path,-p> 
+      The path to directory containing signalp created graphics files.
+  
+  B<--output_prefix,-o>
+      Desired file prefix of the set of signalp graphics files.
+      
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used by the signalp workflow component to rename signalp graphics output files (gnu, gif, eps, ps) so that they do not overwrite each other, and to make them conform with naming standards.
+  
+  =head1 INPUT
+  
+  The script should be provided an input directory with the --path flag.
+  This directory should be equivalent to whatever directory was passed to
+  signalp with *signalp's* -d/-destination flag.
+  
+  The output file prefix should be provided with the --output_prefix flag.
+  Omitting this flag would serve no conceivable purpose, but will not kill
+  the script.
+  
+  =head1 OUTPUT
+  
+  The script will modify and/or rename the following graphics-related files
+  that are produced by signalp if they are found in the directory specified
+  with the --path flag:
+  
+  plot.gnu    --> SPECIFIED_PREFIX.gnu
+  plot.ps     --> SPECIFIED_PREFIX.ps
+  plot.hmm.X.eps  --> SPECIFIED_PREFIX.hmm.SEQUENCE_ID.eps
+  plot.hmm.X.gif  --> SPECIFIED_PREFIX.hmm.SEQUENCE_ID.gif
+  plot.nn.X.eps   --> SPECIFIED_PREFIX.nn.SEQUENCE_ID.eps
+  plot.nn.X.gif   --> SPECIFIED_PREFIX.nn.SEQUENCE_ID.gif
+  
+  Where X is an integer from 1 to N representing the number of the input sequence
+  within a multi-sequence FASTA file provided to signalp as input.
+  
+  All original eps/gif/ps files are generated by signalp from the plot.gnu file.
+  SPECIFIED_PREFIX.gnu is modified by this script so that it will generate output
+  files with the new names generated by this script.
+  
+  =head1 CONTACT
+  
+      Brett Whitty
+      bwhitty@tigr.org
+  - script: signalp2bsml.pl
+    pod: |
+  =head1  NAME
+  
+  signalp2bsml.pl - convert SignalP output to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE: signalp2bsml.pl --input=/path/to/signalp_file --output=/path/to/output.bsml
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      Input file file from a signalp run.
+  
+  B<--debug,-d>
+      Debug level.  Use a large number to turn on verbose debugging.
+  
+  B<--log,-l>
+      Log file
+  
+  B<--output,-o>
+      Output BSML file (will be created, must not exist)
+  
+  B<--help,-h>
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert the output from SignalP into BSML.
+  
+  =head1 INPUT
+  
+  SignalP can be run using multiple input sequences simultaneously, and this
+  script supports parsing single or multiple input result sets.
+  Output file types from 'nn', 'hmm', or 'nn+hmm' prediction methods are all supported
+  and recognized automatically.
+  
+  EDIT:  As of SignalP 4.0, all predictions use the 'nn' (neural network) method, and the choices
+  are 'best' and 'notm' (no transmembrane regions).
+  
+  You define the input file using the --input option.  This file does not need any
+  special file extension.
+  
+  =head1 OUTPUT
+  
+  After parsing the input file, a file specified by the --output option is created.  This script
+  will fail if it already exists.
+  
+  =head1 CONTACT
+  
+  Brett Whitty
+  bwhitty@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.
+  - script: compress_file.pl
+    pod: |
+  =head1  NAME 
+  
+  compress_file.pl - wrapper to gzip an output file
+  
+  =head1 SYNOPSIS
+  
+  USAGE: compress_file.pl 
+          --file=/path/to/some.file 
+        [ --output=/path/to/output
+          --compress=1
+          --list_file=/path/to/some.list
+          --log=/path/to/some.log
+          --debug=4
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--file,-f> 
+      The path to any file you wish to compress.
+  
+  B<--compress,-c>
+      Optional.  If 0, the compression will not be performed.
+  
+  B<--remove_source,-r>
+      Optional.  Controls whether source file is removed when compressing (default = 1)
+  
+  B<--list_file,-s>
+      Optional.  Writes a list file of the gzipped file created.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used as a gzip wrapper to compress a file.
+  
+  =head1 INPUT
+  
+  The input is any file you wish to compress, usually a text file such
+  as alignment data.  This file is passed with the --file option.
+  
+  The --compress option exists so that this script can be incorporated
+  into workflow.  Since Workflow is not a logic-based system, it cannot
+  call gzip on output *sometimes*.  So we call this script all the time,
+  and just pass --compress 1 or 0 depending on whether we actually want
+  the compression done.
+  
+  The --list_file options allows us to create a list file containing the
+  full path to the list file created.  This is useful because a workflow
+  may create a list file for the raw output, but if we zip it, we want to
+  overwrite that single-entry list file with the gzip'ed path before it
+  is merged.
+  
+  Some checks are performed to handle common problems found handling compression
+  in production - each handling cases where previous compression attempts
+  have left partial files.
+  
+  If neither input or output exists the script will die.  If the input file
+  exists and output doesn't, normal compression will occur.  If the output file
+  exists and the input file doesn't, a warning is issued and the script completes
+  successfully.  
+  
+  =head1 OUTPUT
+  
+  The output file will be named the same but with the .gz extension
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net

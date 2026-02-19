@@ -1,0 +1,277 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: update_euk_model_sequences
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - update_euk_model_sequences.config
+  - update_euk_model_sequences.xml
+  - update_euk_model_sequences.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database modification
+  parameters:
+    # Username account to access and update the legacy annotation database
+    USERNAME: access
+    # Password for the corresponding username account to access and update the legacy annotation database
+    PASSWORD: access
+    # Server on which all of the database cited in the control file reside
+    SERVER: SYBTIGR
+    # Relational database management system type (for sql2DB.pl)
+    RDBMS: sybase
+  input:
+    # updateupdate_euk_model_sequences control file:
+    UPDATE_EUK_MODEL_SEQUENCES_CONTROL_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTA_DIRECTORY: $;OUTPUT_DIRECTORY$;/fasta
+    UPDATE_SQL_FILE_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sql.list
+  component:
+    COMPONENT_NAME: update_euk_model_sequences
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4942 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.sql.xml
+    ITERATOR2: update_sequences
+    ITERATOR2_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.sql.xml
+    ITERATOR3: update_proteins
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.sql.xml
+    # Distributed options
+    GROUP_COUNT: 50
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator1 for creating the primary iterator list
+    - Iterator2 for running the update sequence SQL
+    - Iterator3 for running the update sequence SQL
+  command_sets:
+    - update_euk_model_sequences workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/update_euk_model_sequences.list\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR2,$;ITERATOR_XML$;=ITERATOR2_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/update-sequences.sql.list,$;NODISTRIB$;=1,$;GROUP_NUMBER$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR3,$;ITERATOR_XML$;=ITERATOR3_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/update-proteins.sql.list,$;NODISTRIB$;=1,$;GROUP_NUMBER$;=1\"/"
+  steps:
+    - name: create output directory and temporary working directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$;
+    - name: Create iterator list for the update_euk_model_sequences component
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_update_euk_model_sequences_iterator_list
+      params:
+        - key: --control_file
+          value: $;UPDATE_EUK_MODEL_SEQUENCES_CONTROL_FILE$;
+        - key: --output
+          value: $;TMP_DIR$;/update_euk_model_sequences.list
+        - key: stdout
+          value: $;TMP_DIR$;/create_update_euk_model_sequences_iterator_list.stdout
+        - key: stdout
+          value: $;TMP_DIR$;/create_update_euk_model_sequences_iterator_list.stderr
+    - name: create update sequences SQL list
+      type: RunUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$;/ -name '*.update-sequences.sql'"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/update-sequences.sql.list
+    - name: create update proteins SQL list
+      type: RunUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$;/ -name '*.update-proteins.sql'"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/update-proteins.sql.list
+    - name: Create update sequences SQL iterator
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --infile
+          value: $;OUTPUT_DIRECTORY$;/update-sequences.sql.list
+        - key: --outfile
+          value: $;TMP_DIR$;/update-sequences.sql.list
+        - key: --logfile
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_update_sequences.log
+        - key: stdout
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_update_sequences.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_update_sequences.stderr
+    - name: Create update proteins SQL iterator
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --infile
+          value: $;OUTPUT_DIRECTORY$;/update-proteins.sql.list
+        - key: --outfile
+          value: $;TMP_DIR$;/update-proteins.sql.list
+        - key: --logfile
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_update_proteins.log
+        - key: stdout
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_update_proteins.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/ddl2iterator.pl.create_update_proteins.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - update_euk_model_sequences
+  steps:
+    - name: deriveCDSSequences
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/deriveCDSSequences
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --output_sequence_sql_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;.update-sequences.sql
+        - key: --current_sequence_output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;.update-sequences.current.dat
+        - key: --output_protein_sql_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;.update-proteins.sql
+        - key: --current_protein_output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;.update-proteins.current.dat
+        - key: --logfile
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;.$;ASMBL_ID$;.deriveCDSSequences.pl.log
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --asmbl_id
+          value: $;ASMBL_ID$;
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;.deriveCDSSequences.pl.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;.deriveCDSSequences.pl.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_update_euk_model_sequences_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_update_euk_model_sequences_iterator_list.pl - Default output is a workflow iterator that
+  can be used to iterator over a set of database-asmbl_id values.  Can read in the standard legacy2bsml
+  control file.
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  create_update_euk_model_sequences_iterator_list.pl --control_file=/tmp/afu1.control-file.dat --output=/tmp/outfile.txt
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION - TBA
+  
+  Need to provide some description here
+  
+  =head1   CONTACT
+  
+  Jay Sundaram
+  
+  sundaram@jcvi.org
+  
+  =head1   FYI
+  
+  I've recycled portions of the create_legacy2bsml_iterator_list.pl script.
+  
+  =over 4
+  
+  =item getListFromFile()
+  
+  B<Description:> 
+  
+  B<Parameters:> $iteratorconf (array reference), $file (scalar)
+  
+  B<Returns:> None
+  
+  =back
+  
+  =over 4
+  
+  =item createOutputListFile()
+  
+  B<Description:> 
+  
+  B<Parameters:> $iteratorconf (array reference), $file (scalar)
+  
+  B<Returns:> None
+  
+  =back
+  
+  =over 4
+  
+  =item verifyControlFile()
+  
+  B<Description:> 
+  
+  B<Parameters:> $file (scalar)
+  
+  B<Returns:> 1 - true (scalar) OR 0 - false (scalar)
+  
+  =back
+  
+  =over 4
+  
+  =item getFileContents()
+  
+  B<Description:> 
+  
+  B<Parameters:> $file (scalar)
+  
+  B<Returns:> reference to array
+  
+  =back
+  
+  =over 4
+  
+  =item getDataLookup()
+  
+  B<Description:> 
+  
+  B<Parameters:> $file (scalar)
+  
+  B<Returns:> reference to array
+  
+  =back

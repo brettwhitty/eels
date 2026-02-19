@@ -1,0 +1,179 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: cleanse_sgc_database
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - cleanse_sgc_database.config
+  - cleanse_sgc_database.xml
+  - cleanse_sgc_database.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / manipulation
+  parameters:
+    # Tanja's user account has the appropriate permissions for updating records in the databases.
+    USERNAME: tanjad
+    PASSWORD: tanjad9
+  input:
+    # Comma-separated list of sgc or prok annotation databases which shall be validated
+    DATABASE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;TMP_DIR$;
+  component:
+    COMPONENT_NAME: cleanse_sgc_database
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4794 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.i1.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    # no-distrib = 0 ensures that all executes in series and never parallel
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - cleanse_sgc_database workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=cleanse_sgc_database,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/database.list,$;NODISTRIB$;=1\"/"
+  steps:
+    - name: create output and temporary directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$;
+    - name: create_iterator_list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_iterator_list
+      params:
+        - key: --input_list
+          value: $;DATABASE_LIST$;
+        - key: --key
+          value: DATABASE
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/database.list
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/create_iterator_list.pl.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/create_iterator_list.pl.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - cleanse_sgc_database
+  steps:
+    - name: Create database output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;WORKFLOW_REPOSITORY$;/$;DATABASE$;
+    - name: rewrite_seqs.dbi
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/rewrite_seqs
+      arg: -u $;USERNAME$; -p $;PASSWORD$; -D $;DATABASE$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/rewrite_seqs.dbi.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/rewrite_seqs.dbi.stderr
+    - name: sgc_GC_content_load.spl
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/sgc_GC_content_load
+      arg: -u $;USERNAME$; -p $;PASSWORD$; -D $;DATABASE$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/RNA_populate.dbi.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/RNA_populate.dbi.stderr
+    - name: molwt_update.dbi
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/molwt_update
+      arg: -u $;USERNAME$; -p $;PASSWORD$; -D $;DATABASE$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/molwt_update.dbi.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/molwt_update.dbi.stderr
+    - name: signalP_update.dbi
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/signalP_update
+      arg: -u $;USERNAME$; -p $;PASSWORD$; -D $;DATABASE$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/signalP_update.dbi.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/signalP_update.dbi.stderr
+    - name: lipoprotein_update.dbi
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lipoprotein_update
+      arg: -u $;USERNAME$; -p $;PASSWORD$; -D $;DATABASE$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/lipoprotein_update.dbi.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/lipoprotein_update.dbi.stderr
+    - name: tm_update.dbi
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/tm_update
+      arg: -u $;USERNAME$; -p $;PASSWORD$; -D $;DATABASE$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/tm_update.dbi.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/tm_update.dbi.stderr
+    - name: omp_update.dbi
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/omp_update
+      arg: -u $;USERNAME$; -p $;PASSWORD$; -D $;DATABASE$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/omp_update.dbi.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/omp_update.dbi.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_iterator_list.pl - 
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  create_iterator_list
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

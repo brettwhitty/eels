@@ -1,0 +1,154 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mugsyalign
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mugsyalign.config
+  - mugsyalign.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: clustering
+  parameters:
+    OTHER_OPTS: --refine
+  input:
+    FASTA_FILE_LIST: ""
+    # prefix for the output files
+    OUTPUT_PREFIX: mugsy_aln
+    # Two-column tab-delimited file containing organism name and ids to replace in MAF
+    ID_MAP_FILE: ""
+  output bsml2chado:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: mugsyalign
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6107 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: mugsymap
+    ITERATOR1_XML: $;DOCS_DIR$;/mugsyalign.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Replace the output MAF
+  command_sets:
+    - mugsy align
+    - mugsyalign distributed work
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: replace template keys
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_template_keys
+      params:
+        - key: --template_xml
+          value: $;DOCS_DIR$;/mugsyalign_distributed_work.xml
+        - key: --component_conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --output_xml
+          value: $;WORKFLOW_REPOSITORY$;/mugsyalign_distributed_work.xml.gz
+        - key: --distribopts
+          value: nodistrib=$;NODISTRIB$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/replace_template_keys.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/replace_template_keys.stderr
+    - name: Replace organism ids in maf
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_maf_ids
+      params:
+        - key: --id_file
+          value: $;ID_MAP_FILE$;
+        - key: --maf
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_PREFIX$;.maf
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_PREFIX$;.maf.tmp
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/replace_maf_ids.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/replace_maf_ids.stderr
+    - name: Move file
+      type: RunUnixCommand
+      executable: /bin/mv
+      arg: $;OUTPUT_DIRECTORY$;/$;OUTPUT_PREFIX$;.maf.tmp $;OUTPUT_DIRECTORY$;/$;OUTPUT_PREFIX$;.maf
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: replace_maf_ids.pl
+    pod: |
+  =head1 NAME
+  
+  replace_maf_ids.pl - Script to replace checksum ids from MAF file with organism names using a mapping file produced earlier in prepmugsy step.
+  
+  =head1 SYNOPSIS
+  
+  USAGE : perl replace_maf_ids.pl -i <id_file> -m <maf> -o <output_file> [-l <log_file>]
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  	
+  	--id_file	=	Path to a two-column tab delimited map file containing organims name\tchecksum
+  
+  	--maf		=	Path to Multiple Alignment File (MAF) produced by Mugsy
+  
+  	--output_file	=	Path to output MAF with replaced ids
+  
+  	--log		=	Path to log file for logging errors, warnings 	
+  
+  
+  =head1 DESCRIPTION
+  
+  	During the mugsyprep step in comparative genomics pipeline, organism names are replaced with checksums to avoid errors due to special characters in organism names. After runnig mugsyalign these 
+  	ids have to replaced back so that downstream steps will show logical organism names and not checksums.
+  
+  =head1 INPUT
+  
+  	1. map_id.txt - Two-column tab delimited file where first column is organism name from GenBank file and second column is checksum generated during mugsyprep step. Eg
+  		Neisseria_meningitidis_MC58     28975cbc1be5a66a45f3bbf3b75a7a48
+  		Neisseria_meningitidis_Z2491    dafa738d29791390e27a31790cfe54b1
+   
+  	2. MAF - Multiple Alignment File produced by MUGSY containing whole genome multiple alignments.
+  
+  =head1 OUTPUT
+  
+  	1. output_file.maf - Path to output MAF file which will be same as input MAF with checksum ids replaced with organism name.
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Bioinformatics Software Engineer II
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut

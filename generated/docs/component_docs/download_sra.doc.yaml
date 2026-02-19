@@ -1,0 +1,171 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: download_sra
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - download_sra.config
+  - download_sra.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Name of the NCBI FTP server (do not include the ftp:// part)
+    FTP_PATH: ftp-trace.ncbi.nih.gov
+    # NCBI SRA compatible 9-character ID (multiple IDs separated by commas)
+    # --Study IDs begin with SRP
+    # --Experiment IDs begin wtih SRX
+    # --Run IDs begin with SRR
+    # --Sample IDs begin with SRS
+    RUN_ID: ""
+    # If set to 1, will download a CSV-formatted file of SRA run info.  Default = 0
+    FETCH_METADATA: 1
+    # (Optional)
+    USERNAME: ""
+    # (Optional)
+    PASSWORD: ""
+    # (Optional) Number of retries to download a file with 'wget'.  Default is 20
+    NUM_RETRIES: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: ""
+  component:
+    COMPONENT_NAME: download_sra
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - download sra workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Download SRA Reads
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/download_sra
+      params:
+        - key: --run_id
+          value: $;RUN_ID$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --ftp
+          value: $;FTP_PATH$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --num_retry
+          value: $;NUM_RETRIES$;
+        - key: --fetch_metadata
+          value: $;FETCH_METADATA$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/download_sra.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/download_sra.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: download_sra.pl
+    pod: |
+  =head1 NAME
+  
+  download_sra.pl - Script to download read files from NCBI SRA FTP site
+  
+  =head1 SYNOPSIS
+  
+  # USAGE : perl download_sra.pl -r <SRA id> -f <FTP server> -o <path to output dir> [ -u <FTP server username> -p <FTP server password> -k <private_key> -a </path/to/aspera> -m <0/1> -n <number of retries> -l <path to log file> ]
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  	-r <run_id>	:	NCBI SRA compatible 9-character id. Could be Study id (SRPXXXXXX), Experiment id (SRXXXXXXX), Run id (SRRXXXXXX) or Sample id (SRSXXXXXX). X stands for digit. Mandatory
+  	                Can separate multiple IDs with commas.
+  
+  	-f <ftp>	:	Name of the NCBI FTP server. Currently it is ftp-trace.ncbi.nih.gov. Mandatory
+  					If using Aspera, it is defaulted to ftp.ncbi.nlm.nih.gov
+  
+  	-o <output_dir>	:	Path to the output directory where the files will be downloaded. Mandatory
+  
+  [
+  	-u <username>	:	Username for the FTP server. Default: anonymous. Optional
+  						If using Aspera Connect, the default is anonftp
+  
+  	-p <password>	:	Password for the FTP server. Default: anonymous. Optional
+  						There is no password for Aspera Connect, Instead, a private key
+  
+  	-k <private_key>	:	If provided, key will be used to access protected SRA data	Optional.
+  							Protected data will be accessed via Aspera Connect.
+  
+  	-a <aspera_bin>	: Path to the Aspera command-line client. Optional
+  
+  	-n <num_retry>	:	Number of retries to download a file. wget default is 20. Optional
+  
+      -m <fetch_metadata> :   If set to 1, will download CSV file of the SRA run info.  Optional
+  
+  	-l <log>	: 	Path to log file. Optional
+  
+  ]
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  	NCBI SRA compatible valid 9-character ids, FTP server name and output directory where the files will be downloaded
+  
+  =head1 OUTPUT
+  
+  	Read files (.sra) from SRA
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Senior Bioinformatics Software Engineer
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut

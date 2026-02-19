@@ -1,0 +1,315 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: samtools_file_convert
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - samtools_file_convert.config
+  - samtools_file_convert.xml
+  - samtools_file_convert.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to reference FastA file
+    REFERENCE_FASTA: ""
+    # path to samtools package binary directory
+    SAMTOOLS_BIN_DIR: $;SAMTOOLS_BIN$;
+    # samtools view parameters
+    SAMTOOLS_VIEW_PARAMETERS: ""
+    # samtools sort parameters
+    SAMTOOLS_SORT_PARAMETERS: ""
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to alignment file
+    INPUT_FILE: ""
+    # path to list of alignment files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple alignment files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bam
+    # input alignment file format (BAM or SAM)
+    INPUT_FILE_FORMAT: ""
+    # string of options for file conversion (eg : 123)
+    # 1 - BAM to sorted BAM, 2 - sorted BAM to indexed BAM, 3 - BAM to SAM, and 4 - SAM to BAM
+    OPTIONS: ""
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of alignment BAM files
+    OUTPUT_BAM: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bam.list
+    # list of alignment BAM files sorted by position
+    OUTPUT_SORTED_BY_POSITION_BAM: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sorted_by_position_bam.list
+    # list of alignment BAM files sorted by name
+    OUTPUT_SORTED_BY_NAME_BAM: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sorted_by_name_bam.list
+    # list of alignment SAM files
+    OUTPUT_SAM: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sam.list
+    # list of alignment SAM files sorted by position
+    OUTPUT_SORTED_BY_POSITION_SAM: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sorted_by_position_sam.list
+    # list of alignment SAM files sorted by name
+    OUTPUT_SORTED_BY_NAME_SAM: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sorted_by_name_sam.list
+  component:
+    COMPONENT_NAME: samtools_file_convert
+    DESCRIPTION: converts alignment files between SAM and BAM file formats
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # samtools version
+    VERSION: samtools version 0.1.18
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - samtools_file_convert
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create BAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bam\""
+        - key: --output_list
+          value: $;OUTPUT_BAM$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.bam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.bam.stderr
+    - name: create sorted (by position) BAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sorted_by_position\\.bam\""
+        - key: --output_list
+          value: $;OUTPUT_SORTED_BY_POSITION_BAM$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.sorted_pos_bam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.sorted_pos_bam.stderr
+    - name: create sorted (by name) BAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sorted_by_name\\.bam\""
+        - key: --output_list
+          value: $;OUTPUT_SORTED_BY_NAME_BAM$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.sorted_name_bam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.sorted_name_bam.stderr
+    - name: create SAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sam\""
+        - key: --output_list
+          value: $;OUTPUT_SAM$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.sam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.sam.stderr
+    - name: create sorted (by position) SAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sorted_by_position\\.sam\""
+        - key: --output_list
+          value: $;OUTPUT_SORTED_BY_POSITION_SAM$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.sorted_pos_sam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.sorted_pos_sam.stderr
+    - name: create sorted (by name) SAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sorted_by_name\\.sam\""
+        - key: --output_list
+          value: $;OUTPUT_SORTED_BY_NAME_SAM$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.sorted_name_sam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.sorted_name_sam.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - samtools_file_convert
+  steps:
+    - name: samtools_file_convert
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/samtools_file_convert
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --infile
+          value: $;I_FILE_PATH$;
+        - key: --infile_format
+          value: $;INPUT_FILE_FORMAT$;
+        - key: --options
+          value: $;OPTIONS$;
+        - key: --reffile
+          value: $;REFERENCE_FASTA$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --samtools_bin_dir
+          value: $;SAMTOOLS_BIN_DIR$;
+        - key: --samtools_view_options
+          value: $;SAMTOOLS_VIEW_PARAMETERS$;
+        - key: --samtools_sort_options
+          value: $;SAMTOOLS_SORT_PARAMETERS$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/samtools_file_convert.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/samtools_file_convert.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: samtools_file_convert.pl
+    pod: |
+  =head1 NAME
+  
+  samtools_file_convert.pl - script to convert alignment files between SAM and BAM file formats.
+  
+  =head1 SYNOPSIS
+  
+      samtools_file_convert.pl --i input_file --f input_file_format --opt options (1|2|3|4|)
+                               [--r reference_fasta_file] [--o output_dir] [--sb samtools_bin_dir]
+                               [--sv samtools_view_options] [--ss samtools_sort_options] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --i <input_file>               = /path/to/input SAM or BAM alignment file.
+  
+      --f <input_file_format>        = format of input alignment file (SAM or BAM).
+  
+      --opt <options (1|2|3|4)>      = String of options indicating conversion.
+                                       1 : BAM        --> sorted BAM
+                                       2 : sorted BAM --> indexed BAM
+                                       3 : BAM        --> SAM
+                                       4 : SAM        --> BAM
+  
+      --r <reference_fasta_file>     = /path/to/reference FastA file. Optional.
+  
+      --o <output_dir>               = /path/to/output directory. Optional. [input file directory]
+  
+      --sb <samtools_bin_dir>        = /path/to/samtools binary. Optional. [/usr/local/bin]
+  
+      --sv <samtools_view_options>   = additonal samtools view parameters. Optional.
+  
+      --ss <samtools_sort_options>   = additonal samtools sort parameters. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script executes the samtools script from the samtools software package.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

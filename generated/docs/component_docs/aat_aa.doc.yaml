@@ -1,0 +1,696 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: aat_aa
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - aat_aa.config
+  - aat_aa.xml
+  - aat_aa.i1.xml
+  - component_docs/aat_aa.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <h3>overview</h3>
+  <p>
+      This component runs the AAT suite of programs when comparing a nucleic acid sequence with a protein
+      database.  The series of actions it performs is:
+  </p>
+  <ul>
+      <li>dps</li>
+      <li>ext</li>
+      <li>collapse_ext</li>
+      <li>filter</li>
+      <li>nap</li>
+  </ul>
+  <h3>input</h3>
+  <p>
+      The input to aat_aa can be a single FASTA file, a directory of fasta files or a text file 
+      containing a list of file paths.  Note that each FASTA file must have only one sequence within
+      it.  If you have a multi-fasta file, the <a href="./documentation.cgi?article=components&page=split_multifasta">split_multifasta</a>
+      component should be run first.  If iterating over a directory of FASTA files, the iterator will
+      only look for files with the .fsa extension.
+  </p>
+  <p>
+      We need to avoid directly passing huge sequences to AAT for analysis, as memory usage and
+      processing time would be less than optimal.  Instead, we usually split the input sequences
+      into chunks using <a href="./documentation.cgi?article=components&page=split_fasta">split_fasta</a>, run the analysis and then reconstitute
+      the result set, adjusting coordinates when necessary.
+  
+  </p>
+  <h3>output</h3>
+  <p>
+      This component calls five different executables, and each has at least one output file.  Each of
+      these are retained and written to the output directory assigned during configuration.  The files
+      created follow a standard naming convention.  If your input file is called:
+  </p>
+  <blockquote>
+      something.fsa
+  </blockquote>
+  <p>
+      the following files will exist after a successful run (in order of creation):
+  </p>
+  <blockquote>
+      something.dps.raw<br>
+      something.ext.raw<br>
+      something.ext.collapsed<br>
+      something.filter.raw<br>
+      something.nap.raw<br>
+      something.nap.btab<br>
+      something.aat_aa.bsml
+  </blockquote>
+  <p>
+      Notice that the original extension has been stripped.  Because the extension is usually a format
+      descriptor, it is removed to avoid ambiguous file endings such as ".btab.bsml"  or ".fsa.btab" which
+      describe two different formats.
+  </p>
+  <p>
+      The default btab is tab-delimited and has 19 columns.  An example row:
+  </p>
+  <table class="grid">
+      <tbody>
+          <tr>
+              <th class="header">column</th>
+              <th class="header">description</th>
+              <th class="header">example</th>
+          </tr>
+          <tr>
+              <td>0</td>
+              <td>qry name</td>
+              <td>cpa1.assem.1</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>date</td>
+              <td>Jan 25 2005</td>
+          </tr>
+          <tr>
+              <td>2</td>
+              <td>query length</td>
+              <td>15235</td>
+          </tr>
+          <tr>
+              <td>3</td>
+              <td>analysis tool</td>
+              <td>/usr/local/bin/nap</td>
+          </tr>
+          <tr>
+              <td>4</td>
+              <td>database</td>
+              <td>/usr/local/db/panda/AllGroup/AllGroup.niaa</td>
+          </tr>
+          <tr>
+              <td>5</td>
+              <td>db match accession</td>
+              <td>GB|BAA97098.1|8777580|AP002460</td>
+          </tr>
+          <tr>
+              <td>6</td>
+              <td>qry start</td>
+              <td>5416</td>
+          </tr>
+          <tr>
+              <td>7</td>
+              <td>qry stop</td>
+              <td>5280</td>
+          </tr>
+          <tr>
+              <td>8</td>
+              <td>hit start</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>9</td>
+              <td>hit stop</td>
+              <td>46</td>
+          </tr>
+          <tr>
+              <td>10</td>
+              <td>percent identity</td>
+              <td>28.888889</td>
+          </tr>
+          <tr>
+              <td>11</td>
+              <td>percent similarity</td>
+              <td>60.000000</td>
+          </tr>
+          <tr>
+              <td>12</td>
+              <td>domain score</td>
+              <td>70</td>
+          </tr>
+          <tr>
+              <td>13</td>
+              <td>chain number</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>14</td>
+              <td>segment number</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>15</td>
+              <td>db match name</td>
+              <td>unnamed protein product; gene_id:F1D9.26 unknown protein {Arabidopsis thaliana;}</td>
+          </tr>
+          <tr>
+              <td>16</td>
+              <td>???</td>
+              <td>-1</td>
+          </tr>
+          <tr>
+              <td>17</td>
+              <td>qry strand</td>
+              <td>Minus</td>
+          </tr>
+          <tr>
+              <td>18</td>
+              <td>total score</td>
+              <td>260</td>
+          </tr>
+      </tbody>
+  </table>
+  <h3>BSML output representation</h3>
+  <p>
+      We start by creating a Sequence stub for each sequency in the analysis, both query and subject. Then
+      we create a Seq-pair-alignment element for each match in the comparison.  These are followed by
+      The Analysis information.  Using the data above as an example:
+  </p>
+  <div class='code_container'>
+      Example BSML needed here.
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment / pairwise
+  parameters:
+    # Filter options for dps: -p = min_pct_cutoff
+    #                        -C = min_coverage_cutoff
+    # Note: These are used to speed up the subsequent searches, not filter on the final results
+    DPS_OPTS: -f 100 -i 30 -a 2000
+    # full path to database for dps
+    DATABASE_PATH: /usr/local/db/panda/AllGroup/AllGroup.niaa
+    # full path to database for nap (allows for a different database than the dps step)
+    DATABASE_PATH_FOR_NAP: $;DATABASE_PATH$;
+    EXT_OPTS: ""
+    FILTER_OPTS: -c 20
+    NAP_OPTS: ""
+    # filter bsml output by % identity cutoff (optional)
+    CUTOFF_IDENTITY: ""
+    # filter bsml output by % similarity cutoff (optional)
+    CUTOFF_SIMILARITY: ""
+    COMPRESS_BSML_OUTPUT: 1
+    COMPRESS_BTAB_OUTPUT: 1
+    COMPRESS_NAP_OUTPUT: 1
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    BTAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.btab.list
+    NAP_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.nap.list
+  component:
+    COMPONENT_NAME: aat_aa
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - aat_aa workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create nap list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.nap.raw\""
+        - key: --output_list
+          value: $;NAP_OUTPUT_LIST$;
+    - name: create btab list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.nap.btab\""
+        - key: --output_list
+          value: $;BTAB_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - aat_aa compute
+  steps:
+    - name: dps
+      type: RunUnixCommand
+      executable: $;DPS_EXEC$;
+      arg: $;I_FILE_PATH$; $;DATABASE_PATH$; $;MATRIX$; $;DPS_OPTS$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.dps.raw
+    - name: ext
+      type: RunUnixCommand
+      executable: $;EXT_EXEC$;
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.dps.raw $;EXT_OPTS$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.ext.raw
+    - name: ext collapse
+      type: RunUnixCommand
+      executable: $;EXT_COLLAPSE_EXEC$;
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.ext.raw
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.ext.collapsed
+    - name: filter
+      type: RunUnixCommand
+      executable: $;FILTER_EXEC$;
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.ext.collapsed $;FILTER_OPTS$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.filter.raw
+    - name: relocate query seq
+      type: RunUnixCommand
+      executable: cp
+      arg: $;I_FILE_PATH$; $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+    - name: nap
+      type: RunUnixCommand
+      executable: $;NAP_EXEC$;
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$; $;DATABASE_PATH_FOR_NAP$; $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.filter.raw $;MATRIX$; $;NAP_OPTS$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.raw
+    - name: remove temp query seq
+      type: RunUnixCommand
+      executable: rm
+      arg: -f $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+    - name: remove raw dps output
+      type: RunUnixCommand
+      executable: rm
+      arg: -f $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.dps.raw
+    - name: remove raw ext output
+      type: RunUnixCommand
+      executable: rm
+      arg: -f $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.ext.raw
+    - name: remove raw ext collapsed output
+      type: RunUnixCommand
+      executable: rm
+      arg: -f $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.ext.collapsed
+    - name: remove raw filter output
+      type: RunUnixCommand
+      executable: rm
+      arg: -f $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.filter.raw
+    - name: ensure btab existence
+      type: RunUnixCommand
+      executable: touch
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.btab
+    - name: relocate btab
+      type: RunUnixCommand
+      executable: mv
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.btab $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: nap2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/nap2bsml
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.btab
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --query_file_path
+          value: $;I_FILE_PATH$;
+        - key: --query_id
+          value: $;I_FILE_BASE$;
+        - key: --gzip_output
+          value: $;COMPRESS_BSML_OUTPUT$;
+        - key: --cutoff_identity
+          value: "'$;CUTOFF_IDENTITY$;'"
+        - key: --cutoff_similarity
+          value: "'$;CUTOFF_SIMILARITY$;'"
+    - name: compress nap btab
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.btab
+        - key: --compress
+          value: $;COMPRESS_BTAB_OUTPUT$;
+    - name: compress nap
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.raw
+        - key: --compress
+          value: $;COMPRESS_NAP_OUTPUT$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: nap2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  nap2bsml.pl - convert nap btab output to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE: nap2bsml.pl 
+      --input=/path/to/somefile.nap.btab 
+      --output=/path/to/somefile.nap.bsml
+  
+  =head1 OPTIONS
+  
+  B<--input,-i> 
+      Input btab file from a nap search.
+  
+  B<--query_file_path,-q>
+      Full path to FASTA file containing query sequence.
+  
+  B<--query_id>
+      ID of query sequence
+  
+  B<--cutoff_identity> 
+      Filter results on % identity (exclude < cutoff). 
+  
+  B<--cutoff_similarity> 
+      Filter results on % similarity (exclude < cutoff). 
+       
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--output,-o> 
+      Output BSML file
+  
+  B<--qzip_output,-g>
+      Optional.  A non-zero value will make compressed output.
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert the btab output from a nap search into BSML.
+  
+  =head1 INPUT
+  
+  The input to this component is the btab file created by the nap executable.  This file
+  is 19-column, tab-delimited text document.  The input must be a nap btab output from
+  a single search.  Seq-pair-alignment elements are based on the chain ID from nap, so if you concatenate
+  btabs together each chainID 1, for example, would get merged into the same alignment, which 
+  is probably not what you want.  Define the input file using the --input option.
+  
+  Illegal characters will be removed from the 
+  IDs for the query sequence (column 0) and subject hit (column 5) if necessary to create 
+  legal XML id names.  For each element, the original, unmodified name will be stored in the "title"
+  attribute of the Sequence element.  You should make sure that your ids don't begin with
+  a number.  This script will successfully create a BSML document regardless of your ID names,
+  but the resulting document may not pass DTD validation.
+  
+  =head1 OUTPUT
+  
+  The BSML file to be created is defined using the --output option.  If the file already exists
+  it will be overwritten.
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net
+  - script: compress_file.pl
+    pod: |
+  =head1  NAME 
+  
+  compress_file.pl - wrapper to gzip an output file
+  
+  =head1 SYNOPSIS
+  
+  USAGE: compress_file.pl 
+          --file=/path/to/some.file 
+        [ --output=/path/to/output
+          --compress=1
+          --list_file=/path/to/some.list
+          --log=/path/to/some.log
+          --debug=4
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--file,-f> 
+      The path to any file you wish to compress.
+  
+  B<--compress,-c>
+      Optional.  If 0, the compression will not be performed.
+  
+  B<--remove_source,-r>
+      Optional.  Controls whether source file is removed when compressing (default = 1)
+  
+  B<--list_file,-s>
+      Optional.  Writes a list file of the gzipped file created.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used as a gzip wrapper to compress a file.
+  
+  =head1 INPUT
+  
+  The input is any file you wish to compress, usually a text file such
+  as alignment data.  This file is passed with the --file option.
+  
+  The --compress option exists so that this script can be incorporated
+  into workflow.  Since Workflow is not a logic-based system, it cannot
+  call gzip on output *sometimes*.  So we call this script all the time,
+  and just pass --compress 1 or 0 depending on whether we actually want
+  the compression done.
+  
+  The --list_file options allows us to create a list file containing the
+  full path to the list file created.  This is useful because a workflow
+  may create a list file for the raw output, but if we zip it, we want to
+  overwrite that single-entry list file with the gzip'ed path before it
+  is merged.
+  
+  Some checks are performed to handle common problems found handling compression
+  in production - each handling cases where previous compression attempts
+  have left partial files.
+  
+  If neither input or output exists the script will die.  If the input file
+  exists and output doesn't, normal compression will occur.  If the output file
+  exists and the input file doesn't, a warning is issued and the script completes
+  successfully.  
+  
+  =head1 OUTPUT
+  
+  The output file will be named the same but with the .gz extension
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

@@ -1,0 +1,495 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: ksnp
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - ksnp.config
+  - ksnp.xml
+  - ksnp.i1.xml
+  - component_docs/ksnp.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      kSNP is a SNP discovery program that aligns k-mers, or all sub-sequences in a genome of size k, to find SNP candidates.
+  
+      kSNP searchers for matching k-mers among 2 or more genomes with a nucleotide polymorphism at the center position.  For example, an input k 
+      of 41 would look for 20 matching nucleotides on either side of a SNP at position 21.  kSNP uses a program called JellyFish
+      to obtain kmers if k is less than or equal to 31 and suffix arrays if k is greater than 31.  kSNP removes intra-genome 
+      repeats of k-mers with varying SNP positions.  These instances can be reduced by increasing the size of k. Mummer is used to
+      determine the SNP position in a reference genome.
+  </p>
+  <h3>references</h3>
+  <p>
+      <a href='http://www.omicsonline.org/2157-7145/2157-7145-1-107.pdf'>http://www.omicsonline.org/2157-7145/2157-7145-1-107.pdf</a>
+  </p>
+  <h3>input</h3>
+  <p>
+      This program accepts FASTA files as input.  It can be a collection of FASTA files, a single FASTA file 
+      containing multiple sequences, or any combination.  Single Fasta files containing multiple sequences will
+      be merged under one fasta header with a linker sequence of 'NN'.
+  
+      The reference input can also be a collection of FASTA files, a single FASTA file containing multiple sequences,
+      or any combination.  A single fasta file containing multiple sequences will be merged under one fasta header
+      with a linker sequence of 'NN'.
+  
+      The kSNP program accepts a multifasta file as input where each fasta header correspondes to a single genome.
+      The reference genome is determined by list file containing the fasta headers of the finished genomes in the 
+      multi FASTA file.
+  </p>
+  <h3>implemented options</h3>
+  <ul class='options'>
+      <li>$;Kmer$; - length of k-mer used to find SNPs.  The SNP is at the center postion of the k-mer </li>
+      <li>$;REFERENCE_GENOME_LIST$; - The genome to be aligned agaisnt the input sequences. A list of reference
+          genomes can be supplied.  Each genome will be aligned agaisnt each reference. Single fasta files containing
+          multiple sequences will be merged under one fasta header with a linker sequence of 'NN' </li>
+  </ul>
+  <h3>output</h3>
+  <p>
+      The raw output is tab delimited file containing the columns: kmer ID, kmer sequence, nucleotide at the SNP position,
+      position in reference genome and 'R' or 'F' (forward and reverse strands), and genome fasta header. 
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: SNP
+  parameters:
+    # length of k for k-mer SNP analysis (SNP is at center of k-mer)
+    Kmer: ""
+    # Path to reference genbank file used to add gene information.
+    # A seperate list file containing the reference genome(s) must be supplied
+    REFERENCE_GENBANK: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    # The genome to be aligned against. A list of reference genomes can be supplied. Each genome will be aligned against each reference. Will accept a single fasta
+    # or list file
+    REFERENCE_GENOME_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+    ALL_RESULTS_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.snps
+    NO_INDELS_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.no_indels.snps
+  component:
+    COMPONENT_NAME: ksnp
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6529 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - ksnp workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: merge and concatenate reference
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ksnp_merge_reference
+      arg: ">$;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.fna"
+      params:
+        - key: --input
+          value: $;REFERENCE_GENOME_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+    - name: create ksnp2nucmer list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.ksnp\\-show\\-genes\\.tab\""
+        - key: --output_list
+          value: $;OUTPUT_DIRECTORY$;ksnp2snps-show-genes.list
+    - name: concatenate_files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/concatenate_files
+      params:
+        - key: --input_lists
+          value: $;OUTPUT_DIRECTORY$;ksnp2snps-show-genes.list
+        - key: --output
+          value: $;ALL_RESULTS_FILE$;
+    - name: create no indels file
+      type: RunUnixCommand
+      executable: /usr/bin/awk
+      arg: "&apos;{ if( $2 != \".\" &amp;&amp; $3 != \".\" ) print}&apos; $;ALL_RESULTS_FILE$;"
+      params:
+        - key: stdout
+          value: $;NO_INDELS_FILE$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - ksnp compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: merge contigs
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ksnp_merge_reference
+      arg: ">$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.merged.fsa"
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+    - name: parse reference fasta header
+      type: RunUnixCommand
+      executable: $;KSNP_DIR$;/genome_names.pl
+      arg: "$;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.fna >$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/ksnp.reference"
+    - name: merge input and reference
+      type: RunUnixCommand
+      executable: cat
+      arg: "$;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.fna $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.merged.fsa >$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/inputandref.fsa"
+    - name: ksnp
+      type: RunUnixCommand
+      executable: $;KSNP_EXEC$;
+      arg: -f $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/inputandref.fsa -d $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/ -k $;Kmer$; -p $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/ksnp.reference
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+    - name: create raw output
+      type: RunUnixCommand
+      executable: mv
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/SNPs_all_labelLoci $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+    - name: convert ksnp to nucmer output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ksnp_to_addgeneinfo
+      arg: ">$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.ksnp2nucmer.snps"
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+    - name: convert nucmer output to snp add gene info
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ksnp-add-gene-info
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.ksnp-show-genes.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.ksnp-show-genes.stderr
+        - key: --reference_genbank
+          value: $;REFERENCE_GENBANK$;
+        - key: --show_snps_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.ksnp2nucmer.snps
+        - key: --query_fasta
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.merged.fsa
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.ksnp-show-genes.tab
+    - name: remove temp dir
+      type: RunUnixCommand
+      executable: rm
+      arg: -rf $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/TemporaryFilesToDelete
+    - name: remove fsplit dir
+      type: RunUnixCommand
+      executable: rm
+      arg: "-rf $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/Dir.fsplit*"
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: ksnp_merge_reference.pl
+    pod: |
+  =head1 NAME
+  
+  ksnp_merge_reference.pl 
+  
+  B<--input,-in,-i>
+      single fasta file or list of fasta files
+  
+  =head1  DESCRIPTION
+  
+  Merge multiple reference genomes into one multifasta file for kSNP component.  Add "NN" if reference is made up of contigs/scaffolds
+  
+  =head1  INPUT
+  
+  fsa or list of fasta files
+  
+  =head1  OUTPUT
+  
+  A multi-fasta file that will be used as a reference genome in kSNP
+      
+  =head1  CONTACT
+  
+      Kent Shefchek
+      kshefchek@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: concatenate_files.pl
+    pod: |
+  =head1 NAME
+  
+  concatenate_files.pl - will concatenate files.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: concatenate_files.pl
+      --input_files=/path/to/file.1.tab,/path/to/file2.tab
+      --input_lists=/path/to/list1,/path/to/list2
+      --output=/path/to/new.file.tab
+      [ --log=/path/to/file.log
+        --debug=4
+        --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--input_files,-f>
+      A comma separated list of files.  Will cat each file.
+  
+  B<--input_lists,-l>
+      A comma separated list of lists.  Will cat each files in the list.
+  
+  B<--output,-o>
+      Output file
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+      Can be any type of input.  Will simply cat the files and append to same output
+  
+  =head1 OUTPUT
+      All the input files specified in one file
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu
+  - script: ksnp_to_addgeneinfo.pl
+    pod: |
+  =head1 NAME
+  
+  ksnp_merge_reference.pl 
+  
+  B<--input,-in,-i>
+      single fasta file or list of fasta files
+  
+  =head1  DESCRIPTION
+  
+  	Convert kSNP output to nucmer-show-snps output, allowing this information to be
+  	piped into the snp-add-gene-info component.
+  
+  =head1  INPUT
+  
+  	kSNP raw output with only one reference genome
+  
+  =head1  OUTPUT
+  
+  	The same as those output from nucmer-show-snps [see show-snps documentation for 
+  	description of columns]:
+  	p1, ref_base, query_base, p2, buff, dist, len_r, len_q, frm1, frm2, ref_contig, query_contig
+      
+  =head1  CONTACT
+  
+      Kent Shefchek
+      kshefchek@som.umaryland.edu
+  - script: ksnp-add-gene-info.pl
+    pod: |
+  =head1 NAME
+  
+  snp-add-gene-info.pl - Adds gene information to show-snps [nucmer] output: intergenic vs genic, ref vs query codons/amino acids, etc.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: snp-add-gene-info.pl
+  	--reference_genbank=/path/to/ref.gbk
+  	--show_snps_file=/path/to/file.snps
+  	--query_fasta_list=/path/to/queries.fsa.list
+  	--output=/path/to/output.snps
+    [ --log=/path/to/file.log
+      --debug=3
+      --help
+    ]
+  
+  =head1 OPTIONS
+  
+  B<--reference_genbank,-g>
+   Input genbank file for reference sequence.
+  
+  B<--show_snps_file,-s>
+   This is the output file from the show-snps program. Expects tabular output [using the -T options to show-snps].
+  
+  B<--add_homopolymer,-a>
+   This will include homopolymer stretches in indel regions in output tab file. If this is zero, do not need to include the --query_fasta.
+  
+  B<--query_fasta_list,-q>
+   List of fasta files for the query genome(s).
+  
+  B<--output,-o>
+   The output is a tab file. 
+  
+  B<--log,-l>
+   Logfile.
+  
+  B<--debug,-d>
+   1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+   Print this message
+  
+  =head1  DESCRIPTION
+  
+  	It can be very useful to look at the output of show-snps in the context of annotation. Looking at
+  	synonomous vs non-synonomous SNPs or indels which may have been created by homopolymer runs [possible
+  	sequencing issue.]
+   
+  =head1  INPUT
+  
+  	Required: 
+  	 Referenece genome genbank file.
+  	 show-snps output [tabular output, -T]
+  	 Output file path.
+  	 Query fasta file
+  
+  =head1 OUTPUT
+  
+  	The first 12 columns are the same as those output from show-snps [see show-snps documentation for 
+  	description of columns]:
+  	p1, ref_base, query_base, p2, buff, dist, len_r, len_q, frm1, frm2, ref_contig, query_contig
+  
+  	This script will add these additional columns:
+  	gene_id, gene_start, gene_stop, position_in_gene, snps_per_gene, syn_nonsyn, product, gene_direction, ref_codon, ref_amino_acid, query_codon, query_amino_acid, num_homopolymer
+  
+  =head1  CONTACT
+  
+  	Rewrite of Elliot Drabek's process-snps script
+  
+      Kevin Galens
+      kgalens@gmail.com
+  
+  =forcomment
+  	# Calculate query coordinates
+  	my ($qstart, $qstop);
+  	if( $reference_genes{$gene_id}->{'strand'} == 1 ) {
+  		$qstart = $qsnploc - $pos_in_codon;
+  		$qstop = $qsnploc + 2 - $pos_in_codon;
+  	} elsif( $reference_genes{$gene_id}->{'strand'} == -1 ) {
+  		$qstart = $qsnploc - 2 + $pos_in_codon;
+  		$qstop = $qsnploc + $pos_in_codon;
+  	} else {
+  		&_log($ERROR, "Could not understand strand: $reference_genes{$gene_id}->{'strand'}. Expected 1 or -1");
+  	}

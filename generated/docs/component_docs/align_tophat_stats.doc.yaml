@@ -1,0 +1,190 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: align_tophat_stats
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - align_tophat_stats.config
+  - align_tophat_stats.xml
+  - align_tophat_stats.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # other arguments that can be passed to align_tophat_stats
+    OTHER_PARAMETERS: ""
+  input:
+    # path to bam list file
+    INPUT_FILE: ""
+    # path to list file for all input files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple single mate sequence files
+    INPUT_DIRECTORY: ""
+    # file extension for single mate sequence files (to be used when iterating over an INPUT_DIRECTORY)
+    INPUT_EXTENSION: ""
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of stats txt files
+    OUTPUT_ALIGNMENT_TXT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.txt.list
+  component:
+    COMPONENT_NAME: align_tophat_stats
+    DESCRIPTION: Calculates alignment statistics for Tophat Alignment
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6089 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+  command_sets:
+    - align_tophat_stats
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create tophat stats list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".Samples\\.txt\""
+        - key: --output_list
+          value: $;OUTPUT_ALIGNMENT_TXT_FILE$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - align_tophat_stats
+  steps:
+    - name: align_tophat_stats
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/align_tophat_stats
+      params:
+        - key: --infile
+          value: $;I_FILE_PATH$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --args
+          value: $;OTHER_PARAMETERS$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/align_tophat_stats.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/align_tophat_stats.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: align_tophat_stats.pl
+    pod: |
+  =head1 NAME
+  
+      align_tophat_stats.pl  - script to calculate alignment statistics.
+  
+  =head1 SYNOPSIS
+  
+      align_tophat_stats.pl  --i <path to bam list file>   
+                             [--o outdir] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+      
+      --i  <bam list file>   = /list of bam file.
+  
+      --o <output dir>       = /path/to/output directory. Optional.[PWD]
+  
+      --v                    = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script generates summary of alignment statistics from Tophat output.
+  
+  =head1 AUTHOR
+  
+   Priti Kumari
+   Bioinformatics Software Engineer I
+   Institute for Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

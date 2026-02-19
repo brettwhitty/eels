@@ -1,0 +1,232 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: db2bsml
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - db2bsml.config
+  - db2bsml.xml
+  - db2bsml.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / extraction
+  parameters:
+    USERNAME: access
+    PASSWORD: access
+    # PLEASE NOTE: the capitalization of the rdbms parameter MUST match the name 
+    # of the corresponding Prism module (e.g., "Sybase" or "Mysql", not "sybase" or "mysql")
+    RDBMS: Sybase
+    HOST: SYBTIGR
+    BSML_DTD: $;DOCS_DIR$;/bsml3_1.dtd
+    # 
+    # ID mapping input directories is a comma-separated list of directories which may contain ID mapping files
+    # that have file extension .idmap.  These files's contents will be loaded into the ID mapping lookup.
+    # The ID mapping scheme is how we ensure consistent naming of features/sequences coming out of the legacy
+    # annotation databases and being written to BSML.
+    # Note that each and every instance of legacy2bsml.pl launched by this workflow will scan the directories
+    # and each will load the ID mappings into their own hash lookups.
+    INPUT_ID_MAPPING_DIRECTORIES: ""
+    # 
+    # ID mapping input file is a comma-separated list of files with .idmap file extensions.  The files'
+    # contents will be loaded into the ID mapping lookup.
+    # Note that each and every instance of legacy2bsml.pl launched by this workflow will read in all of the
+    # ID mapping files specified here and each will load the ID mappings into their own hash lookups.
+    INPUT_ID_MAPPING_FILES: ""
+  input:
+    # db2bsml control file:
+    # Should contain a listing of organisms and corresponding asmbl_ids, organism_types, sequence_types.  
+    DB2BSML_CONTROL_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTA_DIRECTORY: $;OUTPUT_DIRECTORY$;/fasta
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+  component:
+    COMPONENT_NAME: db2bsml
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5601 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 50
+    NODISTRIB: 1
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - db2bsml workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/db2bsml.list\"/"
+  steps:
+    - name: create output directories
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$; $;TMP_DIR$;/id_mapping
+    - name: Create legacy2bsml master iterator list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_legacy2bsml_iterator_list
+      params:
+        - key: --control_file
+          value: $;DB2BSML_CONTROL_FILE$;
+        - key: --outfile
+          value: $;TMP_DIR$;/db2bsml.list
+        - key: stdout
+          value: $;TMP_DIR$;/create_legacy2bsml_iterator_list.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/create_legacy2bsml_iterator_list.stderr
+    - name: Create BSML file list
+      type: RunJavaUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$; -name '*.bsml'"
+      params:
+        - key: stdout
+          value: $;BSML_OUTPUT_LIST$;
+        - key: stderr
+          value: $;TMP_DIR$;/create_bsml_file_list.stderr
+    - name: Create FASTA file list
+      type: RunJavaUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$; -name '*.fsa'"
+      params:
+        - key: stdout
+          value: $;FASTA_OUTPUT_LIST$;
+        - key: stderr
+          value: $;TMP_DIR$;/create_fasta_file_list.stderr
+    - name: Create mapping directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p $;REPOSITORY_ROOT$;/workflow/mapping/
+    - name: Consolidate all .idmap files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/consolidateIdMapFiles
+      params:
+        - key: --input_directories
+          value: $;TMP_DIR$;/id_mapping
+        - key: --output_file
+          value: $;REPOSITORY_ROOT$;/workflow/mapping/$;PIPELINEID$;_$;COMPONENT_NAME$;_$;OUTPUT_TOKEN$;.idmap
+        - key: --logfile
+          value: $;OUTPUT_DIRECTORY$;/consolidateIdMapFiles.pl.log
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/consolidateIdMapFiles.pl.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/consolidateIdMapFiles.pl.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - db2bsml
+  steps:
+    - name: Create the FASTA output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;FASTA_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+    - name: db2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/db2bsml
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --server
+          value: $;HOST$;
+        - key: --vendor
+          value: $;RDBMS$;
+        - key: --outfile
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;_assembly.bsml
+        - key: --logfile
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;.$;ASMBL_ID$;.db2bsml.pl.log
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --fastadir
+          value: $;FASTA_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --asmbl_id
+          value: $;ASMBL_ID$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --in-id-map-dir
+          value: "'$;INPUT_ID_MAPPING_DIRECTORIES$;'"
+        - key: --in-id-map-file
+          value: "'$;INPUT_ID_MAPPING_FILES$;'"
+        - key: --out_id_map_file
+          value: $;TMP_DIR$;/id_mapping/$;DATABASE$;_$;ASMBL_ID$;.idmap
+        - key: --sourcename
+          value: $;OUTPUT_DIRECTORY$;
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/db2bsml.$;DATABASE$;.$;ASMBL_ID$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/db2bsml.$;DATABASE$;.$;ASMBL_ID$;.stderr
+    - name: DTD validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: -d $;BSML_DTD$; $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;_assembly.bsml
+    - name: profileBSMLFile
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/profileBSMLFile
+      params:
+        - key: --infile
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;_assembly.bsml
+        - key: --database
+          value: $;DATABASE$;
+        - key: --asmbl_id
+          value: $;ASMBL_ID$;
+        - key: --logfile
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;.$;ASMBL_ID$;.profileBSMLFile.pl.log
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/profileBSMLFile.$;DATABASE$;.$;ASMBL_ID$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/profileBSMLFile.$;DATABASE$;.$;ASMBL_ID$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_legacy2bsml_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  generate_asmbl_list.pl - Default output is a workflow iterator that
+  can be used to iterator over a set of asmbl_ids
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  generate_asmbl_list
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

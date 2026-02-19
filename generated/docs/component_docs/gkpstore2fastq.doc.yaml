@@ -1,0 +1,345 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: gkpstore2fastq
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - gkpstore2fastq.config
+  - gkpstore2fastq.xml
+  - gkpstore2fastq.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+  input:
+    # Should be a tab delimited file in the following format:
+    # fasta_contigs    gkpstore
+    CONTIG_GKPSTORE_MAP: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTQ_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fq.list
+    FASTQ_CONTIG_MAP: $;OUTPUT_DIRECTORY$;/fastq_contig.map
+  component:
+    COMPONENT_NAME: gkpstore2fastq
+    DESCRIPTION: Filter fastq files
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Iterator Done
+  command_sets:
+    - bwa workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list,$;ITERATOR_TIMESTAMP$;=1\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create input list
+      type: RunUnixCommand
+      executable: /usr/bin/cut
+      arg: -f2 $;CONTIG_GKPSTORE_MAP$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/gkpstore2fastq.$;OUTPUT_TOKEN$;.input_list
+    - name: create_file_iterator_list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_file_iterator_list
+      params:
+        - key: --input_file_list
+          value: $;TMP_DIR$;/gkpstore2fastq.$;OUTPUT_TOKEN$;.input_list
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list
+        - key: --checksum_filenames
+          value: 1
+        - key: --timestamp
+          value: 1
+    - name: create fastq list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.all\\.fastq\""
+        - key: --output_list
+          value: $;FASTQ_OUTPUT_LIST$;
+    - name: create fastq contigs map
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_fastq_contigs_map
+      params:
+        - key: --input_map
+          value: $;CONTIG_GKPSTORE_MAP$;
+        - key: --fastq_list
+          value: $;FASTQ_OUTPUT_LIST$;
+        - key: --celera_input_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list
+        - key: --output_map
+          value: $;FASTQ_CONTIG_MAP$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/create_fastq_contigs_map.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/create_fastq_contigs_map.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Processing
+  command_sets:
+    - bwa Iterator workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: gkpstore2fastq
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/gkpstore2fastq
+      params:
+        - key: --input_gkpstore
+          value: $;I_FILE_PATH$;
+        - key: --output_prefix
+          value: $;I_FILE_BASE$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --gatekeeper_exec_6-1
+          value: $;GATEKEEPER_61$;
+        - key: --gatekeeper_exec_7-0
+          value: $;GATEKEEPER_70$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_align_exec.ref1.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_align_exec.ref1.stderr
+    - name: cat files
+      type: RunUnixCommand
+      executable: /bin/cat
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.unmated.fastq $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.paired.fastq
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.all.fastq
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_file_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_file_iterator_list.pl - generates list file from various input sources of filenames.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: create_file_iterator_list.pl 
+          --input_file_list=/path/to/some.list
+          --input_file=/path/to/somefile.fsa
+          --input_directory=/path/to/some/dir
+          --input_directory_extension=fsa
+          [--checksum_filenames=1
+          --log=/path/to/some.log
+          --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file_list,-l> 
+      a plain text file containing the full paths to any number of files, one per line.  
+      this can also be a comma-separated list of input file lists.
+  
+  B<--input_file,-f> 
+      the full path to an input file. this can also be a comma-separated list of 
+      input files.
+  
+  B<--input_directory,-d> 
+      the full path to an input directory. this can also be a comma-separated list of 
+      input directories.
+  
+  B<--input_directory_extension,-x> 
+      to be used in conjuction with the input_directory option, this can be used to
+      filter files by extension within any passed input directories.
+  
+  B<--output_iterator_list,-o>
+      output file. Up to 7 lines with comma separated lists of limits
+  
+  B<--output_iterator_list,-o>
+      comma separated list of iterator keys used in the output file.  Each key will be a separate line in the output file.  There are 7 lines in the output file listing FILE, FILE_NAME, FILE_BASE, FILE_EXT, DIRECTORY, XML file
+  
+  B<--checksum_filenames> 
+      use checksums instead of the basename as the iterator name. The checksum will be based on the full path to the file.
+  
+  B<--log> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      already exists.
+      
+  B<--debug> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      This script is used to accept a selection of inputs from either an input list, 
+      directory, file, or any combination thereof.  Each of these options can also
+      be specified using comma-separated lists.  These inputs will then be distributed
+      randomly across a certain number of groups, specified using the --group_count
+      option (usually somewhere around 150).
+      
+      To prevent too many files from being directly in one group, additional groups are 
+      automatically created for large input sets.  You can control how many inputs are 
+      in a group before another is created using the --group_size_limit option (default 
+      1000).  Once the number of inputs in any group reaches this number, another group 
+      is created until it is full, and so on.
+  
+  =head1   OUTPUT
+  
+      The location of the output is specified using the --output_directory option.  One
+      numbered directory will be created under this for each group needed.
+      
+      MORE OUTPUT DESCRIPTIONS NEEDED
+      
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: create_fastq_contigs_map.pl
+    pod: |
+  =head1 NAME
+  
+  create_fastq_contigs_map.pl
+  
+  =head1 SYNOPSIS
+  
+   USAGE: create_fastq_contigs_map.pl
+         --input_map=/path/to/celera_or_velvet.map
+         --fastq_list=/path/to/fastq.list
+         --output_map=/path/to/output.map
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1  DESCRIPTION
+  
+      This relies on how filter_fastq names the output files it creates. If that
+      method changes, this script should be changed.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com
+  - script: gkpstore2fastq.pl
+    pod: |
+  =head1 NAME
+  
+  gkpstore2fastq.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: gkpstore2fastq.pl
+         --input_gkpstore=/path/to/FILE.gkpStore
+         --output_fastq=/path/to/output.fastq
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com

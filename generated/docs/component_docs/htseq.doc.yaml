@@ -1,0 +1,242 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: htseq
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - htseq.config
+  - htseq.xml
+  - htseq.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to Python binary directory
+    PYTHON_BIN_DIR: $;PYTHON_BIN$;
+    # path to Python library directory
+    PYTHON_LIB_DIR: $;PYTHON_LIB$;
+    # Mode to handle reads overlapping more than one feature. [Values: union, intersection-strict or intersection-nonempty]
+    MODE: union
+    # Feature type (3rd column in GFF file) to be used
+    TYPE: exon
+    # Skip all reads with alignment quality lower than the given minimum value
+    MIN_QUAL: 0
+    # Whether the data is from a strand-specific assay
+    STRANDED: no
+    # GFF attribute ID to be used as feature ID
+    ATTRIBUTE_ID: gene_id
+    # additonal htseq parameters
+    OTHER_PARAMS: ""
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to sorted-by-name alignment SAM file
+    INPUT_FILE: ""
+    # path to list of sorted-by-name alignment SAM files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple sorted-by-name alignment SAM files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: sam
+    # path to annotation file in GFF or GTF format
+    ANNOTATION_FILE: ""
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of count files for each alignment SAM file sorted by name
+    OUTPUT_ALIGNMENT_COUNTS: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.counts.list
+  component:
+    COMPONENT_NAME: htseq
+    DESCRIPTION: generates htseq alignment counts for the given SAM alignment file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # HTSeq version
+    VERSION: HTSeq version 0.4.7
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - htseq
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create alignment htseq counts list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.counts\""
+        - key: --output_list
+          value: $;OUTPUT_ALIGNMENT_COUNTS$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - htseq
+  steps:
+    - name: htseq
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/htseq
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --infile
+          value: $;I_FILE_PATH$;
+        - key: --annotation
+          value: $;ANNOTATION_FILE$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --mode
+          value: $;MODE$;
+        - key: --type
+          value: $;TYPE$;
+        - key: --minqual
+          value: $;MIN_QUAL$;
+        - key: --stranded
+          value: $;STRANDED$;
+        - key: --idattr
+          value: $;ATTRIBUTE_ID$;
+        - key: --params
+          value: "'$;OTHER_PARAMS$;'"
+        - key: --python_bin_dir
+          value: $;PYTHON_BIN_DIR$;
+        - key: --python_lib_dir
+          value: $;PYTHON_LIB_DIR$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/htseq.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/htseq.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: htseq.pl
+    pod: |
+  =head1 NAME
+  
+  htseq.pl - script to generate HTSeq read counts from sorted-by-name SAM alignment file
+  
+  =head1 SYNOPSIS
+  
+      htseq.pl --i input_SAM_file --a annotation_file [--o outdir] 
+      		 [--m union, intersection-strict, or intersection-nonempty] 
+      		 [--t feature type from annotation file to count over] 
+      		 [--rq minimum quality of alignment read] [--s strand-specific] 
+      		 [--id attribute id to be used as feature id] [--p other_parameters] [--v] 
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --i <input_SAM_file>           = /path/to/sorted-by-name alignment SAM file.
+  
+      --a <annotation_file>          = /path/to/annotation file in GTF or GFF format.
+  
+      --o <output dir>               = /path/to/output directory. Optional. [present working directory]
+  
+      --m <count_mode>               = Mode to handle reads overlapping more than one feature.
+                                       Possible values are union, intersection-strict or intersection-nonempty. Optional. [union]
+  
+      --t <feature_type>             = feature type (3rd column in GFF file) to be used. Optional. [exon]
+  
+      --rq <minimum read quality>    = skip all reads with alignment quality lower than the given minimum value. Optional. [0]
+  
+      --s <strand-specific>          = whether the data is from a strand-specific assay. Optional. [yes]
+  
+      --id <attribute id>            = GFF attribute ID to be used as feature ID. Optional. [gene_id]
+  
+      --p <other_params>             = additonal htseq parameters. Optional. Refer HTSeq manual.
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script executes the htseq-count (count.py python) script from the htseq python package.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

@@ -1,0 +1,222 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mpileup
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mpileup.config
+  - mpileup.xml
+  - mpileup.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  parameters:
+    # Any other parameters passed directly to samtools mpileup command
+    OTHER_MPILEUP_PARAMETERS: -B -C50
+  input:
+    # Input list should be a list with 2 columns. The first column should be the reference
+    # in fasta format and the second column should be a list of bam files.
+    # Will index the fasta and bam files and then run mpileup on them
+    INPUT_PAIRED_LIST: ""
+    # Input 1 is reference (fasta)
+    # Input 2 is bam alignment. Can be one file or list of files.
+    INPUT_FILE_LIST_1: ""
+    INPUT_FILE_LIST_2: ""
+    INPUT_FILE_1: ""
+    INPUT_FILE_2: ""
+    # Only to be used with INPUT_FILE_LIST_1 and 2.
+    # Path to a file which contains 2 columns of file names (no path or extension) of pairs. 
+    # Will attempt to look for file names in column 1 in INPUT_FILE_LIST_1 and column 2 in 
+    # INPUT_FILE_LIST_2 and pair accordingly. If a file is specified here, ALL_VS_ALL 
+    # parameter will be set to 0.
+    INPUT_MAPPING_FILE: ""
+    # If multiple references and multiple queries were entered, setting this to one will
+    # compute all combinations of reference and query. Setting it to zero will pair up
+    # the first ref with first query. Must have same number of input files if 0.
+    ALL_VS_ALL: 0
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    MPILEUP_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.pileup.list
+  component:
+    COMPONENT_NAME: mpileup
+    DESCRIPTION: samtools mpileup
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Iterator Done
+  command_sets:
+    - mpileup workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/paired_file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create mpileup list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.mpileup\""
+        - key: --output_list
+          value: $;MPILEUP_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Processing
+  command_sets:
+    - bwa Iterator workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: mpileup Execution
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/mpileup_wrapper
+      params:
+        - key: --samtools_exec
+          value: $;SAMTOOLS_EXEC$;
+        - key: --fasta_file
+          value: $;I_FILE_PATH_1$;
+        - key: --mpileup_options
+          value: "&quot;$;OTHER_MPILEUP_PARAMETERS$; $;I_FILE_PATH_2$;&quot;"
+        - key: --tmp_directory
+          value: $;TMP_DIR$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE_2$;.mpileup
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE_2$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: mpileup_wrapper.pl
+    pod: |
+  =head1 NAME
+  
+  mpileup_wrapper.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: mpileup_wrapper.pl
+         --tmp_directory=/tmp/directory
+         --mpileup_options="-C50 -b whatever.bam"
+         --fasta_file=/path/to/fasta
+  
+  =head1  DESCRIPTION
+  
+    Since the fasta file needs to be indexed and the index needs to be located where
+    the fasta file is located, this script will make symlinks to the fasta files in
+    the temp directory and indexes will be created there. This solves an issue about
+    using input fasta files when you don't have write access to the directory (or having
+    index files around in unrelated directories)
+  
+    Any other options should be specified in the mpileup options input parameter (including
+    the input bam files). The bam files are expected to be sorted/indexed.
+   
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com

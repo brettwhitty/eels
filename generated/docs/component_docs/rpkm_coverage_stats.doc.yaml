@@ -1,0 +1,282 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: rpkm_coverage_stats
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - rpkm_coverage_stats.config
+  - rpkm_coverage_stats.xml
+  - rpkm_coverage_stats.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to bedtools package binary directory
+    BEDTOOLS_BIN_DIR: $;BEDTOOLS_BIN$;
+    # path to samtools package binary directory
+    SAMTOOLS_BIN_DIR: $;SAMTOOLS_BIN$;
+    # feature type from column 3 of GTF or GFF3 file
+    FEATURE_ID: ""
+    # attribute id from column 9 of GTF or GFF3 file to be used as region ID
+    ATTRIBUTE_ID: ""
+    # group_by id from column 9 of GTF or GFF3 file to be used to group regions by
+    GROUPBY_ID: ""
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to alignment BAM file
+    INPUT_FILE: ""
+    # path to list of alignment BAM files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple BAM alignment files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bam
+    # path to reference FastA file
+    REFERENCE_FASTA: ""
+    # path to annotation file (BED or GTF or GFF3 format file)
+    ANNOTATION_FILE: ""
+    # annotation file format (bed/gtf/gff3)
+    ANNOTATION_FILE_TYPE: ""
+    # region to determine coverage for (genomic:genic:exonic) separated by ':' or ',' or ';'
+    REGION_TYPE: ""
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of RPKM statistics files for each input alignment BAM file
+    OUTPUT_RPKM_STATS: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.rpkm.stats.list
+  component:
+    COMPONENT_NAME: rpkm_coverage_stats
+    DESCRIPTION: generates RPKM coverage stats for the given BAM alignment file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # samtools version
+    VERSION: samtools version 0.1.18
+    # bedtools version
+    BEDTOOLS_VERSION: bedtools version 2.15.0
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - rpkm_coverage_stats
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create RPKM stats list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.rpkm\\.txt\""
+        - key: --output_list
+          value: $;OUTPUT_RPKM_STATS$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - rpkm_coverage_stats
+  steps:
+    - name: rpkm_coverage_stats
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/rpkm_coverage_stats
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --reffile
+          value: $;REFERENCE_FASTA$;
+        - key: --infile
+          value: $;I_FILE_PATH$;
+        - key: --annotation
+          value: $;ANNOTATION_FILE$;
+        - key: --annotationfiletype
+          value: $;ANNOTATION_FILE_TYPE$;
+        - key: --regiontype
+          value: $;REGION_TYPE$;
+        - key: --feature
+          value: $;FEATURE_ID$;
+        - key: --attribute
+          value: $;ATTRIBUTE_ID$;
+        - key: --groupby
+          value: $;GROUPBY_ID$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --samtools_bin_dir
+          value: $;SAMTOOLS_BIN_DIR$;
+        - key: --bedtools_bin_dir
+          value: $;BEDTOOLS_BIN_DIR$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/rpkm_coverage_stats.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/rpkm_coverage_stats.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: rpkm_coverage_stats.pl
+    pod: |
+  =head1 NAME
+  
+  rpkm_coverage_stats.pl - program to generate read counts and coverage statistics across features.
+  
+  =head1 SYNOPSIS
+  
+      rpkm_coverage_stats.pl      --r [reference_file] --i <bam_file> --a <annotation_file> --rt <region_type> 
+                                  --t <annotation file format (bed|gtf|gff3)> --f <feature> --id <attribute> 
+                                  --g <group_by> [--o <output_dir>] [--b <bedtools_bin_dir>] [--s <samtools_bin_dir>] 
+                                  [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+     
+      --r <reference_file>                            = path to reference fastA file. Required for 'Genomic Coverage'.
+  
+      --i <bam_file>                                  = path to alignment BAM file sorted by position
+  
+      --a <annotation_file>                           = path to annotation file (BED or GTF or GFF3 format file)
+  
+      --rt <region_type>                              = region to determine coverage for (genomic:genic:exonic) separated by ':' or ',' or ';'
+  
+      --t <annotation_file_format>                    = annotation file format (bed/gtf/gff3)
+  
+      --f <feature>                                   = feature type from column 3 of GTF or GFF3 file
+  
+      --id <attribute>                                = attribute id from column 9 of GTF or GFF3 file to be used as region ID
+  
+      --g <group_by>                                  = group_by id from column 9 of GTF or GFF3 file to be used to group regions by
+                                                        use 'yes' if annotation file format is 'BED'
+  
+      --o <output_dir>                                = output directory. Optional
+  
+      --b <bedtools_bin_dir>                          = bedtools binary directory. Optional
+  
+      --s <samtools_bin_dir>                          = samtools binary directory. Optional
+  
+      --v                                             = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  =head1 DIAGNOSTICS
+  
+  =head1 CONFIGURATION AND ENVIRONMENT
+  
+  PERL5LIB environment variable should be set if Bio::Perl is in non-standard
+  location
+  
+  =head1 DEPENDENCIES
+  
+  Bio::Perl
+  
+  =head1 INCOMPATIBILITIES
+  
+  =head1 BUGS AND LIMITATIONS
+  
+  There are no known bugs in this module. Please report problems to Amol Shetty
+  (ashetty@som.umaryland.edu). Patches are welcome.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  
+  =head1 LICENSE AND COPYRIGHT
+  
+  Copyright (c) 2010 Amol Carl Shetty (<ashetty@som.umaryland.edu>). All rights
+  reserved.
+  
+  This program is free software; you can distribute it and/or modify it under
+  GNU-GPL licenscing terms.
+  
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTIBILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

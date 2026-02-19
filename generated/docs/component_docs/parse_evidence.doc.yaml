@@ -1,0 +1,236 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: parse_evidence
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - parse_evidence.config
+  - parse_evidence.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    # the feature type to assign annotations to
+    ANNOTATE_ON: transcript
+    # list of gene describing bsml files for feature relationships 
+    # [for prok pipeline, use start_site_curation output]
+    BSML_FEATURE_LOOKUP_LIST: ""
+    # Valid Evidence type (describes input format, ex. Lipoprotein, HMM, BER, etc.)
+    EVIDENCE_TYPE: ""
+    # Other options to pass to the parser object (see individual parser object documentation for details
+    #  on accepted options.
+    # Should be a space separated list of key value pairs.
+    # i.e. username=user password=pass
+    OTHER_PARSER_OPTIONS: ""
+  input:
+    # Input list of lists
+    INPUT_FILE_LIST: ""
+    # Input file is a list of input files (ex. /path/to/file.list )
+    INPUT_FILE: ""
+    # Directory of input lists
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    TAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.tab.list
+  component:
+    COMPONENT_NAME: parse_evidence
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - parse evidence workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: parse_evidence
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/parse_evidence
+      params:
+        - key: --input_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;EVIDENCE_TYPE$;.tab
+        - key: --evidence_type
+          value: $;EVIDENCE_TYPE$;
+        - key: --bsml_feature_lookup_list
+          value: $;BSML_FEATURE_LOOKUP_LIST$;
+        - key: --annotate_on
+          value: $;ANNOTATE_ON$;
+        - key: --other_options
+          value: "&apos;$;OTHER_PARSER_OPTIONS$;&apos;"
+    - name: create tab list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.tab\""
+        - key: --output_list
+          value: $;TAB_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: parse_evidence.pl
+    pod: |
+  =head1 NAME
+  
+  parse_evidence.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: parse_evidence.pl
+         --input_file=/path/to/file.txt
+         --input_list=/path/to/evidence.list
+         --output=/path/to/output.tab
+         --evidence_type=Pfunc
+         --database_path=/path/to/db_dir
+         --other_options="option1=value1 option2=value2..."
+       [ --log=/path/to/file.log
+         --debug=4
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The input files to parse.  Can be a comma separated list of input files.
+  
+  B<--input_list,-n>
+      input list.  Can be a comma separated list of evidence lists. 
+  
+  B<--output,-o>
+      Output tab file
+  
+  B<--evidence_type,-e>
+      The type of evidence being parsed.
+  
+  B<--database_path,-b>
+      Path which holds various databases which the parsers may require.  Not required, but an individual parser
+      will fail if it requires this path specifically.  For requirements, please see specific parser files in
+      EvidenceParser namespace.
+  
+  B<--other_options,-t>
+      Allows the user to send extra options to the parser.  For specific details on options accepted
+      and what they do, see documentation for the individual parser used. Should be a space separated list
+      of key value pairs, quoted.
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      Will parse evidence files and create an annotation tab file for use in combining multiple 
+      evidence sets into a final annotation.
+   
+  =head1  INPUT
+      The input files should be specific to the format defined by the individual parser.  See EvidenceParser.pm
+      for details.
+  
+  =head1 OUTPUT
+      The output is a tab file based on the Annotation->to_string implementation.  See Annotation.pm for details.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

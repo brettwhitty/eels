@@ -1,0 +1,227 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: filter_merged_table
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - filter_merged_table.config
+  - filter_merged_table.xml
+  - filter_merged_table.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: SNP
+  input:
+    # Path to merged table from SNP verify
+    INPUT_FILE: ""
+    # Path to a list of merged table files from SNP verify. All of the merged tables should have the same query genomes as specified in the QUERY_LIST
+    INPUT_FILE_LIST: ""
+    # Path to directory containing merged table files
+    INPUT_DIRECTORY: ""
+    # Used only when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: txt
+    # Mandatory. Path to list file consisting of paths to query genome FASTA files
+    QUERY_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FILTERED_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.filtered.list
+    FASTA_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fna.list
+  component:
+    COMPONENT_NAME: filter_merged_table
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6529 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - filter_merged_table
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create multi-fasta list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.txt\""
+        - key: --output_list
+          value: $;FILTERED_LIST$;
+    - name: create multi-fasta list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fna\""
+        - key: --output_list
+          value: $;FASTA_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - filter merged table
+  steps:
+    - name: filter_merged_table
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/filter_merged_table
+      params:
+        - key: --merged_table
+          value: $;I_FILE_PATH$;
+        - key: --query_list
+          value: $;QUERY_LIST$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: filter_merged_table.pl
+    pod: |
+  =head1 NAME
+  
+  filter_merged_table.pl - Script to filter the merged table obtained after SNP verification to remove rows with No Hits or indels or more than one nucleotide at a SNP position in a query genome.
+  			 It also prints the FASTA file of all the SNPs from the filtered results
+  
+  =head1 SYNOPSIS
+  
+  USAGE : filter_merged_table.pl -m <merged_table> -q <num_of_query> -o <output_directory> [ -l <log_file> ]
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  	-m <merged_table>	: Path to merged table obtained after SNP verification. Mandatory
+  
+  	-q <query_num>		: Number of query genomes in the merged table. Mandatory
+  
+  	-o <output_dir>		: Path to output directory where all the result files will be printed. Mandatory
+  
+  	-l <log_file>		: Path to log file. Optional	
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  	Refer to snp_verify to see the required format of merged table. If the exact format is not present, the script may print incorrect results 
+  
+  =head1 OUTPUT
+  
+  	filtered_merged_table.txt - Filtered merged table without rows containing "No Hits" or "indel" or more than one nucleotide at a SNP position in a query genome
+  
+  	discarded_merged_table.txt - All the rows removed from merged table to obtain the above filtered_merged_table.txt
+  
+  	filtered_fasta_merged_table.fna - Multi-FASTA file containing the sequence of SNP nucleotides for each query genome in the merged table.	
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Bioinformatics Software Engineer II
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut

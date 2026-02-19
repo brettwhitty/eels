@@ -1,0 +1,170 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: download_tcga
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - download_tcga.config
+  - download_tcga.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Path of the GeneTorrent tools 
+    GENETORRENT_BIN: /home/ksieber/bin/
+    # Path to your personal CGHub key
+    CGHUB_KEY: /local/projects-t3/HLGT/TCGA/key_dir/cghub.key
+    # TCGA Ids should look like this "00007994-abeb-4b16-a6ad-7230300a29e9"
+    # Alphanumeric <8#>-<4#>-<4#>-<4#>-<12#>
+    TCGA_ID: ""
+    # (Optional) Number of retries to download a file with 'wget'.  Default is 20
+    NUM_RETRIES: ""
+    # (Options). Transfer rate limiter in Mb/s. Default is 200
+    RATE_LIMIT: 200
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: ""
+  component:
+    COMPONENT_NAME: download_sra
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - download sra workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Download SRA Reads
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/download_tcga
+      params:
+        - key: --tcga_id
+          value: $;TCGA_ID$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --genetorrent
+          value: $;GENETORRENT_PATH$;
+        - key: --cghub_key
+          value: $;CGHUB_KEY$;
+        - key: --python_exec
+          value: $;PYTHON_EXEC$;
+        - key: --num_retry
+          value: $;NUM_RETRIES$;
+        - key: --rate_limit
+          value: $;RATE_LIMIT$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/download_tcga.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/download_tcga.stderr
+    - name: create file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bam\""
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

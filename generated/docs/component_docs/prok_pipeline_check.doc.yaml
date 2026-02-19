@@ -1,0 +1,190 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: prok_pipeline_check
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - prok_pipeline_check.config
+  - prok_pipeline_check.xml
+  - component_docs/prok_pipeline_check.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component will check the data from a prokaryotic annotation pipeline.  Various 
+      checks are built in to ensure quality data. 
+  </p>
+  <h3>references</h3>
+  <p>
+      <div>Kevin Galens</div>
+      <a href="mailto:kgalens@jcvi.org">kgalens@jcvi.org</a>
+  </p>
+  <h3>input and options</h3>
+  <p>
+      <p>There are no input files to this program.  Instead, only a repository root and pipeline id are required
+      by the program.  By default, all information is printed to the screen ( and is captured in stdout by 
+      ergatis ).  This includes summary information and warnings/errors.  The log file option allows the user to
+      print warnings/errors to a file. </p>
+  
+      <p>A note about --transcript_level_computes option:
+      This was implemented to support checking for the transcript level computes.  But because this program is
+      also used to check gene calls, we might want to verify the calls before spending the compute time on 
+      transcript level computes.  If this option is zero, the normal "sgc" equivalent will be skipped.</p>
+  
+  </p>
+  <h3>checks</h3>
+      <p>Several things are assumed of the pipeline:
+      <ol>
+          <li>It contains all normal computes for a prokaryotic pipeline (tested as of prokaryotic pipeline v1.0).</li>
+          <li>The components have standard output tokens (prok pipeline v1.0)</li>
+          <li>The workflow was run with ergatis and therefore normal ergatis configuration files are 
+              present and accessible (ergatis v2).</li>
+      </ol></p>
+  
+      <p>Die conditions:
+      <ul>
+          <li>If the ORF count is not in an acceptable range. ( Acceptable range can be defined by 
+              genome length / 1000 * 120% + 20 > x > genome length / 1000 * 80% - 20 ).</li>
+          <li>If there were no BER evidence files greater than size zero (btab result files).</li>
+          <li>If there were no HMM evidence files greater than size zero (hmm result files).</li>
+      </ul>
+      All Other conditions will generate warnings, but will not stop the pipeline.</p>
+          
+      <p>Warn conditions:
+      <ul>
+          <li>If the organism name or abbreviation cannot be determined.  This is parsed from the pipeline
+              summary configuration file</li>
+          <li>If the entry was not found or more than one entry was found in the common..genomes table</li>
+          <li>If the genome length could not be retrieved or it is size zero</li>
+          <li>If there were no tRNA-scanSE results for the pipeline</li>
+          <li>If the transcript level compute checks are run, the program will produce and error if the
+              number of output files for an analysis doesn't match the number of ORFs reported</li>
+      </ul></p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # If including transcript level computes in data checks
+    INCLUDE_TRANSCRIPT_LEVEL: 0
+    # This log file will hold only warnings and errors
+    LOG: ""
+    # Pipeline Id and Repository Root of Prok Pipeline to check
+    CHECK_PIPELINEID: $;PIPELINEID$;
+    CHECK_REPOSITORY_ROOT: $;REPOSITORY_ROOT$;
+  input:
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # This logfile will contain all output from the program
+    OUTPUT_LOGILE: $;OUTPUT_DIRECTORY$;/$;PIPELINEID$;_log.txt
+  component:
+    COMPONENT_NAME: prok_pipeline_check
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Postprocessing
+    - There is none
+  command_sets:
+    - prok_pipeline_check workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: prok_pipeline_check
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/prok_pipeline_check
+      params:
+        - key: --pipeline_id
+          value: $;CHECK_PIPELINEID$;
+        - key: --repository_root
+          value: $;CHECK_REPOSITORY_ROOT$;
+        - key: --log
+          value: "&quot;$;LOG$;&quot;"
+        - key: --include_transcript_level
+          value: $;INCLUDE_TRANSCRIPT_LEVEL
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: prok_pipeline_check.pl
+    pod: |
+  =head1 NAME
+  
+  data_consistency_check.pl - Checks data produced in the prokaryotic pipeline
+  
+  =head1 SYNOPSIS
+  
+  USAGE: data_consistency_check.pl
+              --pipeline_id=9923
+              --repository_root=/usr/local/annotation/MOORE
+            [ --log=/path/to/file.log
+              --debug=4
+              --help
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--pipeline_id,-p>
+      REQUIRED. The pipeline id to review data
+  
+  B<--repository_root,-r>
+      REQUIRED. Location of the pipeline ( Ergatis file structure )
+  
+  B<--log,-l>
+      REQUIRED. Logfile.
+  
+  B<--debug,-d>
+      OPTIONAL. Larger number is more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      This script will review the data produced by a normal prokaryotic annotation pipeline run.
+      Specifics for fail conditions will be added here.
+  
+  =head1  INPUT
+  
+      The data ( and where to find it ) requirements will be put here.
+  
+  
+  =head1 OUTPUT
+  
+      Output is in the form of a log file.  
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@jcvi.org

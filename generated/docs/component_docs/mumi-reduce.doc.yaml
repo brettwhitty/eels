@@ -1,0 +1,128 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mumi-reduce
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mumi-reduce.config
+  - mumi-reduce.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / manipulation
+  parameters:
+    # Maximum pairwise MUMi score defining cluster equivalence
+    CLUSTER_THRESHOLD: 0.3
+    # Minimum length defining a maximal unique match when running MUMmer
+    MIN_MUM: 19
+  input:
+    INPUT_FILE: ""
+    INPUT_FILE_LIST: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fasta
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: mumi-reduce
+    DESCRIPTION: de-redundify a collection of reference sequences via pairwise alignment
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 1 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: 01_find_pairs
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    ITERATOR2: 02_run_MUMi
+    ITERATOR2_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR2$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+  dce:
+    # These configuration options only apply to any distributed components 
+    GROUP: ""
+    OS: ""
+    MEMORY: ""
+    HOSTS: ""
+    QUEUE: ""
+    DURATION: ""
+    PRIORITY: ""
+    PASSTHROUGH: -l mem_free=4G
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Begin preprocessing
+    - End preprocessing
+    - "Iterator 1:
+	 
+	 Accumulate lists of pairs of genomes to test, along with preliminary metadata."
+    - End iterator 1
+    - "Iterator 2:
+	 
+	 Run MUMi on each pair in each list and save output."
+    - End iterator 2
+    - Collect all pairwise MUMi scores into a single file.
+    - "Transitively cluster all sequence pairs S, T where MUMi_score(S,T) <= $;CLUSTER_THRESHOLD$;."
+    - "Pick a representative genome for each cluster, then concatenate all representatives into a single output file."
+  command_sets:
+    - mumi-reduce workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR2,$;ITERATOR_XML$;=ITERATOR2_XML\""
+  steps:
+    - name: Create the toplevel output directory.
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: Create a temporary working directory on the scratch partition.
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create a directory in which to store all final MUMi scores.
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters
+    - name: Collect all pairwise MUMi scores into a single file.
+      type: RunUnixCommand
+      executable: $;MUMI_SCORE_AGGREGATOR_EXEC$;
+      arg: $;OUTPUT_DIRECTORY$;/02_run_MUMi $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/00_pair_scores.txt
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/01_pair_scores__STDOUT.txt
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/02_pair_scores__STDERR.txt
+    - name: "Transitively cluster all sequence pairs S, T where MUMi_score(S,T) &lt;= $;CLUSTER_THRESHOLD$;."
+      type: RunUnixCommand
+      executable: $;MUMI_CLUSTERING_EXEC$;
+      arg: $;CLUSTER_THRESHOLD$; $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/00_pair_scores.txt $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/03_clusters.txt
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/04_clusters__STDOUT.txt
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/05_clusters__STDERR.txt
+    - name: "Pick a representative genome for each cluster, then concatenate all representatives into a single output file."
+      type: RunUnixCommand
+      executable: $;GENERATE_REDUCED_DB_EXEC$;
+      arg: $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/03_clusters.txt $;INPUT_DIRECTORY$; $;INPUT_EXTENSION$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/06_buildFinalFile__STDOUT.txt
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/03_MUMi_scores_and_clusters/07_buildFinalFile__STDERR.txt

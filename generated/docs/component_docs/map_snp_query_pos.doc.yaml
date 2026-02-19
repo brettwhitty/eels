@@ -1,0 +1,141 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: map_snp_query_pos
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - map_snp_query_pos.config
+  - map_snp_query_pos.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: snp
+  parameters:
+  input:
+    # Tab delimited file, 2 columns. 
+    # QUERY_ACC    PATH_TO_FASTA
+    QUERY_ACC_MAP: ""
+    MERGED_TABLE: ""
+    # Expects blast results from blast of extract_snp_regions output (subject) and fasta database (query).
+    RAW_BLAST_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.mapped_positions.txt
+  component:
+    COMPONENT_NAME: map_snp_query_pos
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6529 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+  command_sets:
+    - map snp query pos workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: map query pos
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/map_query_pos
+      params:
+        - key: --query_acc_map
+          value: $;QUERY_ACC_MAP$;
+        - key: --merged_table
+          value: $;MERGED_TABLE$;
+        - key: --raw_blast_list
+          value: $;RAW_BLAST_LIST$;
+        - key: --output_file
+          value: $;OUTPUT_FILE$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: map_query_pos.pl
+    pod: |
+  =head1 NAME
+  
+  map_query_pos.pl - Will map SNP positions on reference sequence from raw blast results to query postions.
+  
+  =head1 SYNOPSIS
+  
+      my %options;
+      my $results = GetOptions (\%options,
+  			      'query_acc_map|q=s',
+  			      'raw_blast_list|r=s',
+  			      'merged_table|m=s',
+  			      'output_file|o=s'
+                                );
+   USAGE: map_query_pos.pl
+         --query_acc_map=/path/to/some/query_map.txt
+         --raw_blast_list=/path/to/blast_raw.list
+         --merged_table=/path/to/snp_merged_table.txt
+         --output_file=/path/to/output_file.txt
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--query_acc_map,-q>
+      Input tab delimited file with 2 columns, first column is the query acc and the second is full path to fasta file
+  
+  B<--raw_blast_list,-r>
+      Path to list of raw blast files. Expects blast results from extract SNP regions as subject and query fastas as query database.
+  
+  B<--merged_table,-m>
+      Path to SNP merged table. Created form SNP-verify or Skirret pipelies.
+  
+  B<--output_file,-o>
+      Path to output file which will be written.
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose. [Default:1]
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      This script will read in Blast results and attempt to map positions in some reference to query fasta. Will read in blast
+      results and find the best mapping (sometimes a tie). 
+   
+  =head1  INPUT
+      
+      See SNP::MergedTable for a description of MergedTable format (--merged_table option).
+  
+  =head1 OUTPUT
+      
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com

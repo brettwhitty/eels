@@ -1,0 +1,237 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: btab2taxon
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - btab2taxon.config
+  - btab2taxon.xml
+  - btab2taxon.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # Location of the ncbi taxonomy files (nodes.dmp and names.dmp
+    NCBITAX: /local/db/repository/ncbi/blast/20110831_122720/taxonomy/taxdump/
+    # Location of the gi_taxid_nucl.dmp file for nucleotides or gi_taxid_prot.dmp file for proteins
+    GI2TAX: /local/db/repository/ncbi/blast/20110831_122720/taxonomy/gi_taxid_nucl.dmp
+    # Host name of the mongo database
+    HOST: tettelin-lx.igs.umaryland.edu
+    # Name of the gi database in mongo
+    TAXONDB: gi2taxon
+    # Name of the gi collection in mongo.
+    # This should match with the paths specified in the $;NCBITAX$; and $;GI2TAX$; so that different version will not overwrite each other.
+    TAXONCOLL: gi2taxonnuc_20110831_122720
+    # Set to 0 if you want to have results written to the stdout file. 
+    # Leave at 1 if you want to overwrite the existing input file with the one that has taxon info.
+    OVERWRITE: 1
+    # Location to write ncbi taxonomy index files. Leave this blank if they are in the same location as the nodes/names files.
+    IDX_DIRECTORY: $;TMP_DIR$;
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: raw
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    STDOUT_LIST: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/stdout.list
+  component:
+    COMPONENT_NAME: btab2taxon
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # 
+    # To only produce raw blast output add;
+    # $;SKIP_WF_COMMAND$;=add create bsml list,convert btab to bsml,store config params,dtd validation
+    # 
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6529 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - btab2taxon workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Loading taxon DB
+      type: RunDistributedCommand
+      executable: $;BIN_DIR$;/btab2taxon
+      params:
+        - key: --load_db_only
+          value: 1
+        - key: --ncbitax
+          value: $;NCBITAX$;
+        - key: --gitax
+          value: $;GI2TAX$;
+        - key: --dbhost
+          value: $;HOST$;
+        - key: --taxondb
+          value: $;TAXONDB$;
+        - key: --taxoncoll
+          value: $;TAXONCOLL$;
+        - key: --overwrite
+          value: $;OVERWRITE$;
+        - key: --idx_dir
+          value: $;IDX_DIRECTORY$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/createdb.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/createdb.stderr
+    - name: create stdout list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.stdout\""
+        - key: --output_list
+          value: $;STDOUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - btab2taxon compute
+  steps:
+    - name: btab2taxon
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/btab2taxon
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --ncbitax
+          value: $;NCBITAX$;
+        - key: --gitax
+          value: $;GI2TAX$;
+        - key: --dbhost
+          value: $;HOST$;
+        - key: --taxondb
+          value: $;TAXONDB$;
+        - key: --taxoncoll
+          value: $;TAXONCOLL$;
+        - key: --overwrite
+          value: $;OVERWRITE$;
+        - key: --idx_dir
+          value: $;IDX_DIRECTORY$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: btab2taxon.pl
+    pod: |
+  =head1 NAME
+  
+  btab2taxon.pl
+  
+  =head1 SYNOPSIS
+  
+   USAGE: btab2taxon.pl
+         --input=/path/to/file/list
+         --ncbitax=/path/to/taxonomy
+         --gi2tax=/path/to/gi2tax
+         --dbhost=database.host.com
+         --taxondb=taxon_db_name
+         --taxoncoll=taxon_collection
+        [--help]
+       
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

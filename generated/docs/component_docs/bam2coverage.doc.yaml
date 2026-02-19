@@ -1,0 +1,128 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bam2coverage
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bam2coverage.config
+  - bam2coverage.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    BAM_FILE: /local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/test.sorted.bam
+    STRANDED: 0
+    OUTPUT_STUB: test
+    GFF3_FILE: /local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/gasalab49.gff
+    FEATURE_TYPE: CDS
+    GENOME_ONLY: ""
+    FEATURES_ONLY: ""
+    TOTAL_MAPPED_READS: ""
+    OTHER_ARGS: ""
+  input:
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: bam2coverage
+    DESCRIPTION: aligns reads against a single reference file contining one or more contigs
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # bam2coverage version
+    VERSION: N/A
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - bam2coverage workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: bam2coverage
+      type: RunDistributedCommand
+      executable: $;BIN_DIR$;/bam2coverage
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --bam_file
+          value: $;BAM_FILE$;
+        - key: --stranded
+          value: $;STRANDED$;
+        - key: --gff3_file
+          value: $;GFF3_FILE$;
+        - key: --feature_type
+          value: $;FEATURE_TYPE$;
+        - key: --output_stub
+          value: $;OUTPUT_STUB$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --genome_only
+          value: $;GENOME_ONLY$;
+        - key: --features_only
+          value: $;FEATURES_ONLY$;
+        - key: --total_mapped_reads
+          value: $;TOTAL_MAPPED_READS$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/bam2coverage.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/bam2coverage.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: bam2coverage.pl
+    pod: |
+  =head1 NAME
+  
+  bam2coverage.pl - Generate coverage stats for alignments in BAM files.  
+                  - If given a gff3 file, also computes expression of genes. 
+  	            - Produces a chromosomes.expr,genes.expr, and genes.counts file.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: bam2coverage.pl
+  	--bam_file=/path/to/bam/file
+  	--total_mapped_reads= optionally pass in precalculated total mapped reads for rpkm calculation
+  	--stranded= 1 or 0 to indicate the library was stranded (default: 0)
+          --reverse_strand = 1 or 0, to reverse the strand of features, useful for wierd RNA-seq protocols [default 0]
+  	--gff3_file=/path/to/gff3/file
+  	--feature_type=feature to use for transcripts (default: gene)
+  	--genome_only= 1 or 0 calculate only chromosome level coverage information
+  	--features_only= 1 or 0  calculate only feature level coverage information
+  	--output_stub=path and filename stub to use for output files
+  	[ --log=/path/to/file.log
+  	--help
+  	]
+  
+  =head1  CONTACT
+  
+  	Todd Creasy
+      tcreasy@som.umaryland.edu

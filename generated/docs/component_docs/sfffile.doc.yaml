@@ -1,0 +1,240 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: sfffile
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - sfffile.config
+  - sfffile.xml
+  - sfffile.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Raw SFF file from which subset of reads will be pulled.
+    RAW_SFF: ""
+    # Command line parameters
+    CONFIG_PARAMS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: list
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    SFF_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sff.list
+  component:
+    COMPONENT_NAME: sfffile
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Post-processing
+  command_sets:
+    - sfffile workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temporary directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create sff output list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sff\""
+        - key: --output_list
+          value: $;SFF_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - sfffile compute
+  steps:
+    - name: sfffile
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/sfffile
+      arg: -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.sff -i $;I_FILE_PATH$; $;RAW_SFF$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stderr
+        - key: --raw_sff_files
+          value: $;RAW_SFF$;
+        - key: --accession_list
+          value: $;I_FILE_PATH$;
+        - key: --sfffile_exe
+          value: $;SFFFILE_EXEC$;
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.sff
+        - key: --command_line_opts
+          value: $;CONFIG_PARAMS$;
+        - key: --log
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.log
+        - key: --debug
+          value: 4
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: sfffile.pl
+    pod: |
+  =head1 NAME
+  
+  sfffile.pl - Wrapper script for sfffile to facilitate its execuction via Ergatis
+  
+  =head1 SYNOPSIS
+  
+  ./sfffile.pl 
+          --sfffile_exe=/path/to/sfffile/executable
+          --raw_sff_files=/path/to/sff/files
+          --command_line_opts=/sfffile/command/line/options
+          --accession_list=/path/to/accession/list
+          --output_file=/path/to/target/output/file
+          --log=/path/to/log/file
+          --debug=/debug/level
+          --help
+  
+  =head1 PARAMETERS
+  
+  B<--sfffile_exe, -e>
+      Path to the sfffile executable
+  
+  B<--raw_sff_files, -s> 
+      Either a single SFF file or a comma-delimited list of SFF files.
+      
+  B<--command_line_opts, -c>
+      Any command line options that should be passed to the sfffile executable
+      
+  B<--accession_list, -a>
+      A list of accessions that should be used to generate the new filtered SFF file
+      
+  B<--output_file, -o>
+      Path to the target output SFF file.
+      
+  B<--log, -l>
+      Optional. Log file
+      
+  B<--debug, -d>
+      Optional. Debug level
+      
+  B<--help>
+      Print out documentation for this wrapper script
+      
+  =head1 DESCRIPTION
+  
+  A wrapper script that handles executing the sfffile program. Specifically it can handle a comma-delimited list of SFF files
+  provided by the user.
+  
+  =head1 INPUT
+  
+  A list of accessions to filter with and a comma-delimited list of SFF files
+  
+  =head1 OUTPUT
+  
+  A new SFF containing only the reads corresponding to the accession list
+  
+  =head1 CONTACT
+  
+      Cesar Arze
+      carze@som.umaryland.edu
+      

@@ -1,0 +1,314 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: uclust
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - uclust.config
+  - uclust.xml
+  - uclust.i1.xml
+  - component_docs/uclust.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+      UCLUST is a program for very-high speed sequence clustering, alignment and search. It is orders of magnitude faster than BLAST for some search applications. 
+  </p>
+  <h3>input</h3>
+  <p>
+      Input to the uclust component is a well-formed FASTA or multi-FASTA file.
+  </p>
+  <h3>implemented options</h3>
+  <p>
+      The identity threshold can be controlled via the IDENTITY_THRESHOLD parameter and the sorting algorithm can be controlled via the SORT_ALGORITHM parameter.
+  </p>
+  <h3>output</h3>
+  <p>Output is a new FASTA file containing clustered sequences</p>   
+              
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: clustering
+  parameters:
+    # fractional identity threshold
+    IDENTITY_THRESHOLD: 0.90
+    # algorithm to use when sorting inpput
+    SORT_ALGORITHM: "[ sort|mergesort ]"
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+    CLUSTER_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.clstr.list
+    SORTED_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sorted.list
+  component:
+    COMPONENT_NAME: uclust
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 1.2
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - UCLUST workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create fasta list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fsa\""
+        - key: --output_list
+          value: $;FASTA_OUTPUT_LIST$;
+    - name: create clstr list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.clstr\""
+        - key: --output_list
+          value: $;CLUSTER_OUTPUT_LIST$;
+    - name: create sorted list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sorted\""
+        - key: --output_list
+          value: $;SORTED_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - UCLUST compute
+  steps:
+    - name: sort
+      type: RunUnixCommand
+      executable: cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;
+      arg: --$;SORT_ALGORITHM$; $;I_FILE_PATH$; --output $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.sorted
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+    - name: cluster
+      type: RunUnixCommand
+      executable: cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;
+      arg: --input $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.sorted --uc $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.uc --id $;IDENTITY_THRESHOLD$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+    - name: convert to fasta
+      type: RunUnixCommand
+      executable: cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;
+      arg: --input $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.sorted --uc2fasta $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.uc --types S --output $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.cluster.raw
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+    - name: format fasta
+      type: RunUnixCommand
+      executable: cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;BIN_DIR$;/format_uclust_fasta_ids
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/format_uclust_fasta_ids_$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/format_uclust_fasta_ids_$;I_FILE_BASE$;.stderr
+        - key: --fasta_input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.cluster.raw
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.cluster.fsa
+        - key: --log
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;_format.log
+        - key: --debug
+          value: 4
+    - name: format clustering file
+      type: RunUnixCommand
+      executable: cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;
+      arg: --uc2clstr $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.uc --output $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.clstr
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/format_uclust_clustering_$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/format_uclust_clustering_$;I_FILE_BASE$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: format_uclust_fasta_ids.pl
+    pod: |
+  =head1 NAME
+  
+  format_uclust_fasta_ids.pl - Renames uclust-generated FASTA sequence identifiers to a friendlier format.
+  
+  =head1 SYNOPSIS
+  
+  ./format_uclust_fasta_ids.pl
+          --fasta_input=/path/to/FASTA/file
+          --output_file=/path/to/desired/output/FASTA/file
+          --log=/path/to/log/file
+          --debug=/debug/level
+          --help
+          
+  =head1 PARAMETERS
+  
+  B<--fasta_input, -i>
+      Input FASTA file generated by the UCLUST executable's --uc2fasta option
+  
+  B<--output_file, -o>
+      Path to where formatted output FASTA file should be written.
+      
+  B<--log, -l>
+      Optional. Log file
+  
+  B<--debug, -d>
+      Optional. Debug level (1-4)
+      
+  B<--help>
+      Prints out help documentation.
+  
+  =head1 INPUT
+  
+  A FASTA file generated by the UCLUTS executable in conjunction with the --uc2fasta option. 
+  Output from UCLUST contains characters denoting what cluster a specific sequence was placed in
+  among other things:
+  
+      >10773|*|FV55M7V02DXODN rank=0227767 x=1496.0 y=2585.0 length=116
+      AAAAGTCTACCGATTTACCTGGGAGGCGGAGCTTGCAGTGAGCCGAGATGGCGCCACTGCACTCCAGCCTGGGCGACAG...
+  
+      >10774|*|FV55M7V02EPR9M rank=0077407 x=1816.0 y=3272.5 length=115
+      CGGGTGGTGGTTCGTGTCGGCCTATTAGTACCGGTCGGCTGAGCCCGTTGCCGGGCTTGCACCTCCGGCCTATCGACCC...
+  
+      >10775|*|FV55M7V02DZ9IH rank=0268274 x=1526.0 y=407.0 length=115
+      TTTCGCTGGGGATTTGCTAACCATGTACCAAAAGTATGCAGAAGCCCAAGGATGGCGTTTTGAAGTTATGGAAGCTTCT...
+  
+  These other characters can cause problems in other applications that index or utilize the sequence identifier. 
+  Following formatting the sequence identifiers should look like so:
+  
+      >FV55M7V02DXODN rank=0227767 x=1496.0 y=2585.0 length=116
+      AAAAGTCTACCGATTTACCTGGGAGGCGGAGCTTGCAGTGAGCCGAGATGGCGCCACTGCACTCCAGCCTGGGCGACAG...
+  
+      >FV55M7V02EPR9M rank=0077407 x=1816.0 y=3272.5 length=115
+      CGGGTGGTGGTTCGTGTCGGCCTATTAGTACCGGTCGGCTGAGCCCGTTGCCGGGCTTGCACCTCCGGCCTATCGACCC...
+  
+      >FV55M7V02DZ9IH rank=0268274 x=1526.0 y=407.0 length=115
+      TTTCGCTGGGGATTTGCTAACCATGTACCAAAAGTATGCAGAAGCCCAAGGATGGCGTTTTGAAGTTATGGAAGCTTCT...
+  
+  =head OUTPUT
+  
+  A FASTA file with formatted sequence identifiers. The number of sequences and sequence data should stay untouched.     
+  
+  =head1 CONTACT                   
+  
+      Cesar Arze
+      carze@som.umaryland.edu
+      

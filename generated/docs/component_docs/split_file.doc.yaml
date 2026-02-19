@@ -1,0 +1,135 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: split_file
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - split_file.config
+  - split_file.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Number of lines per file
+    LINES_PER_FILE: ""
+    # Total number of files (Cannot be used with lines_per_file).
+    NUM_FILES: 150
+    # Prefix for all of the output files
+    PREFIX: split_file
+  input:
+    # A single file or comma separated list of files (no spaces).
+    INPUT_FILE: ""
+    # A list of list files to redistribute.
+    INPUT_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/split_file.list
+  component:
+    COMPONENT_NAME: split_file
+    DESCRIPTION: Concanate the content of all files in an input file list into a single output file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - split files workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: split file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/split_file
+      params:
+        - key: --input_files
+          value: $;INPUT_FILE$;
+        - key: --input_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --lines_per_file
+          value: $;LINES_PER_FILE$;
+        - key: --num_files
+          value: $;NUM_FILES$;
+        - key: --prefix
+          value: $;PREFIX$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/split_file.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/split_file.stderr
+    - name: Create file list
+      type: RunUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$; -name '*.splitlist'|sort -n"
+      params:
+        - key: stdout
+          value: $;OUTPUT_LIST$;
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/split_file.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: split_file.pl
+    pod: |
+  =head1 NAME
+  
+  split_file.pl - will split a file (or list of files) into chunks of the specified size or into the specified number of chunks.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: split_file.pl
+      --input_files=/path/to/list.txt
+      --input_file_list=/path/to/list_of_lists.txt
+      --output_directory=/path/to/output_dir/
+      --lines_per_file=100 || --num_files=100
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-f>
+      The file to split. Could also be a comma separated list of files to redistribute lines from.
+  
+  B<--input_file_list,-l>
+      A list of files to redistribute into files of the selected size
+  
+  B<--output_directory,-o>
+      The directory to put the split files.
+  
+  B<--lines_per_file,-l>
+      The number of lines to print per file. Cannot be used with num files.
+  
+  B<--num_files,-f>
+      The number of total files to make. Cannot be used with lines_per_file.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+  =head1  AUTHOR
+  
+      David Riley
+      driley@som.umaryland.edu

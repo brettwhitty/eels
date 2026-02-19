@@ -1,0 +1,189 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: identify_human_contaminants
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - identify_human_contaminants.config
+  - identify_human_contaminants.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+    MIN_COVERAGE: 0.9
+    # minimum coverage acceptable to determine an "organism" hit
+    MIN_PERC_ID: 0.9
+    # The algorithm used to produce results; fasta, blast, or blasttable (for default blast)
+    ALGORITHM: nucmer
+  input:
+    # List of sequence files used in target alignments
+    FASTA_LIST: ""
+    # List of output files from alignment against human genome
+    HUMAN_ALIGN: ""
+    # List of output files from alignemnt against DACC reference genomes
+    REF_ALIGN: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    READ_TAX_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.read_tax.txt
+    REF_HITS_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.refgeno.fsa
+    FORAMOS_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.formamoscmp
+    SINGLETON_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.singleton
+    SINGLETON_LIST_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.singleton.list
+    UNCLASSIFIED_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.unclassified.fsa
+    UNCLASS_ID_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.forassembly.list
+  component:
+    COMPONENT_NAME: identify_human_contaminants
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - identify_human_contaminants workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: identify_human_contaminants
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/identify_human_contaminants
+      arg: --list
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/identify_human_contaminants.pl.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/identify_human_contaminants.pl.stderr
+        - key: --human_contams
+          value: $;HUMAN_ALIGN$;
+        - key: --ref_geno_search
+          value: $;REF_ALIGN$;
+        - key: --fasta_file
+          value: $;FASTA_LIST$;
+        - key: --mincov
+          value: $;MIN_COVERAGE$;
+        - key: --minpercid
+          value: $;MIN_PERC_ID$;
+        - key: --output_prefix
+          value: $;OUTPUT_DIRECTORY$;/identify_human_contaminants
+        - key: --algorithm
+          value: $;ALGORITHM$;
+    - name: create singleton fasta file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/get_seq_included
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/get_seq_included.pl.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/get_seq_included.pl.stderr
+        - key: --fasta_list
+          value: $;FASTA_LIST$;
+        - key: --seq_id_list
+          value: $;OUTPUT_DIRECTORY$;/identify_human_contaminants.singleton.list
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/identify_human_contaminants.singleton
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: identify_human_contaminants.pl
+    pod: |
+  =head1 NAME
+  
+  identify_human_contaminants.pl - allows you to identify human contaminants and divide sequences in those similar to human, ref bacterial genomes and those that are similar to nothing or are inconclusive.
+  
+  =head1 SYNOPSIS
+  
+  USAGE:identify_human_contaminats.pl 
+              --human_contams=/path/to/blast_against_humangenome.blsout',
+  	    --ref_geno_search=/path/to/blast_against_refgenome.blsout',
+  	    --fasta_file=/path/to/query_fastafile.fa',
+  	    --mincov=fraction_coverage',
+  	    --minpercid=fraction_id',
+  	    --output_prefix=/path/to/outfiles'
+              --list
+              --algorithm=search_algorithm
+              --for_assembly=1
+  
+  =head1 OPTIONS
+  
+  B<--human_contams,-m>
+      blast output file from a search of metagenomic sequences against the human genome database (dna)
+  
+  B<--ref_geno_search,-r>
+      blast output file from a search of metagenomic sequences against the reference genome database (dna)
+  
+  B<--algorithm,-a>
+      which algorithm was used to produce search results -- fasta, blast, blasttable for blast -m8
+      default blast
+  
+  B<--fasta_file,-f>
+      metagenomic fasta file, that was used at the input for the blast searches done against ref_geno_search and human_contams
+  
+  B<--mincov, -c>
+      This is the minimum coverage acceptable to determine a "organism" hit; default 0.9
+  
+  B<--minpercid, -p>
+      This is the minimum coverage acceptable to determine a "organism" hit; default 0.9
+  
+  B<--output_prefix,-o>
+      output files names, output files would be output_prefix.human.fasta, output_prefix.refgeno.fasta, output_prefix.inconclusive.fasta 
+  B<--for_assembly,-b>
+      1 for assembly and 0 for gene finding
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  B<--list,-t>
+      The files are list and not individual files
+  
+  =head1  DESCRIPTION
+  
+  this scripts aims to identify human contaminants.
+  
+  =head1  INPUT
+  
+  blast results of your sequences against the human genome and a set of bacterial reference genomes.  also the script requires the original blast search input fasta file.
+  
+  =head1  OUTPUT
+  
+  the output for this script are several fasta files -- human contaminants,  reference genome hits and unknown hits
+  
+  =head1  CONTACT
+  
+      Brandi Cantarel
+      bcantarel@som.umaryland.edu

@@ -1,0 +1,294 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bam2bigwig
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bam2bigwig.config
+  - bam2bigwig.xml
+  - bam2bigwig.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # Whether the data is from a strand-specific assay (firststrand or secondstrand)
+    STRANDED: ""
+    # path to ucsc utilities directory
+    UCSC_UTIL_DIR: $;UCSC_UTIL$;
+    # path to bedtools package binary directory
+    BEDTOOLS_BIN_DIR: $;BEDTOOLS_BIN$;
+    # path to samtools package binary directory
+    SAMTOOLS_BIN_DIR: $;SAMTOOLS_BIN$;
+    # use --w to include WIG format files in the output, --e for single-end BAM file input and --v for verbose execution (space-seperated args)
+    OTHER_ARGS: --v
+  input:
+    # path to alignment file
+    INPUT_FILE: ""
+    # path to list of alignment files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple alignment files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bam
+    # path to reference FastA file
+    REFERENCE_FASTA: ""
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of alignment BedGraph files
+    OUTPUT_BEDGRAPH: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bedgraph.list
+    # list of alignment BigWig files
+    OUTPUT_BIGWIG: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bigwig.list
+    # list of alignment WIG files
+    OUTPUT_WIG: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.wig.list
+  component:
+    COMPONENT_NAME: bam2bigwig
+    DESCRIPTION: converts alignment BAM files to BedGraph and BigWig formats for visualization
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # ucsc utilities version
+    UCSC_UTILS_VERSION: ucsc utilities update 06.14.2011
+    # bedtools version
+    BEDTOOLS_VERSION: bedtools version 2.15.0
+    # samtools version
+    SAMTOOLS_VERSION: samtools version 0.1.18
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - bam2bigwig
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create BedGraph file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bedGraph\""
+        - key: --output_list
+          value: $;OUTPUT_BEDGRAPH$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.bedgraph.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.bedgraph.stderr
+    - name: create BigWig file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bw\""
+        - key: --output_list
+          value: $;OUTPUT_BIGWIG$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.bigwig.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.bigwig.stderr
+    - name: create WIG file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.wig\""
+        - key: --output_list
+          value: $;OUTPUT_WIG$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.wig.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.wig.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - bam2bigwig
+  steps:
+    - name: bam2bigwig
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bam2bigwig
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --infile
+          value: $;I_FILE_PATH$;
+        - key: --reffile
+          value: $;REFERENCE_FASTA$;
+        - key: --stranded
+          value: $;STRANDED$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --ucsc_util_dir
+          value: $;UCSC_UTIL_DIR$;
+        - key: --bedtools_bin_dir
+          value: $;BEDTOOLS_BIN_DIR$;
+        - key: --samtools_bin_dir
+          value: $;SAMTOOLS_BIN_DIR$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/bam2bigwig.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/bam2bigwig.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: bam2bigwig.pl
+    pod: |
+  =head1 NAME
+  
+  bam2bigwig.pl - program to generate BedGraph and BigWig files from alignment BAM file.
+  
+  =head1 SYNOPSIS
+  
+      bam2bigwig.pl --r <reffile> --i <alignment_bam_file> [--s <strandedness>] [--o <output_dir>] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+     
+      --r <reference FastA file>                     = /path/to/reference FastA file.
+  
+      --i <alignment_BAM_file>                       = /path/to/alignment BAM file sorted by position.
+  
+      --s <strandedness>                             = strandedness (firststrand or secondstrand). Optional.
+  
+      --o <output_dir>                               = output directory. Optional.
+  
+      --e                                            = if input BAM file is of single-end sequencing reads. Optional.
+  
+      --w                                            = if 'WIG' files required. Optional.
+  
+      --uu <ucsc_util_dir>                           = /path/to/ucsc_utility_directory. Optional.
+  
+      --bb <bedtools_bin_dir>                        = /path/to/bedtools_bin_directory. Optional.
+  
+      --sb <samtools_bin_dir>                        = /path/to/samtools_bin_directory. Optional.
+  
+      --v                                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  =head1 DIAGNOSTICS
+  
+  =head1 CONFIGURATION AND ENVIRONMENT
+  
+  PERL5LIB environment variable should be set if Bio::Perl is in non-standard
+  location
+  
+  =head1 DEPENDENCIES
+  
+  Bio::Perl
+  
+  =head1 INCOMPATIBILITIES
+  
+  =head1 BUGS AND LIMITATIONS
+  
+  There are no known bugs in this module. Please report problems to Amol Shetty
+  (ashetty@som.umaryland.edu). Patches are welcome.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  
+  =head1 LICENSE AND COPYRIGHT
+  
+  Copyright (c) 2010 Amol Carl Shetty (<ashetty@som.umaryland.edu>). All rights
+  reserved.
+  
+  This program is free software; you can distribute it and/or modify it under
+  GNU-GPL licenscing terms.
+  
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTIBILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

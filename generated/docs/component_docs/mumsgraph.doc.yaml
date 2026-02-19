@@ -1,0 +1,182 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mumsgraph
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mumsgraph.config
+  - mumsgraph.xml
+  - mumsgraph.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment / multiple
+  parameters:
+    # Use a value of 1 to build clusters of strictly identical sequences.
+    # 
+    # For values <1, each sequence in a cluster will match over greater
+    # than $;COVERAGE_CUTOFF$; fraction of the longest member.  Matches
+    # are started from the end of the sequence to allow for disagreements
+    # in detection of the translation start .
+    COVERAGE_CUTOFF: 1
+  input:
+    REFERENCE_FASTA: ""
+    MUMMERTAB_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: mumsgraph
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - mumsgraph workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: mummer
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fasta2seqlen
+      params:
+        - key: stdin
+          value: $;REFERENCE_FASTA$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.seqlens.out
+    - name: sort seqlens
+      type: RunUnixCommand
+      executable: sort
+      params:
+        - key: stdin
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.seqlens.out
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.seqlens.out.sorted
+    - name: filter on query coverage
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/filtermummer
+      arg: --query $;COVERAGE_CUTOFF$;
+      params:
+        - key: stdin
+          value: $;MUMMERTAB_FILE_LIST$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.mummertab.out
+    - name: sort mummertab
+      type: RunUnixCommand
+      executable: sort
+      params:
+        - key: stdin
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.mummertab.out
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.mummertab.out.sorted
+    - name: join tab
+      type: RunUnixCommand
+      executable: join
+      arg: -j 1 $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.mummertab.out.sorted $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.seqlens.out.sorted
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.joined.out
+    - name: create list
+      type: RunUnixCommand
+      executable: echo
+      arg: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.joined.out
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.joined.out.list
+    - name: filter on query coverage
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/filtermummer
+      arg: --reference $;COVERAGE_CUTOFF$;
+      params:
+        - key: stdin
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.joined.out.list
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.joined.out.filt
+    - name: print match graph
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/printmatchgraph
+      params:
+        - key: stdin
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.joined.out.filt
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.graph
+    - name: find connected components
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/runcc
+      arg: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.graph
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.graph.cc
+    - name: print components
+      type: RunUnixCommand
+      executable: gvpr
+      arg: -f $;DOCS_DIR$;/printgraph.g
+      params:
+        - key: stdin
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.graph.cc
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.clusters
+    - name: sort clusters
+      type: RunUnixCommand
+      executable: sort
+      arg: "-k 1,1 -k 3,3 -n -r"
+      params:
+        - key: stdin
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.clusters
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.clusters.sorted
+    - name: print reps
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/printrepresentative
+      arg: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.cluster.fasta $;REFERENCE_FASTA$; $;COVERAGE_CUTOFF$;
+      params:
+        - key: stdin
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.clusters.sorted
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.cluster.id.lookup
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - nucmer SNPs compute
+  steps:
+    - name: mummer
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/mummertab
+      arg: -L -maxmatch $;REFERENCE_FASTA$; $;I_FILE_PATH$;
+      params:
+        - key: stdin
+          value: $;I_FILE_PATH$;

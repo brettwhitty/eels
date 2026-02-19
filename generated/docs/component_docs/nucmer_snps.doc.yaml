@@ -1,0 +1,381 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: nucmer_snps
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - nucmer_snps.config
+  - nucmer_snps.xml
+  - nucmer_snps.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment / multiple
+  parameters:
+    BREAKLEN: 200
+    MINCLUSTER: 65
+    DIAGFACTOR: 0.12
+    MAXGAP: 90
+    MINMATCH: 20
+    # extra options for show-snps
+    SHOW_SNPS_OPTS: -C
+  input:
+    INPUT_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: nucmer_snps
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/nucmer_snps.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/nucmer_snps.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - wait workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create_pairwise_iterator_list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_pairwise_iterator_list
+      params:
+        - key: --input_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list
+    - name: Create SNPs list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --regex
+          value: "\".*.$;COMPONENT_NAME$;.snps\""
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_list
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.snps.list
+    - name: Merge snps files
+      type: RunUnixCommand
+      executable: /usr/bin/find
+      arg: "$;OUTPUT_DIRECTORY$; -regex \".*.$;COMPONENT_NAME$;.snps\" -exec cat '{}' \\;"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.snps
+    - name: Extract sequence data from snps
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/extract_seq_data_from_snp_output
+      arg: -i $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.snps -o $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.snps.seq
+    - name: Convert snps to clusterer
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/convert_snp_output_to_clusterer_input
+      arg: -i $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.snps -o $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.cluster
+    - name: Run SNP Clusterer
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/SnpClusterer
+      arg: -i $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.cluster -o $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.cluster.merged
+    - name: Create BSML
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/snp2bsml
+      params:
+        - key: -i
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.cluster.merged
+        - key: -o
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.all.cluster.bsml
+        - key: --project
+          value: $;PROJECT$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: -s
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.all.snps.seq
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.all.cluster.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.all.cluster.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - nucmer SNPs compute
+  steps:
+    - name: NUCmer
+      type: RunUnixCommand
+      executable: /usr/local/common/nucmer
+      arg: --maxmatch $;I_FILE_PATH1$; $;I_FILE_PATH2$;
+      params:
+        - key: --prefix
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;PAIR_COUNT$;
+        - key: --breaklen
+          value: $;BREAKLEN$;
+        - key: --mincluster
+          value: $;MINCLUSTER$;
+        - key: --diagfactor
+          value: $;DIAGFACTOR$;
+        - key: --maxgap
+          value: $;MAXGAP$;
+        - key: --minmatch
+          value: $;MINMATCH$;
+    - name: delta-filter
+      type: RunUnixCommand
+      executable: /usr/local/common/delta-filter
+      arg: -r $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;PAIR_COUNT$;.delta
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;PAIR_COUNT$;.filtered.delta
+    - name: show-snps
+      type: RunUnixCommand
+      executable: /usr/local/common/show-snps
+      arg: -Tl $;SHOW_SNPS_OPTS$; $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;PAIR_COUNT$;.filtered.delta
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;PAIR_COUNT$;.$;COMPONENT_NAME$;.snps
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: snp2bsml.pl
+    pod: |
+  =head1 NAME
+  
+  snp2bsml.pl - convert clustered snp output information from show-snps to bsml
+  
+  =head1 SYNOPSIS
+  
+  usage: snp2bsml.pl [ --input|-i=/path/to/show-snps_clustered_output ]
+             [ --output|-o=/path/to/snp_data.bsml ]
+               --project
+             [ --log|-l=/path/to/logfile ]
+             [ --debug|-d=debug_level ]
+             [ --moltype|-m=molecule_type ]
+             [ --seqdata|-s=sequence_data ]
+  
+  =head1 OPTIONS
+  
+  B<--input, -i>
+      Clustered output from show-snps tool from MUMer suite
+  
+  B<--output, -o>
+      BSML multiple sequence alignment file for SNP representation
+  
+  B<--project>
+      Project name
+  
+  B<--id_repository>
+      Path to project id repository
+  
+  B<--log, -l>
+      Log file
+  
+  B<--debug, -D>
+      Debug level
+  
+  B<--moltype, -m>
+      Molecule type (nucleotide, protein)
+      Defaults to nucleotide
+  
+  B<--seqdata, -s>
+      SNP sequence data, in tab delimited format, containing:
+      sequence_id, position, orientation, base_call
+  
+  B<--help, -h>
+      This help message
+  
+  =head1 DESCRIPTION
+  
+  This script will parse out clustered output from show-snps tool from the
+  MUMer package and create a multiple sequence alignment BSML representation
+  for the SNP data.
+  
+  =head1 INPUT
+  
+  The input for this script is the output from show-snps tool from the MUMer
+  package, in tab delimited format.
+  
+  =head1 OUTPUT
+  
+  The output for this script is the BSML multiple sequence alignment
+  representation of the SNP data.
+  
+  =head1 CONTACT
+  
+  Ed Lee (elee@tigr.org)
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

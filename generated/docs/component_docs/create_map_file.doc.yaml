@@ -1,0 +1,95 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: create_map_file
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - create_map_file.config
+  - create_map_file.xml
+  - component_docs/create_map_file.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component generates the organism prefix information; used for pangenome,JOC and mugsy pipelines;
+  </p>
+  <h3>input</h3>
+  <p>
+      Input to the component should be a file that lists out the path of genbank files.
+  </p>
+  <h3>implemented options</h3>
+  <p>
+      There are no user configurable options.
+  </p>
+  <h3>create_map_file output</h3>
+  <div>
+  	organism name suffix suffix
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  input:
+    INPUT_FILE_LIST: /mnt/staging/tags/bifidobacter_genbank_tag
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    MAP_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.map.txt
+  component:
+    COMPONENT_NAME: create_map_file
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - we don't need the iterator for this component
+    - Postprocessing
+  command_sets:
+    - create_map_file workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create map file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_map_file
+      params:
+        - key: --input_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --output_file
+          value: $;MAP_FILE$;

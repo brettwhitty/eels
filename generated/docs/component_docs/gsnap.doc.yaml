@@ -1,0 +1,118 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: gsnap
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - gsnap.config
+  - gsnap.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  parameters:
+    # the reference fasta/multi-fasta file
+    REFERENCE: ""
+    # additional arguments for gmap_setup
+    OTHER_GMAP_SETUP_OPTIONS: ""
+    # the reads in one or two (for paired-end data) fastq or fasta files 
+    READS: ""
+    MAX_MISMATCHES: 3
+    INDEL_PENALTY: 1000
+    INDEL_END_LENGTH: 3
+    MAX_PAIRED_LENGTH: 1000
+    EXPECTED_PAIRED_LENGTH: 200
+    THREADS: 1
+    # the maximum number of alignments to print for a given read
+    MAX_PATHS: 100
+    OUTPUT_FORMAT: sam
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    SAM_OUTPUT: $;OUTPUT_DIRECTORY$;/aligned.sam
+  component:
+    COMPONENT_NAME: gsnap
+    DESCRIPTION: runs the slice-aware GSNAP aligner after setting up a GMAP database
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - gsnap workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create gmapdb directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/gmapdb
+    - name: gmap_setup
+      type: RunDistributedCommand
+      executable: $;GMAP_SETUP_EXEC$;
+      arg: -d reference -o $;OUTPUT_DIRECTORY$;/Makefile.reference -D $;OUTPUT_DIRECTORY$;/gmapdb $;REFERENCE$; $;OTHER_GMAP_SETUP_OPTIONS$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/gmap_setup.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/gmap_setup.stderr
+    - name: gmapdb Makefiles
+      type: RunUnixCommand
+      executable: make
+      arg: -f $;OUTPUT_DIRECTORY$;/Makefile.reference coords
+    - name: gmapdb Makefiles
+      type: RunUnixCommand
+      executable: make
+      arg: -f $;OUTPUT_DIRECTORY$;/Makefile.reference gmapdb
+    - name: gmapdb Makefiles
+      type: RunUnixCommand
+      executable: make
+      arg: -f $;OUTPUT_DIRECTORY$;/Makefile.reference install
+    - name: gsnap
+      type: RunDistributedCommand
+      executable: $;GSNAP_EXEC$;
+      arg: "-d reference -D $;OUTPUT_DIRECTORY$;/gmapdb -m $;MAX_MISMATCHES$; -i $;INDEL_PENALTY$; -I $;INDEL_END_LENGTH$; -P $;MAX_PAIRED_LENGTH$; -p $;EXPECTED_PAIRED_LENGTH$; -T $;THREADS$; -n $;MAX_PATHS$; -A $;OUTPUT_FORMAT$; $;READS$; > $;OUTPUT_DIRECTORY$;/hits.sam"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/gsnap_log.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/gsnap_log.stderr

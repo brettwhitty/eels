@@ -1,0 +1,486 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: trf
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - trf.config
+  - trf.xml
+  - trf.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / tRNAs
+  parameters:
+    # matching weight
+    MATCH: 2
+    # mismatching penalty
+    MISMATCH: 7
+    # indel penalty
+    DELTA: 7
+    # match probability (whole number)
+    PM: 80
+    # indel probability (whole number)
+    PI: 10
+    # minimum alignment score to report
+    MINSCORE: 50
+    # maximum period size to report
+    MAXPERIOD: 500
+    # other options can include -m (masked sequence file), -f (flanking sequence)
+    # (-d is always passed, don't include it here)
+    OTHER_OPTS: ""
+    COMPRESS_BSML_OUTPUT: 0
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: trf
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - trf workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - trf compute
+  steps:
+    - name: trf
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/trf_wrapper
+      params:
+        - key: --trf_exec
+          value: $;TRF_EXEC$;
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --match
+          value: $;MATCH$;
+        - key: --mismatch
+          value: $;MISMATCH$;
+        - key: --delta
+          value: $;DELTA$;
+        - key: --pm
+          value: $;PM$;
+        - key: --pi
+          value: $;PI$;
+        - key: --minscore
+          value: $;MINSCORE$;
+        - key: --maxperiod
+          value: $;MAXPERIOD$;
+        - key: --other_opts
+          value: "'-d $;OTHER_OPTS$;'"
+        - key: --output_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: relocate output
+      type: RunUnixCommand
+      executable: find
+      arg: "$;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; -type f -regex '.*\\/$;I_FILE_BASE$;\\..*$;MATCH$;\\.$;MISMATCH$;\\.$;DELTA$;\\.$;PM$;\\.$;PI$;\\.$;MINSCORE$;\\.$;MAXPERIOD$;\\.dat' -exec mv \\{\\} $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw \\;"
+    - name: trf2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/trf2bsml
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --project
+          value: $;PROJECT$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --gzip_output
+          value: $;COMPRESS_BSML_OUTPUT$;
+        - key: --fasta_input
+          value: $;I_FILE_PATH$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: trf_wrapper.pl
+    pod: |
+  =head1  NAME 
+  
+  trf_wrapper.pl - wraps tandem repeat finder (trf) to allow proper return values
+  and output location options.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: trf2bsml.pl 
+              --input=/path/to/somefile.dat
+              --trf_exec=/usr/local/bin/trf
+            [ --output_dir=/path/to/output.bsml ]
+              --match=2
+              --mismatch=7
+              --delta=7
+              --pm=80
+              --pi=10
+              --minscore=50
+              --maxperiod=500
+            [ --other_opts='-d' ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i> 
+      input .dat file from a RepeatMasker search.
+  
+  B<--output_dir,-o> 
+      [optional] Directory where you want the output written.  The script will chdir into
+      that directory, run trf, and then chdir back.
+  
+  B<--match,-m>
+      matching weight.
+  
+  B<--mismatch,-x>
+      mismatching penalty.
+  
+  B<--delta,-e>
+      indel penalty.
+  
+  B<--pm,-p>
+      match probability (whole number)
+  
+  B<--pi,-r>
+      indel probability (whole number)
+  
+  B<--minscore,-n>
+      minimum alignment score to report.
+  
+  B<--maxperiod,-a>
+      maximum period size to report.
+  
+  B<--trf_exec,-f>
+      path to the trf executable.
+  
+  B<--other_opts,-t>
+      This should be put in quotes.  Acceptable options are:
+      
+      -m masked sequence file
+      -f flanking sequence
+      -d data file
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  Tandem Repeat Finder (trf) has some interesting quirks that makes it difficult
+  to run directly using workflow.  It does not return 0 upon success, it returns the
+  number of sequences processed, and it has no options to control the output file
+  names or locations.
+  
+  This wrapper allows you to pass the directory where you want the out files to go,
+  and checks the return value of trf, logs appropriately, and returns 0 upon success.
+  
+  =head1 INPUT
+  
+  Each of the options available to trf can be used by passing them to this script.  See
+  the OPTIONS section for descriptions of these.  The input FASTA file can have one
+  or many sequences within it.
+  
+  =head1 OUTPUT
+  
+  The output files will be written in the location defined using the --output_dir option.
+  If not passed, /tmp will be used.  
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: trf2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  trf2bsml.pl - convert Tandem Repeat Finder (trf) output to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE: trf2bsml.pl 
+              --input=/path/to/somefile.dat 
+              --output=/path/to/output.bsml
+              --id_repository=/path/to/valid/id_repository
+             [--fasta_input=/path/to/trf/input.fsa
+              --gzip_output=1
+              --project=aa1 ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i> 
+      Input .dat file from a RepeatMasker search.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--output,-o> 
+      Output BSML file (will be created, must not exist)
+  
+  B<--project,-p>
+      Project ID.  Used in creating feature ids.  Defaults to 'unknown' if
+      not passed and is unable to parse from input file name.
+  
+  B<--id_repository>
+      Used in the generation of ids.
+  
+  B<--gzip_output,-g>
+      [OPTIONAL] A non-zero value will result in compressed bsml output.  If there is no .gz extension on
+      the output file name, one will be added.
+  
+  B<--fasta_input,-f>
+      [OPTIONAL] The file used as input for the trf run.
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert the output from a RepeatMasker search into BSML.
+  
+  =head1 INPUT
+  
+  trf can be run using a query file with one or many input sequences, and this
+  script supports parsing single or multiple input result sets.  trf generates a few
+  output files, but the space-delimited ".dat" file is used here.  A usual trf
+  .dat file looks like (wide-window):
+  
+      Sequence: cpa1.assem.1
+  
+      Parameters: 2 7 7 80 10 50 500
+  
+      34540 34614 3 25.0 3 82 15 93 68 1 30 0 0.98 AGA AGAAGAAGAAGAAGAAGAAGAAAACGAAGAAGAAGAAGAAAGAAAAGAAGAAGAAGAGAGAGAAGAAGAAAAAGA
+      35458 35499 3 13.7 3 95 5 75 64 0 2 33 1.07 ATA ATAATGAATAATAATAATAATAATAATAATAATAATAATAAT
+      37239 37288 3 16.3 3 95 4 91 32 2 0 66 1.03 TTA TTATTATTATTATTATTATTATTATTATTATTATTATTATTATTCATTAT
+      48180 48226 3 15.3 3 95 4 85 65 0 2 31 1.04 ATA ATAATGAATAATAATAATAATAATAATAATAATAATAATAATAATAA
+      51008 51037 3 9.7 3 92 7 51 33 0 0 66 0.92 ATT ATTATTATTATTATTATTATTATTTATTAT 1   21    (0)    7  
+  
+  The header rows should be ignored by this script.
+  
+  You define the input file using the --input option.  This file does not need any
+  special file extension.
+  
+  =head1 OUTPUT
+  
+  After parsing the input file, a file specified by the --output option is created.  This script
+  will fail if it already exists.  The file is created, and temporary IDs are created for
+  each result element. 
+  
+  Base positions from the input file are renumbered so that positions start at zero.  
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

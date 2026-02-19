@@ -1,0 +1,350 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: predict_prokaryotic_gene_function
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - predict_prokaryotic_gene_function.config
+  - predict_prokaryotic_gene_function.xml
+  - component_docs/predict_prokaryotic_gene_function.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component is under development and documentation will be finalized once the full methods are implemented.
+      The general annotation strategy is below:
+  </p>
+  <h3>evidence priority</h3>
+  <ol>
+     <li>Equivalog HMM above trusted cutoff</li>
+     <li>Characterized BER match with at least 35% identity (configurable) and over 80% of the query length (configurable)</li>
+     <li>Full-length subfamily HMM (will append 'family protein')</li>
+     <li>Equivalog-domain HMM</li>
+     <li>Superfamily HMM (will append 'family protein')</li>
+     <li>Subfamily domain (will append 'domain protein')</li>
+     <li>Domain HMM (will append 'domain protein')</li>
+     <li>PFAM isology (will append 'family protein')</li>
+     <li>consider tmhmm - if 50% (configurable) of protein is involved in tmhmm matches gene product will be 'putative membrane protein'</li>
+     <li>consider lipoprotein - If matches, gene product will be 'putative lipoprotein'</li>
+     <li>Hypothetical equivalog HMM (will name 'conserved hypothetical protein')</li>
+  </ol>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: functional prediction
+  parameters:
+    # On which feature type should annotation be assigned?
+    ANNOTATE_ON: transcript
+    # Optional (unless --hmm_list defined) MLDBM file (tied hash) on disk that stores 
+    #  attributes of HMM entries in your search database.  See the hmmlib_to_mldbm.pl 
+    #  script for more info.
+    HMM_INFO: ""
+    # Optional (unless --ber_list defined) MLDBM file (tied hash) on disk that stores 
+    #  attributes of BER entries in your search database.  See the tchar_to_mldbm.pl 
+    #  script for more info.
+    BER_INFO: ""
+  input:
+    INPUT_FILE_LIST: ""
+    # optional.  output list of HMM evidence in BSML format.  can specify more than one separated by commas
+    HMM_LIST: ""
+    # optional.  output list of BER evidence in BSML format.  can specify more than one separated by commas
+    BER_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: predict_prokaryotic_gene_function
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - predict_prokaryotic_gene_function workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: predict function
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/predict_prokaryotic_gene_function
+      params:
+        - key: --input_list
+          value: "'$;INPUT_FILE_LIST$;'"
+        - key: --annotate_on
+          value: "'$;ANNOTATE_ON$;'"
+        - key: --hmm_list
+          value: "'$;HMM_LIST$;'"
+        - key: --hmm_info
+          value: "'$;HMM_INFO$;'"
+        - key: --ber_list
+          value: "'$;BER_LIST$;'"
+        - key: --ber_info
+          value: "'$;BER_INFO$;'"
+        - key: --output_directory
+          value: "'$;OUTPUT_DIRECTORY$;'"
+        - key: --log
+          value: "'$;OUTPUT_DIRECTORY$;/functional_predictions.log'"
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: predict_prokaryotic_gene_function.pl
+    pod: |
+  =head1 NAME
+  
+  predict_gene_function.pl - Reads annotation evidence for a gene and generates a functional
+  prediction with product name, gene symbol, EC number and GO terms where possible.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: predict_gene_function.pl 
+              --input_list=/path/to/bsml.list
+              --output_directory=/some/dir
+            [ --hmm_list=/path/to/hmm_bsml.list
+              --hmm_info=/path/to/hmminfo.db
+              --ber_list=/path/to/ber_bsml.list
+              --ber_info=/path/to/berinfo.db
+              --annotate_on=transcript ]
+  
+  =head1 OPTIONS
+  
+  B<--input_list>
+      BSML input list, usually the output of the auto_gene_curation Ergatis component.
+  
+  B<--output_directory>
+      This is where the output BSML containing functional predictions will be written.
+      
+  B<--hmm_list>
+      Optional. Ouput list of HMM evidence in BSML format.
+  
+  B<--hmm_info>
+      Optional (unless --hmm_list defined) MLDBM file (tied hash) on disk that stores 
+      attributes of HMM entries in your search database.  See the hmmlib_to_mldbm.pl 
+      script for more info.
+  
+  B<--ber_list>
+      Optional. Output list of BER evidence in BSML format.
+  
+  B<--ber_info>
+      Optional (unless --ber_list is defined).  MLDBM file (tied hash) on disk that stores 
+      attributes of matched BER accessions from your search.  See the tchar_to_mldbm.pl
+      script for more info.
+  
+  B<--annotate_on>
+      Optional. On which feature type should annotation be assigned?  (default = transcript)
+      
+  B<--log,-l> 
+      Log file of all steps in the prediction process.  You should probably use this.
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  A relatively simple approach to functional prediction, this script considers evidence in
+  the following order:
+  
+     1. Equivalog HMM above trusted cutoff
+     2. Characterized BER match (later, with at least 35% identity (configurable) and over 80% of the query length (configurable))
+     3. Full-length subfamily HMM (will append 'family protein')
+     4. Equivalog-domain HMM
+     5. Superfamily HMM (will append 'family protein')
+     6. Subfamily domain (will append 'domain protein')
+     7. Domain HMM (will append 'domain protein')
+     8. PFAM isology (will append 'family protein')
+     9. consider tmhmm - if 50% (configurable) of protein is involved in tmhmm matches gene product will be 'putative membrane protein'
+    10. consider lipoprotein - If matches, gene product will be 'putative lipoprotein'
+    11. Hypothetical equivalog HMM (will name 'conserved hypothetical protein')
+  
+  =head1  INPUT
+  
+  Throughout each of these BSML description sections I've removed elements from the examples
+  that aren't required for this script.  Other elements are optional and should be ignored
+  
+  =head2 Input BSML format
+  
+  The input BSML is first scanned so that relationships between features can be defined.  Most
+  of the computes are run on polypeptides, so if we're attaching annotations to CDS we need
+  to be able to define which polypeptide corresponds to which CDS.  The section of the BSML
+  that defines these relationships looks like this:
+  
+      <Feature-group group-set="ctha1.gene.16128.1" id="Bsml958">
+          <Feature-group-member featref="ctha1.gene.18117.1" feature-type="gene"></Feature-group-member>
+          <Feature-group-member featref="ctha1.polypeptide.17997.1" feature-type="polypeptide"></Feature-group-member>
+          <Feature-group-member featref="ctha1.CDS.18117.1" feature-type="CDS"></Feature-group-member>
+          <Feature-group-member featref="ctha1.transcript.17997.1" feature-type="transcript"></Feature-group-member>
+          <Feature-group-member featref="ctha1.exon.18117.1" feature-type="exon"></Feature-group-member>
+      </Feature-group>
+  
+  Once these and the evidence are processed, annotation is added to the <Feature> elements.  (See OUTPUT section)
+  
+  =head2 HMM BSML format
+  
+  The only section of the HMM BSML input considered are the alignments.  Each looks like this:
+  
+      <Seq-pair-alignment refseq="ctha1.polypeptide.20147.1" refstart="0" compseq="TIGR00633" class="match">
+          <Attribute name="total_e_value" content="4.3e-53"></Attribute>
+          <Attribute name="total_score" content="187.6"></Attribute>
+          <Seq-pair-run compcomplement="0" runlength="238" refpos="0" comprunlength="279" refcomplement="0" runscore="187.6" comppos="0">
+              <Attribute name="class" content="match_part"></Attribute>
+              <Attribute name="domain_num" content="1"></Attribute>
+              <Attribute name="domain_of" content="1"></Attribute>
+              <Attribute name="e_value" content="4.3e-53"></Attribute>
+          </Seq-pair-run>
+          <Link rel="analysis" href="#hmmpfam_analysis" role="computed_by"></Link>
+      </Seq-pair-alignment>
+  
+  =head2 BER BSML format
+  
+  Not yet written
+  
+  =head1  OUTPUT
+  
+  The output of the script is a copy of the input BSML but with additional function definitions
+  added.  What was this, unannotated:
+  
+      <Feature class="transcript" title="ctha1.transcript.1397901.1" id="ctha1.transcript.1397901.1">
+        <Interval-loc complement="0" endpos="1378390" startpos="1378195"></Interval-loc>
+      </Feature>
+  
+  Will become something like this, depending on how much evidence is present:
+  
+      <Feature class="transcript" title="ctha1.transcript.1397901.1" id="ctha1.transcript.1397901.1">
+        <Interval-loc complement="0" endpos="1378390" startpos="1378195"></Interval-loc>
+        <Attribute name="gene_product_name" content="polyphosphate kinase"></Attribute>
+        <Attribute name="gene_product_name_source" content="PF02503"></Attribute>
+        <Attribute name="gene_symbol" content="ppk"></Attribute>
+        <Attribute name="gene_symbol_source" content="PF02503"></Attribute>
+        <Link rel="analysis" href="#predict_prokaryotic_gene_function_analysis" role="computed_by"></Link>
+        <Attribute-list>
+          <Attribute name="GO" content="GO:0006799"></Attribute>
+          <Attribute name="IEA" content="PF02503"></Attribute>
+        </Attribute-list>
+        <Attribute-list>
+          <Attribute name="GO" content="GO:0008976"></Attribute>
+          <Attribute name="IEA" content="PF02503"></Attribute>
+        </Attribute-list>
+        <Attribute-list>
+          <Attribute name="GO" content="GO:0009358"></Attribute>
+          <Attribute name="IEA" content="PF02503"></Attribute>
+        </Attribute-list>
+        <Attribute-list>
+          <Attribute name="EC" content="2.7.4.1"></Attribute>
+          <Attribute name="IEA" content="PF02503"></Attribute>
+        </Attribute-list>
+      </Feature>
+  
+  The log file, if generated with the --log option, contains a great deal of information about the
+  decision process for functional curation of each gene.
+  
+  =head1 TESTING
+  
+  This is my command for testing.  This should be removed eventually, but I'm putting it here
+  because it takes a while to build the command.  :)
+  
+  perl -I /usr/local/projects/ergatis/package-devel/lib/perl5/site_perl/5.8.8/ predict_prokaryotic_gene_function.pl --input_list=/usr/local/projects/aengine/output_repository/auto_gene_curation/537_overlap_analysis/auto_gene_curation.bsml.list.all --output_directory=/tmp/annotate --hmm_list=/usr/local/projects/aengine/output_repository/hmmpfam/537_pre_overlap_analysis/hmmpfam.bsml.list --hmm_info=/usr/local/projects/db/coding_hmm/coding_hmm.lib.db --ber_list=/usr/local/projects/aengine/output_repository/ber/537_pre_overlap_analysis/ber.bsml.list --ber_info=/usr/local/projects/db/tchar/tchar.db --log=/tmp/annotate/annotation.log
+  
+  =head1 DEVEL NOTES
+  
+  Do we have a problem when features are versioned up and we point at BLAST or HMM results from
+  the previous version?  This needs to be considered, but since a version change usually implies
+  a sequence change the old result files would be stale.
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

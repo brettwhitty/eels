@@ -1,0 +1,616 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: hmmpfam3
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - hmmpfam3.config
+  - hmmpfam3.xml
+  - hmmpfam3.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment / model
+  parameters:
+    #   --cut_ga      : use Pfam GA gathering threshold cutoffs
+    #   --cut_nc      : use Pfam NC noise threshold cutoffs
+    #   --cut_tc      : use Pfam TC trusted threshold cutoffs
+    #   -E <x>        : reporting threshold E-value. Default is 10.0
+    #   -T <x>        : reporting threshold bit score.
+    #   --domE <x>    : domain reporting threshold E-value. Default is 10.0
+    #   --domT <x>    : domain reporting threshold bit-score.
+    #   --incE <x>    : inclusion threshold E-value. Default is 0.01
+    #   --incT <x>    : inclusion threshold bit score.
+    #   --incdomE <x> : domain inclusion threshold E-value. Default is 0.01
+    #   --incdomT <x> : domain inclusion threshold bit score.
+    CUTOFFS: ""
+    # --qformat <f>, query sequence format. Eg. fasta, embl, genbank,
+    #                ddbj, uniprot, stockholm or afa
+    # If HMMer is compiled with POSIX support, you may consider using
+    # --cpu 1 so that each process consumes exactly one processor.  If
+    # using LDHMMer, the equivalent option is --threads 1. 
+    # --acc, directs hmmpfam to export the accession of matched HMMs
+    # rather than the values in the NAME field.  This is required for
+    # htab output
+    # --noali, omits alignment section from output
+    # --notextw, no text wrapping in output.
+    # --textw <n>, set length of output line to <n> characters
+    #              per line. Default is 120.
+    # --max, turns off all filters to increase sensitivity but lowers speed
+    # --nobias, turn off bias filter to increase sensitivity but lowers speed
+    OTHER_OPTS: --acc
+    COMPRESS_BSML_OUTPUT: 0
+    # The following are the molecule types for the model and query.
+    MODEL_MOL_TYPE: aa
+    MODEL_MOL_CLASS: polypeptide
+    QUERY_MOL_TYPE: aa
+    QUERY_MOL_CLASS: polypeptide
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    # This needs to be formatted for HMMER 3.0. HMMER 2.0 and 3.0 dbs are not compatible
+    DATABASE_PATH: $;HMM_ALL$;
+    # MLDBM file  
+    HMM_INFO_FILE: $;HMM_LIB_DB$;
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    # Set $;SKIP_HTAB$; to 1 to skip htab generation
+    SKIP_HTAB: 0
+    HTAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.htab.list
+  component:
+    COMPONENT_NAME: hmmpfam3
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6081 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - hmmpfam3 workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create htab list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.htab\""
+        - key: --output_list
+          value: $;HTAB_OUTPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - hmmpfam3 compute
+  steps:
+    - name: hmmpfam3
+      type: RunUnixCommand
+      executable: $;HMMSCAN_EXEC$;
+      arg: $;OTHER_OPTS$; $;CUTOFFS$; $;DATABASE_PATH$; $;I_FILE_PATH$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.raw
+    - name: hmmpfam32htab
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/hmmpfam32htab
+      params:
+        - key: --donotrun
+          value: $;SKIP_HTAB$;
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.raw
+        - key: --output_htab
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.htab
+        - key: --mldbm_file
+          value: "'$;HMM_INFO_FILE$;'"
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+    - name: hmmpfam32bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/hmmpfam32bsml
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml
+        - key: --fasta_input
+          value: $;I_FILE_PATH$;
+        - key: --gzip_output
+          value: $;COMPRESS_BSML_OUTPUT$;
+        - key: --model_mol_type
+          value: $;MODEL_MOL_TYPE$;
+        - key: --model_mol_class
+          value: $;MODEL_MOL_CLASS$;
+        - key: --query_mol_type
+          value: $;QUERY_MOL_TYPE$;
+        - key: --query_mol_class
+          value: $;QUERY_MOL_CLASS$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: hmmpfam32htab.pl
+    pod: |
+  =head1 NAME
+  
+  hmmer2htab.pl - creates an htab file from hmmscan or hmmpfam raw input depending on the version of hmmer passed using HmmTools.pm
+  
+  =head1 SYNOPSIS
+  
+  USAGE: hmmer2htab.pl
+      --input_file=/path/to/hmmer.raw
+      --output_htab=/path/to/hmmer.htab
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      Raw output from hmmscan or hmmpfam run
+  
+  B<--output_htab,-o>
+      HTAB output file
+  
+  B<--mldbm_file,-m>
+      MLDBM perl data structure (tied hash) containing HMM information.  This was previously
+      queried out of egad.hmm2.  See hmmlib_to_mldbm.pl for more information.
+  
+  B<--prog_ver,-p>
+      The version of hmmer [hmmer2 or hmmer3] used to produce the raw output. Default is hmmer3
+  
+  B<--donotrun>
+      skip pretty much any noticeble activity
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to convert the output from hmmscan or hmmpfam into htab using $ANNOT_DEVEL/hmm/bin/HmmTools.pm
+  
+  =head1  INPUT
+  
+  Output can be in multisequence format (generated from hmmscan or hmmpfam from multifasta input).
+  
+  Can also be a list of file names.
+  
+  example hmmscan raw output:
+  
+  # hmmscan :: search sequence(s) against a profile database
+  # HMMER 3.0 (March 2010); http://hmmer.org/
+  # Copyright (C) 2010 Howard Hughes Medical Institute.
+  # Freely distributed under the GNU General Public License (GPLv3).
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # query sequence file:             /usr/local/projects/aengine/sagrawal/output_repository/translate_sequence/2722941276_translate/i1/g1/testApr6.polypeptide.2723277720.1.fsa
+  # target HMM database:             /export/test_sagrawal/combined_hmm.lib
+  # output directed to file:         /export/test_sagrawal/polytest1.raw
+  # prefer accessions over names:    yes
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
+  Query:       testApr6.polypeptide.2723277720.1  [L=285]
+  Scores for complete sequence (score includes all domains):
+     --- full sequence ---   --- best 1 domain ---    -#dom-
+      E-value  score  bias    E-value  score  bias    exp  N  Model      Description
+      ------- ------ -----    ------- ------ -----   ---- --  --------   -----------
+      7.8e-76  254.9  35.0    8.9e-76  254.7  24.2    1.0  1  PF00950.11 ABC 3 transport family
+      7.7e-42  143.7  31.1    8.7e-42  143.5  21.6    1.0  1  TIGR03770  anch_rpt_perm: anchored repeat-type ABC transport
+      9.3e-07   28.0  30.3    9.3e-07   28.0  21.0    1.3  1  PF01032.12 FecCD transport family
+    ------ inclusion threshold ------
+         0.18   11.1   0.8       0.31   10.3   0.5    1.4  1  PF08690.4  GET complex subunit GET2
+  
+  
+  Domain annotation for each model (and alignments):
+  >> PF00950.11  ABC 3 transport family
+     #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+   ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+     1 !  254.7  24.2   2.2e-79   8.9e-76       1     257 [.      10     265 ..      10     266 .. 0.99 
+  
+  Alignments for each domain:
+  == domain 1    score: 254.7 bits;  conditional E-value: 2.2e-79
+                        PF00950.11   1 qyeflqrallasilvslvagilgsfvvlrrqsllgdalsHaalpGvalafllginlllgailvgliaavaiellkr 76  
+                                       q+ f+ +all+s++vs+ +++l++f+vl+ ++l+gda+sHa++pG++la++lg++l++ga+++g+++ava ++lk 
+  testApr6.polypeptide.2723277720.1 10 QFTFMSHALLISLVVSIPCALLSVFLVLKSWALMGDAMSHAVFPGIVLAWILGLPLATGAFVAGVFCAVATGYLKD 85  
+                                       689************************************************************************* PP
+  
+  ...
+  ...
+  ...
+  
+  Internal pipeline statistics summary:
+  -------------------------------------
+  Query sequence(s):                         1  (285 residues)
+  Target model(s):                       16296  (3513130 nodes)
+  Passed MSV filter:                       920  (0.0564556); expected 325.9 (0.02)
+  Passed bias filter:                      260  (0.0159548); expected 325.9 (0.02)
+  Passed Vit filter:                        34  (0.0020864); expected 16.3 (0.001)
+  Passed Fwd filter:                        13  (0.000797742); expected 0.2 (1e-05)
+  Initial search space (Z):              16296  [actual number of targets]
+  Domain search space  (domZ):               4  [number of targets reported over threshold]
+  # CPU time: 0.52u 3.87s 00:00:04.39 Elapsed: 00:00:07.35
+  # Mc/sec: 136.22
+  //
+  
+  example hmmscan raw output:
+  
+  Logical Depth LDhmmpfam v1.5.4
+  Copyright (C) Logical Depth, Inc. All rights reserved.
+  TIGR and TIGR Affiliates 300 CPU-socket License
+  
+  hmmpfam
+  HMMER 2.3-compatible (LDhmmpfam)
+  
+  HMM file:      /usr/local/db/HMM_LIB/ALL_LIB_bin.HMM
+  Sequence file: /usr/local/annotation/MOORE/output_repository/translate_sequence/8422_translate_promoted/12/cya1.polypeptide.724320.1.fsa
+  
+  Query sequence: cya1.polypeptide.724320.1
+  Accession:      [none]
+  Description:    [none]
+  
+  Scores for sequence family classification (score includes all domains):
+  Model     Description                                   Score    E-value #D
+  --------  -----------                                   -----    ------- --
+  TIGR01730 RND_mfp: efflux transporter, RND family, MF   114.8    3.5e-31  1
+  TIGR00998 8a0101: efflux pump membrane protein          -97.8    1.2e-06  1
+  TIGR00999 8a0102: Membrane Fusion Protein cluster 2 p    -0.3    4.9e-06  1
+  TIGR01843 type_I_hlyD: type I secretion membrane fusi  -170.3    0.00012  1
+  
+  ...
+  ...
+  ...
+  
+  Parsed for domains:
+  Model     Domain Seq-f Seq-t    HMM-f HMM-t      Score  E-value
+  --------  ------ ----- -----    ----- -----      -----  -------
+  TIGR03007  1/1      23   432 ..     1   510 []  -337.6     0.54
+  TIGR01000  1/1      29   442 ..     1   476 []  -289.8     0.25
+  TIGR01133  1/1      30   293 ..     1   368 []  -183.6      8.9
+  TIGR00998  1/1      32   434 ..     1   379 []   -97.8  1.2e-06
+  
+  ...
+  ...
+  ...
+  
+  Alignments of top-scoring domains:
+  TIGR03007: domain 1 of 1, from 23 to 432: score -337.6, E = 0.54
+                     *->eqllsYlkgiWrr.RwlfvavAwvVmivGwvvvyvlPdrYeAsarVY
+                        e+ +   +   +++Rwl+ +v +  +i+ w                 
+    cya1.polyp    23    EENRQNTTKNKQFpRWLIPIVILGGGITLWQ---------------- 53   
+  
+                     VDTQsvLrPLlkGlAvtPnvdqkirIlsrtLlS.....RpnLekVirmlD
+                          + +PL+   + t n     + ++ +LlS+++++R +  +++ +++
+    cya1.polyp    54 -----IFSPLVIPTTETNNQTPPPKPVETVLLSsgqgnRQV--RLLGQVE 96   
+  
+                     LDvgakspaqlEalitklqknIsIslagrdNLFtISYeDkdPelA.....
+                     +  +a+   q  + ++k+  +   s++   + +    +D+d++ A  + +
+    cya1.polyp    97 AGAKATLSSQVSGTVEKILVKEGDSITS--GMIVAILDDADGKIAlaeaq 144
+  
+  =head1 OUTPUT
+  
+      Description of the output format (tab-delimited, one line per domain hit)
+  
+      col  perl-col   description
+      1      [0]      HMM accession
+      2      [1]      Date search was run (if available), otherwise date of htab parse
+      3      [2]      Length of the HMM (not populated if -s is used)
+      4      [3]      Search program
+      5      [4]      Database file path
+      6      [5]      Sequence accession
+      7      [6]      Alignment start position on HMM match - hmm-f
+      8      [7]      Alignment end position on HMM match - hmm-t
+      9      [8]      Alignment start position on sequence - seq-f
+      10     [9]      Alignment end position on sequence - seq-t
+      11     [10]     frame (only populated if --frames search is run on nucleotide sequence)
+      12     [11]     Domain score
+      13     [12]     Total score
+      14     [13]     Index of domain hit
+      15     [14]
+      16     [15]     HMM description (may be truncated by hmmsearch or hmmpfam if -s is used)
+      17     [16]     Sequence description (may be truncated by hmmsearch or hmmpfam)
+      18     [17]     Total score trusted cutoff (not populated if -s is used)
+      19     [18]     Total score noise cutoff (not populated if -s is used)
+      20     [19]     Expect value for total hit
+      21     [20]     Expect value for domain hit
+      22     [21]     Domain score trusted cutoff (egad..hmm2.trusted_cutoff2) (not populated if -s is used)
+      23     [22]     Domain score noise cutoff (egad..hmm2.noise_cutoff2) (not populated if -s is used)
+      24     [23]     Total score gathering threshold (not populated if -s is used)
+      25     [24]     Domain score gathering threshold (not populated if -s is used)
+  
+  =head1  CONTACT
+  
+      Sonia Agrawal
+      sagrawal@som.umaryland.edu
+  - script: hmmpfam32bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  hmmer2bsml.pl - convert hmmpfam or hmmscan raw output to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE: hmmer2bsml.pl 
+          --input=/path/to/somefile.hmmer.raw 
+          --output=/path/to/somefile.hmmer.bsml
+        [ --search_method=hmmpfam or hmmpfam3
+          --query_mol_type=aa
+          --query_mol_class=polypeptide
+          --model_mol_type=aa
+          --model_mol_class=polypeptide
+          --fasta_input=/path/to/hmmer/input.fsa
+          --gzip_output=1
+          --log=/path/to/some.log
+          --debug=4 
+          --help
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i> 
+      Input raw alignment file from an hmmpfam or hmmscan search.
+  
+  B<--output,-o> 
+      Output BSML file
+  
+  B<--search_method,-m> 
+      Optional. Search method used with hmmpfam.  Default is 'hmmscan' but others
+      include 'hmmsmart', 'hmmpir', etc.
+  
+  B<--query_mol_type,-qt> 
+      Query molecule type (like 'aa' or 'dna'). 
+  
+  B<--query_mol_class,-qc> 
+      Query molecule type (like 'polypeptide' or 'DNA'). 
+  
+  B<--model_mol_type,-mt> 
+      Model molecule type (like 'aa' or 'dna'). 
+  
+  B<--model_mol_class,-mc> 
+      Query molecule type (like 'polypeptide' or 'DNA'). 
+  
+  B<--fasta_input,-f>
+      Optional.  If included, will make a seq data import element and include the 
+      defline with the sequences.
+  
+  B<--gzip_output,-g>
+      Optional.  If given a non-zero value, will compress the output and give the output
+      file a .gz extension.  If the file already contains one, it won't add another.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert the raw alignment output from an hmmpfam or hmmscan search into BSML.
+  
+  =head1 INPUT
+  
+  The input file passed to this script must be a raw alignment file generated by hmmpfam or hmmscan.
+  Define the input file using the --input option.
+  
+  Illegal characters will be removed from the IDs for the query sequence and subject hit
+  if necessary to create legal XML id names.  For each element, the original, unmodified 
+  name will be stored in the "title" attribute of the Sequence element.  You should make 
+  sure that your ids don't begin with a number.  This script will successfully create a 
+  BSML document regardless of your ID names, but the resulting document may not pass DTD 
+  validation.
+  
+  =head1 OUTPUT
+  
+  The BSML file to be created is defined using the --output option.  If the file already exists
+  it will be overwritten.
+  
+  Because the hmmpfam executable is used to perform a variety of searches, including hmmsmart
+  and hmmtigr, the user may pass a value using --search_method, which will create the
+  appropriate titles in the BSML Analysis element.  If not passed, the default 'hmmpfam3' is used.
+  
+  =head1 CONTACT
+  
+      Sonia Agrawal
+      sagrawal@som.umaryland.edu
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

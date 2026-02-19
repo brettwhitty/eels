@@ -1,0 +1,104 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: formatdb
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - formatdb.config
+  - formatdb.xml
+  - component_docs/formatdb.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This is the database creation tool used by the NCBI BLAST suite.   Use individual or multiple FASTA 
+      sequences to create a indexed, searchable database in the format necessary for the ncbi-blast suite 
+      of programs.
+  </p>
+  <h3>references</h3>
+  <p>
+      <a href='http://www.ncbi.nlm.nih.gov/blast/docs/formatdb.html'>http://www.ncbi.nlm.nih.gov/blast/docs/formatdb.html</a>
+  </p>
+  <h3>input</h3>
+  <p>
+      This program accepts FASTA files as input.  It can be a collection of FASTA files, a single FASTA file 
+      containing multiple sequences, or any combination.  Nucleic acid or polypeptide sequences can be used, 
+      but not mixed.
+  </p>
+  <h3>implemented options</h3>
+  <ul class='options'>
+      <li>-p = boolean to specify whether the input sequences are polypeptides</li>
+      <li>-n = creates formatdb database files with the basename 'name'.  This option is required when
+          creating a database with multiple FASTA files.</li>
+  </ul>
+  <h3>bsml output</h3>
+  <p>
+      This component does not generate BSML output.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / indexing
+  parameters:
+    # enter T for protein, F for nucleotide
+    PROTEIN: T
+  input:
+    # space-separated list
+    INPUT_FILES: ""
+    INPUT_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # call it whatever you like
+    DATABASE_NAME: db
+  component:
+    COMPONENT_NAME: formatdb
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - formatdb workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: formatdb
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/formatdb
+      params:
+        - key: --input_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --input_files
+          value: $;INPUT_FILES$;
+        - key: --formatdb_path
+          value: $;FORMATDB_EXEC$;
+        - key: --protein
+          value: $;PROTEIN$;
+        - key: --database_name
+          value: $;OUTPUT_DIRECTORY$;/$;DATABASE_NAME$;

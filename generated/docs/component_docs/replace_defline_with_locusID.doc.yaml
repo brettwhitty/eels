@@ -1,0 +1,112 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: replace_defline_with_locusID
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - replace_defline_with_locusID.config
+  - replace_defline_with_locusID.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+  input:
+    # all files in input list will be concatenated into output file
+    INPUT_FILE: ""
+    INPUT_BSML_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;OUTPUT_TOKEN$;.out
+  component:
+    COMPONENT_NAME: replace_defline_with_locusID
+    DESCRIPTION: Concanate the content of all files in an input file list into a single output file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - replace_defline_with_locusID workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: replace_defline_with_locusID
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_defline_with_locusID
+      params:
+        - key: --fasta
+          value: $;INPUT_FILE$;
+        - key: --output
+          value: $;OUTPUT_FILE$;
+        - key: --bsml_list
+          value: $;INPUT_BSML_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: replace_defline_with_locusID.pl
+    pod: |
+  =head1 NAME
+  
+   	replace_defline_with_locusID.pl - script that replaces the FastA header with the locus ID of that protein or nucleotide.
+  
+  =head1 SYNOPSIS
+  
+  # USAGE : 
+  
+  	perl replace_defline_with_locusID.pl -f file.fsa -b file2.bsml -o output.fsa
+  
+  =head1 OPTIONS
+  
+  	--bsml_list (-b)	-	BSML list file for BSML files with locus IDs (typically output from the pipeline_summary Ergatis component)
+  
+  	--fasta (-f)	-	The fasta file whose headers need to be replaced
+  
+  	--output (-o)	-	The path of the output file
+  
+  	--log (-l)	-	writes to a log file
+  
+  	--help (-h)	-	displays this documentation
+  
+  =head1 DESCRIPTION
+  
+  	This script will map the identifier within the header of the FastA file to the ID attribute of the Feature element within the BSML file.  Using the start and end positions located within the Interval-loc element, the "identifier" attribute (locus_id) from within the "Cross-reference" element of the "gene" class will be used to replace the original FastA header.
+  
+  	The purpose of this is to use the locus identifier as the ID within the blastable database that will be accessed via Manatee
+  
+  =head1 INPUT
+  
+  	A multi-fasta file
+  	A BSML list for BSML files that includes a Feature element with class "gene".  Withiin this class must be a "Cross-reference" element with "identifier" attribute
+  
+  =head1 OUTPUT
+  
+  	A multi-fasta file
+  
+  =head1 CONTACT
+  
+  	Shaun Adkins
+  	sadkins@som.umaryland.edu

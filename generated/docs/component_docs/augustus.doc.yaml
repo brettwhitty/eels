@@ -1,0 +1,500 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: augustus
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - augustus.config
+  - augustus.xml
+  - augustus.i1.xml
+  - component_docs/augustus.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+       "AUGUSTUS is a gene prediction progam for eukaryotes by Mario Stanke and Stephan Waack. It can be used as an ab initio program, which means it bases its prediction purely on the sequence. AUGUSTUS may also incorporate hints on the gene structure coming from extrinsic sources such as BLAST search results."
+  </p>
+  <h3>references</h3>
+  <p>
+      <a href='http://augustus.gobics.de/'>http://augustus.gobics.de/</a>.
+  </p>
+  <h3>input</h3>
+  <p>
+  Regular FASTA input.  Before the program can be run, you must set the environmental variable
+      AUGUSTUS_CONFIG_PATH to the config directory within the augustus installation.   The mandatory
+      arguments to augustus are the query file and "species".  Species is really just the name of the
+      training set and is actually most often the genus.  Letters other than ATGC (either case) in the
+      input sequence are simply ignored. </p>
+  <h3>implemented options</h3>
+  <p> Options supported by this component are:
+  </p>
+  <p>
+      <strong>--strand=both, --strand=forward or --strand=backward</strong><br>
+      report predicted genes on both strands, just the forward or just the backward strand.
+  </p>
+  <p>
+      <strong>--genemodel=partial, --genemodel=complete, --genemodel=atleastone or --genemodel=exactlyone</strong><br>
+        partial      : allow prediction of incomplete genes (default)<br>
+        complete     : only predict complete genes<br>
+  
+        atleastone   : predict at least one complete gene<br>
+        exactlyone   : predict exactly one complete gene
+  </p>
+  <p>
+      <strong>--maxDNAPieceSize=n</strong>
+        When --singlestrand=false (default), AUGUSTUS uses a
+        little more than 1MB per kilo base sequence lenght memory. When run
+        with --singlestrand=true it uses about half the memory. If the sequence is too long for the memory of your
+        computer, you can specify the maximal length of the pieces that the sequence
+        should be cut into. Default is --maxDNAPieceSize=200000 (&lt; 250MB RAM required).
+        AUGUSTUS tries to place the boundaries of these pieces in the intergenic region, which 
+        is inferred by a preliminary prediction. GC-content dependent parameters are chosen for each piece of DNA. 
+        This is why this value should not be set very large, even if you have plenty of memory. 
+  </p>
+  
+  <h3>raw output</h3>
+  
+  <p>
+      The raw output is a modified GFF format, such as:
+  </p>
+  <p class="code">
+  # This output was generated with AUGUSTUS (version 1.5).
+  # AUGUSTUS is a gene prediction tool for eukaryotes written by Mario Stanke (mstanke@gwdg.de).
+  # Please cite: Mario Stanke and Stephan Waack (2003) "Gene prediction with a hidden Markov model and
+  # a new intron submodel", Bioinformatics, Vol. 19 Suppl. 2, ii215-ii225
+  # No extrinsic information on sequences given.
+  # We have hints for 0 sequence and for 0 of the sequences in the input set.
+  #
+  # ----- prediction on sequence number 1 (length = 17799, name = aa1.assembly.24514) -----
+  #
+  # Constraints/Hints:
+  # (none)
+  # Predicted genes for sequence number 1 on both strands
+  aa1.assembly.24514  AUGUSTUS    internal    519 677 .   -   0   transcript_id "g1.1"; gene_id "g1";
+  aa1.assembly.24514  AUGUSTUS    intron  678 880 .   -   .   transcript_id "g1.1"; gene_id "g1";
+  aa1.assembly.24514  AUGUSTUS    initial 881 1006    .   -   0   transcript_id "g1.1"; gene_id "g1";
+  aa1.assembly.24514  AUGUSTUS    CDS 519 677 .   -   0   transcript_id "g1.1"; gene_id "g1";
+  aa1.assembly.24514  AUGUSTUS    CDS 881 1006    .   -   0   transcript_id "g1.1"; gene_id "g1";
+  # protein sequence = [MFNIHHSTLSRVLKRFQERLTLDYGKGAGRKPGPENKKTEGKDMNPPNCPELRPVEQ
+  # YWAIMKRVLRKSKKTVKEEKDVLRKLKKKTEKLVPDDA]
+  aa1.assembly.24514  AUGUSTUS    stop_codon  15167   15169   .   -   0   transcript_id "g3.1"; gene_id "g3";
+  aa1.assembly.24514  AUGUSTUS    terminal    15167   15348   .   -   2   transcript_id "g3.1"; gene_id "g3";
+  aa1.assembly.24514  AUGUSTUS    intron  15349   15409   .   -   .   transcript_id "g3.1"; gene_id "g3";
+  aa1.assembly.24514  AUGUSTUS    initial 15410   15434   .   -   0   transcript_id "g3.1"; gene_id "g3";
+  aa1.assembly.24514  AUGUSTUS    CDS 15170   15348   .   -   2   transcript_id "g3.1"; gene_id "g3";
+  aa1.assembly.24514  AUGUSTUS    CDS 15410   15434   .   -   0   transcript_id "g3.1"; gene_id "g3";
+  # protein sequence = [MIFIIGAQTGILGEPTAIGSTNLMGFPIKVGNVVVTSMISAKKREDDDDASETLLLL
+  # LPPGIDPFDDE]
+  </p>
+  <p>
+      All comment lines in the raw output are ignored when converting to BSML.
+  </p>
+  
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+  &lt;Bsml&gt;
+    &lt;Definitions&gt;
+      &lt;Sequences&gt;
+        &lt;Sequence id="aa1.assembly.24514" molecule="mol-not-set"&gt;
+          &lt;Feature-tables&gt;
+            &lt;Feature-table id="Bsml0"&gt;
+  
+              &lt;Feature class="exon" id="ir.aa1.exon.20145000.1"&gt;
+                &lt;Interval-loc complement="1" startpos="518" endpos="676"&gt;&lt;/Interval-loc&gt;
+                &lt;Link rel="analysis" href="#augustus_analysis"&gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+              &lt;Feature class="intron" id="ir.aa1.intron.20145000.1"&gt;
+  
+                &lt;Interval-loc complement="1" startpos="677" endpos="879"&gt;&lt;/Interval-loc&gt;
+                &lt;Link rel="analysis" href="#augustus_analysis"&gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+              
+              [ ... one Feature for each predicted feature ... ]
+              
+            &lt;/Feature-table&gt;
+            &lt;Feature-group id="Bsml2" group-set="ir.aa1.gene.20145000.1"&gt;
+  
+              &lt;Feature-group-member feature-type="exon" featref="ir.aa1.exon.20145000.1"&gt;&lt;/Feature-group-member&gt;
+              &lt;Feature-group-member feature-type="intron" featref="ir.aa1.intron.20145000.1"&gt;&lt;/Feature-group-member&gt;
+              &lt;Feature-group-member feature-type="exon" featref="ir.aa1.exon.20145000.2"&gt;&lt;/Feature-group-member&gt;
+              &lt;Feature-group-member feature-type="CDS" featref="ir.aa1.CDS.20145000.1"&gt;&lt;/Feature-group-member&gt;
+              &lt;Feature-group-member feature-type="CDS" featref="ir.aa1.CDS.20145000.2"&gt;&lt;/Feature-group-member&gt;
+  
+            &lt;/Feature-group&gt;
+            
+            [ ... one Feature-group for the components of each gene ... ]
+          
+          &lt;/Feature-tables&gt;
+          &lt;Seq-data-import source="/usr/local/scratch/Paolo/AA1/Asmbls/aa1.assembly.24514.fsa" identifier="aa1.assembly.24514" format="fasta" id="Bsml1"&gt;&lt;/Seq-data-import&gt;
+          &lt;Link rel="analysis" href="#augustus_analysis"&gt;&lt;/Link&gt;
+        &lt;/Sequence&gt;
+  
+      &lt;/Sequences&gt;
+    &lt;/Definitions&gt;
+  
+    &lt;Research&gt;
+      &lt;Analyses&gt;
+        &lt;Analysis id="augustus_analysis"&gt;
+          &lt;Attribute content="/usr/local/scratch/annotation/AA1/BSML_repository/augustus/13898_default/0/aa1.assembly.24514.augustus.bsml" name="sourcename"&gt;&lt;/Attribute&gt;
+  
+        &lt;/Analysis&gt;
+        &lt;Analysis&gt;
+          &lt;Attribute content="on" name="cds"/&gt;
+          &lt;Attribute content="aedes" name="species"/&gt;
+          &lt;Attribute content="350000" name="split_size"/&gt;
+          
+          [ ... one Attribute for each attribute of the Analysis ... ]
+        
+        &lt;/Analysis&gt;
+  
+      &lt;/Analyses&gt;
+    &lt;/Research&gt;
+  &lt;/Bsml&gt;
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / genes
+  parameters:
+    CDS: on
+    # this field is required
+    SPECIES: ""
+    SPLIT_SIZE: 350000
+    # strand values: both, forward, backward
+    STRAND: both
+    # genemodel values: partial, complete, atleastone, exactlyone
+    GENEMODEL: partial
+    # The maximum number of tracks when displayed in a genome browser.
+    MAXTRACKS: ""
+    # Extrinsic Config File
+    EXTRINSIC_CONFIG_FILE: $;AUGUSTUS_CONFIG_PATH$;/extrinsic/extrinsic.cfg
+    # path to the augustus executable.  this is configurable because
+    # Mario has created different versions for different projects.
+    AUGUSTUS_CONFIG_PATH: $;AUGUSTUS_DIR$;/config
+    AUGUSTUS_BINARY_PATH: $;AUGUSTUS_DIR$;/bin/augustus
+    # Paramaters that are truly optional go here.  For example, put --hintsfile=/path/to/my.hintsfile
+    # here to use one.
+    OTHER_OPTS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: augustus
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - augustus workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - augustus compute
+  steps:
+    - name: augustus
+      type: RunUnixCommand
+      executable: $;AUGUSTUS_BINARY_PATH$;
+      arg: $;I_FILE_PATH$; $;OTHER_OPTS$;
+      params:
+        - key: --maxDNAPieceSize
+          value: $;SPLIT_SIZE$;
+        - key: --species
+          value: $;SPECIES$;
+        - key: --cds
+          value: $;CDS$;
+        - key: --strand
+          value: $;STRAND$;
+        - key: --genemodel
+          value: $;GENEMODEL$;
+        - key: --AUGUSTUS_CONFIG_PATH
+          value: $;AUGUSTUS_CONFIG_PATH$;
+        - key: --extrinsicCfgFile
+          value: $;EXTRINSIC_CONFIG_FILE$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+    - name: augustus2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/augustus2bsml
+      params:
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --fasta_input
+          value: $;I_FILE_PATH$;
+        - key: --project
+          value: $;PROJECT$;
+        - key: --sourcename
+          value: $;OUTPUT_DIRECTORY$;/dummy/dir
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: augustus2bsml.pl
+    pod: |
+  =head1 NAME
+  
+  augustus2bsml.pl - Creates a bsml document from augustus raw
+      output
+  
+  =head1 SYNOPSIS
+  
+  USAGE: augustus2bsml.pl
+              --input_file=/path/to/some/augustus.raw
+              --output=/path/to/augustus.bsml
+              --project=aa1
+              --id_repository=/path/to/id_repository
+              --fasta_input=/path/to/glimmer3/input.fsa
+            [ --log=/path/to/file.log
+              --debug=4
+              --help
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      Raw augustus output.
+  
+  B<--output,-o>
+      The output bsml file.
+  
+  B<--project,-p>
+      The project (used for id generation).
+  
+  B<--id_repository,-r>
+      Id repository for use by Workflow::IdGenerator.pm
+  
+  B<--fasta_input,-a>
+      The input file that was used as input for the glimmer3 run
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to convert the output from an augustus search into BSML.
+  
+  =head1  INPUT
+  
+  
+  =head1 OUTPUT
+  
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

@@ -1,0 +1,295 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: filter_fastq
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - filter_fastq.config
+  - filter_fastq.xml
+  - filter_fastq.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+  input:
+    # Should be a tab delimited file in the following format:
+    # fasta_contigs    fastq1[,fastq2]    read_list(Sequences file)
+    FASTA_READ_MAP: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTQ_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fq.list
+    FILTERED_FASTQ_CONTIG_MAP: $;OUTPUT_DIRECTORY$;/filtered_fastq_contig.map
+  component:
+    COMPONENT_NAME: filter_fastq
+    DESCRIPTION: Filter fastq files
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Iterator Done
+  command_sets:
+    - bwa workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=$;ITERATOR1$;,$;ITERATOR_XML$;=$;ITERATOR1_XML$;,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list,$;ITERATOR_RANDOM$;=1\" /"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: filter_fastq_file_iterator_list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_filter_fastq_file_iterator_list
+      params:
+        - key: --input_map
+          value: $;FASTA_READ_MAP$;
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list
+    - name: create fastq list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fastq\\.list\""
+        - key: --output_list
+          value: $;FASTQ_OUTPUT_LIST$;
+    - name: create filtered fastq contigs mapping
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_fastq_contigs_map
+      params:
+        - key: --input_map
+          value: $;FASTA_READ_MAP$;
+        - key: --fastq_list
+          value: $;FASTQ_OUTPUT_LIST$;
+        - key: --output_map
+          value: $;FILTERED_FASTQ_CONTIG_MAP$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/create_fastq_contigs_map.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/create_fastq_contigs_map.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Processing
+  command_sets:
+    - bwa Iterator workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: filter fastq
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/filter_fastq
+      params:
+        - key: --fastq_input
+          value: $;READS$;
+        - key: --read_names
+          value: $;READ_LIST$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;BASENAME$;.bwa_align_exec.ref1.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;BASENAME$;.bwa_align_exec.ref1.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_filter_fastq_file_iterator_list.pl
+    pod: |
+  =head1 NAME
+  
+  create_filter_fastq_file_iterator_list.pl
+  
+  =head1 SYNOPSIS
+  
+   USAGE: create_filter_fastq_file_iterator_list.pl
+         --input_map=/path/to/input_map.txt
+         --output_iter_list=/path/to/i1.list
+  
+  =head1 OPTIONS
+  
+  B<--input_map>
+      Input file should be tab delimited.
+      contigs.fa    fastq1[,fastq2]    (Sequences|Read List)
+  
+  B<--output_iter_list>
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: create_fastq_contigs_map.pl
+    pod: |
+  =head1 NAME
+  
+  create_fastq_contigs_map.pl
+  
+  =head1 SYNOPSIS
+  
+   USAGE: create_fastq_contigs_map.pl
+         --input_map=/path/to/celera_or_velvet.map
+         --fastq_list=/path/to/fastq.list
+         --output_map=/path/to/output.map
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1  DESCRIPTION
+  
+      This relies on how filter_fastq names the output files it creates. If that
+      method changes, this script should be changed.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com
+  - script: filter_fastq.pl
+    pod: |
+  =head1 NAME
+  
+      filter_fastq.pl - Will filter input fastq files with input list of read names
+  
+  =head1 SYNOPSIS
+  
+    USAGE: filter_fastq.pl
+      --fastq_input=/path/to/fastq
+      --read_names=/path/to/read_names.txt
+      --output_dir=/path/to/outdir/
+    [ --log=/path/to/file.log
+      --debug=3
+      --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--fastq_input,-i>
+      Can be a fastq file or list of fastq files (for paired end).
+  
+  B<--read_names,-r>
+      A file with a list of read_names.
+  
+  B<--output_dir,-o>
+      Path to output directory. Will create an output file for each input fastq file.
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      Developed when an illumina dataset has been sub-sampled before assembly to reduce the 
+      coverage (since some assemblers can't handle very deep coverage). We often don't keep
+      the actual fastq files used for the assemblies around; instead we just save the read
+      names used. This will regenerate the fastq files use for assembly, given the original
+      fastq file(s) and the list of read names.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kevingalens@gmail.com

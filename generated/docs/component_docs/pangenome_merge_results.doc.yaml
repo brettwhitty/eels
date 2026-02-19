@@ -1,0 +1,138 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pangenome_merge_results
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pangenome_merge_results.config
+  - pangenome_merge_results.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+  input:
+    INPUT_FILE_LIST: ""
+    # Place your list file from pangenome_blast_parse into $;INPUT_FILE$; since all list items are going into one execution call
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bsml
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BLAST_OUTPUT_STORED_FILE: $;OUTPUT_DIRECTORY$;/pangenome.blast.stored
+  component:
+    COMPONENT_NAME: pangenome_merge_results
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - pangenome merge results workflow
+    - pangenome merge results distributed work
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: replace template keys
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_template_keys
+      params:
+        - key: --template_xml
+          value: $;DOCS_DIR$;/pangenome_merge_results_distributed_work.xml
+        - key: --component_conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --output_xml
+          value: $;WORKFLOW_REPOSITORY$;/pangenome_merge_results_distributed_work.xml.gz
+        - key: --distribopts
+          value: nodistrib=$;NODISTRIB$;
+        - key: stdout
+          value: $;TMP_DIR$;/replace_template_keys.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/replace_template_keys.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: pangenome_merge_results.pl
+    pod: |
+  =head1  NAME
+  
+  pangenome_merge_results_pl - Performs the merging of BLAST results to create pangenome data.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: pangenome_merge_results.pl
+          --input_list=/path/to/pangenome.stored.list
+          --output=/path/to/output.list
+        [ --log=/path/to/some/log ]
+  
+  =head1 OPTIONS
+  
+  B<--input_list,-i>
+      List of files containing serialized array of BLAST data.
+  
+  B<--output_path,-o>
+      Path to which output files will be written.
+  
+  B<--output_file,-o>
+      Full path and name of pangenome data output file.
+  
+  B<--log,-d>
+      optional. Will create a log file with summaries of all actions performed.
+  
+  B<--debug>
+      optional. Will display verbose status messages to STDERR if logging is disabled.
+  
+  B<--help,-h>
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      The pangenome analysis script creates an array of BLAST results data which is then
+      processed to create pangenome data.
+  
+  =head1 INPUT
+  
+      The input should be a list of files containing serialized BLAST results array data.
+  
+  =head1 OUTPUT
+  
+      There is no output unless you use the --log option.
+  
+  =head1 CONTACT
+  
+      Brett Whitty
+      bwhitty@tigr.org

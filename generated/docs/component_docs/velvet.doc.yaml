@@ -1,0 +1,412 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: velvet
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - velvet.config
+  - velvet.xml
+  - velvet.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: assembly
+  parameters:
+    # velveth parameters
+    FILE_FORMAT: "[-fasta|-fastq|-fasta.gz|-fastq.gz|-eland|-gerald| ]"
+    READ_TYPE: "[-short|-shortPaired|-short2|-shortPaired2|-long|-longPaired]"
+    HASH_LENGTH: ""
+    # Any other velveth command-line parameters
+    VELVETH_OPTS: ""
+    # velvetg parameters
+    VELVETG_OPTS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    SEQUENCE_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sequences.list
+    ROADMAP_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.roadmaps.list
+    CONTIG_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fa.list
+    STATS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stats.list
+    GRAPH_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.graph.list
+    AMOS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.afg.list
+  component:
+    COMPONENT_NAME: velvet
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - velvet workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create sequence list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sequences\""
+        - key: --output_list
+          value: $;SEQUENCE_OUTPUT_LIST$;
+    - name: create roadmap list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.roadmaps\""
+        - key: --output_list
+          value: $;ROADMAP_OUTPUT_LIST$;
+    - name: create contigs list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fa\""
+        - key: --output_list
+          value: $;CONTIG_OUTPUT_LIST$;
+    - name: create stats list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.stats\""
+        - key: --output_list
+          value: $;STATS_OUTPUT_LIST$;
+    - name: create graph list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.graph\""
+        - key: --output_list
+          value: $;GRAPH_OUTPUT_LIST$;
+    - name: create amos list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.afg\""
+        - key: --output_list
+          value: $;AMOS_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - velvet compute
+  steps:
+    - name: create velveth temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;I_FILE_BASE$;
+    - name: create velvetg temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;I_FILE_BASE$;
+    - name: velveth
+      type: RunUnixCommand
+      executable: $;VELVETH_EXEC$;
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;I_FILE_BASE$; $;HASH_LENGTH$; $;FILE_FORMAT$; $;READ_TYPE$; $;VELVETH_OPTS$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+    - name: velveth post-processing
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/velveth_post_processing
+      params:
+        - key: --input_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;I_FILE_BASE$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --output_prefix
+          value: $;I_FILE_BASE$;
+        - key: --log
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;COMPONENT_NAME$;.$;I_FILE_BASE$;.log
+    - name: velvetg pre-processing
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/velvetg_pre_processing
+      params:
+        - key: --input_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --output_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;I_FILE_BASE$;
+        - key: --prefix
+          value: $;I_FILE_BASE$;
+        - key: --log
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;COMPONENT_NAME$;.$;I_FILE_BASE$;.log
+    - name: velvetg
+      type: RunUnixCommand
+      executable: $;VELVETG_EXEC$;
+      arg: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;I_FILE_BASE$; $;VELVETG_OPTS$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+    - name: velvetg post-processing
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/velvetg_post_processing
+      params:
+        - key: --input_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;I_FILE_BASE$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --output_prefix
+          value: $;I_FILE_BASE$;
+        - key: --log
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;/$;COMPONENT_NAME$;.$;I_FILE_BASE$;.log
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: velveth_post_processing.pl
+    pod: |
+  =head1 NAME
+  
+  velvet_post_processing_rename.pl - Renames default velvet output to store each file with a unique filename
+  
+  =head1 SYNOPSIS
+  
+  USAGE: ./velvet_post_Processing_rename.pl --input_dir /path/to/velvet/output --output_dir /path/to/output --output_prefix OUTPUT_PREFIX --log /path/to/log --debug DEBUG
+  
+  =head1 OPTIONS
+  
+  B<--input_dir, -i>
+  	Path to the velvet output directory containing the Logs, Roadmap, and Sequences files.
+  
+  B<--output_dir, -o>
+  	Path to output directory where renamed velvet output files will be stored.
+  		
+  B<--output_prefix, -p>
+  	Output prefix to rename velvet output files to. Files will be named OUTPUT_PREFIX.sequences, OUTPUT_PREFIX.roadmaps, OUTPUT_PREFIX.log
+  
+  B<--log, -l>
+  	Log file
+  	
+  B<--debug, -d>
+  	Debug level
+  
+  =head1 DESCRIPTION
+  
+  The velvet software does not uniquely name its output files a process is needed to give the output files unique names for easier retrieval
+  in later pipelines. This script uses the output prefix provided by the user to achieve this.
+  
+  =head1 INPUT
+  
+  Standard output from velvet. Three files -- SEQUENCES, ROADMAPS, LOG
+  
+  =head1 OUPTUT
+  
+  Renamed velvet output files using the --output_prefix flag as the filenmame -- OUTPUT_PREFIX.sequences, OUTPUT_PREFIX.roadmaps, OUTPUT_PREFIX.log
+  
+  =head1 CONTACT
+  
+  	Cesar Arze
+  	carze@som.umaryland.edu
+  	
+  - script: velvetg_pre_processing.pl
+    pod: |
+  =head1 NAME
+  
+  velvetg_pre_processing.pl - Renames velveth output to default naming schema.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: ./velvetg_pre_processing.pl --input_dir /path/to/velvet/output --output_dir /path/to/output --prefix OUTPUT_PREFIX --log /path/to/log --debug DEBUG
+  
+  =head1 OPTIONS
+  
+  B<--input_dir, -i>
+  	Path to the velvet output directory containing the Logs, Roadmap, and Sequences files.
+  
+  B<--output_dir, -o>
+  	Path to output directory where renamed velvet output files will be stored.
+  		
+  B<--prefix, -p>
+  	Output prefix to rename velvet output files to. Files will be named OUTPUT_PREFIX.sequences, OUTPUT_PREFIX.roadmaps, OUTPUT_PREFIX.log
+  
+  B<--log, -l>
+  	Log file
+  	
+  B<--debug, -d>
+  	Debug level
+  
+  =head1 DESCRIPTION
+  
+  The velvet software does not uniquely name its output files a process is needed to give the output files unique names for easier retrieval
+  in later pipelines. This script takes the renamed unique output names and renames them back to the default schema so that the velvetg software
+  can run correctly.
+  
+  =head1 INPUT
+  
+  Standard output from velvet uniquely renamed; *.sequences, *.roadmaps, *.log
+  
+  =head1 OUPTUT
+  
+  Renamed velvet output files using the default naming schema -- Sequences, Roadmaps, Log
+  
+  =head1 CONTACT
+  
+  	Cesar Arze
+  	carze@som.umaryland.edu
+  	
+  - script: velvetg_post_processing.pl
+    pod: |
+  =head1 NAME
+  
+  velvetg_post_processing.pl - Renames default velvetg output to store each file with a unique filename
+  
+  =head1 SYNOPSIS
+  
+  USAGE: ./velvetg_post_processing.pl --input_dir /path/to/velvet/output --output_dir /path/to/output --output_prefix OUTPUT_PREFIX --log /path/to/log --debug DEBUG
+  
+  =head1 OPTIONS
+  
+  B<--input_dir, -i>
+  	Path to the velvetg output directory
+  
+  B<--output_dir, -o>
+  	Path to output directory where renamed velvetg output files will be stored.
+  		
+  B<--output_prefix, -p>
+  	Output prefix to rename velvetg output files to. Files will be renamed to PREFIX.*
+  
+  B<--log, -l>
+  	Log file
+  	
+  B<--debug, -d>
+  	Debug level
+  
+  =head1 DESCRIPTION
+  
+  The velvetg software does not uniquely name its output files a process is needed to give the output files unique names for easier retrieval
+  in later pipelines. This script uses the output prefix provided by the user to achieve this.
+  
+  =head1 INPUT
+  
+  Standard output from velvetg
+  
+  =head1 OUPTUT
+  
+  Renamed velvetg output files using the --output_prefix flag as the filenmame.
+  
+  =head1 CONTACT
+  
+  	Cesar Arze
+  	carze@som.umaryland.edu
+  	

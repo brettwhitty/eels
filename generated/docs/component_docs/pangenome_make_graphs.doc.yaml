@@ -1,0 +1,273 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pangenome_make_graphs
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pangenome_make_graphs.config
+  - pangenome_make_graphs.xml
+  - pangenome_make_graphs.i1.xml
+  - component_docs/pangenome_make_graphs.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component does pangenome analysis. More documentation to follow.
+  </p>
+  <h3>references</h3>
+  <p>
+      To be completed.
+  </p>
+  <h3>input</h3>
+  <p>
+      Input is a set of all-vs-all blast results for a set of genomes. Usually this would
+      include results from both WU-BLASTP and WU-TBLASTN.
+  
+      Analysis can be performed on a subset of genomes without re-running the BLASTs by
+      providing an optional list of genome-encoding BSML documents (eg: legacy2bsml output)
+      for the set of genomes to analyze.
+  </p>
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+      no bsml output defined for this component
+  </div>
+  <h3>output</h3>
+  <p>
+      To be completed.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+    R_EXEC: ""
+    # 1 if you want .eps files outputted, 0 if you do not
+    USE_EPS: 1
+  input:
+    # The input table from either the pangenome_make_table script or the
+    # pangenome_make_pangenome script.
+    PANGENOME_INPUT_TABLE: ""
+    # The R scripts to run on the table passed in above. This can be passed in as 
+    # a single file, a list or a directory full of R files.
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: R
+    # name of the organism (will be in the beginning of the graph title)
+    TITLE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/ps.output.list
+    EPS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/eps.output.list
+  component:
+    COMPONENT_NAME: pangenome_make_graphs
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator
+  command_sets:
+    - wu-blastp workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create postscript list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.ps\""
+        - key: --output_list
+          value: $;PS_OUTPUT_LIST$;
+    - name: create encapsulated postscript list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.eps\""
+        - key: --output_list
+          value: $;EPS_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - pangenome generate graphs
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: prep the R input file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/pangenome_make_graphs
+      params:
+        - key: --r_script
+          value: $;I_FILE_PATH$;
+        - key: --input_table
+          value: $;PANGENOME_INPUT_TABLE$;
+        - key: --title
+          value: "'$;TITLE$;'"
+        - key: --create_eps
+          value: "'$;USE_EPS$;'"
+        - key: --output_path
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --r_exec_path
+          value: $;R_EXEC$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: pangenome_make_graphs.pl
+    pod: |
+  =head1  NAME
+  
+  pangenome_do_R.pl - Runs a specified R file on the specified input file.
+  
+  =head1 SYNOPSIS
+  
+    USAGE: pangenome_do_R.pl
+      --input=/path/to/pangenome.table.txt
+      --r_script=/path/to/some_R_script.R
+      --output_path=/path/to/output/
+      --title='Genus species'
+      [ --create_eps=1 
+        --log=/path/to/some/log ]
+  
+  =head1 OPTIONS
+  
+  B<--input_table,-i>
+      The pangenome.table.txt file that comes from pangenome_do_analysis.pl or the pangenome.output
+      file that comes from pangenome_make_pangenome.pl
+  
+  B<--r_script,-r>
+      The R script to run on the input pangenome_table
+  
+  B<--output_path,-o>
+      Path to which output files will be written.
+      
+  B<--create_eps, -e>
+      If set, will convert .ps files to .eps files.
+  
+  B<--title,-g>
+      Path to which output files will be written.
+  
+  B<--help,-h>
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      The pangenome analysis script creates an array of BLAST results data which is then
+      processed to create pangenome data.
+  
+  =head1 INPUT
+  
+      The input should be a list of files containing serialized BLAST results array data.
+  
+  =head1 OUTPUT
+  
+      There is no output unless you use the --log option.

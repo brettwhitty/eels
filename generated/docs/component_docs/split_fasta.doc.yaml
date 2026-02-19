@@ -1,0 +1,424 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: split_fasta
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - split_fasta.config
+  - split_fasta.xml
+  - split_fasta.i1.xml
+  - workflow/split_fasta-master.ini
+  - workflow/split_fasta.ini
+  - workflow/split_fastaconf.ini
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / manipulation
+  parameters:
+    FRAGMENT_LENGTH: ""
+    OVERLAP_LENGTH: ""
+    # FILE_NUMBERING must be either positional or incremental
+    FILE_NUMBERING: incremental
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+  component:
+    COMPONENT_NAME: split_fasta
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - split_multifasta workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: merge list files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/merge_lists
+      params:
+        - key: --input_dir
+          value: $;TMP_DIR$;/i1
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+        - key: --glob
+          value: "'$;COMPONENT_NAME$;.list'"
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - split_multifasta compute
+  steps:
+    - name: split_fasta
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/split_fasta
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;
+        - key: --output_list
+          value: $;TMP_DIR$;/i1/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.list
+        - key: --fragment_length
+          value: $;FRAGMENT_LENGTH$;
+        - key: --overlap_length
+          value: $;OVERLAP_LENGTH$;
+        - key: --file_numbering
+          value: $;FILE_NUMBERING$;
+        - key: --file_name_root
+          value: $;I_FILE_BASE$;
+        - key: --bsml_map
+          value: $;OUTPUT_DIRECTORY$;/$;I_FILE_BASE$;.map.bsml
+
+# Workflow INI: split_fasta-master.ini
+workflow_ini_split_fasta-master.ini:
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  merge_list_files:
+    param.command: $;BIN_DIR$;/merge_lists
+    param.--input_dir: $;TMP_DIR$;
+    param.--output_list: $;OUTPUT_LIST$;
+    param.--glob: "'*/*.$;NAME$;.list'"
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: split_fasta.ini
+workflow_ini_split_fasta.ini:
+  empty:
+  split_fasta:
+    # Split the fasta files
+    param.command: $;BIN_DIR$;/split_fasta
+    param.--input_file: $;ITER_FILE_PATH$;
+    param.--output_dir: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;
+    param.--fragment_length: $;FRAGMENT_LENGTH$;
+    param.--overlap_length: $;OVERLAP_LENGTH$;
+    param.--file_numbering: $;FILE_NUMBERING$;
+    param.--file_name_root: $;ITER_FILE_BASE$;
+    param.--output_list: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.list
+    param.--bsml_map: $;OUTPUT_DIRECTORY$;/$;ITER_FILE_BASE$;.map.bsml
+
+# Workflow INI: split_fastaconf.ini
+workflow_ini_split_fastaconf.ini:
+  _header:
+    # configuration file for the split_fasta workflow
+  include split_fasta:
+    $;SHARED_CONFIG$;: ""
+  input split_fasta:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: fsa
+  output split_fasta:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.fsa.list
+  parameters split_fasta:
+    $;FRAGMENT_LENGTH$;: ""
+    $;OVERLAP_LENGTH$;: ""
+    # FILE_NUMBERING must be either positional or incremental
+    $;FILE_NUMBERING$;: incremental
+  workflowdocs split_fasta:
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: split_fasta
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/split_fasta-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/split_fasta-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/split_fasta.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/split_fasta_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 20
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: merge_lists.pl
+    pod: |
+  =head1 NAME
+  
+  merge_lists.pl - Iterate through a directory of lists and merge them into a single list.
+  
+  =head1 SYNOPSIS
+  
+      USAGE: merge_lists.pl 
+                  --input_dir=/some/dir/
+                  --output_list=/some/path/something.list
+                [ --glob='*.list' ]
+  
+  =head1 OPTIONS
+  
+  B<--input_dir,-i>
+      The input directory containing the list files.
+  
+  B<--output_list,-o>
+      The file to which the output list will be written.
+  
+  B<--glob,-g>
+      Searches for file names with this pattern within --input_dir
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  Because distributed processes cannot all write to the same list file, each write their
+  own and we use this script to merge them into a single file, after the iteration steps
+  are finished.  Of course, this can also be used outside of workflow if you simply have
+  files that you want to merge.
+  
+  Why not use just cat with a redirector?  We could, but this allows us to log each file
+  as it is merged into the final version as well as do any needed sanity checking.
+  
+  =head1  INPUT
+  
+  The required input is simply a directory path, specified by --input_dir, containing the files 
+  you want to merge.  This will merge every file in the directory into the output
+  file unless you also pass a filter with the --glob option.  Glob allows one to specify
+  many of the same patterns for file identification as using grep on the command line, such
+  as * ? [ ] .
+  
+  =head1  OUTPUT
+  
+  Each of the files will be concatenated, with no content modification, onto the end of the
+  output file, specified with the --output_list option.  If the output file already exists
+  it will be overwritten.
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: split_fasta.pl
+    pod: |
+  =head1 NAME
+  
+  split_fasta.pl - split a single-sequence FASTA file into separate, optionally overlapping, portions.
+  
+  =head1 SYNOPSIS
+  
+      USAGE: split_fasta.pl 
+                  --input_file=/path/to/some_file.fsa 
+                  --output_dir=/path/to/somedir
+                  --fragment_length=50000
+                [ --overlap_length=1000 
+                  --file_numbering=incremental|positional
+                  --file_name_root=string
+                  --file_name_suffix=string
+                  --output_list=/path/to/somefile.list
+                  --bsml_map=/path/to/somefile.map.bsml
+                ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The input multi-fasta file to split.
+  
+  B<--output_dir,-o>
+      The directory to which the output files will be written.
+  
+  B<--fragment_length,-f>
+      Given in base pairs, the input sequence will be split into portions of this size (plus optional overhanging sequence)
+  
+  B<--overlap_length,-p>
+      Given in base pairs, a portion of sequence of this size will be included from the next fragment.
+  
+  B<--file_numbering,-n>
+      Either 'incremental' or 'positional'.  See the OUTPUT section for more information.
+  
+  B<--file_name_root,-r>
+      Forms the root part of the file name created.  See the OUTPUT section for more information.
+  
+  B<--file_name_suffix,-u>
+      Forms the suffix part of each file name created.  If omitted, defaults to 'fsa'. See the OUTPUT section for more information.
+  
+  B<--output_list,-s>
+      Write a list file containing the paths of each of the regular output files.  This may be useful
+      for later scripts that can accept a list as input.
+  
+  B<--bsml_map,-b>
+      Creates a bsml file containing information which maps each of the fasta files created back
+      onto the source file.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  This script takes a single-sequence FASTA file and breaks it into chunks for analysis. This 
+  is useful for performing analyses on large input files, such as large assemblies, using 
+  computational tools that do not handle or scale well with large input sequences (such as AAT).
+  
+  Aside from simply splitting the input sequence into user-defined chunks, each chunk can 
+  optionally include a defined-length overhang from the next sequence. This helps to ensure 
+  that no features will be missed over the break-point when performing an analysis. Gene 
+  finders, for example, will miss a gene call if the gene spans the region where the sequence 
+  was fragmented. 
+  
+  =head1  INPUT
+  
+  The input is defined with --input_file and should be a FASTA file with a single sequence.  File 
+  extensions are ignored.  For example:
+  
+      >gi53791237 Tragulus javanicus p97bcnt gene for p97Bcnt
+      ACAGGAGAAGAGACTGAAGAGACACGTTCAGGAGAAGAGCAAGAGAAGCCTAAAGAAATGCAAGAAGTTA
+      AACTCACCAAATCACTTGTTGAAGAAGTCAGGTAACATGACATTCACAAACTTCAAAACTAGTTCTTTAA
+      AAAGGAACATCTCTCTTTTAATATGTATGCATTATTAATTTATTTACTCATTGGCGTGGAGGAGGAAATG
+  
+  Whitespace is ignored within the input file.  See the OUTPUT section for more on creation of 
+  output files.
+  
+  =head1  OUTPUT
+  
+  As the input file is fragmented, multiple output files (one for each fragment) need to be written.  
+  How these files are named depends on the value of the optional --file_numbering and --file_name_root 
+  options.  If --file_name_root is not given, the first part of the file name will simply be the 
+  original file name.  The --file_numbering option will control the part of each output file name
+  after the root portion.  The default value is 'incremental'.  Examples are in order:
+  
+      original file name: somefile.fsa
+      --file_numbering='incremental'
+      --file_name_root was NOT PASSED
+      --file_name_suffix='fsa'
+      --fragment_length=50000
+  
+      somefile.fsa.1.fsa
+      somefile.fsa.2.fsa
+      somefile.fsa.3.fsa
+      ...
+  
+  But that's probably not what you want, since .fsa is now in the file name twice.  It would be better
+  to do it like this:
+  
+      original file name: somefile.fsa
+      --file_numbering='incremental'
+      --file_name_root='somefile'
+      --file_name_suffix='fsa'
+      --fragment_length=50000
+  
+      somefile.1.fsa
+      somefile.2.fsa
+      somefile.3.fsa
+      ...
+  
+  This may be fine for some applications, but these file names give no positional information
+  about how the contents of the file relate to the original, larger file.  If this is needed,
+  use --file_numbering=positional .  More examples:
+  
+  If, for example, your large file is called 'somefile.fsa' and
+  your --fragment_length is set to 50000, the files generated will be named like:
+  
+      original file name: somefile.fsa
+      --file_numbering='incremental'
+      --file_name_root='blastres'
+      --file_name_suffix='fsa'
+      --fragment_length=50000
+  
+      blast_res.0.fsa
+      blast_res.50000.fsa
+      blast_res.100000.fsa
+      ...
+  
+  The FASTA headers for each of the fragment files created will have a slightly modified header.
+  For each, the ID of the file (such as blast_res.0 above) will be inserted as the first element
+  of the header, followed by a space.
+  
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org

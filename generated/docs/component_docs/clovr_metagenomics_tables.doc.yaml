@@ -1,0 +1,157 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: clovr_metagenomics_tables
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - clovr_metagenomics_tables.config
+  - clovr_metagenomics_tables.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  input:
+    BLAST_LIST: ""
+    CLUSTER_LIST: ""
+    MAPPING_FILE: ""
+    ANNOTATION_FILE: ""
+    BSML_METAGENE_LIST: "\"\""
+    POLYPEPTIDE_CLUSTER_LIST: "\"\""
+    FASTA_FILE: "\"\""
+    PREFIX: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_PREFIX: $;OUTPUT_DIRECTORY$;/$;PREFIX$;
+    TABLE_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/tables.list
+    PAIRED_TABLE_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/pairedtables.list
+    RAW_ANTN_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/rawannotation.list
+  component:
+    COMPONENT_NAME: clovr_metagenomics_tables
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5810 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - clovr_metagenomics_tables workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create summary tables
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/clovr_metagenomics_tsvtables.pl
+      arg: "-b $;BLAST_LIST$; -c $;CLUSTER_LIST$; -m `cat $;MAPPING_FILE$;` -a $;ANNOTATION_FILE$; -f $;FASTA_FILE$; -y $;BSML_METAGENE_LIST$; -z $;POLYPEPTIDE_CLUSTER_LIST$; -p $;OUTPUT_PREFIX$;"
+    - name: create tables list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.tsv\""
+        - key: --output_list
+          value: $;TABLE_OUTPUT_LIST$;
+    - name: create paired tables list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.2tsv\""
+        - key: --output_list
+          value: $;PAIRED_TABLE_OUTPUT_LIST$;
+    - name: create raw annotation list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw.antn\""
+        - key: --output_list
+          value: $;RAW_ANTN_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

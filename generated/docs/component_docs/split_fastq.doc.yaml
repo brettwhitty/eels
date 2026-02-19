@@ -1,0 +1,239 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: split_fastq
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - split_fastq.config
+  - split_fastq.xml
+  - split_fastq.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # SEQ_NUMBER must be either integer. Default 20,000,000
+    SEQ_NUMBER: 20000000
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fastq
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_SPLIT_FASTQ_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fastq.list
+    SPLIT_FASTQ_INFO_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fastq.info.list
+  component:
+    COMPONENT_NAME: split_fastq
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: none
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - split_fastq
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create splitted fastq file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\d+\\.fastq\""
+        - key: --output_list
+          value: $;OUTPUT_SPLIT_FASTQ_FILE$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_split_fastq_file.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_split_fastq_file.stderr
+    - name: create splitted fastq info file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*num\\.txt\""
+        - key: --output_list
+          value: $;SPLIT_FASTQ_INFO_FILE$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_split_fastq_info_file.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_split_fastq_info_file.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - split_fastq
+  steps:
+    - name: split_fastq
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/split_fastq
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;
+        - key: --numseq
+          value: $;SEQ_NUMBER$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/split_fastq_file.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/split_fastq_file.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: split_fastq.pl
+    pod: |
+  =head1 NAME
+  
+  split_fastq.pl - program to split_fastq file.
+  
+  =head1 SYNOPSIS
+  
+      split_fasq.pl --i <fastq_file> [--o <output_dir>] 
+                   [--n < max number of sequences per split file>] [--e <exclude_regex>] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+     
+      --i <fastq_file>                         = fastq file to split.
+  
+      --o <output_dir>                               = output directory. Optional.
+  
+      --n < max number of sequences per split file>  = maximum number of reads in per output file. Optional.
+  
+      --e <exclude regex>                            = regex to exclude reads that match the regex. Optional.
+  
+      --v                                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  =head1 DIAGNOSTICS
+  
+  =head1 CONFIGURATION AND ENVIRONMENT
+  
+  
+  location
+  
+  =head1 DEPENDENCIES
+  
+  Bio::Perl
+  
+  =head1 INCOMPATIBILITIES
+  
+  =head1 BUGS AND LIMITATIONS
+  
+  There are no known bugs in this module. Please report problems to Amol Shetty
+  (ashetty@som.umaryland.edu). Patches are welcome.
+  
+  =head1 AUTHOR
+  
+   Weizhong Chang, Amol Carl Shetty
+   Bioinformatics Software Engineer
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  
+  =head1 LICENSE AND COPYRIGHT
+  
+  Copyright (c) 2010 Amol Carl Shetty (<ashetty@som.umaryland.edu>). All rights
+  reserved.
+  
+  This program is free software; you can distribute it and/or modify it under
+  GNU-GPL licenscing terms.
+  
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTIBILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

@@ -1,0 +1,226 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: remove_db_gene_syms_with_hypos
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - remove_db_gene_syms_with_hypos.config
+  - remove_db_gene_syms_with_hypos.xml
+  - remove_db_gene_syms_with_hypos.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    HOST: ""
+    USERNAME: ""
+    PASSWORD: ""
+    # Read password from file if the password should not be publicly seen. (optional)
+    PASSWORD_FILE: ""
+    # Set to 1 if database should be changed.  Leave 0, if it shouldn't, such as in test-runs
+    UPDATE: 1
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    INPUT_EXTENSION: txt
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;OUTPUT_TOKEN$;.out
+  component:
+    COMPONENT_NAME: remove_db_gene_syms_with_hypos
+    DESCRIPTION: Remove EC numbers and gene symbols that have hypothetical gene product names
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - remove_db_gene_syms_with_hypos workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - remove_db_gene_syms_with_hypos iterator
+  steps:
+    - name: remove_hypothetical_ec
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/remove_hypothetical_ec
+      params:
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --password_file
+          value: $;PASSWORD_FILE$;
+        - key: --server
+          value: $;HOST$;
+        - key: --database_file
+          value: $;I_FILE_PATH$;
+        - key: --update
+          value: $;UPDATE$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.ec..stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.ec.stderr
+    - name: remove_db_gene_syms_with_hypotheticals
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/remove_db_gene_syms_with_hypos
+      params:
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --password_file
+          value: $;PASSWORD_FILE$;
+        - key: --server
+          value: $;HOST$;
+        - key: --database_file
+          value: $;I_FILE_PATH$;
+        - key: --update
+          value: $;UPDATE$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gene_syms.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gene_syms.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: remove_hypothetical_ec.pl
+    pod: |
+  =head1 NAME
+  
+  remove_hypothetical_ec.pl - Will remove EC numbers from genes annotated as hypothetical proteins
+  
+  =head1 SYNOPSIS
+  
+   USAGE: remove_hypothetical_ec.pl
+  	--database_file=/path/to/db_file.txt
+  	--username=username
+  	--password=password
+  	--server=server
+  	--update=1
+  	--help
+  
+  =head1 OPTIONS
+  
+  B<--username,-u> 
+  	Database username
+  
+  B<--password,-p>
+  	Database password
+  
+  B<--server,-s>
+  	Database hostname
+  	
+  B<--database_file,-d>
+      Either a comma-separated or tab-separated file containing the following columns:
+      1) Name of Database
+      2) Locus_tag ID prefix
+      3) Path to a curate_common_names rules file
+      4+) Any other DB related information (to come later)	
+  
+  B<--update,-a> 
+  	Default = 0. Set to non-zero to make changes to database. Will not change anything by default
+  
+  B<--help,-h>
+  	Will print this message
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu
+  - script: remove_db_gene_syms_with_hypos.pl
+    pod: |
+  =head1 NAME
+  
+  remove_db_gene_syms_with_hypos.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: remove_db_gene_syms_with_hypos.pl
+         --database_file=/path/to/database.file
+         --username=db_user1
+         --password=db_password1
+         --update=1
+         [--password_file=/path/to/password/txt]
+         --server=annot_db.someplace.org
+  
+  =head1 OPTIONS
+  
+  B<--database_file,-d>
+      Either a comma-separated or tab-separated file containing the following columns:
+      1) Name of Database
+      2) Locus_tag ID prefix
+      3) Path to a curate_common_names rules file
+      4+) Any other DB related information (to come later)
+      
+  B<--username,-u>
+      The MySQL username of a user with SELECT permissions on --database.
+  
+  B<--password,-p>
+      The MySQL password for the username specified by --username on the MySQL server --server.
+  
+  B<--password_file,-P>
+  	Password stored in a text file.  Useful for keeping password non-visible.
+  
+  B<--server,-s>
+      The MySQL server on which the database specified by the --database option resides.
+      
+  B<--update,-a> 
+  	Default = 0. Set to non-zero to make changes to database. Will not change anything by default    
+      
+  B<--log,-l>
+      Optional.  Location of a log file to which error messages/warnings should be written.
+  
+  B<--help,-h>
+      Optional.  Print this documentation.
+  
+  =head1  DESCRIPTION
+  
+  This script removes, from the database, any entries with a gene symbol and a 'hypothetical protein' gene product name
+  Matches "hypothetical protein", "conserved hypothetical protein", "conserved domain protein", and "conserved protein"
+  
+  =head1  CONTACT
+      Shaun Adkins
+      sadkins@som.umaryland.edu

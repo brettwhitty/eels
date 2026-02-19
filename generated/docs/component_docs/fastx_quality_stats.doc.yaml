@@ -1,0 +1,219 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: fastx_quality_stats
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - fastx_quality_stats.config
+  - fastx_quality_stats.xml
+  - fastx_quality_stats.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to fastx toolkit binary directory
+    FASTX_BIN_DIR: $;FASTX_BIN$;
+    # quality string type for FastQ files (33 or 64)
+    QUALITY_STRING: 33
+    # use --z if input file is gzipped and --v for verbose summary
+    OTHER_ARGS: --z --v
+  input:
+    # path to input FastQ/A sequence file
+    INPUT_FILE: ""
+    # path to list of input FastQ/A sequence files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple input FastQ/A sequence files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: txt
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of quality statistics files for each input FastQ file
+    OUTPUT_QUALITY_STATS: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stats.list
+    # list of quality box plots for each input FastQ file
+    OUTPUT_QUALITY_BOX_PLOT: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.plots.list
+  component:
+    COMPONENT_NAME: fastx_quality_stats
+    DESCRIPTION: generates quality statistics for input FastX file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # fastx toolkit version
+    VERSION: fastx_toolkit-0.0.13
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - fastx_quality_stats
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create quality stats list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.base_quality_stats\\.txt\""
+        - key: --output_list
+          value: $;OUTPUT_QUALITY_STATS$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.stats.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.stats.stderr
+    - name: create box plot images list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.base_quality_stats\\.png\""
+        - key: --output_list
+          value: $;OUTPUT_QUALITY_BOX_PLOT$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.boxplot.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.boxplot.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - fastx_quality_stats
+  steps:
+    - name: fastx_quality_stats
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fastx_quality_stats
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --infile
+          value: $;I_FILE_PATH$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --quality
+          value: $;QUALITY_STRING$;
+        - key: --fastx_bin_dir
+          value: $;FASTX_BIN_DIR$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/fastx_quality_stats.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/fastx_quality_stats.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: fastx_quality_stats.pl
+    pod: |
+  =head1 NAME
+  
+  fastx_quality_stats.pl - script to execute fastx_quality_stats on FastA/Q file
+  
+  =head1 SYNOPSIS
+  
+      fastx_quality_stats.pl --i fastx file [--o outdir] [--b fastx_bin_dir] 
+                             [--Q quality(33 or 64)] [--z] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --i <fastx file>     = /path/to/fastx read file to analyze.
+  
+      --o <output dir>     = /path/to/output directory. Optional. [present working directory]
+  
+      --b <fastx_bin_dir>  = /path/to/fastx toolkit binary. Optional. [/usr/local/bin]
+  
+      --Q <quality format> = quality string format. Optional. [64]
+  
+      --z                  = indicates fastx_file is gzipped. Optional
+  
+      --v                  = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script executes the fastx_quality_stats script from the fastx toolkit.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

@@ -1,0 +1,200 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pick_otus_through_otu_table
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pick_otus_through_otu_table.config
+  - pick_otus_through_otu_table.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: phylogenetic
+  parameters:
+    QIIME_PATH: /opt/opt-packages/bioinf-v1r4b1/qiime
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    CUSTOM_PARAMETERS_FILE: ""
+    MAPPING_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OTU_TABLE_LIST: $;OUTPUT_DIRECTORY$;/results/OTU_Table.list
+    FASTTREE_FILE_LIST: $;OUTPUT_DIRECTORY$;/results/Fasttree.list
+  component:
+    COMPONENT_NAME: pick_otus_through_otu_table
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - QIIME pick_otus_through_otu_table workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: pick_otus_through_otu_table
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/pick_otus_through_otu_table.py
+      arg: "-i `cat $;INPUT_FILE_LIST$;` -p $;CUSTOM_PARAMETERS_FILE$; -o $;OUTPUT_DIRECTORY$;/results"
+      params:
+        - key: stderr
+          value: $;TMP_DIR$;/$;COMPONENT_NAME$;.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;COMPONENT_NAME$;.stdout
+    - name: create otu_table list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;/results
+        - key: --regex
+          value: "\".*_otu_table\\.txt\""
+        - key: --output_list
+          value: $;OTU_TABLE_LIST$;
+    - name: create fasttree list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;/results
+        - key: --regex
+          value: "\".*_rep_set\\.tre\""
+        - key: --output_list
+          value: $;FASTTREE_FILE_LIST$;
+    - name: make_otu_heatmap_html_file
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/make_otu_heatmap_html.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_heatmap/"
+    - name: make_otu_network
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/make_otu_network.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -m $;MAPPING_FILE$; -o $;OUTPUT_DIRECTORY$;/results/otu_network/"
+    - name: create otu_table summary output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/results/otu_summary_tables
+    - name: summarizing taxa analysis (phyla)
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/summarize_taxa.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_Level3.txt -L 3 -r 0"
+    - name: summarizing taxa analysis (class)
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/summarize_taxa.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_Level4.txt -L 4 -r 0"
+    - name: summarizing taxa analysis (order)
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/summarize_taxa.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_Level5.txt -L 5 -r 0"
+    - name: summarizing taxa analysis (family)
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/summarize_taxa.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_Level6.txt -L 6 -r 0"
+    - name: summarizing taxa analysis (genus)
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/summarize_taxa.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_Level7.txt -L 7 -r 0"
+    - name: create alpha rarefaction curves
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/alpha_rarefaction.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -m `cat $;MAPPING_FILE$;` -o $;OUTPUT_DIRECTORY$;/results/alpha_rarefaction/ -p $;CUSTOM_PARAMETERS_FILE$; -t `cat $;FASTTREE_FILE_LIST$;`"
+    - name: create beta diversity and PCoA plots
+      type: RunUnixCommand
+      executable: $;QIIME_PATH$;/bin/beta_diversity_through_3d_plots.py
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -m `cat $;MAPPING_FILE$;` -o $;OUTPUT_DIRECTORY$;/results/beta_diversity/ -p $;CUSTOM_PARAMETERS_FILE$; -t `cat $;FASTTREE_FILE_LIST$;`"
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

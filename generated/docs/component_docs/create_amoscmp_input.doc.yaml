@@ -1,0 +1,198 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: create_amoscmp_input
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - create_amoscmp_input.config
+  - create_amoscmp_input.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / assembly
+  parameters:
+  input:
+    INPUT_FILE: ""
+    SFF_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    TABLE_FILE_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.amoscmp.tbl
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fasta.list
+    QUAL_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.qual.list
+  component:
+    COMPONENT_NAME: create_amoscmp_input
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - create amoscmp input
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: run create_amoscmp_input
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_amoscmp_input
+      params:
+        - key: --input
+          value: $;INPUT_FILE$;
+        - key: --sff_file
+          value: $;SFF_FILE$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;
+    - name: create fasta list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fsa\""
+        - key: --output_list
+          value: $;FASTA_OUTPUT_LIST$;
+    - name: create qual list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.qual\""
+        - key: --output_list
+          value: $;QUAL_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_amoscmp_input.pl
+    pod: |
+  =head1 NAME
+  
+  create_amoscmp_input.pl - takes input from identify_human_contaminates to amoscmp
+  
+  =head1 SYNOPSIS
+  
+  USAGE: ./create_amoscmp_input.pl --input=/path/to/for_assembly_output --sff_file=/path/to/sff/file --output_directory=/path/to/output/directory
+  
+  =head1 OPTIONS
+  
+  B<--input, -i>
+  	text file produced by identify_human_contaminates.pl  called something like name.foramoscmp
+  	
+  B<--sff_file, -s>
+  	Raw reads in SFF format. This file should contain the sequences in the FASTA file used as input for nucmer.
+  	
+  B<--output_directory, -o>
+  	Output directory where FASTA and qual files will be written to.
+  	
+  B<--log, -l>
+  	Optional. Log file.
+  	
+  B<--debug, -d>
+  	Optional. Debug level.
+  	
+  =head1 DESCRIPTION
+  
+  =head1 INPUT
+  
+  Standard nucmer delta output.
+  
+  =head1 OUTPUT
+  
+  Both a FASTA file and quality file for the top nucmer alignment hits.
+  
+  =head1 CONTACT
+  
+  	Cesar Arze
+  	carze@som.umaryland.edu
+  	
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

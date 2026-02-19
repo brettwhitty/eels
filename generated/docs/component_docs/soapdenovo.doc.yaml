@@ -1,0 +1,285 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: soapdenovo
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - soapdenovo.config
+  - soapdenovo.xml
+  - soapdenovo.i1.xml
+  - component_docs/soapdenovo.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      From the BGI site for soapdenovo
+  </p>
+  <blockquote>
+      SOAPdenovo is a novel short-read assembly method that can build a de novo draft assembly for 
+      the human-sized genomes. The program is specially designed to assemble Illumina GA short reads. 
+      It creates new opportunities for building reference sequences and carrying out accurate analyses 
+      of unexplored genomes in a cost effective way.
+  </blockquote>
+  <h3>references</h3>
+  <p>
+      Ruiqiang Li, et al.<br>
+      De novo assembly of human genomes with massively parallel short read sequencing<br>
+      <a href='http://genome.cshlp.org/content/20/2/265.abstract'>Genome Research, 2010, Vol. 20, 265-272</a>
+  </p>
+  <h3>input</h3>
+  <p>
+      SOAPdenovo requires the creation of a configuration file that contains, among other
+      information, the location of the input files, and library information. For example:
+  <div class='code_container'> 
+      max_rd_len=75 #maximum read length
+      Then, for each library (for each set of input files if more than one is used in the project)
+      you need to create a block with the following structure:
+      [LIB] 
+      avg_ins = <LIBSZ> # average insert size 
+      reverse_seq = 0 # forward/reverse library 
+      asm_flags = 3 # reads used for contigging and scaffolding 
+      pair_num_cutoff = 2 # num of mates needed to scaffold across a gap 
+      map_len = 60 # minimum length of read mapping to a contig 
+      q1 = <prefix>.1.fastq # read1 in fastq 
+      q2 = <prefix>.2.fastq # read2 in fastq 
+      q=<prefix>.singleton.fastq
+  </div>
+  </p>
+  <h3>output</h3>
+  <p>
+      Output includes the raw output files (*.contig and *.scafSeq) and other files for advanced users.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: assembly
+  parameters:
+    # soapdenovo package binary
+    SOAPDENOVO_BIN: $;SOAPDENOVO_EXEC$;
+    # assembly process to run ('all','pregraph','contig','map' or 'scaff'). Default:all.
+    PROCESS: all
+    # K-mer size. Default:23.
+    KMER_SIZE: 23
+    # output file prefix
+    OUTPUT_PREFIX: output
+    # other arguments 
+    OTHER_ARGS: -R -M 3 -d 1
+  input:
+    # path to config file
+    INPUT_FILE: ""
+    # path to config list file
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple single mate sequence files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: config
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    OUTPUT_EXTENSION: ""
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of output files
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.out.list
+    # compressed input files
+    COMPRESS_OUTPUT: 0
+  component:
+    COMPONENT_NAME: soapdenovo
+    DESCRIPTION: novel short-read assembly method that builds denovo draft assembly for large genomes.
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # soapdenovo 
+    VERSION: SOAPdenovo version 1.04
+    SOAPDENOVO_EXEC: /usr/local/packages/SOAPdenovo-V1.04/SOAPdenovo
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - soapdenovo workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create list files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+        - key: --regex
+          value: "\".*\""
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - soapdenovo_ compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;
+    - name: soapdenovo
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/soapdenovo
+      params:
+        - key: --soapdenovo_exec
+          value: $;SOAPDENOVO_BIN$;
+        - key: --config_file
+          value: $;I_FILE_PATH$;
+        - key: --process
+          value: $;PROCESS$;
+        - key: --args
+          value: "\"-o $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;/$;OUTPUT_PREFIX$; -K $;KMER_SIZE$; $;OTHER_ARGS$;\""
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: soapdenovo.pl
+    pod: |
+  =head1 NAME
+  
+  soapdenovo.pl - Wrapper to facilitate the execution of SOAPdenovo through ergatis.
+  
+  =head1 SYNOPSIS
+  
+  USAGE ./soapdenovo.pl --soapdenovo_exe=/path/to/soapdenovo --process=soapdenovo_process --config_file=/path/to/config --args=<SOAPDENOVO ARGS>
+  
+  =head1 OPTIONS
+  
+  B<--soapdenovo_exe, -s>
+          Path to the soapdenovo executable.
+  
+  B<--process, -p> 
+          Choose soapdenovo process to run.
+  	Options include all, pregraph, contig, map, scaff
+          
+  B<--config_file, -c>
+          Config file with info location of input files, library info, etc
+  
+  B<--args, -a> 
+          Any command-line arguments that should be passed to soapdenovo
+  
+  B<--log, -l>
+          OPTIONAL. Log file
+          
+  =head1 DESCRIPTION
+  
+  The script executes the SOAPdenovo script from the SOAPdenovo software package (version 1.04).
+  
+  =head1 INPUT
+  
+  The main input for this script is the config file which has the following format:
+  	#maximal read length
+  	max_rd_len=75
+  	[LIB]
+  	avg_ins = <LIBSZ> # average insert size
+  	reverse_seq = 0 # forward/reverse library
+  	asm_flags = 3 # reads used for contigging and scaffolding
+  	pair_num_cutoff = 2 # num of mates needed to scaffold across a gap
+  	map_len = 60 # minimum length of read mapping to a contig
+  	q1 = <prefix>.1.fastq # read1 in fastq
+  	q2 = <prefix>.2.fastq # read2 in fastq
+  	q=<prefix>.singleton.fastq
+  
+  more details: http://soap.genomics.org.cn/soapdenovo.html
+  
+  =head1 CONTACT
+  
+          Kemi Abolude
+          kabolude@som.umaryland.edu

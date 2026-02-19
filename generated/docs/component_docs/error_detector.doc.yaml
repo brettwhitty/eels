@@ -1,0 +1,89 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: error_detector
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - error_detector.config
+  - error_detector.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: validation
+  parameters:
+    # Leave database parameter blank for BSML file consistency checks
+    USERNAME: ""
+    PASSWORD: ""
+    DATABASE: ""
+    SERVER: ""
+    # Relational database management system type e.g. sybase or postgresql
+    RDBMS: "[postgresql|mysql|sybase|oracle]"
+  input:
+    # This parameter can be a single file (or a comma-separated list of such files) containing a new-line separated list of .bsml documents to be loaded
+    INPUT_FILE_LIST: ""
+    INPUT_EXTENSION: bsml
+  output bsml2chado:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: error_detector
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6107 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - error detector workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: error detector
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/error_detector
+      params:
+        - key: --input_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --database
+          value: $;DATABASE$;
+        - key: --host
+          value: $;SERVER$;
+        - key: --user
+          value: $;USERNAME$;
+        - key: --pass
+          value: $;PASSWORD$;
+        - key: --log
+          value: $;TMP_DIR$;/error_detector.log
+        - key: --debug
+          value: 4

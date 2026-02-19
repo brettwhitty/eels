@@ -1,0 +1,221 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: core_qiime
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - core_qiime.config
+  - core_qiime.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: phylogenetic
+  parameters:
+    QIIME_PATH: /opt/opt-packages/qiime-1.8/qiime-1.8.0-release
+    REFERENCE_FASTA: /mnt/staging/data/clovr-greengenes-db/rep_set/97_otus.fasta
+  input:
+    INPUT_FILE: ""
+    CUSTOM_PARAMETERS_FILE: ""
+    MAPPING_FILE: ""
+    META_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OTU_TABLE_LIST: $;OUTPUT_DIRECTORY$;/results/OTU_Table.list
+    FASTTREE_FILE_LIST: $;OUTPUT_DIRECTORY$;/results/Fasttree.list
+    RESULTS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/results/Taxa.results.list
+    TABLE_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/results/Taxa.tables.list
+    PAIRED_TABLE_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/results/Taxa.pairedtables.list
+  component:
+    COMPONENT_NAME: core_qiime
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - core QIIME workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: pick open-reference otus
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/pick_open_reference_otus
+      arg: -i $;INPUT_FILE$; -p $;CUSTOM_PARAMETERS_FILE$; -f -o $;OUTPUT_DIRECTORY$;/results/uclust_picked_otus -r $;REFERENCE_FASTA$;
+      params:
+        - key: stderr
+          value: $;TMP_DIR$;/$;COMPONENT_NAME$;.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;COMPONENT_NAME$;.stdout
+    - name: create otu_table list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;/results
+        - key: --regex
+          value: "\".*otu_table_mc2_w_tax_no_pynast_failures\\.biom\""
+        - key: --output_list
+          value: $;OTU_TABLE_LIST$;
+    - name: create fasttree list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;/results
+        - key: --regex
+          value: "\".*rep_set\\.tre\""
+        - key: --output_list
+          value: $;FASTTREE_FILE_LIST$;
+    - name: make_otu_heatmap_html_file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/make_otu_heatmap_html
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_heatmap/"
+    - name: create otu_table summary output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/results/otu_summary_tables
+    - name: summarizing taxa analysis (phyla)
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/summarize_taxa
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_summary_tables -a"
+    - name: reformatting phyla assignment matrix
+      type: RunUnixCommand
+      executable: perl $;BIN_DIR$;/Create_Qiime_tables.pl
+      arg: -t $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_mc2_w_tax_no_pynast_failures_L3.txt -m $;META_FILE$; -p $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/phylum
+    - name: reformatting classes assignment matrix
+      type: RunUnixCommand
+      executable: perl $;BIN_DIR$;/Create_Qiime_tables.pl
+      arg: -t $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_mc2_w_tax_no_pynast_failures_L4.txt -m $;META_FILE$; -p $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/class
+    - name: reformatting orders assignment matrix
+      type: RunUnixCommand
+      executable: perl $;BIN_DIR$;/Create_Qiime_tables.pl
+      arg: -t $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_mc2_w_tax_no_pynast_failures_L5.txt -m $;META_FILE$; -p $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/order
+    - name: reformatting families assignment matrix
+      type: RunUnixCommand
+      executable: perl $;BIN_DIR$;/Create_Qiime_tables.pl
+      arg: -t $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_mc2_w_tax_no_pynast_failures_L6.txt -m $;META_FILE$; -p $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/family
+    - name: summarizing taxa analysis (genus)
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/summarize_taxa
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -o $;OUTPUT_DIRECTORY$;/results/otu_summary_tables -L 7 -a"
+    - name: reformatting genera assignment matrix
+      type: RunUnixCommand
+      executable: perl $;BIN_DIR$;/Create_Qiime_tables.pl
+      arg: -t $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/otu_table_mc2_w_tax_no_pynast_failures_L7.txt -m $;META_FILE$; -p $;OUTPUT_DIRECTORY$;/results/otu_summary_tables/genus
+    - name: create tables list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;/results/otu_summary_tables
+        - key: --regex
+          value: "\".*\\.tsv\""
+        - key: --output_list
+          value: $;TABLE_OUTPUT_LIST$;
+    - name: create paired tables list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;/results/otu_summary_tables
+        - key: --regex
+          value: "\".*\\.2tsv\""
+        - key: --output_list
+          value: $;PAIRED_TABLE_OUTPUT_LIST$;
+    - name: create beta diversity and PCoA plots
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/beta_diversity_through_plots
+      arg: "-i `cat $;OTU_TABLE_LIST$;` -m $;MAPPING_FILE$; -o $;OUTPUT_DIRECTORY$;/results/beta_diversity/ -p $;CUSTOM_PARAMETERS_FILE$; -t `cat $;FASTTREE_FILE_LIST$;` -f"
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

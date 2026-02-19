@@ -1,0 +1,292 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: metagene
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - metagene.config
+  - metagene.xml
+  - metagene.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / ORFs
+  parameters:
+    # maximum number of sequences per BSML output file
+    NUM_SEQS: 1000
+    # gene calls smaller than this cutoff value are discarded
+    CUTOFF: 180
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+    TBL_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.tbl.list
+    GBK_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.gbk.list
+  component:
+    COMPONENT_NAME: metagene
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    SKIP_WF_COMMAND: "get_seq_by_metagene,create tbl list,create gbk list"
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    ITERATORVAL: dtd
+    ITERATORVAL_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATORVAL$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # 
+    # These settings should only bet set if this component
+    # is being run as part of the oral metagenomics pipeline
+    # 
+    # Desired SeqIO output format.
+    # Should be a valid BioPerl SeqIo output format (i.e. "genbank")
+    OUT_FORMAT: null
+    # Prefix for sequence identifiers in newly genereated files
+    GENE_PREFIX: null
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+    - Iterator
+    - More postprocessing
+  command_sets:
+    - metagene workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATORVAL,$;ITERATOR_XML$;=ITERATORVAL_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/bsml_iterator.list\" /"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create bsml file iterator
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_metagene_bsml_iterator_list
+      arg: --bsml_list=$;BSML_OUTPUT_LIST$; --output=$;TMP_DIR$;/bsml_iterator.list --log=$;TMP_DIR$;/create_metagene_bsml_iterator_list.log --debug=4
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/metagene.dtdval.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/metagene.dtdval.stderr
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+    - name: create tbl list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.tbl\""
+        - key: --output_list
+          value: $;TBL_OUTPUT_LIST$;
+    - name: create gbk list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.gbk\""
+        - key: --output_list
+          value: $;GBK_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - metagene component
+  steps:
+    - name: metagene
+      type: RunUnixCommand
+      executable: $;METAGENE_EXEC$;
+      arg: $;I_FILE_PATH$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+    - name: metagene2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/metagene2bsml
+      params:
+        - key: --num_seqs
+          value: $;NUM_SEQS$;
+        - key: --cutoff
+          value: $;CUTOFF$;
+        - key: --fasta_input
+          value: $;I_FILE_PATH$;
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;I_FILE_BASE$;.$;COMPONENT_NAME$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --project
+          value: $;PROJECT$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+    - name: get_seq_by_metagene
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/get_seq_by_metagene
+      params:
+        - key: --fasta_input
+          value: $;I_FILE_PATH$;
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gbk
+        - key: --format
+          value: $;OUT_FORMAT$;
+        - key: --prefix
+          value: $;GENE_PREFIX$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: metagene2bsml.pl
+    pod: |
+  =head1  NAME
+  
+  metagene2bsml.pl  - converts raw metagene output into BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  metagene2bsml.pl -i raw_metagene_output.txt -f /path/to/fasta_input.fsa -o /path/to/outfile.bsml [-l /path/to/logfile.log] --project project_name --id_repository /path/to/id_repository
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The input raw output from metagene.
+  
+  B<--fasta_input,-f>
+      The full path to the fasta sequence file that was input to metagene.
+      
+  B<--output,-o>
+      The full path to the BSML output file to be created. 
+  
+  B<--debug,-d>
+      Debug level.  Use a large number to turn on verbose debugging.
+  
+  B<--log,-l>
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  Create BSML document from metagene output. Will extract nucleotide sequences for the
+  predicted ORFs.
+  
+  =head1  CONTACT
+          Brett Whitty
+          bwhitty@tigr.org

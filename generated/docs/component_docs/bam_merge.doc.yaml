@@ -1,0 +1,222 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bam_merge
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bam_merge.config
+  - bam_merge.xml
+  - bam_merge.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # samtools bin directory
+    SAMTOOLS_BIN: /usr/local/bin
+  input:
+    # path to list of files of fastq split information
+    INPUT_FILE_LIST: ""
+    # path files of fastq split information
+    INPUT_FILE: ""
+    # directory containing files of fastq split information
+    INPUT_DIRECTORY: ""
+    # path to list of bam file
+    INPUT_BAM_LIST: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: num.txt
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_BAM_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.file.list
+  component:
+    COMPONENT_NAME: bam_merge
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: none
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - bam_merge
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bam file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\"\\.bam\""
+        - key: --output_list
+          value: $;OUTPUT_BAM_FILE$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_bam_list.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_bam_list.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - bam_merge
+  steps:
+    - name: bam_merge
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bam_merge
+      params:
+        - key: --sBamInfoFile
+          value: $;I_FILE_PATH$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;
+        - key: --inBamFileList
+          value: $;INPUT_BAM_LIST$;
+        - key: --samtools_bin_dir
+          value: $;SAMTOOLS_BIN$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/bam_merge.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/bam_merge.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: bam_merge.pl
+    pod: |
+  =head1 NAME
+  
+  	bam_merge.pl - program to merge bam file from alignment of splitted fastq file 
+  
+  =head1 SYNOPSIS
+  
+      bam_merge.pl      --l [bam_file_list] --i <fastq_file_split_info> 
+                        [--o <output_dir>] [--b <bedtools_bin_dir>][--s <samtools_bin_dir>] 
+                        [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+     
+      --l <bam_file_list>                             = path to splitted BAM file list
+  
+      --i < fastq file split infomation>              = path to fastq file split information
+  
+      --o <output_dir>                                = output directory. Optional
+  
+      --s <samtools_bin_dir>                          = samtools binary directory. Optional
+  
+      --v                                             = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  =head1 DIAGNOSTICS
+  
+  
+  =head1 BUGS AND LIMITATIONS
+  
+  There are no known bugs in this module. Please report problems to Amol Shetty
+  (ashetty@som.umaryland.edu). Patches are welcome.
+  
+  =head1 AUTHOR
+  
+   Weizhong Chang
+   Bioinformatics Software Engineer
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  
+  =head1 LICENSE AND COPYRIGHT
+  
+  Copyright (c) 2010 Amol Carl Shetty (<ashetty@som.umaryland.edu>). All rights
+  reserved.
+  
+  This program is free software; you can distribute it and/or modify it under
+  GNU-GPL licenscing terms.
+  
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTIBILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

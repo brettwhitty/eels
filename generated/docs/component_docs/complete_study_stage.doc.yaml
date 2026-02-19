@@ -1,0 +1,119 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: complete_study_stage
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - complete_study_stage.config
+  - complete_study_stage.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    STUDY_STAGE_ID: ""
+    CONFIG: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # input_extension is only used in combination with input_directory
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: complete_study_stage
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6107 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - complete study stage workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: complete study stage
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/complete_study_stage
+      params:
+        - key: --study_stage_id
+          value: $;STUDY_STAGE_ID$;
+        - key: --config
+          value: $;CONFIG$;
+        - key: --log
+          value: $;TMP_DIR$;/complete_study_stage.log
+        - key: --debug
+          value: 4
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: complete_study_stage.pl
+    pod: |
+  =head1 NAME
+  
+   complete_study_stage.pl - Connects to IPD and marks a study stage of type "automatic annotation" with the status "complete"
+  
+  =head1 SYNOPSIS
+  
+  # USAGE : perl complete_study_stage.pl --study_stage_id=42
+  
+  
+  =head1 OPTIONS
+   --study_stage_id (-s)	--	ID of the study stage whose status needs to be changed to "complete"
+  
+   --log (-l)	--	Path to log file
+  
+   --help (-h)	--	Print this information
+  
+  
+  =head1 DESCRIPTION
+  
+   Takes the study stage ID from the options, and verifies that it is of type "automatic annotation".  If it is so, then the status is changed to "complete".
+   
+   This was intended to be used as an compnent in the Ergatis prokaryotic annotation pipeline during times when the user 
+  wishes to sync their pipeline progress with a sample and study from the IGS Projects Database (IPD)
+  
+  =head1 INPUT
+   None
+  
+  
+  =head1 OUTPUT
+   None
+  
+  
+  =head1 CONTACT
+  
+  	Shaun Adkins
+  	sadkins@som.umaryland.edu

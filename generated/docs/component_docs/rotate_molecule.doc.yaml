@@ -1,0 +1,142 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: rotate_molecule
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - rotate_molecule.config
+  - rotate_molecule.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / manipulation
+  parameters:
+    USERNAME: ""
+    PASSWORD: ""
+    DATABASE: ""
+    SERVER: ""
+    # Name of the assembly which needs to be rotated
+    ASSEMBLY: ""
+    # Coordinate on the assembly by which the molecule needs to be rotated
+    COORD: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: rotate_molecule
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - rotate_molecule workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$; $;TMP_DIR$;/id_mapping
+    - name: rotate_molecule
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/rotate_molecule
+      params:
+        - key: --host
+          value: $;SERVER$;
+        - key: --database
+          value: $;DATABASE$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --coord
+          value: $;COORD$;
+        - key: --asmbl
+          value: $;ASSEMBLY$;
+        - key: --log
+          value: $;TMP_DIR$;/rotate_molecule.log
+        - key: stdout
+          value: $;TMP_DIR$;/rotate_molecule.pl.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/rotate_molecule.pl.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: rotate_molecule.pl
+    pod: |
+  =head1 NAME
+  
+      rotate_molecule.pl  -  rotates a molecule and maps all features and evidence to new coordinate system given a coordinate as origin of replication
+  
+  =head1 USAGE
+  
+      rotate_molecule.pl -d <database> -u <username> -p <password> -h <host> -a <asmbl> -s <coordinate> [ -r ]
+  
+  =head1 OPTIONS
+  
+      -d <database>      database to use (Required)
+  
+      -u <username>      database username (Required)
+  
+      -p <password>      database password (Required)
+  
+      -t <host>	       database host (Required)
+  
+      -a <asmbl>         assembly to rotate (Required)
+  
+      -c <coordinate>    coordinate on current molecule that will be coordinate 1
+                         on new molecule. Origin of replication  (Required)
+  
+      -reverse 		reverse complement the sequence (Optional)
+  
+      -b                 debug level. Use a large number to turn on verbose debugging (Optional)
+  
+  =head1  DESCRIPTION
+  
+  The program rotates an assembly given a coordinate as the origin of replication. It will then map the features on the current molecule (everything in featureloc)
+  to the new molecule, and adjust the genome coords stored in the table. It fetches the feature coordinates from the current assembly and updates/overwrites the featureloc
+  table with the newly transformed coordinates. It also changes the assembly sequence accordingly in feature table.
+  
+  NOTE:  When choosing a coordinate for the --coordinate option, do note that the 5' coordinates in Manatee are 1 position greater than the fmin coordinate position in the Chado database.  The 3' and fmax positions are both the same in Manatee and Chado.  So when choosing your value, choose the Manatee coordinate.
+  
+  =head1  INPUT
+  
+      None.
+  
+  =head1  OUTPUT
+  
+      None
+  
+  =head1  CONTACT
+  
+      Sonia Agrawal
+      sagrawal@som.umaryland.edu
+  
+  =begin comment
+  
+      keywords: rotate, reverse complement, molecule transformation
+  
+  =end comment

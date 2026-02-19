@@ -1,0 +1,453 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: jaccard
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - jaccard.config
+  - jaccard.xml
+  - jaccard.i1.xml
+  - workflow/jaccard-master.ini
+  - workflow/jaccard.ini
+  - workflow/jaccardconf.ini
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: clustering
+  parameters:
+    PVALCUT: 1e-5
+    MAX_MULTI_ALIGNMENT: 30
+    PIDENTITY_CUTOFF: 80
+    PSIMILARITY_CUTOFF: ""
+    PCOVERAGE_CUTOFF: 70
+    LINKSCORE: .6
+    # set this to 1 if the Seq-data-import.identifiers in the input BSML are not guaranteed to match the 
+    # ids of the corresponding linked features
+    USE_FEATURE_IDS_IN_FASTA: 0
+  input:
+    # this should be the annotation bsml data
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # this is only used when iterating over an input directory
+    INPUT_EXTENSION: bsml
+    # this should be the all-vs-all blast data
+    MATCH_BSML_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+  component:
+    COMPONENT_NAME: jaccard
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - jaccard workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: generate organism list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_genome_file_iterator_list
+      params:
+        - key: --input_file_list
+          value: "'$;INPUT_FILE_LIST$;'"
+        - key: --input_file
+          value: "'$;INPUT_FILE$;'"
+        - key: --input_directory
+          value: "'$;INPUT_DIRECTORY$;'"
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/$;ITERATOR1$;.list
+    - name: merge fasta list files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/merge_lists
+      params:
+        - key: --input_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_list
+          value: $;FASTA_OUTPUT_LIST$;
+        - key: --glob
+          value: "'$;COMPONENT_NAME$;.fsa.list'"
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - jaccard compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: make asmbl lookup
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bsml2idlookup
+      params:
+        - key: --bsml_list
+          value: $;I_GENOME_LIST_FILE$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.asmbl.lookup
+    - name: generate clusters
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/clusterBsmlPairwiseAlignments
+      params:
+        - key: --bsmlSearchList
+          value: $;MATCH_BSML_FILE_LIST$;
+        - key: --asmbl_lookup
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.asmbl.lookup
+        - key: --log
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.cluster.log
+        - key: --linkscore
+          value: $;LINKSCORE$;
+        - key: --percent_identity
+          value: $;PIDENTITY_CUTOFF$;
+        - key: --percent_similarity
+          value: $;PSIMILARITY_CUTOFF$;
+        - key: --percent_coverage
+          value: $;PCOVERAGE_CUTOFF$;
+        - key: --p_value
+          value: $;PVALCUT$;
+        - key: --outfile
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.jkcluster.out
+        - key: --cluster_path
+          value: $;CLUSTER_PATH$;
+    - name: jaccard2fasta
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/CogProteinFastaNoMap
+      params:
+        - key: --cogFile
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.jkcluster.out
+        - key: --bsmlModelList
+          value: $;I_GENOME_LIST_FILE$;
+        - key: --outputDir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;
+        - key: --maxCogSeqCount
+          value: $;MAX_MULTI_ALIGNMENT$;
+        - key: --use_feature_ids_in_fasta
+          value: "'$;USE_FEATURE_IDS_IN_FASTA$;'"
+        - key: --outputToken
+          value: $;GROUP_NUMBER$;
+    - name: create fasta list
+      type: RunUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$; -name '*.fsa'"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.$;COMPONENT_NAME$;.fsa.list
+
+# Workflow INI: jaccard-master.ini
+workflow_ini_jaccard-master.ini:
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.directory: "'$;TMP_DIR$;'"
+    param.extension: glist
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  generate_match_input:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;MATCH_BSML_FILE_LIST$;'"
+    param.file: "'$;MATCH_BSML_FILE$;'"
+    param.directory: "'$;MATCH_BSML_DIRECTORY$;'"
+    param.output: $;TMP_DIR$;/match.input.list
+    arg: --listfiles
+  generate_organism_list:
+    param.command: $;BIN_DIR$;/generate_list_by_genome
+    param.filelist: "'$;QUERY_BSML_FILE_LIST$;'"
+    param.file: "'$;QUERY_BSML_FILE$;'"
+    param.directory: "'$;QUERY_BSML_DIRECTORY$;'"
+    param.output_dir: $;TMP_DIR$;
+    param.output_extension: glist
+  merge_fasta_list_files:
+    param.command: $;BIN_DIR$;/merge_lists
+    param.--input_dir: $;TMP_DIR$;
+    param.--output_list: $;FASTA_OUTPUT_LIST$;
+    param.--glob: "'*/*.$;NAME$;.fsa.list'"
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: jaccard.ini
+workflow_ini_jaccard.ini:
+  create_fasta_list:
+    param.command: find
+    arg: "$;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$; -name '*.fsa'"
+    param.stdout: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.fsa.list
+  empty:
+  generate_asmbl_input:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;GLIST_FILE$;'"
+    param.output: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.asmbl.input.list
+    arg: --listfiles
+  generate_clusters:
+    param.command: $;BIN_DIR$;/clusterBsmlPairwiseAlignments
+    param.--bsmlSearchList: $;TMP_DIR$;/match.input.list
+    param.--asmbl_lookup: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.asmbl.lookup
+    param.--log: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.cluster.log
+    param.--linkscore: $;LINKSCORE$;
+    param.--percent_identity: $;PIDENTITY_CUTOFF$;
+    param.--p_value: $;PVALCUT$;
+    param.--outfile: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.jkcluster.out
+  jaccard2fasta:
+    # generate FASTA input for clustal
+    param.command: $;BIN_DIR$;/CogProteinFasta
+    param.--cogFile: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.jkcluster.out
+    param.--bsmlModelList: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.asmbl.input.list
+    param.--outputDir: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;
+    param.--maxCogSeqCount: $;MAX_MULTI_ALIGNMENT$;
+  make_asmbl_lookup:
+    param.command: $;BIN_DIR$;/bsml2idlookup
+    param.--bsml_list: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.asmbl.input.list
+    param.--output: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.asmbl.lookup
+
+# Workflow INI: jaccardconf.ini
+workflow_ini_jaccardconf.ini:
+  _header:
+    # configuration file for the Jaccard workflow
+  include jaccard:
+    $;SHARED_CONFIG$;: ""
+  input jaccard:
+    $;QUERY_BSML_FILE_LIST$;: ""
+    $;QUERY_BSML_FILE$;: ""
+    $;QUERY_BSML_DIRECTORY$;: ""
+    $;MATCH_BSML_FILE_LIST$;: ""
+    $;MATCH_BSML_FILE$;: ""
+    $;MATCH_BSML_DIRECTORY$;: ""
+  output jaccard:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;FASTA_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.fsa.list
+  parameters jaccard:
+    $;PVALCUT$;: 1e-5
+    $;MAX_MULTI_ALIGNMENT$;: 30
+    $;PIDENTITY_CUTOFF$;: 80
+    $;LINKSCORE$;: .6
+  workflowdocs jaccard:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: jaccard
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/jaccard-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/jaccard-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/jaccard.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/jaccard_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_genome_file_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  generate_input_list.pl - Default output is a workflow iterator that
+  can be used to iterator over a set of files
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  generate_input_list
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION
+  - script: merge_lists.pl
+    pod: |
+  =head1 NAME
+  
+  merge_lists.pl - Iterate through a directory of lists and merge them into a single list.
+  
+  =head1 SYNOPSIS
+  
+      USAGE: merge_lists.pl 
+                  --input_dir=/some/dir/
+                  --output_list=/some/path/something.list
+                [ --glob='*.list' ]
+  
+  =head1 OPTIONS
+  
+  B<--input_dir,-i>
+      The input directory containing the list files.
+  
+  B<--output_list,-o>
+      The file to which the output list will be written.
+  
+  B<--glob,-g>
+      Searches for file names with this pattern within --input_dir
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  Because distributed processes cannot all write to the same list file, each write their
+  own and we use this script to merge them into a single file, after the iteration steps
+  are finished.  Of course, this can also be used outside of workflow if you simply have
+  files that you want to merge.
+  
+  Why not use just cat with a redirector?  We could, but this allows us to log each file
+  as it is merged into the final version as well as do any needed sanity checking.
+  
+  =head1  INPUT
+  
+  The required input is simply a directory path, specified by --input_dir, containing the files 
+  you want to merge.  This will merge every file in the directory into the output
+  file unless you also pass a filter with the --glob option.  Glob allows one to specify
+  many of the same patterns for file identification as using grep on the command line, such
+  as * ? [ ] .
+  
+  =head1  OUTPUT
+  
+  Each of the files will be concatenated, with no content modification, onto the end of the
+  output file, specified with the --output_list option.  If the output file already exists
+  it will be overwritten.
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: clusterBsmlPairwiseAlignments.pl
+    pod: |
+  =head1 NAME
+  
+  clusterBsmlPairwiseAlignments.pl - 
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  clusterBsmlPairwiseAlignments.pl  -b bsml_list -m match_list -k linkscore -p percent_identity -u p_value [-l log] [-h help] [-o outdir] [-p percent_identity] [-u p_value]
+  =head1 OPTIONS
+  
+  =over 8
+  
+  =item B<--bsml_list,-b>
+      
+      List of bsml files containing polypeptides and assemblies
+  
+  =item B<--bsmlSearchList,-m>
+      
+      List of bsml files containing pairwise matches
+  
+  =item B<--log,-l>
+      
+    log file
+  
+  =item B<--linkscore,-k>
+  
+      Link score: <0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9>
+  
+  =item B<--outdir, -o>
+      
+      Output directory for the Jaccard cluster files. Defaults to current directory
+  
+  =item B<--percent_identity, -p>
+      
+      Percent identity threshold value.  Default is set to 75 
+  
+  =item B<--p_value, -u>
+      
+      P_value threshold value.  Default is set to 1e-15
+  
+  =item B<--help,-h>
+  
+      Print this help
+  
+  =item B<--debug,-d>
+  
+      Debug level
+  
+  =back
+  
+  =head1 DESCRIPTION
+  
+      clusterBsmlPairwiseAlignments.pl - Read BSML pairwise search encoding documents and produce Jaccard cluster file(s)

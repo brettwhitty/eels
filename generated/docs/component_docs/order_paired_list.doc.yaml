@@ -1,0 +1,128 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: order_paired_list
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - order_paired_list.config
+  - order_paired_list.xml
+  - component_docs/order_paired_list.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+       This component takes in a list of paired files and arranges them in the correct order- first pair then second.
+  </p>
+  <h3>input</h3>
+  <p>
+       The input is a list file containing exactly two files.
+  </p>
+  <h3>output</h3>
+  <p>
+       The output is a list file.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  input:
+    # Input list file
+    INPUT_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.list
+  component:
+    COMPONENT_NAME: order_paired_list
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6161 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - order_paired_list workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: order_paired_list
+      type: RunDistributedCommand
+      executable: $;BIN_DIR$;/order_paired_list
+      params:
+        - key: --input_list
+          value: $;INPUT_FILE$;
+        - key: --output_list
+          value: $;OUTPUT_FILE$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: order_paired_list.pl
+    pod: |
+  =head1 NAME
+  
+  order_paired_list.pl - ensures list file orders files correctly: member 1 then member 2
+  
+  =head1 SYNOPSIS
+  
+  USAGE: order_paired_list.pl 
+              --input_list=/path/to/somefile.list 
+              --output_list=/path/to/somefile.list 
+  
+  =head1 OPTIONS
+  
+  B<--input_list,-i>
+      Required. The input list file containing the paths of two paired files.
+  
+  B<--output_list,-o>
+      Optional. List file containing the paths of two paired files in the correct order: member 1 then 
+      member 2. Output will be named ordered_files.list if user does not provide one.
+  
+  =head1  DESCRIPTION
+  
+  This script is used to reorder a list file containing two sequences. The script ensures that the list
+  file contains exactly two paths, and that they are in the correct order. 
+  
+  =head1  INPUT
+  
+  The input is defined with --input_list and should be a single list file. The file should contain paths 
+  to exactly two fasta or fasq files, each representing a member of the paired end reads. The header for
+  the fasta/fastq files must indicate the member of the pair in one of two ways:
+  - end with "/1" or "/2" e.g. @HWUSI-EAS100R:6:73:941:1973#0/1
+  - contain " 1:" or " 2:" e.g. @EAS139:136:FC706VJ:2:2104:15343:197393 1:Y:18:ATCACG
+   
+  
+  =head1  CONTACT
+  
+      Kemi Abolude
+      kabolude@som.umaryland.edu

@@ -1,0 +1,137 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: prokpipe_consistency_checks
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - prokpipe_consistency_checks.config
+  - prokpipe_consistency_checks.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: validation
+  parameters:
+    # Leave database parameter blank for BSML file consistency checks
+    USERNAME: ""
+    PASSWORD: ""
+    DATABASE: ""
+    SERVER: ""
+    # Relational database management system type e.g. sybase or postgresql
+    RDBMS: "[postgresql|mysql|sybase|oracle]"
+  input:
+    # This parameter can be a single file (or a comma-separated list of such files) containing a new-line separated list of .bsml documents to be loaded
+    INPUT_FILE_LIST: ""
+    INPUT_EXTENSION: bsml
+  output bsml2chado:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: prokpipe_consistency_checks
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6107 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - prokpipe consistency checks workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: prokpipe consistency checks
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/prokpipe_consistency_checks
+      params:
+        - key: --input_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --database
+          value: $;DATABASE$;
+        - key: --host
+          value: $;SERVER$;
+        - key: --user
+          value: $;USERNAME$;
+        - key: --pass
+          value: $;PASSWORD$;
+        - key: --log
+          value: $;TMP_DIR$;/error_detector.log
+        - key: --debug
+          value: 4
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: prokpipe_consistency_checks.pl
+    pod: |
+  =head1 NAME
+  prokpipe_consistency_checks.pl
+      Automated pipeline and database error detection
+      Checks BSML files and DB for consistencies and either warns or errors out
+  	dependng on the failed check and its severity
+      Used in the Prokaryotic Annotation Pipeline run by Ergatis
+  
+  =head1 OPTIONS (more to be added later)
+  B<--input_list, -i>
+      A list containing the paths of .bsml files
+  
+  B<--output_dir, -o>
+      Name of the output directory
+  
+  B<--database, -d>
+      Use a specified database instead of an input list
+  
+  B<--host, -h>
+      Host of the database if you are checking that
+  
+  B<--user, -u>
+      Username for the database
+  
+  B<--pass, -p>
+      Password for your username
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help>
+      Print this message
+  
+  =head1 SYNOPSIS
+  
+      For checking BSML lists:
+      error_detector.pl -i path/to/files.bmsl.list -o path/to/output/dir
+  
+      For checking databases:
+      prokpipe_consistency_checks.pl -d database -h host -u username -p password -o path/to/output/dir
+  
+  =head1 CONTACT
+      Shaun Adkins
+      sadkins@som.umaryland.edu

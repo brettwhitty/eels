@@ -1,0 +1,103 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bam2sam
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bam2sam.config
+  - bam2sam.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # additional options for samtools view
+    VIEW_OPTIONS: -h
+    # additional options for samtools sort
+    SORT_OPTIONS: ""
+    # the input SAM file, by default the Input File from below
+    INPUT_BAM_FILE: /local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/sam2bam/185_default/test.name_sorted.bam
+    OTHER_ARGS: ""
+  input:
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: bam2sam
+    DESCRIPTION: converts SAM files to indexed BAM
+    SAMTOOLS_PATH: $;SAMTOOLS_EXEC$;
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: samtools-0.1.16
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - bam2sam workflow
+  steps:
+    - name: Create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: Create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: bam2sam
+      type: RunDistributedCommand
+      executable: $;BIN_DIR$;/bam2sam
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --samtools-exec
+          value: $;SAMTOOLS_PATH$;
+        - key: --view_options
+          value: $;VIEW_OPTIONS$;
+        - key: --sort_options
+          value: $;SORT_OPTIONS$;
+        - key: --input_file
+          value: $;INPUT_BAM_FILE$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/bam2sam.stderr
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/bam2sam.stdout
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: bam2sam.pl
+    pod: |
+  =head1 NAME
+  
+  bam2sam.pl - convert bam file back to sam file
+  
+  =head1 SYNOPSIS
+  
+    USAGE: bam2sam.pl [
+  	--samtools-exec=path to samtools binary
+  	--help
+  	]

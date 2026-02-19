@@ -1,0 +1,123 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: gff3_to_gbrowse
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - gff3_to_gbrowse.config
+  - gff3_to_gbrowse.xml
+  - gff3_to_gbrowse.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    # Path to the directory where GBrowse configuration files are stored
+    GBROWSE_CONF_DIRECTORY: ""
+    # Path to the GBrowse master configuration file (GBrowse.conf)
+    GBROWSE_MASTER_CONF: ""
+    # A template file that will be used by the component to generate the GBrowse database configuration.
+    GBROWSE_CONF_TEMPLATE: ""
+    # The source organism whose sequence data will be loaded into GBrowse
+    ORGANISM: ""
+    # Hostname for MySQL server where sequence data will be loaded
+    HOSTNAME: ""
+    # Desired name for database where sequence data will be loaded
+    DB_NAME: ""
+    USERNAME: ""
+    PASSWORD: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: gff3
+    # Optional SAM file that can be mapped against the sequence data loaded into GBrowse
+    SAM_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: gff3_to_gbrowse
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6089 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - gff3_to_gbrowse workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - gff3_to_gbrowse compute
+  steps:
+    - name: gff32GBrowse
+      type: RunUnixCommand
+      executable: $;PYTHON_EXEC$; $;BIN_DIR$;/gff3_to_gbrowse.py
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+        - key: --input_gff3_file
+          value: $;I_FILE_PATH$;
+        - key: --input_sam_file
+          value: $;SAM_FILE$;
+        - key: --gbrowse_conf_template
+          value: $;GBROWSE_CONF_TEMPLATE$;
+        - key: --organism
+          value: "\"$;ORGANISM$;\""
+        - key: --gbrowse_master_conf
+          value: $;GBROWSE_MASTER_CONF$;
+        - key: --gbrowse_conf_dir
+          value: $;GBROWSE_CONF_DIRECTORY$;
+        - key: --database
+          value: "\"$;DB_NAME$;\""
+        - key: --hostname
+          value: $;HOSTNAME$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;

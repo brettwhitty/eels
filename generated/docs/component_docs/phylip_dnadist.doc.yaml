@@ -1,0 +1,616 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: phylip_dnadist
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - phylip_dnadist.config
+  - phylip_dnadist.xml
+  - phylip_dnadist.i1.xml
+  - component_docs/phylip_dnadist.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  <p>
+      This component is a parallelized version of the dnadist utility from Joe 
+      Felsenstein's PHYLIP package.
+  </p>
+  
+  <h3>references</h3>
+  <p>
+    <ul>
+     <li><a href='http://evolution.genetics.washington.edu/phylip.html'>Felsenstein, J. 2005. PHYLIP (Phylogeny Inference Package) version 3.6. Distributed by the author. Department of Genome Sciences, University of Washington, Seattle.</a></li>
+     <li>Felsenstein, J. 1989. PHYLIP - Phylogeny Inference Package (Version 3.2). Cladistics 5: 164-166.</li>
+    </ul>
+  </p>
+  
+  <h3>algorithm</h3>
+      dnadist supports several distance calculation methods. See the <a href='http://evolution.genetics.washington.edu/phylip.html'>PHYLIP</a> 
+      documentation for details.
+  
+  <h3>input</h3>
+  <p>
+      The dnadist component accepts essentially the same input as dnadist itself.
+  </p>
+  
+  <h3>implemented options</h3>
+  <p>
+     <ul>
+          <li><span style='font-weight: bold;'>$;INPUT_FILE$;</span> - path to a file containing aligned sequence data in the format accepted by dnadist, e.g.:
+  <div class='code_container' style='font-family: Courier,monospace;'>
+     5   13
+  Alpha     AACGTGGCCACAT
+  Beta      AAGGTCGCCACAC
+  Gamma     CAGTTCGCCACAA
+  Delta     GAGATTTCCGCCT
+  Epsilon   GAGATCTCCGCCC
+  </div>
+  In this test data set (from the dnadist documentation), 5 = the number of species/sequences and 13 = the number of characters (i.e., the sequence length).
+  </li>
+          <li><span style='font-weight: bold;'>$;CONTROL_FILE$;</span> - a partial dnadist "control file" of the type accepted by dnadist.  A dnadist control file is nothing more than a set of commands, one per line, that can be piped into dnadist instead of interacting manually with its menu-based interface.  This control file, if specified, should NOT include an initial line to set the input file name (this line will be inserted based on the INPUT_FILE parameter) and it also should NOT include the final 'Y' response used to run the calculation.
+  
+  For example, here is a control file that: changes the distance matrix format to Lower-triangular ("L"); changes the Transition/transversion ratio from the default to 2.1 ("T", "2.1"); and changes the distance measure from the default to Kimura 2-parameter ("D"):
+  <div class='code_container' style='font-family: Courier,monospace;'>
+  L
+  T
+  2.1
+  D
+  </div>
+  </li>
+          <li><span style='font-weight: bold;'>$;GROUP_SIZE$;</span> - Number of pairwise comparisons to be performed by each distributed dnadist worker process.</li>
+     </ul>
+  </p>
+  
+  <h3>output</h3>
+  <p>
+      The output of dnadist is a distance matrix, the format of which will depend on the dnadist control file (e.g., in the case where the lower triangular output has been selected.)
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: phylogeny
+  input:
+    # Path to a file containing aligned sequence data in the format accepted by dnadist, e.g.
+    # 
+    #    3   6
+    # seq1      AACGTG
+    # seq2      AGGGTC
+    # seq3      CAGCCC
+    # 
+    # The first number (3) is the number of sequences, the second (6) is the aligned sequence
+    # length.  The id of each sequence must fit into 10 characters.  See the dnadist documentation
+    # for more details..
+    # 
+    INPUT_FILE: ""
+  parameters:
+    # Control file to pass to dnadist.  Note that the control file (which is simply a way to
+    # specify noninteractive responses to the dnadist program's interactive menu) must not
+    # include either: 1. an initial line setting the input file name, or 2. a "Y" on the final
+    # line (used to tell dnadist to accept the inputs and start running.)  These initial and
+    # final portions of the control file will be generated automatically by the component, and
+    # a control file will be generated automatically if none is provided.  It is also highly
+    # recommended that dnadist NOT be run with the option to print progress messages, since 
+    # this can generate a significant amount of NFS traffic/IO activity.  By default the parallel
+    # version of dnadist at IGS has this option disabled.
+    # 
+    CONTROL_FILE: ""
+    # Number of pairwise comparisons to be performed by each distributed dnadist worker process.
+    # 
+    GROUP_SIZE: 1000000
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    RESULTS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.results.list
+  component:
+    COMPONENT_NAME: phylip_dnadist
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Generate dnadist control file
+    - Split dnadist work amongst dnadist_worker processes
+    - Run distributed dnadist jobs on the grid
+    - Iterator
+    - Concatenate and sort distributed worker output
+    - Output final distance matrix using dnadist_combiner
+  command_sets:
+    - PHYLIP dnadist
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;OUTPUT_DIRECTORY$;/dnadist_worker_jobs.i1.list,$;NODISTRIB$;=0,$;GROUP_NUMBER$;=1\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create dnadist control file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_dnadist_control_file
+      params:
+        - key: --dnadist_seq_file
+          value: $;INPUT_FILE$;
+        - key: --control_file
+          value: $;CONTROL_FILE$;
+        - key: --output_control_file
+          value: $;OUTPUT_DIRECTORY$;/dnadist_control_file.txt
+    - name: create dnadist iterator list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_dnadist_iterator_list
+      params:
+        - key: --dnadist_seq_file
+          value: $;INPUT_FILE$;
+        - key: --output_iterator_list
+          value: $;OUTPUT_DIRECTORY$;/dnadist_worker_jobs.i1.list
+        - key: --group_size
+          value: $;GROUP_SIZE$;
+        - key: --log
+          value: $;TMP_DIR$;/dnadist_make_iterator.log
+        - key: stdout
+          value: $;TMP_DIR$;/dnadist_make_iterator.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/dnadist_make_iterator.stderr
+    - name: concatenate and sort dnadist_worker output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/concat_and_sort_dnadist_worker_output
+      arg: --delete_tmp_files --delete_worker_files --worker_output_is_sorted
+      params:
+        - key: --worker_output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/sorted_dnadist_worker_output.txt
+        - key: --worker_output_regex
+          value: "'^\\S+\\.distances$'"
+        - key: --log
+          value: $;TMP_DIR$;/concat_and_sort_dnadist_worker_output.log
+        - key: stdout
+          value: $;TMP_DIR$;/concat_and_sort_dnadist_worker_output.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/concat_and_sort_dnadist_worker_output.stderr
+    - name: dnadist_combiner - print distance matrix
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dnadist_combiner_wrapper
+      params:
+        - key: --dnadist_combiner_path
+          value: $;DNADIST_COMBINER$;
+        - key: --control_file
+          value: $;OUTPUT_DIRECTORY$;/dnadist_control_file.txt
+        - key: --sorted_worker_output
+          value: $;OUTPUT_DIRECTORY$;/sorted_dnadist_worker_output.txt
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/dnadist_output.txt
+        - key: log
+          value: $;TMP_DIR$;/dnadist_combiner.log
+        - key: stdout
+          value: $;TMP_DIR$;/dnadist_combiner.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/dnadist_combiner.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Sort output file
+    - Delete unsorted output
+  command_sets:
+    - PHYLIP dnadist (distributed dnadist process)
+  steps:
+    - name: dnadist_worker_wrapper
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dnadist_worker_wrapper
+      params:
+        - key: --dnadist_worker_path
+          value: $;DNADIST_WORKER$;
+        - key: --control_file
+          value: $;OUTPUT_DIRECTORY$;/dnadist_control_file.txt
+        - key: --start_cell
+          value: $;I_START_CELL$;
+        - key: --end_cell
+          value: $;I_END_CELL$;
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_START_CELL$;-$;I_END_CELL$;.distances.unsorted
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_START_CELL$;-$;I_END_CELL$;.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_START_CELL$;-$;I_END_CELL$;.stdout
+    - name: sort output
+      type: RunUnixCommand
+      executable: $;DNADIST_SORT$;
+      arg: "-n $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_START_CELL$;-$;I_END_CELL$;.distances.unsorted > $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_START_CELL$;-$;I_END_CELL$;.distances"
+    - name: remove unsorted output
+      type: RunUnixCommand
+      executable: rm
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_START_CELL$;-$;I_END_CELL$;.distances.unsorted
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_dnadist_control_file.pl
+    pod: |
+  =head1  NAME 
+  
+  create_dnadist_control_file.pl - Creates a complete dnadist control file from a partial control file.
+  
+  =head1 SYNOPSIS
+  
+  create_dnadist_control_file.pl
+           --dnadist_seq_file=/path/to/dnadist_aligned_seqs.txt
+           --output_control_file=/path/to/complete_control_file.txt
+          [--control_file=/path/to/dnadist_partial_control_file.txt
+           --log=/path/to/some.log
+           --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--dnadist_seq_file,-s> 
+      path to the file of aligned sequences on which dnadist is to be run.
+  
+  B<--control_file,-c>
+      optional.  path to a dnadist control file that does not contain either: 
+      1. an input file name as its first line or 2. a 'Y' as its final line.
+  
+  B<--output_control_file,-o>
+      path to the (complete) output control file.
+  
+  B<--log,-l> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      already exists.
+      
+  B<--debug,-d> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1 DESCRIPTION
+  
+  Creates a complete dnadist control file from a partial control file.  Takes as
+  its (optional) input a partial control file and then prepends the input file name 
+  and appends a trailing 'Y' line.
+  
+  =head1 INPUT
+  
+  A dnadist sequence file and a partial dnadist control file (i.e., one that does not
+  set the input sequence file name or end with a trailing 'Y' line.)  See the PHYLIP
+  dnadist documentation for more information on these file formats.
+  
+  =head1 OUTPUT
+  
+  Writes a complete dnadist control file to the file specified by --output_control_file
+  
+  =head1 CONTACT
+  
+      Jonathan Crabtree
+      jonathancrabtree@gmail.com
+  - script: create_dnadist_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_dnadist_iterator_list.pl - Create ergatis/workflow iterator for distributed dnadist job.
+  
+  =head1 SYNOPSIS
+  
+  create_dnadist_iterator_list.pl 
+           --dnadist_seq_file=/path/to/dnadist_aligned_seqs.txt
+           --output_iterator_list=/path/to/output_iterator_list.txt
+          [--group_size=1000
+           --log=/path/to/some.log
+           --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--dnadist_seq_file,-s> 
+      path to the file of aligned sequences on which dnadist is to be run. (used only
+      to determine how many sequences there are.)
+  
+  B<--output_iterator_list,-o> 
+      path to the ergatis/workflow iterator list file to create.
+  
+  B<--group_size,-g> 
+      optional.  specifies the maximum number of (pairwise) sequence distance calculations
+      to perform in each iterator group.  Defaults to 1000.  Note that for an input of N
+      sequences, (N(N-1)) / 2 pairwise comparisons will be performed.
+  
+  B<--log,-l> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      already exists.
+      
+  B<--debug,-d> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1 DESCRIPTION
+  
+  Creates an ergatis/workflow iterator list file for a distributed dnadist job.
+  
+  =head1 INPUT
+  
+  A sequence file in the format accepted by dnadist. The script currently looks only at
+  the first line of the file, which is expected to have two whitespace-delimited fields:
+  
+  100 7682
+  
+  The first field is the number of sequences in the file and the second field is the 
+  number of characters (i.e., the sequence length) in each aligned sequence.  The number
+  of sequences is used to determine the size of the output matrix and divide up the 
+  cells of the matrix amongst the dnadist_worker processes.
+  
+  =head1 OUTPUT
+  
+  The output ergatis iterator list will be written to the file specified by --output_iterator_list
+  
+  =head1 CONTACT
+  
+      Jonathan Crabtree
+      jonathancrabtree@gmail.com
+  - script: concat_and_sort_dnadist_worker_output.pl
+    pod: |
+  =head1 NAME 
+  
+  concat_and_sort_dnadist_worker_output.pl - Concatenates and sorts intermediate output from dnadist_worker processes.
+  
+  =head1 SYNOPSIS
+  
+  concat_and_sort_dnadist_worker_output.pl
+           --worker_output_dir=/path/to/dnadist_worker_output
+           --output_file=/path/to/complete_control_file.txt
+          [--worker_output_regex='^\S+\.distances$'
+           --tmp_dir=/tmp
+           --worker_output_is_sorted
+           --delete_worker_files
+           --delete_tmp_files
+           --log=/path/to/some.log
+           --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--worker_output_dir,-w> 
+      path to the (parent) directory in which all of the dnadist_worker output
+      was written
+  
+  B<--output_file,-o>
+      file where the concatenated and sorted output should be written.
+  
+  B<--worker_output_regex,-r>
+      optional.  regular expression used to identify dnadist_worker output files.
+      defaults to \S+\.distances
+  
+  B<--tmp_dir,-t>
+      optional.  directory in which to place temporary files.  defaults to /tmp
+  
+  B<--worker_output_is_sorted,-a>
+      optional.  whether the worker output files are already sorted.
+  
+  B<--delete_worker_files,-x>
+      optional.  whether to delete worker output files once they are no longer needed.
+  
+  B<--delete_tmp_files,-y>
+      optional.  whether to delete temporary files once they are no longer needed.
+  
+  B<--log,-l> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      already exists.
+      
+  B<--debug,-d> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1 DESCRIPTION
+  
+  Concatenates and sorts intermediate output from dnadist_worker processes.
+  Modified version of the script that assumes the output will be in lower triangular 
+  form.
+  
+  =head1 INPUT
+  
+  A set of files containing whitespace-delimited output of the following form:
+  
+  1 0.244838
+  100 0.244838
+  2 0.056921
+  200 0.056921
+  
+  The first value on each line is the 0-based offset of a cell in the output
+  matrix and the second value is the distance value in that cell.  The output 
+  must be redundant (i.e. not restricted to the lower triangle of the matrix) 
+  if the final output will be the full matrix.  If only a lower triangular 
+  matrix will be output (by dnadist_combiner) then the intermediate input can
+  omit the duplicate values, like so:
+  
+  1 0.244838
+  2 0.056921
+  
+  =head1 OUTPUT
+  
+  Writes a file containing all the lines from each of the input files, 
+  sorted by ascending matrix cell number (the first integer on each line.)
+  
+  =head1 CONTACT
+  
+      Jonathan Crabtree
+      jonathancrabtree@gmail.com
+  - script: dnadist_combiner_wrapper.pl
+    pod: |
+  =head1  NAME 
+  
+  dnadist_combiner_wrapper.pl - Wrapper for dnadist_combiner executable in a parallel version of dnadist.
+  
+  =head1 SYNOPSIS
+  
+  dnadist_combiner_wrapper.pl
+           --dnadist_combiner_path=/path/to/dnadist_combiner
+           --control_file=/path/to/dnadist_control_file
+           --sorted_worker_output=/path/to/partial_output.dnadist
+           --output_file=/path/to/output.txt
+          [--log=/path/to/some.log
+           --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--dnadist_combiner_path,-w>
+      path to the dnadist_combiner executable.
+  
+  B<--control_file,-c>
+      path to the dnadist control file.  see the dnadist documentation for details (this
+      file is essentially a set of keyboard commands that gets piped into dnadist's 
+      interactive menu interface)
+  
+  B<--sorted_worker_output,-s>
+      path to the sorted, concatenated output from all of the distributed dnadist_worker
+      processes.  dnadist_combiner will fail if this output is not complete or does not
+      match the input file passed in the --control_file
+  
+  B<--output_file,-o>
+      path to the file in which to store the final dnadist output.
+  
+  B<--log,-l> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      already exists.
+      
+  B<--debug,-d> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1 DESCRIPTION
+  
+  Wrapper for dnadist_combiner executable in a parallel version of dnadist.
+  
+  =head1 INPUT
+  
+  The input to this wrapper consists of the input to the original dnadist
+  program, specified by the --control_file, plus the tab-delimited data
+  produced by the dnadist_worker processes.  Each line of this output will
+  have two columns separated by a space, e.g.
+  
+  1 0.244838
+  2 0.056921
+  3 0.647833
+  4 0.234556
+  
+  This file contains the sorted concatenated output from all of the distributed
+  dnadist_worker jobs.
+  
+  =head1 OUTPUT
+  
+  The output of the wrapper is the output of dnadist, namely a distance matrix
+  whose format is specified by the --control_file.
+  
+  =head1 CONTACT
+  
+      Jonathan Crabtree
+      jonathancrabtree@gmail.com
+  - script: dnadist_worker_wrapper.pl
+    pod: |
+  =head1  NAME 
+  
+  dnadist_worker_wrapper.pl - Wrapper for dnadist_worker executable in a parallel version of dnadist.
+  
+  =head1 SYNOPSIS
+  
+  dnadist_worker_wrapper.pl
+           --dnadist_worker_path=/path/to/dnadist_worker
+           --control_file=/path/to/dnadist_control_file
+           --start_cell=10
+           --end_cell=20
+           --output_file=/path/to/partial_output.dnadist
+          [--instance_limit=2
+           --log=/path/to/some.log
+           --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--dnadist_worker_path,-w>
+      path to the dnadist_worker executable.
+  
+  B<--control_file,-c>
+      path to the dnadist control file.  see the dnadist documentation for details (this
+      file is essentially a set of keyboard commands that gets piped into dnadist's 
+      interactive menu interface)
+  
+  B<--start_cell,-s> 
+      first matrix cell (inclusive) for the worker process to calculate
+  
+  B<--end_cell,-e> 
+      last matrix cell (inclusive) for the worker process to calculate
+  
+  B<--output_file,-o>
+      path to the file in which to store the (partial) dnadist output.
+  
+  B<--instance_limit,-i>
+      optional.  run no more than this number of dnadist_worker_wrapper jobs on any
+      given machine (this is an ad-hoc architecture-dependent workaround; use at
+      your peril.)
+  
+  B<--log,-l> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      it already exists.
+      
+  B<--debug,-d> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1 DESCRIPTION
+  
+  Wrapper for dnadist_worker executable in a parallel version of dnadist.
+  
+  =head1 INPUT
+  
+  The input to this wrapper is the same as the input to the original dnadist
+  program, and is specified by the --control_file.
+  
+  =head1 OUTPUT
+  
+  The (partial) dnadist output will be written to the file specified by --output_file.
+  Each line of the output will have two columns separated by a space, e.g.
+  
+  1 0.244838
+  100 0.244838
+  2 0.056921
+  200 0.056921
+  
+  The first value on each line is the 0-based offset of a cell in the output
+  matrix and the second value is the distance value computed for that cell.
+  Out-of-order offsets appear in the file because unless dnadist is configured
+  to output a lower-triangular matrix each distance value will appear in two 
+  distinct (but symmetric) locations.
+  
+  =head1 CONTACT
+  
+      Jonathan Crabtree
+      jonathancrabtree@gmail.com

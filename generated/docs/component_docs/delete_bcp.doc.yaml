@@ -1,0 +1,231 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: delete_bcp
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - delete_bcp.config
+  - delete_bcp.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / manipulation
+  parameters:
+    SERVER: ""
+    DATABASE: ""
+    # The relational database management system type must be specified as
+    # either sybase or postgresql.  This information is necessary for
+    # correctly parsing the tab-delimited BCP files.  Different database types
+    # use different field and record delimiters.
+    DATABASE_TYPE: sybase
+    BCP_EXTENSION: out
+  input:
+    # This input file list should be a file containing a new-line separated list of BCP files
+    INPUT_FILE_LIST: ""
+    # This input file value should be a comma-separated list of BCP files
+    INPUT_FILE: ""
+    # This input directory value should the fullpath to a directory containing BCP files
+    INPUT_DIRECTORY: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: delete_bcp
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Iterator for processing and loading all OBO files
+    ITERATOR1: create_sql
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    ITERATOR2: sql
+    ITERATOR2_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR2$;.xml
+    ITERATOR3: execute_sql
+    ITERATOR3_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR3$;.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    # no-distrib = 0 ensures that all executes in series and never parallel
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator1 for generating all delete SQL files
+    - Iterator2 for dropping all foreign key constraints
+    - Iterator3 for dropping all non-primary key indices
+    - Iterator4 for executing all delete SQL files
+    - Iterator5 for dropping all primary key indices
+    - Iterator6 for adding all indicies and foreign key constraints
+  command_sets:
+    - delete_bcp workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/delete_bcp_list_file.txt\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=drop_foreign_key_constraints,$;ITERATOR_XML$;=ITERATOR2_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/drop_foreign_key_constraints.list,$;NODISTRIB$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=drop_non_primary_key_indices,$;ITERATOR_XML$;=ITERATOR2_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/drop_non_primary_key_indices.list,$;NODISTRIB$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR3,$;ITERATOR_XML$;=ITERATOR3_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/delete_bcp_list_file.txt\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=drop_primary_key_indices,$;ITERATOR_XML$;=ITERATOR5_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/drop_primary_key_indices.list,$;NODISTRIB$;=1\"/"
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=create_indices,$;ITERATOR_XML$;=ITERATOR6_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/create_indices.list,$;NODISTRIB$;=1\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create chado table iterator list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_file_iterator_list
+      params:
+        - key: --input_list_file
+          value: $;INPUT_LIST_FILE$;
+        - key: --input_file
+          value: $;INPUT_FILE$;
+        - key: --input_directory
+          value: $;INPUT_DIRECTORY$;
+        - key: --output_iter_list
+          value: $;TMP_DIR$;/delete_bcp_list_file.txt
+        - key: --input_directory_extension
+          value: $;BCP_EXTENSION$;
+        - key: stdout
+          value: $;TMP_DIR$;/create_chado_table_iterator_list.pl.stdout
+        - key: stdout
+          value: $;TMP_DIR$;/create_chado_table_iterator_list.pl.stderr
+    - name: Drop tables list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: stdin
+          value: $;DOCS_DIR$;/drop_indexes.ddl
+        - key: --foreign_keys_only
+          value: 1
+        - key: stdout
+          value: $;TMP_DIR$;/drop_foreign_key_constraints.list
+    - name: Drop tables list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: stdin
+          value: $;DOCS_DIR$;/drop_indexes.ddl
+        - key: --exclude_primary_keys
+          value: 1
+        - key: stdout
+          value: $;TMP_DIR$;/drop_non_primary_key_indices.list
+    - name: Drop primary key indices
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: stdin
+          value: $;DOCS_DIR$;/drop_indexes.ddl
+        - key: --primary_key_indices_only
+          value: 1
+        - key: stdout
+          value: $;TMP_DIR$;/drop_primary_key_indices.list
+    - name: Create indices and foreign key constraints list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/ddl2iterator
+      params:
+        - key: stdin
+          value: $;DOCS_DIR$;/create_indexes.ddl
+        - key: stdout
+          value: $;TMP_DIR$;/create_indices.list
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_file_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_file_iterator_list.pl - generates list file from various input sources of filenames.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: create_file_iterator_list.pl 
+          --input_file_list=/path/to/some.list
+          --input_file=/path/to/somefile.fsa
+          --input_directory=/path/to/some/dir
+          --input_directory_extension=fsa
+          [--checksum_filenames=1
+          --log=/path/to/some.log
+          --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file_list,-l> 
+      a plain text file containing the full paths to any number of files, one per line.  
+      this can also be a comma-separated list of input file lists.
+  
+  B<--input_file,-f> 
+      the full path to an input file. this can also be a comma-separated list of 
+      input files.
+  
+  B<--input_directory,-d> 
+      the full path to an input directory. this can also be a comma-separated list of 
+      input directories.
+  
+  B<--input_directory_extension,-x> 
+      to be used in conjuction with the input_directory option, this can be used to
+      filter files by extension within any passed input directories.
+  
+  B<--output_iterator_list,-o>
+      output file. Up to 7 lines with comma separated lists of limits
+  
+  B<--output_iterator_list,-o>
+      comma separated list of iterator keys used in the output file.  Each key will be a separate line in the output file.  There are 7 lines in the output file listing FILE, FILE_NAME, FILE_BASE, FILE_EXT, DIRECTORY, XML file
+  
+  B<--checksum_filenames> 
+      use checksums instead of the basename as the iterator name. The checksum will be based on the full path to the file.
+  
+  B<--log> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      already exists.
+      
+  B<--debug> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      This script is used to accept a selection of inputs from either an input list, 
+      directory, file, or any combination thereof.  Each of these options can also
+      be specified using comma-separated lists.  These inputs will then be distributed
+      randomly across a certain number of groups, specified using the --group_count
+      option (usually somewhere around 150).
+      
+      To prevent too many files from being directly in one group, additional groups are 
+      automatically created for large input sets.  You can control how many inputs are 
+      in a group before another is created using the --group_size_limit option (default 
+      1000).  Once the number of inputs in any group reaches this number, another group 
+      is created until it is full, and so on.
+  
+  =head1   OUTPUT
+  
+      The location of the output is specified using the --output_directory option.  One
+      numbered directory will be created under this for each group needed.
+      
+      MORE OUTPUT DESCRIPTIONS NEEDED
+      
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org

@@ -1,0 +1,538 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: p_func
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - p_func.config
+  - p_func.xml
+  - p_func.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: functional prediction
+  parameters:
+    # basename for output file
+    OUTPUT_FILE_BASE_NAME: ""
+    # list of gene describing bsml [start_site_curation bsml list]
+    SOURCE_BSML_FILE: ""
+    # bsml2feature_relationship (pre-overlap analysis) mapping file -- used in genecalls pipeline
+    FEATURE_RELATIONSHIP_FILE: ""
+    # pseudomolecule list file -- used in genecalls pipeline to get order of contigs in pseudomolecule (can get from create_pseudomolecule component)
+    PSEUDOMOLECULE_FILE: ""
+    # Path to the sort binary
+    SORT_BIN: /bin/sort
+    # Path to databases
+    ROLES_DB_DIR: $;TIGR_ROLES_DB_DIR$;
+    # Path to enzymes.dat
+    EC_DAT_FILE: $;ENZYME_DAT$;
+    # hypothetical protein or conserved hypothetical protein tag
+    HYPOTHETICAL: ""
+  input:
+    # This is hardcoded and used internally. Do not change!
+    INPUT_FILE_LIST: $;BSML_OUTPUT_LIST$;
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    # comma separated list of tab list files from parse_evidence 
+    # e.g. /path/parse_evidence.list1,/path/parse_evidence.list2, ...
+    INPUT_TAB_LISTS: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: p_func
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - assign_gene_function workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: concatenate files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/concatenate_files
+      params:
+        - key: --input_lists
+          value: $;INPUT_TAB_LISTS$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.concat.tab
+    - name: sort file
+      type: RunUnixCommand
+      executable: $;SORT_BIN$;
+      arg: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.concat.tab
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.sorted.tab
+    - name: assign annotations
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/assign_annotations
+      params:
+        - key: --input_files
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.sorted.tab
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.assigned.tab
+    - name: post process tab file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/post_process_annotations
+      params:
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.assigned.tab
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.processed.tab
+        - key: --tigr_roles_db_dir
+          value: $;ROLES_DB_DIR$;
+        - key: --input_ec_dat
+          value: "&apos;$;EC_DAT_FILE$;&apos;"
+        - key: --hypo
+          value: "&apos;$;HYPOTHETICAL$;&apos;"
+    - name: map headers to tab
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/map_header_to_transcript_in_tab
+      params:
+        - key: --pseudomolecule_list
+          value: $;PSEUDOMOLECULE_FILE$;
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.final.tab
+        - key: --feature_relationship_file
+          value: $;FEATURE_RELATIONSHIP_FILE$;
+        - key: --tabfile
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.processed.tab
+        - key: --print_mapping
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;_relationship.map
+    - name: annotation to bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/annotation_collection_to_bsml
+      params:
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE_BASE_NAME$;.processed.tab
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --source_bsml_file
+          value: $;SOURCE_BSML_FILE$;
+        - key: --sourcename
+          value: $;OUTPUT_DIRECTORY$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - analysis2bsml compute
+  steps:
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;I_FILE_PATH$;
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;I_FILE_PATH$;
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: concatenate_files.pl
+    pod: |
+  =head1 NAME
+  
+  concatenate_files.pl - will concatenate files.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: concatenate_files.pl
+      --input_files=/path/to/file.1.tab,/path/to/file2.tab
+      --input_lists=/path/to/list1,/path/to/list2
+      --output=/path/to/new.file.tab
+      [ --log=/path/to/file.log
+        --debug=4
+        --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--input_files,-f>
+      A comma separated list of files.  Will cat each file.
+  
+  B<--input_lists,-l>
+      A comma separated list of lists.  Will cat each files in the list.
+  
+  B<--output,-o>
+      Output file
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+      Can be any type of input.  Will simply cat the files and append to same output
+  
+  =head1 OUTPUT
+      All the input files specified in one file
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu
+  - script: post_process_annotations.pl
+    pod: |
+  =head1 NAME
+  
+  post_process_annotations.pl - Contains functionality to refine final annotations.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: post_process_annotations.pl
+         --input_file=/path/to/file.tab
+         --output=/path/to/output.tab
+         --tigr_roles_db_dir=/path/to/db_dir
+       [ --input_ec_dat=/path/to/enzyme.dat       
+         --hypo="conserved hypothetical protein" or "hypothetical protein"
+         --log=/path/to/file.log
+         --debug=4
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The input tab file to parse.  Should be output from assign_annotations.pl. In general, a file containing
+      Annotation.pm objects ->to_string representations
+  
+  B<--output,-o>
+      Output tab file.
+  
+  B<--tigr_roles_db_dir,-b>
+      The path to the database directory. The directory should contain the file:
+      tigr_roles/tigr_roles_keywords.txt.
+  
+  B<--input_ec_dat,-e>
+      Path to the enzyme.dat containing EC numbers file downloaded from 
+      [ftp://ftp.expasy.org/databases/enzyme/enzyme.dat]
+  
+  B<--hypo,-h>
+      Default is hypothetical protein. Option is conserved hypothetical protein
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      Will process various annotations assigned to the features including:
+  
+      1. Name clean up as described in CommonNameAnnotation.pm
+      2. TIGR role assignment by common name keywords
+           DESCRIPTION or link to module doing the work
+   
+  =head1  INPUT
+  
+      A file based on the Annotation->to_string implementation.  See Annotation.pm for details.  
+  
+  =head1 OUTPUT
+  
+      Same format file, with the annotations changed where described in description
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu
+  - script: map_header_to_transcript_in_tab.pl
+    pod: |
+  =head1 NAME
+  
+  map_header_to_transcript_in_tab.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: map_header_to_transcript_in_tab.pl
+   	   --tabfile=/path/to/annotated.tab
+         --feature_relationship_file=/path/to/some/bsml2featurerelaionship.mapping.txt
+         --fasta_list=/path/to/multifasta.list
+         --output_file=/path/to/transterm.file
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--tabfile,-t> Annotation tabfile.
+  
+  B<--feature_relations_file, -r> A bsml2featurerelationship mapping file
+  
+  B<--pseudomolecule_list, -p> List file pointing to a pseudomolecule fasta file.  The filename will be used to grab the contig order file that was also outputted from the create_pseudomolecule script.  Needs to only be 1 file in list
+  
+  B<--output_file, -o> Will be new tabfile with headers instead of transcript IDs at the start
+  
+  B<--print_mapping, -m> Print a mapping file showing the header ID, the transcript ID, and the transcript coords
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+  This program will take headers from the initial multifasta file of a pipeline and used them as substitutes for the transcript IDs in a given annotation tabfile.  In the gene calls pipeline, each sequence in the multifasta file is sorted longest to shortest to create a pseudomolecule.  The coordinates for each sequence appear in the bsml2featurerelationships mapping file and since the order of the headers is known, it is easy to map the transcript ID from there.  To avoid any potential parsing issues in the tabfile, the header will be parsed up to the first space character (or newline if the header is space-free)
+  
+  =head1  INPUT
+      Describe the input
+  
+  =head1 OUTPUT
+      Describe the output
+  
+  =head1  CONTACT
+      Shaun Adkins
+      sadkins@som.umaryland.edu
+  - script: annotation_collection_to_bsml.pl
+    pod: |
+  =head1 NAME
+  
+  annotation_collection2bsml.pl - Uses output from AnnotationCollection module (using Annotation::to_string 
+      subroutine) and writes information to bsml
+  
+  =head1 SYNOPSIS
+  
+   USAGE: parse_evidence.pl
+         --input_file=/path/to/file.txt
+         --output=/path/to/output.bsml
+         --source_bsml_file=/path/to/start_site_curation.all.bsml.list
+       [ --sourcename=/path/to/output/files
+         --log=/path/to/file.log
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The input files to parse.  Can be a comma separated list of input files.
+  
+  B<--input_list,-n>
+      input list.  Can be a comma separated list of evidence lists. 
+  
+  <--output,-o>
+      Output directory.  Will name files based on parent sequence name.  Organizes all features annotated
+      from input file as indicated by the feature_relationship_bsml files.  If there are features in the
+      input annotation file that are not a child feature of a sequence described in a feature_relationship_bsml
+      file, it will not be printed.  Check the log for the names of the sequences (but not yet, because I'm
+      not logging yet)
+  
+  B<--source_bsml_file,-f>
+      Input file used for parent genomic sequence information as well as Seq-data information ( location of 
+      sequence data files )
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      Will parse input annotation file (created by Annotation::to_string subroutine).  Uses AnnotationCollection
+      module to parse the information and return base Annotation objects, which will be used to create bsml file. 
+   
+  =head1  INPUT
+      
+      The input is an annotation file output from Annotation::to_string method.  See this module for specific format
+      details.
+  
+  =head1 OUTPUT
+      
+      The output
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

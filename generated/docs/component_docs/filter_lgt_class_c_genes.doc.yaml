@@ -1,0 +1,228 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: filter_lgt_class_c_genes
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - filter_lgt_class_c_genes.config
+  - filter_lgt_class_c_genes.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # Bitscore threshold - only keep "exclude" BLAST hits above this threshold. Default 100
+    BITSCORE_THRESH: 100
+    # H-score threshold - only keep hits where H-score is above this threshold. Default 30
+    HSCORE_THRESH: 30
+  input:
+    # Blast result where the database is only the sister taxa in question
+    SISTER_FILE: $;REPOSITORY_ROOT$;/output_repository/concatenate_files/$;PIPELINEID$;_sister/blastp.out
+    # Blast result where the database excludes the taxa and sisters in question
+    OUTSIDE_FILE: $;REPOSITORY_ROOT$;/output_repository/concatenate_files/$;PIPELINEID$;_outside/blastp.out
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.list
+  component:
+    COMPONENT_NAME: filter_lgt_class_c_genes
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - filter_lgt_class_c_genes workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: get best blast hit by bitscore - "sister"
+      type: RunUnixCommand
+      executable: sort
+      arg: "-k1,1 -k12,12nr -k11,11n $;SISTER_FILE$; | sort -u -k1,1 --merge"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sister.best.m8
+    - name: get best blast hit by bitscore - "outsie"
+      type: RunUnixCommand
+      executable: sort
+      arg: "-k1,1 -k12,12nr -k11,11n $;OUTSIDE_FILE$; | sort -u -k1,1 --merge"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.outside.best.m8
+    - name: calculate h-score and classify c-class genes
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/classify_class_c_genes
+      params:
+        - key: --sister_file
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sister.best.m8
+        - key: --outside_file
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.outside.best.m8
+        - key: --bitscore_thresh
+          value: $;BITSCORE_THRESH$;
+        - key: --hscore_thresh
+          value: $;HSCORE_THRESH$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/classify_class_c_genes.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/classify_class_c_genes.stderr
+    - name: create class-c m8 list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\"class_c\\.tsv\""
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: classify_class_c_genes.pl
+    pod: |
+  =head1 NAME
+  
+  classify_class_c_genes.pl - Calculate h-score of two blast files and filter out the class-c genes
+  
+  =head1 SYNOPSIS
+  
+   USAGE: classify_class_c_genes.pl
+         --sister_file=/path/to/sister/blast.m8
+         --outside_file=/path/to/outside/blast.m8
+         --output_dir=/path/to/class_c.tsv
+       [ --bitscore_thresh=100
+  	   --hscore_thresh=30
+  	   --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--sister_file>
+  	The m8-formatted BLAST output where the subject database was restricted to only the GI accessions in question
+  	File should only have the best hit for each query gene
+  
+  B<--outside_file>
+  	The m8-formatted BLAST output where the subject database excluded those GI accessions from --only_file
+  	File should only have the best hit for each query gene
+  
+  B<--output_dir,-o>
+  	Directory to write output into
+  
+  B<--bitscore_thresh>
+  	Keep genes that exceed this bitscore in the --exclude_file.  Default is 100
+  
+  B<--hscore_thresh>
+  	Keep genes whose h-score exceeds this value.  Default is 30
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+  
+      Describe the input
+  
+  =head1 OUTPUT
+  
+      Describe the output
+  
+  =head1  CONTACT
+  
+      Shaun Adkins
+      sadkins@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

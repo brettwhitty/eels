@@ -1,0 +1,87 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: train_for_glimmer3_iteration
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - train_for_glimmer3_iteration.config
+  - train_for_glimmer3_iteration.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # output position weight matrix (used as input to the -b option to glimmer3)
+    # [REQUIRED]
+    OUTPUT_PWM: $;OUTPUT_DIRECTORY$;/all.motif
+    # output token for glimmer3 (second iteration)
+    # [REQUIRED]
+    GLIMMER3_OUTPUT_TOKEN: default
+  input:
+    INPUT_PREDICT_LIST: ""
+    INPUT_FASTA_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: train_for_glimmer3_iteration
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - train_for_glimmer3 workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: train for glimmer3 iteration
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/train_for_glimmer3_iteration
+      params:
+        - key: --input_predict_list
+          value: $;INPUT_PREDICT_LIST$;
+        - key: --input_fasta_list
+          value: $;INPUT_FASTA_LIST$;
+        - key: --output_pwm
+          value: $;OUTPUT_PWM$;
+        - key: --tmp_dir
+          value: $;TMP_DIR$;
+        - key: --glimmer3_dir
+          value: $;GLIMMER3_DIR$;
+        - key: --elph_bin
+          value: $;ELPH_BIN$;
+        - key: --conf_ini_file
+          value: $;REPOSITORY_ROOT$;/workflow/runtime/glimmer3/$;PIPELINEID$;_$;GLIMMER3_OUTPUT_TOKEN$;/glimmer3.$;GLIMMER3_OUTPUT_TOKEN$;.user.config

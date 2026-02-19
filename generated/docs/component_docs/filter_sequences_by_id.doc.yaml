@@ -1,0 +1,291 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: filter_sequences_by_id
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - filter_sequences_by_id.config
+  - filter_sequences_by_id.xml
+  - filter_sequences_by_id.i1.xml
+  - component_docs/filter_sequences_by_id.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component accepts FASTA or FASTQ input as well as one or more files containing 
+      sequence identifiers, and can filter those sequence files based on the identifiers
+      listed.  This filter can be inclusive or exclusive.
+  </p>
+  <h3>input</h3>
+  <p>
+      FASTQ or FASTA formats are supported for the sequence files.  The ID files can be
+      simple files with one ID per line or tab-delimited files where you specify the column
+      to consider for IDs.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / manipulation
+  parameters:
+    # In the ID files (defined below) this is the column number containing
+    #  the IDs of interest.  (if tab delimited, else just one ID per line)
+    ID_COLUMN_NUM: 1
+    # value here should be 'fasta' or 'fastq'
+    INPUT_FORMAT: ""
+    # Should the input files be filtered to include or excluded those entries in the ID file?
+    FILTER_MODE: exclude
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+    # a single file of input IDs (if you have more than one file, specify a list below instead)
+    ID_FILE: ""
+    # a list of files containing IDs on which to filter
+    ID_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    SEQ_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.list
+  component:
+    COMPONENT_NAME: filter_sequences_by_id
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # 
+    # To skip any commands in the component, enter them here
+    # 
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 1.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6682 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - filter_sequences_by_id workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create output list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.$;INPUT_FORMAT$;\""
+        - key: --output_list
+          value: $;SEQ_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - filter_sequences_by_id compute
+  steps:
+    - name: filter
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/filter_sequences_by_id
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.filtered.$;INPUT_FORMAT$;
+        - key: --id_file
+          value: $;ID_FILE$;
+        - key: --id_file_list
+          value: $;ID_FILE_LIST$;
+        - key: --mode
+          value: $;FILTER_MODE$;
+        - key: --format
+          value: $;INPUT_FORMAT$;
+        - key: --id_column_num
+          value: $;ID_COLUMN_NUM$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: filter_sequences_by_id.pl
+    pod: |
+  =head1 NAME
+  
+  filter_sequences_by_id.pl - Filter a sequence file to include/exclude entries by their IDs.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: filter_sequences_by_id.pl 
+              --input_file=/path/to/some_file.fsa 
+              --output_dir=/path/to/somedir
+              --id_file=/path/to/somefile.tab
+            [ --mode=include
+              --format=fasta
+              --id_file_list=/path/to/some.list
+              --id_column_num=1
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+      The input file (parallelization available in Ergatis).
+  
+  B<--output_file,-o>
+      The output file to be created/overwritten.
+  
+  B<--id_file,-f>
+      This file contains the IDs on which the script will filter, and can either have
+      one value per line or be tab-delimited, in which case you'll need to also pass
+      the --id_column_num option.
+  
+  B<--mode,-m>
+      Optional.  Define whether to include/exclude only those sequences in the ID list in 
+      the output file.  (default = include)
+  
+  B<--format,-r>
+      Optional.  Format of input files to filter.  Must be either 'fasta' or 'fastq' (default = fasta)
+  
+  B<--id_file_list,-l>
+      Optional.  Use this if you have more than one file containing filter IDs.
+  
+  B<--id_column_num,-n>
+      Optional.  In which column of the tab-delimited input files are the IDs?  (Default = 1)
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to filter entries in a FASTA or FASTQ file by their IDs.  Depending on the
+  value of the --mode setting, the resulting output files can include or exclude those sequences
+  matching the ID list.
+  
+  =head1  INPUT
+  
+  This script operates on a single file.  In practice, it's called as part of an Ergatis component
+  by the same name if you have multiple input files to process.
+  
+  The input is defined with --input_file and should be a single file in one of the supported formats.
+  File extensions are ignored.  The first *word* of each header line is accepted to be the ID
+  
+  For example:
+  
+      >gi53791237 Tragulus javanicus p97bcnt gene for p97Bcnt
+      ACAGGAGAAGAGACTGAAGAGACACGTTCAGGAGAAGAGCAAGAGAAGCCTAAAGAAATGCAAGAAGTTA
+      AACTCACCAAATCACTTGTTGAAGAAGTCAGGTAACATGACATTCACAAACTTCAAAACTAGTTCTTTAA
+      AAAGGAACATCTCTCTTTTAATATGTATGCATTATTAATTTATTTACTCATTGGCGTGGAGGAGGAAATG
+  
+      @HWI-ST180:243:C0589ACXX:1:1101:16202:57975 1:N:0:CGATGCA
+      TTAGCCTTTTTTGCTTCCTTGGCAGCCCTGATAGCTTGTTCTCGTTGAGCCTTCCTAACTTCAGGTTTCTGATTCCTCTTGGCCATTATATCAGCAAGAGA
+      +
+      CCCFFFFAHGHHHJIIJJJJGEGGIJJJIGDHICFGDFDGIDGIFEHHIJJEGHIIGGIJIHCEE;AEHHHBECBC>DCEEEAEDCDCDEACAACCCCC?C
+  
+  Whitespace is ignored within the input file.  
+  
+  =head1  OUTPUT
+  
+  A single output file will be created.  Depending on the value passed to the --mode option, 
+  the output file will either include/exclude only those with the IDs passed.
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net

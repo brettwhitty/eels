@@ -1,0 +1,180 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: fix_gene_symbols
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - fix_gene_symbols.config
+  - fix_gene_symbols.xml
+  - fix_gene_symbols.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Specify the following parameters only when you wish to make the changes  in the database 
+    SERVER: jabba
+    USERNAME: ""
+    PASSWORD: ""
+  input:
+    INPUT_FILE: ""
+    INPUT_FILE_LIST: ""
+    INPUT_DIRECTORY: ""
+    INPUT_EXTENSION: txt
+    TBL_FILE: ""
+  output:
+    OUTPUT_TOKEN: db
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: fix_gene_symbols
+    DESCRIPTION: Fix gene symbols by removing duplicates in database or provided .tbl file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 1.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - fix_gene_symbols workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - fix gene symbols iterator
+  steps:
+    - name: fix gene symbols
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fix_gene_symbols
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --host
+          value: $;SERVER$;
+        - key: --tbl_file
+          value: $;TBL_FILE$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: fix_gene_symbols.pl
+    pod: |
+  =head1 NAME
+  
+  fix_gene_symbols.pl - Script to remove upper case, duplicate gene symbols as well replace existing gene symbols in DB with new ones provided in the rules file
+  
+  =head1 SYNOPSIS
+  
+  # USAGE : perl fix_gene_symbols.pl -i <meta data file> [ -o <path to output dir>  -u <database username> -p <database password> -s <database server> -t <path to .tbl file> -l <path to log file> ]
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  	-i <input_file>	:	Path to input meta data file containing one row for a database. Mandatory
+  [	
+  	-o <output_dir>	:	Path to the output directory where the corrected tbl file will be created. Mandatory if change required in only tbl file
+  
+  	-u <username>	:	Username for the database server. Mandatory if change required in the database only.
+  
+  	-p <password>	:	Password for the database server. Mandatory if change required in the database only.
+  
+  	-s <host>	:	Name of the database server. Mandatory if change required in the database only.
+  
+  	-t <tbl_file>	:	Path to the original .tbl file to be corrected for gene symbols. Mandatory if change required in only tbl file
+  
+  	-l <log>	: 	Path to log file. Optional
+  
+  ] 
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  	Required input is the meta data file with the following columns in a row for a database:
+  		[0] = Db name
+  		[1] = NCBI locus tag
+  		[2] = Path to rules file
+  		[3] = Path to gene symbols file
+  		[4] = Bioproject Id
+  		[5] = Organism name
+  		[6] = strain name
+  		[7] = Organism serotype
+  		[8] = Host
+  		[9] = Date
+  		[10]= Country
+  		[11]= Assembly method
+  		[12]= Genome Coverage
+  		[13]= Sequencing platform
+  		[14]= Contact person's name. Last name\sFirst name
+  		[15]= Contact person's email address
+  		[16]= Comma-separated author list. Each name should be Last name\sFirst name\sMiddle Initial
+  		[17]= Title of the publication
+  	For this script only column [0] and [3] needs to be have valid values.
+  
+  	If .tbl file needs to be changed, then provide the original tbl file dumped from manatee database. If directly database needs to changed 
+  	then pass the required database parameters to the script. Either .tbl file or database parameters needs to be present but not both.
+  
+  =head1 OUTPUT
+  
+  	Corrected .tbl file if original tbl file was passed. Otherwise, gene symbol changes happen in the database provided in the input meta data file.
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Senior Bioinformatics Software Engineer
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut

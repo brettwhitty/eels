@@ -1,0 +1,111 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: move_to_scratch
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - move_to_scratch.config
+  - move_to_scratch.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    COMPONENT_EXTENSION: ""
+  input:
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.list
+  component:
+    COMPONENT_NAME: move_to_scratch
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 7224 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - move to scratch workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: move_to_scratch
+      type: RunDistributedCommand
+      executable: $;BIN_DIR$;/move_to_scratch
+      params:
+        - key: --input_list
+          value: $;COMPONENT_EXTENSION$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --scratch_dir
+          value: $;TMP_DIR$;
+        - key: --log
+          value: $;OUTPUT_DIRECTORY$;/move_to_scratch.log
+        - key: --debug
+          value: 4
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: move_to_scratch.pl
+    pod: |
+  =head1 move_to_scratch.pl - Script designed to move unwanted files to the scratch repository
+  
+  =head1 DESCRIPTION
+  
+  	This script will take files created by various components, specified by file extension and component, and move them into the user's specified scratch repository.  This is intended to shrink space from Ergatis prokaryotic pipeline runs by not keeping files that wouldn't be useful for error diagnosis nor used by components later in the program.
+  
+  =head1 INPUT
+  
+  	--input_list - A tab-delimited file listing the 'component.token' name and the file extension to move
+  
+  create_pseudomolecules.default	.multi.fasta
+  create_pseudomolecules.default	.fasta.orig
+  glimmer3.iter1	.detail
+  hmmpfam3.pre	.htab
+  
+  	--scratch_dir - The scratch directory you are using (including the move_to_scratch folder)
+  
+  	--output_dir - The output repository directory (including the move_to_scratch/pipe##_default/ directories)
+  
+  =head1 SYNOPSIS
+  
+  perl ./move_to_scratch.pl -i /path/to/input/list -s /local/scratch/username/move_to_scratch/1234_default -o /repository/path/output_repository/move_to_scratch/1234_default
+  
+  =head1 OUTPUT
+  
+  	A Stderr file that lists if there are problems with the moving process
+  
+  =head1 CONTACT
+  
+  Shaun Adkins
+  sadkins@som.umaryland.edu

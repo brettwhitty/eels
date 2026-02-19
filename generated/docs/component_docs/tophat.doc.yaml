@@ -1,0 +1,364 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: tophat
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - tophat.config
+  - tophat.xml
+  - tophat.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to bowtie package binary directory
+    BOWTIE_BIN_DIR: $;BOWTIE_BIN$;
+    # path to samtools package binary directory
+    SAMTOOLS_BIN_DIR: $;SAMTOOLS_BIN$;
+    # path to Tophat package binary directory
+    TOPHAT_BIN_DIR: $;TOPHAT_BIN$;
+    # the expected (mean) inner distance between mate pairs. Default:200.
+    MATE_INNER_DIST: 200
+    # The standard deviation for the distribution on inner distances between mate pairs. Default:20.
+    MATE_STD_DEV: 20
+    # Tophat anchor length. Must be atleast 3. Default:8.
+    MIN_ANCHOR: 8
+    # The maximum number of mismatches that may appear in the "anchor" region of a spliced alignment. Default:0.
+    SPLICE_MISMATCHES: 0
+    # The minimum intron length. Default:50.
+    MIN_INTRON_LENGTH: 50
+    # The maximum intron length. Default:500000.
+    MAX_INTRON_LENGTH: 500000
+    # The maximum insertion length. Default:3.
+    MAX_INSERTION_LENGTH: 3
+    # The maximum deletion length. Default:3.
+    MAX_DELETION_LENGTH: 3
+    # The number of threads to be used to align reads. Default:1.
+    NUMBER_THREADS: 1
+    # Allow up to this many alignments to the reference for a given read. Default:20.
+    MAX_MULTIHITS: 20
+    # TopHat will treat the reads as strand specific (Valid Options : fr-unstranded, fr-firststrand, fr-secondstrand)
+    LIBRARY_TYPE: ""
+    # Bowtie mode for initial read mapping. Default:v
+    BOWTIE_MODE: v
+    # Number of mismatches in initial read alignment. Default:2.
+    READ_MISMATCHES: 2
+    # Number of mismatches in each segment alignment. Default:2.
+    SEGMENT_MISMATCHES: 2
+    # Each read is cut up into segments, each at least this long. Default:25.
+    SEGMENT_LENGTH: 25
+    # Final read alignments having more than these many total length of gaps are discarded (For TopHat2). Default:2.
+    READ_GAP_LENGTH: ""
+    # Final read alignments having more than these many edit distance are discarded (For TopHat2). Default:2.
+    READ_EDIT_DIST: ""
+    # The minimum intron length that may be found during coverage search. Default:50.
+    MIN_COVERAGE_INTRON: 50
+    # The maximum intron length that may be found during coverage search. Default:20000.
+    MAX_COVERAGE_INTRON: 20000
+    # The minimum intron length that may be found during split-segment search. Default:50.
+    MIN_SEGMENT_INTRON: 50
+    # The maximum intron length that may be found during split-segment search. Default:500000.
+    MAX_SEGMENT_INTRON: 500000
+    # List of raw junctions
+    RAW_JUNCS_FILE: ""
+    # Annotation file in GTF or GFF3 format
+    ANNOTATION_FILE: ""
+    # path to transcriptome index prefix
+    TRANSCRIPTOME_INDEX_PREFIX: ""
+    # List of insertions file
+    REF_INSERTIONS_FILE: ""
+    # List of deletions file
+    REF_DELETIONS_FILE: ""
+    # additional tophat parameters
+    OTHER_PARAMETERS: ""
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to sequence file consisting of first mates
+    INPUT_FILE_1: ""
+    # path to sequence file consisting of second mates (if paired-end sequencing)
+    INPUT_FILE_2: ""
+    # path to list file consisting of tab separated first mate and second mate sequence files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple single mate sequence files
+    INPUT_DIRECTORY: ""
+    # file extension for single mate sequence files (to be used when iterating over an INPUT_DIRECTORY)
+    INPUT_EXTENSION: txt
+    # path to bowtie index directory
+    BOWTIE_INDEX_DIR: ""
+    # bowtie index prefix
+    BOWTIE_INDEX_PREFIX: ""
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of alignment BAM files
+    OUTPUT_ALIGNMENT_BAM_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bam.list
+    # list of alignment SAM files
+    OUTPUT_ALIGNMENT_SAM_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sam.list
+  component:
+    COMPONENT_NAME: tophat
+    DESCRIPTION: generates tophat alignment for the input sequence file(s) against the given reference index file.
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # tophat version
+    VERSION: TopHat version 1.4.0
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - tophat
+  includes:
+    - "file=\"$;DOCS_DIR$;/paired_list_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create alignment BAM list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.accepted_hits\\.bam\""
+        - key: --output_list
+          value: $;OUTPUT_ALIGNMENT_BAM_FILE$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.bam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.bam.stderr
+    - name: create alignment SAM list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --skip_error --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.accepted_hits\\.sam\""
+        - key: --output_list
+          value: $;OUTPUT_ALIGNMENT_SAM_FILE$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.sam.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.sam.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - tophat
+  steps:
+    - name: tophat
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/tophat
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --seq1file
+          value: $;INPUT_FILE_1$;
+        - key: --seq2file
+          value: "'$;INPUT_FILE_2$;'"
+        - key: --bowtie_index_dir
+          value: $;BOWTIE_INDEX_DIR$;
+        - key: --prefix
+          value: $;BOWTIE_INDEX_PREFIX$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --tophat_bin_dir
+          value: $;TOPHAT_BIN_DIR$;
+        - key: --samtools_bin_dir
+          value: $;SAMTOOLS_BIN_DIR$;
+        - key: --bowtie_bin_dir
+          value: $;BOWTIE_BIN_DIR$;
+        - key: --mate-inner-dist
+          value: $;MATE_INNER_DIST$;
+        - key: --mate-std-dev
+          value: $;MATE_STD_DEV$;
+        - key: --min-anchor-length
+          value: $;MIN_ANCHOR$;
+        - key: --splice-mismatches
+          value: $;SPLICE_MISMATCHES$;
+        - key: --min-intron-length
+          value: $;MIN_INTRON_LENGTH$;
+        - key: --max-intron-length
+          value: $;MAX_INTRON_LENGTH$;
+        - key: --max-insertion-length
+          value: $;MAX_INSERTION_LENGTH$;
+        - key: --max-deletion-length
+          value: $;MAX_DELETION_LENGTH$;
+        - key: --num-threads
+          value: $;NUMBER_THREADS$;
+        - key: --max-multihits
+          value: $;MAX_MULTIHITS$;
+        - key: --library-type
+          value: $;LIBRARY_TYPE$;
+        - key: --bowtie_mode
+          value: $;BOWTIE_MODE$;
+        - key: --initial-read-mismatches
+          value: $;READ_MISMATCHES$;
+        - key: --segment-mismatches
+          value: $;SEGMENT_MISMATCHES$;
+        - key: --segment-length
+          value: $;SEGMENT_LENGTH$;
+        - key: --read-gap-length
+          value: $;READ_GAP_LENGTH$;
+        - key: --read-edit-dist
+          value: $;READ_EDIT_DIST$;
+        - key: --min-coverage-intron
+          value: $;MIN_COVERAGE_INTRON$;
+        - key: --max-coverage-intron
+          value: $;MAX_COVERAGE_INTRON$;
+        - key: --min-segment-intron
+          value: $;MIN_SEGMENT_INTRON$;
+        - key: --max-segment-intron
+          value: $;MAX_SEGMENT_INTRON$;
+        - key: --raw-juncs
+          value: $;RAW_JUNCS_FILE$;
+        - key: --GTF
+          value: $;ANNOTATION_FILE$;
+        - key: --transcriptome-index
+          value: $;TRANSCRIPTOME_INDEX_PREFIX$;
+        - key: --insertions
+          value: $;REF_INSERTIONS_FILE$;
+        - key: --deletions
+          value: $;REF_DELETIONS_FILE$;
+        - key: --args
+          value: "'$;OTHER_PARAMETERS$;'"
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/tophat.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/tophat.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: tophat.pl
+    pod: |
+  =head1 NAME
+  
+  tophat.pl - script to execute reference based alignment for input sequence file(s).
+  
+  =head1 SYNOPSIS
+  
+      tophat.pl --r1 mate_1_sequence_file(s) [--r2 mate_2_sequence_file(s)] 
+                --bi bowtie_index_dir --p index_prefix [--o outdir] 
+                [--tb tophat_bin_dir] [--bb bowtie_bin_dir] [--sb samtools_bin_dir] 
+                [--mate-inner-dist] [--mate-std-dev] [--min-anchor-length] [--splice-mismatches] 
+                [--min-intron-length] [--max-intron-length] [--max-insertion-length] [--max-deletion-length]
+                [--num-threads] [--max-multihits] [--library-type]
+                [--bowtie_mode] [--initial-read-mismatches] [--segment-mismatches] [--segment-length] 
+                [--read-gap-length] [--read-edit-dist]
+                [--min-coverage-intron] [--max-coverage-intron] [--min-segment-intron] [--max-segment-intron]
+                [--raw-juncs] [--GTF] [--transcriptome-index] [--insertions] [--deletions]
+                [--a other_parameters] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --r1 <mate_1_sequence_file(s)> = /path/to/input sequence file(s) for the first mates.
+      
+      --r2 <mate_2_sequence_file(s)> = /path/to/input sequence file(s) for the second mates. Optional.
+  
+      --bi <bowtie_index_dir>        = /path/to/bowtie_index directory.
+  
+      --p <index_prefix>             = prefix for index files.
+  
+      --o <output dir>               = /path/to/output directory. Optional. [present working directory]
+  
+      --tb <tophat_bin_dir>          = /path/to/tophat binary. Optional. [/usr/local/bin]
+  
+      --bb <bowtie_bin_dir>          = /path/to/bowtie binary. Optional. [/usr/local/bin]
+  
+      --sb <samtools_bin_dir>        = /path/to/samtools binary. Optional. [/usr/local/bin]
+  
+      Tophat parameters              = refer to Tophat User Manual accessible at 
+                                       http://tophat.cbcb.umd.edu/manual.html for specific details and 
+                                       defaults of the above mentioned tophat parameters. Optional.
+  
+      --a <other_parameters>         = additonal tophat parameters. Optional. Refer Tophat manual.
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script executes the tophat script from the tophat software package.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

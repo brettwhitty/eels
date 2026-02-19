@@ -1,0 +1,438 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: glimmerHMM
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - glimmerHMM.config
+  - glimmerHMM.xml
+  - glimmerHMM.i1.xml
+  - component_docs/glimmerHMM.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+      The following description is taken from the <a href='http://cbcb.umd.edu/software/glimmerhmm/'>GlimmerHMM site</a>:
+  </p>
+  <blockquote>
+      GlimmerHMM is a new gene finder based on a Generalized Hidden Markov Model (GHMM). Although 
+      the gene finder conforms to the overall mathematical framework of a GHMM, additionally it 
+      incorporates splice site models adapted from the GeneSplicer program and a decision tree 
+      adapted from GlimmerM. It also utilizes Interpolated Markov Models for the coding and 
+      noncoding models . Currently, GlimmerHMM's GHMM structure includes introns of each phase, 
+      intergenic regions, and four types of exons (initial, internal, final, and single).
+  </blockquote>
+  <p>
+      By default, this script splits the input fasta sequences into chunks of 200,000bp, with 
+      overlaps of 10,000. 
+  </p>
+  
+  <h3>reference</h3>
+  <p>
+      Majoros WH, Pertea M, Salzberg SL.<br>
+      Abstract TigrScan and GlimmerHMM: two open source ab initio eukaryotic gene-finders.<br>
+      <a href='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15145805'>Bioinformatics. 2004 Nov 1;20(16):2878-9. Epub 2004 May 14.</a>
+  </p>
+  
+  <h3>input</h3>
+  <p>
+      GlimmerHMM takes a single-entry FASTA file as its input. Using this component, you can define 
+      multiple iterations over a larger input set using either an input list file or defining a 
+      directory of sequence files ending with the '.fsa' extension.
+  </p>
+  
+  <h3>raw output</h3>
+  <p>
+      An example of the raw output from glimmerHMM
+  </p>
+  <div class='code_container'>
+      GlimmerHMM
+      Sequence name: aa1.assembly.15595
+      Sequence length: 73904 bp
+      Sequence C+G%: 39.976185
+  
+  
+      Predicted genes/exons
+  
+      Gene Exon Strand  Exon            Exon Range      Exon
+         #    #         Type                           Length
+  
+         1    1  -  Initial        2522       2729      208
+  
+         2    1  +  Single         4309       4566      258
+  
+         3    1  +  Initial        6567       6594       28
+         3    2  +  Internal      10892      10912       21
+         3    3  +  Terminal      15171      15343      173
+  
+         4    1  +  Initial       15371      17356     1986
+         4    2  +  Terminal      23748      23900      153
+  
+         5    1  -  Terminal      26294      26316       23
+         5    2  -  Initial       32039      32054       16
+  
+         6    1  -  Terminal      33873      34189      317
+         6    2  -  Initial       34684      34849      166
+  
+         7    1  +  Initial       37907      37933       27
+         7    2  +  Terminal      42196      42408      213
+  
+         8    1  -  Terminal      44043      44104       62
+         8    2  -  Initial       45635      45746      112
+  
+         9    1  -  Terminal      48434      48555      122
+         9    2  -  Internal      51964      51994       31
+         9    3  -  Internal      54756      54857      102
+         9    4  -  Internal      55284      55764      481
+         9    5  -  Initial       60329      60366       38
+  
+        10    1  +  Initial       64469      64517       49
+        10    2  +  Terminal      65016      65260      245
+  
+        11    1  +  Initial       67010      67015        6
+        11    2  +  Terminal      72846      72947      102
+  
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / genes
+  parameters:
+    # this directory is incomplete, but is the root of the training areas
+    TRAINING_DIRECTORY: /local/devel/ANNOTATION/GlimmerHMM/trained_dir
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: glimmerHMM
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - glimmerHMM workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - glimmerHMM compute
+  steps:
+    - name: glimmerHMM
+      type: RunUnixCommand
+      executable: $;GLIMMERHMM_EXEC$;
+      arg: $;I_FILE_PATH$; $;TRAINING_DIRECTORY$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.glimmerHMM.raw
+    - name: glimmerHMM2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/glimmerHMM2bsml
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.glimmerHMM.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.glimmerHMM.bsml
+        - key: --fasta_file
+          value: $;I_FILE_PATH$;
+        - key: --project
+          value: $;PROJECT$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: glimmerHMM2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  glimmerHMM2bsml.pl - convert glimmerHMM output to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE: glimmerHMM2bsml.pl 
+          --input=/path/to/glimmerHMM.output.file 
+          --output=/path/to/output.bsml
+         [ --project=aa1 ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i> 
+      Input file file from a glimmerHMM scan.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--fasta_file,-f>
+      If passed, will create a Seq-data-import element referencing this
+      path.
+  
+  B<--project,-p> 
+      Project ID.  Used in creating feature ids.  Defaults to 'unknown' if
+      not passed.
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--output,-o> 
+      Output BSML file (will be created, must not exist)
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert the output from a glimmerHMM search into BSML.
+  
+  =head1 INPUT
+  
+  You define the input file using the --input option.  This file does not need any
+  special file extension.  The regular output of glimmerHMM looks like this:
+  
+      GlimmerHMM
+      Sequence name: aa1.assembly.15595
+      Sequence length: 73904 bp
+      Sequence C+G%: 39.976185
+  
+  
+      Predicted genes/exons
+  
+      Gene Exon Strand  Exon            Exon Range      Exon
+         #    #         Type                           Length
+  
+         1    1  -  Initial        2522       2729      208
+  
+         2    1  +  Single         4309       4566      258
+  
+         3    1  +  Initial        6567       6594       28
+         3    2  +  Internal      10892      10912       21
+         3    3  +  Terminal      15171      15343      173
+  
+         4    1  +  Initial       15371      17356     1986
+         4    2  +  Terminal      23748      23900      153
+  
+         5    1  -  Terminal      26294      26316       23
+         5    2  -  Initial       32039      32054       16
+  
+  Each element in BSML requires an id, and the Sequence stub created uses as its ID the
+  value after the "Sequence name: " label above (up to the first whitespace.)
+  
+  All other header lines in the file are ignored.
+  
+  =head1 OUTPUT
+  
+  After parsing the input file, a file specified by the --output option is created.  This script
+  will fail if it already exists.  The file is created, and temporary IDs are created for
+  each result element.  They are only unique to the document, and will need to be replaced
+  before any database insertion.
+  
+  Base positions from the input file are renumbered so that positions start at zero.
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

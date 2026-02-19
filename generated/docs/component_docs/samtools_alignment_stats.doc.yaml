@@ -1,0 +1,193 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: samtools_alignment_stats
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - samtools_alignment_stats.config
+  - samtools_alignment_stats.xml
+  - samtools_alignment_stats.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to samtools package binary directory
+    SAMTOOLS_BIN_DIR: $;SAMTOOLS_BIN$;
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to alignment BAM file
+    INPUT_FILE: ""
+    # path to list of alignment BAM files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple BAM alignment files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: bam
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory for component results
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # list of mapping statistics files for each input alignment BAM file
+    OUTPUT_ALIGNMENT_STATS: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.mapstats.list
+  component:
+    COMPONENT_NAME: samtools_alignment_stats
+    DESCRIPTION: generates samtools alignment stats for the given BAM alignment file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # samtools version
+    VERSION: samtools version 0.1.18
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - samtools_alignment_stats
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create alignment stats list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generate_list_file
+      arg: --v
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.mapstats\\.txt\""
+        - key: --output_list
+          value: $;OUTPUT_ALIGNMENT_STATS$;
+        - key: stdout
+          value: $;TMP_DIR$;/generate_list_file.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/generate_list_file.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - samtools_alignment_stats
+  steps:
+    - name: samtools_alignment_stats
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/samtools_alignment_stats
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --infile
+          value: $;I_FILE_PATH$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --samtools_bin_dir
+          value: $;SAMTOOLS_BIN_DIR$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/samtools_alignment_stats.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/samtools_alignment_stats.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: generate_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  generate_list_file.pl - script to generate a list of files in a directory that
+                          satisfy the given regular expression.
+  
+  =head1 SYNOPSIS
+  
+      generate_list_file.pl --d search_directory --r regex 
+                            [--o output_listfile] [--gz] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --d <search directory>         = /path/to/directory to begin the search at
+  
+      --r <regex>                    = regular expression criterion to filter files
+  
+      --o <output_listfile>          = /path/to/output list of files found. Optional. [stdout]
+  
+      --se                           = do not die on error. Optional
+  
+      --gz                           = include gzipped files in the search output. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script uses the Unix find command to search for specific files within a directory tree.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201
+  - script: samtools_alignment_stats.pl
+    pod: |
+  =head1 NAME
+  
+  samtools_alignment_stats.pl - script to generate alignment stats from BAM file
+  
+  =head1 SYNOPSIS
+  
+      samtools_alignment_stats.pl --i input_BAM_file [--o outdir] [--sb samtools_bin_dir] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --i <input_BAM_file>           = /path/to/alignment BAM file.
+  
+      --o <output dir>               = /path/to/output directory. Optional. [present working directory]
+  
+      --sb <samtools_bin_dir>        = /path/to/samtools_build binary. Optional. [/usr/local/bin]
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script executes the samtools flagstat script from the samtools software package.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

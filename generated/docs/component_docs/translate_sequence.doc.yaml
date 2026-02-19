@@ -1,0 +1,435 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: translate_sequence
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - translate_sequence.config
+  - translate_sequence.xml
+  - translate_sequence.i1.xml
+  - component_docs/translate_sequence.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component will translate sequence from a single format fasta file or a polypeptide describing BSML document (ex. gene prediction output).  
+      Uses Emboss' transeq.
+  </p>
+  <h3>References</h3>
+  <p>
+  
+      Rice P, Longden I, Bleasby A. (2000)
+      EMBOSS: the European Molecular Biology Open Software Suite.
+      Trends Genet 2000 Jun;16(6):276-7.
+      <a href='http://www.ebi.ac.uk/emboss/transeq/'>http://www.ebi.ac.uk/emboss/transeq/</a>
+  </p>
+  <h3>Input</h3>
+  <p>
+     Translate_sequence will take a single sequence fasta file (nucleic acid) and translate.  Translate_sequence will also take a BSML document.
+     Using the Seq-Data[-Import] element, translate_sequence will pull nucleic acid information and translate the specified intervals.     
+  </p>
+  <h3>implemented options</h3>
+  <p>
+      Please see $;BIN_DIR$;/translate_sequence.pl for option explanations.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: sequence / manipulation
+  parameters:
+    # translation table to use
+    # 0 (Standard); 1 (Standard (with alternative initiation codons)); 2 (Vertebrate Mitochondrial); 3 (Yeast Mitochondrial); 4 (Mold, Protozoan, Coelenterate Mitochondrial and Mycoplasma/Spiroplasma); 
+    # 5 (Invertebrate Mitochondrial); 6 (Ciliate Macronuclear and Dasycladacean); 9 (Echinoderm Mitochondrial); 10 (Euplotid Nuclear); 11 (Bacterial); 12 (Alternative Yeast Nuclear); 13 (Ascidian Mitochondrial);
+    # 14 (Flatworm Mitochondrial); 15 (Blepharisma Macronuclear); 16 (Chlorophycean Mitochondrial); 21 (Trematode Mitochondrial); 22 (Scenedesmus obliquus); 23 (Thraustochytrium Mitochondrial)
+    TABLE: 0
+    # translation frame(s), comma seperated (1,2,3,F,-1,-2,-3,R,6) [information from BSML input will override this setting]
+    FRAME: 1
+    # multifasta formatted output.  Select 0 for single-fasta output, or select 1 for multi-fasta output (100 seqs per file).  Default is 0.
+    MULTIFASTA_OUTPUT: 0
+    # number of sequences per fasta output file.  Default is 100.  Only works if multifasta option is set to 1
+    SEQS_PER_FASTA: 100
+    # optional sequence regions to translate (eg: 10-165,200-325,360-450)
+    REGIONS: ""
+    # used in the base name in all new features IDs generated
+    PROJECT_NAME: $;PROJECT$;
+    # delete any fasta files that are not polypeptide sequences
+    CLEANUP: 0
+  input:
+    # input file format should be single sequence fasta file(s)
+    # or gene encoding BSML document(s) (eg: output from gene prediction components)
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    FSA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+    OUTPUT_TRANSLATED_FILE: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.concat.fsa
+  component:
+    COMPONENT_NAME: translate_sequence
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    SKIP_WF_COMMAND: concatenate translated sequences
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - wu-blastp workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create fsa list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fsa\""
+        - key: --output_list
+          value: $;FSA_OUTPUT_LIST$;
+    - name: concatenate translated sequences
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/concatenate_files
+      params:
+        - key: --input_lists
+          value: $;FSA_OUTPUT_LIST$;
+        - key: --output
+          value: $;OUTPUT_TRANSLATED_FILE$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - wu-blastp compute
+  steps:
+    - name: translate_sequence
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/translate_sequence
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --regions
+          value: "'$;REGIONS$;'"
+        - key: --frame
+          value: $;FRAME$;
+        - key: --table
+          value: $;TABLE$;
+        - key: --multifasta_output
+          value: $;MULTIFASTA_OUTPUT$;
+        - key: --seqs_per_fasta
+          value: $;SEQS_PER_FASTA$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --cleanup
+          value: $;CLEANUP$;
+        - key: --project
+          value: $;PROJECT_NAME$;
+        - key: --transeq_bin
+          value: $;TRANSEQ_EXEC$;
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: concatenate_files.pl
+    pod: |
+  =head1 NAME
+  
+  concatenate_files.pl - will concatenate files.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: concatenate_files.pl
+      --input_files=/path/to/file.1.tab,/path/to/file2.tab
+      --input_lists=/path/to/list1,/path/to/list2
+      --output=/path/to/new.file.tab
+      [ --log=/path/to/file.log
+        --debug=4
+        --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--input_files,-f>
+      A comma separated list of files.  Will cat each file.
+  
+  B<--input_lists,-l>
+      A comma separated list of lists.  Will cat each files in the list.
+  
+  B<--output,-o>
+      Output file
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+      Can be any type of input.  Will simply cat the files and append to same output
+  
+  =head1 OUTPUT
+      All the input files specified in one file
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu
+  - script: translate_sequence.pl
+    pod: |
+  =head1  NAME
+  
+  translate_sequence.pl  - translates nt fasta or gene describing BSML into polypeptide fasta
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  translate_sequence.pl --transeq_bin /path/to/emboss/bin/transeq -i [single_sequence.fsa|gene_document.bsml] -o /output/directory [-l /path/to/logfile.log] [--regions s1-e1,s2-e2,...] [--frame 1,2,3,F,-1,-2,-3,R,6] [--table 0] [--multifasta_output 0] [--seqs_per_fasta 100] --project project_name --id_repository /path/to/id_repository
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      The input single sequence fasta file or gene describing BSML document
+  
+  B<--output,-o>
+      The output path.
+  
+  B<--project>
+      Used as the project portion of the names in all features generated.  See Ergatis::IdGenerator
+      module for more details on ID generation.
+  
+  B<--regions,r>
+      Optional regions of sequence to translate (formatted to be compatible with emboss transeq)
+      [flag is ignored for BSML input]
+  
+  B<--frame,-f>
+      Optional frames to translate (1, 2, 3, F, -1, -2, -3, R, 6)
+      [flag is ignored for BSML input]
+  
+  B<--table,-t>
+      Optional translation table to use
+      
+  B<--multifasta_output, -m>
+      Optional.  If value is set to 1, multiple sequences will be written to a fasta file, as opposed to a single seq per fasta.  Default is 0;
+      Currently only works for BSML input sequences
+      
+  B<--seqs_per_fasta -s>
+  	Optional.  Determines number of sequences written to a fasta file.  Only works if --multifasta_output option is enabled.
+  	Default is 100 seqs per file
+  
+  B<--cleanup
+      Optional.  If set to 1, will delete any cdb files created from the transeq executable run.  Default is 0
+  
+  B<--debug>
+      Debug level.  Use a large number to turn on verbose debugging.
+  
+  B<--log,-l>
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  Translates an input fasta sequence to a polypeptide fasta file using emboss transeq.
+  Can also produce fasta formatted polypeptide sequences for genes described in a gene 
+  encoding BSML document.
+  
+  =head1  CONTACT
+          Brett Whitty
+          bwhitty@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

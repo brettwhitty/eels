@@ -1,0 +1,318 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: stap_aligner
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - stap_aligner.config
+  - stap_aligner.xml
+  - stap_aligner.i1.xml
+  - component_docs/stap_aligner.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  <p>
+      This component uses the profile aligner from the ss-rRNA Taxonomy Assigning Pipeline (STAP) 
+      to align each of the input nucleotide sequences to its database of small subunit ribosomal 
+      RNA sequences.  The input sequences are assumed to be either all eukaryotic or all prokaryotic 
+      ss-rRNAs, and the component must be explicitly told which database (eukaryotic or prokaryotic)
+      the input sequences should be aligned to.
+  </p>
+  
+  <h3>references</h3>
+  <p>
+    <ul>
+     <li><a href='http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0002566'>Wu D, Hartman A, Ward N, Eisen JA (2008) An Automated Phylogenetic Tree-Based Small Subunit rRNA Taxonomy and Alignment Pipeline (STAP). PLoS ONE 3(7): e2566. doi:10.1371/journal.pone.0002566</a></li>
+     <li><a href='http://128.120.136.15/mediawiki/index.php/STAP_download'>STAP page on the Eisen Lab.'s web site</a></li>
+    </ul>
+  </p>
+  
+  <h3>algorithm</h3>
+  
+    The profile alignment script in STAP uses the CLUSTALW profile aligner to perform the alignments.
+  
+  <h3>input</h3>
+  <p>
+      Like the program itself, this component accepts FASTA files as input.  If you have a single
+      file containing multiple sequences in FASTA format, you should use the 
+      <a href='./documentation.cgi?article=components&page=split_multifasta'>split_multifasta</a>
+      component first to generate individual sequence files.
+  </p>
+  
+  <h3>implemented options</h3>
+  <p>
+     <ul>
+      <li>-d: the domain of the input sequences (E=eukaryotic, P=prokaryotic)</li>
+     </ul>
+   Note that there is currently no way to specify a different domain (-d option) for different
+   sequences in the input set; at present the option applies to all of the input sequences and
+   MUST be supplied.  Unlike the RDP classifier the aligner has no option to automatically guess
+   the domain of the input sequence(s).
+  </p>
+  
+  <h3>output</h3>
+  <p>
+      The output is a set of profile alignments in FASTA format.  For example, here is the 
+      STAP-generated alignment for one of the prokaryotic rRNA sequences in STAP's own 
+      database (line-wrapped for readability):
+  
+  <div class='code_container' style='font-family: Courier,monospace;'>
+  >P19992_PROK2.18.3.4.1
+  --------------------------------------------------------------------------------
+  ----------------------CTGCAGAGAGTTT-GA--T-CC-T-G-GCTC-AG-GA-TGAA-C-GC--TGG-C--G-
+  GT-A-TG--C----T-T--AACACA-T-GC-A-AGT-CGA-A-CGA---------A-A----------------------
+  ------------------G-TT----------------------------------------------------TGT---
+  --------------------------------------------------------------------------------
+  -AAAAAC---------------------------TT--T--AG-T-GG-C-GG-A--C-------------GGG-TGAGT
+  -A--AC-AC-G-T-G-AG---A-A--T-CT-A--C-T-TTT--AG-G---------------------------------
+  ---------------------------------A-GA-----GGCAT-AA-CAT-------------------------T
+  -T-G-----------------------GAA-A---CAA-TTG-CTAA-AG---CC-T--C-AT-A----------T----
+  ------------------------------------------------------GC-T----------------------
+  --------------------------------------------------------------------------------
+  -----------------G-CA-A---------------------------------------------------------
+  -----------------------------------------------------------------------------A-G
+  -T------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  -----------------------------------------------GAAACAGAG-A----------------------
+  --------------------------------------------------------------------------------
+  --------------------------------AAT---------------------------------------------
+  --------------------------------------------------------------------------------
+  -------C----TG--------------C----C-T---G-AA-A---AT---G-A-----G-CTC-GCG--C-CTG--A
+  ------TT--A--G-CT-A----G---TTGG-T-A-AG-G-T----AAA-AG-C-T-T-ACCA--A-GG-C-A--A-CG-
+  A------------TCA-G-T------AG-CT-G-G-TTT-G-AG----A--GG-AC--G-AC-C-AG-CCAC-A-CTGGG
+  --A-C-TG-A-GA-C-AC-G-G-CCCAGA-CTCC-TAC-G--G-G-A-G-GC-A-GC-A-G-TG---GG-G-A-ATT-TT
+  CCG-C-AA-T-GG--GC-GA-A----A-G--CCT-GA-CG-GA-GCAA-TACC-G-CG-T---G-A-G--G--GA-T-G-
+  -A--A-G-G-CT-----CG-TG---------G-G-T-T-G-T--A---AA-C-CTC--------TT-TT-C-T--T-AGG
+  ----GA-A--G---A--------------------A-GC--TC-T------------------------------GA-CG
+  -GT-A-C-CT-A-AG-G---------AT-----------TAAGC-ATC-GG-C-TAA---C--T-CCGT--GCCC--G-C
+  ---A--TCCG---C-GG--TA-AT--AC---GG-AG-GAT-GCA-A-G-CG-TTAT-C-CGG-AA-TC-A--C-T--GGG
+  C-ATT----TA-GCGT-CT--G-TA-G-G-T-T------------G--C-TT-A-G-T-AA----G-T-C-T---G-CTG
+  -TT-A-AA-TA--TT-GGG-G-----------------------------------------------------------
+  ---------CT-C-AA----------------------------------------------------------------
+  ---------CC-C-C-AA-AA-C----A-G-C-A-G-T--------G--GA-A-A-C-T-G-CTA--A-G-C--------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  -----------------------------------------T-A-G-A-G-T-A-----T-GG--CA-A-G---------
+  ---G-GT-A-AA-G----GG--AATT-CCC-A-GT--GT-A-GCG-GTGAAA-TG-CGT-AGAT-A-TT-G-GGA--AG-
+  A-AC-A-CC-AG--A--G--GC-GAA-A---GC---G----C--T-T-TACTA------G-AC-CA--------------
+  ------------------------------------------------TT-G-C-T--GA--CA-----CT-CA-GA--G
+  -A-CGA--AA-G-C--------------T-AGGG-GAG-C-G-AATG--GG-ATTA-G-ATA-C-----CC-C-A-GTA-
+  G-T----C-CT--A-G-CCG-T-AAA--C-GATG-GA--TA-CT---------A-GA--T--G-T-TG-C-GC-G-----
+  --------------------------------------------------------------------------------
+  ----TATTGACC--------------------------------------------------------------------
+  ------------------------------------------------------------------------------C-
+  G-TG--C-A-G-T-AT-C------GT--A----GC-TAA--CG-C-G-T--T--AA-GT--A----T-CCC-GCC-T-G-
+  GG-GAG-TA---CGC-----T-C--G-C-A-A-GAG-T--GAA-ACTC-AAA---------GGAA-TTG-ACGGG-G-G-
+  CCCG----C-A--C-A-A-GC-GGT-G--G--AG-CA-T--GT-GGT-TT-AATT-C-G-ATG-CAAC-G-CG-A-AG-A
+  -A-CC-TT-A-CC-AGGAC-TT-G-AC-A-T-G--------------TCA-C---------------AAAT-T-T----T
+  T--T-GA-A-A-A--A-A-G--A-A-A-G--T-G-----CC-------------------------------------T-
+  -TT-G------------------------------------------GG----A----A---TG-TGA---A--CA----
+  -----------------------------------------------C-A-G-G-T-GGTG-CA-TGG-CT--GTC-GTC
+  -A-GC-TC---G-TG-CG-G--TGA-GA-TGT-T-GG-G-TT-AA-GT-CCCGC-AA--------C-GAG-CGC-A-ACC
+  -C-T-TG--TC--T-TTAG--T-T-G-C-C---AT-C-A--T--------------------------------------
+  --------------------------------------------------------------------------------
+  ------------------------------------------------------------------TTAG----------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  ----------------------------------T----T-G------------G----G---C-A--CT----------
+  -----C-T-A-A-A-GA-G--AC-T-G-CCG--G-T------------------------------------G-A---CA
+  A----------------------------------A-C-C-G--G-A-GG-A--AGG-T--GAGG-A-TGAC-GTC--AA
+  GT-C---AGC-A-T-G-C-C-C-CTT----AT-G--TC-C-T-GG-GC-TA-CAC-ACGTG-C--TA--CAATG---G-T
+  CGC-G-A--C-AAA-GA-GT------------------------------------------------------------
+  --------------------------------------T-G-C-A-A--A-CTTG-C--C--------------------
+  -------------------A-AA-G-C-----------T--A-G-CT---A----------A--TCT-C------A-C-A
+  AATC-GC-G-G-C-T-CAG-TTC--------GGA-T-TGCAG-GC--T-GCAA-CT-C----------------------
+  ---------------------------------------------------------------------------G-CCT
+  GC-A-T-G-AA-G-GT-GGAAT-CG-G-TA--G-TA-AT-C-G-C----CGG-TC-A-G-CT------AC--ACG-GC-G
+  -GT-G-AAT-CCGT-T-CCCGGGCCT-TGTA----CACACCG-CCC-GTC-----A---CA--CCA-TG-GG-A--G---
+  CTG-G-CC-AC-GCC--C-GAA------G--T-CGT-TA-C-C-C-T-AA-CCT--------------------------
+  -----------------------------------T-TT-----------------------------------------
+  ---------------------------------------------------------------GG-A--GG-G--G---G
+  G-CGC--CT--AAG-G----T-AGG-GC-TAG------------------------TG--ACT-GGGG------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------
+  --
+  
+  </div>
+  </p>
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: phylogeny
+  parameters:
+    # The domain (either 'E' for eukaryote or 'P' for prokaryote) of the 
+    # input sequences, if known.  The domain MUST be specified and must be the same
+    # for all of the input sequences; if this is not the case then the input must 
+    # be broken into separate eukaryotic and prokaryotic subsets.
+    DOMAIN: P
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    RESULTS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.aln.list
+  component:
+    COMPONENT_NAME: stap_aligner
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - STAP SSU-rRNA aligner workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create results list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.aln\""
+        - key: --output_list
+          value: $;RESULTS_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - STAP SSU-rRNA aligner
+  steps:
+    - name: align_to_rRNA_profile.pl
+      type: RunUnixCommand
+      executable: $;STAP_ALIGNER_EXEC$;
+      arg: -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.aln -d $;DOMAIN$;
+      params:
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

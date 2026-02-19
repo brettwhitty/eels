@@ -1,0 +1,258 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: wait
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - wait.config
+  - wait.xml
+  - wait.i1.xml
+  - wait.i2.xml
+  - component_docs/wait.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This is a testing component and doesn't serve any functional purpose.  It is usually used
+      to make sure the file iteration, grid submission and monitoring aspects of Ergatis and
+      Workflow are working correctly.  It allows the user to specify input (see below) and then
+      each job just sits on the grid, sleeping, for some user-defined time period before 
+      returning a success code.  This demonstrates that the input def can be parsed, groups
+      created, jobs submitted to the grid, executed and successfully monitored.
+  </p>
+  <h3>input</h3>
+  <p>
+      The standard methods of input for Ergatis components apply here.  This can include iteration
+      over a list of files, a single file or a directory of files.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    TIME: 10
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # input_extension is only used in combination with input_directory
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: wait
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/wait.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/wait.$;ITERATOR1$;.xml
+    # The following keys are as examples of multiple iterators and can be
+    # excluded by if using a single iterator
+    ITERATOR2: i2
+    ITERATOR2_XML: $;DOCS_DIR$;/wait.$;ITERATOR2$;.xml
+    ITERATOR3: undef
+    ITERATOR3_XML: undef
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Example file iterator include using "file_iterator_template.xml" which requires
+    - "configuration key names INPUT_FILE_LIST,INPUT_FILE,INPUT_DIRECTORY"
+    - Example of general iterator that accepts an $;ITERATOR_LIST$; file and
+    - can be used for iterators besides files.  Requires command to build
+    - iterator list and uses generic iterator "iterator_template.xml"
+    - Postprocessing
+  command_sets:
+    - wait workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR2,$;ITERATOR_XML$;=ITERATOR2_XML,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/$;ITERATOR2$;.list\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create_file_iterator_list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_file_iterator_list
+      params:
+        - key: --input_file_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --input_file
+          value: $;INPUT_FILE$;
+        - key: --input_directory
+          value: $;INPUT_DIRECTORY$;
+        - key: --input_directory_extension
+          value: $;INPUT_EXTENSION$;
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/$;ITERATOR2$;.list
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - wait compute
+  steps:
+    - name: wait
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/spin_wait
+      params:
+        - key: --time
+          value: $;TIME$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+
+# Iterator i2 - per-input processing steps
+iterator_i2:
+  command_sets:
+    - wait compute
+  steps:
+    - name: wait
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/spin_wait
+      params:
+        - key: --time
+          value: $;TIME$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_file_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_file_iterator_list.pl - generates list file from various input sources of filenames.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: create_file_iterator_list.pl 
+          --input_file_list=/path/to/some.list
+          --input_file=/path/to/somefile.fsa
+          --input_directory=/path/to/some/dir
+          --input_directory_extension=fsa
+          [--checksum_filenames=1
+          --log=/path/to/some.log
+          --debug=4 ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file_list,-l> 
+      a plain text file containing the full paths to any number of files, one per line.  
+      this can also be a comma-separated list of input file lists.
+  
+  B<--input_file,-f> 
+      the full path to an input file. this can also be a comma-separated list of 
+      input files.
+  
+  B<--input_directory,-d> 
+      the full path to an input directory. this can also be a comma-separated list of 
+      input directories.
+  
+  B<--input_directory_extension,-x> 
+      to be used in conjuction with the input_directory option, this can be used to
+      filter files by extension within any passed input directories.
+  
+  B<--output_iterator_list,-o>
+      output file. Up to 7 lines with comma separated lists of limits
+  
+  B<--output_iterator_list,-o>
+      comma separated list of iterator keys used in the output file.  Each key will be a separate line in the output file.  There are 7 lines in the output file listing FILE, FILE_NAME, FILE_BASE, FILE_EXT, DIRECTORY, XML file
+  
+  B<--checksum_filenames> 
+      use checksums instead of the basename as the iterator name. The checksum will be based on the full path to the file.
+  
+  B<--log> 
+      optional.  path to a log file the script should create.  will be overwritten if
+      already exists.
+      
+  B<--debug> 
+      optional.  the debug level for the logger (an integer)
+  
+  B<--help,-h> 
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      This script is used to accept a selection of inputs from either an input list, 
+      directory, file, or any combination thereof.  Each of these options can also
+      be specified using comma-separated lists.  These inputs will then be distributed
+      randomly across a certain number of groups, specified using the --group_count
+      option (usually somewhere around 150).
+      
+      To prevent too many files from being directly in one group, additional groups are 
+      automatically created for large input sets.  You can control how many inputs are 
+      in a group before another is created using the --group_size_limit option (default 
+      1000).  Once the number of inputs in any group reaches this number, another group 
+      is created until it is full, and so on.
+  
+  =head1   OUTPUT
+  
+      The location of the output is specified using the --output_directory option.  One
+      numbered directory will be created under this for each group needed.
+      
+      MORE OUTPUT DESCRIPTIONS NEEDED
+      
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: spin_wait.pl
+    pod: |
+  =head1  NAME 
+  
+  dummy.pl - do nothing
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  dummy.pl --debug debug_level --log log_file
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

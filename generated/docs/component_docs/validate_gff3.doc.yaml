@@ -1,0 +1,214 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: validate_gff3
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - validate_gff3.config
+  - validate_gff3.xml
+  - validate_gff3.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: validation
+  parameters:
+  input:
+    # This parameter can be a single file (or a comma-separated list of such files) containing a new-line separated list of .bsml documents to be loaded
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: gff3
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: validate_gff3
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: "$Name:  $"
+    REVISION: "$Revision: 1.1 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    NODISTRIB: 1
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator
+  command_sets:
+    - validate_gff3 workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - validate_gff3
+  steps:
+    - name: Validation of GFF3 file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/gff3Valid
+      arg: $;I_FILE_PATH$;
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/gff3Valid.pl.$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/gff3Valid.pl.$;I_FILE_BASE$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: gff3Valid.pl
+    pod: |
+  =head1 SYNOPSIS
+  
+      gff3Valid.pl some_file.gff3
+  
+  =head1 DESCRIPTION
+  
+  This is a GFF3 validator for the BRC Interoperability Working Group (iowg.brcdevel.org).  This is
+  based on Lincoln Stein's GFF3 1.01 spec but is more strict.  Our usage is defined here:
+  
+      http://iowg.brcdevel.org/gff3.html
+      
+  This first version of the validator does not yet check many of the rules given in the document
+  above.  The VALIDATION section below describes each of the current validation checks.
+  
+  Ontology directive targets may currently be local files or URLs (http or ftp).  URNs are not
+  currently supported.
+  
+  =head1 VALIDATION
+  
+  The list below represents the current set of checks performed by this validator.
+  
+  =over 4
+  
+  =item *
+  note: general character class: [a-zA-Z0-9.:_-]
+  
+  =item *
+  the gff3 file passed must exist
+  
+  =item *
+  the first line in the file must be the version definition
+  
+  =item *
+  implied fasta directive usage not encouraged (warning)
+  
+  =item *
+  feature-ontology directive should be passed (warning)
+  
+  =item *
+  feature-ontology directive URI, if passed, must be accessible
+  
+  =item *
+  attribute-ontology directive should be passed (warning)
+  
+  =item *
+  attribute-ontology directive URI, if passed, must be accessible
+  
+  =item *
+  format of ##sequence-region directive must be: ##sequence-region seqid start end
+  
+  =item *
+  directives not in the spec are not allowed
+  
+  =item *
+  data lines must have 9 tab-delimited columns
+  
+  =item *
+  column1, seqid, must match the general character class
+  
+  =item *
+  column2, source, cannot be whitespace or empty (. for none)
+  
+  =item *
+  column3, type, must have an entry in the feature ontology
+  
+  =item *
+  column4, start, must be an integer
+  
+  =item *
+  column5, end, must be an integer
+  
+  =item *
+  start must be <= end
+  
+  =item *
+  column6, score, must be a floating point number such as 5e-3 -5e+10 5E-3 5E+20 but NOT e-10
+  
+  =item *
+  column7, strand, must be one of [-+.?]
+  
+  =item *
+  column8, phase, must be one of [012.]
+  
+  =item *
+  column9, attributes, must be in key=value format, with multiple values within a key separated by commas and multiple key=value pairs separated by a semi-colon
+  
+  =item *
+  each attribute key must be defined in the attribute ontology
+  
+  =item *
+  Dbxref attributes must be in the form db:id
+  
+  =item *
+  Ontology_term attributes must be in the form AA:0000000
+  
+  =item *
+  ec_number attributes must be in the form of N.N.N.N
+  
+  =item *
+  molecule_type attributes must be either dsDNA | ssDNA | dsRNA | ssRNA
+  
+  =item *
+  topology attributes must be either linear | circular
+  
+  =item *
+  localization attributes must be either mitochondrion | plastid | episome | plasmid | nuclear | chromosomal
+  
+  =item *
+  if the feature type (column 3) is mRNA or SO:0000234, the following attributes are required: ID, Name, Dbxref, description
+  
+  =item *
+  if the feature type (column 3) is contig, SO:0000149, supercontig or SO:0000148, the following attributes are required: ID, Name, molecule_type, organism_name, translation_table, Dbxref.  Also, Dbxref must point to a taxon id.
+  
+  =item *
+  each seqid referenced in column 1 must also have a contig or supercontig definition within the GFF3 file.
+  
+  =item *
+  each seqid referenced in column 1 must also have a FASTA sequence within the GFF3 file.
+  
+  =item *
+  there must be at least one row of type mRNA cds and exon
+  
+  =back

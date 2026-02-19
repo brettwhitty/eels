@@ -1,0 +1,88 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: assert_disjoint_clusters
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - assert_disjoint_clusters.config
+  - assert_disjoint_clusters.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: cluster analysis
+  parameters:
+    USERNAME: access
+    PASSWORD: access
+    # PLEASE NOTE: the capitalization of the rdbms parameter MUST match the name 
+    # of the corresponding Prism module (e.g., "Sybase" or "Mysql", not "sybase" or "mysql")
+    RDBMS: Sybase
+    SERVER: SYBPROD
+    DATABASE: $;PROJECT$;
+    ANALYSIS_ID: ""
+  input:
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    REPORT_FILE: $;OUTPUT_DIRECTORY$;/assertion_report.txt
+  component:
+    COMPONENT_NAME: assert_disjoint_clusters
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5601 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 50
+    NODISTRIB: 1
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - assert_disjoint_clusters workflow
+  steps:
+    - name: create output directories
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$;
+    - name: assert the clusters for analysis_id '$;ANALYSIS_ID$;' are disjoint
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/assertClustersDisjoint
+      params:
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --database
+          value: $;DATABASE$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --vendor
+          value: $;RDBMS$;
+        - key: --analysis_id
+          value: $;ANALYSIS_ID$;
+        - key: --outfile
+          value: $;REPORT_FILE$;
+        - key: stdout
+          value: $;TMP_DIR$;/assert_disjoint_clusters.pl.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/assert_disjoint_clusters.pl.stderr

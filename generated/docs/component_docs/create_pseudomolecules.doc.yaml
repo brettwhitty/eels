@@ -1,0 +1,246 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: create_pseudomolecules
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - create_pseudomolecules.config
+  - create_pseudomolecules.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Name of the strain
+    STRAIN_NAME: ""
+    # Database and format for reference genomes from GenBank
+    DATABASE: nucleotide
+    FORMAT: fasta
+    # Configuration options for NUCMER
+    NUCMER_CONFIG: -c 100 -maxmatch
+    # Optional pmarks spacer sequence
+    LINKER_SEQUENCE: ""
+  input:
+    # Provide a single contig file or list file having paths to contigs files
+    CONTIG_INPUT: ""
+    # Optional tab-delimited file of reference accession ids and group number
+    ACSN_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.list
+  component:
+    COMPONENT_NAME: create_pseudomolecules
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - create pseudomolecules workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create_pseudomolecules
+      type: RunDistributedCommand
+      executable: $;BIN_DIR$;/create_pseudomolecules
+      params:
+        - key: --input_file
+          value: $;ACSN_FILE$;
+        - key: --contig_input
+          value: $;CONTIG_INPUT$;
+        - key: --strain
+          value: $;STRAIN_NAME$;
+        - key: --database
+          value: $;DATABASE$;
+        - key: --format
+          value: $;FORMAT$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --nucmer_exec
+          value: $;NUCMER_EXEC$;
+        - key: --coords_exec
+          value: $;COORDS_EXEC$;
+        - key: --config_param
+          value: "'$;NUCMER_CONFIG$;'"
+        - key: --linker_sequence
+          value: $;LINKER_SEQUENCE$;
+        - key: --log
+          value: $;TMP_DIR$;/create_pseudomolecules.log
+        - key: --debug
+          value: 4
+    - name: create pseudomolecules file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.pseudomolecule\\..*\\.fasta\""
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_pseudomolecules.pl
+    pod: |
+  =head1 NAME
+  
+  create_pseudomolecules.pl - program to generate pseudomolecules from contigs for annotation.
+  
+  =head1 SYNOPSIS
+  
+      create_pseudomolecules.pl --output_dir <outdir>  --contig_input <contig file> --strain <strain name> [--input_file <reference accession ids file> --database <genBank database> --format <reference file format> --config_param <nucmer config params> --log <log file> --debug <debug level> --help <usgae>]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --output_dir  	= /path/to/output_dir. This is the directory where all output 
+  		    	  files generated during the script execution will be stored.
+  
+      --contig_input 	= /path/to/contig_file or contig_list_file. This is a file 
+  			  containing the strain genome contigs in fasta format 
+  			  or paths to contig files.
+      
+      --strain      	= Name of the strain used for naming the output files.
+  
+     [--config_param	= Configuration parameters to execute nucmer.
+  		    	  e.g. -c 100 -maxmatch
+  
+      --input_file  	= /path/to/input_file. This is a tab-delimited file containing
+  		    	  genBank accession ids or paths to reference genome files and 
+  			  a serial group number indicating which reference sequences 
+  			  should be concatenated together for analysis .
+  		    	  e.g.CP000803.1	1
+  			      /path/to/ref_file	1 	
+  			      CP000804.1	2
+  			      CP000806.1	2
+  
+      --database 	  	= Name of the genBank database used to download the reference 
+  		    	  genomes.e.g.nucleotide
+  
+      --format      	= Format in which the reference genome sequence is downloaded
+  		    	  e.g.FASTA
+      
+      --linker_sequence	= This sequence will be inserted after each sequence stitched together into
+  			  a pseudomolecule.  The default sequence (NNNNNCACACACTTAATTAATTAAGTGTGTGNNNNN) will be
+  			  inserted if this isn't specified and contains 6-frame translational stop codons.  This
+  			  can be an empty string.
+  
+      --log 	  = /path/to/log_file. Log file. Optional
+  
+      --debug       = Debug level. Optional
+  
+      --help]       = Help message, script usage. Optional
+  
+  =head1 DESCRIPTION
+  
+  The program creates pseudomolecules from contigs for annotation purposes. Following steps are taken in pseudomolecule creation:
+  1. If no reference file is passed then concatenate the contigs based on length - longest to shortest to create a pseudomolecule.
+  2. If a reference accession file containing accession ids or file paths is specified then download reference genome sequences from genBank.
+     Always provide absolute paths for the reference genome files
+  3. Concatenate reference genomes based on the groups provided by the user.
+  4. Run nucmer to create .delta file by aligning reference genome with input contigs file
+  5. Run show-coords to create .coords file for the alignment.
+  6. Run reference_genome_match_tiler.pl to produce .map file and  for the contigs that mapped with the reference.
+  7. Run create_fasta_pseudomolecules.pl to produce a pseudomolecule and unmapped contigs fasta file using the .map file.
+  8. Run cleanFasta.pl to clean up the pseudomolecule file and generate a FASTA format file.
+  9. If there is more than 1 reference group then re-run all the steps above starting from step 4 with unmapped contigs file as the 
+     new contig file and next group of reference genomes as the reference sequence. 
+  10. At the end generate the pseudomolecule of unmapped contigs using create_fasta_pseudomolecules.pl
+  
+  =head1  CONTACT
+  
+  Sonia Agrawal
+  sagrawal@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

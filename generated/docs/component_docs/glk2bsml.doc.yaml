@@ -1,0 +1,175 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: glk2bsml
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - glk2bsml.config
+  - glk2bsml.xml
+  - glk2bsml.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / extraction
+  parameters:
+    USERNAME: access
+    PASSWORD: access
+    # Name of the server on which the databases reside
+    SERVER: SYBTIGR
+    # All Sequence and Feature identifiers will be assigned the following
+    # IdGenerator identifier suffix value:
+    ID_GEN_VERSION: 0
+  input:
+    # The glk2bsml control file should contain a listing of source databases along with bac identifier values.
+    GLK2BSML_CONTROL_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTA_DIRECTORY: $;OUTPUT_DIRECTORY$;/fasta
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+  component:
+    COMPONENT_NAME: glk2bsml
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    BSML_DTD: $;DOCS_DIR$;/bsml3_1.dtd
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4942 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 50
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - glk2bsml workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/glk2bsml.list\"/"
+  steps:
+    - name: create output directory and temporary directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$;
+    - name: Create the glk2bsml iterator list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_legacy2bsml_iterator_list
+      params:
+        - key: --control_file
+          value: $;GLK2BSML_CONTROL_FILE$;
+        - key: --output
+          value: $;TMP_DIR$;/glk2bsml.list
+        - key: stdout
+          value: $;TMP_DIR$;/create_glk2bsml_iterator_list.stdout
+        - key: stdout
+          value: $;TMP_DIR$;/create_glk2bsml_iterator_list.stderr
+    - name: Create BSML file list
+      type: RunJavaUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$; -name '*.bsml'"
+      params:
+        - key: stdout
+          value: $;BSML_OUTPUT_LIST$;
+        - key: stderr
+          value: $;TMP_DIR$;/create_bsml_file_list.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - glk2bsml
+  steps:
+    - name: glk2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/glk2bsml
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --id_gen_version
+          value: $;ID_GEN_VERSION$;
+        - key: --bsmlfile
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;_assembly.bsml
+        - key: --bac_id
+          value: $;ASMBL_ID$;
+        - key: --genus
+          value: $;GENUS$;
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/glk2bsml.$;DATABASE$;_$;ASMBL_ID$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/glk2bsml.$;DATABASE$;_$;ASMBL_ID$;.stderr
+    - name: DTD validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: -d $;BSML_DTD$; $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;_assembly.bsml
+    - name: profileBSMLFile
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/profileBSMLFile
+      params:
+        - key: --infile
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;_assembly.bsml
+        - key: --database
+          value: $;DATABASE$;
+        - key: --asmbl_id
+          value: $;ASMBL_ID$;
+        - key: --logfile
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;DATABASE$;_$;ASMBL_ID$;.profileBSMLFile.pl.log
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/profileBSMLFile.$;DATABASE$;_$;ASMBL_ID$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/profileBSMLFile.$;DATABASE$;_$;ASMBL_ID$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_legacy2bsml_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  generate_asmbl_list.pl - Default output is a workflow iterator that
+  can be used to iterator over a set of asmbl_ids
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  generate_asmbl_list
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

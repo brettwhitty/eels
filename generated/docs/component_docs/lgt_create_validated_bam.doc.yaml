@@ -1,0 +1,243 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: lgt_create_validated_bam
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - lgt_create_validated_bam.config
+  - lgt_create_validated_bam.xml
+  - lgt_create_validated_bam.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # List file that contains one trace and one clone hits file each, containing LGT hits and LCA info
+    LGT_HITS: ""
+  input:
+    # A filtered BAM file
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: raw
+  output:
+    OUTPUT_TOKEN: lgt
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BAM_LIST: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/$;COMPONENT_NAME$;.bam.list
+  component:
+    COMPONENT_NAME: lgt_create_validated_bam
+    DESCRIPTION: Validate the LGT Finder results and create a BAM file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # 
+    # To only produce raw blast output add;
+    # $;SKIP_WF_COMMAND$;=add create bsml list,convert btab to bsml,store config params,dtd validation
+    # 
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6529 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Iterator Done
+  command_sets:
+    - LGT workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create BAM file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bam\""
+        - key: --output_list
+          value: $;BAM_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Processing
+  command_sets:
+    - create validated bam workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: Create validated BAM
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_create_validated_bam
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.validated_bam.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.validated_bam.stderr
+        - key: --hits_list
+          value: $;LGT_HITS$;
+        - key: --prefix
+          value: final
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --samtools_path
+          value: $;SAMTOOLS_EXEC$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: lgt_create_validated_bam.pl
+    pod: |
+  =head1 NAME
+  
+  lgt_create_validated_bam.pl - Validated a create a BAM file after finding LGT hits
+  
+  =head1 SYNOPSIS
+  
+   USAGE: lgt_create_validated_bam.pl
+         --input_file=/path/to/some/input.file
+         --output_dir=/path/to/transterm
+  	   --clone_hits=/path/to/hits_by_clone.txt
+  	   --samtools_path=/usr/local/bin/samtools
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+  	A BAM file that has been filtered by Picard-tools and Prinseq
+  
+  B<--hits_list,-c>
+  	List file that lists the clone and trace files containing the donor/host hits and their LCA lineages.
+  	Should contain just one trace and clone hit file each. Obtained from lgt_finder.pl
+  
+  B<--output_dir,-o>
+  
+  B<--prefix, -p>
+  	Name you would like to give as a prefix in the output file name
+  
+  B<--samtools_path,-s>
+      Path to samtools executable
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   	This is a wrapper script that will call LGT::LGTSeek->validate_bam to create a BAM file after finding LGT in lgt_finder.pl
+  
+  =head1  INPUT
+  
+  =head1 OUTPUT
+  
+  =head1  CONTACT
+  
+      Shaun Adkins
+      sadkins@som.umaryland.edu

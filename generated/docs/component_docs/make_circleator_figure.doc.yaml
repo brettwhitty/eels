@@ -1,0 +1,271 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: make_circleator_figure
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - make_circleator_figure.config
+  - make_circleator_figure.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameter:
+    # Optional. Basename of the .svg file to be generated in the output directory. Default is figure.svg
+    SVG_BASENAME: ""
+    # Optional.Comma-separated list of desired output formats for the circleator figure (pdf, jpg, png). Default is pdf,jpg
+    OUTPUT_FORMAT: ""
+    # Optional.Height of the figure. Default is 3000
+    OUTPUT_HEIGHT: ""
+    # Optional.Width of the figure. Default is 3000
+    OUTPUT_WIDTH: ""
+  input:
+    # Path to directory containing GenBank files (.gbf)
+    GENBANK_DIR: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    SVG_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.svg.list
+    PDF_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.pdf.list
+    JPG_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.jpg.list
+  component:
+    COMPONENT_NAME: make_circleator_figure
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - create circleator figures
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: make_circleator_figure
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/make_circleator_figure
+      params:
+        - key: --circleator_path
+          value: $;CIRCLEATOR_PATH$;
+        - key: --rasterizer_path
+          value: $;RASTERIZER_PATH$;
+        - key: --config_dir
+          value: $;CONFIG_DIR$;
+        - key: --genbank_dir
+          value: $;GENBANK_DIR$;
+        - key: --svg_file
+          value: $;SVG_BASENAME$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_format
+          value: $;OUTPUT_FORMAT$;
+        - key: --output_width
+          value: $;OUTPUT_WIDTH$;
+        - key: --output_height
+          value: $;OUTPUT_HEIGHT$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stderr
+    - name: create svg file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.svg\""
+        - key: --output_list
+          value: $;SVG_LIST$;
+    - name: create pdf file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.pdf\""
+        - key: --output_list
+          value: $;PDF_LIST$;
+    - name: create jpg file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.jpg\""
+        - key: --output_list
+          value: $;JPG_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: make_circleator_figure.pl
+    pod: |
+  =head1  NAME 
+  
+  make-circleator-figure.pl - Automatically generate and rasterize a Circleator figure given GenBank format input file(s).
+  
+  =head1 SYNOPSIS
+  
+  make-circleator-figure.pl
+           --genbank_dir=.
+           --circleator_path=/usr/local/packages/circleator/bin/circleator
+           --rasterizer_path=/usr/local/packages/circleator/bin/rasterize-svg
+           --config_dir=/path/to/predefined/config/file/directory
+          [--svg_file=figure.svg
+           --output_dir=.
+           --output_formats='pdf,jpg'
+           --output_width=3000
+           --output_height=3000
+           --help
+           --man]
+  
+  =head1 OPTIONS
+      
+  B<--genbank_dir,-g>
+      Path to a directory that contains one or more GenBank flat files with the ".gbf" suffix.
+      The named directory will be searched recursively for all such files.
+  
+  B<--circleator_path>
+      Path to the "circleator" script in the bin/ directory of the Circleator distribution.
+  
+  B<--rasterizer_path>
+      Path to the "rasterize-svg" script in the bin/ directory of the Circleator distribution.
+  
+  B<--config_dir,-c>
+      Path to a directory that contains the following predefined Circleator config files:
+       -fig-1.cfg
+       -fig-1-small.cfg
+  
+  B<--svg_file,-s>
+      Optional. Name of the SVG file to generate in --output_dir. Default is "figure.svg"
+  
+  B<--output_dir>
+      Optional. Path to the directory in which the contig list file, output SVG file, and
+      rasterized file should be written. Default is current working directory.
+  
+  B<--output_formats>
+      Optional. Comma-delimited list of formats ('png', 'jpg', or 'pdf') to which SVG should 
+      be rasterized/converted. Default is 'pdf,jpg'
+  
+  B<--output_width>
+      Optional. Width of the final rasterized/converted images. Default is 3000.
+  
+  B<--output_height>
+      Optional. Height of the final rasterized/converted images. Default is 3000.
+  
+  B<--help,-h> 
+      Display the script documentation.
+  
+  B<--man,-m>
+      Display the script documentation.
+  
+  =head1 DESCRIPTION
+  
+  Wrapper script for Circleator that performs the following tasks:
+  
+  1. Creates a Circleator --contig_list file for all the .gbf output files in a given directory.
+  2. Selects one of 3 predefined config files based on the number of input seqs and their lengths
+  3. Runs the Circleator to generate an SVG-format figure
+  4. Runs the SVG rasterizer to convert the SVG file into PDF, PNG, or JPEG
+  
+  =head1 INPUT
+  
+  One or more GenBank-format annotation files.
+  
+  =head1 OUTPUT
+  
+  A graphical plot of the input sequence(s) in both SVG format and whatever format is specified
+  by the --output_format option.
+  
+  =head1 CONTACT
+  
+      Jonathan Crabtree
+      jonathancrabtree@gmail.com
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

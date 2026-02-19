@@ -1,0 +1,129 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: sam2fasta
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - sam2fasta.config
+  - sam2fasta.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # Whether to output fastq instead of fasta
+    FASTQ: 0
+    # Set to 1 if you have HLGT style combined sam files and you want to append
+    # _human and _bac to the accessions of the output fasta file.
+    HLGT: 0
+    # Hostname where files live. (Assumes you have passwordless ssh setup).
+    # Leave this blank if the files are local
+    HOST: ""
+    # Set to 1 to concatenate mate pairs together
+    COMBINE_MATES: 0
+    # Set to 0 if the mates are not paired end
+    PAIRED: 1
+    # Set to 1 if you are processing a file that that does not contain the same read more than once.
+    ASSUME_UNIQ: 0
+  input:
+    # List of sam files to convert
+    INPUT_FILE: ""
+  output:
+    # Name of the output file. Clear this parameter and set HLGT to 1 to get 1 file per run.
+    OUTPUT_FILE: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/sam2fasta.fasta
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_BASES: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/sam2fasta.base.list
+    OUTPUT_LIST: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/sam2fasta.out.list
+  component:
+    COMPONENT_NAME: sam2fasta
+    DESCRIPTION: Lateral Genome Transfer sam2fasta converter
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - LGT workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Convert sam to fasta
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/sam2fasta
+      params:
+        - key: --file_list
+          value: $;INPUT_FILE$;
+        - key: --fastq
+          value: $;FASTQ$;
+        - key: --hlgt
+          value: $;HLGT$;
+        - key: --output_file
+          value: $;OUTPUT_FILE$;
+        - key: --tmp_dir
+          value: $;TMP_DIR$;
+        - key: --base_list
+          value: $;OUTPUT_BASES$;
+        - key: --host
+          value: $;HOST$;
+        - key: --out_list
+          value: $;OUTPUT_LIST$;
+        - key: --combine_mates
+          value: $;COMBINE_MATES$;
+        - key: --samtools_bin
+          value: $;SAMTOOLS_EXEC$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/lgt_sam2fasta.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/lgt_sam2fasta.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: sam2fasta.pl
+    pod: |
+  =head1 NAME
+  
+  sam2fasta.pl
+  
+  =head1 SYNOPSIS
+  
+      sam2fasta.pl
+         --file_list=/path/to/file/list || --input=/path/to/input.sam
+         [--output_file=/path/to/outputfile.fasta # Will be used as a base to generate _N.fastq files if --fastq=1
+         --host=foobar.com
+         --combine_mates=1 # To concat the sequence/quality into one string
+         --tmp_dir=/path/to/temp
+         --fastq=1
+         --hlgt=1
+         --paired=1 # Defaults to 1
+         --assume_uniq=1 # To ignore how many times you see a read. Good for single large files.
+         --help]

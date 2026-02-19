@@ -1,0 +1,342 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: chado2bsml
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - chado2bsml.config
+  - chado2bsml.xml
+  - chado2bsml.i1.xml
+  - workflow/chado2bsml-master.ini
+  - workflow/chado2bsml.ini
+  - workflow/chado2bsmlconf.ini
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / extraction
+  parameters:
+    USERNAME: ""
+    PASSWORD: ""
+    # Relational database management system type e.g. sybase or postgresql
+    DATABASE_TYPE: sybase
+    # Server name on which the database resides
+    SERVER: ""
+    # User can specify whether the GO data should not be extracted from the database and written to the output .bsml
+    IGNORE_GO: ""
+    # User can specify whether the Evidence codes data should not be extracted from the database and written to the output .bsml
+    IGNORE_EVCODES: ""
+    # User can specify whether the TIGR_roles should not be extracted from the database and written to the output .bsml
+    IGNORE_NON_GO: ""
+    # User can specify whether only the polypeptides that localize to the assembly should be extracted from the database and written to the output .bsml
+    # Good for generating BSML files that serve as input to other computational analyses
+    POLYPEPTIDES_ONLY: ""
+  input:
+    # Name of chado database (if you are using either the control_file or bsml_file_list parameters)
+    DATABASE: $;PROJECT$;
+    # chado2bsml control file:
+    # Should contain a new-line separated listing of all assembly identifers for assemblies that should be extracted from the
+    # source $;DATABASE$;.
+    # 
+    # Either the CHADO2BSML_CONTROL_FILE or the BSML_FILE_LIST should be specified.
+    # 
+    # A new-line separated list of assembly/reference sequence identifiers.
+    CHADO2BSML_CONTROL_FILE: ""
+    # A new-line separated list of BSML files whose contents were loaded into the
+    # chado database from which they shall now be drawn/extracted.
+    BSML_FILE_LIST: ""
+    # A new-line separated list of database names to be dumped:
+    DATABASE_LIST: ""
+    BSML_DTD: $;DOCS_DIR$;/bsml3_1.dtd
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    FASTA_DIRECTORY: $;OUTPUT_DIRECTORY$;/fasta
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    FASTA_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+  component:
+    COMPONENT_NAME: chado2bsml
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 5
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator1 for chado2bsml
+  command_sets:
+    - chado2bsml workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/chado2bsml.list\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create chado2bsml iterator list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_chado2bsml_iterator_list
+      params:
+        - key: --control_file
+          value: $;CHADO2BSML_CONTROL_FILE$;
+        - key: --bsmlfilelist
+          value: $;BSML_FILE_LIST$;
+        - key: --databaselist
+          value: $;DATABASE_LIST$;
+        - key: --output_file
+          value: $;TMP_DIR$;/chado2bsml.list
+        - key: --logfile
+          value: $;TMP_DIR$;/create_chado2bsml_iterator_list.pl.log
+        - key: stdout
+          value: $;TMP_DIR$;/create_chado2bsml_iterator_list.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/create_chado2bsml_iterator_list.stderr
+    - name: Create BSML file list
+      type: RunJavaUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$; -name '*.bsml'"
+      params:
+        - key: stdout
+          value: $;BSML_OUTPUT_LIST$;
+        - key: stderr
+          value: $;TMP_DIR$;/create_bsml_file_list.stderr
+    - name: Create FASTA file list
+      type: RunJavaUnixCommand
+      executable: find
+      arg: "$;FASTA_DIRECTORY$; -name '*.fsa'"
+      params:
+        - key: stdout
+          value: $;FASTA_OUTPUT_LIST$;
+        - key: stderr
+          value: $;TMP_DIR$;/create_chado2bsml_iterator_list.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - chado2bsml
+  steps:
+    - name: Create the FASTA output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;FASTA_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+    - name: chado2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/chado2bsml
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;DATABASE_TYPE$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --asmbl
+          value: $;ASMBL$;
+        - key: --ignore_go
+          value: $;IGNORE_GO$;
+        - key: --ignore_evcodes
+          value: $;IGNORE_EVCODES$;
+        - key: --ignore_non_go
+          value: $;IGNORE_NON_GO$;
+        - key: --polypeptides_only
+          value: $;POLYPEPTIDES_ONLY$;
+        - key: --bsml_file_name
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;ASMBL$;.bsml
+        - key: --logfile
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/chado2bsml.pl.$;ASMBL$;.log
+        - key: --debug
+          value: $;DEBUG$;
+        - key: --fastadir
+          value: $;FASTA_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/chado2bsml.$;ASMBL$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/chado2bsml.$;ASMBL$;.stderr
+    - name: DTD validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: -d $;BSML_DTD$; $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;ASMBL$;.bsml
+
+# Workflow INI: chado2bsml-master.ini
+workflow_ini_chado2bsml-master.ini:
+  _header:
+    # commands to repopulate the BSML repository 
+  archive_bsml_repository:
+    # archive old output
+    param.command: $;BIN_DIR$;/archive
+    param.--file: $;TMP_DIR$;/BSML_repository.tgz
+    param.--directory: $;BSML_REPOSITORY$;
+    param.--nodelete: 1
+  chado2bsml:
+    # download gene model info from database into BSML doc
+    # 
+    # param.log=$;WORKFLOW_REPOSITORY$;/chado2bsml.log
+    param.command: $;BIN_DIR$;/chado2bsml
+    param.username: $;USERNAME$;
+    param.password: $;PASSWORD$;
+    param.database: $;DATABASE$;
+    param.output_dir: $;BSML_REPOSITORY$;
+    param.fasta_outdir: $;FASTA_REPOSITORY$;
+    param.asmbl_ids: ALL
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.directory: "'$;BSML_REPOSITORY$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  generate_asmbl_fasta:
+    # 
+    # 
+    param.command: $;BIN_DIR$;/generate_genomic_seq
+    param.username: $;USERNAME$;
+    param.password: $;PASSWORD$;
+    param.database: $;DATABASE$;
+    param.output_dir: $;FASTA_REPOSITORY$;
+    param.asmbl_ids: ALL
+  generate_jaccard_organism_asmbl_files:
+    param.command: $;BIN_DIR$;/generate_jaccard_organism_asmbl_files
+    param.database: $;DATABASE$;
+    param.username: $;USERNAME$;
+    param.password: $;PASSWORD$;
+    param.log4perl: $;WORKFLOW_REPOSITORY$;/generate_jaccard_organism_asmbl_files.pl.log
+    param.debug_level: $;DEBUG$;
+    param.directory: $;REPOSITORY_ROOT$;/workflow_config_files
+  remove_bsml_gene_model_docs:
+    # 
+    # 
+    param.command: find
+    arg: "$;BSML_REPOSITORY$; -name \"*.bsml\" -type f -maxdepth 0 -exec rm \\{\\} \\;"
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: chado2bsml.ini
+workflow_ini_chado2bsml.ini:
+  _header:
+    # commands to repopulate the BSML repository 
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;ITER_FILE_PATH$;
+  empty:
+
+# Workflow INI: chado2bsmlconf.ini
+workflow_ini_chado2bsmlconf.ini:
+  _header:
+    # configuration file for the Chado2bsml workflow
+  include chado2bsml:
+    $;SHARED_CONFIG$;: ""
+  input chado2bsml:
+  output chado2bsml:
+    $;OUTPUT_TOKEN$;: default
+    $;BSML_REPOSITORY$;: $;REPOSITORY_ROOT$;/BSML_repository
+    $;FASTA_REPOSITORY$;: $;REPOSITORY_ROOT$;/FASTA_repository
+  parameters chado2bsml:
+    $;USERNAME$;: access
+    $;PASSWORD$;: access
+  workflowdocs chado2bsml:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: chado2bsml
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/chado2bsml-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/chado2bsml-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/chado2bsml.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/chado2bsml_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_chado2bsml_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_chado2bsml_iterator_list.pl will take a new-line separated list of assembly identifiers and create an ergatis workflow iterator list file
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  create_chado2bsml_iterator_list.pl --control_file=inputfile --output_file=outputfile
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--control_file> Input file containing new-line separated list of assembly identifiers
+  
+  =item *
+  
+  B<--output_file> Output iterator file that will be processed by the chado2bsml workflow component
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--logfile> Ergatis Workflow::Logger logfile
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

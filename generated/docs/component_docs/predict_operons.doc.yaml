@@ -1,0 +1,211 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: predict_operons
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - predict_operons.config
+  - predict_operons.xml
+  - predict_operons.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / genes
+  parameters:
+    REFERENCE_FASTA: ""
+    GFF_FILE: ""
+    # Name of output prefix to use
+    ABBR: ""
+  input:
+    # This is the list of WIG files
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # input_extension is only used in combination with input_directory
+    INPUT_EXTENSION: wig
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    GFF3_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.gff3.list
+  component:
+    COMPONENT_NAME: predict_operons
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6107 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - predict_operons workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create gff3 list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.gff3\""
+        - key: --output_list
+          value: $;GFF3_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - predict_operons compute
+  steps:
+    - name: predict_operons
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/predict_operons
+      params:
+        - key: --bin_dir
+          value: $;BIN_DIR$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --wig_file
+          value: $;I_FILE_PATH$;
+        - key: --gff
+          value: $;GFF_FILE$;
+        - key: --reference
+          value: $;REFERENCE_FASTA$;
+        - key: --sample
+          value: $;ABBR$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: predict_operons.pl
+    pod: |
+  =head1 NAME
+  
+   predict_operons.pl - wrapper script for predict_operons.sh
+  
+  =head1 SYNOPSIS
+  
+   perl predict_operons.pl -b /bin/dir -o /output/dir -w /wig/dir/ -g /path/to/file.gff3 -r /path/to/reference.fa -s sample_name
+  
+  =head1 OPTIONS
+  
+  	--bin_dir|b	-	The path of the bin directory where the predict_transcripts.sh, find_transcripts.pl, and find_intergenic_background_cutoff.py are stored
+  	--output_dir|o	-	The output directory to store files
+  	--wig_file|w	-	A WIG file path 
+  	--second_wig|W	-	A second WIG file path.  Used if the two WIG files are forward and reverse coverage WIG file pairs
+  	--gff|g		-	The path to the GFF3 file
+  	--reference|r	-	A reference fasta file path
+  	--sample|s	-	The name of the sample (typically will be the abbreviation used in Ergatis ProkPipe)
+  
+  =head1 DESCRIPTION
+  
+   This is a wrapper script that will provide these arguments as parameters to predict_operons.sh.  That shell script in turn, calls several other scripts.
+   Fastalen.awk will create a tab-separated (.tsv) file of contigs and contig lengths from the reference fasta file
+   Find_intergenic_background_cutoff.py will produce a depth-of-coverage cut-off intended for transcript finding
+   Find_transcripts.pl will take the cutoff output file and find transcripts from an alignment based on coverage islands
+  
+  =head1 OUTPUT
+  
+   find_transcripts.pl will output a GFF3 file which will list the coordinates of all transcripts, and another GFF3 which will list only those that are not known (do not overlap with known)
+  
+  =head1 CONTACT
+  
+  	Shaun Adkins
+  	sadkins@som.umaryland.edu

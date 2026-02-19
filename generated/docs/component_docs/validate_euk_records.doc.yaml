@@ -1,0 +1,124 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: validate_euk_records
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - validate_euk_records.config
+  - validate_euk_records.xml
+  - validate_euk_records.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database validation
+  parameters:
+  input:
+    # validate_euk_records control file:
+    # Should contain a listing of euk schema databases and corresponding asmbl_ids
+    # See validate_euk_records control file example for format
+    VALIDATE_EUK_RECORDS_CONTROL_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: validate_euk_records
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4942 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - validate_euk_records workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;TMP_DIR$;/validate_euk_records.list,$;NODISTRIB$;=1\"/"
+  steps:
+    - name: create output and temporary directories
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$;
+    - name: Create validate_euk_records master iterator list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_legacy2bsml_iterator_list
+      params:
+        - key: --control_file
+          value: $;VALIDATE_EUK_RECORDS_CONTROL_FILE$;
+        - key: --output
+          value: $;TMP_DIR$;/validate_euk_records.list
+        - key: stdout
+          value: $;TMP_DIR$;/create_validate_euk_records_iterator_list.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/create_validate_euk_records_iterator_list.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - validate_euk_records
+  steps:
+    - name: Create database output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;WORKFLOW_REPOSITORY$;/$;DATABASE$;
+    - name: annot_validator
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/annot_validator
+      arg: -D $;DATABASE$; -a $;ASMBL_ID$;
+      params:
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/annot_validator.dbi.$;DATABASE$;_$;ASMBL_ID$;.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/$;DATABASE$;/annot_validator.dbi.$;DATABASE$;_$;ASMBL_ID$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_legacy2bsml_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  generate_asmbl_list.pl - Default output is a workflow iterator that
+  can be used to iterator over a set of asmbl_ids
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  generate_asmbl_list
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

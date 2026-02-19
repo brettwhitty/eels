@@ -1,0 +1,152 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: prepare_paired_ends_for_velvet
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - prepare_paired_ends_for_velvet.config
+  - prepare_paired_ends_for_velvet.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: assembly
+  parameters:
+    # Location of velvet
+    VELVET_PATH: $;VELVET_INSTALL_DIR$;
+  input:
+    # A list of paired end read files. Each file must contain pairs ordered the same in each of the two
+    # files. To specify multiple paired end file pairs, create comma separated list of lists.
+    # Example: /path/to/paired_end_pairs.list,/path/to/another/file.list
+    SHORT_INPUT_LIST: ""
+    LONG_INPUT_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    LONG_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/long_reads.list
+    SHORT_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/short_reads.list
+  component:
+    COMPONENT_NAME: prepare_paired_ends_for_velvet
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+  command_sets:
+    - velvet workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: prepare paired end files for velvet
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/prepare_paired_ends_for_velvet
+      params:
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --short_input_list
+          value: "&quot;$;SHORT_INPUT_LIST$;&quot;"
+        - key: --short_output_list
+          value: "&quot;$;SHORT_OUTPUT_LIST$;&quot;"
+        - key: --long_input_list
+          value: "&quot;$;LONG_INPUT_LIST$;&quot;"
+        - key: --long_output_list
+          value: "&quot;$;LONG_OUTPUT_LIST$;&quot;"
+        - key: --log
+          value: $;OUTPUT_DIRECTORY$;/run_velvet_optimser.log
+        - key: --velvet_path
+          value: $;VELVET_PATH$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: prepare_paired_ends_for_velvet.pl
+    pod: |
+  =head1 NAME
+  
+  prepare_input_for_velvet.pl - Will read in a file and run shuffle sequences (provided by velvlet)
+      for any paired end. Will simply copy non-paired end data into the output directory
+  
+  =head1 SYNOPSIS
+  
+   USAGE: prepare_short_paired_input_for_velvet.pl
+         --output_directory=/path/to/output_dir/
+         --short_input_list=/path/to/paired_end_files.list
+         --short_output_list=/path/to/short_reads.list
+         --long_input_list=/path/to/long_paired_ends.list
+         --long_output_list=/path/to/long_reads.list
+         --velvet_path=/path/to/velvet_dir/
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--output_directory,-o>
+      Path to write the shuffled sequence files to.
+  
+  B<--short_input_list,-s>
+      Value should be a list (or comma separated list of lists) that contains 2 files (in the same format)
+      which represent paired end files. Accepts only fasta or fastq format.
+  
+  B<--short_output_list,-so>
+      Will create a list of the short read output files
+  
+  B<--long_input_list,-l>
+      Same as short input list, but these are for long reads (ex sanger, 454, etc.)
+  
+  B<--long_output_list,-lo>
+      Sames as for short output list, but with long reads
+  
+  B<--velvet_path,-v>
+      Path to velvet install dir
+  
+  B<--log,-L>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      The only reason the short and long need to be separated so we can make two output lists of 
+      shuffled paired files so that these can be passed into run_velvet_optimiser.pl script separately.
+   
+  =head1  INPUT
+      Input should be a list of two files. The two files should represent one runs paired end data. This script
+      will run shuffleSequences.pl on it so it can be used as input into velvet.
+  
+  =head1 OUTPUT
+      Will write two output lists, long_reads.list and short_reads.list.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com

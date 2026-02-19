@@ -1,0 +1,433 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: blast_lgt_finder
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - blast_lgt_finder.config
+  - blast_lgt_finder.xml
+  - blast_lgt_finder.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # Location of the ncbi taxonomy files (nodes.dmp and names.dmp
+    NCBITAX: /local/db/repository/ncbi/blast/20120414_001321/taxonomy/taxdump/
+    # Location of the gi_taxid_nucl.dmp file for nucleotides or gi_taxid_prot.dmp file for proteins
+    GI2TAX: /local/db/repository/ncbi/blast/20120414_001321/taxonomy/gi_taxid_nucl.dmp
+    # Host name of the mongo database
+    HOST: "revan.igs.umaryland.edu:10001"
+    # Name of the gi database in mongo
+    TAXONDB: gi2taxon
+    # Name of the gi collection in mongo.
+    TAXONCOLL: gi2taxonnuc
+    # A mapping file of clone/matepair to trace/read. If this is not present it will look for _1/_2 at the end of the name to determine pairs.
+    MAPPING_FILE: ""
+    # Reference lineage (Homo for instance). This is only necessary if you are looking for LGT within a trace/read. Also must provide a Donor lineage.
+    HOST_LINEAGE: ""
+    # Query lineage (Bacteria for instance). This is only necessary if you are looking for LGT within a trace/read. Also must provide a Host lineage.
+    DONOR_LINEAGE: ""
+    # Lineage to filter out as bad (example would be 'vector', which would filter out anything that has a best hit to vector or where a hit overlaps vector by more than the filter_min_overlap).
+    FILTER_LINEAGE: ""
+    # Minimum overlap length between a trace/read hit and the filter_lineage. More than this and a clone/matepair will be filtered out. Only applicable if filter_lineage is set.
+    FILTER_MIN_OVERLAP: 50
+    # Minimum hit length.
+    MIN_LENGTH: ""
+    # Maximum overlap between hits within a trace/read. (Only applicable if looking for LGT within a read/trace).
+    MAX_OVERLAP: 0
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: raw
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    LGT_LIST: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/lgt_finder.list
+    M8_LIST: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/filtered_m8.list
+  component:
+    COMPONENT_NAME: blast_lgt_finder
+    DESCRIPTION: Take best blast hits and find LGT for the given donor/host lineages
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # 
+    # To only produce raw blast output add;
+    # $;SKIP_WF_COMMAND$;=add create bsml list,convert btab to bsml,store config params,dtd validation
+    # 
+    SKIP_WF_COMMAND: ""
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6529 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - blast_lgt_finder workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create LGT list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.txt\""
+        - key: --output_list
+          value: $;LGT_LIST$;
+    - name: Create list of filtered m8 files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.out\""
+        - key: --output_list
+          value: $;M8_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - lgt finder compute
+  steps:
+    - name: Filter BLAST for best hits
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/filter_lgt_best_hit
+      params:
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --trace_mapping
+          value: $;MAPPING_FILE$;
+        - key: --host_lineage
+          value: $;HOST_LINEAGE$;
+        - key: --donor_lineage
+          value: $;DONOR_LINEAGE$;
+        - key: --filter_lineage
+          value: $;FILTER_LINEAGE$;
+        - key: --filter_min_overlap
+          value: $;FILTER_MIN_OVERLAP$;
+        - key: --names_file
+          value: $;NCBITAX$;/names.dmp
+        - key: --nodes_file
+          value: $;NCBITAX$;/nodes.dmp
+        - key: --tax_id_file
+          value: $;GI2TAX$;
+        - key: --host
+          value: $;HOST$;
+        - key: --db
+          value: $;TAXONDB$;
+        - key: --collection
+          value: $;TAXONCOLL$;
+        - key: --tmp_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.filter.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.filter.stderr
+    - name: Create list of filtered files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.out\""
+        - key: --output_list
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/filtered_m8.list
+    - name: Find LGT
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_finder
+      params:
+        - key: --input_list
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/filtered_m8.list
+        - key: --output_prefix
+          value: $;I_FILE_BASE$;
+        - key: --min_length
+          value: $;MIN_LENGTH$;
+        - key: --max_overlap
+          value: $;MAX_OVERLAP$;
+        - key: --ref_lineage
+          value: $;HOST_LINEAGE$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.lgt_finder.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.lgt_finder.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: filter_lgt_best_hit.pl
+    pod: |
+  =head1 NAME
+  
+  filter_lgt_best_hit.pl - Wrapper script to find best blast result hit per query ID
+  
+  =head1 SYNOPSIS
+  
+   USAGE: filter_lgt_best_hit.pl
+         --input_file=/path/to/some/blast.m8
+         --output_file=/path/to/transterm.txt
+  	   --tmp_dir=/tmp
+  	   --donor_lineage="Wolbachia"
+  	   --host_lineage="Drosophila"
+  	   --tax_id_file=/path/to/tax_ids.txt
+  	   --nodes_file=/path/to/nodes.txt
+  	   --names_file\/path/to/names.txt
+  	 [
+  	   --filter_lineage='vector'
+  	   --filter_min_overlap=50
+  	   --trace_mapping=/path/to/trace_file.txt
+  	   --host=revan.igs.umaryland.edu
+  	   --db=gi2taxon
+  	   --collection=gi2taxonnuc
+  	   --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+  	A -m8 formatted BLASTN results file
+  
+  B<--output_dir,-o>
+  	Path name to output directory.
+  
+  B<--tmp_dir,-T>
+  	Directory to store temporary files
+  
+  B<--trace_mapping,-t>
+  	Optional. Tab-delimited mapping file that lists the trace ID, clone/mate_pair template ID, and directionality of the read
+  
+  B<--donor_lineage,-d>
+  	Name of the donor to find LCA on
+  
+  B<--host_lineage,-h>
+  	Name of the host/recipient to find LCA on
+  
+  B<--filter_lineage,-f>
+  	Optional. Lineage to filter out as bad (example would be 'vector', which would filter out anything that has a best hit to vector or where a hit overlaps vector by more than the filter_min_overlap).
+  
+  B<--filter_min_overlap,-m>
+  	Optional.  Minimum overlap length between a trace/read hit and the filter_lineage. More than this and a clone/matepair will be filtered out. Only applicable if filter_lineage is set.  Default is 50 if unset but applicable
+  
+  B<--tax_id_file>
+  	Dump file mapping GI accessions to NCBI taxonomy hits
+  
+  B<--nodes_file>
+  	Dump file containing information about NCBI Taxonomy ID nodes and their parent/children relationships.  If not provided, the Entrez database will be used instead to determine taxonomy lineage
+  
+  B<--names_file>
+  	Dump file containing information about organism names for given NCBI Taxonomy IDs. If not provided, the Entrez database will be used instead to determine taxonomy lineage
+  
+  B<--tax_id_file>
+  	Dump file mapping nucleotide GI accessions to NCBI Taxonomy IDs. If not provided, then the MongoDB database will have to gradually built with an NCBI ESummary taxon lookup
+  
+  B<--host>
+  	Optional. MongoDB host server
+  
+  B<--db>
+  	Optional. The GI-to-taxon database name (default 'gi2taxon'a)
+  
+  B<--collection>
+  	Optional. The table that houses the GI-to-taxon information (default 'gi2taxonnuc')
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+  
+  =head1  INPUT
+  
+      BlastN results that have been formatted into the m8 format
+  
+  =head1 OUTPUT
+  
+      Three output files containing information about the best hit and LCA for a given query.
+  	One output will correspond to traces mapping to the host genome
+  	One output will correspond to traces mapping to the donor genome
+  	The final output will correspond to the overall mate clones
+  
+  =head1  CONTACT
+  
+      Shaun Adkins
+      sadkins@som.umaryland.edu
+  - script: lgt_finder.pl
+    pod: |
+  =head1 NAME
+  
+  lgt_finder.pl - Wrapper script to find LGT hits between donor and host
+  
+  =head1 SYNOPSIS
+  
+   USAGE: lgt_finder.pl
+         --input_file/input_list=/path/to/some/input
+         --output_file=/path/to/transterm.txt
+  	   --ref_lineage="Drosophila"
+  	 [
+  	   --output_prefix=blah
+  	   --max_overlap=20
+  	   --min_length=0
+  	   --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+  	A file consisting of the best blast hits per query, obtainable from lgt_best_blast_hit.pl
+  
+  B<--input_list,-I>
+  	A list file consisting of input files
+  
+  B<--output_dir,-o>
+  	Path name to output directory. 
+  
+  B<--output_prefix,-p>
+  	Prefix name to give output files
+  
+  B<--max_overlap,-M>
+  	Overlap threshold that too good hits will not exceed.  Default is 20 bases
+  
+  B<--min_length,-m>
+  	Threshold for minimum alignment length of a hit.  Default is 0 bases.
+  
+  B<--ref_lineage,-d>
+  	Name of the lineage of the reference genome.  This will most likely be the host/recipient genome
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+  
+      BlastN results that have been formatted into the m8 format
+  
+  =head1 OUTPUT
+  
+      Three output files containing information about the best hit and LCA for a given query.
+  	One output will correspond to traces mapping to the host genome
+  	One output will correspond to traces mapping to the donor genome
+  	The final output will correspond to the overall mate clones
+  
+  =head1  CONTACT
+  
+      Shaun Adkins
+      sadkins@som.umaryland.edu

@@ -1,0 +1,288 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: nucmer-snp2merged
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - nucmer-snp2merged.config
+  - nucmer-snp2merged.xml
+  - nucmer-snp2merged.i1.xml
+  - component_docs/nucmer-snp2merged.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component reads the no_indels output from snp-add-gene-info
+  	and formats the output to a 'MergedTable' (described below).
+  </p>
+  <h3>Input</h3>
+  <p>
+  	Input should be the tab delimited output from snp-add-gene-info. Described below:
+  
+  	The first 12 columns are the same as from the show-snps program from nucmer [see nucmer show-snps documentation
+  	for description of columns]:
+  	p1, ref_base, query_base, p2, buff, dist, len_r, len_q, frm1, frm2, ref_contig, query_contig
+  
+  	This script will add these additional columns:
+  	gene_id, gene_start, gene_stop, position_in_gene, snps_per_gene, syn_nonsyn, product, gene_direction, 
+  	ref_codon, ref_amino_acid, query_codon, query_amino_acid, num_homopolymer
+  	
+  </p>
+  <h3>Output</h3>
+  <p>
+  	The merged table format is an internal format which allows the user to see a single SNP on one line (including the 
+  	base in each of the represented queries). It also includes a few other columns which can aid in SNP analysis. This is
+  	also a tab delimited format. See below for documentation on the format:
+  
+  	molecule:        An identifier for the molecule.
+   	refpos:          Position of SNP in reference
+   	syn?:            SYN or NSYN if within gene, 'NA' otherwise
+   	refbase:         The base in the reference
+   	<queries>:       Variable number of columns, one for each query. The value will be the base of the SNP in the query. 
+      	             If the region was not found in the query, the string 'No Hit' will be here.
+   	gene_name:       If the SNP is with a gene, the name of that gene, otherwise the string 'None'
+   	product:         The common name of the gene this SNP is within. The string "intergenic" if not in a gene
+   	gene_start:      Start of the gene.
+   	gene_stop:       Stop of the gene.
+   	gene_length:     Length of gene if SNP is within gene.
+   	snps_per_gene:   The number of SNPs in this gene.
+   	pos_in_gene:     Position of SNP within gene.
+   	ref_codon:       The reference codon
+   	ref_aa:          The reference amino acid.
+   	query_codon:     The query codon (if multiple, separated by /, example ACT/AGT)
+   	query_aa:        The query amino acid (if multiple, separatedy by /, example T/S)
+   	<num_hits>:      A column for each query, listing the number of hits from blast results [used in snp-verify]. Optional.
+   	properties:      Column of key-value pairs in the format of <key>=<value> (ex. verfified=false) separated by
+     	                 semi-colons. Optional.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    MERGED_TABLE_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.list
+  component:
+    COMPONENT_NAME: nucmer-snp2merged
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - nucmer-snps2merged workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create merged table list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.merged\\.tab\""
+        - key: --output_list
+          value: $;MERGED_TABLE_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of preprocessing
+    - Processing
+    - end of processing
+  command_sets:
+    - nucmer-snp2merged
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: nucmer-snp2merged
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/nucmer-snp2merged
+      params:
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.merged.tab
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.snps
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: nucmer-snp2merged.pl
+    pod: |
+  =head1 NAME
+  
+  nucmer_snp2_merged_table.pl - Will take in a concatenated snp file (output of SNP add gene info)
+  
+  =head1 SYNOPSIS
+  
+   nucmer-snp2merged.pl
+         --input_file=/path/to/some/input.snps
+         --output=/path/to/merged_input.snps
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i> 
+      Output from snp-add-gene-info.pl. See INPUT for description of format
+  
+  B<--output_file,-o>
+      Output file is a SNP Merged Table. See OUTPUT section for description of format.
+  
+  B<--query_map,-q>
+      A file which identifies if there are mulitple molecules per query.
+      Each lines represents a query and should have the following tab delimited columns:
+  
+      query_id     molecule_id-1     molecule_id-2     ... molecule_id-n
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   This merged table format is an internal output format to view snps across a number of query genomes. This script 
+   converts the output from snp-add-gene-info into the merged table format. The snp-add-gene-info output 
+   format is the same as the output received from nucmer-show-snps program, with a few additional columns 
+   added to the end. See the INPUT section for details on the formats.
+   
+  =head1  INPUT
+  
+  =head2 snp-add-gene-info output
+  
+  The first 12 columns are the same as those output from show-snps [see show-snps documentation for 
+  description of columns]:
+  p1, ref_base, query_base, p2, buff, dist, len_r, len_q, frm1, frm2, ref_contig, query_contig
+  
+  With these additional columns:
+  gene_id, position_in_gene, syn_nonsyn, product, gene_direction, ref_codon, ref_amino_acid, query_codon, query_amino_acid, num_homopolymer
+  
+  =head1 OUTPUT
+  
+  =head2 Columns in the output:
+  
+   See the perldoc for SNP::MergedTable.pm.
+  
+  =head1  CONTACT
+  
+   Kevin Galens
+   kgalens@gmail.com

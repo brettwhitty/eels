@@ -1,0 +1,228 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: chado2flatfile
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - chado2flatfile.config
+  - chado2flatfile.xml
+  - component_docs/chado2flatfile.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+       Reads information from a chado database and creates a pep file, a seq file and a coords file
+       for the features described in the database.
+  </p>
+  
+  <h3>input</h3>
+  <p>
+       This component calls the perl script chado2flatfile.pl to do the extraction.
+       The only input is the name of database, host, username and password
+  </p>
+  <p>
+       Use perldoc on chado2flatfile.pl for complete script usage information.
+  </p>
+  
+  <h3>output</h3>
+  <p>
+       The following three files are created in the output directory:
+  <ul>.pep file - Multi fasta file of peptides. Headers have identifiers (feature.uniquename, unless --locus_ids option is used)
+  		followed by the common name (featureprop.value for 'gene_product_name' cvterm) then followed by the
+  		molecule unique name on which the feature is located.</ul>
+  <ul>.seq file - Same as pep file but with nucleotide sequences.</ul>
+  <ul>.coords file - Tab separated file with identifiers (uniquename unless --locus_ids option is used)
+  		   followed by molecule name, end5 and end3.</ul>	 
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / extraction
+  parameters:
+    USERNAME: ""
+    PASSWORD: ""
+    DATABASE: ""
+    SERVER: ""
+    # Name of the db of the locus identifiers to be used in the output
+    LOCUS_ID: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PEP_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;DATABASE$;.pep
+    SEQ_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;DATABASE$;.seq
+    COORDS_OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;DATABASE$;.coords
+  component:
+    COMPONENT_NAME: chado2flatfile
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - chado2flatfile workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$; $;TMP_DIR$; $;TMP_DIR$;/id_mapping
+    - name: chado2flatfile
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/chado2flatfile
+      params:
+        - key: --host
+          value: $;SERVER$;
+        - key: --database
+          value: $;DATABASE$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --pep_file
+          value: $;PEP_OUTPUT_FILE$;
+        - key: --seq_file
+          value: $;SEQ_OUTPUT_FILE$;
+        - key: --coords_file
+          value: $;COORDS_OUTPUT_FILE$;
+        - key: --locus_ids
+          value: $;LOCUS_ID$;
+        - key: stdout
+          value: $;TMP_DIR$;/chado2flatfile.pl.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/chado2flatfile.pl.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: chado2flatfile.pl
+    pod: |
+  =head1 NAME
+  
+  chado2flatfile.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: chado2flatfile.pl
+         --database=pak26
+         --host=khan.igs.umaryland.edu
+         --username=user
+         --password=password
+         --pep_file=/path/to/file.pep
+         --seq_file=/path/to/file.seq
+         --coords_file=/path/to/file.coords
+       [ --locus_ids=TIGR_moore
+         --log=/path/to/file.log
+         --debug=4
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--database,-d>
+      The name of the database
+  
+  B<--host,-s>
+      Server where the database is located
+  
+  B<--username,-u>
+      Username for database
+  
+  B<--password,-p>
+      Password for database
+  
+  B<--pep_file,-f>
+      The output pep file name.
+  
+  B<--seq_file,-e>
+      The output seq file name.
+  
+  B<--coords_file,-c>
+      The output coords file name.
+  
+  B<--locus_ids>
+      The name of the db of the locus identifiers to be used in the output
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      Reads information from a chado database and creates a pep file, seq file and/or coords file
+      for the features described in the database.
+   
+  =head1  INPUT
+      
+      The only input is the name of database, host, username and password.
+  
+  =head1 OUTPUT
+  
+      All output files are sorted first by molecule located on and then by featureloc.fmax
+      
+      pep file:
+      Multi fasta file of peptides. Headers have identifiers (feature.uniquename, unless --locus_ids option is used)
+      followed by the common name (featureprop.value for 'gene_product_name' cvterm) then followed by the
+      molecule uniquenae on which the feature is located.
+  
+      ex:
+      >hik_1522	glyceraldehyde-3-phosphate dehydrogenase, type I hik.assembly.1
+      MAIKIGINGFGRIGRIVFRAAQHRDDIEVVGINDLIDVEYMAYMLKYDSTHGRFDGTVEV
+      KDGNLVVNGKTIRVTAERDPANLNWGAIGVDIAVEATGLFLTDETARKHITAGAKKVVLT
+      GPSKDATPMFVRGVNFNAYAGQDIVSNASCTTNCLAPLARVVHETFGIKDGLMTTVHATT
+      ATQKTVDGPSAKDWRGGRGASQNIIPSSTGAAKAVGKVLPALNGKLTGMAFRVPTPNVSV
+      VDLTVNLEKPASYDAIKQAIKDAAEGKTFNGELKGVLGYTEDAVVSTDFNGCALTSVFDA
+      DAGIALTDSFVKLVSWYDNETGYSNKVLDLVAHIYNYKG
+      >hik_1013	hypothetical protein
+      LKKLTALRSVFYYLEFNLRSKNEQGITKNNLKQSIFF
+      >hik_593	AMP-binding enzyme family protein
+      MNLDLHFVHRIQQQAKTRTNMTALRYKEHGLWRDISWKNFQEQLNQLSRALLAHNIDVQD
+      KIAIFAHNMERWTIVDIATLQIRAITVPIYATNTAQQAEFILNHADVKILFVGDQEQYDQ
+      TLEIAHHCPKLQKIVAMKSTIQLQQDPLSCTWESFIKTGSNAQQDELTQRLNQKQLSDLF
+      TIIYTSGTTGEPKGVMLDYANLAHQLETHDLSLNVTDQDISLSFLPFSHIFERAWAAYIL
+      HRGAILCYLEDTNQVRSALTEIRPTLMCAVPRFYEKIYAAVLDKVQKAPKLRQIMFHWAI
+      SVGQKYFDLRANNKAIPFLLKKQFALADKLVLSKLRQLLGGRIKMMPCGGAKLEPAIGLF
+      FHAIGINIKLGYGMTETTATVSCWHDFQFNPNSIGTLMPKAEVKIGENNEILVRGGMVMK
+      GYYKKPEETAQAFTEDGFLKTGDAGEFDEQGNLFITDRIKELMKTSNGKYIAPQYIESKI
+      GKDKFIEQIAIIADAKKYVSALIVPCFDSLEEYAKQLNIKYHDRLELLKNSDILKMFEHR
+      INAVQKELAHFEQVKKFTLLSQAFSIKLGEITPTLKLRRKVILERYRKQIEAMYHSQEA
+      ...
+  
+      seq file:
+      Same as pep file but with nucleotide sequences
+  
+      coords file:
+      tab separated file with identifiers (uniquename unless --locus_ids option is used)
+      followed by molecule name, end5 and end3.
+  
+      ex:
+      hik_1522	hik.assembly.1   1	1021
+      hik_1013	hik.assembly.1   1029	1143
+      
+      ...
+      
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu

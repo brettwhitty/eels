@@ -1,0 +1,267 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: extract_assembly_stats
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - extract_assembly_stats.config
+  - extract_assembly_stats.xml
+  - extract_assembly_stats.i1.xml
+  - component_docs/extract_assembly_stats.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+       This component extracts assembly statistics from sequence files.
+  </p>
+  <h3>input</h3>
+  <p>
+      Input is fasta format.
+  </p>
+  <h3>ouput</h3>
+  <p>
+      Output is a tab-delimited file with the following information:
+      
+      File - name of input file
+      Number - total number of contigs
+      Total Size - total size of contigs
+      Min Size - minimum contig size
+      Max Size - maximum contig size
+      Average Size - average contig size
+      Median Size - median contig size
+      N50 - size of contig c, such that 50% of the total assembly size is contained in contigs larger than c.
+      Size @ 1Mbp - same as N50 but assuming that genome size is 2Mbp
+      Number @ 1Mbp - smallest number of contigs that add up to 1Mbp
+      Size and Number @ 2Mbp, 4Mbp, 10Mbp - same as above but for more values.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: assembly
+  parameters:
+    # --limit NN: only report results for contigs >= NN bp
+    LIMIT: ""
+    # --n50base NN -- use NN as the base genome size for computing the N50 value
+    N50_BASE: ""
+  input:
+    # path to input file
+    INPUT_FILE: ""
+    # path to config list file
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple single mate sequence files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stats.list
+  component:
+    COMPONENT_NAME: extract_assembly_stats
+    DESCRIPTION: extracts assembly statistics
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - extract_assembly_stats workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create list files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+        - key: --regex
+          value: "\".*\\.stats\""
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - extract_assembly_stats compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/i1/g$;GROUP_NUMBER$;
+    - name: extract_assembly_stats
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/extract_assembly_stats
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --n50base
+          value: $;N50_BASE$;
+        - key: --limit
+          value: $;LIMIT$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stats
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: extract_assembly_stats.pl
+    pod: |
+  =head1 NAME
+  
+  extract_assembly_stats.pl - Extracts statistics from an assembly file
+  
+  =head1 SYNOPSIS
+  
+  USAGE: extract_assembly_stats.pl 
+              --input=/path/to/input_file.fa 
+              --output=/path/to/output_file.fa
+            [ --limit=integer 
+              --no50base
+  	    --help
+  	    --log
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      Required.Input assembly file to be analyzed. Fasta format.
+      Files compressed with gzip or bzip2 are automatically decompressed.
+  
+  B<--output,-o>
+      Required. Output file with statistics. Tab-delimited format.
+  
+  B<--limit,-m>
+      Optional. Script ignores contigs smaller than the integer assigned. 
+  
+  B<--no50base,-n> 
+      Optional. Script will use this number as the base genome size for computing the N50 value.
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  
+  =head1  DESCRIPTION
+  
+  This script extracts statistics from an assembly (fasta) file - contigs or scaffolds.
+  
+  =head1  INPUT
+  
+  Input format is fasta. Files compressed with gzip or bzip2 are automatically decompressed.
+  
+  =head1  OUTPUT
+  
+  Output is a tab-delimited file with the following information:
+  File: name of input file
+  Number: total number of contigs
+  Total Size: total size of contigs
+  Min Size: minimum contig size
+  Max Size: maximum contig size
+  Average Size: average contig size
+  N50: size of contig c, such that 50% of the total assembly size is contained in contigs larger than c
+  Size @ 1Mbp: same as N50 but assuming that genome size is 2Mbp
+  Number @ 1Mbp: smallest number of contigs that add up to 1Mbp
+  Size & Number @ 2Mbp, 4Mbp, 10Mbp - same as above but for more values 
+  
+  
+  =head1  CONTACT
+  
+      Kemi Abolude
+      kabolude@som.umaryland.edu
+      Script adapted from http://www.cbcb.umd.edu/software/metamos/statistics.pl

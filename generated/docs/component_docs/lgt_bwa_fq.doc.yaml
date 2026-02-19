@@ -1,0 +1,419 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: lgt_bwa_fq
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - lgt_bwa_fq.config
+  - lgt_bwa_fq.xml
+  - lgt_bwa_fq.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # Mismatch Penalty.
+    MISMATCH_PENALTY: 3
+    # Maximum Gap Opens.
+    MAX_GAP_OPENS: 1
+    # Maximum number of gap extensions.
+    MAX_GAP_EXTNS: -1
+    # Gap Open Penalty.
+    GAP_OPEN_PENALTY: 11
+    # Gap Extension Penality.
+    GAP_EXTN_PENALTY: 4
+    # Maximum Number of Threads. Multi-threading mode.
+    MAX_THREADS: 1
+    # This is the option between "is" or "bwasw".
+    # 0 - default option.
+    # 1 - To use bwasw.
+    BWASW: 0
+    # This is the maximum number of alignments for each read.
+    MAX_ALIGN: 1000
+    # Set to 1 to remove fastq files after searches and post processing are complete
+    CLEANUP: 1
+    # Reference files can be passed in either by comma separated lists or by file
+    # lists.
+    # 
+    # First comma separated list of reference files
+    REF_FILE1: ""
+    # Second comma separated list of reference files
+    REF_FILE2: ""
+    # 
+    # Alternatively, pass list files
+    # 
+    # First list file of references
+    REF_FILE_LIST1: ""
+    # Second list file of reference
+    REF_FILE_LIST2: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    SAM_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sam.list
+  component:
+    COMPONENT_NAME: lgt_bwa_fq
+    DESCRIPTION: Lateral Genome Transfer
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Iterator Done
+  command_sets:
+    - LGT workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create SAM file list
+      type: RunJavaUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$; -name '*.sam'"
+      params:
+        - key: stdout
+          value: $;SAM_OUTPUT_LIST$;
+        - key: stderr
+          value: $;TMP_DIR$;/create_bsml_file_list.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Processing
+  command_sets:
+    - bwa Iterator workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: BWA Execution
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_bwa
+      params:
+        - key: --input_dir
+          value: $;I_DIR$;
+        - key: --input_base
+          value: $;I_FILE_BASE$;
+        - key: --ref_file_list
+          value: $;REF_FILE_LIST1$;
+        - key: --ref_file
+          value: $;REF_FILE1$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --mistmatch
+          value: $;MISMATCH_PENALTY$;
+        - key: --max_gaps
+          value: $;MAX_GAP_OPENS$;
+        - key: --max_gap_extensions
+          value: $;MAX_GAP_EXTNS$;
+        - key: --open_gap_penalty
+          value: $;GAP_OPEN_PENALTY$;
+        - key: --extend_gap_penalty
+          value: $;GAP_EXTN_PENALTY$;
+        - key: --threads
+          value: $;MAX_THREADS$;
+        - key: --use_bwasw
+          value: $;BWASW$;
+        - key: --num_aligns
+          value: $;MAX_ALIGN$;
+        - key: --bwa_path
+          value: $;BWA_EXEC$;
+        - key: --cleanup_sai
+          value: $;CLEANUP$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_align_exec.ref1.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_align_exec.ref1.stderr
+    - name: BWA Execution
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_bwa
+      params:
+        - key: --input_dir
+          value: $;I_DIR$;
+        - key: --input_base
+          value: $;I_FILE_BASE$;
+        - key: --ref_file_list
+          value: $;REF_FILE_LIST2$;
+        - key: --ref_file
+          value: $;REF_FILE2$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --mistmatch
+          value: $;MISMATCH_PENALTY$;
+        - key: --max_gaps
+          value: $;MAX_GAP_OPENS$;
+        - key: --max_gap_extensions
+          value: $;MAX_GAP_EXTNS$;
+        - key: --open_gap_penalty
+          value: $;GAP_OPEN_PENALTY$;
+        - key: --extend_gap_penalty
+          value: $;GAP_EXTN_PENALTY$;
+        - key: --threads
+          value: $;MAX_THREADS$;
+        - key: --use_bwasw
+          value: $;BWASW$;
+        - key: --num_aligns
+          value: $;MAX_ALIGN$;
+        - key: --bwa_path
+          value: $;BWA_EXEC$;
+        - key: --cleanup_sai
+          value: $;CLEANUP$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_align_exec.ref2.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bwa_align_exec.ref2.stderr
+    - name: POST PROCESSING
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_bwa_post_process
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.postprocess_exec.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.postprocess_exec.stderr
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+        - key: --ref1
+          value: $;REF_FILE1$;
+        - key: --ref2
+          value: $;REF_FILE2$;
+        - key: --ref_list1
+          value: $;REF_FILE_LIST1$;
+        - key: --ref_list2
+          value: $;REF_FILE_LIST2$;
+    - name: ZIP FILES
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_bwa_zip.sh
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.zip_files_exec.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.zip_files_exec.stderr
+    - name: REMOVE FASTQ FILES
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/lgt_bwa_rm.sh
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.remove_fastq_exec.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.remove_fastq_exec.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: lgt_bwa.pl
+    pod: |
+  =head1 NAME
+  
+  # Name of the script and a 1 line desc
+  
+  =head1 SYNOPSIS
+  
+  # USAGE :
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  B<--reference,-r>
+  	Name of the fasta reference to align against.  Multiple files can be specified if seperated by commas
+  
+  B<--reference_list, -R>
+  	List of fasta references to align against.  The list is looped over and each reference aligned to individually.
+  
+  B<--input_file, -i>
+  	Fastq or BAM input file.  A list file pointing to input is also accepted.
+  
+  B<--input_dir,-I>
+  	Input directory where either fastq files or BAM input files can be found
+  
+  B<--output_dir, -o>
+  	Directory to store the output contents
+  
+  B<--misMsc>
+  	(Optional) Mismatch penalty. BWA will not search for suboptimal hits with a score lower than (bestScore-misMsc).  Default is 3
+  
+  B<--maxGapO>
+      (Optional)  Maximum number of gap opens.  Default is 1
+  
+  B<--maxGapE>
+  	(Optional) Maximum number of gap extensions, -1 for k-difference mode (disallowing long gaps).  Default is -1
+  
+  B<--maxOcc>
+  	(Optional) Maximum edit distance if the value is INT, or the fraction of missing alignments given 2% uniform base error rate if FLOAT. In the latter case, the maximum edit distance is automatically chosen for different read lengths. Default is 0.04
+  
+  B<--gapOsc>
+  	(Optional) Gap open penalty. Default is 11
+  
+  B<--gapEsc>
+  	(Optional) Gap extension penalty. Default is 4
+  
+  B<--nThrds, -t>
+  	(Optional) Number of threads used in multi-threading mode.  Not necessary if calling via Ergatis. Default is 1
+  
+  B<--bwa_params, -B>
+  	Extra parameters for the "bwa" program
+  
+  B<--samtools_params, -S>
+  	Extra parameters for the "samtools" program
+  
+  B<--bwa_path, -b>
+  	Path to the "bwa" executable
+  
+  B<--samtools_path, -s>
+  	Path to the "samtools" executable
+  
+  B<--use_mem, -m>
+  	Set to 1 to indicate that the "bwa mem" algorithm should be used instead of "bwa aln"
+  
+  B<--bam_paired, -p>
+  	If set to 1, this indicates the input BAM is from paired-end data
+  
+  B<--tmp_dir, -T>
+      If set, this will become the "TMP_DIR" environment variable value for the BWA aln/mem run
+  
+  B<--log, -l>
+  	Path to writable log file
+  
+  B<--help, -h>
+  	Prints this help doc
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  
+  
+  =head1 OUTPUT
+  
+  
+  
+  =head1 AUTHOR
+  
+  	Shaun Adkins
+  	Bioinformatics Software Engineer
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sadkins@som.umaryland.edu
+  
+  ==cut
+  - script: lgt_bwa_post_process.pl
+    pod: |
+  =head1 NAME
+  
+  lgt_bwa_post_process.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: lgt_bwa_post_process.pl
+         --input_file=/path/to/some/input.file
+         --output=/path/to/transterm.file
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--donor_file,-d>
+  	Filtered BAM file mapping to a donor reference genome
+  
+  B<--donor_file_list, -D>
+  	List of BAM files mapping to a donor reference genome.  Filename must have a shared identifier with the recipient genome
+  
+  B<--recipient_file, -r>
+  	Filtered BAM file mapping to a recipient or host reference genome
+  
+  B<--recipient_file_list, -R>
+  	List of BAM files mapping to a recipient reference genome.  Filename must have a shared identifier with the donor genome
+  
+  B<--output_dir,-o>
+  
+  B<--prefix,-p>
+  	Prefix name to give output files
+  
+  B<--samtools_path,-s>
+      Path to samtools executable
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   	This is a wrapper script that will call LGT::LGTSeek->bwaPostProcess to handle the post processing.
+  
+  =head1  INPUT
+  
+      Either:
+      a) Two filtered BAM files.  One mapping to a donor reference genome and the other to the recipient
+      or:
+      b) Two lists of filtered BAM files.  One list has files mapped to donor reference genomes and the other has them mapped to the recipient
+  
+  =head1 OUTPUT
+  
+      Three new BAM files
+  
+      1) Microbiome file - Both ends of the paired reads mapped to the donor genome but both ends did not map to the recipient
+  
+      2) LGT_donor file
+      3) LGT_recipient file
+      - Potential lateral gene transfer (LGT) is defined as pairs of reads where exactly one read maps to the donor (other is unmapped), and the other maps to the recipient (first is unmapped).  Thus we output alignments for both the donor and recipient.
+  
+  =head1  CONTACT
+  
+      Shaun Adkins
+      sadkins@som.umaryland.edu

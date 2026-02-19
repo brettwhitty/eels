@@ -1,0 +1,297 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: validate_chado_records
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - validate_chado_records.config
+  - validate_chado_records.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / manipulation
+  parameters:
+    USERNAME: ""
+    PASSWORD: ""
+    DATABASE: $;PROJECT$;
+    SERVER: ""
+    # Relational database management system type e.g. sybase or postgresql
+    RDBMS: sybase
+  input:
+  output validate_chado_records:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: validate_chado_records
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5003 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - validate_chado_records workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: Check for duplicate analysisprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.analysisprop.log
+        - key: --table
+          value: analysisprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.analysisprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.analysisprop.stderr
+    - name: Check for duplicate dbxrefprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.dbxrefprop.log
+        - key: --table
+          value: dbxrefprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.dbxrefprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.dbxrefprop.stderr
+    - name: Check for duplicate featureprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.featureprop.log
+        - key: --table
+          value: featureprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.featureprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.featureprop.stderr
+    - name: Check for duplicate feature_cvtermprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.feature_cvtermprop.log
+        - key: --table
+          value: feature_cvtermprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.feature_cvtermprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.feature_cvtermprop.stderr
+    - name: Check for duplicate feature_relationshipprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.feature_relationshipprop.log
+        - key: --table
+          value: feature_relationshipprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.feature_relationshipprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.feature_relationshipsprop.stderr
+    - name: Check for duplicate organismprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.organismprop.log
+        - key: --table
+          value: organismprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.organismprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.organismprop.stderr
+    - name: Check for duplicate phylonodeprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.phylonodeprop.log
+        - key: --table
+          value: phylonodeprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.phylonodeprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.phylonodeprop.stderr
+    - name: Check for duplicate pubprop records
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForDuplicatePropertyTuples
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.pubprop.log
+        - key: --table
+          value: pubprop
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.pubprop.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForDuplicatePropertyTuples.pl.pubprop.stderr
+    - name: "Check for fmin>fmax and valid strand featureloc records"
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkFeaturelocRecords
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkFeaturelocRecords.pl.log
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkFeaturelocRecords.pl.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkFeaturelocRecords.pl.stderr
+    - name: Check for feature residues-seqlen mismatches
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/checkForFeatureResiduesSeqlenMismatches
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --database_type
+          value: $;RDBMS$;
+        - key: --server
+          value: $;SERVER$;
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --debug_level
+          value: $;DEBUG$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/checkForFeatureResiduesSeqlenMismatches.pl.log
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/checkForFeatureResiduesSeqlenMismatches.pl.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/checkForFeatureResiduesSeqlenMismatches.pl.stderr

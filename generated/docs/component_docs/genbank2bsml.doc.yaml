@@ -1,0 +1,459 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: genbank2bsml
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - genbank2bsml.config
+  - genbank2bsml.xml
+  - genbank2bsml.i1.xml
+  - genbank2bsml.i2.xml
+  - workflow/genbank2bsml-master.ini
+  - workflow/genbank2bsml.ini
+  - workflow/genbank2bsmlconf.ini
+  - component_docs/genbank2bsml.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component converts Genbank flat file formatted genome records into BSML files.
+  </p>
+  <h3>input</h3>
+  <p>
+      Input to the component should be one or more genbank flat files.
+  </p>
+  <h3>implemented options</h3>
+  <p>
+      There are no user configurable options.
+  </p>
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+  
+      Example BSML to be added later.
+  
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    # a tab-delimited file that specifies a mapping from GenBank ORGANISM to chado id prefix
+    # e.g., Homo sapiens	hs1
+    ORGANISM_TO_PREFIX_MAPPING: /dev/null
+    # whether to autogenerate Ergatis-compliant ids for the DNA sequence(s);
+    # this is required if you plan to use the output BSML in the pan-genome pipeline
+    GENERATE_NEW_SEQ_IDS: 1
+    # --skip_unknown_dbxref
+    # 0 = allow non-GO.xrf dbxrefs in output bsml
+    # 1 = don't
+    SKIP_UNKNOWN_DBXREF: 0
+    # --skip_incomplete_feature_groups
+    # 0 = die if a feature group lacking the complete set of BSML features is encountered
+    # 1 = skip to the next group
+    SKIP_INCOMPLETE_FEATURE_GROUPS: 1
+    # 
+    # List and priority of tags to consider for uniquely identifying a gene
+    UNIQUE_FEATURE_TAGS: "locus_tag,protein_id,systematic_id,gene"
+    # Set to 1 if you want to translate CDS features that do not have a polypeptide sequence
+    TRANSLATE_EMPTY_CDS: 0
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: gbk
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: genbank2bsml
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - genbank2bsml workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=i2,$;ITERATOR_XML$;=$;DOCS_DIR$;/$;COMPONENT_NAME$;.i2.xml,$;INPUT_FILE_LIST$;=$;BSML_OUTPUT_LIST$;\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of preprocessing
+  command_sets:
+    - genbank2bsml compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: genbank2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/genbank2bsml
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr
+        - key: --organism_to_prefix_mapping
+          value: $;ORGANISM_TO_PREFIX_MAPPING$;
+        - key: --unique_feature_tags
+          value: $;UNIQUE_FEATURE_TAGS$;
+        - key: --generate_new_seq_ids
+          value: $;GENERATE_NEW_SEQ_IDS$;
+        - key: --translate_empty_cds
+          value: $;TRANSLATE_EMPTY_CDS$;
+        - key: --input_file
+          value: $;I_FILE_PATH$;
+        - key: --output_bsml
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: --project
+          value: $;PROJECT$;
+        - key: --skip_unknown_dbxref
+          value: $;SKIP_UNKNOWN_DBXREF$;
+        - key: --skip_incomplete_feature_groups
+          value: $;SKIP_INCOMPLETE_FEATURE_GROUPS$;
+
+# Iterator i2 - per-input processing steps
+iterator_i2:
+  command_sets:
+    - genbank2bsml - add analysis and dtd validate
+  steps:
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;I_FILE_PATH$;
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;I_FILE_PATH$;
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Workflow INI: genbank2bsml-master.ini
+workflow_ini_genbank2bsml-master.ini:
+  create_bsml_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--regex: "\".*\\.bsml\""
+    param.--output_list: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_fasta_list:
+    # [create_btab_list]
+    # param.command=$;BIN_DIR$;/create_list_file
+    # param.--regex=".*\.btab"
+    # param.--directory=$;OUTPUT_DIRECTORY$;
+    # param.--output_list=$;OUTPUT_DIRECTORY$;/$;NAME$;.btab.list
+    # [create_raw_list]
+    # param.command=$;BIN_DIR$;/create_list_file
+    # param.--regex=".*\.raw"
+    # param.--directory=$;OUTPUT_DIRECTORY$;
+    # param.--output_list=$;OUTPUT_DIRECTORY$;/$;NAME$;.raw.list
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--regex: "\".*\\.fsa\""
+    param.--output_list: $;OUTPUT_DIRECTORY$;/$;NAME$;.fasta.list
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: genbank2bsml.ini
+workflow_ini_genbank2bsml.ini:
+  compress_bsml_output:
+    # make the tmp directory
+    param.command: $;BIN_DIR$;/compress_file
+    param.--file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--compress: $;COMPRESS_BSML_OUTPUT$;
+    param.--list_file: $;TMP_DIR$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml.list
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+  empty:
+  genbank2bsml:
+    # Execute genbank2bsml
+    param.command: $;BIN_DIR$;/genbank2bsml
+    param.--input_file: $;ITER_FILE_PATH$;
+    param.--output_dir: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/
+    param.--output_bsml: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.stdout: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.out
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    param.--analysis_id: $;NAME$;_analysis
+
+# Workflow INI: genbank2bsmlconf.ini
+workflow_ini_genbank2bsmlconf.ini:
+  _header:
+    # configuration file for the genbank2bsml workflow
+  include genbank2bsml:
+    $;SHARED_CONFIG$;: ""
+  input genbank2bsml:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: gbk
+  output genbank2bsml:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;BSML_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    $;FASTA_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.fasta.list
+    # $;BTAB_OUTPUT_LIST$; = $;OUTPUT_DIRECTORY$;/$;NAME$;.btab.list
+    # $;RAW_OUTPUT_LIST$; = $;OUTPUT_DIRECTORY$;/$;NAME$;.raw.list
+    # $;COMPRESS_RAW_OUTPUT$; = 1
+    # compressed input files handled in genbank2bsml
+    $;COMPRESS_BSML_OUTPUT$;: 1
+  parameters genbank2bsml:
+    # none
+  workflowdocs genbank2bsml:
+    $;VERSION$;: 1.0
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: genbank2bsml
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/genbank2bsml-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/genbank2bsml-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/genbank2bsml.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/genbank2bsml_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

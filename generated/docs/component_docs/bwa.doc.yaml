@@ -1,0 +1,345 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bwa
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bwa.config
+  - bwa.xml
+  - bwa.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  parameters:
+    # Mismatch Penalty.
+    MISMATCH_PENALTY: 3
+    # Maximum Gap Opens.
+    MAX_GAP_OPENS: 1
+    # Maximum number of gap extensions.
+    MAX_GAP_EXTNS: -1
+    # Gap Open Penalty.
+    GAP_OPEN_PENALTY: 11
+    # Gap Extension Penality.
+    GAP_EXTN_PENALTY: 4
+    # Maximum Number of Threads. Multi-threading mode.
+    MAX_THREADS: 1
+    # This is the maximum number of alignments for each read.
+    MAX_ALIGN: 1
+    # Set to 1 to remove sai (alignment) files after searches are complete
+    CLEANUP: 1
+    # Set to 1 to have the output bam sorted and indexed
+    INDEX_BAM: 1
+    # Optional: Input list of query fasta sequences. Used to create
+    # output mapping file in the format of:
+    #   query_sequence.fasta	output_bwa.bam
+    QUERY_INPUT_LIST: ""
+  input:
+    # Input list should be a list with 2 columns. The first column should be reference file 
+    # in fasta format and the second column should be query sequences, expected in fastq 
+    # format. Will index the fasta and align to fastq files create a bam file. The second 
+    # column can be either a path to a fastq file or a list of 2 fastq files (in the case 
+    # of paired end reads).
+    INPUT_PAIRED_LIST: ""
+    # Input 1 is reference (fasta)
+    # Input 2 is query (fastq)
+    # Can provide a list of references and a list of queries. 
+    # A query file can be a path to a fastq file or a list to 2 fastq files (for paired end)
+    INPUT_FILE_LIST_1: ""
+    INPUT_FILE_LIST_2: ""
+    INPUT_FILE_1: ""
+    INPUT_FILE_2: ""
+    # Only to be used with INPUT_FILE_LIST_1 and 2.
+    # Path to a file which contains 2 columns of file names (no path or extension) of pairs. 
+    # Will attempt to look for file names in column 1 in INPUT_FILE_LIST_1 and column 2 in 
+    # INPUT_FILE_LIST_2 and pair accordingly. If a file is specified here, ALL_VS_ALL 
+    # parameter will be set to 0.
+    INPUT_MAPPING_FILE: ""
+    # If multiple references and multiple queries were entered, setting this to one will
+    # compute all combinations of reference and query. Setting it to zero will pair up
+    # the first ref with first query. Must have same number of input files if 0.
+    ALL_VS_ALL: 1
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BAM_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bam.list
+    OUTPUT_QUERY_BAM_MAP: $;OUTPUT_DIRECTORY$;/query_bam.map
+  component:
+    COMPONENT_NAME: bwa
+    DESCRIPTION: BWA aligner
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Iterator Done
+  command_sets:
+    - bwa workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/paired_file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bam list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bam\""
+        - key: --output_list
+          value: $;BAM_OUTPUT_LIST$;
+    - name: create query bam map
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_fasta_bam_map
+      params:
+        - key: --query_list
+          value: "&quot;$;QUERY_INPUT_LIST$;&quot;"
+        - key: --bam_list
+          value: $;BAM_OUTPUT_LIST$;
+        - key: --output_map
+          value: $;OUTPUT_QUERY_BAM_MAP$;
+        - key: --strict
+          value: 1
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/create_fasta_bam_map.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/create_fasta_bam_map.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Processing
+  command_sets:
+    - bwa Iterator workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: BWA Execution
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bwa_wrapper
+      params:
+        - key: --query_file
+          value: $;I_FILE_PATH_2$;
+        - key: --ref_file
+          value: $;I_FILE_PATH_1$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/
+        - key: --tmp_dir
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --mismatch
+          value: $;MISMATCH_PENALTY$;
+        - key: --max_gaps
+          value: $;MAX_GAP_OPENS$;
+        - key: --max_gap_extensions
+          value: $;MAX_GAP_EXTNS$;
+        - key: --open_gap_penalty
+          value: $;GAP_OPEN_PENALTY$;
+        - key: --extend_gap_penalty
+          value: $;GAP_EXTN_PENALTY$;
+        - key: --threads
+          value: $;MAX_THREADS$;
+        - key: --num_aligns
+          value: $;MAX_ALIGN$;
+        - key: --bwa_path
+          value: $;BWA_EXEC$;
+        - key: --samtools_path
+          value: $;SAMTOOLS_EXEC$;
+        - key: --cleanup
+          value: $;CLEANUP$;
+        - key: --index_bam
+          value: $;INDEX_BAM$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE_1$;_v_$;I_FILE_BASE_2$;.bwa_align_exec.ref1.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE_1$;_v_$;I_FILE_BASE_2$;.bwa_align_exec.ref1.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: create_fasta_bam_map.pl
+    pod: |
+  =head1 NAME
+  
+  create_fasta_bam_map.pl - Will create an output list mapping input query fasta to output bam files. Written to be
+      used as part of the BWA component.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: create_fasta_bam_map.pl
+      --query_list=/path/to/input.list
+      --bam_list=/path/to/output.list
+      --output=/path/to/output.map
+      --strict=1
+      [ 
+      --log=/path/to/file.log
+      --debug=3
+      --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--query_list,-q>
+      Input list of query and reference sequences used as input to BWA. If this option is blank, 
+      the script will not run and just return 0. 
+  
+  B<--bam_list,-b>
+      The list of BAM files. The list which is created by bwa component.
+  
+  B<--output,-o>
+      The output map file. Can be used as input to other components. Such as mpileup, for example.
+  
+  B<--strict,-s>
+      Will require that all files in the query_list file map to files in the bam_list (and vice versa).
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+      This was written to create an output map file for use as input to other components. Developed for use
+      at the end of the BWA pipeline and the map file can be used as the input map file for mpileup. Might
+      have other uses as well down the line.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com
+  - script: bwa_wrapper.pl
+    pod: |
+  =head1  NAME 
+  
+  lgt_bwa.pl
+  
+  =head1 SYNOPSIS
+  
+  
+        
+  =head1 OPTIONS
+  
+  =over 8
+  
+  This help message is no good.
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  
+  =head1 INPUT
+  
+  
+  
+  =head1 OUTPUT
+  
+  
+  =head1 CONTACT
+  
+     Kevin Galens
+     kgalens@gmail.com
+  
+     Adapted from lgt_bwa.pl

@@ -1,0 +1,170 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: qiime_fastq_mothur_cnvr
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - qiime_fastq_mothur_cnvr.config
+  - qiime_fastq_mothur_cnvr.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: preliminary
+  parameters:
+  input:
+    # Must be fastq input
+    INPUT_FILE_LIST: ""
+    QUAL_FILE_LIST: ""
+    MAPPING_FILE: ""
+    BARCODE_TYPE: 24
+    OTHEROPTS: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    MOTHUR_PREFIX: $;OUTPUT_DIRECTORY$;/mothur
+    RESULTS_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/Processed.list
+  component:
+    COMPONENT_NAME: qiime_fastq_mothur_cnvr
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - QIIME-fastq to MOTHUR conversion workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: preprocess input data for split libraries
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/prep_MiSeq_for_qiime.sh
+      arg: -f $;INPUT_FILE_LIST$; -o $;OUTPUT_DIRECTORY$; -b $;BIN_DIR$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/prep.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/prep.stderr
+    - name: Validate input mapping file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/validate_mapfile.sh
+      arg: "-m `cat $;MAPPING_FILE$;` -o $;OUTPUT_DIRECTORY$;"
+      params:
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/mapping_corrected.stderr
+    - name: split libraries for QIIME - FastQ
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/split_libraries_fastq
+      arg: "-m $;OUTPUT_DIRECTORY$;/mapping_corrected.txt,$;OUTPUT_DIRECTORY$;/mapping_corrected.txt -i $;OUTPUT_DIRECTORY$;/R1N_PE.fq,$;OUTPUT_DIRECTORY$;/R3N_PE.fq -o $;OUTPUT_DIRECTORY$;/splitlibs/ -b $;OUTPUT_DIRECTORY$;/barcode.fq,$;OUTPUT_DIRECTORY$;/barcode.fq --barcode_type $;BARCODE_TYPE$; $;OTHEROPTS$;"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/split_libraries.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/split_libraries.stderr
+    - name: create input files for mothur components
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/qiime_to_mothur_meta.pl
+      arg: -f $;OUTPUT_DIRECTORY$;/splitlibs/seqs.fna -m $;OUTPUT_DIRECTORY$;/mapping_corrected.txt -p $;MOTHUR_PREFIX$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/qiime2mothur.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/qiime2mothur.stderr
+    - name: create results list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*_PE\\.fq\""
+        - key: --output_list
+          value: $;RESULTS_OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

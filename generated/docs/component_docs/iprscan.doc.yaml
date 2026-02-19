@@ -1,0 +1,786 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: iprscan
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - iprscan.config
+  - iprscan.xml
+  - iprscan.i1.xml
+  - workflow/iprscan-master.ini
+  - workflow/iprscan.ini
+  - workflow/iprscanconf.ini
+  - component_docs/iprscan.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentaion -->
+  <p>
+      The iprscan wrapper is a useful tool that allows you to run an entire suite of useful
+      tools without much interaction.  While this is useful when running a quick screen manually,
+      there are some drawbacks.  First, you lose access to most of the tuning options of each
+      individual program that you run.  Second, the available output formats when using this
+      tool do not include the regular alignment text files that each component normally generates, so
+      you are limited in the amount of result data you can parse and store.
+  </p>
+  
+  <h3>references<h3>
+  <p>
+  Nicola J. Mulder, et. al.
+  </p>
+  <h3>implementation</h3>
+  <p>
+      We have implemented this component because of its ease of use, but we also plan to create 
+      individual components for each of the analysis tools within iprscan, so that users can pick
+      and choose as desired.
+  </p>
+  <p>
+      The current executable is located in:
+      /usr/local/devel/ANNOTATION/elee/iprscan/4.1/iprscan/bin/iprscan.sh
+  </p>
+  <p>
+      The entire suite of tools can be run like:
+      <br><br>
+      iprscan.sh -cli -i ../test.seq -nocrc -iprlookup -goterms -format txt
+  </p>
+  <p>
+      This suite includes the following tools:
+      <ul>
+          <li>blastprodom</li>
+  
+          <li>coils</li>
+          <li>hmmpir</li>
+          <li>hmmsmart</li>
+          <li>fprintscan</li>
+          <li>scanregexp</li>
+          <li>profilescan</li>
+  
+          <li>superfamily</li>
+          <li>seg</li>
+          <li>hmmtigr</li>
+          <li>hmmpfam</li>
+      </ul>
+  </p>
+  <p>
+      The iprscan executable (perl) has the following usage:
+  
+  </p>
+  <p class=code>
+      usage: iprscan -cli [-email &lt;addr&gt;] [-appl &lt;name&gt; ...] [-nocrc]
+          [-seqtype p|n] [-trlen &lt;N&gt;] [-trtable &lt;table&gt;] [-goterms]
+          -i &lt;seqfile&gt; -o &lt;output file&gt;\n
+          -i &lt;seqfile&gt;      Your sequence file (mandatory).
+          -o &lt;output file&gt;  The output file where to write results (optional), default is STDOUT.
+          -email &lt;addr&gt;     Submitter email address (required for non-interactive).
+          -appl &lt;name&gt;      Application(s) to run (optional), default is all.
+          -nocrc            Don't perform CRC64 check, default is on.
+          -seqtype &lt;type&gt;   Sequence type: n for DNA/RNA, p for protein (default).
+          -trlen &lt;n&gt;        Transcript length threshold (20-150).
+          -trtable &lt;table&gt;  Codon table number.
+          -goterms          Show GO terms if iprlookup option is also given
+          -iprlookup        Switch on the InterPro lookup for results
+          -format &lt;format&gt;  Output results format (raw, txt, html, xml(default), ebixml(EBI header on top of xml))
+          -verbose          Print messages during run
+          
+  
+  </p>
+  <p>
+      This is a really cool tool, from which you can run the entire suite of programs or just individual
+      ones using the --appl option.  There are some problems though, the largest being that you don't
+      seem to have access to all the detailed options of the individual programs.  We're going for
+      greater transparency here, so I'd rather call the individual programs in the suite rather than
+      "iprscan -appl " over and over again.
+  </p>
+  <p>
+      Brian got a tool from the author to show the individual commands that were being run when you run
+      the iprscan pipeline.  They are:
+  </p>
+  <p class=code>
+  Tool [blastprodom] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/ProDomBlast3i.pl 
+      -P /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/blast 
+      -p blastp 
+      -d /usr/local/devel/ANNOTATION/iprscan_4.0/data/prodom.ipr 
+      -s /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq 
+      -h 0 -f
+   
+  Tool [coils] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/ncoils 
+      -c -m /usr/local/devel/ANNOTATION/iprscan_4.0/data/new_coil.mat
+   
+  Tool [hmmpir] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/iterator.pl 
+      -i /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq 
+      -o /usr/local/devel/ANNOTATION/iprscan_4.0/tmp/20050328/iprscan-20050328-08491549/chunk_1/iprscan-20050328-08491549-hmmpir-cnk1.output 
+      -c \"/usr/local/devel/ANNOTATION/iprscan_4.0/bin/pirsf.pl -i %infile -pirsf /usr/local/devel/ANNOTATION/iprscan_4.0/data/pirsf.dat -sfhmm /usr/local/devel/ANNOTATION/iprscan_4.0/data/sf_hmm -subsf /usr/local/devel/ANNOTATION/iprscan_4.0/data/sf_hmm_sub -h /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/hmmpfam\"
+   
+  Tool [hmmpfam] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/hmmpfam 
+      --cpu 1 
+      --acc 
+      -E 20.000000 
+      -A 100 
+      --cut_ga /usr/local/devel/ANNOTATION/iprscan_4.0/data/Pfam 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq
+   
+  Tool [hmmsmart] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/hmmpfam 
+      --cpu 1 
+      --acc 
+      -E 0.010000 
+      -A 100 
+      -Z 350000 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/data/smart.HMMs 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq
+   
+  Tool [hmmtigr] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/hmmpfam 
+      --cpu 1 
+      --acc 
+      -E 20.000000 
+      -A 100 
+      --cut_tc 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/data/TIGRFAMs_HMM.LIB 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq
+   
+  Tool [fprintscan] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/FingerPRINTScan 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/data/prints.pval 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq 
+      -e 0.0001 
+      -fj -a 
+      -o 15 
+      | /usr/local/devel/ANNOTATION/iprscan_4.0/bin/FingerPRINTSparser.pl 
+      -d /usr/local/devel/ANNOTATION/iprscan_4.0/data/FingerPRINTSparser.db
+   
+  Tool [scanregexp] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/scanregexpf.pl 
+      -pattern /usr/local/devel/ANNOTATION/iprscan_4.0/data/prosite.patterns 
+      -confirm /usr/local/devel/ANNOTATION/iprscan_4.0/data/confirm.patterns
+   
+  Tool [profilescan] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/ps_scan.pl 
+      -d /usr/local/devel/ANNOTATION/iprscan_4.0/data/prosite_prerelease.prf 
+      --pfscan /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/pfscan 
+      -s 
+      -o gff
+   
+  Tool [superfamily] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/superfamily.pl 
+      -i /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq 
+      -o /usr/local/devel/ANNOTATION/iprscan_4.0/tmp/20050328/iprscan-20050328-08491549/chunk_1/iprscan-20050328-08491549-superfamily-cnk1.output 
+      -t /usr/local/devel/ANNOTATION/iprscan_4.0/tmp/tmp 
+      -m /usr/local/devel/ANNOTATION/iprscan_4.0/data/superfamily.hmm 
+      -d /usr/local/devel/ANNOTATION/iprscan_4.0/data/superfamily.tab 
+      -a /usr/local/devel/ANNOTATION/iprscan_4.0/data/superfamily.acc 
+      -p /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/hmmpfam 
+      -s /usr/local/devel/ANNOTATION/iprscan_4.0/bin 
+      -e 0.02 
+      -r y
+   
+  Tool [seg] : /usr/local/devel/ANNOTATION/iprscan_4.0/bin/binaries/seg 
+      /usr/local/devel/ANNOTATION/iprscan_4.0/test.seq
+  </p>
+  <p>
+      INSTALLATION NOTE:
+      <br><br>
+      Note that during installation we modified the file INSTALL_DIR/conf/localenv.sh from:
+  
+  </p>
+  <p class=code>
+      #!/bin/sh
+  
+      rhost=[%host.exec]
+      ihost=`hostname`
+  
+      echo "[%toolexitcode]"
+  
+      case $rhost in
+          $ihost*)
+              [%cmd] ;;
+          *)
+              rsh $rhost "[%cmd]";;
+  
+      esac
+  
+      exit 0
+  </p>
+  <p>
+      to:
+  </p>
+  <p class=code>
+      #!/bin/sh
+  
+      #rhost=[%host.exec]
+      ihost=`hostname`
+      # hack added by bhaas, always run on localhost, for use with cluster
+      rhost=$ihost
+  
+      echo "[%toolexitcode]"
+  
+      [%cmd]
+  
+      exit 0
+  </p>
+  <p>
+      Also, iprscan was returning 0 on ALL events, even failures.  This was fixed by going into
+      the library Tools.pm and the iprscan script and modifying the exit values where necessary.
+      The author is going to change this behavior in the next version.
+  </p>
+  
+  <p>
+      Ed has since done extensive rewrites of portions of the code, which will need to be detailed
+      here.
+  </p>
+  <h3>default output</h3>
+  <p>
+      The native output from iprscan is a tab-delimited format as described in the example below
+      (taken from the documentation):
+  </p>
+  <p class="code">
+      ------
+      NF00181542      0A5FDCE74AB7C3AD        272     HMMPIR  PIRSF001424     Prephenate dehydratase  1       270     6.5e-141        T       06-Oct-2004         IPR008237       Prephenate dehydratase with ACT region  Molecular Function:prephenate dehydratase activity (GO:0004664), Biological Process:L-phenylalanine biosynthesis (GO:0009094)
+      ------
+  
+      Where: NF00181542:             is the id of the input sequence.
+             27A9BBAC0587AB84:       is the crc64 (checksum) of the proteic sequence (supposed to be unique).
+             272:                    is the length of the sequence (in AA).
+             HMMPIR:                 is the anaysis method launched.
+             PIRSF001424:            is the database members entry for this match.
+             Prephenate dehydratase: is the database member description for the entry.
+             1:                      is the start of the domain match.
+             270:                    is the end of the domain match.
+             6.5e-141:               is the evalue of the match (reported by member database anayling method).
+             T:                      is the status of the match (T: true, ?: unknown).
+             06-Oct-2004:            is the date of the run.
+             IPR008237:              is the corresponding InterPro entry (if iprlookup requested by the user).
+             Prephenate dehydratase with ACT region:                           is the description of the InterPro entry.
+             Molecular Function:prephenate dehydratase activity (GO:0004664):  is the GO (gene ontology) description for the InterPro entry.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment / model
+  parameters:
+    # n for dna/rna, p for protein
+    SEQ_TYPE: p
+    COMPRESS_BSML_OUTPUT: 1
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: iprscan
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - iprscan workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create raw list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*iprscan\\.raw\""
+        - key: --output_list
+          value: $;RAW_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - end of iprscan calls
+  command_sets:
+    - iprscan compute
+  steps:
+    - name: blastprodom
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl blastprodom -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.blastprodom.raw
+    - name: coils
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl coils -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.coils.raw
+    - name: hmmpir
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl hmmpir -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.hmmpir.raw
+    - name: hmmpfam
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl hmmpfam -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.hmmpfam.raw
+    - name: hmmsmart
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl hmmsmart -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.hmmsmart.raw
+    - name: hmmtigr
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl hmmtigr -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.hmmtigr.raw
+    - name: fprintscan
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl fprintscan -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.fprintscan.raw
+    - name: scanregexp
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl scanregexp -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.scanregexp.raw
+    - name: profilescan
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl profilescan -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.profilescan.raw
+    - name: superfamily
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl superfamily -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.superfamily.raw
+    - name: seg
+      type: RunUnixCommand
+      executable: $;IPRSCAN_EXEC$;
+      arg: -cli -nocrc -iprlookup -goterms -appl seg -seqtype $;SEQ_TYPE$; -format raw -i $;I_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.seg.raw
+    - name: combine raw output
+      type: RunUnixCommand
+      executable: find
+      arg: "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/ -type f -regex '.*$;I_FILE_BASE$;.*.raw' ! -regex '.*$;I_FILE_BASE$;.*.$;COMPONENT_NAME$;.raw' -exec cat {} \\;"
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+    - name: iprscan2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/iprscan2bsml
+      params:
+        - key: --query_file_path
+          value: $;I_FILE_PATH$;
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --gzip_output
+          value: $;COMPRESS_BSML_OUTPUT$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Workflow INI: iprscan-master.ini
+workflow_ini_iprscan-master.ini:
+  create_bsml_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--regex: "\".*.$;NAME$;.bsml\""
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--output_list: $;BSML_OUTPUT_LIST$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_output_directory:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_raw_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--regex: "\".*.$;NAME$;.raw\""
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--output_list: $;RAW_OUTPUT_LIST$;
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: iprscan.ini
+workflow_ini_iprscan.ini:
+  blastprodom:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl blastprodom -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.blastprodom.raw
+  coils:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl coils -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.coils.raw
+  combine_raw_output:
+    param.command: find
+    arg: "$;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/ -type f -regex '.*$;ITER_FILE_BASE$;.*.raw' ! -regex '.*$;ITER_FILE_BASE$;.*.$;NAME$;.raw' -exec cat {} \\;"
+    param.stdout: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.raw
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+  empty:
+  fprintscan:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl fprintscan -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.fprintscan.raw
+  hmmpfam:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl hmmpfam -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.hmmpfam.raw
+  hmmpir:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl hmmpir -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.hmmpir.raw
+  hmmsmart:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl hmmsmart -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.hmmsmart.raw
+  hmmtigr:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl hmmtigr -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.hmmtigr.raw
+  iprscan2bsml:
+    param.command: $;BIN_DIR$;/iprscan2bsml
+    param.--input: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.raw
+    param.--output: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--query_file_path: $;ITER_FILE_PATH$;
+    param.--query_id: $;ITER_FILE_BASE$;
+    param.--gzip_output: $;COMPRESS_BSML_OUTPUT$;
+  profilescan:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl profilescan -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.profilescan.raw
+  scanregexp:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl scanregexp -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.scanregexp.raw
+  seg:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl seg -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.seg.raw
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/$;PIPELINEID$;/pipeline.xml.instance
+    param.--analysis_id: $;NAME$;_analysis
+  superfamily:
+    param.command: /usr/local/packages/$;NAME$;/bin/$;NAME$;.sh
+    arg: -cli -nocrc -iprlookup -goterms -appl superfamily -seqtype $;SEQ_TYPE$; -format raw -i $;ITER_FILE_PATH$; -o $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.superfamily.raw
+
+# Workflow INI: iprscanconf.ini
+workflow_ini_iprscanconf.ini:
+  _header:
+    # configuration file for the iprscan workflow
+  include iprscan:
+    $;SHARED_CONFIG$;: ""
+  input iprscan:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    $;INPUT_EXTENSION$;: fsa
+  output iprscan:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;RAW_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.raw.list
+    $;BSML_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    $;COMPRESS_BSML_OUTPUT$;: 0
+  parameters iprscan:
+    # n for dna/rna, p for protein
+    $;SEQ_TYPE$;: p
+  workflowdocs iprscan:
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: iprscan
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/iprscan-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/iprscan-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/iprscan.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/iprscan_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: iprscan2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  iprscan2bsml.pl - convert iprscan btab output to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE: iprscan2bsml.pl 
+      --input=/path/to/somefile.iprscan.raw 
+      --output=/path/to/somefile.iprscan.bsml
+    [ --fasta_input=/path/to/iprscan/input.fsa
+      --gzip_output=1 ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i> 
+      Input tab-delimited file from an iprscan search.
+  
+  B<--query_file_path,-q>
+      Full path to FASTA file containing query sequence.  This allows the creation
+      of a Sequence element in BSML even if there are no matches.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--gzip_output,-g>
+      Optional.  Non-zero value will give you a compressed bsml file. If output
+      does not contain a .gz extension, it will be added automatically.
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--output,-o> 
+      Output BSML file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert the tab-delimited output from a nap search into BSML.
+  
+  =head1 INPUT
+  
+  The input to this component is the btab file created by the iprscan executable.  This file
+  is 14-column, tab-delimited text document.  The input must be a nap btab output from
+  a single search.  Fromthe documentation, the raw output looks like this:
+  
+      ------
+      NF00181542      0A5FDCE74AB7C3AD        272     HMMPIR  PIRSF001424     Prephenate dehydratase  1       270     6.5e-141        T       06-Oct-2004         IPR008237       Prephenate dehydratase with ACT region  Molecular Function:prephenate dehydratase activity (GO:0004664), Biological Process:L-phenylalanine biosynthesis (GO:0009094)
+      ------
+  
+      Where: NF00181542:             is the id of the input sequence.
+             27A9BBAC0587AB84:       is the crc64 (checksum) of the proteic sequence (supposed to be unique).
+             272:                    is the length of the sequence (in AA).
+             HMMPIR:                 is the anaysis method launched.
+             PIRSF001424:            is the database members entry for this match.
+             Prephenate dehydratase: is the database member description for the entry.
+             1:                      is the start of the domain match.
+             270:                    is the end of the domain match.
+             6.5e-141:               is the evalue of the match (reported by member database anayling method).
+             T:                      is the status of the match (T: true, ?: unknown).
+             06-Oct-2004:            is the date of the run.
+             IPR008237:              is the corresponding InterPro entry (if iprlookup requested by the user).
+             Prephenate dehydratase with ACT region:                           is the description of the InterPro entry.
+             Molecular Function:prephenate dehydratase activity (GO:0004664):  is the GO (gene ontology) description for the InterPro entry.
+  
+  
+  Illegal characters will be removed from the 
+  IDs for the query sequence (column 0) and subject hit (column 5) if necessary to create 
+  legal XML id names.  For each element, the original, unmodified name will be stored in the "title"
+  attribute of the Sequence element.  You should make sure that your ids don't begin with
+  a number.  This script will successfully create a BSML document regardless of your ID names,
+  but the resulting document may not pass DTD validation.
+  
+  =head1 OUTPUT
+  
+  The BSML file to be created is defined using the --output option.  If the file already exists
+  it will be overwritten.
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.

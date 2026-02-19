@@ -1,0 +1,197 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: fetch_genbank
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - fetch_genbank.config
+  - fetch_genbank.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    DATABASE: nucleotide
+    # Comma-separated list of accession ids
+    QUERY: ""
+    FORMAT: fasta
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.list
+  component:
+    COMPONENT_NAME: fetch_genbank
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 6048 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Postprocessing
+  command_sets:
+    - fetch genBank workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: fetch_genbank
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fetch_genbank
+      params:
+        - key: --query
+          value: $;QUERY$;
+        - key: --database
+          value: $;DATABASE$;
+        - key: --format
+          value: $;FORMAT$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --log
+          value: $;TMP_DIR$;/fetch_genbank.log
+        - key: --debug
+          value: 4
+    - name: create fetch genBank file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.$;FORMAT$;\""
+        - key: --output_list
+          value: $;OUTPUT_LIST$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: fetch_genbank.pl
+    pod: |
+  =head1 NAME
+  
+  fetch_genbank.pl - Fetches data from GenBank for the provided accession numbers list 
+  
+  =head1 SYNOPSIS
+  
+  USAGE: fetch_genbank.pl 
+      --database=name of the database to be searched
+      --query=comma-separated accession number list
+      --format=output format
+      --output_dir=/path/to/somedir	
+  =head1 OPTIONS
+  
+  B<--database,-d>
+  The name of the database to be searched 
+  
+  B<--output_dir,-o>
+  The directory to which the output files will be written.
+  
+  B<--query,-q>
+  The comma-separated list of accession numbers from the genBank to be fetched.
+  
+  B<--format,-f>
+  The format in which output is required. Examples fasta, gb, asn. If format given is not recognized, eutils will return asn.
+  
+  B<--debug,-d> 
+  Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+  Log file
+  
+  B<--help,-h>
+  This help message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to fetch a text query given a UID in a given database. Its mainly used for downloading reference genomes in FASTA format from genBank
+  given genBank accesion ids. 
+  
+  =head1  CONTACT
+  
+  Sonia Agrawal
+  sagrawal@som.umaryland.edu
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org

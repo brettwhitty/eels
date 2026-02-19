@@ -1,0 +1,335 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: tbl2asn
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - tbl2asn.config
+  - tbl2asn.xml
+  - tbl2asn.i1.xml
+  - component_docs/tbl2asn.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This is a component used to convert NCBI tbl format to ASN.1
+  </p>
+  <h3>references</h3>
+  <p>
+      <a href='http://www.ncbi.nlm.nih.gov/Sequin/table.html#Table%20Layout'>tbl format</a>
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    # Name of the organism to be included in gbk file
+    ORGANISM: ""
+    ASN_TEMPLATE: ""
+    # values are T or F
+    GENERATE_GENBANK_FILES: T
+    # validate ASN.1 output file (values are T or F)
+    PERFORM_VALIDATION: T
+    # translation table number
+    CODON_TABLE: 11
+    OTHER_OPTS: ""
+    # List of fasta files. Must be named the same as the .tbl input files.
+    FASTA_INPUT_LIST: ""
+  input:
+    # Input .tbl files
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: tbl
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    SQN_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.sqn.list
+    GBF_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.gbf.list
+    VAL_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.val.list
+    DISCRPT_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.discrpt.list
+  component:
+    COMPONENT_NAME: tbl2asn
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 50
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - tbl2asn workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create .sqn list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.sqn\""
+        - key: --output_list
+          value: $;SQN_OUTPUT_LIST$;
+    - name: Create .gbf list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.gbf\""
+        - key: --output_list
+          value: $;GBF_OUTPUT_LIST$;
+    - name: Create .val list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.val\""
+        - key: --output_list
+          value: $;VAL_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - tbl2asn
+  steps:
+    - name: Create the tbl2asn output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;/
+      params:
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.mkdir.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.mkdir.stdout
+    - name: Copy files to working directory
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/prepare_for_tbl2asn
+      params:
+        - key: --fasta_list
+          value: $;FASTA_INPUT_LIST$;
+        - key: --tbl_file
+          value: $;I_FILE_PATH$;
+        - key: --output_directory
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.copy.fasta.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.copy.fasta.stdout
+    - name: Run tbl2asn
+      type: RunUnixCommand
+      executable: $;TBL2ASN_EXEC$;
+      arg: "-p $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$; -V bv -j \"[gcode=$;CODON_TABLE$;]\" -n \"$;ORGANISM$;\""
+      params:
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.tbl2asn.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.tbl2asn.stdout
+    - name: Fix locus name
+      type: RunUnixCommand
+      executable: perl
+      arg: "-pi -e 's/(LOCUS\\s+$;I_FILE_BASE$;)\\s*(\\S+.*)/$1 $2/;' $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;/$;I_FILE_BASE$;.gbf"
+      params:
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.fixgbf.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.fixgbf.stdout
+    - name: Fix GenBank
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fix_gbk
+      params:
+        - key: --input_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;/$;I_FILE_BASE$;.gbf
+        - key: --output_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;/$;I_FILE_BASE$;.gbf.tmp
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.fixgbf.stderr
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.fixgbf.stdout
+    - name: Move GenBank
+      type: RunUnixCommand
+      executable: /bin/mv
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;/$;I_FILE_BASE$;.gbf.tmp $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;/$;I_FILE_BASE$;.gbf
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: prepare_for_tbl2asn.pl
+    pod: |
+  =head1 NAME
+  
+  prepare_for_tbl2asn.pl - Copies files to a directory which tbl2asn expects
+  
+  =head1 SYNOPSIS
+  
+  USAGE: prepare_for_tbl2asn.pl
+              --tbl_file=/path/to/file.tbl
+              --fasta_list=/path/to/fasta.list
+              --output_directory=/path/to/dir
+              --help
+            
+  =head1 OPTIONS
+  
+  B<--tbl_file,-t>
+      A tbl file
+  
+  B<--fasta_list,-f>
+      Fasta list of files one of which must be named to match the name of the tbl file
+      (with a .fsa extension)
+  
+  B<--output_directory,-o>
+      Directory to copy files to
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to convert the output from a glimmer3 search into BSML.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kevingalens@gmail.com
+  - script: fix_gbk.pl
+    pod: |
+  =head1 NAME
+  
+  fix_gbk.pl - Script to add accession numbers and fix taxonomy information in newly created GenBank file thorough the clovr microbe pipeline
+  
+  =head1 SYNOPSIS
+  
+  # USAGE : perl fix_gbk.pl --i <Path to input GenBank file> --o <Path to output GenBank file> --r <Path to Ergatis id repository> [--l <Path to log file>]
+  
+  	parameters in [] are optional
+  
+  =head1 OPTIONS
+  
+  
+  
+  =head1 DESCRIPTION
+  
+  
+  
+  =head1 INPUT
+  
+  
+  
+  =head1 OUTPUT
+  
+  
+  
+  =head1 AUTHOR
+  
+  	Sonia Agrawal
+  	Senior Bioinformatics Software Engineer
+  	Institute for Genome Sciences
+  	School of Medicine
+  	University of Maryland
+  	Baltimore, MD - 21201
+  	sagrawal@som.umaryland.edu
+  
+  ==cut

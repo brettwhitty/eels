@@ -1,0 +1,148 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: create_db_list_file
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - create_db_list_file.config
+  - create_db_list_file.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+  input:
+    INPUT_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/db.list
+  component:
+    COMPONENT_NAME: create_db_list_file
+    DESCRIPTION: Create a list of delimited files containing database and other relevant information
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - create db list file workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create db list file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_db_list_file
+      params:
+        - key: --input_file
+          value: $;INPUT_FILE$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_db_list_file.pl
+    pod: |
+  =head1 NAME
+  
+  create_db_list_file.pl - Converts a csv or tab delimited file with database properties into a list
+  	of individual file paths for each individual entry
+  
+  =head1 SYNOPSIS
+  
+   USAGE: perl_template.pl
+         --input_file=/path/to/some/db_info.tab
+         --output_dir=/path/to/output_dir
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+  
+  B<--output_dir,-o>
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+      A tab-separated file containing the following columns:
+   1. Name of the manatee database used while running the prokaryotic annotation pipeline
+   2. NCBI_locus_tag prefix to be assigned to the genes.
+   3. Absolute path to the tab-delimited rules file for fixing gene product names in the database.
+   4. Absolute path to the tab-delimited gene symbol rules file for fixing gene symbols in the database.
+   5. Bioproject Id beginning with PRJ [for .sbt file creation]
+   6. Organism name [for tbl2asn]
+   7. Strain name [for tbl2asn]
+   8. Organism serotype [for tbl2asn]
+   9. Name of the host from which the bacterial sample was isolated [for tbl2asn]
+   10. Date on which bacterial sample was collected (mostly year only) [for tbl2asn]
+   11. Country from which the bacterial sample was isolated [for tbl2asn]
+   12. Assembly method used to assemble the genome sequence [for .cmt file creation]
+   13. Genome Coverage [for .cmt file creation]
+   14. Sequencing platform [for .cmt file creation]
+   15. Contact person's name for Genbank submission. Format : Last name\sFirst name [for .sbt file creation]
+   16. Contact person's email address [for .sbt file creation]
+   17. Comma-separated author list for Genbank submission. Format : Each name should be Last name\sFirst name\sMiddle Initial [for .sbt file creation]
+   18. Title of the publication [for .sbt file creation]
+   19. Absolute path to list of deprecated or bad EC numbers, one per row (used in update_ec_numbers)
+   20. Isolation source of the bacterial sample.
+   21. Absolute path to file consisting of a tab-delimited address containing the contact person in 15)
+   22. BioSample ID [for .sbt file creation]
+   23. Path to a fasta file (for using dump_fasta to copy fasta file instead of dumping from Chado db)
+   
+   A comma-separated file can be used but it is not recommended unless you plan on entering only the first 4 columsn or less of data
+  
+  =head1 OUTPUT
+  	A list file containing paths to individual comma-separated or tab-delimited files.
+  	Each file will be in the form of:
+  	dbname	id_prefix	/path/to/rules.txt	/path/to/gene_syms.txt	Other_db_info	...
+  	
+  	
+  =head1  CONTACT
+      Shaun Adkins
+      sadkins@som.umaryland.edu

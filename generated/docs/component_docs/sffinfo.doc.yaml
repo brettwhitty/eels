@@ -1,0 +1,324 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: sffinfo
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - sffinfo.config
+  - sffinfo.xml
+  - sffinfo.i1.xml
+  - component_docs/sffinfo.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <p>
+     The sffinfo program extracts read information from the SFF file, and
+     reports it in text form.  By default, a text summary of all of the
+     read information is output, but the output can be limited to only
+     the accnos, sequences, quality scores, flowgrams or manifest.  All
+     output is written to standard output.
+  </p>
+  <h3>input</h3>
+  <p>
+      Input to the sffinfo component is a well-formed SFF files.
+  </p>
+  <h3>implemented options</h3>
+  <p>
+      Any of the sffinfo executable options maybe passed in using the CONFIG_PARAMS option but explicit support
+      for the follwing data is supported via the OUTPUT_TYPES parameter:
+         <ul class="options">
+              <li>a: Output just the accessions</li>
+              <li>s: Output just the sequences</li>
+              <li>q: Output just the quality scores</li>
+              <li>f: Output just the flowgrams</li>
+              <li>t: Output the seq/qual/flow as tab-delimited lines</li>
+          </ul>
+      
+      Multiple output types can be specified via a comma-delimited list like so:
+              OUTPUT_TYPES = a,s,q    --> Produces accessions, sequences (FASTA), and quality files
+  </p>
+  <h3>output</h3>
+  <p> Output is dependant on the combination of options passed into the OUTPUT_TYPES parameter:
+          <ul>
+              <li>a: Outputs a .acc file</li>
+              <li>s: Outputs a .fasta file</li>
+              <li>q: Outputs a .qual file</li>
+              <li>f: Outputs a .flow file</li>
+              <li>t: Outputs a .tab file</li>
+          </ul>
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    #  Provide output types. Multiple output types can be specified in a comma-delimited format.
+    # 
+    # Types
+    # -------
+    # a - accessions
+    # s - sequences
+    # q - quality values
+    # f - flowgram
+    # t - tab-delimited file containing seq/qual/flow
+    OUTPUT_TYPES: ""
+    # Any sffinfo command line arguments
+    CONFIG_PARAMS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: list
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    ACCESSION_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.acc.list
+    SEQUENCE_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.fsa.list
+    QUALITY_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.qual.list
+    FLOWGRAM_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.flow.list
+    TAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.tab.list
+  component:
+    COMPONENT_NAME: sffinfo
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Post-processing
+  command_sets:
+    - sffinfo workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temporary directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create accession output list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.acc\""
+        - key: --output_list
+          value: $;ACCESSION_OUTPUT_LIST$;
+    - name: create sequence output list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.fsa\""
+        - key: --output_list
+          value: $;SEQUENCE_OUTPUT_LIST$;
+    - name: create quality output list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.qual\""
+        - key: --output_list
+          value: $;QUALITY_OUTPUT_LIST$;
+    - name: create flowgram output list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.flow\""
+        - key: --output_list
+          value: $;FLOWGRAM_OUTPUT_LIST$;
+    - name: create tabular output list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.tab\""
+        - key: --output_list
+          value: $;TAB_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - sffinfo compute
+  steps:
+    - name: sffinfo
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/sffinfo
+      params:
+        - key: stdout
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.stdout
+        - key: --sffinfo_exec
+          value: $;SFFINFO_EXEC$;
+        - key: --config_opts
+          value: $;CONFIG_PARAMS$;
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;
+        - key: --output_type
+          value: $;OUTPUT_TYPES$;
+        - key: --log
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;COMPONENT_NAME$;_$;I_FILE_BASE$;.log
+        - key: --debug
+          value: 4
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: sffinfo.pl
+    pod: |
+  =head1 NAME
+  
+  sffinfo.pl - Wrapper script for sffinfo to facilitate its execution via Ergatis.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: sffinfo.pl --sffinfo_exec=/path/to/sffinfo --input=/path/to/input --output=/path/to/output --output_type=<TYPE OF OUTPUT>
+  
+  =head1 OPTIONS
+  
+  B<--sffinfo_exec, -e>
+  	Path to sffinfo executable
+  
+  B<--config_opts, -c>
+      Optional. Any command-line arguments to be passed to sffinfo.
+  
+  B<--input, -i>
+  	Input file; An SFF file.
+  
+  B<--output, -o>
+  	Output. Path to output not including a prefix i.e. /test/sff_test and not /test/sff_test.out
+  	
+  B<--output_type, -t>
+  	What types of output file to produce. Options include
+  		a -- Output just accessions
+  		s -- Output just the sequences
+  		q -- Ouput just the quality scores
+  		f -- Output just the flowgrams
+  		t -- Output the seq/qual/flow as tab-delimited lines
+  		
+  B<--log, -l>
+  	Optional. Log file.
+  	
+  B<--debug, -d>
+  	Optional. Debug level.
+  	
+  =head1 DESCRIPTION
+  
+  A wrapper script that handles that prefixing of output depending on the output type selected.
+  
+  =head1 INPUT
+  
+  Sequence data in SFF format
+  
+  =head1 OUTPUT
+  
+  One of the selected output types (accessions, sequences, quality scores, etc.)
+  
+  =head1 CONTACT
+  
+  	Cesar Arze
+  	carze@som.umaryland.edu
+  	

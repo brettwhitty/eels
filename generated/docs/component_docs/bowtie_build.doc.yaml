@@ -1,0 +1,150 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bowtie_build
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - bowtie_build.config
+  - bowtie_build.xml
+  - bowtie_build.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: RNA-Seq
+  parameters:
+    # path to bowtie package binary directory
+    BOWTIE_BIN_DIR: $;BOWTIE_BUILD_BIN$;
+    # bowtie index prefix
+    BOWTIE_INDEX_PREFIX: ref
+    # additional bowtie-build parameters
+    OTHER_PARAMETERS: ""
+    # use --v for verbose summary
+    OTHER_ARGS: --v
+  input:
+    # path to reference FastA file
+    INPUT_FILE: ""
+    # path to list of reference FastA files
+    INPUT_FILE_LIST: ""
+    # path to directory of multiple reference FastA files
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fa
+  output:
+    # use a unique sample name
+    OUTPUT_TOKEN: default
+    # output directory
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # output index for single reference file input
+    INDEX_FILE: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/$;ITERATOR1$;/g1/$;BOWTIE_INDEX_PREFIX$;
+  component:
+    COMPONENT_NAME: bowtie_build
+    DESCRIPTION: generates bowtie index files for the given reference fasta file
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # bowtie-build version
+    VERSION: bowtie-build version 0.12.7
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Iterator
+  command_sets:
+    - bowtie_build
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - bowtie_build
+  steps:
+    - name: bowtie_build
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/bowtie_build
+      arg: $;OTHER_ARGS$;
+      params:
+        - key: --reffile
+          value: $;I_FILE_PATH$;
+        - key: --outdir
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+        - key: --prefix
+          value: $;BOWTIE_INDEX_PREFIX$;
+        - key: --bowtie_bin_dir
+          value: $;BOWTIE_BIN_DIR$;
+        - key: --args
+          value: "'$;OTHER_PARAMETERS$;'"
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/bowtie_build.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/bowtie_build.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: bowtie_build.pl
+    pod: |
+  =head1 NAME
+  
+  bowtie_build.pl - script to create Bowtie index for a reference FastA file
+  
+  =head1 SYNOPSIS
+  
+      bowtie_build.pl --r reference_fasta_file [--o outdir] [--b bowtie_bin_dir] 
+                      [--p index_prefix] [--a other_parameters] [--v]
+  
+      parameters in [] are optional
+      do NOT type the carets when specifying options
+  
+  =head1 OPTIONS
+  
+      --r <reference_fasta_file>     = /path/to/reference fasta file to index.
+  
+      --o <output dir>               = /path/to/output directory. Optional. [present working directory]
+  
+      --b <bowtie_bin_dir>           = /path/to/bowtie_build binary. Optional. [/usr/local/bin]
+  
+      --p <index_prefix>             = prefix for index files. Optional. [ref]
+  
+      --a <other_parameters>         = additonal bowtie_build parameters. Optional
+  
+      --v                            = generate runtime messages. Optional
+  
+  =head1 DESCRIPTION
+  
+  The script executes the bowtie_build script from the bowtie software package.
+  
+  =head1 AUTHOR
+  
+   Amol Carl Shetty
+   Bioinformatics Software Engineer II
+   Institute of Genome Sciences
+   University of Maryland
+   Baltimore, Maryland 21201

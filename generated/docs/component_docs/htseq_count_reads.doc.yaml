@@ -1,0 +1,172 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: htseq_count_reads
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - htseq_count_reads.config
+  - htseq_count_reads.xml
+  - htseq_count_reads.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  parameters:
+    # the feature definitions to count over
+    GTF_FILE: ""
+    # scheme to decipher overlapping features and reads.  either union, intersection-strict, or intersection-nonempty
+    COUNT_MODE: union
+    # feature type to extract from gtf file and count over
+    COUNTING_FEATURE: exon
+    # minimum quality of alignment to count a read
+    MIN_ALIGN_QUAL: 0
+    # indicates whether or not the rna-seq library is strand-specific
+    IS_STRANDED: no
+    # the attribute over the features that is used to group features.  for example, exons with the same gene_id will be grouped together for counting reads
+    ID_ATTRIBUTE: gene_id
+  input:
+    # Input SAM file(s) with header, sorted by read name
+    INPUT_FILE: ""
+    INPUT_FILE_LIST: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: sam
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    COUNT_FILE_LIST: $;OUTPUT_DIRECTORY$;/count_file_list.txt
+  component:
+    COMPONENT_NAME: htseq_count_reads
+    DESCRIPTION: uses the HTseq Python package to count reads aligning to features
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - HTSeq Count Reads
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: Create read count file list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_multi_file_list_file.pl
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*gene\\.counts\""
+        - key: --output_list
+          value: $;COUNT_FILE_LIST$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/create_read_count_file_list.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/create_read_count_file_list.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - HTSeq counting
+  steps:
+    - name: HTSeq counting
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/htseq_count_reads.sh
+      arg: $;COUNT_MODE$; $;COUNTING_FEATURE$; $;MIN_ALIGN_QUAL$; $;ID_ATTRIBUTE$; $;IS_STRANDED$; $;GTF_FILE$; $;I_FILE_PATH$; $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.gene.counts
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.htseq.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.htseq.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_multi_file_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_multi_file_list_file.pl - script to create a list of files or groups of file given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  If multiple matches are found in a subdirectory, they will
+      be printed as comma-separated entries on the same line.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Umar Farooq
+      ufarooq@som.umaryland.edu

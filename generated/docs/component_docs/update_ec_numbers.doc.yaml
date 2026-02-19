@@ -1,0 +1,189 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: update_ec_numbers
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - update_ec_numbers.config
+  - update_ec_numbers.xml
+  - update_ec_numbers.i1.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    HOST: ""
+    USERNAME: ""
+    PASSWORD: ""
+    # Read password from file if the password should not be publicly seen. (optional)
+    PASSWORD_FILE: ""
+    # Can obtain ec_dat file from ftp://ftp.expasy.org/databases/enzyme/enzyme.dat
+    EC_DAT_FILE: /local/db/expasy/enzyme/latest/enzyme.dat
+    # If value is 0, database will be changed.  If value is 1, database will not be changed
+    NO_CHANGE: 0
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    INPUT_EXTENSION: txt
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    OUTPUT_FILE: $;OUTPUT_DIRECTORY$;/$;OUTPUT_TOKEN$;.out
+  component:
+    COMPONENT_NAME: update_ec_numbers
+    DESCRIPTION: Update EC numbers in the database
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 0.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - update_ec_numbers workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - update ec numbers iterator
+  steps:
+    - name: update ec numbers
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/update_ec_numbers
+      params:
+        - key: --username
+          value: $;USERNAME$;
+        - key: --password
+          value: $;PASSWORD$;
+        - key: --password_file
+          value: $;PASSWORD_FILE$;
+        - key: --server
+          value: $;HOST$;
+        - key: --database_file
+          value: $;I_FILE_PATH$;
+        - key: --input_ec_dat
+          value: $;EC_DAT_FILE$;
+        - key: --no_change
+          value: $;NO_CHANGE$;
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: update_ec_numbers.pl
+    pod: |
+  =head1 NAME
+  
+  update_ec_numbers.pl - Will read in a current enzyme.dat file and update
+      annotated EC numbers with suggestions from the file. Does not
+      change partial EC numbers.
+  
+  =head1 SYNOPSIS
+  
+   USAGE: update_ec_numbers.pl
+         --input_ec_dat=/path/to/some/enzyme.dat
+         --username=dbuser
+         --password=dbpass
+         --database_file=/path/to/db.txt
+         --server=dbserver
+         --no_change=1
+       [ --password_file=/path/to/password.txt
+         --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_ec_dat,-i>
+      enzyme.dat file. (ftp://ftp.expasy.org/databases/enzyme/enzyme.dat)
+  
+  B<--username,-u>
+      Database username
+  
+  B<--password,-p>
+      Database password.  One of --password or --password_file is required
+      
+  B<--password_file,-P>
+      Password stored in a text file.  Useful for keeping password non-visible.
+  
+  B<--database_file,-d>
+      Either a comma-separated or tab-separated file containing the following columns:
+      1) Name of Database
+      2) Locus_tag ID prefix
+      3) Path to a curate_common_names rules file
+      4+) Any other DB related information (to come later)
+      
+  B<--server,-s>
+      Database hostname
+  
+  B<--no_change,-n>
+      Toggles between 0 (will change) and 1 (will not change). Will print out report but not actually change anything 
+      in the database
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-D>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   Looks at enzyme.dat file (ftp://ftp.expasy.org/databases/enzyme/enzyme.dat)
+   and makes sure all the EC numbers are current. Will delete whole EC numbers it 
+   cannot find and will change EC numbers which it finds under Formerly EC tags
+   in enzyme.dat file (basically, updating obsolete EC numbers)
+   
+  =head1  INPUT
+      Enzyme.dat (ftp://ftp.expasy.org/databases/enzyme/enzyme.dat)
+  
+  =head1 OUTPUT
+      None. Logfile. Report to STDOUT
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@gmail.com

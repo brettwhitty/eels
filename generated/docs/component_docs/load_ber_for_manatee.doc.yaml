@@ -1,0 +1,273 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: load_ber_for_manatee
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - load_ber_for_manatee.config
+  - load_ber_for_manatee.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # Username, password, host for database server
+    DB_USERNAME: ""
+    DB_PASSWORD: ""
+    DB_HOST: ""
+    DB_NAME: ""
+    # Path to the output directory for ber analysis.  Usually
+    # the directory that contains the list file (do not include
+    # the iterator directory (ie. i1/ == bad ))
+    BER_OUTPUT_DIRECTORY: ""
+    # The following options are for where the files will be copied
+    # When copying, the local_directory will be removed from files (leaving a 
+    # relative directory path) and will be copied to the destination
+    # directory. (ex. /usr/local/project/file.txt -> /export/www/data/file.txt
+    # local dir = /usr/local/project, destination = /export/www/data );
+    DESTINATION_DIRECTORY: ""
+    LOCAL_DIRECTORY: ""
+    BER_FILE_DESTINATION_SERVER: ""
+  input:
+    INPUT_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    BTAB_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.btab.list
+    RAW_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: load_ber_for_manatee
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+  command_sets:
+    - load_ber_for_manatee workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: load ber analysis
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/add_blast_polypeptide_links
+      params:
+        - key: --bsml_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --user
+          value: $;DB_USERNAME$;
+        - key: --password
+          value: $;DB_PASSWORD$;
+        - key: --host
+          value: $;DB_HOST$;
+        - key: --sourcename
+          value: $;BER_OUTPUT_DIRECTORY$;
+        - key: --database
+          value: $;DB_NAME$;
+        - key: --analysis_name
+          value: ber_analysis
+    - name: move files
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/move_ber_files_for_manatee
+      params:
+        - key: --ber_output_directory
+          value: $;BER_OUTPUT_DIRECTORY$;
+        - key: --remote_directory
+          value: $;DESTINATION_DIRECTORY$;
+        - key: --local_directory
+          value: $;LOCAL_DIRECTORY$;
+        - key: --server
+          value: $;BER_FILE_DESTINATION_SERVER$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: add_blast_polypeptide_links.pl
+    pod: |
+  =head1 NAME
+  
+  add_blast_polypeptide_links.pl - Adds a BLAST analysis and associated analysisprops from a BSML file
+  to a chado database.  Does NOT load match features, only the analysis and attributes.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: add_blast_polypeptide_links.pl 
+              --bsml_list=/path/to/some_file.list
+              --database=entamoeba
+              --user=someuser
+              --password=somepass
+              --analysis_name=ber_analysis
+            [ --server=SYBTIGR
+              --skip_missing=0
+              --program=ber
+              --algorithm=ber
+              --sourcename=/some/path
+              --sequence_class=polypeptide
+              --log=/path/to/some.log
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--bsml_list,-b>
+      Input BSML file list containing <Analysis> elements and input_of Sequence features.
+  
+  B<--database,-d>
+      Sybase database name to connect to.
+  
+  B<--user,-u>
+      User account with select, insert, and update privileges on the specified database.
+  
+  B<--password,-p>
+      Password for user account specified.
+  
+  B<--analysis_name,-a>
+      You need to pass the name of the analysis you want searched within the passed BSML.
+      This corresponds to the BSML Analysis.id value and is usually something like
+      'wu-blastp_analysis'
+  
+  B<--sequence_class,-e>
+      Optional.  Can pass this to limit which BSML sequence element classes are considered.
+      Entries in analysisfeature will only be created for these.
+  
+  B<--sourcename,-o>
+      Optional.  For each analysis load the chado analysis.sourcename column needs to be
+      loaded with a value.  By default, this will be pulled from the Attribute element
+      with a 'name' attribute value of 'sourcename', but you can override this with a
+      custom one here.  The sourcename analysisprop will still be loaded.
+  
+  B<--program,-r>
+      Optional.  For each analysis load the chado analysis.program column needs to be
+      loaded with a value.  By default, this will be pulled from the Attribute element
+      with a 'name' attribute value of 'program', but you can override this with a
+      custom one here.  The sourcename analysisprop (if present) will still be loaded.
+  
+  B<--algorithm,-g>
+      Optional.  For each analysis load the chado analysis.algorithm column needs to be
+      loaded with a value.  By default, this will be pulled from the Attribute element
+      with a 'name' attribute value of 'algorithm', but you can override this with a
+      custom one here.  The sourcename analysisprop (if present) will still be loaded.
+  
+  B<--skip_missing,-k>
+      Optional.  By default, the script will fail if any input features are found within 
+      the BSML that are not in the database.  Setting this skips these missing features
+      and just puts a warning in the logs.  (default = 0)
+  
+  B<--host,-s>
+      Optional.  MySQL server to connect to (default = localhost).
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  We usually use the Ergatis bsml2chado component to load analyses from BSML into a 
+  chado database instance.  For BLAST results, this involves the creation of feature
+  rows for qry/sbj/match elements, as well as featureloc coordinate information and
+  all the rows needed for scoring.  For some tools (like Manatee), most of this isn't
+  necessary.  They only need the BLAST analysis element loaded and links from each
+  of the polypeptides as 'input_of' the analysis.  This script does that.
+  
+  =head1  INPUT
+  
+  Input can be a list file of BSML that is output from the Ergatis ber component.
+  Multiple list files can be concatenated together - the script handles simultaneous
+  input from multiple, separate analyses as long as results aren't mixed within any
+  single file.
+  
+  =head1  OUTPUT
+  
+  This script only produces file output if the --log option is used.  In the database, it 
+  performs inserts on the analysis, analysisprop and analysisfeature tables.  All row 
+  identifiers are written to the log.
+  
+  =head1  CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net
+  - script: move_ber_files_for_manatee.pl
+    pod: |
+  =head1 NAME
+  
+  move_ber_files_for_manatee.pl - will copy a set of files in a given directory to a remote server
+  
+  =head1 SYNOPSIS
+  
+  USAGE: move_ber_files_for_manatee.pl 
+        --ber_output_directory=/usr/local/projects/aengine/output_repository/ber/1234_default
+        --remote_directory=/remove/server/destination/dir
+        --local_directory=/local/path/to/replace
+        --server=khan
+      [ --log 
+        --help
+      ]
+  
+  =head1 OPTIONS
+  
+  B<--ber_output_directory,-b>
+      Directory where output files live for ber run.  The directory should also
+      contain a list file of all the ber output files in the directory.
+  
+  B<--remote_directory,-d>
+      Path on remote server for destination of copied files
+  
+  B<--local_directory,-l>
+      Path on local machine to remove when copying to remote server.  Example:
+      If a file is located in 
+  
+      /usr/local/projects/p1/output_repository/ber/1234_default/i1/g1/file.raw
+  
+      and the --remote_directory option is /export/www/data
+      and the --local_directory option is /usr/local/projects
+  
+      The file will be copied to 
+      /export/www/data/p1/output_repository/ber/1234_default/i1/g1/file.raw
+      on the remote server
+  
+  B<--server,-s>
+      The name of the server to copy the files to
+  
+  B<--log,-o> 
+      Log file
+  
+  B<--help,-h>
+      This help message
+  
+  =head1  DESCRIPTION
+  
+  Takes the content of the directory passed in --ber_output_directory and copies that to --server.
+  It will remove the part of the absolute path specified in --local_directory and replace with
+  value of --remote_directory.
+  
+  =head1  CONTACT
+  
+      Kevin Galens
+      kgalens@som.umaryland.edu

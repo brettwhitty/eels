@@ -1,0 +1,130 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: validate_sgc_records
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - validate_sgc_records.config
+  - validate_sgc_records.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: database / manipulation
+  parameters:
+    # Comma-separated list of sgc or prok annotation databases which shall be validated
+    DATABASE_LIST: ""
+    USERNAME: access
+    PASSWORD: access
+    SERVER: SYBTIGR
+    EMAIL_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;TMP_DIR$;
+  component:
+    COMPONENT_NAME: validate_sgc_records
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4794 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: check_small_genome_db
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.check_small_genome_db.xml
+    # Distributed options
+    GROUP_COUNT: 1
+    # no-distrib = 0 ensures that all executes in series and never parallel
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Iterator1 for check_small_genome_db
+  command_sets:
+    - validate_sgc_records workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=check_small_genome_db,$;ITERATOR_XML$;=ITERATOR1_XML,$;ITERATOR_LIST$;=$;WORKFLOW_REPOSITORY$;/database.list,$;NODISTRIB$;=1\"/"
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create_iterator_list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_iterator_list
+      params:
+        - key: --input_list
+          value: $;DATABASE_LIST$;
+        - key: --key
+          value: DATABASE
+        - key: --output_iter_list
+          value: $;WORKFLOW_REPOSITORY$;/database.list
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/create_iterator_list.pl.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/create_iterator_list.pl.stderr
+    - name: generate and email report
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/generateCheckSmallGenomeDBReport.pl
+      params:
+        - key: --database-list
+          value: $;DATABASE_LIST$;
+        - key: --email-list
+          value: $;EMAIL_LIST$;
+        - key: --output_repository
+          value: $;WORKFLOW_REPOSITORY$;
+        - key: --logfile
+          value: $;WORKFLOW_REPOSITORY$;/generateCheckSmallGenomeDBReport.pl.log
+        - key: --report-file
+          value: $;WORKFLOW_REPOSITORY$;/checkSmallGenomeDBReport.report.txt
+        - key: stdout
+          value: $;WORKFLOW_REPOSITORY$;/generateCheckSmallGenomeDBReport.pl.stdout
+        - key: stderr
+          value: $;WORKFLOW_REPOSITORY$;/generateCheckSmallGenomeDBReport.pl.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_iterator_list.pl
+    pod: |
+  =head1  NAME 
+  
+  create_iterator_list.pl - 
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  create_iterator_list
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =head1   DESCRIPTION

@@ -1,0 +1,220 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pangenome_do_analysis
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pangenome_do_analysis.config
+  - pangenome_do_analysis.xml
+  - pangenome_do_analysis.i1.xml
+  - component_docs/pangenome_do_analysis.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component does pangenome analysis. More documentation to follow.
+  </p>
+  <h3>references</h3>
+  <p>
+      To be completed.
+  </p>
+  <h3>input</h3>
+  <p>
+      Input is a set of all-vs-all blast results for a set of genomes. Usually this would
+      include results from both WU-BLASTP and WU-TBLASTN.
+  
+      Analysis can be performed on a subset of genomes without re-running the BLASTs by
+      providing an optional list of genome-encoding BSML documents (eg: legacy2bsml output)
+      for the set of genomes to analyze.
+  </p>
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+      no bsml output defined for this component
+  </div>
+  <h3>output</h3>
+  <p>
+      To be completed.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+    # Write gene lists for shared / core / new categories 
+    # for each genome and for each comparison set performed
+    WRITE_LISTS: 0
+    # The following two parameters are options that can be used to sample the 
+    # blast data. Use only 1 of them if you want sampling and leave them blank if
+    # you want all the data to be analyzed.
+    MULTIPLICITY: ""
+    COMPARISONS: ""
+  input:
+    # Blast stored file created using pangenome_parse_blast
+    BLAST_STORED_FILE: ""
+    # A file listing database names to include in the analysis. a 'database name'
+    # just means the uniquename prefix (for apx1.assembly.1.0 the database name
+    # would be apx1).Leave blank for all organisms to be included.
+    DB_FILTER_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    NEW_CORE_GENE_TABLE: $;OUTPUT_DIRECTORY$;/pangenome.table.txt
+    PANGENOME_PROFILE: $;OUTPUT_DIRECTORY$;/pangenome.profile.txt
+    PANGENOME_OUTPUT: $;OUTPUT_DIRECTORY$;/pangenome.output
+  component:
+    COMPONENT_NAME: pangenome_do_analysis
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - hack to make sure these following commands will run other than master node
+  command_sets:
+    - wu-blastp workflow
+    - pangenome_do_analysis distributed work
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: replace template keys
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_template_keys
+      params:
+        - key: --template_xml
+          value: $;DOCS_DIR$;/pangenome_do_analysis_distributed_work.xml
+        - key: --component_conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --output_xml
+          value: $;WORKFLOW_REPOSITORY$;/pangenome_do_analysis_distributed_work.xml.gz
+        - key: --distribopts
+          value: nodistrib=$;NODISTRIB$;
+        - key: stdout
+          value: $;TMP_DIR$;/replace_template_keys.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/replace_template_keys.stderr
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  xml_comments:
+    - Preprocessing
+    - end of pre processing
+  command_sets:
+    - pangenome compute
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+    - name: parse blast results
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/pangenome_blast_parse
+      params:
+        - key: --input
+          value: $;I_FILE_PATH$;
+        - key: --output_path
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: pangenome_blast_parse.pl
+    pod: |
+  =head1  NAME
+  
+  pangenome_blast_parse.pl - Parses BLAST BSML output files and extracts data needed for pangenome analysis.
+  
+  =head1 SYNOPSIS
+  
+  USAGE: pangenome_query_list.pl
+          --input=/path/to/somefile.bsml
+          --output_path=/path/to/output/directory/
+          --coverage_cutoff=50
+          --similarity_cutoff=50
+        [ --log=/path/to/some/log
+          --organism_to_db_mapping=/path/to/organism_to_db_mapping.txt
+          --db_list=/path/to/database.list
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      BSML file containing BLAST results to parse.
+  
+  B<--output_path,-o>
+      Directory to write stored file
+  
+  B<--coverage_cutoff>
+      Coverage cutoff. Hits below this will not be considered hits.
+  
+  B<--similarity_cutoff>
+      Similarity cutoff. Hits below this will not be considered hits.
+  
+  B<--organism_to_db_mapping>
+      Mapping file of the format:
+      Genus Species strain uniquename_prefix
+      Streptococcus pneumoniae TIGR4 sptigr4
+  
+  B<--db_list>
+      List of uniquename prefixes that should be included in the analysis.
+      It is not necessary to include this list if you are filtering with the
+      organism_to_db_mapping file.
+  
+  B<--log,-d>
+      optional. Will create a log file with summaries of all actions performed.
+  
+  B<--debug>
+      optional. Will display verbose status messages to STDERR if logging is disabled.
+  
+  B<--help,-h>
+      This help message/documentation.
+  
+  =head1   DESCRIPTION
+  
+      This script parses the BSML output from WU-BLASTP and WU-TBLASTN runs for pangenome analysis
+      and serializes the prepared data so that it can be later unserialized for the analysis step.
+  
+  =head1 INPUT
+  
+      The input should be one of the set of BSML files containing BLAST results from a pangenome
+      pipeline run.
+  
+  =head1 OUTPUT
+  
+      There is no output unless you use the --log option.
+  
+  =head1 CONTACT
+  
+      Brett Whitty
+      bwhitty@tigr.org

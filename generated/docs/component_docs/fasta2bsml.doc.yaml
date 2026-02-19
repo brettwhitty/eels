@@ -1,0 +1,329 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: fasta2bsml
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - fasta2bsml.config
+  - fasta2bsml.xml
+  - component_docs/fasta2bsml.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  
+  <p>
+      This is a conversion component that creates BSML from FASTA files.
+  </p>
+  
+  <h3>input</h3>
+  <p>
+       Input can be either a single file, a directory of files, or a list. A list is a text 
+       file containing a list of either files or directories, one on each line. Any individual 
+       fasta file can have a single entry or multiple entries. This component will separate them 
+       as needed.
+  </p>
+  <p>
+       When converting multiple FASTA files, or a single file with multiple entries, the ID of 
+       each entry is assumed to be the the string of characters after the > symbol up until the 
+       first whitespace. For example:
+  </p>
+  <div class='code_container'>
+      &gt;aa1.assembly.23411 some defline description here
+      
+  </div>
+  <p>
+       In the example header above, the ID of the sequence is assumed to be "aa1.assembly.23411".
+  </p>
+  
+  <h3>output</h3>
+  <p>
+       The fasta format is limited in its data representation in the header. Because of this, 
+       this script was written very generically to allow any sort of header. In each  element 
+       created, the attributes generated are length, title, and id. (other attributes may be 
+       handled by default in BsmlBuilder). The id is assumed to be the first part of the fasta 
+       header up to the initial whitespace. So with this header:
+  </p>
+  <div class='code_container'>
+      &gt;gi46446716 putative chromosomal replication initiator protein, dnaA
+      
+  </div>
+  <p>
+       The 'id' attribute will be set to 'gi46446716'. The 'title' attribute is set to the entire 
+       value of the fasta header, including the first word that became the id.   The component can 
+       be configured using the format option to create one large BSML file with multiple entries 
+       in it or to create individual BSML files for each sequence.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / conversion
+  parameters:
+    FORMAT: single
+    # Optional paramaters for fasta2bsml.pl.
+    CLASS: assembly
+    GENUS: ""
+    SPECIES: ""
+  input:
+    INPUT_FILE: ""
+    INPUT_FILE_LIST: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # OUTPUT_FILE should be null if FORMAT is 'single'
+    OUTPUT_FILE: ""
+    OUTPUT_SUBDIR_SIZE: 20000
+    OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: fasta2bsml
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - fasta2bsml workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: fasta2bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fasta2bsml
+      params:
+        - key: --fasta_input
+          value: "'$;INPUT_FILE$;'"
+        - key: --fasta_list
+          value: "'$;INPUT_FILE_LIST$;'"
+        - key: --format
+          value: "'$;FORMAT$;'"
+        - key: --class
+          value: "'$;CLASS$;'"
+        - key: --genus
+          value: "'$;GENUS$;'"
+        - key: --species
+          value: "'$;SPECIES$;'"
+        - key: --output
+          value: "'$;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE$;'"
+        - key: --output_list
+          value: "'$;OUTPUT_LIST$;'"
+        - key: --output_subdir_size
+          value: $;OUTPUT_SUBDIR_SIZE$;
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: fasta2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  fasta2bsml.pl - convert fasta files to BSML
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  fasta2bsml.pl 
+          --fasta_input=/path/to/fileORdir | --fasta_list=/path/to/file
+          --format=multi|single
+          --output=/path/to/somefile.fsa   | /path/to/somedir
+        [ --class=assembly
+          --output_list=/path/to/somefile.list
+          --output_subdir_size=20000
+          --output_subdir_prefix='somename'
+          --debug=debug_level 
+          --log=log_file 
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--class,-c> 
+      Sets the class attribute of each Sequence element created.  Default = assembly.
+  
+  B<--fasta_input,-i> 
+      Input files or folders.  Can be a comma-separated list of mixed input types.
+  
+  B<--fasta_list,-s> 
+      Text file that is a list of input files and/or folders.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--format,-f> 
+      Format.  'multi' (default) writes all sequences to a multi-entry bsml file, and 'single' writes each sequence in a separate file named like $id.bsml
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--output,-o> 
+      Output file (if --format=multi) or directory (if --format=single)
+  
+  B<--output_list,-u>
+      Optional.  If passed, will create a list file containing the path to each of the
+      files created.
+      
+  B<--output_subdir_size,-z>
+      Optional.  Number of files to create within each output subdirectory.
+      
+  B<--output_subdir_prefix,-x>
+      Optional.  Rather than just plain numberical names (N), output subdirectories will
+      be named like "prefixN" if you pass a prefix with this.
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used to convert fasta to BSML.  The input is meant to be as flexible 
+  as possible and is described below.  The output can be either a single file with 
+  multiple <Sequence> entries, or separate files for each entry.
+  
+  =head1 INPUT
+  
+  Input can be either a single file, a directory of files, or a list.  A list is
+  a text file containing a list of either files or directories, one on each line.
+  
+  Any individual fasta file can have a single entry or multiple entries.  This
+  script will separate them as needed.
+  
+  The --fasta_input option is used to pass files or directories.  The following
+  example passes a single fasta file:
+  
+      fasta2bsml.pl --fasta_input=/foo/bar/dnaA.fna
+  
+  We can pass multiple files in a comma-separated list (use quotes):
+  
+      fasta2bsml.pl --fasta_input="/foo/bar/dnaA.fna, /foo/bar/tonB.faa"
+  
+  If /foo/bar had many fasta files in it and we want to process them all, we could 
+  just do:
+  
+      fasta2bsml.pl --fasta_input=/foo/bar
+  
+  Also multiple directories are ok:
+  
+      fasta2bsml.pl --fasta_input="/foo/bar, /home/you"
+  
+  You can even mix directories and files:
+  
+      fasta2bsml.pl --fasta_input="/foo/bar/dnaA.fna, /home/you"
+  
+  Lists are useful if you have a specific set of files or directories to process.
+  If we have a file named, for example, '/foo/bar/neatstuff.list', which has contents 
+  like (the .list suffix is completely optional):
+  
+      /foo/bar/thingy1.fna
+      /foo/bar/thingy2.faa
+      ...
+      /foo/bar/thingy1034.fsa
+  
+  You can pass this list to the script:
+  
+      fasta2bsml.pl --fasta_list=/foo/bar/neatstuff.list
+  
+  If one of the lines in the list is a path to a directory rather than a file, each
+  fasta file in that directory will be processed.  A list can contain paths to both
+  files and directories such as:
+  
+      /foo/bar/thingy1.bsml
+      /foo/bar/thingy2.bsml
+      ...
+      /foo/bar/thingy1034.bsml
+      /home/you
+  
+  Finally, you can be really messy and mix input types and methods to process files,
+  directories and lists all at the same time:
+  
+      fasta2bsml.pl --fasta_input="/foo/bar/dnaA.bsml, /home/you" --fasta_list=/home/you/some.list
+  
+  Once everything is evaluated down to the file-level, all will be skipped that
+  don't have one of the following suffices: .fsa .faa .fna .fasta
+  
+  =head1 OUTPUT
+  
+  The fasta format is limited in its data representation in the header.  Because of this,
+  this script was written very generically to allow any sort of header.  In each <Sequence>
+  element created, the attributes generated are length, title, and id.  (other attributes
+  my be handled by default in BsmlBuilder).  The id is assumed to be the first part of
+  the fasta header up to the initial whitespace.  So with this header:
+  
+      >gi46446716  putative chromosomal replication initiator protein, dnaA
+  
+  The 'id' attribute will be set to 'gi46446716'.  The 'title' attribute is set to
+  the entire value of the fasta header, including the first word that became the id.
+  
+  Output is specified using the required --output and optional --format options.  By
+  default the output will be a single file containing multiple sequences entries.  So:
+  
+      fasta2bsml.pl --fasta_input=/foo/bar --output=/home/you/seqs.bsml
+  
+  This would read all the fasta files in /foo/bar and write their sequences to the
+  seqs.bsml file in /home/you in multi-entry format.  If you want each sequence to be
+  output separately, you need to use the --format=single option:
+  
+      fasta2bsml.pl --fasta_input=/foo/bar --output=/home/you/data --format=single
+  
+  This would write each sequence to its own .bsml file into the /home/you/data directory.
+  Each file will be named using the id attribute of each sequence, like $id.fsa .
+  --format=multi is the default and does not need to be passed explicitly.  Note that
+  the only legal characters for the file name are in the set [ a-z A-Z 0-9 - _ . ].  Any
+  other characters will be replaced with underscores.
+  
+  You can pass a path to the optional --output_list to create a text file containing the full paths
+  to each of the BSML files created by this script.
+  
+  Two other optional arguments, --output_subdir_size and --output_subdir_prefix, can be used
+  on input sets that are too large to write out to one directory.  This depends on the limitations
+  of your file system, but you usually don't want 100,000 files written in the same directory.
+  
+  If you are going to create 95000 sequences, and use the following option:
+  
+      --output=/some/path
+      --output_subdir_size=30000
+      
+  The following will be created:
+  
+      directory              file count
+      ---------------------------------
+      /some/path/0/          30000
+      /some/path/1/          30000
+      /some/path/2/          30000
+      /some/path/3/           5000
+  
+  If you choose to create a list file (and you probably want to), it will contain these paths.
+  
+  You may not want the subdirectories to simply be numbers, as above, so you can use the
+  --output_subdir_prefix option.  For example:        
+  
+      --output=/some/path
+      --output_subdir_size=30000
+      --output_subdir_prefix=bsml
+      
+  The following will be created:
+  
+      directory              file count
+      ---------------------------------
+      /some/path/bsml0/     30000
+      /some/path/bsml1/     30000
+      /some/path/bsml2/     30000
+      /some/path/bsml3/      5000
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org

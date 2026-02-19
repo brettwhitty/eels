@@ -1,0 +1,168 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: tag_data
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - tag_data.config
+  - tag_data.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: utility
+  parameters:
+    # This component tags data using the CloVR tagData.py script
+    # Input is a hard-coded template file generated prior to the
+    # execution of this component.
+    REPO_ROOT: ""
+    PIPELINE_ID: ""
+    PIPELINE_NAME: ""
+    FLATTEN: ""
+  input:
+    INPUT: ""
+    MAP_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: tag_data
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801$"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 1
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+  command_sets:
+    - tag_data workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: tarring workflow xml paths
+      type: RunUnixCommand
+      executable: "tar -czf $;TMP_DIR$;/$;PIPELINE_NAME$;_workflow_xml.tar.gz $(find /mnt/projects/clovr/workflow/runtime/*/$;PIPELINEID$;_* /mnt/projects/clovr/workflow/runtime/pipeline/$;PIPELINEID$; -type d) || true"
+    - name: select files to tag
+      type: RunUnixCommand
+      executable: printf
+      arg: "\"$;INPUT$;\" &gt; $;MAP_FILE$;"
+    - name: tag_data
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/tag_data
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/tag_data.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/tag_data.stderr
+        - key: --map_file
+          value: $;MAP_FILE$;
+        - key: --flatten
+          value: $;FLATTEN$;
+        - key: --repository_root
+          value: $;REPOSITORY_ROOT$;
+        - key: --pipeline_id
+          value: $;PIPELINE_ID$;
+        - key: --pipeline_name
+          value: $;PIPELINE_NAME$;
+        - key: --log_file
+          value: $;TMP_DIR$;/tag_data_ergatis.log
+        - key: --debug
+          value: 4
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: tag_data.pl
+    pod: |
+  =head1 NAME
+  
+  transform_WWARN_input.pl - Transforms input data to WWARN to a common format.
+  
+  =head1 SYNOPSIS
+  
+  ./tag_data.pl 
+          --map_file=/path/to/map/file
+          --repository_root=/path/to/ergatis/repository/root
+          --pipeline_id=<ergatis pipeline ID>
+          --pipeline_name=<clovr pipeline name>
+         [--log=/path/to/log/file
+          --debug=<debug level>
+          --help]
+          
+  =head1 PARAMETERS
+  
+  B<--map_file, -i>
+      A tab delimited file containing the files to be tagged as well as the desired tag-name
+      for these set of files.
+  
+  B<--repository_root, -r>
+      The repository where output files to be tagged reside. This value is replaced in the mapping
+      file when present
+      
+  B<--pipeline_id, -p>
+      The pipeline ID whose files should be downloaded. This value is replaced in the mapping file
+      when present    
+   
+  B<--pipeline_name, -n>
+      The pipeline name (provided in the clovr wrapper config) that will be used to create a unique
+      tag name for output.
+  
+  B<--log, -l>
+      Optional. Log file.
+      
+  B<--debug, -d>
+      Optional. Debug level.
+      
+  B<--help>
+      Prints this documentaiton.
+      
+  =head1 DESCRIPTION            
+  
+  A wrapper script that facilitates the execution of the CloVR tagData.py script through ergatis.
+  This wrapper script is meant to allow for custom tagging of output data from a pipeline.
+  
+  =head1 INPUT
+  
+  Input is a tab delimited file containing all files to be tagged and the associated tag-name for
+  the files. Files can be a single file, directories, a list containing multiple files or a list of comma-separated
+  files.
+  
+  #TAG_NAME\tFILE
+  test_tag\tfile1.txt,file2.txt,files.list,/usr/local/test_data/
+  
+  =head OUTPUT
+  
+  A file containing all tag names will be written for use by the accompanying download_tag component
+  
+  =head1 CONTACT
+  
+      Cesar Arze
+      carze@som.umaryland.edu

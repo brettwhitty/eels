@@ -1,0 +1,150 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: remove_subset_of_gis
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - remove_subset_of_gis.config
+  - remove_subset_of_gis.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: LGT
+  parameters:
+    # Highest ranked Taxon ID to search for GIs
+    TAXON_ID: ""
+    # Database to get GIs from.  Examples are 'taxonomy', 'gene', and 'protein'
+    DATABASE: ""
+  input:
+    INPUT_FILE_LIST: ""
+    # A list of GI files that will have a subset removed.
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    TXT_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.txt.list
+  component:
+    COMPONENT_NAME: remove_subset_of_gis
+    DESCRIPTION: "From a list of GIs, remove GIs that fall under a specific taxa"
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: $Name$
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  command_sets:
+    - Remove subset of GIs workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: fetch GIs of taxon ID
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fetch_gis_from_taxon_id
+      params:
+        - key: --database
+          value: $;DATABASE$;
+        - key: --taxon_id
+          value: $;TAXON_ID$;
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+    - name: sort large GI list
+      type: RunUnixCommand
+      executable: sort
+      arg: -n $;INPUT_FILE$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/sorted_superset.gilist
+    - name: sort small GI list
+      type: RunUnixCommand
+      executable: sort
+      arg: -n $;OUTPUT_DIRECTORY$;/$;TAXON_ID$;.gilist
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/sorted_subset.gilist
+    - name: Suppress subset of GI
+      type: RunUnixCommand
+      executable: comm
+      arg: -2 -3 $;OUTPUT_DIRECTORY$;/sorted_superset.gilist $;OUTPUT_DIRECTORY$;/sorted_subset.gilist
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/gis_without_$;TAXON_ID$;.gilist
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: fetch_gis_from_taxon_id.pl
+    pod: |
+  =head1 NAME
+  
+  fetch_gis_from_taxon_id.pl - Fetch GIs given a taxon id 
+  
+  =head1 SYNOPSIS
+  
+  USAGE: fetch_gis_from_taxon_id.pl 
+      --database=name of the database to be searched
+      --taxon_id=<1234>
+      --format=output format
+      --output_dir=/path/to/somedir	
+  =head1 OPTIONS
+  
+  B<--database,-d>
+  The name of the database to be searched 
+  
+  B<--output_dir,-o>
+  The directory to which the output files will be written.
+  
+  B<--taxon_id, -t>
+  The highest-ranking taxon ID to which retrieved GIs would fall under.
+  
+  B<--format,-f>
+  The format in which output is required. Examples fasta, gb, asn. If format given is not recognized, eutils will return a GI list.
+  
+  B<--debug,-d> 
+  Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+  Log file
+  
+  B<--help,-h>
+  This help message
+  
+  =head1  DESCRIPTION
+  
+  This script is used to fetch a list of UIs given a taxon ID in a given database.
+  
+  The script is a modification of fetch_genbank.pl
+  
+  =head1  CONTACT
+  
+  Shaun Adkins
+  sadkins@som.umaryland.edu

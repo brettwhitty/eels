@@ -1,0 +1,113 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pangenome_make_pangenome
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - pangenome_make_pangenome.config
+  - pangenome_make_pangenome.xml
+  - component_docs/pangenome_make_pangenome.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      This component does pangenome analysis. More documentation to follow.
+  </p>
+  <h3>references</h3>
+  <p>
+      To be completed.
+  </p>
+  <h3>input</h3>
+  <p>
+      Input is a profile matrix listing whether each gene in the set is a hit for a given pangenome (noted by 1), or not a hit (noted by 0).  Rows are genome/gene/[hit to each subj genome]
+  
+  </p>
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+      no bsml output defined for this component
+  </div>
+  <h3>output</h3>
+  <p>
+      To be completed.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: unclassified
+  parameters:
+    # The following two parameters are options that can be used to sample the
+    # blast data. Use only 1 of them if you want sampling and leave them blank if
+    # you want all the data to be analyzed.
+    MULTIPLICITY: ""
+    COMPARISONS: ""
+  input:
+    # Pangenome profile matrix file created using pangenome_make_profile
+    INPUT_FILE: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PANGENOME_OUTPUT: $;OUTPUT_DIRECTORY$;/pangenome.output
+  component:
+    COMPONENT_NAME: pangenome_make_pangenome
+    DESCRIPTION: Reports the total number of genes from a random set of genomes of N-size
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: current
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 4680 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - hack to make sure these following commands will run other than master node
+  command_sets:
+    - pangenome_make_pangenome workflow
+    - pangenome_make_pangenome distributed work
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: replace template keys
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_template_keys
+      params:
+        - key: --template_xml
+          value: $;DOCS_DIR$;/pangenome_make_pangenome_distributed_work.xml
+        - key: --component_conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --output_xml
+          value: $;WORKFLOW_REPOSITORY$;/pangenome_make_pangenome_distributed_work.xml.gz
+        - key: --distribopts
+          value: nodistrib=$;NODISTRIB$;
+        - key: stdout
+          value: $;TMP_DIR$;/replace_template_keys.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/replace_template_keys.stderr

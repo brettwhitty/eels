@@ -1,0 +1,171 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: mosaik
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - mosaik.config
+  - mosaik.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: alignment
+  parameters:
+    # location of the references file
+    FR: ""
+    # optional references mate file, prepend with -fr2
+    FR2: ""
+    # optional base qualities for first mate, prepend with -fq
+    FQ: ""
+    # optional base qualities for second mate, prepend with -fq2
+    FQ2: ""
+    # location of the reads file 
+    Q: ""
+    # optional reads mate file, prepend with -q2
+    Q2: ""
+    # the sequencer technology used to obtain the reads 
+    # one of 454, helicos, illumina, sanger, or solid
+    ST: illumina
+    # additional arguments for MosaikBuild
+    OTHER_BUILD_OPTS: ""
+    # the hash size
+    HS: 15
+    # maximum number of mismatches allowed per read
+    MM: 2
+    # place only uniquely aligning reads(unique) or place all reads (all) 
+    M: all
+    # maximum hash positions per seed
+    MHP: 100
+    # alignment candidate threshold
+    ACT: 20
+    # number of processors (keep at 1)
+    P: 1
+    # additional arguments for MosaikAlign
+    OTHER_ALIGN_OPTS: ""
+    # additional arguments for MosaikSort
+    OTHER_SORT_OPTS: ""
+    # assembly file format for MosaikAssembler output
+    FORM: ace
+    # additional arguments for MosaikAssembler
+    OTHER_ASSEMBLER_OPTS: ""
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+  component:
+    COMPONENT_NAME: mosaik
+    DESCRIPTION: aligns reads against a single reference file contining one or more contigs
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: "$Revision: 5801 $"
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - mosaik workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: MosaikBuild Refs
+      type: RunUnixCommand
+      executable: $;MOSAIK_BUILD_EXEC$;
+      arg: -fr $;FR$; $;FR2$; $;FQ$; $;FQ2$; -oa $;OUTPUT_DIRECTORY$;/references.dat
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/buildref.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/buildref.stderr
+    - name: MosaikBuild Reads
+      type: RunUnixCommand
+      executable: $;MOSAIK_BUILD_EXEC$;
+      arg: -q $;Q$; $;Q2$; -out $;OUTPUT_DIRECTORY$;/reads.dat -st $;ST$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/buildread.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/buildread.stderr
+    - name: MosaikAligner
+      type: RunUnixCommand
+      executable: $;MOSAIK_ALIGNER_EXEC$;
+      arg: -in $;OUTPUT_DIRECTORY$;/reads.dat -out $;OUTPUT_DIRECTORY$;/aligned.dat -ia $;OUTPUT_DIRECTORY$;/references.dat -hs $;HS$; -mm $;MM$; -m $;M$; -mhp $;MHP$; -act $;ACT$; -p $;P$; $;OTHER_ALIGN_OPTS$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/align.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/align.stderr
+    - name: MosaikSort
+      type: RunUnixCommand
+      executable: $;MOSAIK_SORT_EXEC$;
+      arg: -in $;OUTPUT_DIRECTORY$;/aligned.dat -out $;OUTPUT_DIRECTORY$;/aligned_sorted.dat $;OTHER_SORT_OPTS$;
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/sort.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/sort.stderr
+    - name: create assembly file output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;/ace_files
+    - name: MosaikAssembler
+      type: RunUnixCommand
+      executable: $;MOSAIK_ASSEMBLER_EXEC$;
+      arg: -in $;OUTPUT_DIRECTORY$;/aligned_sorted.dat -ia $;OUTPUT_DIRECTORY$;/references.dat -f $;FORM$; -out $;OUTPUT_DIRECTORY$;/ace_files/assembled
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/assemble.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/assemble.stderr
+    - name: MosaikText
+      type: RunUnixCommand
+      executable: $;MOSAIK_TEXT_EXEC$;
+      arg: -in $;OUTPUT_DIRECTORY$;/aligned_sorted.dat -sam $;OUTPUT_DIRECTORY$;/aligned_sorted.sam
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/text.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/text.stderr
+    - name: Gunzip SAM file
+      type: RunUnixCommand
+      executable: /usr/bin/gunzip
+      arg: $;OUTPUT_DIRECTORY$;/aligned_sorted.sam.gz
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/gunzip.stdout
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/gunzip.stderr

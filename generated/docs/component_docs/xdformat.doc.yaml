@@ -1,0 +1,121 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: xdformat
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - xdformat.config
+  - xdformat.xml
+  - component_docs/xdformat.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+      Licensed WU BLAST 2.0 supports the eXtended Database Format (XDF), a power user's dream in many ways 
+      for working with peptide and nucleotide sequences. Both the NCBI BLAST 2.0 database format and the NCBI 
+      implementation of the BLAST search algorithm are restricted to sequences under 16 Mbp in length, 
+      whereas human genome contigs exceeded 25 Mbp in the previous century (Hattori et al., 2000) and 
+      extend to several tens of megabytes today. In contrast, XDF can accurately store individual sequences 
+      of up to 1 Gbp (billion bp) with ambiguity codes intact. Other BLAST software, such as the NCBI's, 
+      limits database files to 2 gigabytes, whereas WU BLAST's XDF supports databases (and database files) 
+      of virtually unlimited size -- provided of course that the underlying operating system supports 
+      these so-called 'large files', which most modern operating systems do.
+  </p>
+  <h3>references</h3>
+  <p>
+      <a href='http://blast.wustl.edu/blast/README.html'>http://blast.wustl.edu/blast/README.html</a>
+  </p>
+  <h3>input</h3>
+  <p>
+      This program accepts FASTA files as input.  It can be a collection of FASTA files, a single FASTA file 
+      containing multiple sequences, or any combination.  Nucleic acid or polypeptide sequences can be used, 
+      but not mixed.
+  </p>
+  <h3>implemented options</h3>
+  <ul class='options'>
+      <li>-p - read/write/append/index an XDF protein sequence database</li>
+      <li>-n - read/write/append/index an XDF nucleotide sequence database</li>
+      <li>-o name - create XDF database files with the basename "name".  This options is required when creating a database from multiple FASTA input files.
+      <li>-I - index sequence identifiers while formatting database.  This recognizes any of the following identifier formats:<br>
+          <blockquote>
+              gi|integer<br>
+              dbj|accession|locus<br>
+  
+              emb|accession|locus<br>
+              gb|accession|locus<br>
+              gp|accession|locus<br>
+              sp|accession|name<br>
+              pir|entry|name<br>
+              ref|accession|name<br>
+  
+              pdb|entry|chain<br>
+              lcl|string<br>
+              gnl|domain|identifier
+          </blockquote>
+      </li>
+      <li>-O# - bytes precision for file offsets.  The default (4) supports database files up to 4GB in size.  Specifying -O5 provides sufficient precision for database 256 times larger.
+  </ul>
+  <h3>bsml output</h3>
+  <p>
+      This component does not generate BSML output.
+  </p>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: file / indexing
+  parameters:
+    # p - protein, n - nucleotide
+    SEQ_TYPE: p
+    # 4 for 4GB or less, else use 5
+    PRECISION: 4
+    # other options (eg: '-I' to index sequence identifiers, -k to skip ambiguity codes)
+    OTHER_OPTS: -I -k
+  input:
+    # space-separated list
+    INPUT_FILES: ""
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # call it whatever you like
+    DATABASE_NAME: db
+  component:
+    COMPONENT_NAME: xdformat
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Processing
+  command_sets:
+    - xdformat workflow
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: xdformat
+      type: RunUnixCommand
+      executable: $;XDFORMAT_EXEC$;
+      arg: -$;SEQ_TYPE$; $;OTHER_OPTS$; -o $;OUTPUT_DIRECTORY$;/$;DATABASE_NAME$; -O$;PRECISION$; $;INPUT_FILES$;

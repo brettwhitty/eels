@@ -1,0 +1,176 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: fastortho
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - fastortho.config
+  - fastortho.xml
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: clustering
+  parameters:
+    # Maximum e-value to keep BLAST hits for (default 1e-5)
+    MAX_E_VALUE: 1e-5
+    # Minimum percent identity to use as cutoff for BLAST hits (default 0.0)
+    MIN_PERCENT_ID: 0.0
+    # Minimum percent of the sequence length (query or subject) that aligns to use as a cutoff for BLAST hits (default 0.0)
+    MIN_PERCENT_MATCH: 0.0
+    # Inflation rate value to put into MCL.  Higher number seems to increase the number of clusters (default 1.5)
+    INFLATION: 1.5
+    # Number of CPUs to use for BLASTP (default 1)
+    NUM_CPUS: 1
+    # Enter 1 if each file in input contains multiple genomes.  Enter 0 if each genome is separated by file
+    MIXED_GENOMES: 1
+    # String of additional options to append to FastOrtho run
+    OTHER_ARGS: "''"
+  input:
+    # Either a list of protein FASTAs to iterate over or a single FASTA
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  component:
+    COMPONENT_NAME: fastortho
+    DESCRIPTION: Wrapper component for the FastOrtho tool
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - using distributed-serial instead of remote-serial since that will allow it to run locally if need be (like in Docker)
+  command_sets:
+    - fastortho workflow
+    - fastortho distributed
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: write FastOrtho config file
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/fastortho_write_config
+      params:
+        - key: --output_dir
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --max_eval
+          value: $;MAX_E_VALUE$;
+        - key: --min_pct_id
+          value: $;MIN_PERCENT_ID$;
+        - key: --min_pct_match
+          value: $;MIN_PERCENT_MATCH$;
+        - key: --inflation
+          value: $;INFLATION$;
+        - key: --num_cpus
+          value: $;NUM_CPUS$;
+        - key: --mixed_genomes
+          value: $;MIXED_GENOMES$;
+        - key: --input_file
+          value: $;INPUT_FILE$;
+        - key: --input_list
+          value: $;INPUT_FILE_LIST$;
+        - key: --blast_bin
+          value: $;BLASTPLUS_BIN$;
+        - key: --mcl_bin
+          value: $;MCL_BIN$;
+        - key: stderr
+          value: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.writeConfig.stderr
+    - name: replace template keys
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/replace_template_keys
+      params:
+        - key: --template_xml
+          value: $;DOCS_DIR$;/fastortho_distributed.xml
+        - key: --component_conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --output_xml
+          value: $;WORKFLOW_REPOSITORY$;/fastortho_distributed.xml.gz
+        - key: --distribopts
+          value: nodistrib=$;NODISTRIB$;
+        - key: stdout
+          value: $;TMP_DIR$;/replace_template_keys.stdout
+        - key: stderr
+          value: $;TMP_DIR$;/replace_template_keys.stderr
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: fastortho_write_config.pl
+    pod: |
+  =head1 NAME
+  
+  perl_template.pl - Description
+  
+  =head1 SYNOPSIS
+  
+   USAGE: perl_template.pl
+         --input_file=/path/to/some/input.file
+         --output=/path/to/transterm.file
+       [ --log=/path/to/file.log
+         --debug=3
+         --help
+       ]
+  
+  =head1 OPTIONS
+  
+  B<--input_file,-i>
+  
+  B<--output_file,-o>
+  
+  B<--log,-l>
+      Logfile.
+  
+  B<--debug,-d>
+      1,2 or 3. Higher values more verbose.
+  
+  B<--help,-h>
+      Print this message
+  
+  =head1  DESCRIPTION
+  
+   DESCRIPTION
+   
+  =head1  INPUT
+  
+      Describe the input
+  
+  =head1 OUTPUT
+  
+      Describe the output
+  
+  =head1  CONTACT
+  
+      Shaun Adkins
+      sadkins@som.umaryland.edu

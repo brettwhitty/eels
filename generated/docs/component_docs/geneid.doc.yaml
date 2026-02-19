@@ -1,0 +1,517 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: geneid
+extracted_at: "2026-02-19T15:34:47"
+source_files:
+  - geneid.config
+  - geneid.xml
+  - geneid.i1.xml
+  - component_docs/geneid.tmpl
+
+# Component documentation (from Ergatis web UI help template)
+component_documentation: |
+  <!-- component documentation -->
+  
+  <p>
+  geneid is a program to predict genes in anonymous genomic sequences designed with a hierarchical structure. In the first step, splice sites, start and stop codons are predicted and scored along the sequence using Position Weight Arrays (PWAs). In the second step, exons are built from the sites. Exons are scored as the sum of the scores of the defining sites, plus the the log-likelihood ratio of a Markov Model for coding DNA. Finally, from the set of predicted exons, the gene structure is assembled, maximizing the sum of the scores of the assembled exons. geneid offers some type of support to integrate predictions from multiple source via external gff files and the redefinition of the general gene structure or model is also feasible. The accuracy of geneid compares favorably to that of other existing tools, but geneid is likely more efficient in terms of speed and memory usage. Currently, geneid v1.2 analyzes the whole human genome in 3 hours (approx. 1 Gbp / hour) on a processor Intel(R) Xeon CPU 2.80 Ghz.
+  </p>
+  <p>
+  <a href='http://www1.imim.es/software/geneid/' >http://www1.imim.es/software/geneid/</a>
+  </p>
+  <h3>references</h3>
+  <p>
+  E. Blanco, G. Parra and R. Guigó,
+  "Using geneid to Identify Genes.",
+  In A. Baxevanis, editor:
+  Current Protocols in Bioinformatics. Unit 4.3.
+  John Wiley & Sons Inc., New York (2002)
+  </p>
+  <h3>input</h3>
+  <p>
+      Like the program itself, this component accepts FASTA files as input.  If you have a single
+      file containing multiple sequences in FASTA format, you should use the 
+      <a href='./documentation.cgi?article=components&page=split_multifasta'>split_multifasta</a>
+      component first to generate individual sequences, allowing them to be atomically searched
+      and individually managed on the grid.
+  </p>
+  <h3>implemented options</h3>
+  <p>
+      All options of the geneid binary are configurable with this component, but changes to the
+      output format options will cause btab and bsml conversion scripts to fail.  Note that the parameter file MUST be specified.
+  </p>
+  <h3>bsml output</h3>
+  <div class='bsml_container'>
+  
+  &lt;?xml version="1.0"?&gt;
+  
+  &lt;Bsml&gt;
+    &lt;Definitions&gt;
+      &lt;Sequences&gt;
+        &lt;Sequence title="zma1.assembly.5808" id="zma1.assembly.5808" molecule="dna"&gt;
+          &lt;Feature-tables&gt;
+            &lt;Feature-table id="Bsml0"&gt;
+              &lt;Feature class="gene" title="zma1.assembly.5808_1" id="zma1.gene.50542.1"&gt;
+                &lt;Interval-loc complement="0" startpos="4911" endpos="5243"&gt;&lt;/Interval-loc&gt;
+                &lt;Link rel="analysis" href="#geneid" role="computed_by"&gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+              &lt;Feature class="exon" title="exon_zma1.assembly.5808_1.0" id="zma1.exon.125567.1"&gt;
+                &lt;Interval-loc complement="0" startpos="4911" endpos="5243"&gt;&lt;/Interval-loc&gt;
+                &lt;Link rel="analysis" href="#geneid" role="computed_by"&gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+              &lt;Feature class="transcript" title="mRNA_zma1.assembly.5808_1" id="zma1.transcript.38102.1"&gt;
+                &lt;Interval-loc complement="0" startpos="4911" endpos="5243"&gt;&lt;/Interval-loc&gt;
+                &lt;Link rel="analysis" href="#geneid" role="computed_by"&gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+              &lt;Feature class="CDS" title="cds_zma1.assembly.5808_1" id="zma1.CDS.131010.1"&gt;
+                &lt;Interval-loc complement="0" startpos="4911" endpos="5243"&gt;&lt;/Interval-loc&gt;
+                &lt;Link rel="analysis" href="#geneid" role="computed_by"&gt;&lt;/Link&gt;
+              &lt;/Feature&gt;
+            &lt;/Feature-table&gt;
+  
+          [ ... and so on per prediction ... ]
+  
+            &lt;Feature-group id="Bsml1" group-set="zma1.transcript.38102.1"&gt;
+              &lt;Feature-group-member feature-type="gene" featref="zma1.gene.50542.1"&gt;&lt;/Feature-group-member&gt;
+              &lt;Feature-group-member feature-type="exon" featref="zma1.exon.125567.1"&gt;&lt;/Feature-group-member&gt;
+              &lt;Feature-group-member feature-type="transcript" featref="zma1.transcript.38102.1"&gt;&lt;/Feature-group-member&gt;
+              &lt;Feature-group-member feature-type="CDS" featref="zma1.CDS.131010.1"&gt;&lt;/Feature-group-member&gt;
+            &lt;/Feature-group&gt;
+  
+          [ ... and so on per prediction ... ]
+  
+          &lt;/Feature-tables&gt;
+          &lt;Link rel="analysis" href="#geneid" role="input_of"&gt;&lt;/Link&gt;
+        &lt;/Sequence&gt;
+      &lt;/Sequences&gt;
+    &lt;/Definitions&gt;
+  
+    &lt;Research&gt;
+      &lt;Analyses&gt;
+        &lt;Analysis id="geneid_analysis"&gt;
+          &lt;Attribute content="/usr/local/annotation/ZMA1/output_repository/geneid/7748_test/i1" name="sourcename"&gt;&lt;/Attribute&gt;
+          &lt;Attribute content="/usr/local/scratch/jinman/rice.param.Aug_3_2004" name="param_file"/&gt;
+          &lt;Attribute content="1" name="compress_gff3_output"/&gt;
+          &lt;Attribute content="1" name="compress_bsml_output"/&gt;
+  
+          [ ... and so on for all Analysis attributes ... ]
+  
+        &lt;/Analysis&gt;
+      &lt;/Analyses&gt;
+    &lt;/Research&gt;
+  &lt;/Bsml&gt;
+  
+  </div>
+
+# Configuration file - all sections, parameters, defaults, and inline comments
+config:
+  interface:
+    classification: feature prediction / genes
+  parameters:
+    PARAM_FILE: ""
+    OTHER_OPTS: ""
+    COMPRESS_GFF3_OUTPUT: 1
+    COMPRESS_BSML_OUTPUT: 1
+  input:
+    INPUT_FILE_LIST: ""
+    INPUT_FILE: ""
+    INPUT_DIRECTORY: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    INPUT_EXTENSION: fsa
+  output:
+    OUTPUT_TOKEN: default
+    OUTPUT_DIRECTORY: $;REPOSITORY_ROOT$;/output_repository/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    BSML_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.bsml.list
+    GFF3_OUTPUT_LIST: $;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.raw.list
+  component:
+    COMPONENT_NAME: geneid
+    DESCRIPTION: none
+    WORKFLOW_REPOSITORY: $;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    PIPELINE_TOKEN: unnamed
+    # The version,revision,tag here is set by an interpolated CVS tag
+    VERSION: 2.0
+    RELEASE_TAG: $Name$
+    REVISION: $Revision$
+    TEMPLATE_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.xml
+    ITERATOR1: i1
+    ITERATOR1_XML: $;DOCS_DIR$;/$;COMPONENT_NAME$;.$;ITERATOR1$;.xml
+    # Distributed options
+    GROUP_COUNT: 150
+    NODISTRIB: 0
+    # the following keys are replaced at runtime by the invocation script
+    COMPONENT_CONFIG: ""
+    COMPONENT_XML: ""
+    PIPELINE_XML: ""
+    PIPELINEID: ""
+  include:
+    PROJECT_CONFIG: ""
+
+# Main workflow XML template - step definitions
+workflow_xml:
+  xml_comments:
+    - Preprocessing
+    - Processing
+    - Iterator
+    - Postprocessing
+  command_sets:
+    - geneid workflow
+  includes:
+    - "file=\"$;DOCS_DIR$;/file_iterator_template.xml\" keys=\"$;ITERATOR_NAME$;=ITERATOR1,$;ITERATOR_XML$;=ITERATOR1_XML\""
+  steps:
+    - name: create output directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+    - name: create temp directory
+      type: RunUnixCommand
+      executable: mkdir
+      arg: -p -m 777 $;TMP_DIR$;
+    - name: create bsml list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.bsml\""
+        - key: --output_list
+          value: $;BSML_OUTPUT_LIST$;
+    - name: create gff3 list
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/create_list_file
+      params:
+        - key: --directory
+          value: $;OUTPUT_DIRECTORY$;
+        - key: --regex
+          value: "\".*\\.gff3\""
+        - key: --output_list
+          value: $;GFF3_OUTPUT_LIST$;
+
+# Iterator i1 - per-input processing steps
+iterator_i1:
+  command_sets:
+    - geneid compute
+  steps:
+    - name: geneid
+      type: RunUnixCommand
+      executable: $;GENEID_EXEC$;
+      arg: -P $;PARAM_FILE$; $;I_FILE_PATH$; $;OTHER_OPTS$; -3
+      params:
+        - key: stdout
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gff3
+    - name: geneidgff32bsml
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/geneidgff32bsml
+      params:
+        - key: --input
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gff3
+        - key: --output
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --project
+          value: $;PROJECT$;
+        - key: --id_repository
+          value: $;PROJECT_ID_REPOSITORY$;
+    - name: store config params
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/analysis2bsml
+      params:
+        - key: --ergatis_control_file
+          value: $;ERGATIS_DIR$;.ini
+        - key: --conf
+          value: $;COMPONENT_CONFIG$;
+        - key: --bsml_file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --componenturl
+          value: $;WORKFLOW_REPOSITORY$;/component.xml
+        - key: --pipelineurl
+          value: $;PIPELINE_XML$;
+        - key: --analysis_id
+          value: $;COMPONENT_NAME$;_analysis
+    - name: compress bsml output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+        - key: --compress
+          value: $;COMPRESS_BSML_OUTPUT$;
+        - key: --list_file
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml.list
+    - name: compress gff3 output
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/compress_file
+      params:
+        - key: --file
+          value: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gff3
+        - key: --compress
+          value: $;COMPRESS_GFF3_OUTPUT$;
+        - key: --list_file
+          value: $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.gff3.list
+    - name: dtd validation
+      type: RunUnixCommand
+      executable: $;BIN_DIR$;/dtdValid.pl
+      arg: $;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml
+      params:
+        - key: -d
+          value: $;DOCS_DIR$;/bsml3_1.dtd
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: create_list_file.pl
+    pod: |
+  =head1	NAME
+  
+  create_list_file.pl - script to create a list of files given a certain regex
+  
+  =head1	SYNOPSIS
+  
+  USAGE: create_list_file.pl
+         [  --directory|d=/path/to/some/directory/
+            --output_list|o=/path/output.list
+            --regex|r=string regular expression
+            --include_gz|g ]
+  
+  =head1	OPTIONS
+  
+  B<--directory,-d>
+  	Location of the directory to search.  No wild card characters should be
+      used in the directory.
+      (Default: current directory)
+  
+  B<--output_list,-o>
+      File that will be the list of found files
+      (Default: standard out)
+  
+  B<--regex,-r>
+      Regular expression for entire file name (including full path)
+      (Default: finds all files)
+  
+  B<--include_gz|g>
+      This flag tells the script to include .gz extensions in the list
+  
+  B<--help,-h>
+  	Prints this help message
+  
+  =head1	DESCRIPTION
+  
+      This script will search a directory for file names containing the given
+      regular expression.  By default, all .gz or .gzip extensions are stripped
+      off.  Programs using these list files should know to search for .gz|.gzip
+      versions.
+  
+      **Note: No wild card characters should be used in this option.
+  
+  =head1	INPUT
+  
+      There are no required options to the script and there isn't really any
+      input.  See above for defaults.  
+  
+  =head1	OUTPUT
+  
+      The script will output a list of files that match the regular expression
+      given by option --regex|-r. If no output file is given, this script will 
+      print out to standard out.  
+  
+  =head1	CONTACT
+  
+      Kevin Galens
+      kgalens@tigr.org
+  - script: geneidgff32bsml.pl
+    pod: |
+  =head1 NAME
+  
+  geneidgff32bsml.pl
+  
+  =head1 SYNOPSIS
+  
+  USAGE: geneidgff32bsml.pl
+             --input|-i
+             --output|-o
+             --project|-p
+             --id_repository|r
+             --help|-h
+  
+  =head1 OPTIONS
+  
+  B<--input,-i>
+      Input gff3 format file created by geneid.
+  
+  B<--output,-o>
+      Output BSML file name.
+  
+  B<--project,-p>
+      Project/database name used to create feature identifiers.
+  
+  B<--id_repository,r>
+      Path to the id repository for the named project.
+  
+  B<--help,-h>
+      This help documentation
+  
+  =head1 DESCRIPTION
+  
+  This script parses GFF3 output from geneid and writes it out 
+  as BSML suitable for import into CHADO/legacy DBs.  Note that
+  this was pretty much evmgff32bsml.pl but edited to not merge
+  CDS records, allowing accurate representation of the exon structure
+  when loaded with bsml2legacydb.pl 
+  
+  =head1 INPUT
+  
+  Current assumption is that input files are syntactically
+  correct with respect to the GFF3 spec, and that they are
+  encoding predicted gene features.
+  
+  The script could be extended to support writing BSML from
+  GFF3 compliant files encoding other features.  (as it was for this!)
+  
+  =head1 OUTPUT
+  
+  Output will be BSML encoding the geneid predicted gene models.
+  
+  =head1 CONTACT
+  
+      Brett Whitty (original author of evmgff32bsml.pl)
+      bwhitty@tigr.org
+  
+      Jason Inman (copier/editor of geneid version)
+      jinman@tigr.org
+  - script: analysis2bsml.pl
+    pod: |
+  =head1  NAME 
+  
+  analysis2bsml.pl - add analysis parameters to a BSML result doc
+  
+  =head1 SYNOPSIS
+  
+      USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml 
+                               --conf=/path/to/some/pipeline.config
+                             [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                             [ --componenturl=/path/to/some/pipeline.xml ]
+                             [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                             [ --debug debug_level  ]
+                             [ --log log_file ]
+                             [ --analysis_id=some_id ]
+  
+  =head1 OPTIONS
+  
+  =item *
+  
+  B<--debug,-d> Debug level.  Use a large number to turn on verbose debugging. 
+  
+  =item *
+  
+  B<--analysis_id,-a> Analysis id (optional).  If given, will be the id attribute for the Analysis
+  element created or appended to.  If the value 'first' is passed, the first Analysis element will
+  be used.  If not given, the Analysis element will be created with no id attribute.
+  
+  =item *
+  
+  B<--log,-l> Log file
+  
+  =item *
+  
+  B<--help,-h> This help message
+  
+  =item *
+  
+  B<--ergatis_control_file,-e> Control file defining software versions for ergatis install.
+  
+  =item *
+  
+  B<--componenturl,-u> Stores component url in <Analysis>
+  
+  =item *
+  
+  B<--pipelineurl,-p> Store pipeline.xml url in <Analysis>
+  
+  =back
+  
+  =head1   DESCRIPTION
+  
+  This script is used to record the parameters of an analysis into the BSML file that the
+  analysis created.  This is done to ensure that each of the run-time settings for the
+  analysis are recorded for informational purposes or to re-run the analysis.
+  - script: compress_file.pl
+    pod: |
+  =head1  NAME 
+  
+  compress_file.pl - wrapper to gzip an output file
+  
+  =head1 SYNOPSIS
+  
+  USAGE: compress_file.pl 
+          --file=/path/to/some.file 
+        [ --output=/path/to/output
+          --compress=1
+          --list_file=/path/to/some.list
+          --log=/path/to/some.log
+          --debug=4
+        ]
+  
+  =head1 OPTIONS
+  
+  B<--file,-f> 
+      The path to any file you wish to compress.
+  
+  B<--compress,-c>
+      Optional.  If 0, the compression will not be performed.
+  
+  B<--remove_source,-r>
+      Optional.  Controls whether source file is removed when compressing (default = 1)
+  
+  B<--list_file,-s>
+      Optional.  Writes a list file of the gzipped file created.
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  This script is used as a gzip wrapper to compress a file.
+  
+  =head1 INPUT
+  
+  The input is any file you wish to compress, usually a text file such
+  as alignment data.  This file is passed with the --file option.
+  
+  The --compress option exists so that this script can be incorporated
+  into workflow.  Since Workflow is not a logic-based system, it cannot
+  call gzip on output *sometimes*.  So we call this script all the time,
+  and just pass --compress 1 or 0 depending on whether we actually want
+  the compression done.
+  
+  The --list_file options allows us to create a list file containing the
+  full path to the list file created.  This is useful because a workflow
+  may create a list file for the raw output, but if we zip it, we want to
+  overwrite that single-entry list file with the gzip'ed path before it
+  is merged.
+  
+  Some checks are performed to handle common problems found handling compression
+  in production - each handling cases where previous compression attempts
+  have left partial files.
+  
+  If neither input or output exists the script will die.  If the input file
+  exists and output doesn't, normal compression will occur.  If the output file
+  exists and the input file doesn't, a warning is issued and the script completes
+  successfully.  
+  
+  =head1 OUTPUT
+  
+  The output file will be named the same but with the .gz extension
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@users.sf.net
