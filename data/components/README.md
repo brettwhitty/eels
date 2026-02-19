@@ -38,6 +38,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - **Recoverable error states** - Every error state is recoverable; pipelines can be resumed from failure points without restarting (critical for multi-day/multi-week production runs)
 - **Shared resource management** - Multi-user environment with resource prioritization and authentication
 - **Production-grade security** - User authentication and authorization for multi-institutional HPC environments
+- **Web-based interface** - AJAX-driven UI using prototype.js (developed by Josh Orvis) for pipeline building, monitoring, and management
 
 These JSON files preserve the complete component library structure:
 - Component configuration parameters
