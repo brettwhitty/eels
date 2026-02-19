@@ -22,6 +22,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - **Multi-step execution** - Tool execution, format conversion, validation within single component
 - **Data flow management** - Explicit dependencies and file-based communication
 - **Grid computing integration** - SGE/Grid Engine scheduling, shared filesystem architecture
+- **Complete execution logging** - Every single execution step logged for debugging, auditing, and provenance tracking
 
 These JSON files preserve the complete component library structure:
 - Component configuration parameters
