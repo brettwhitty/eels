@@ -11,9 +11,9 @@ Extract and preserve 20+ years of production genomics annotation knowledge encod
 ## What is Ergatis?
 
 Ergatis is a complete bioinformatics workflow platform including:
-- **Component library** - 371 atomic workflow units
+- **Component library** - 362 reusable workflow components
 - **Converter library** - 91+ scripts transforming tool output to BSML XML
-- **Workflow templates** - 56 production pipelines
+- **Workflow templates** - 40 production pipeline templates
 - **Web interface** - Pipeline builder and monitoring
 - **BSML format** - XML data exchange for Chado database loading
 
@@ -26,24 +26,23 @@ This is production-tested software representing institutional knowledge from TIG
 **Data Extraction:**
 - 362 components analyzed → `data/components/*.json`
 - 254 iterator patterns cataloged → `data/iterator_catalog.json`
-- 56 workflows cataloged → `data/workflow_catalog.json` (108 XML files)
-- 51 workflow structures extracted → `data/workflow_structure.json` (784 steps)
+- 40 pipeline templates extracted → `data/pipelines/*.json`
+- 51 component templates extracted → `data/component_templates/*.json`
 - 472 utility scripts cataloged → `data/utility_catalog.json`
 - 91 converters identified → `data/converter_catalog.json`
 - 65 converter configs → `data/converters/*.json`
 - 28 contributors identified → `data/contributors.json`
 
 **Translation Formats Generated:**
-- 362 Ergatis Lite component notations → `data/ergatis_lite/*.lite`
-- 362 BioCompute Objects (complete) → `data/bco/*.json`
-- 402 CWL tool definitions (complete) → `data/cwl/*.cwl`
+- 362 Ergatis Lite component notations → `generated/ergatis_lite/*.lite`
+- 362 BioCompute Objects → `generated/bco/*.json`
+- 399 CWL tool definitions → `generated/cwl/*.cwl`
 
 **Note:** Converter manpages exist in `ergatis-install/man/man1/*2bsml.pl.1p` (65 files)
 
 **Documentation:**
 - Component anatomy walkthrough → `docs/COMPONENT_ANATOMY.md`
 - Converter reference guide → `docs/CONVERTER_REFERENCE.md`
-- BSML converter catalog → `docs/BSML_CONVERTER_CATALOG.md`
 - Ergatis Lite specification → `docs/ERGATIS_LITE_SPEC.md`
 - Contributor attribution → `CONTRIBUTORS.md`
 
@@ -57,31 +56,31 @@ Work is ongoing. See `docs/ARCHITECTURE_CLARIFICATION.md` for current understand
 eels/
 ├── data/                        # Source data (Ergatis extractions)
 │   ├── components/              # 362 component configs (Brett, 2017)
-│   ├── component_templates/     # Component workflow templates (parsed XML)
+│   ├── component_templates/     # 51 component workflow templates (parsed XML)
+│   ├── component_docs/          # 75 HTML documentation templates
 │   ├── converters/              # 65 converter definitions (from manpages)
+│   ├── pipelines/               # 40 production pipeline templates
+│   ├── reference/               # DTD, XSD, iterator templates, project config
+│   ├── pipeline_catalog.json    # Pipeline summary
 │   ├── converter_catalog.json   # All converters (91)
 │   ├── utility_catalog.json     # Utility scripts (472)
 │   ├── iterator_catalog.json    # Iterator patterns
-│   ├── workflow_catalog.json    # Workflow catalog
-│   └── contributors.json       # Attribution (28)
+│   └── contributors.json       # Attribution
 │
 ├── generated/                   # Generated/derivative data
 │   ├── bco/                     # Component BCO files (362)
 │   ├── cwl/                     # CWL tool definitions (399)
 │   └── ergatis_lite/            # Ergatis Lite notation (362)
 │
+├── tools/                       # EELS Perl scripts (Brett's extraction tools)
+│   ├── workflow_xml_to_json.pl  # Core XML to JSON converter
+│   ├── to_json.pl               # Batch component XML converter
+│   ├── simple_to_nextflow.pl    # JSON to Nextflow converter
+│   └── parse_pipeline_layout.pl # Pipeline layout parser
+│
 ├── ergatis_lite/                # Ergatis Lite source code (Brett, 2007)
 │
 ├── docs/                        # Documentation
-│   ├── ARCHITECTURE_CLARIFICATION.md
-│   ├── ERGATIS_ARCHITECTURE.md
-│   ├── COMPONENT_ANATOMY.md
-│   ├── BSML_SCHEMA.md
-│   ├── ERGATIS_LITE_SPEC.md
-│   ├── CONVERTER_REFERENCE.md
-│   ├── TRANSLATION_GUIDE.md
-│   ├── TRANSLATION_STRATEGY.md
-│   └── BCO_MAPPING.md
 │
 ├── CONTRIBUTORS.md
 ├── PHILOSOPHY.md

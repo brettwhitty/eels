@@ -23,13 +23,17 @@
 }
 ```
 
-### Level 2: Workflows (56 workflows, 108 XML files)
+### Level 2: Component Templates (51 component templates)
 **Source:** `ergatis-git/workflow/` (XML templates)  
-**Current catalog:** `data/workflow_catalog.json` (file counts only)  
-**Scope:** Component composition and ordering  
-**Captures:** Which components run in what order, data flow between components
+**Current catalog:** `data/component_templates/*.json`  
+**Scope:** Internal workflow structure of individual components  
+**Captures:** How a component's tools and converters are orchestrated
 
-**NOT YET EXTRACTED:** Actual workflow logic (component ordering, data dependencies)
+### Level 2b: Pipeline Templates (40 production pipelines)
+**Source:** `ergatis-install/templates/pipelines/`  
+**Current catalog:** `data/pipelines/*.json`, `data/pipeline_catalog.json`  
+**Scope:** Component composition and ordering  
+**Captures:** Which components run in what order, serial/parallel structure
 
 **Example workflow structure:**
 ```
@@ -174,7 +178,7 @@ Prokaryotic Annotation Pipeline:
 → Use Ergatis Lite or BCO (NOT CWL Workflow)
 
 ### Regulatory Submission
-→ Use BCO for FDA compliance
+→ Use BCO (IEEE 2791-2020 standard)
 
 ### Publication
 → Include all three formats for completeness
@@ -187,22 +191,23 @@ Prokaryotic Annotation Pipeline:
 ### Complete
 - ✅ Component JSON (362 files) - individual component structure
 - ✅ Converter JSON (65 files) - converter parameters
-- ✅ Workflow catalog (56 workflows) - file counts only
+- ✅ Component template extraction (51 templates)
+- ✅ Pipeline template extraction (40 production pipelines with serial/parallel structure)
+- ✅ Ergatis Lite generation (362 components)
+- ✅ CWL tool definitions (399 tools)
+- ✅ BCO generation (362 components with real parameters)
 
-### Incomplete
-- ❌ Workflow logic extraction - component ordering, data flow
-- ❌ Workflow JSON - structured representation of pipelines
-- ❌ Ergatis Lite generation
-- ❌ CWL generation
-- ❌ BCO generation
+### Needs Review
+- CWL files are thin stubs - need real parameters from component configs
+- BCO files need verification against source data
+- Pipeline-level translations not yet done
 
 ## Next Steps
 
-1. **Parse workflow XML files** - Extract component ordering and data dependencies
-2. **Create workflow JSON** - Structured representation of 56 workflows
-3. **Generate Ergatis Lite** - For components and workflows
-4. **Generate CWL** - For individual tools only
-5. **Generate BCO** - For components and workflows
+1. **Improve CWL files** - Add real parameters from .config files
+2. **Generate pipeline-level Ergatis Lite** - From data/pipelines/ structure
+3. **Generate pipeline-level BCO** - From data/pipelines/ structure
+4. **Validate BCO** - Against IEEE 2791-2020 schema
 
 ## Benefits of Multi-Format Approach
 

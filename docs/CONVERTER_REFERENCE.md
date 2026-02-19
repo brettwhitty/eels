@@ -148,8 +148,8 @@ These converters represent 20+ years of production genomics annotation at TIGR/J
 ## Related Documentation
 - `BSML_SCHEMA.md` - BSML XML structure
 - `COMPONENT_ANATOMY.md` - Component structure
-- `CHADO_INTEGRATION.md` - Database loading
-- Individual converter docs in `docs/converters/`
+
+
 
 ## Converter List
 

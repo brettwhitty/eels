@@ -116,14 +116,6 @@ Mathematical notation for hierarchical composition.
 - Persistent compute nodes
 - Database-backed workflow tracking
 - 1000s of genomes annotated
-- FDA regulatory submissions
-
-**Not:**
-- AWS Lambda
-- Kubernetes pods
-- Docker containers (originally)
-- Ephemeral cloud compute
-- Log file processing
 
 ## Key Insight
 
@@ -136,7 +128,7 @@ A component encapsulates:
 - Error handling
 - Cleanup
 
-This is **software engineering for bioinformatics workflows**, not DevOps scripting.
+This is **software engineering for bioinformatics workflows**.
 
 ## Translation Strategy
 
@@ -160,7 +152,7 @@ This is **software engineering for bioinformatics workflows**, not DevOps script
 - `docs/ERGATIS_LITE_SPEC.md` - Hierarchical composition notation
 - `doc/workflowxml.txt` - Original architecture documentation
 - 362 component JSON files - Complete component library
-- 56 workflow templates - Production pipelines
+- 40 pipeline templates - Production pipelines
 
 ### Academic References
 

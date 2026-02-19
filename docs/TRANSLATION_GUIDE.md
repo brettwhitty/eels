@@ -51,7 +51,7 @@ This guide documents how Ergatis knowledge is translated into three complementar
 
 **Purpose:** Minimal human-readable representation of hierarchical composition
 
-**Location:** `data/ergatis_lite/*.lite` (362 files)
+**Location:** `generated/ergatis_lite/*.lite` (362 files)
 
 **Example:** `ncbi-blastp.lite`
 ```
@@ -85,7 +85,7 @@ This guide documents how Ergatis knowledge is translated into three complementar
 
 **Purpose:** Type-safe tool parameter documentation
 
-**Location:** `data/cwl/*.cwl`
+**Location:** `generated/cwl/*.cwl`
 
 **Example:** `ncbi-blastp_ncbi_blastp.cwl`
 ```yaml
@@ -131,7 +131,7 @@ outputs:
 
 **Purpose:** IEEE 2791-2020 regulatory compliance and complete documentation
 
-**Location:** `data/bco/*.json`
+**Location:** `generated/bco/*.json`
 
 **Example:** `ncbi-blastp.json`
 ```json
@@ -301,20 +301,21 @@ outputs:
 
 ### Completed
 - ✓ Component JSON extraction (362 components)
-- ✓ Workflow structure extraction (51 workflows)
+- ✓ Component template extraction (51 component templates)
+- ✓ Pipeline template extraction (40 production pipelines)
 - ✓ Ergatis Lite generation (362 components)
-- ✓ CWL samples (4 tools)
-- ✓ BCO samples (5 components)
+- ✓ CWL tool definitions (399 tools)
+- ✓ BCO generation (362 components)
 
-### In Progress
-- Complete BCO generation for all components
-- Workflow-level Ergatis Lite notation
-- Complete CWL tool definitions
+### Needs Review
+- CWL files are thin stubs - need real parameters from configs
+- BCO files need verification against source data
+- Ergatis Lite notation needs verification
 
 ### Future
-- BCO workflow-level objects
+- Pipeline-level BCO objects
+- Pipeline-level Ergatis Lite notation
 - Validation against IEEE 2791-2020 schema
-- Translation tooling automation
 
 ## References
 

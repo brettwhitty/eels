@@ -86,7 +86,7 @@ Converters (e.g., `blast2bsml.pl`) become separate BCO steps:
 
 ### Provenance Domain
 
-- **Contributors**: Map from `CONTRIBUTORS.md` (28 TIGR/JCVI/IGS developers)
+- **Contributors**: Map from `CONTRIBUTORS.md`
 - **Created**: Component creation date (from git history)
 - **Modified**: Last modification date
 - **License**: Artistic License 2.0 (Ergatis license)
@@ -156,19 +156,18 @@ Ergatis iterators create parallel execution:
 
 ## Benefits of BCO Format
 
-- **FDA compliance**: IEEE standard for regulatory submissions
+- **IEEE standard**: IEEE 2791-2020 for computational workflow documentation
 - **Human-readable**: JSON format with extensive documentation
 - **Provenance tracking**: Built-in attribution and versioning
 - **Interoperability**: Standard format across institutions
 - **Validation**: Schema validation for correctness
 
-## Next Steps
+## Status
 
-1. Create BCO schema templates for common component types
-2. Extract provenance from git history and CONTRIBUTORS.md
-3. Map tool versions from production deployments
-4. Generate BCO examples for 3-5 representative components
-5. Validate against IEEE 2791-2020 schema
+- 362 component-level BCOs generated in `generated/bco/`
+- Real parameters extracted from .config files into parametric_domain
+- Pipeline-level BCOs not yet generated
+- IEEE 2791-2020 schema validation not yet done
 
 ## References
 
