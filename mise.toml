@@ -1,0 +1,34 @@
+[tools]
+node = "lts"
+
+[tasks."viewer:build"]
+description = "Build component_index.json for the web viewer"
+run = "node viewer/build_index.js"
+
+[tasks."viewer:serve"]
+description = "Build index and serve the Ergatis Component Viewer"
+run = """
+node viewer/build_index.js
+echo "Serving viewer at http://localhost:8080/viewer/"
+npx -y serve . -l 8080
+"""
+
+[tasks.stats]
+description = "Display EELS repository dashboard"
+run = "node tools/node/stats.mjs"
+
+[tasks.tree]
+description = "Display component classification tree"
+run = "node tools/node/tree.mjs"
+
+[tasks.coverage]
+description = "Display coverage report across all artifact types"
+run = "node tools/node/coverage.mjs"
+
+[tasks.search]
+description = "Search components: mise run search -- <query> [--category CAT] [--biotools] [--verbose]"
+run = "node tools/node/search.mjs"
+
+[tasks.pipeline]
+description = "Display pipeline diagram: mise run pipeline -- <name> [--svg output.svg]"
+run = "node tools/node/pipeline.mjs"
