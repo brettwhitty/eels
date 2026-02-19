@@ -39,6 +39,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - **Shared resource management** - Multi-user environment with resource prioritization and authentication
 - **Production-grade security** - User authentication and authorization for multi-institutional HPC environments
 - **Web-based interface** - AJAX-driven UI using prototype.js (developed by Josh Orvis) for pipeline building, monitoring, and management
+- **Publication-quality visualization** - Sybil: SVG-based comparative genomics plots suitable for publications (developed by Jonathan Crabtree)
 
 These JSON files preserve the complete component library structure:
 - Component configuration parameters
