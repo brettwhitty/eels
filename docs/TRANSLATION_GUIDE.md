@@ -3,7 +3,7 @@
 ## Overview
 
 This guide documents how Ergatis knowledge is translated into three complementary formats:
-1. **Ergatis lite** - Minimal mathematical notation
+1. **Ergatis Lite** - Minimal mathematical notation
 2. **CWL** - Individual tool configurations
 3. **BCO** - IEEE 2791-2020 regulatory compliance
 
@@ -47,7 +47,7 @@ This guide documents how Ergatis knowledge is translated into three complementar
 
 ## Translation Outputs
 
-### 1. Ergatis lite Notation
+### 1. Ergatis Lite Notation
 
 **Purpose:** Minimal human-readable representation of hierarchical composition
 
@@ -213,7 +213,7 @@ outputs:
 
 ### From Component JSON
 
-1. **Generate Ergatis lite:**
+1. **Generate Ergatis Lite:**
    ```python
    steps = []
    for tool in component['tool_execution']:
@@ -250,7 +250,7 @@ outputs:
 
 ### From Workflow Structure JSON
 
-1. **Generate Ergatis lite:**
+1. **Generate Ergatis Lite:**
    ```
    (
      <component1>,
@@ -267,16 +267,16 @@ outputs:
 ## Use Cases
 
 ### Quick Reference
-→ Ergatis lite notation
+→ Ergatis Lite notation
 
 ### Tool Parameter Documentation
 → CWL CommandLineTool files
 
 ### Multi-Step Component Documentation
-→ Ergatis lite + BCO
+→ Ergatis Lite + BCO
 
 ### Workflow Composition
-→ Ergatis lite + BCO (NOT CWL)
+→ Ergatis Lite + BCO (NOT CWL)
 
 ### Regulatory Submission
 → BCO (IEEE 2791-2020 standard)
@@ -286,7 +286,7 @@ outputs:
 
 ## Format Comparison
 
-| Feature | Ergatis lite | CWL | BCO |
+| Feature | Ergatis Lite | CWL | BCO |
 |---------|-------------|-----|-----|
 | **Scope** | Component/Workflow | Individual Tool | Component/Workflow |
 | **Multi-step** | ✓ | ✗ | ✓ |
@@ -302,13 +302,13 @@ outputs:
 ### Completed
 - ✓ Component JSON extraction (362 components)
 - ✓ Workflow structure extraction (51 workflows)
-- ✓ Ergatis lite generation (362 components)
+- ✓ Ergatis Lite generation (362 components)
 - ✓ CWL samples (4 tools)
 - ✓ BCO samples (5 components)
 
 ### In Progress
 - Complete BCO generation for all components
-- Workflow-level Ergatis lite notation
+- Workflow-level Ergatis Lite notation
 - Complete CWL tool definitions
 
 ### Future
@@ -320,6 +320,6 @@ outputs:
 
 - Component JSON: `data/components/README.md`
 - Ergatis Architecture: `docs/ERGATIS_ARCHITECTURE.md`
-- Ergatis lite Spec: `docs/ERGATIS_LITE_SPEC.md`
+- Ergatis Lite Spec: `docs/ERGATIS_LITE_SPEC.md`
 - BCO Mapping: `docs/BCO_MAPPING.md`
 - Translation Strategy: `docs/TRANSLATION_STRATEGY.md`

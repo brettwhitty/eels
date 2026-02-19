@@ -148,7 +148,7 @@ Extract institutional knowledge from Ergatis bioinformatics workflow system and 
 - [ ] Pipeline → CWL Workflow / Nextflow workflow / WDL workflow
 - [ ] File-based subflows → workflow composition patterns
 - [ ] Variable expansion → workflow parameter passing
-- [ ] Evaluate **Ergatis lite S-expression format** as native representation
+- [ ] Evaluate **Ergatis Lite S-expression format** as native representation
   - Minimal syntax designed for command-line one-liners
   - `()` = serial, `{}` = parallel, `<>` = component
   - Built by a workflow expert for workflow experts
@@ -255,7 +255,7 @@ Extract institutional knowledge from Ergatis bioinformatics workflow system and 
 - Write **minimal code** - only what's needed for extraction
 - User (Brett) is the domain expert - leverage his knowledge
 - This is **institutional memory preservation** for bioinformatics community
-- **Ergatis lite S-expression format** (2007) may be a better native representation than XML
+- **Ergatis Lite S-expression format** (2007) may be a better native representation than XML
   - Minimal syntax designed for command-line one-liners
   - More human-readable than XML, more structured than YAML
   - Consider as primary format for extracted knowledge

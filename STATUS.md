@@ -173,9 +173,9 @@ Ergatis uses a 6-level XML hierarchy for workflow execution:
 - Translate iterator patterns to scatter/gather
 - Preserve parallelization strategies
 
-### Ergatis lite Format (2007)
+### Ergatis Lite Format (2007)
 
-Brett's **Ergatis lite** project (the "lite" is lowercase - it's the Diet version) introduced a bracket-based format designed for command-line one-liners.
+Brett's **Ergatis Lite** project (the "lite" is lowercase - it's the Diet version) introduced a bracket-based format designed for command-line one-liners.
 
 **Mathematical Foundation:**
 - `()` = **Ordered list** (serial execution - order matters)

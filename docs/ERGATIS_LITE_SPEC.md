@@ -1,11 +1,11 @@
-# Ergatis lite Format Specification
+# Ergatis Lite Format Specification
 
 **Author:** Brett Whitty, JCVI, 2007  
 **Design:** Mathematical ordered/unordered list syntax + Perl Data::Dumper extensions
 
 ## Overview
 
-Ergatis lite uses a bracket-based syntax designed for command-line one-liners. The format maps directly to mathematical concepts and is familiar to Perl developers.
+Ergatis Lite uses a bracket-based syntax designed for command-line one-liners. The format maps directly to mathematical concepts and is familiar to Perl developers.
 
 ## Core Syntax
 
@@ -112,12 +112,12 @@ Uppercase keys indicate the value is a global variable (defined in template head
 
 ### Template Includes
 
-**Include Ergatis lite template:**
+**Include Ergatis Lite template:**
 ```
 <INCLUDE:/path/to/template_file.txt>
 ```
 
-Recursively parse and include another Ergatis lite template (bracket syntax).
+Recursively parse and include another Ergatis Lite template (bracket syntax).
 
 **Include Ergatis XML template:**
 ```
@@ -127,7 +127,7 @@ Recursively parse and include another Ergatis lite template (bracket syntax).
 Parse an existing Ergatis XML template and convert it to lite format inline.
 
 **Bidirectional conversion:**
-- Ergatis lite → XML (for execution)
+- Ergatis Lite → XML (for execution)
 - Ergatis XML → lite (for editing/composition)
 
 This allows mixing legacy XML templates with new lite syntax.

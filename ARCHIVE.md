@@ -32,7 +32,7 @@ This archive preserves 20+ years of institutional knowledge from the Ergatis bio
 
 ### Translation Formats
 
-**Ergatis lite (362 files)**
+**Ergatis Lite (362 files)**
 - `data/ergatis_lite/*.lite` - Minimal component notation
 - Hierarchical composition syntax
 - Human-readable workflow definitions
@@ -53,7 +53,7 @@ This archive preserves 20+ years of institutional knowledge from the Ergatis bio
 **Architecture**
 - `ERGATIS_ARCHITECTURE.md` - System architecture and design
 - `COMPONENT_ANATOMY.md` - Component structure details
-- `ERGATIS_LITE_SPEC.md` - Ergatis lite notation specification
+- `ERGATIS_LITE_SPEC.md` - Ergatis Lite notation specification
 
 **Translation**
 - `TRANSLATION_GUIDE.md` - Complete translation guide
@@ -151,7 +151,7 @@ Modern tools (Nextflow, Snakemake) excel at cloud deployment but lack Ergatis's 
 ### For Modern Translation
 - CWL files provide tool configurations
 - BCO objects enable regulatory compliance
-- Ergatis lite shows compositional patterns
+- Ergatis Lite shows compositional patterns
 
 ### For Tool Discovery
 - 362 components document bioinformatics tools
@@ -171,7 +171,7 @@ Modern tools (Nextflow, Snakemake) excel at cloud deployment but lack Ergatis's 
 }
 ```
 
-### Ergatis lite
+### Ergatis Lite
 ```
 <ncbi-blastp> = (
   <ncbi-blastp>,

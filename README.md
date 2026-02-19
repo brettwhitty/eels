@@ -6,7 +6,7 @@ Systematic extraction and preservation of institutional knowledge from the Ergat
 
 ## Objective
 
-Extract and preserve 20+ years of production genomics annotation knowledge encoded in Ergatis components, converters, and workflows. Document in structured formats: Component JSON, Ergatis lite notation, CWL (tool configs), and BioCompute Object (IEEE standard).
+Extract and preserve 20+ years of production genomics annotation knowledge encoded in Ergatis components, converters, and workflows. Document in structured formats: Component JSON, Ergatis Lite notation, CWL (tool configs), and BioCompute Object (IEEE standard).
 
 ## What is Ergatis?
 
@@ -34,7 +34,7 @@ This is production-tested, FDA-approved software representing institutional know
 - 28 contributors identified → `data/contributors.json`
 
 **Translation Formats Generated:**
-- 362 Ergatis lite component notations → `data/ergatis_lite/*.lite`
+- 362 Ergatis Lite component notations → `data/ergatis_lite/*.lite`
 - 362 BioCompute Objects (complete) → `data/bco/*.json`
 - 402 CWL tool definitions (complete) → `data/cwl/*.cwl`
 
@@ -44,7 +44,7 @@ This is production-tested, FDA-approved software representing institutional know
 - Component anatomy walkthrough → `docs/COMPONENT_ANATOMY.md`
 - Converter reference guide → `docs/CONVERTER_REFERENCE.md`
 - BSML converter catalog → `docs/BSML_CONVERTER_CATALOG.md`
-- Ergatis lite specification → `docs/ERGATIS_LITE_SPEC.md`
+- Ergatis Lite specification → `docs/ERGATIS_LITE_SPEC.md`
 - Contributor attribution → `CONTRIBUTORS.md`
 
 ### Archive Complete
