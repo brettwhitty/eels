@@ -48,4 +48,10 @@ These JSON files preserve the complete component library structure:
 - Input/output specifications
 - Converter usage and data transformations
 
+**Notable Workflows Included:**
+- **Sybil pipelines** - Comparative genomics analysis and visualization
+- **CAMERA metagenomics pipelines** - Environmental metagenomics (developed by Brett Whitty)
+- **Human Microbiome Project pipelines** - Large-scale microbiome analysis (developed by Brett Whitty)
+- 56 total workflow templates representing production genomics annotation pipelines
+
 This conversion work predates the EELS project and serves as foundational data for knowledge extraction and preservation of institutional expertise from the genomics annotation community.
