@@ -4,21 +4,21 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "create output directory",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env sort",
+         "executable" : "[/bin/env] sort",
          "idx" : 1,
          "name" : "get best blast hit by bitscore - \"sister\"",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env sort",
+         "executable" : "[/bin/env] sort",
          "idx" : 2,
          "name" : "get best blast hit by bitscore - \"outsie\"",
          "run_type" : "RunUnixCommand"

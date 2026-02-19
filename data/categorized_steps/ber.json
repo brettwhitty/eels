@@ -16,7 +16,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env cat",
+         "executable" : "[/bin/env] cat",
          "idx" : 2,
          "name" : "append to filtered hits",
          "run_type" : "RunUnixCommand"
@@ -29,7 +29,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env cat",
+         "executable" : "[/bin/env] cat",
          "idx" : 4,
          "name" : "append to mini db",
          "run_type" : "RunUnixCommand"
@@ -54,7 +54,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env mv",
+         "executable" : "[/bin/env] mv",
          "idx" : 8,
          "name" : "rename fixed praze output",
          "run_type" : "RunUnixCommand"

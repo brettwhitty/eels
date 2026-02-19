@@ -4,7 +4,7 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "Create the FASTA output directory",
          "run_type" : "RunUnixCommand"

@@ -4,7 +4,7 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "create output directory",
          "run_type" : "RunUnixCommand"
@@ -29,7 +29,7 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env find",
+         "executable" : "[/bin/env] find",
          "idx" : 4,
          "name" : "create fasta list",
          "run_type" : "RunUnixCommand"

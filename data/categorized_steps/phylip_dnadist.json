@@ -16,7 +16,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env rm",
+         "executable" : "[/bin/env] rm",
          "idx" : 2,
          "name" : "remove unsorted output",
          "run_type" : "RunUnixCommand"

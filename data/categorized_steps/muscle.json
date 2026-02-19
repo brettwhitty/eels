@@ -4,14 +4,14 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "create output directory",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env cp",
+         "executable" : "[/bin/env] cp",
          "idx" : 1,
          "name" : "relocate query file",
          "run_type" : "RunUnixCommand"

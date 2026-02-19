@@ -4,7 +4,7 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "Create the tbl2asn output directory",
          "run_type" : "RunUnixCommand"
@@ -23,7 +23,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env perl",
+         "executable" : "[/bin/env] perl",
          "idx" : 3,
          "name" : "Fix locus name",
          "run_type" : "RunUnixCommand"

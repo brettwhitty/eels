@@ -4,7 +4,7 @@
    "steps" : [
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env cp",
+         "executable" : "[/bin/env] cp",
          "idx" : 0,
          "name" : "relocate query file",
          "run_type" : "RunUnixCommand"

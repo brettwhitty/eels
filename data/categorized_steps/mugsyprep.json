@@ -4,21 +4,21 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "create output directory",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 1,
          "name" : "create fasta output directory",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 2,
          "name" : "create temp directory",
          "run_type" : "RunUnixCommand"

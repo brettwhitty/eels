@@ -4,7 +4,7 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "create output directory",
          "run_type" : "RunUnixCommand"
@@ -23,7 +23,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env cat",
+         "executable" : "[/bin/env] cat",
          "idx" : 3,
          "name" : "merge input and reference",
          "run_type" : "RunUnixCommand"
@@ -36,7 +36,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env mv",
+         "executable" : "[/bin/env] mv",
          "idx" : 5,
          "name" : "create raw output",
          "run_type" : "RunUnixCommand"
@@ -55,14 +55,14 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env rm",
+         "executable" : "[/bin/env] rm",
          "idx" : 8,
          "name" : "remove temp dir",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env rm",
+         "executable" : "[/bin/env] rm",
          "idx" : 9,
          "name" : "remove fsplit dir",
          "run_type" : "RunUnixCommand"

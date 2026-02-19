@@ -34,35 +34,35 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env rm",
+         "executable" : "[/bin/env] rm",
          "idx" : 5,
          "name" : "remove raw dds output",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env rm",
+         "executable" : "[/bin/env] rm",
          "idx" : 6,
          "name" : "remove raw ext output",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env rm",
+         "executable" : "[/bin/env] rm",
          "idx" : 7,
          "name" : "remove raw ext collapsed output",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env rm",
+         "executable" : "[/bin/env] rm",
          "idx" : 8,
          "name" : "remove raw filter output",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env touch",
+         "executable" : "[/bin/env] touch",
          "idx" : 9,
          "name" : "ensure btab existence",
          "run_type" : "RunUnixCommand"

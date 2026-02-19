@@ -4,21 +4,21 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "create output directory",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 1,
          "name" : "create temp directory",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 2,
          "name" : "create gmapdb directory",
          "run_type" : "RunUnixCommand"
@@ -31,21 +31,21 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env make",
+         "executable" : "[/bin/env] make",
          "idx" : 4,
          "name" : "gmapdb Makefiles",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env make",
+         "executable" : "[/bin/env] make",
          "idx" : 5,
          "name" : "gmapdb Makefiles",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env make",
+         "executable" : "[/bin/env] make",
          "idx" : 6,
          "name" : "gmapdb Makefiles",
          "run_type" : "RunUnixCommand"

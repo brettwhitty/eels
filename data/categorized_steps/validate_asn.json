@@ -4,14 +4,14 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "Create the asnval and asndisc temp output directories",
          "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 1,
          "name" : "Create the asnval and asndisc output directories",
          "run_type" : "RunUnixCommand"

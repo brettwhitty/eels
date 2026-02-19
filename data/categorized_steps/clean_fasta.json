@@ -4,7 +4,7 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 0,
          "name" : "create clean_fasta directory",
          "run_type" : "RunUnixCommand"
@@ -23,7 +23,7 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "/bin/env mkdir",
+         "executable" : "[/bin/env] mkdir",
          "idx" : 3,
          "name" : "create cf directory",
          "run_type" : "RunUnixCommand"

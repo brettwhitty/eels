@@ -10,7 +10,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env mv",
+         "executable" : "[/bin/env] mv",
          "idx" : 1,
          "name" : "migrate output file",
          "run_type" : "RunUnixCommand"

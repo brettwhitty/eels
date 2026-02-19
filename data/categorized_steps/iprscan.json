@@ -70,7 +70,7 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "/bin/env find",
+         "executable" : "[/bin/env] find",
          "idx" : 11,
          "name" : "combine raw output",
          "run_type" : "RunUnixCommand"
