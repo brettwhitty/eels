@@ -52,7 +52,7 @@ Attribution for TIGR/JCVI/IGS bioinformatics team
 
 ## Translation Formats
 
-### Ergatis Lite Notation (362 files)
+### Ergatis lite Notation (362 files)
 Minimal mathematical notation for hierarchical composition:
 ```
 <ncbi-blastp> = (
@@ -140,7 +140,7 @@ These tools were developed without studying Grid computing literature (Yu & Buyy
 - 28 contributors
 
 ### Translation Formats Generated
-- 362 Ergatis Lite notations
+- 362 Ergatis lite notations
 - 4 CWL tool definitions
 - 5 BioCompute Objects
 
@@ -156,7 +156,7 @@ These tools were developed without studying Grid computing literature (Yu & Buyy
 - Workflow structure: 5,704 lines
 - Utility catalog: 3,046 lines
 - Converter catalog: 577KB
-- Ergatis Lite: 1,332 lines (362 files)
+- Ergatis lite: 1,332 lines (362 files)
 - BCO samples: 474 lines (5 files)
 
 ## Remaining Work
@@ -164,7 +164,7 @@ These tools were developed without studying Grid computing literature (Yu & Buyy
 ### Complete Translation
 - Generate BCO for all 362 components
 - Generate CWL for all tools
-- Workflow-level Ergatis Lite notation
+- Workflow-level Ergatis lite notation
 - Workflow-level BCO objects
 
 ### BSML Schema
@@ -185,7 +185,7 @@ These tools were developed without studying Grid computing literature (Yu & Buyy
 ✓ All workflows cataloged (56/56)
 ✓ All converters identified (91/91)
 ✓ Converter manpages documented (65/65)
-✓ Translation formats demonstrated (Ergatis Lite, CWL, BCO)
+✓ Translation formats demonstrated (Ergatis lite, CWL, BCO)
 ✓ Architecture documented
 ✓ Contributors attributed
 ✓ Advanced features documented

@@ -48,9 +48,9 @@ Prokaryotic Annotation Pipeline:
 
 ## Translation Targets
 
-### For Components: Ergatis Lite + CWL + BCO
+### For Components: Ergatis lite + CWL + BCO
 
-**Component JSON → Ergatis Lite:**
+**Component JSON → Ergatis lite:**
 ```
 (<dds>, <ext>, <filter>, <gap22bsml>)
 ```
@@ -70,9 +70,9 @@ Prokaryotic Annotation Pipeline:
 }
 ```
 
-### For Workflows: Ergatis Lite + BCO ONLY
+### For Workflows: Ergatis lite + BCO ONLY
 
-**Workflow XML → Ergatis Lite:**
+**Workflow XML → Ergatis lite:**
 ```
 (
   <glimmer3:input=genome.fsa>,
@@ -99,7 +99,7 @@ Prokaryotic Annotation Pipeline:
 - CWL: Only for individual tool configs, not workflow composition
 - Nextflow: No proper workflow/subflow concepts to represent Ergatis hierarchy
 - WDL: Similar limitations
-- Ergatis Lite + BCO: Properly capture the workflow/component/tool hierarchy
+- Ergatis lite + BCO: Properly capture the workflow/component/tool hierarchy
 
 ## Translation Workflow
 
@@ -107,7 +107,7 @@ Prokaryotic Annotation Pipeline:
 
 **Input:** `data/components/*.json` (362 files)
 
-1. **Generate Ergatis Lite:**
+1. **Generate Ergatis lite:**
    - Read `tool_execution` array → serial execution steps
    - Read `converters` object → converter chain
    - Extract parameters from component `.config` files
@@ -133,7 +133,7 @@ Prokaryotic Annotation Pipeline:
 
 **Source:** `data/components/aat_na.json`
 
-**Generated Ergatis Lite:**
+**Generated Ergatis lite:**
 ```
 (
   <dds:executable=$;DDS_EXEC$;>,
@@ -169,10 +169,10 @@ Prokaryotic Annotation Pipeline:
 → Use CWL CommandLineTool for individual tools
 
 ### Multi-Step Component Documentation
-→ Use Ergatis Lite notation
+→ Use Ergatis lite notation
 
 ### Workflow Execution
-→ Use Ergatis Lite or BCO (NOT CWL Workflow)
+→ Use Ergatis lite or BCO (NOT CWL Workflow)
 
 ### Regulatory Submission
 → Use BCO for FDA compliance
@@ -181,7 +181,7 @@ Prokaryotic Annotation Pipeline:
 → Include all three formats for completeness
 
 ### Long-term Preservation
-→ BCO as primary format, CWL for tool configs, Ergatis Lite for human readability
+→ BCO as primary format, CWL for tool configs, Ergatis lite for human readability
 
 ## Current Status
 
@@ -193,7 +193,7 @@ Prokaryotic Annotation Pipeline:
 ### Incomplete
 - ❌ Workflow logic extraction - component ordering, data flow
 - ❌ Workflow JSON - structured representation of pipelines
-- ❌ Ergatis Lite generation
+- ❌ Ergatis lite generation
 - ❌ CWL generation
 - ❌ BCO generation
 
@@ -201,21 +201,21 @@ Prokaryotic Annotation Pipeline:
 
 1. **Parse workflow XML files** - Extract component ordering and data dependencies
 2. **Create workflow JSON** - Structured representation of 56 workflows
-3. **Generate Ergatis Lite** - For components and workflows
+3. **Generate Ergatis lite** - For components and workflows
 4. **Generate CWL** - For individual tools only
 5. **Generate BCO** - For components and workflows
 
 ## Benefits of Multi-Format Approach
 
 - **Component JSON:** Primary canonical format (already complete, 362 components)
-- **Ergatis Lite:** Human-readable minimal notation derived from JSON
+- **Ergatis lite:** Human-readable minimal notation derived from JSON
 - **CWL:** Type-safe tool parameter documentation (one per tool in component)
 - **BCO:** Regulatory compliance, full provenance, IEEE standard
 - **Together:** Complete knowledge preservation with multiple access points
 
 ## References
 
-- Ergatis Lite: `docs/ERGATIS_LITE_SPEC.md`
+- Ergatis lite: `docs/ERGATIS_LITE_SPEC.md`
 - CWL: https://www.commonwl.org/
 - BCO: https://docs.biocomputeobject.org/
 - IEEE 2791-2020: BioCompute Object Standard

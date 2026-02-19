@@ -95,7 +95,7 @@ Parallelization happens **within** components via iterators, not at workflow lev
 
 ## What Works
 
-### Ergatis Lite
+### Ergatis lite
 **Designed for this** - Mathematical notation for hierarchical composition
 
 **Workflow:**
@@ -174,8 +174,8 @@ This is **software engineering for bioinformatics workflows**, not DevOps script
 
 **Preserve the hierarchy:**
 1. Tool configs → CWL CommandLineTool
-2. Components → Ergatis Lite notation + BCO substeps
-3. Workflows → Ergatis Lite notation + BCO pipeline
+2. Components → Ergatis lite notation + BCO substeps
+3. Workflows → Ergatis lite notation + BCO pipeline
 
 **Don't flatten:**
 - Don't convert components to flat workflow steps

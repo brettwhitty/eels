@@ -54,7 +54,7 @@
    - Iterator → scatter/gather patterns
    - Pipeline → workflow composition / BCO pipeline
 2. Document variable expansion strategies
-3. Evaluate Ergatis Lite S-expression as native format
+3. Evaluate Ergatis lite S-expression as native format
 4. Map to BioCompute Object (BCO) IEEE standard
 
 **Output:** `docs/TRANSLATION_GUIDE.md`
