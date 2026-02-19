@@ -1,0 +1,537 @@
+{
+  "Amol Carl Shetty Bioinformatics Software Engineer II Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
+    "files": [
+      "blib/script/bam2bigwig.pl",
+      "blib/script/bowtie.pl",
+      "blib/script/bowtie_build.pl",
+      "blib/script/create_cuffsuite_files.pl",
+      "blib/script/create_euk_rnaseq_pipeline_config.pl",
+      "blib/script/create_euk_rnaseq_pipeline_configbeta.pl",
+      "blib/script/create_paired_iterator_list.pl",
+      "blib/script/create_paired_list_file.pl",
+      "blib/script/create_prok_rnaseq_pipeline_config.pl",
+      "blib/script/create_strictly_paired_iterator_list.pl",
+      "blib/script/cuffcompare.pl",
+      "blib/script/cuffdiff.pl",
+      "blib/script/cufflinks.pl",
+      "blib/script/deseq.pl",
+      "blib/script/fastx_quality_stats.pl",
+      "blib/script/fastx_trimming.pl",
+      "blib/script/genbank2gtf.pl",
+      "blib/script/generate_list_file.pl",
+      "blib/script/htseq.pl",
+      "blib/script/pileup2wig.pl",
+      "blib/script/rpkm_coverage_stats.pl",
+      "blib/script/samtools_alignment_stats.pl",
+      "blib/script/samtools_file_convert.pl",
+      "blib/script/samtools_reference_index.pl",
+      "blib/script/tophat.pl",
+      "src/perl/bam2bigwig.pl",
+      "src/perl/bowtie.pl",
+      "src/perl/bowtie_build.pl",
+      "src/perl/create_cuffsuite_files.pl",
+      "src/perl/create_euk_rnaseq_pipeline_config.pl",
+      "src/perl/create_euk_rnaseq_pipeline_configbeta.pl",
+      "src/perl/create_paired_iterator_list.pl",
+      "src/perl/create_paired_list_file.pl",
+      "src/perl/create_prok_rnaseq_pipeline_config.pl",
+      "src/perl/create_strictly_paired_iterator_list.pl",
+      "src/perl/cuffcompare.pl",
+      "src/perl/cuffdiff.pl",
+      "src/perl/cufflinks.pl",
+      "src/perl/deseq.pl",
+      "src/perl/fastx_quality_stats.pl",
+      "src/perl/fastx_trimming.pl",
+      "src/perl/genbank2gtf.pl",
+      "src/perl/generate_list_file.pl",
+      "src/perl/htseq.pl",
+      "src/perl/pileup2wig.pl",
+      "src/perl/rpkm_coverage_stats.pl",
+      "src/perl/samtools_alignment_stats.pl",
+      "src/perl/samtools_file_convert.pl",
+      "src/perl/samtools_reference_index.pl",
+      "src/perl/tophat.pl"
+    ],
+    "file_count": 50,
+    "emails": [],
+    "roles": [
+      "pod"
+    ]
+  },
+  "james robert white": {
+    "files": [
+      "blib/script/Create_Qiime_tables.pl",
+      "blib/script/clovr16S_rdp_tables.pl",
+      "blib/script/clovr_mapfasta_check.pl",
+      "blib/script/clovr_metagenomics_prep.pl",
+      "blib/script/clovr_metagenomics_tsvtables.pl",
+      "blib/script/dataprep_dual16S.pl",
+      "blib/script/get_blast_querynames.pl",
+      "blib/script/merge_mothur_chimera_ids.pl",
+      "blib/script/merge_rarefaction_data.pl",
+      "blib/script/merge_uchime_ids.pl",
+      "blib/script/mothur_unique_seq_limit.pl",
+      "blib/script/qiime_to_mothur_meta.pl",
+      "blib/script/screen_seqs_by_ids.pl",
+      "blib/script/uclust_replicate_removal.pl",
+      "components/clovr_metagenomics_prep/clovr_metagenomics_prep.pl",
+      "src/perl/Create_Qiime_tables.pl",
+      "src/perl/clovr16S_rdp_tables.pl",
+      "src/perl/clovr_mapfasta_check.pl",
+      "src/perl/clovr_metagenomics_prep.pl",
+      "src/perl/clovr_metagenomics_tsvtables.pl",
+      "src/perl/dataprep_dual16S.pl",
+      "src/perl/get_blast_querynames.pl",
+      "src/perl/merge_mothur_chimera_ids.pl",
+      "src/perl/merge_rarefaction_data.pl",
+      "src/perl/merge_uchime_ids.pl",
+      "src/perl/mothur_unique_seq_limit.pl",
+      "src/perl/qiime_to_mothur_meta.pl",
+      "src/perl/screen_seqs_by_ids.pl",
+      "src/perl/uclust_replicate_removal.pl"
+    ],
+    "file_count": 29,
+    "emails": [
+      "james.dna.white@gmail.com",
+      "whitej@umd.edu"
+    ],
+    "roles": [
+      "comment"
+    ]
+  },
+  "Jay Sundaram": {
+    "files": [
+      "blib/lib/GFF3/GFF3Builder.pm",
+      "blib/lib/GFF3/GFF3Record.pm",
+      "blib/lib/GFF3/GTFBuilder.pm",
+      "blib/lib/GFF3/GTFRecord.pm",
+      "blib/lib/OBO/OBOBuilder.pm",
+      "blib/lib/OBO/OBOParser.pm",
+      "blib/lib/OBO/OBORecord.pm",
+      "blib/lib/OBO/OBOTerm.pm",
+      "blib/lib/OBO/OBOTypedef.pm",
+      "blib/script/brcGff3ToBsml.pl",
+      "blib/script/check_logfiles.pl",
+      "blib/script/gatekeeper.pl",
+      "blib/script/notify_database_users.pl",
+      "blib/script/observer_script.pl",
+      "lib/GFF3/GFF3Builder.pm",
+      "lib/GFF3/GFF3Record.pm",
+      "lib/GFF3/GTFBuilder.pm",
+      "lib/GFF3/GTFRecord.pm",
+      "lib/OBO/OBOBuilder.pm",
+      "lib/OBO/OBOParser.pm",
+      "lib/OBO/OBORecord.pm",
+      "lib/OBO/OBOTerm.pm",
+      "lib/OBO/OBOTypedef.pm",
+      "src/perl/brcGff3ToBsml.pl",
+      "src/perl/check_logfiles.pl",
+      "src/perl/gatekeeper.pl",
+      "src/perl/notify_database_users.pl",
+      "src/perl/observer_script.pl"
+    ],
+    "file_count": 28,
+    "emails": [
+      "sundaram@jcvi.org",
+      "sundaram@tigr.org"
+    ],
+    "roles": [
+      "comment",
+      "pod"
+    ]
+  },
+  "Sonia Agrawal Bioinformatics Software Engineer II Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
+    "files": [
+      "blib/script/blast_snp_regions.pl",
+      "blib/script/configure_manatee.pl",
+      "blib/script/create_comparative_summary_report.pl",
+      "blib/script/create_summary_report.pl",
+      "blib/script/extract_snp_regions.pl",
+      "blib/script/filter_merged_table.pl",
+      "blib/script/lgt_build_index.pl",
+      "blib/script/lgt_filter_reads.pl",
+      "blib/script/make_snp_lists.pl",
+      "blib/script/replace_maf_ids.pl",
+      "blib/script/snp_verify.pl",
+      "blib/script/transform_mugsycog.pl",
+      "src/perl/blast_snp_regions.pl",
+      "src/perl/configure_manatee.pl",
+      "src/perl/create_comparative_summary_report.pl",
+      "src/perl/create_summary_report.pl",
+      "src/perl/extract_snp_regions.pl",
+      "src/perl/filter_merged_table.pl",
+      "src/perl/lgt_build_index.pl",
+      "src/perl/lgt_filter_reads.pl",
+      "src/perl/make_snp_lists.pl",
+      "src/perl/replace_maf_ids.pl",
+      "src/perl/snp_verify.pl",
+      "src/perl/transform_mugsycog.pl"
+    ],
+    "file_count": 24,
+    "emails": [
+      "sagrawal@som.umaryland.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Joshua Orvis": {
+    "files": [
+      "blib/lib/Ergatis/ConfigFile.pm",
+      "blib/lib/Ergatis/IdGenerator/CloudIdGenerator.pm",
+      "blib/lib/Ergatis/IdGenerator/DefaultIdGenerator.pm",
+      "blib/lib/Ergatis/IdGenerator/JCVIIdGenerator.pm",
+      "blib/lib/Ergatis/IdGenerator/RandomIdGenerator.pm",
+      "blib/lib/Ergatis/Pipeline.pm",
+      "blib/lib/Ergatis/SavedPipeline.pm",
+      "blib/lib/Ergatis/Validator.pm",
+      "lib/Ergatis/ConfigFile.pm",
+      "lib/Ergatis/IdGenerator/CloudIdGenerator.pm",
+      "lib/Ergatis/IdGenerator/DefaultIdGenerator.pm",
+      "lib/Ergatis/IdGenerator/JCVIIdGenerator.pm",
+      "lib/Ergatis/IdGenerator/RandomIdGenerator.pm",
+      "lib/Ergatis/Pipeline.pm",
+      "lib/Ergatis/SavedPipeline.pm",
+      "lib/Ergatis/Validator.pm"
+    ],
+    "file_count": 16,
+    "emails": [
+      "jorvis@tigr.org",
+      "jorvis@users.sf.net"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Amol Carl Shetty": {
+    "files": [
+      "blib/script/bam2bigwig.pl",
+      "blib/script/bam_merge.pl",
+      "blib/script/genbank2gtf.pl",
+      "blib/script/pileup2wig.pl",
+      "blib/script/rpkm_coverage_stats.pl",
+      "blib/script/split_fastq.pl",
+      "src/perl/bam2bigwig.pl",
+      "src/perl/bam_merge.pl",
+      "src/perl/genbank2gtf.pl",
+      "src/perl/pileup2wig.pl",
+      "src/perl/rpkm_coverage_stats.pl",
+      "src/perl/split_fastq.pl"
+    ],
+    "file_count": 12,
+    "emails": [
+      "ashetty@som.umaryland.edu"
+    ],
+    "roles": [
+      "copyright"
+    ]
+  },
+  "Sonia Agrawal Senior Bioinformatics Software Engineer Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
+    "files": [
+      "blib/script/download_sra.pl",
+      "blib/script/fix_gbk.pl",
+      "blib/script/fix_gene_symbols.pl",
+      "blib/script/sra2fastq.pl",
+      "blib/script/wrap_tbl2asn.pl",
+      "src/perl/download_sra.pl",
+      "src/perl/fix_gbk.pl",
+      "src/perl/fix_gene_symbols.pl",
+      "src/perl/sra2fastq.pl",
+      "src/perl/wrap_tbl2asn.pl"
+    ],
+    "file_count": 10,
+    "emails": [
+      "sagrawal@som.umaryland.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "# author: Jay Sundaram": {
+    "files": [
+      "blib/script/check_logfiles.pl",
+      "blib/script/gatekeeper.pl",
+      "blib/script/notify_database_users.pl",
+      "blib/script/observer_script.pl",
+      "src/perl/check_logfiles.pl",
+      "src/perl/gatekeeper.pl",
+      "src/perl/notify_database_users.pl",
+      "src/perl/observer_script.pl"
+    ],
+    "file_count": 8,
+    "emails": [
+      "sundaram@tigr.org"
+    ],
+    "roles": [
+      "comment"
+    ]
+  },
+  "Priti Kumari Bioinformatics Software Engineer I Institute for Genome Sciences University of Maryland Baltimore, Maryland 21201": {
+    "files": [
+      "blib/script/align_bowtie_stats.pl",
+      "blib/script/align_tophat_stats.pl",
+      "blib/script/fastqc_stats.pl",
+      "blib/script/percent_mapped_stats.pl",
+      "src/perl/align_bowtie_stats.pl",
+      "src/perl/align_tophat_stats.pl",
+      "src/perl/fastqc_stats.pl",
+      "src/perl/percent_mapped_stats.pl"
+    ],
+    "file_count": 8,
+    "emails": [],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Arthur Brady": {
+    "files": [
+      "blib/script/preserveGivenReadsInFastq.pl",
+      "blib/script/preserve_reads_in_fastq.pl",
+      "blib/script/processFastaForNewbler.pl",
+      "blib/script/splitFastq.pl",
+      "src/perl/preserveGivenReadsInFastq.pl",
+      "src/perl/preserve_reads_in_fastq.pl",
+      "src/perl/processFastaForNewbler.pl",
+      "src/perl/splitFastq.pl"
+    ],
+    "file_count": 8,
+    "emails": [
+      "abrady@umiacs.umd.edu"
+    ],
+    "roles": [
+      "copyright"
+    ]
+  },
+  "Priti Kumari Bioinformatics Software Engineer Institute for Genome Sciences University of Maryland Baltimore, Maryland 21201": {
+    "files": [
+      "blib/script/cummerbund.pl",
+      "blib/script/expression_plots.pl",
+      "blib/script/wrapper_align.pl",
+      "src/perl/cummerbund.pl",
+      "src/perl/expression_plots.pl",
+      "src/perl/wrapper_align.pl"
+    ],
+    "file_count": 6,
+    "emails": [],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Kevin Galens": {
+    "files": [
+      "blib/lib/Ergatis/IdGenerator/IGSIdGenerator.pm",
+      "blib/lib/IntervalTree.pm",
+      "blib/lib/SNP/MergedTable.pm",
+      "lib/Ergatis/IdGenerator/IGSIdGenerator.pm",
+      "lib/IntervalTree.pm",
+      "lib/SNP/MergedTable.pm"
+    ],
+    "file_count": 6,
+    "emails": [
+      "kgalens@gmail.com",
+      "kgalens@som.umaryland.edu",
+      "kgalens@tigr.org"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "David Riley": {
+    "files": [
+      "blib/lib/GiTaxon.pm",
+      "blib/script/split_file.pl",
+      "lib/GiTaxon.pm",
+      "src/perl/split_file.pl"
+    ],
+    "file_count": 4,
+    "emails": [
+      "driley@som.umaryland.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Mahesh Vangala": {
+    "files": [
+      "blib/script/filter_subjects_based_on_align_score.pl",
+      "blib/script/map_clovr_ergatis_comp_config.pl",
+      "src/perl/filter_subjects_based_on_align_score.pl",
+      "src/perl/map_clovr_ergatis_comp_config.pl"
+    ],
+    "file_count": 4,
+    "emails": [
+      "mvangala@som.umaryland.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "# Remove all spaces and then append the @tigr.org": {
+    "files": [
+      "blib/script/check_logfiles.pl",
+      "src/perl/check_logfiles.pl"
+    ],
+    "file_count": 2,
+    "emails": [],
+    "roles": [
+      "comment"
+    ]
+  },
+  "Priti Kumari Bioinformatics Software Engineer Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
+    "files": [
+      "blib/script/edgeR.pl",
+      "src/perl/edgeR.pl"
+    ],
+    "file_count": 2,
+    "emails": [],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Shaun Adkins": {
+    "files": [
+      "blib/script/clovr_map_MiSeq_check.pl",
+      "src/perl/clovr_map_MiSeq_check.pl"
+    ],
+    "file_count": 2,
+    "emails": [
+      "sadkins@som.umaryland.edu"
+    ],
+    "roles": [
+      "comment"
+    ]
+  },
+  "Weizhong Chang, Amol Carl Shetty Bioinformatics Software Engineer Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
+    "files": [
+      "blib/script/split_fastq.pl",
+      "src/perl/split_fastq.pl"
+    ],
+    "file_count": 2,
+    "emails": [],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Howard Hughes Medical Institute.": {
+    "files": [
+      "blib/script/hmmpfam32htab.pl",
+      "src/perl/hmmpfam32htab.pl"
+    ],
+    "file_count": 2,
+    "emails": [],
+    "roles": [
+      "copyright"
+    ]
+  },
+  "Shaun Adkind Bioinformatics Software Engineer Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
+    "files": [
+      "blib/script/prepare_sbt_cmt.pl",
+      "src/perl/prepare_sbt_cmt.pl"
+    ],
+    "file_count": 2,
+    "emails": [
+      "sadkins@som.umaryland.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Shaun Adkins Bioinformatics Software Engineer Institute for Genome Sciences School of Medicine University of Maryland Baltimore, MD - 21201": {
+    "files": [
+      "blib/script/lgt_bwa.pl",
+      "src/perl/lgt_bwa.pl"
+    ],
+    "file_count": 2,
+    "emails": [
+      "sadkins@som.umaryland.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "# editor:": {
+    "files": [
+      "blib/script/generate_asmbl_list.pl",
+      "src/perl/generate_asmbl_list.pl"
+    ],
+    "file_count": 2,
+    "emails": [
+      "sundaram@tigr.org"
+    ],
+    "roles": [
+      "comment"
+    ]
+  },
+  "Weizhong Chang, Priti Kumari Bioinformatics Software Engineer I Institute for Genome Sciences University of Maryland Baltimore, Maryland 21201": {
+    "files": [
+      "blib/script/align_tophat_split_stats.pl",
+      "src/perl/align_tophat_split_stats.pl"
+    ],
+    "file_count": 2,
+    "emails": [],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Weizhong Chang Bioinformatics Software Engineer Institute of Genome Sciences University of Maryland Baltimore, Maryland 21201": {
+    "files": [
+      "blib/script/bam_merge.pl",
+      "src/perl/bam_merge.pl"
+    ],
+    "file_count": 2,
+    "emails": [],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Kemi Abolude": {
+    "files": [
+      "blib/script/split_paired_files.pl",
+      "src/perl/split_paired_files.pl"
+    ],
+    "file_count": 2,
+    "emails": [
+      "kabolude@som.umaryland.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Ian Korf": {
+    "files": [
+      "blib/lib/BPlite.pm",
+      "lib/BPlite.pm"
+    ],
+    "file_count": 2,
+    "emails": [
+      "ikorf@sapiens.wustl.edu"
+    ],
+    "roles": [
+      "pod"
+    ]
+  },
+  "Ian Korf. All Rights Reserved.": {
+    "files": [
+      "blib/lib/BPlite.pm",
+      "lib/BPlite.pm"
+    ],
+    "file_count": 2,
+    "emails": [],
+    "roles": [
+      "copyright"
+    ]
+  },
+  "Brett Whitty": {
+    "files": [
+      "blib/lib/Ergatis/IdGenerator.pm",
+      "lib/Ergatis/IdGenerator.pm"
+    ],
+    "file_count": 2,
+    "emails": [
+      "bwhitty@jcvi.org"
+    ],
+    "roles": [
+      "pod"
+    ]
+  }
+}
