@@ -4,15 +4,15 @@ This document recognizes the individuals who contributed to the Ergatis workflow
 
 ## About This Project
 
-Ergatis was developed primarily at **The Institute for Genomic Research (TIGR)** and later maintained at the **J. Craig Venter Institute (JCVI)** and the **Institute for Genome Sciences (IGS)** at the University of Maryland. The system represents institutional knowledge from the early days of high-throughput genome annotation (2005-2008), when standards and best practices were being actively developed.
+Ergatis was developed primarily at **The Institute for Genomic Research (TIGR)** and later maintained at the **J. Craig Venter Institute (JCVI)** and the **Institute for Genome Sciences (IGS)** at the University of Maryland. The system represents institutional knowledge from high-throughput genome annotation, when standards and best practices were being actively developed.
 
 The value of this codebase lies not just in the software itself, but in the **human expertise** encoded within it: the careful engineering, the domain knowledge from working biologists, and the iterative refinement based on real-world production use.
 
 ## Lead Contributors
 
 ### Brett Whitty
-**TIGR/JCVI (2005-2008)**
-- Lead developer during TIGR era
+**TIGR/JCVI**
+- Core developer and contributor
 - Primary author of BSML converter infrastructure
 - Contributed to 67+ converter scripts and core workflow components
 - Email: bwhitty@tigr.org
