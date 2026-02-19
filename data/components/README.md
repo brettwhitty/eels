@@ -8,6 +8,13 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 
 **Historical Context:** Ergatis was developed at TIGR/JCVI/IGS (2002-2008), the world leader in producing "Gold-Standard" genome annotations. The system was engineered by talented developers at one of the US's leading Centers of Excellence in Genomics, implementing advanced Grid computing principles for HPC/HTPC environments.
 
+**Design Philosophy:** Ergatis was designed as a professional workflow management system for genome scientists and bioinformaticians working on production-scale annotation projects. The system prioritizes:
+- Compositional software engineering principles
+- Reusable, maintainable workflow components
+- Scalability for large-scale HPC/HTPC infrastructure
+- Flexibility for complex multi-step biological analyses
+- Production reliability for regulatory submissions (FDA-approved workflows)
+
 **Advanced Features Preserved:**
 - **Hierarchical composition** - Workflows compose components (subworkflows), components compose tools
 - **Reusable subworkflows** - Components as first-class compositional units
