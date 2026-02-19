@@ -63,7 +63,10 @@ eels/
 │   ├── component_docs/          # 75 HTML documentation templates
 │   ├── converters/              # 65 converter definitions (from manpages)
 │   ├── pipelines/               # 40 production pipeline templates
-│   ├── reference/               # DTD, XSD, iterator templates, project config
+│   ├── reference/               # DTD, XSD, iterator templates, project config, software config
+│   ├── schemas/                 # JSON Schema for component data
+│   ├── biotools_mapping.json    # Component → bio.tools registry mapping
+│   ├── edam_mapping.json        # Component → EDAM ontology terms
 │   ├── pipeline_catalog.json    # Pipeline summary
 │   ├── converter_catalog.json   # All converters (91)
 │   ├── utility_catalog.json     # Utility scripts (472)
@@ -72,14 +75,20 @@ eels/
 │
 ├── generated/                   # Generated/derivative data
 │   ├── bco/                     # Component BCO files (362)
+│   ├── bco_pipelines/           # Pipeline BCO files (40)
 │   ├── cwl/                     # CWL tool definitions (399)
-│   └── ergatis_lite/            # Ergatis Lite notation (362)
+│   ├── ergatis_lite/            # Component Ergatis Lite notation (362)
+│   └── ergatis_lite_pipelines/  # Pipeline Ergatis Lite notation (40)
 │
 ├── tools/                       # EELS Perl scripts (Brett's extraction tools)
 │   ├── workflow_xml_to_json.pl  # Core XML to JSON converter
 │   ├── to_json.pl               # Batch component XML converter
 │   ├── simple_to_nextflow.pl    # JSON to Nextflow converter
-│   └── parse_pipeline_layout.pl # Pipeline layout parser
+│   ├── parse_pipeline_layout.pl # Pipeline layout parser
+│   ├── categorize_steps.pl      # Step categorizer (tool/infra/converter)
+│   ├── map_biotools.pl          # bio.tools registry mapper
+│   ├── pipeline_to_lite.pl      # Pipeline to Ergatis Lite converter
+│   └── pipeline_to_bco.pl       # Pipeline to BCO converter
 │
 ├── ergatis_lite/                # Ergatis Lite source code (Brett, 2007)
 │
