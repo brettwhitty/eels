@@ -138,7 +138,7 @@ if (steps?.steps?.length) {
   console.log(header('WORKFLOW STEPS'));
   for (const step of steps.steps) {
     const tool = resolveExe(step.executable);
-    const exeClean = step.executable.replace(/\{\{[^}]+\}\}/g, chalk.dim('…'));
+    const exeClean = step.executable.replace(/\$;([^$]+)\$;/g, '{{$1}}');
     const catColor = { tool_execution: 'green', converter: 'blue', provenance: 'magenta',
                        compression: 'dim', validation: 'yellow', infrastructure: 'cyan' }[step.category] || 'white';
     const catBadge = chalk[catColor](`[${step.category}]`);
