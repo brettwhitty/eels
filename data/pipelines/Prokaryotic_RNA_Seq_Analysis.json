@@ -1,0 +1,151 @@
+{
+   "component_configs" : {
+      "align_bowtie_stats.bowtie_stats" : {
+         "component" : "align_bowtie_stats",
+         "token" : "bowtie_stats"
+      },
+      "align_tophat_stats.tophat_stats" : {
+         "component" : "align_tophat_stats",
+         "token" : "tophat_stats"
+      },
+      "bam2bigwig.visualization" : {
+         "component" : "bam2bigwig",
+         "token" : "visualization"
+      },
+      "bowtie.alignment" : {
+         "component" : "bowtie",
+         "token" : "alignment"
+      },
+      "bowtie_build.reference" : {
+         "component" : "bowtie_build",
+         "token" : "reference"
+      },
+      "create_paired_list_file.list" : {
+         "component" : "create_paired_list_file",
+         "token" : "list"
+      },
+      "deseq.differential_expression" : {
+         "component" : "deseq",
+         "token" : "differential_expression"
+      },
+      "edgeR.edgeR_diff_expression" : {
+         "component" : "edgeR",
+         "token" : "edgeR_diff_expression"
+      },
+      "expression_plots.deseq" : {
+         "component" : "expression_plots",
+         "token" : "deseq"
+      },
+      "expression_plots.rpkm" : {
+         "component" : "expression_plots",
+         "token" : "rpkm"
+      },
+      "fastqc_stats.fastqc" : {
+         "component" : "fastqc_stats",
+         "token" : "fastqc"
+      },
+      "fastx_quality_stats.read1" : {
+         "component" : "fastx_quality_stats",
+         "token" : "read1"
+      },
+      "fastx_quality_stats.read2" : {
+         "component" : "fastx_quality_stats",
+         "token" : "read2"
+      },
+      "fastx_trimming.read1" : {
+         "component" : "fastx_trimming",
+         "token" : "read1"
+      },
+      "fastx_trimming.read2" : {
+         "component" : "fastx_trimming",
+         "token" : "read2"
+      },
+      "filter_deseq.filter_de" : {
+         "component" : "filter_deseq",
+         "token" : "filter_de"
+      },
+      "htseq.exon_counts" : {
+         "component" : "htseq",
+         "token" : "exon_counts"
+      },
+      "percent_mapped_stats.percent_mapped" : {
+         "component" : "percent_mapped_stats",
+         "token" : "percent_mapped"
+      },
+      "rpkm_coverage_stats.rpkm_cvg" : {
+         "component" : "rpkm_coverage_stats",
+         "token" : "rpkm_cvg"
+      },
+      "samtools_alignment_stats.alignment_stats" : {
+         "component" : "samtools_alignment_stats",
+         "token" : "alignment_stats"
+      },
+      "samtools_file_convert.sam2sorted_bam" : {
+         "component" : "samtools_file_convert",
+         "token" : "sam2sorted_bam"
+      },
+      "samtools_file_convert.sorted_name" : {
+         "component" : "samtools_file_convert",
+         "token" : "sorted_name"
+      },
+      "samtools_file_convert.sorted_position" : {
+         "component" : "samtools_file_convert",
+         "token" : "sorted_position"
+      },
+      "samtools_reference_index.reference" : {
+         "component" : "samtools_reference_index",
+         "token" : "reference"
+      },
+      "wrapper_align.wrap" : {
+         "component" : "wrapper_align",
+         "token" : "wrap"
+      }
+   },
+   "components" : [
+      "align_bowtie_stats.bowtie_stats",
+      "align_tophat_stats.tophat_stats",
+      "bam2bigwig.visualization",
+      "bowtie.alignment",
+      "bowtie_build.reference",
+      "create_paired_list_file.list",
+      "deseq.differential_expression",
+      "edgeR.edgeR_diff_expression",
+      "expression_plots.deseq",
+      "expression_plots.rpkm",
+      "fastqc_stats.fastqc",
+      "fastx_quality_stats.read1",
+      "fastx_quality_stats.read2",
+      "fastx_trimming.read1",
+      "fastx_trimming.read2",
+      "filter_deseq.filter_de",
+      "htseq.exon_counts",
+      "percent_mapped_stats.percent_mapped",
+      "rpkm_coverage_stats.rpkm_cvg",
+      "samtools_alignment_stats.alignment_stats",
+      "samtools_file_convert.sam2sorted_bam",
+      "samtools_file_convert.sorted_name",
+      "samtools_file_convert.sorted_position",
+      "samtools_reference_index.reference",
+      "wrapper_align.wrap"
+   ],
+   "has_layout" : false,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_RNA_Seq_Analysis",
+   "note" : "RNA-Seq pipelines use per-component .pipeline.layout files instead of a single pipeline.layout",
+   "pipeline_config_sections" : [
+      "bam2bigwig",
+      "bowtie",
+      "bowtie_build",
+      "deseq",
+      "edgeR",
+      "expression_plots",
+      "fastx_quality_stats",
+      "fastx_trimming",
+      "filter_deseq",
+      "filter_edgeR",
+      "htseq",
+      "percent_mapped_stats",
+      "rpkm_coverage_stats"
+   ],
+   "template_format" : "per_component_layouts"
+}

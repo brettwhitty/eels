@@ -1,0 +1,92 @@
+{
+   "component_configs" : {
+      "bam2bigwig.visualization" : {
+         "component" : "bam2bigwig",
+         "token" : "visualization"
+      },
+      "bowtie.alignment" : {
+         "component" : "bowtie",
+         "token" : "alignment"
+      },
+      "bowtie_build.reference" : {
+         "component" : "bowtie_build",
+         "token" : "reference"
+      },
+      "predict_operons.predict" : {
+         "component" : "predict_operons",
+         "token" : "predict"
+      },
+      "samtools_file_convert.sorted_position" : {
+         "component" : "samtools_file_convert",
+         "token" : "sorted_position"
+      }
+   },
+   "components" : [
+      "bowtie_build.reference",
+      "bowtie.alignment",
+      "samtools_file_convert.sorted_position",
+      "bam2bigwig.visualization",
+      "predict_operons.predict"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "RNA_Seq_Operon_Prediction",
+   "pipeline_config" : {
+      "bam2bigwig visualization" : {
+         "$;ABBR$;" : "$;ABBREVIATION$;"
+      },
+      "bowtie alignment" : {
+         "$;BOWTIE_INDEX_PREFIX$;" : "$;ABBREVIATION$;",
+         "$;INPUT_FILE_LIST$;" : "$;SHORT_READ_PAIRED_END_LIST$;"
+      },
+      "bowtie_build reference" : {
+         "$;BOWTIE_INDEX_PREFIX$;" : "$;ABBREVIATION$;"
+      },
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;GENOME$;" : "",
+         "$;INPUT_BSML_LIST$;" : "",
+         "$;SHORT_READ_PAIRED_END_LIST$;" : "",
+         "$;TRANS_TABLE$;" : "11"
+      },
+      "predict_operons predict" : {
+         "$;ABBR$;" : "$;ABBREVIATION$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "bowtie_build.reference",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "bowtie.alignment",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "samtools_file_convert.sorted_position",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "bam2bigwig.visualization",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "predict_operons.predict",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

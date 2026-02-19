@@ -1,0 +1,116 @@
+{
+   "component_configs" : {
+      "bsml2fasta.prediction_CDS" : {
+         "component" : "bsml2fasta",
+         "token" : "prediction_CDS"
+      },
+      "clean_fasta.genecalls" : {
+         "component" : "clean_fasta",
+         "token" : "genecalls"
+      },
+      "create_pseudomolecules.genecalls" : {
+         "component" : "create_pseudomolecules",
+         "token" : "genecalls"
+      },
+      "pmarks2bsml.genecalls" : {
+         "component" : "pmarks2bsml",
+         "token" : "genecalls"
+      },
+      "promote_gene_prediction.promote_prediction" : {
+         "component" : "promote_gene_prediction",
+         "token" : "promote_prediction"
+      },
+      "pseudomolecule2glimmer3.genecalls" : {
+         "component" : "pseudomolecule2glimmer3",
+         "token" : "genecalls"
+      },
+      "translate_sequence.translate_prediction" : {
+         "component" : "translate_sequence",
+         "token" : "translate_prediction"
+      }
+   },
+   "components" : [
+      "clean_fasta.genecalls",
+      "create_pseudomolecules.genecalls",
+      "pmarks2bsml.genecalls",
+      "pseudomolecule2glimmer3.genecalls",
+      "translate_sequence.translate_prediction",
+      "bsml2fasta.prediction_CDS",
+      "promote_gene_prediction.promote_prediction"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Genecalls_Input",
+   "pipeline_config" : {
+      "clean_fasta genecalls" : {
+         "$;INPUT_FILE$;" : "$;INPUT_FASTA$;"
+      },
+      "create_pseudomolecules genecalls" : {
+         "$;ACSN_FILE$;" : "$;ACCESSION_FILE$;",
+         "$;STRAIN_NAME$;" : "$;ABBREVIATION$;"
+      },
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;ACCESSION_FILE$;" : "",
+         "$;INPUT_FASTA$;" : "",
+         "$;TRANS_TABLE$;" : "11"
+      },
+      "pmarks2bsml genecalls" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "promote_gene_prediction promote_prediction" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "pseudomolecule2glimmer3 genecalls" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "translate_sequence translate_prediction" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "clean_fasta.genecalls",
+                  "type" : "component"
+               },
+               {
+                  "id" : "create_pseudomolecules.genecalls",
+                  "type" : "component"
+               },
+               {
+                  "id" : "pmarks2bsml.genecalls",
+                  "type" : "component"
+               },
+               {
+                  "id" : "pseudomolecule2glimmer3.genecalls",
+                  "type" : "component"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "translate_sequence.translate_prediction",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "bsml2fasta.prediction_CDS",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "id" : "promote_gene_prediction.promote_prediction",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

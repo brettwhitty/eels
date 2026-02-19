@@ -1,0 +1,55 @@
+{
+   "component_configs" : {
+      "download_sra.default" : {
+         "component" : "download_sra",
+         "token" : "default"
+      },
+      "sra2fastq.default" : {
+         "component" : "sra2fastq",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "download_sra.default",
+      "sra2fastq.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "LGT_Seek_Pipeline_SRA",
+   "pipeline_config" : {
+      "download_sra default" : {
+         "$;RUN_ID$;" : "$;SRA_RUN_ID$;"
+      },
+      "global" : {
+         "$;DATA_DIR$;" : "",
+         "$;SRA_RUN_ID$;" : ""
+      },
+      "sra2fastq default" : {
+         "$;DATA_DIRECTORY$;" : "$;DATA_DIR$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "download_sra.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "sra2fastq.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

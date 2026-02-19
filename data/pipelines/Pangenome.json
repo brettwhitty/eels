@@ -1,0 +1,289 @@
+{
+   "component_configs" : {
+      "blastp_plus.default" : {
+         "component" : "blastp_plus",
+         "token" : "default"
+      },
+      "bsml2fasta.assembly" : {
+         "component" : "bsml2fasta",
+         "token" : "assembly"
+      },
+      "bsml2fasta.polypeptide" : {
+         "component" : "bsml2fasta",
+         "token" : "polypeptide"
+      },
+      "create_map_file.default" : {
+         "component" : "create_map_file",
+         "token" : "default"
+      },
+      "formatdb.nuc" : {
+         "component" : "formatdb",
+         "token" : "nuc"
+      },
+      "formatdb.prot" : {
+         "component" : "formatdb",
+         "token" : "prot"
+      },
+      "genbank2bsml.default" : {
+         "component" : "genbank2bsml",
+         "token" : "default"
+      },
+      "mugsyprep.assembly" : {
+         "component" : "mugsyprep",
+         "token" : "assembly"
+      },
+      "mugsyprep.polypeptide" : {
+         "component" : "mugsyprep",
+         "token" : "polypeptide"
+      },
+      "pangenome_blast_parse.default" : {
+         "component" : "pangenome_blast_parse",
+         "token" : "default"
+      },
+      "pangenome_fix_headers.nuc" : {
+         "component" : "pangenome_fix_headers",
+         "token" : "nuc"
+      },
+      "pangenome_fix_headers.prot" : {
+         "component" : "pangenome_fix_headers",
+         "token" : "prot"
+      },
+      "pangenome_make_graphs.core_genes" : {
+         "component" : "pangenome_make_graphs",
+         "token" : "core_genes"
+      },
+      "pangenome_make_graphs.new_genes" : {
+         "component" : "pangenome_make_graphs",
+         "token" : "new_genes"
+      },
+      "pangenome_make_graphs.pangenome" : {
+         "component" : "pangenome_make_graphs",
+         "token" : "pangenome"
+      },
+      "pangenome_make_pangenome.default" : {
+         "component" : "pangenome_make_pangenome",
+         "token" : "default"
+      },
+      "pangenome_make_profile.default" : {
+         "component" : "pangenome_make_profile",
+         "token" : "default"
+      },
+      "pangenome_make_table.default" : {
+         "component" : "pangenome_make_table",
+         "token" : "default"
+      },
+      "pangenome_merge_results.default" : {
+         "component" : "pangenome_merge_results",
+         "token" : "default"
+      },
+      "tblastn_plus.default" : {
+         "component" : "tblastn_plus",
+         "token" : "default"
+      },
+      "translate_sequence.polypeptide" : {
+         "component" : "translate_sequence",
+         "token" : "polypeptide"
+      }
+   },
+   "components" : [
+      "create_map_file.default",
+      "genbank2bsml.default",
+      "bsml2fasta.assembly",
+      "mugsyprep.assembly",
+      "pangenome_fix_headers.nuc",
+      "translate_sequence.polypeptide",
+      "mugsyprep.polypeptide",
+      "pangenome_fix_headers.prot",
+      "formatdb.nuc",
+      "tblastn_plus.default",
+      "formatdb.prot",
+      "blastp_plus.default",
+      "pangenome_blast_parse.default",
+      "pangenome_merge_results.default",
+      "pangenome_make_profile.default",
+      "pangenome_make_table.default",
+      "pangenome_make_graphs.new_genes",
+      "pangenome_make_graphs.core_genes",
+      "pangenome_make_pangenome.default",
+      "pangenome_make_graphs.pangenome"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Pangenome",
+   "pipeline_config" : {
+      "formatdb nuc" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_FNA_LIST$;"
+      },
+      "formatdb prot" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_FAA_LIST$;"
+      },
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;GENOME$;" : "",
+         "$;INPUT_FAA_LIST$;" : "",
+         "$;INPUT_FNA_LIST$;" : "",
+         "$;TRANS_TABLE$;" : "11"
+      },
+      "ncbi-blastp default" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_FAA_LIST$;"
+      },
+      "ncbi-tblastn default" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_FAA_LIST$;"
+      },
+      "pangenome_make_graphs core_genes" : {
+         "$;TITLE$;" : "$;GENOME$;"
+      },
+      "pangenome_make_graphs new_genes" : {
+         "$;TITLE$;" : "$;GENOME$;"
+      },
+      "pangenome_make_graphs pangenome" : {
+         "$;TITLE$;" : "$;GENOME$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "create_map_file.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "genbank2bsml.default",
+                        "type" : "component"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "children" : [
+                                 {
+                                    "id" : "bsml2fasta.assembly",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "id" : "mugsyprep.assembly",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "id" : "pangenome_fix_headers.nuc",
+                                    "type" : "component"
+                                 }
+                              ],
+                              "type" : "serial"
+                           },
+                           {
+                              "children" : [
+                                 {
+                                    "id" : "translate_sequence.polypeptide",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "id" : "mugsyprep.polypeptide",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "id" : "pangenome_fix_headers.prot",
+                                    "type" : "component"
+                                 }
+                              ],
+                              "type" : "serial"
+                           }
+                        ],
+                        "type" : "parallel"
+                     }
+                  ],
+                  "type" : "serial"
+               },
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "formatdb.nuc",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "tblastn_plus.default",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "id" : "formatdb.prot",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "blastp_plus.default",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "pangenome_blast_parse.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "pangenome_merge_results.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "pangenome_make_profile.default",
+                        "type" : "component"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "children" : [
+                                 {
+                                    "id" : "pangenome_make_table.default",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "id" : "pangenome_make_graphs.new_genes",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "id" : "pangenome_make_graphs.core_genes",
+                                    "type" : "component"
+                                 }
+                              ],
+                              "type" : "serial"
+                           },
+                           {
+                              "children" : [
+                                 {
+                                    "id" : "pangenome_make_pangenome.default",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "id" : "pangenome_make_graphs.pangenome",
+                                    "type" : "component"
+                                 }
+                              ],
+                              "type" : "serial"
+                           }
+                        ],
+                        "type" : "parallel"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

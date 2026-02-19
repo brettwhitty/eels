@@ -1,0 +1,54 @@
+{
+   "component_configs" : {
+      "prepare_paired_ends_for_velvet.default" : {
+         "component" : "prepare_paired_ends_for_velvet",
+         "token" : "default"
+      },
+      "velvet_optimiser.assembly" : {
+         "component" : "velvet_optimiser",
+         "token" : "assembly"
+      }
+   },
+   "components" : [
+      "prepare_paired_ends_for_velvet.default",
+      "velvet_optimiser.assembly"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Velvet_Assembly",
+   "pipeline_config" : {
+      "global" : {
+         "$;LONG_READ_PAIRED_END_LIST$;" : "",
+         "$;LONG_READ_SINGLE_END$;" : "",
+         "$;SHORT_READ_PAIRED_END_LIST$;" : "",
+         "$;SHORT_READ_SINGLE_END$;" : ""
+      },
+      "prepare_paired_ends_for_velvet default" : {
+         "$;LONG_INPUT_LIST$;" : "$;LONG_READ_PAIRED_END_LIST$;",
+         "$;SHORT_INPUT_LIST$;" : "$;SHORT_READ_PAIRED_END_LIST$;"
+      },
+      "velvet_optimiser assembly" : {
+         "$;LONG$;" : "$;LONG_READ_SINGLE_END$;",
+         "$;SHORT$;" : "$;SHORT_READ_SINGLE_END$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "prepare_paired_ends_for_velvet.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "velvet_optimiser.assembly",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

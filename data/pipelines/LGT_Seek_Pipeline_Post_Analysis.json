@@ -1,0 +1,42 @@
+{
+   "component_configs" : {
+      "gather_lgtview_files.default" : {
+         "component" : "gather_lgtview_files",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "gather_lgtview_files.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "LGT_Seek_Pipeline_Post_Analysis",
+   "pipeline_config" : {
+      "gather_lgtview_files default" : {
+         "$;RUN_ID$;" : "$;SRA_RUN_ID$;"
+      },
+      "global" : {
+         "$;SRA_RUN_ID$;" : ""
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "gather_lgtview_files.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

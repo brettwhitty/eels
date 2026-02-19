@@ -1,0 +1,379 @@
+{
+   "component_configs" : {
+      "bsml2chado.ber_post" : {
+         "component" : "bsml2chado",
+         "token" : "ber_post"
+      },
+      "bsml2chado.ber_pre" : {
+         "component" : "bsml2chado",
+         "token" : "ber_pre"
+      },
+      "bsml2chado.hmm_post" : {
+         "component" : "bsml2chado",
+         "token" : "hmm_post"
+      },
+      "bsml2chado.hmm_pre" : {
+         "component" : "bsml2chado",
+         "token" : "hmm_pre"
+      },
+      "bsml2chado.lipop" : {
+         "component" : "bsml2chado",
+         "token" : "lipop"
+      },
+      "bsml2chado.pipeline_summary" : {
+         "component" : "bsml2chado",
+         "token" : "pipeline_summary"
+      },
+      "bsml2chado.pmarks" : {
+         "component" : "bsml2chado",
+         "token" : "pmarks"
+      },
+      "bsml2chado.ps_scan" : {
+         "component" : "bsml2chado",
+         "token" : "ps_scan"
+      },
+      "bsml2chado.signalp" : {
+         "component" : "bsml2chado",
+         "token" : "signalp"
+      },
+      "bsml2chado.tmhmm" : {
+         "component" : "bsml2chado",
+         "token" : "tmhmm"
+      },
+      "concatenate_files.nuc" : {
+         "component" : "concatenate_files",
+         "token" : "nuc"
+      },
+      "concatenate_files.prot" : {
+         "component" : "concatenate_files",
+         "token" : "prot"
+      },
+      "formatdb.genome" : {
+         "component" : "formatdb",
+         "token" : "genome"
+      },
+      "formatdb.nuc" : {
+         "component" : "formatdb",
+         "token" : "nuc"
+      },
+      "formatdb.prot" : {
+         "component" : "formatdb",
+         "token" : "prot"
+      },
+      "initdb.default" : {
+         "component" : "initdb",
+         "token" : "default"
+      },
+      "pathway_tools_input.default" : {
+         "component" : "pathway_tools_input",
+         "token" : "default"
+      },
+      "pipeline_pmarks" : {
+         "component" : "pipeline_pmarks",
+         "token" : "default"
+      },
+      "replace_defline_with_locusID.nuc" : {
+         "component" : "replace_defline_with_locusID",
+         "token" : "nuc"
+      },
+      "replace_defline_with_locusID.prot" : {
+         "component" : "replace_defline_with_locusID",
+         "token" : "prot"
+      },
+      "scp_files.copy_ber_post" : {
+         "component" : "scp_files",
+         "token" : "copy_ber_post"
+      },
+      "scp_files.copy_ber_pre" : {
+         "component" : "scp_files",
+         "token" : "copy_ber_pre"
+      },
+      "scp_files.copy_formatdb_nuc" : {
+         "component" : "scp_files",
+         "token" : "copy_formatdb_nuc"
+      },
+      "scp_files.copy_formatdb_prot" : {
+         "component" : "scp_files",
+         "token" : "copy_formatdb_prot"
+      },
+      "scp_files.copy_genome" : {
+         "component" : "scp_files",
+         "token" : "copy_genome"
+      }
+   },
+   "components" : [
+      "initdb.default",
+      "bsml2chado.pipeline_summary",
+      "bsml2chado.signalp",
+      "bsml2chado.lipop",
+      "bsml2chado.ps_scan",
+      "bsml2chado.hmm_pre",
+      "bsml2chado.hmm_post",
+      "bsml2chado.tmhmm",
+      "bsml2chado.ber_pre",
+      "bsml2chado.ber_post",
+      "scp_files.copy_ber_pre",
+      "scp_files.copy_ber_post",
+      "pathway_tools_input.default",
+      "concatenate_files.prot",
+      "replace_defline_with_locusID.prot",
+      "formatdb.prot",
+      "scp_files.copy_formatdb_prot",
+      "concatenate_files.nuc",
+      "replace_defline_with_locusID.nuc",
+      "formatdb.nuc",
+      "scp_files.copy_formatdb_nuc",
+      "formatdb.genome",
+      "scp_files.copy_genome"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Chado_Loading",
+   "pipeline_config" : {
+      "bsml2chado ber_post" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado ber_pre" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado hmm_post" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado hmm_pre" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado lipop" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado pipeline_summary" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado ps_scan" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado signalp" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado tmhmm" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "formatdb genome" : {
+         "$;DATABASE_NAME$;" : "$;DB$;_genome_dbn.fa"
+      },
+      "formatdb nuc" : {
+         "$;DATABASE_NAME$;" : "$;DB$;_dbn.fa"
+      },
+      "formatdb prot" : {
+         "$;DATABASE_NAME$;" : "$;DB$;_dbp.fa"
+      },
+      "global" : {
+         "$;DB$;" : "",
+         "$;GENOME$;" : "",
+         "$;HOST$;" : "",
+         "$;PASS$;" : "",
+         "$;PASS_FILE$;" : "",
+         "$;TAXID$;" : "",
+         "$;USER$;" : ""
+      },
+      "initdb default" : {
+         "$;ADMIN_PASS$;" : "$;PASS$;",
+         "$;ADMIN_USER$;" : "$;USER$;",
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;SERVER$;" : "$;HOST$;"
+      },
+      "pathway_tools_input default" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;DB_HOST$;" : "$;HOST$;",
+         "$;ORGANISM_NAME$;" : "$;GENOME$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
+         "$;TAXON_ID$;" : "$;TAXID$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "scp_files copy_ber_post" : {
+         "$;DATABASE$;" : "$;DB$;"
+      },
+      "scp_files copy_ber_pre" : {
+         "$;DATABASE$;" : "$;DB$;"
+      },
+      "scp_files copy_formatdb_nuc" : {
+         "$;DATABASE$;" : "$;DB$;"
+      },
+      "scp_files copy_formatdb_prot" : {
+         "$;DATABASE$;" : "$;DB$;"
+      },
+      "scp_files copy_genome" : {
+         "$;DATABASE$;" : "$;DB$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "initdb.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.pipeline_summary",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.signalp",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.lipop",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.ps_scan",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.hmm_pre",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.hmm_post",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.tmhmm",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.ber_pre",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2chado.ber_post",
+                  "type" : "component"
+               },
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "scp_files.copy_ber_pre",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "scp_files.copy_ber_post",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     },
+                     {
+                        "id" : "pathway_tools_input.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "concatenate_files.prot",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "replace_defline_with_locusID.prot",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "formatdb.prot",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "scp_files.copy_formatdb_prot",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "id" : "concatenate_files.nuc",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "replace_defline_with_locusID.nuc",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "formatdb.nuc",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "scp_files.copy_formatdb_nuc",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "id" : "formatdb.genome",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "scp_files.copy_genome",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     }
+                  ],
+                  "type" : "parallel"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

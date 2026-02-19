@@ -1,0 +1,83 @@
+{
+   "component_configs" : {
+      "bsml2fasta.prediction_CDS" : {
+         "component" : "bsml2fasta",
+         "token" : "prediction_CDS"
+      },
+      "prodigal.default" : {
+         "component" : "prodigal",
+         "token" : "default"
+      },
+      "promote_gene_prediction.promote_prediction" : {
+         "component" : "promote_gene_prediction",
+         "token" : "promote_prediction"
+      },
+      "translate_sequence.translate_prediction" : {
+         "component" : "translate_sequence",
+         "token" : "translate_prediction"
+      }
+   },
+   "components" : [
+      "prodigal.default",
+      "translate_sequence.translate_prediction",
+      "bsml2fasta.prediction_CDS",
+      "promote_gene_prediction.promote_prediction"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Prodigal_Predictions",
+   "pipeline_config" : {
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;TRANS_TABLE$;" : "11"
+      },
+      "prodigal default" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;",
+         "$;TRANSLATION_TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "promote_gene_prediction promote_prediction" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "translate_sequence translate_prediction" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "prodigal.default",
+                        "type" : "component"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "id" : "translate_sequence.translate_prediction",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "bsml2fasta.prediction_CDS",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "parallel"
+                     },
+                     {
+                        "id" : "promote_gene_prediction.promote_prediction",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

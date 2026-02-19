@@ -1,0 +1,88 @@
+{
+   "component_configs" : {
+      "pangenome.default" : {
+         "component" : "pangenome",
+         "token" : "default"
+      },
+      "split_multifasta.default" : {
+         "component" : "split_multifasta",
+         "token" : "default"
+      },
+      "wu-blastp.default" : {
+         "component" : "wu-blastp",
+         "token" : "default"
+      },
+      "wu-tblastn.default" : {
+         "component" : "wu-tblastn",
+         "token" : "default"
+      },
+      "xdformat.default" : {
+         "component" : "xdformat",
+         "token" : "default"
+      },
+      "xdformat.nuc" : {
+         "component" : "xdformat",
+         "token" : "nuc"
+      },
+      "xdformat.pepdb" : {
+         "component" : "xdformat",
+         "token" : "pepdb"
+      }
+   },
+   "components" : [
+      "xdformat.default",
+      "xdformat.pepdb",
+      "split_multifasta.default",
+      "wu-blastp.default",
+      "wu-tblastn.default",
+      "pangenome.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : false,
+   "name" : "Pangenome_old",
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "xdformat.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "xdformat.pepdb",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "split_multifasta.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "wu-blastp.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "wu-tblastn.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "pangenome.default",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

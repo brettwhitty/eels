@@ -1,0 +1,105 @@
+{
+   "component_configs" : {
+      "bsml2fasta.prediction_CDS" : {
+         "component" : "bsml2fasta",
+         "token" : "prediction_CDS"
+      },
+      "glimmer3.iter1" : {
+         "component" : "glimmer3",
+         "token" : "iter1"
+      },
+      "glimmer3.iter2" : {
+         "component" : "glimmer3",
+         "token" : "iter2"
+      },
+      "promote_gene_prediction.promote_prediction" : {
+         "component" : "promote_gene_prediction",
+         "token" : "promote_prediction"
+      },
+      "train_for_glimmer3_iteration.train_for_glimmer" : {
+         "component" : "train_for_glimmer3_iteration",
+         "token" : "train_for_glimmer"
+      },
+      "translate_sequence.translate_prediction" : {
+         "component" : "translate_sequence",
+         "token" : "translate_prediction"
+      }
+   },
+   "components" : [
+      "glimmer3.iter1",
+      "train_for_glimmer3_iteration.train_for_glimmer",
+      "glimmer3.iter2",
+      "translate_sequence.translate_prediction",
+      "bsml2fasta.prediction_CDS",
+      "promote_gene_prediction.promote_prediction"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Glimmer_Predictions",
+   "pipeline_config" : {
+      "glimmer3 iter1" : {
+         "$;GLIMMER3_OPTS$;" : "-o50 -g110 -t30 -z$;TRANS_TABLE$; -l -X",
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "glimmer3 iter2" : {
+         "$;GLIMMER3_OPTS$;" : "-o50 -g110 -t30 -z$;TRANS_TABLE$; -l -X -b $;REPOSITORY_ROOT$;/output_repository/train_for_glimmer3_iteration/$;PIPELINEID$;_train_for_glimmer/all.motif",
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;TRANS_TABLE$;" : "11"
+      },
+      "promote_gene_prediction promote_prediction" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "translate_sequence translate_prediction" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "glimmer3.iter1",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "train_for_glimmer3_iteration.train_for_glimmer",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "glimmer3.iter2",
+                        "type" : "component"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "id" : "translate_sequence.translate_prediction",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "bsml2fasta.prediction_CDS",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "parallel"
+                     },
+                     {
+                        "id" : "promote_gene_prediction.promote_prediction",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

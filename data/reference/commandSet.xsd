@@ -1,0 +1,102 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+ 	    <xsd:documentation xml:lang="en">
+   			Command Set Schema to be used in the workflow system.
+			Copyright 2002, The Institute for Genomic Research (TIGR).
+            All rights reserved.
+  		</xsd:documentation>
+	</xsd:annotation>
+
+
+    <!-- Root Element, contains 1 to unbounded command sets -->
+	<xsd:element name="commandSetRoot" type="commandSetRootType"/ >
+
+	<xsd:complexType name="commandSetRootType">
+	    <xsd:element name="commandSet" type="commandSetType"/>	
+	</xsd:complexType> 
+
+
+    <!-- Command Set Type -->
+	<xsd:complexType name="commandSetType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" use="required"/>	
+			<xsd:element name="id" type="xsd:integer" use="optional" minOccurs="0"/>	
+			<xsd:element name="startTime" type="xsd:dateTime" use="optional" minOccurs="0"/>	
+			<xsd:element name="endTime" type="xsd:dateTime" use="optional" minOccurs="0"/>	
+			<xsd:element name="state" type="listOfStatesType" use="optional" minOccurs="0"/>	
+			<xsd:element name="waitUntil" type="xsd:dateTime" use="optional" minOccurs="0"/>	
+			<xsd:element name="successful" type="xsd:boolean" use="optional" minOccurs="0"/>	
+			<xsd:element name="config" type="ConfigType" use="optional" minOccurs="0"/>	
+			<xsd:element name="status" type="commandSetStatusType" use="optional" minOccurs="0"/>	
+            <xsd:group ref="commandList" maxOccurs="unbounded"/>
+		</xsd:sequence>
+			<xsd:attribute name="type" type="xsd:string" use="required"/>	
+	</xsd:complexType>
+
+
+    <!-- CommandList group that may conatin a command and/or command set -->
+    <xsd:group name="commandList">
+        <xsd:choice>
+			<xsd:element name="command" type="commandType"/>	
+			<xsd:element name="commandSet" type="commaSetType"/>	
+        </xsd:choice>
+    </xsd:group name="CommandList">
+
+    <!-- List for the element state -->
+    <xsd:simpleType name="listOfStatesType">
+        <xsd:list itemType="commandState"/>
+    </xsd:simpleType> 
+    <listOfStates>completed waiting paused running</listOfStates>
+
+
+    <!--Status Type, keeps the status information of a comamnd set or a command -->
+	<xsd:complexType name="commandSetStatusType">
+		<xsd:element name="returnValue" type="xsd:string" use="optional"/>	
+		<xsd:element name="errors" type="xsd:integer" use="optional" minOccurs="0"/>	
+		<xsd:element name="running" type="xsd:integer" use="optional" minOccurs="0"/>	
+		<xsd:element name="waiting" type="xsd:integer" use="optional" minOccurs="0"/>	
+		<xsd:element name="paused" type="xsd:integer" use="optional" minOccurs="0"/>	
+	</xsd:complexType> 
+
+
+    <!--Config Type, keeps the configuration information if any needed for comamnd set or a command -->
+	<xsd:complexType name="configType">
+		<xsd:element name="filePath" type="xsd:string" use="optional" minOccurs="0"/>
+		<xsd:element name="param" type="paramType" use="optional" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:complexType> 
+
+
+    <!--Param Type, keeps the parameter information if any for a command or command set -->
+	<xsd:complexType name="paramType">
+		<xsd:element name="key" type="xsd:string"/>
+		<xsd:element name="value" type="xsd:string" maxOccurs="unbounded"/>
+	</xsd:complexType>
+
+
+    <!--Command Type -->
+	<xsd:complexType name="commandType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" use="required"/>	
+			<xsd:element name="id" type="xsd:integer" use="optional" minOccurs="0"/>	
+			<xsd:element name="startTime" type="xsd:dateTime" use="optional" minOccurs="0"/>	
+			<xsd:element name="endTime" type="xsd:dateTime" use="optional" minOccurs="0"/>	
+			<xsd:element name="state" type="listOfStatesType" use="optional" minOccurs="0"/>	
+			<xsd:element name="waitUntil" type="xsd:dateTime" use="optional" minOccurs="0"/>	
+			<xsd:element name="type" type="xsd:string" use="optional" minOccurs="0""/>	
+			<xsd:element name="retryCount" type="xsd:integer" use="optional" minOccurs="0"/>	
+			<xsd:element name="timeOut" type="xsd:integer" use="optional" minOccurs="0"/>	
+			<xsd:element name="successful" type="xsd:boolean" use="optional" minOccurs="0"/>	
+			<xsd:element name="config" type="configType" use="optional" minOccurs="0"/>	
+			<xsd:element name="status" type="commandStatusType" use="optional" minOccurs="0"/>	
+			<xsd:element name="param" type="paramType" use="optional" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <!--Status Type, keeps the status information of a comamnd set or a command -->
+	<xsd:complexType name="commandStatusType">
+		<xsd:element name="returnValue" type="xsd:string" use="optional" minOccurs="0"/>	
+		<xsd:element name="message" type="xsd:string" use="optional" minOccurs="0"/>	
+	</xsd:complexType> 
+
+</xsd:schema>

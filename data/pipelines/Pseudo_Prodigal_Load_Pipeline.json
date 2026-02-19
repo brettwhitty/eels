@@ -1,0 +1,175 @@
+{
+   "component_configs" : {},
+   "components" : [
+      "start pipeline:"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Pseudo_Prodigal_Load_Pipeline",
+   "pipeline_config" : {
+      "RNAmmer default" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "bsml2chado ber_post" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado ber_pre" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado hmm_post" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado hmm_pre" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado lipop" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado pipeline_summary" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado pmarks" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado ps_scan" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado signalp" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "bsml2chado tmhmm" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;SERVER$;" : "$;HOST$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "clean_fasta default" : {
+         "$;INPUT_FILE$;" : ""
+      },
+      "create_pseudomolecules default" : {
+         "$;ACSN_FILE$;" : "",
+         "$;CONTIG_FILE$;" : "$;INPUT_FILE$;",
+         "$;STRAIN_NAME$;" : "$;ABBREVIATION$;"
+      },
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;ACSN_FILE$;" : "",
+         "$;COPY_POST_OUTPUT_DIR$;" : "",
+         "$;COPY_PRE_OUTPUT_DIR$;" : "",
+         "$;DB$;" : "",
+         "$;GENOME$;" : "",
+         "$;HOST$;" : "",
+         "$;INPUT_FILE$;" : "",
+         "$;PASS$;" : "",
+         "$;TAXID$;" : "",
+         "$;TRANS_TABLE$;" : "11",
+         "$;USER$;" : ""
+      },
+      "initdb default" : {
+         "$;ADMIN_PASS$;" : "$;PASS$;",
+         "$;ADMIN_USER$;" : "$;USER$;",
+         "$;DATABASE$;" : "$;DB$;",
+         "$;SERVER$;" : "$;HOST$;"
+      },
+      "lipop default" : {
+         "$;PROJECT_ABBR$;" : "$;ABBREVIATION$;"
+      },
+      "p_func default" : {
+         "$;OUTPUT_FILE_BASE_NAME$;" : "$;ABBREVIATION$;"
+      },
+      "parse_evidence ber_post" : {
+         "$;OTHER_PARSER_OPTIONS$;" : "char_db=$;UNIREF100_LOOKUP_FILE$;"
+      },
+      "parse_evidence ber_pre" : {
+         "$;OTHER_PARSER_OPTIONS$;" : "char_db=$;UNIREF100_LOOKUP_FILE$;"
+      },
+      "pathway_tools_input default" : {
+         "$;DATABASE$;" : "$;DB$;",
+         "$;DB_HOST$;" : "$;HOST$;",
+         "$;ORGANISM_NAME$;" : "$;GENOME$;",
+         "$;PASSWORD$;" : "$;PASS$;",
+         "$;TAXON_ID$;" : "$;TAXID$;",
+         "$;USERNAME$;" : "$;USER$;"
+      },
+      "pipeline_summary default" : {
+         "$;LOCUS_PREFIX$;" : "$;ABBREVIATION$;",
+         "$;ORGANISM$;" : "$;GENOME$;",
+         "$;TRANSLATION_TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "pmarks2bsml default" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "prodigal default" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;",
+         "$;TRANSLATION_TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "scp_files copy_ber_post" : {
+         "$;OUTDIR$;" : "$;COPY_POST_OUTPUT_DIR$;"
+      },
+      "scp_files copy_ber_pre" : {
+         "$;OUTDIR$;" : "$;COPY_PRE_OUTPUT_DIR$;"
+      },
+      "split_multifasta default" : {
+         "$;INPUT_FILE_LIST$;" : "$;REPOSITORY_ROOT$;/output_repository/create_pseudomolecules/$;PIPELINEID$;_default/create_pseudomolecules.list"
+      },
+      "start_site_curation default" : {
+         "$;DB_PASSWORD$;" : "$;PASS$;",
+         "$;DB_USERNAME$;" : "$;USER$;"
+      },
+      "tRNAscan-SE find_tRNA" : {
+         "$;ID_ROOT$;" : "$;ABBREVIATION$;"
+      },
+      "translate_sequence final_polypeptides" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "translate_sequence translate" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "translate_sequence translate_new_models" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "translate_sequence translate_prediction" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "id" : "start pipeline:",
+            "type" : "component"
+         }
+      ],
+      "type" : "instance"
+   }
+}

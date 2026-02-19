@@ -1,0 +1,103 @@
+{
+   "component_configs" : {
+      "blastp_plus.outside" : {
+         "component" : "blastp_plus",
+         "token" : "outside"
+      },
+      "blastp_plus.sister" : {
+         "component" : "blastp_plus",
+         "token" : "sister"
+      },
+      "concatenate_files.outside" : {
+         "component" : "concatenate_files",
+         "token" : "outside"
+      },
+      "concatenate_files.sister" : {
+         "component" : "concatenate_files",
+         "token" : "sister"
+      },
+      "filter_lgt_class_c_genes.default" : {
+         "component" : "filter_lgt_class_c_genes",
+         "token" : "default"
+      },
+      "getorf.assembly" : {
+         "component" : "getorf",
+         "token" : "assembly"
+      }
+   },
+   "components" : [
+      "getorf.assembly",
+      "blastp_plus.sister",
+      "concatenate_files.sister",
+      "blastp_plus.outside",
+      "concatenate_files.outside"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "LGT_Seek_Phylogenetic",
+   "pipeline_config" : {
+      "blastp_plus outside" : {
+         "$;NEG_GI_LIST$;" : ""
+      },
+      "blastp_plus sister" : {
+         "$;GI_LIST$;" : ""
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "getorf.assembly",
+                              "type" : "component"
+                           },
+                           {
+                              "children" : [
+                                 {
+                                    "children" : [
+                                       {
+                                          "id" : "blastp_plus.sister",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "concatenate_files.sister",
+                                          "type" : "component"
+                                       }
+                                    ],
+                                    "type" : "serial"
+                                 },
+                                 {
+                                    "children" : [
+                                       {
+                                          "id" : "blastp_plus.outside",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "concatenate_files.outside",
+                                          "type" : "component"
+                                       }
+                                    ],
+                                    "type" : "serial"
+                                 }
+                              ],
+                              "type" : "parallel"
+                           }
+                        ],
+                        "name" : "filter_lgt_class_c_genes.default",
+                        "type" : "serial"
+                     }
+                  ],
+                  "type" : "parallel"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

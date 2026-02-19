@@ -1,0 +1,666 @@
+[
+  {
+    "name": "Eukaryotic_RNA_Seq_Analysis",
+    "num_components": 38,
+    "num_configs": 38,
+    "has_layout": false,
+    "has_pipeline_config": true,
+    "template_format": "per_component_layouts",
+    "components": [
+      "align_bowtie_stats.bowtie_stats",
+      "align_tophat_split_stats.tophat_stats",
+      "align_tophat_stats.tophat_stats",
+      "bam2bigwig.visualization",
+      "bam_merge.list",
+      "bowtie_build.reference",
+      "create_cuffsuite_files.cuffcompare",
+      "create_cuffsuite_files.cuffdiff",
+      "create_paired_list_file.list",
+      "create_paired_list_file.split",
+      "cuffcompare.comparison",
+      "cuffdiff.differential_expression",
+      "cuffdiff_filter.filter_cuff",
+      "cufflinks.isoform",
+      "cummerbund.cummer_cuff",
+      "deseq.differential_expression",
+      "edgeR.edgeR_diff_expression",
+      "expression_plots.cuffdiff",
+      "expression_plots.deseq",
+      "expression_plots.rpkm",
+      "fastqc_stats.fastqc",
+      "fastx_quality_stats.read1",
+      "fastx_quality_stats.read2",
+      "fastx_trimming.read1",
+      "fastx_trimming.read2",
+      "filter_deseq.filter_de",
+      "htseq.exon_counts",
+      "percent_mapped_stats.percent_mapped",
+      "rpkm_coverage_stats.rpkm_cvg",
+      "samtools_alignment_stats.alignment_stats",
+      "samtools_file_convert.sam2sorted_bam",
+      "samtools_file_convert.sorted_name",
+      "samtools_file_convert.sorted_position",
+      "samtools_reference_index.reference",
+      "split_fastq.first_mate",
+      "split_fastq.second_mate",
+      "tophat.alignment",
+      "wrapper_align.wrap"
+    ]
+  },
+  {
+    "name": "GenBank_submission_no_annotation",
+    "num_components": 2,
+    "num_configs": 2,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "create_db_list_file.default",
+      "dump_fasta.default"
+    ]
+  },
+  {
+    "name": "GenBank_submission_pipeline",
+    "num_components": 7,
+    "num_configs": 7,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "create_db_list_file.default",
+      "assign_dbxref_ids.default",
+      "curate_common_names.default",
+      "remove_db_gene_syms_with_hypos.default",
+      "update_ec_numbers.default",
+      "fix_gene_symbols.db",
+      "dump_table.default"
+    ]
+  },
+  {
+    "name": "Integrated_JOCs-pangenome_pipeline",
+    "num_components": 12,
+    "num_configs": 12,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "bsml2fasta.fastamulti",
+      "bsml2fasta.genomicseq",
+      "xdformat.nuc",
+      "xdformat.default",
+      "split_multifasta.default",
+      "wu-blastp.default",
+      "jaccard.default",
+      "muscle.jaccard",
+      "j_ortholog_clusters.default",
+      "muscle.j_ortholog_clusters",
+      "wu-tblastn.default",
+      "pangenome.default"
+    ]
+  },
+  {
+    "name": "JOCs_comparative_pipeline",
+    "num_components": 8,
+    "num_configs": 9,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "bsml2fasta.fastamulti",
+      "split_multifasta.default",
+      "xdformat.default",
+      "wu-blastp.default",
+      "jaccard.default",
+      "muscle.jaccard",
+      "j_ortholog_clusters.default",
+      "muscle.j_ortholog_clusters"
+    ]
+  },
+  {
+    "name": "LGT_Seek_Parametric",
+    "num_components": 3,
+    "num_configs": 4,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "selfsim.default",
+      "sighunt.default",
+      "alien_hunter.default"
+    ]
+  },
+  {
+    "name": "LGT_Seek_Phylogenetic",
+    "num_components": 5,
+    "num_configs": 6,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "getorf.assembly",
+      "blastp_plus.sister",
+      "concatenate_files.sister",
+      "blastp_plus.outside",
+      "concatenate_files.outside"
+    ]
+  },
+  {
+    "name": "LGT_Seek_Pipeline",
+    "num_components": 18,
+    "num_configs": 20,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "lgt_bwa.recipient",
+      "lgt_bwa.donor",
+      "lgt_bwa_post_process.default",
+      "filter_dups_lc_seqs.lgt",
+      "lgt_bwa.lgt",
+      "sam2lca.lgt",
+      "sam2fasta.fasta",
+      "split_multifasta.fasta",
+      "blastn_plus.nt",
+      "concatenate_files.blast",
+      "blast_lgt_finder.lgt",
+      "blast2lca.lgt",
+      "lgt_create_validated_bam.lgt",
+      "lgt_bwa.validation",
+      "lgt_mpileup.lgt",
+      "filter_dups_lc_seqs.mb",
+      "lgt_bwa.mb",
+      "sam2lca.mb"
+    ]
+  },
+  {
+    "name": "LGT_Seek_Pipeline_BWA_Index",
+    "num_components": 3,
+    "num_configs": 5,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "lgt_build_bwa_index.recipient",
+      "lgt_build_bwa_index.donor",
+      "lgt_build_bwa_index.refseq"
+    ]
+  },
+  {
+    "name": "LGT_Seek_Pipeline_Post_Analysis",
+    "num_components": 1,
+    "num_configs": 1,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "gather_lgtview_files.default"
+    ]
+  },
+  {
+    "name": "LGT_Seek_Pipeline_SRA",
+    "num_components": 2,
+    "num_configs": 2,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "download_sra.default",
+      "sra2fastq.default"
+    ]
+  },
+  {
+    "name": "LGT_Seek_Pipeline_TCGA",
+    "num_components": 0,
+    "num_configs": 1,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": []
+  },
+  {
+    "name": "NonPseudo_Glimmer_Load_Pipeline",
+    "num_components": 1,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "start pipeline:"
+    ]
+  },
+  {
+    "name": "NonPseudo_Glimmer_NonLoad_Pipeline",
+    "num_components": 0,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": []
+  },
+  {
+    "name": "NonPseudo_Prodigal_Load_Pipeline",
+    "num_components": 1,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "start pipeline:"
+    ]
+  },
+  {
+    "name": "NonPseudo_Prodigal_NonLoad_Pipeline",
+    "num_components": 0,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": []
+  },
+  {
+    "name": "Pangenome",
+    "num_components": 20,
+    "num_configs": 21,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "create_map_file.default",
+      "genbank2bsml.default",
+      "bsml2fasta.assembly",
+      "mugsyprep.assembly",
+      "pangenome_fix_headers.nuc",
+      "translate_sequence.polypeptide",
+      "mugsyprep.polypeptide",
+      "pangenome_fix_headers.prot",
+      "formatdb.nuc",
+      "tblastn_plus.default",
+      "formatdb.prot",
+      "blastp_plus.default",
+      "pangenome_blast_parse.default",
+      "pangenome_merge_results.default",
+      "pangenome_make_profile.default",
+      "pangenome_make_table.default",
+      "pangenome_make_graphs.new_genes",
+      "pangenome_make_graphs.core_genes",
+      "pangenome_make_pangenome.default",
+      "pangenome_make_graphs.pangenome"
+    ]
+  },
+  {
+    "name": "Pangenome_old",
+    "num_components": 6,
+    "num_configs": 7,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "xdformat.default",
+      "xdformat.pepdb",
+      "split_multifasta.default",
+      "wu-blastp.default",
+      "wu-tblastn.default",
+      "pangenome.default"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Celera_Assembly",
+    "num_components": 2,
+    "num_configs": 2,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "sff_to_CA.default",
+      "celera-assembler.assembly"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Chado_Loading",
+    "num_components": 23,
+    "num_configs": 25,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "initdb.default",
+      "bsml2chado.pipeline_summary",
+      "bsml2chado.signalp",
+      "bsml2chado.lipop",
+      "bsml2chado.ps_scan",
+      "bsml2chado.hmm_pre",
+      "bsml2chado.hmm_post",
+      "bsml2chado.tmhmm",
+      "bsml2chado.ber_pre",
+      "bsml2chado.ber_post",
+      "scp_files.copy_ber_pre",
+      "scp_files.copy_ber_post",
+      "pathway_tools_input.default",
+      "concatenate_files.prot",
+      "replace_defline_with_locusID.prot",
+      "formatdb.prot",
+      "scp_files.copy_formatdb_prot",
+      "concatenate_files.nuc",
+      "replace_defline_with_locusID.nuc",
+      "formatdb.nuc",
+      "scp_files.copy_formatdb_nuc",
+      "formatdb.genome",
+      "scp_files.copy_genome"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Gene_Annotations",
+    "num_components": 41,
+    "num_configs": 50,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "translate_sequence.translate",
+      "filter_bogus_genes.filtered",
+      "bsml2fasta.create_blastx_pre_input",
+      "hmmpfam3.pre_overlap_analysis",
+      "RAPSearch2.pre_overlap_analysis",
+      "bsml2fasta.pre_overlap_analysis",
+      "formatdb.pre_overlap_analysis",
+      "bsml2featurerelationships.pre_overlap_analysis",
+      "ber.pre_overlap_analysis",
+      "overlap_analysis.default",
+      "start_site_curation.default",
+      "translate_sequence.translate_new_models",
+      "bsml2fasta.create_blastx_post_input",
+      "hmmpfam3.post_overlap_analysis",
+      "RAPSearch2.post_overlap_analysis",
+      "bsml2fasta.post_overlap_analysis",
+      "formatdb.post_overlap_analysis",
+      "bsml2featurerelationships.post_overlap_analysis",
+      "ber.post_overlap_analysis",
+      "bsml2interevidence_fasta.default",
+      "split_multifasta.split_interevidence",
+      "RAPSearch2.interevidence_search",
+      "translate_sequence.final_polypeptides",
+      "bsml2fasta.final_cds",
+      "signalp.default",
+      "ps_scan.default",
+      "ncbi-blastp.COGS",
+      "ncbi-blastp.eggNOG",
+      "lipop.default",
+      "tmhmm.default",
+      "parse_evidence.hmmpfam3_pre",
+      "parse_evidence.hmmpfam3_post",
+      "parse_evidence.ber_pre",
+      "parse_evidence.ber_post",
+      "parse_evidence.tmhmm",
+      "parse_evidence.eggNOG",
+      "parse_evidence.lipoprotein",
+      "parse_evidence.hypothetical",
+      "p_func.default",
+      "pipeline_summary.default",
+      "prokpipe_consistency_checks.bsml"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Genecalls_Input",
+    "num_components": 7,
+    "num_configs": 7,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "clean_fasta.genecalls",
+      "create_pseudomolecules.genecalls",
+      "pmarks2bsml.genecalls",
+      "pseudomolecule2glimmer3.genecalls",
+      "translate_sequence.translate_prediction",
+      "bsml2fasta.prediction_CDS",
+      "promote_gene_prediction.promote_prediction"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Glimmer_Predictions",
+    "num_components": 6,
+    "num_configs": 6,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "glimmer3.iter1",
+      "train_for_glimmer3_iteration.train_for_glimmer",
+      "glimmer3.iter2",
+      "translate_sequence.translate_prediction",
+      "bsml2fasta.prediction_CDS",
+      "promote_gene_prediction.promote_prediction"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_IPD",
+    "num_components": 1,
+    "num_configs": 1,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "complete_study_stage.default"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Input_Processing",
+    "num_components": 2,
+    "num_configs": 2,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "clean_fasta.clean_fasta",
+      "split_multifasta.default"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Prodigal_Predictions",
+    "num_components": 4,
+    "num_configs": 4,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "prodigal.default",
+      "translate_sequence.translate_prediction",
+      "bsml2fasta.prediction_CDS",
+      "promote_gene_prediction.promote_prediction"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Pseudomolecule_Generation",
+    "num_components": 3,
+    "num_configs": 3,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "clean_fasta.default",
+      "create_pseudomolecules.default",
+      "pmarks2bsml.default"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_RNA_Predictions",
+    "num_components": 2,
+    "num_configs": 3,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "infernal.default",
+      "tRNAscan-SE.find_tRNA"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_SPAdes_Assembly",
+    "num_components": 1,
+    "num_configs": 1,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "SPAdes.assembly"
+    ]
+  },
+  {
+    "name": "Prokaryotic_Annotation_Pipeline_Velvet_Assembly",
+    "num_components": 2,
+    "num_configs": 2,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "prepare_paired_ends_for_velvet.default",
+      "velvet_optimiser.assembly"
+    ]
+  },
+  {
+    "name": "Prokaryotic_RNA_Seq_Analysis",
+    "num_components": 25,
+    "num_configs": 25,
+    "has_layout": false,
+    "has_pipeline_config": true,
+    "template_format": "per_component_layouts",
+    "components": [
+      "align_bowtie_stats.bowtie_stats",
+      "align_tophat_stats.tophat_stats",
+      "bam2bigwig.visualization",
+      "bowtie.alignment",
+      "bowtie_build.reference",
+      "create_paired_list_file.list",
+      "deseq.differential_expression",
+      "edgeR.edgeR_diff_expression",
+      "expression_plots.deseq",
+      "expression_plots.rpkm",
+      "fastqc_stats.fastqc",
+      "fastx_quality_stats.read1",
+      "fastx_quality_stats.read2",
+      "fastx_trimming.read1",
+      "fastx_trimming.read2",
+      "filter_deseq.filter_de",
+      "htseq.exon_counts",
+      "percent_mapped_stats.percent_mapped",
+      "rpkm_coverage_stats.rpkm_cvg",
+      "samtools_alignment_stats.alignment_stats",
+      "samtools_file_convert.sam2sorted_bam",
+      "samtools_file_convert.sorted_name",
+      "samtools_file_convert.sorted_position",
+      "samtools_reference_index.reference",
+      "wrapper_align.wrap"
+    ]
+  },
+  {
+    "name": "Pseudo_Glimmer_Load_Pipeline",
+    "num_components": 1,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "start pipeline:"
+    ]
+  },
+  {
+    "name": "Pseudo_Glimmer_NonLoad_Pipeline",
+    "num_components": 0,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": []
+  },
+  {
+    "name": "Pseudo_Prodigal_Load_Pipeline",
+    "num_components": 1,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "start pipeline:"
+    ]
+  },
+  {
+    "name": "Pseudo_Prodigal_NonLoad_Pipeline",
+    "num_components": 0,
+    "num_configs": 0,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": []
+  },
+  {
+    "name": "RNA_Seq_Operon_Prediction",
+    "num_components": 5,
+    "num_configs": 5,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "bowtie_build.reference",
+      "bowtie.alignment",
+      "samtools_file_convert.sorted_position",
+      "bam2bigwig.visualization",
+      "predict_operons.predict"
+    ]
+  },
+  {
+    "name": "metagenomic_contaminant_screen",
+    "num_components": 2,
+    "num_configs": 2,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "bmtagger.default",
+      "filter_sequences_by_id.default"
+    ]
+  },
+  {
+    "name": "nonredundant_sequence_pipeline",
+    "num_components": 3,
+    "num_configs": 3,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "split_multifasta.default",
+      "mummer.default",
+      "mumsgraph.default"
+    ]
+  },
+  {
+    "name": "skirret",
+    "num_components": 6,
+    "num_configs": 6,
+    "has_layout": true,
+    "has_pipeline_config": true,
+    "template_format": "standard",
+    "components": [
+      "genbank2fasta.reference",
+      "nucmer.default",
+      "nucmer-delta-filter.default",
+      "nucmer-show-snps.default",
+      "snp-add-gene-info.default",
+      "nucmer-snp2merged.default"
+    ]
+  },
+  {
+    "name": "snp_verification",
+    "num_components": 5,
+    "num_configs": 8,
+    "has_layout": true,
+    "has_pipeline_config": false,
+    "template_format": "standard",
+    "components": [
+      "extract_snp_regions.default",
+      "formatdb.default",
+      "split_multifasta.default",
+      "ncbi-blastn.default",
+      "snp_verify.default"
+    ]
+  }
+]

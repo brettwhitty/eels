@@ -1,0 +1,89 @@
+{
+   "component_configs" : {
+      "genbank2fasta.reference" : {
+         "component" : "genbank2fasta",
+         "token" : "reference"
+      },
+      "nucmer-delta-filter.default" : {
+         "component" : "nucmer-delta-filter",
+         "token" : "default"
+      },
+      "nucmer-show-snps.default" : {
+         "component" : "nucmer-show-snps",
+         "token" : "default"
+      },
+      "nucmer-snp2merged.default" : {
+         "component" : "nucmer-snp2merged",
+         "token" : "default"
+      },
+      "nucmer.default" : {
+         "component" : "nucmer",
+         "token" : "default"
+      },
+      "snp-add-gene-info.default" : {
+         "component" : "snp-add-gene-info",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "genbank2fasta.reference",
+      "nucmer.default",
+      "nucmer-delta-filter.default",
+      "nucmer-show-snps.default",
+      "snp-add-gene-info.default",
+      "nucmer-snp2merged.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "skirret",
+   "pipeline_config" : {
+      "genbank2fasta reference" : {
+         "$;INPUT_FILE$;" : "$;REFERENCE_GENBANK_FILE$;"
+      },
+      "global" : {
+         "$;QUERY_FSA_LIST$;" : "",
+         "$;REFERENCE_GENBANK_FILE$;" : ""
+      },
+      "nucmer default" : {
+         "$;INPUT_FILE_LIST$;" : "$;QUERY_FSA_LIST$;"
+      },
+      "snp-add-gene-info default" : {
+         "$;QUERY_FASTA_LIST$;" : "$;QUERY_FSA_LIST$;",
+         "$;REFERENCE_GENBANK$;" : "$;REFERENCE_GENBANK_FILE$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "genbank2fasta.reference",
+                  "type" : "component"
+               },
+               {
+                  "id" : "nucmer.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "nucmer-delta-filter.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "nucmer-show-snps.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "snp-add-gene-info.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "nucmer-snp2merged.default",
+                  "type" : "component"
+               }
+            ],
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

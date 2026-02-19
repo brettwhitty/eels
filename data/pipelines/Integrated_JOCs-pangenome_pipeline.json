@@ -1,0 +1,153 @@
+{
+   "component_configs" : {
+      "bsml2fasta.fastamulti" : {
+         "component" : "bsml2fasta",
+         "token" : "fastamulti"
+      },
+      "bsml2fasta.genomicseq" : {
+         "component" : "bsml2fasta",
+         "token" : "genomicseq"
+      },
+      "j_ortholog_clusters.default" : {
+         "component" : "j_ortholog_clusters",
+         "token" : "default"
+      },
+      "jaccard.default" : {
+         "component" : "jaccard",
+         "token" : "default"
+      },
+      "muscle.j_ortholog_clusters" : {
+         "component" : "muscle",
+         "token" : "j_ortholog_clusters"
+      },
+      "muscle.jaccard" : {
+         "component" : "muscle",
+         "token" : "jaccard"
+      },
+      "pangenome.default" : {
+         "component" : "pangenome",
+         "token" : "default"
+      },
+      "split_multifasta.default" : {
+         "component" : "split_multifasta",
+         "token" : "default"
+      },
+      "wu-blastp.default" : {
+         "component" : "wu-blastp",
+         "token" : "default"
+      },
+      "wu-tblastn.default" : {
+         "component" : "wu-tblastn",
+         "token" : "default"
+      },
+      "xdformat.default" : {
+         "component" : "xdformat",
+         "token" : "default"
+      },
+      "xdformat.nuc" : {
+         "component" : "xdformat",
+         "token" : "nuc"
+      }
+   },
+   "components" : [
+      "bsml2fasta.fastamulti",
+      "bsml2fasta.genomicseq",
+      "xdformat.nuc",
+      "xdformat.default",
+      "split_multifasta.default",
+      "wu-blastp.default",
+      "jaccard.default",
+      "muscle.jaccard",
+      "j_ortholog_clusters.default",
+      "muscle.j_ortholog_clusters",
+      "wu-tblastn.default",
+      "pangenome.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : false,
+   "name" : "Integrated_JOCs-pangenome_pipeline",
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "bsml2fasta.fastamulti",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "bsml2fasta.genomicseq",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "xdformat.nuc",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "xdformat.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "split_multifasta.default",
+                              "type" : "component"
+                           },
+                           {
+                              "children" : [
+                                 {
+                                    "children" : [
+                                       {
+                                          "id" : "wu-blastp.default",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "jaccard.default",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "muscle.jaccard",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "j_ortholog_clusters.default",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "muscle.j_ortholog_clusters",
+                                          "type" : "component"
+                                       }
+                                    ],
+                                    "type" : "serial"
+                                 },
+                                 {
+                                    "children" : [
+                                       {
+                                          "id" : "wu-tblastn.default",
+                                          "type" : "component"
+                                       }
+                                    ],
+                                    "type" : "serial"
+                                 }
+                              ],
+                              "type" : "parallel"
+                           },
+                           {
+                              "id" : "pangenome.default",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

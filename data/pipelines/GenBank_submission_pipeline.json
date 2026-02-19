@@ -1,0 +1,88 @@
+{
+   "component_configs" : {
+      "assign_dbxref_ids.default" : {
+         "component" : "assign_dbxref_ids",
+         "token" : "default"
+      },
+      "create_db_list_file.default" : {
+         "component" : "create_db_list_file",
+         "token" : "default"
+      },
+      "curate_common_names.default" : {
+         "component" : "curate_common_names",
+         "token" : "default"
+      },
+      "dump_table.default" : {
+         "component" : "dump_table",
+         "token" : "default"
+      },
+      "fix_gene_symbols.db" : {
+         "component" : "fix_gene_symbols",
+         "token" : "db"
+      },
+      "remove_db_gene_syms_with_hypos.default" : {
+         "component" : "remove_db_gene_syms_with_hypos",
+         "token" : "default"
+      },
+      "update_ec_numbers.default" : {
+         "component" : "update_ec_numbers",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "create_db_list_file.default",
+      "assign_dbxref_ids.default",
+      "curate_common_names.default",
+      "remove_db_gene_syms_with_hypos.default",
+      "update_ec_numbers.default",
+      "fix_gene_symbols.db",
+      "dump_table.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : false,
+   "name" : "GenBank_submission_pipeline",
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "create_db_list_file.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "assign_dbxref_ids.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "curate_common_names.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "remove_db_gene_syms_with_hypos.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "update_ec_numbers.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "fix_gene_symbols.db",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "dump_table.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

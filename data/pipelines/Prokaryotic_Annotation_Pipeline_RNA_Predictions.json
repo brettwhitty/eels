@@ -1,0 +1,50 @@
+{
+   "component_configs" : {
+      "RNAmmer.default" : {
+         "component" : "RNAmmer",
+         "token" : "default"
+      },
+      "infernal.default" : {
+         "component" : "infernal",
+         "token" : "default"
+      },
+      "tRNAscan-SE.find_tRNA" : {
+         "component" : "tRNAscan-SE",
+         "token" : "find_tRNA"
+      }
+   },
+   "components" : [
+      "infernal.default",
+      "tRNAscan-SE.find_tRNA"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_RNA_Predictions",
+   "pipeline_config" : {
+      "global" : {
+         "$;ABBREVIATION$;" : ""
+      },
+      "tRNAscan-SE find_tRNA" : {
+         "$;ID_ROOT$;" : "$;ABBREVIATION$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "infernal.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "tRNAscan-SE.find_tRNA",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

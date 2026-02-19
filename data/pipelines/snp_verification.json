@@ -1,0 +1,82 @@
+{
+   "component_configs" : {
+      "blast_snp_regions.default" : {
+         "component" : "blast_snp_regions",
+         "token" : "default"
+      },
+      "extract_snp_regions.default" : {
+         "component" : "extract_snp_regions",
+         "token" : "default"
+      },
+      "formatdb.default" : {
+         "component" : "formatdb",
+         "token" : "default"
+      },
+      "formatdb_snp.default" : {
+         "component" : "formatdb_snp",
+         "token" : "default"
+      },
+      "make_snp_lists.default" : {
+         "component" : "make_snp_lists",
+         "token" : "default"
+      },
+      "ncbi-blastn.default" : {
+         "component" : "ncbi-blastn",
+         "token" : "default"
+      },
+      "snp_verify.default" : {
+         "component" : "snp_verify",
+         "token" : "default"
+      },
+      "split_multifasta.default" : {
+         "component" : "split_multifasta",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "extract_snp_regions.default",
+      "formatdb.default",
+      "split_multifasta.default",
+      "ncbi-blastn.default",
+      "snp_verify.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : false,
+   "name" : "snp_verification",
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "extract_snp_regions.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "formatdb.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "id" : "split_multifasta.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "ncbi-blastn.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "snp_verify.default",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

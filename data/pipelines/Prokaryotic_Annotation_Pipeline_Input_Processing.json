@@ -1,0 +1,48 @@
+{
+   "component_configs" : {
+      "clean_fasta.clean_fasta" : {
+         "component" : "clean_fasta",
+         "token" : "clean_fasta"
+      },
+      "split_multifasta.default" : {
+         "component" : "split_multifasta",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "clean_fasta.clean_fasta",
+      "split_multifasta.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Input_Processing",
+   "pipeline_config" : {
+      "clean_fasta clean_fasta" : {
+         "$;INPUT_FILE$;" : "$;INPUT_FSA_FILE$;",
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_FSA_LIST$;"
+      },
+      "global" : {
+         "$;INPUT_FSA_FILE$;" : "",
+         "$;INPUT_FSA_LIST$;" : ""
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "clean_fasta.clean_fasta",
+                  "type" : "component"
+               },
+               {
+                  "id" : "split_multifasta.default",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

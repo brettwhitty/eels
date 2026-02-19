@@ -1,0 +1,65 @@
+{
+   "component_configs" : {
+      "clean_fasta.default" : {
+         "component" : "clean_fasta",
+         "token" : "default"
+      },
+      "create_pseudomolecules.default" : {
+         "component" : "create_pseudomolecules",
+         "token" : "default"
+      },
+      "pmarks2bsml.default" : {
+         "component" : "pmarks2bsml",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "clean_fasta.default",
+      "create_pseudomolecules.default",
+      "pmarks2bsml.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Pseudomolecule_Generation",
+   "pipeline_config" : {
+      "clean_fasta default" : {
+         "$;INPUT_FILE$;" : "$;INPUT_FASTA$;"
+      },
+      "create_pseudomolecules default" : {
+         "$;ACSN_FILE$;" : "$;ACCESSION_FILE$;",
+         "$;CONTIG_INPUT$;" : "$;REPOSITORY_ROOT$;/output_repository/clean_fasta/$;PIPELINEID$;_default/clean_fasta.list",
+         "$;STRAIN_NAME$;" : "$;ABBREVIATION$;"
+      },
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;ACCESSION_FILE$;" : "",
+         "$;INPUT_FASTA$;" : ""
+      },
+      "pmarks2bsml default" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "clean_fasta.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "create_pseudomolecules.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "pmarks2bsml.default",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

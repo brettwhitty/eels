@@ -1,0 +1,69 @@
+{
+   "component_configs" : {
+      "SPAdes.assembly" : {
+         "component" : "SPAdes",
+         "token" : "assembly"
+      },
+      "alien_hunter.default" : {
+         "component" : "alien_hunter",
+         "token" : "default"
+      },
+      "selfsim.default" : {
+         "component" : "selfsim",
+         "token" : "default"
+      },
+      "sighunt.default" : {
+         "component" : "sighunt",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "selfsim.default",
+      "sighunt.default",
+      "alien_hunter.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "LGT_Seek_Parametric",
+   "pipeline_config" : {
+      "SPAdes assembly" : {
+         "$;INPUT_FILE_LIST$;" : "$;FASTQ_LIST$;"
+      },
+      "global" : {
+         "$;FASTQ_LIST$;" : ""
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "selfsim.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "sighunt.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "alien_hunter.default",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "parallel"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

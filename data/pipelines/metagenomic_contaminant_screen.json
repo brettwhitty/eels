@@ -1,0 +1,43 @@
+{
+   "component_configs" : {
+      "bmtagger.default" : {
+         "component" : "bmtagger",
+         "token" : "default"
+      },
+      "filter_sequences_by_id.default" : {
+         "component" : "filter_sequences_by_id",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "bmtagger.default",
+      "filter_sequences_by_id.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : false,
+   "name" : "metagenomic_contaminant_screen",
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "children" : [
+                     {
+                        "id" : "bmtagger.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "filter_sequences_by_id.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "serial"
+               }
+            ],
+            "name" : "start",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

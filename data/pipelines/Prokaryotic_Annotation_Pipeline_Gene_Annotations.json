@@ -1,0 +1,545 @@
+{
+   "component_configs" : {
+      "RAPSearch2.interevidence_search" : {
+         "component" : "RAPSearch2",
+         "token" : "interevidence_search"
+      },
+      "RAPSearch2.post_overlap_analysis" : {
+         "component" : "RAPSearch2",
+         "token" : "post_overlap_analysis"
+      },
+      "RAPSearch2.pre_overlap_analysis" : {
+         "component" : "RAPSearch2",
+         "token" : "pre_overlap_analysis"
+      },
+      "ber.post_overlap_analysis" : {
+         "component" : "ber",
+         "token" : "post_overlap_analysis"
+      },
+      "ber.pre_overlap_analysis" : {
+         "component" : "ber",
+         "token" : "pre_overlap_analysis"
+      },
+      "bsml2fasta.create_blastx_post_input" : {
+         "component" : "bsml2fasta",
+         "token" : "create_blastx_post_input"
+      },
+      "bsml2fasta.create_blastx_pre_input" : {
+         "component" : "bsml2fasta",
+         "token" : "create_blastx_pre_input"
+      },
+      "bsml2fasta.final_cds" : {
+         "component" : "bsml2fasta",
+         "token" : "final_cds"
+      },
+      "bsml2fasta.post_overlap_analysis" : {
+         "component" : "bsml2fasta",
+         "token" : "post_overlap_analysis"
+      },
+      "bsml2fasta.pre_overlap_analysis" : {
+         "component" : "bsml2fasta",
+         "token" : "pre_overlap_analysis"
+      },
+      "bsml2featurerelationships.post_overlap_analysis" : {
+         "component" : "bsml2featurerelationships",
+         "token" : "post_overlap_analysis"
+      },
+      "bsml2featurerelationships.pre_overlap_analysis" : {
+         "component" : "bsml2featurerelationships",
+         "token" : "pre_overlap_analysis"
+      },
+      "bsml2interevidence_fasta.default" : {
+         "component" : "bsml2interevidence_fasta",
+         "token" : "default"
+      },
+      "filter_bogus_genes.filtered" : {
+         "component" : "filter_bogus_genes",
+         "token" : "filtered"
+      },
+      "formatdb.post_overlap_analysis" : {
+         "component" : "formatdb",
+         "token" : "post_overlap_analysis"
+      },
+      "formatdb.pre_overlap_analysis" : {
+         "component" : "formatdb",
+         "token" : "pre_overlap_analysis"
+      },
+      "hmmpfam.post_overlap_analysis" : {
+         "component" : "hmmpfam",
+         "token" : "post_overlap_analysis"
+      },
+      "hmmpfam.pre_overlap_analysis" : {
+         "component" : "hmmpfam",
+         "token" : "pre_overlap_analysis"
+      },
+      "hmmpfam3.post_overlap_analysis" : {
+         "component" : "hmmpfam3",
+         "token" : "post_overlap_analysis"
+      },
+      "hmmpfam3.pre_overlap_analysis" : {
+         "component" : "hmmpfam3",
+         "token" : "pre_overlap_analysis"
+      },
+      "lipop.default" : {
+         "component" : "lipop",
+         "token" : "default"
+      },
+      "ncbi-blastp.COGS" : {
+         "component" : "ncbi-blastp",
+         "token" : "COGS"
+      },
+      "ncbi-blastp.eggNOG" : {
+         "component" : "ncbi-blastp",
+         "token" : "eggNOG"
+      },
+      "ncbi-blastx.interevidence_search" : {
+         "component" : "ncbi-blastx",
+         "token" : "interevidence_search"
+      },
+      "ncbi-blastx.post_overlap_analysis" : {
+         "component" : "ncbi-blastx",
+         "token" : "post_overlap_analysis"
+      },
+      "ncbi-blastx.pre_overlap_analysis" : {
+         "component" : "ncbi-blastx",
+         "token" : "pre_overlap_analysis"
+      },
+      "overlap_analysis.default" : {
+         "component" : "overlap_analysis",
+         "token" : "default"
+      },
+      "p_func.default" : {
+         "component" : "p_func",
+         "token" : "default"
+      },
+      "parse_evidence.ber_post" : {
+         "component" : "parse_evidence",
+         "token" : "ber_post"
+      },
+      "parse_evidence.ber_pre" : {
+         "component" : "parse_evidence",
+         "token" : "ber_pre"
+      },
+      "parse_evidence.eggNOG" : {
+         "component" : "parse_evidence",
+         "token" : "eggNOG"
+      },
+      "parse_evidence.hmmpfam3_post" : {
+         "component" : "parse_evidence",
+         "token" : "hmmpfam3_post"
+      },
+      "parse_evidence.hmmpfam3_pre" : {
+         "component" : "parse_evidence",
+         "token" : "hmmpfam3_pre"
+      },
+      "parse_evidence.hmmpfam_post" : {
+         "component" : "parse_evidence",
+         "token" : "hmmpfam_post"
+      },
+      "parse_evidence.hmmpfam_pre" : {
+         "component" : "parse_evidence",
+         "token" : "hmmpfam_pre"
+      },
+      "parse_evidence.hypothetical" : {
+         "component" : "parse_evidence",
+         "token" : "hypothetical"
+      },
+      "parse_evidence.lipoprotein" : {
+         "component" : "parse_evidence",
+         "token" : "lipoprotein"
+      },
+      "parse_evidence.tmhmm" : {
+         "component" : "parse_evidence",
+         "token" : "tmhmm"
+      },
+      "pipeline_summary.default" : {
+         "component" : "pipeline_summary",
+         "token" : "default"
+      },
+      "prokpipe_consistency_checks.bsml" : {
+         "component" : "prokpipe_consistency_checks",
+         "token" : "bsml"
+      },
+      "ps_scan.default" : {
+         "component" : "ps_scan",
+         "token" : "default"
+      },
+      "signalp.default" : {
+         "component" : "signalp",
+         "token" : "default"
+      },
+      "split_multifasta.split_interevidence" : {
+         "component" : "split_multifasta",
+         "token" : "split_interevidence"
+      },
+      "start_site_curation.default" : {
+         "component" : "start_site_curation",
+         "token" : "default"
+      },
+      "tmhmm.default" : {
+         "component" : "tmhmm",
+         "token" : "default"
+      },
+      "translate_sequence.final_polypeptides" : {
+         "component" : "translate_sequence",
+         "token" : "final_polypeptides"
+      },
+      "translate_sequence.translate" : {
+         "component" : "translate_sequence",
+         "token" : "translate"
+      },
+      "translate_sequence.translate_new_models" : {
+         "component" : "translate_sequence",
+         "token" : "translate_new_models"
+      },
+      "xdformat.post_overlap_analysis" : {
+         "component" : "xdformat",
+         "token" : "post_overlap_analysis"
+      },
+      "xdformat.pre_overlap_analysis" : {
+         "component" : "xdformat",
+         "token" : "pre_overlap_analysis"
+      }
+   },
+   "components" : [
+      "translate_sequence.translate",
+      "filter_bogus_genes.filtered",
+      "bsml2fasta.create_blastx_pre_input",
+      "hmmpfam3.pre_overlap_analysis",
+      "RAPSearch2.pre_overlap_analysis",
+      "bsml2fasta.pre_overlap_analysis",
+      "formatdb.pre_overlap_analysis",
+      "bsml2featurerelationships.pre_overlap_analysis",
+      "ber.pre_overlap_analysis",
+      "overlap_analysis.default",
+      "start_site_curation.default",
+      "translate_sequence.translate_new_models",
+      "bsml2fasta.create_blastx_post_input",
+      "hmmpfam3.post_overlap_analysis",
+      "RAPSearch2.post_overlap_analysis",
+      "bsml2fasta.post_overlap_analysis",
+      "formatdb.post_overlap_analysis",
+      "bsml2featurerelationships.post_overlap_analysis",
+      "ber.post_overlap_analysis",
+      "bsml2interevidence_fasta.default",
+      "split_multifasta.split_interevidence",
+      "RAPSearch2.interevidence_search",
+      "translate_sequence.final_polypeptides",
+      "bsml2fasta.final_cds",
+      "signalp.default",
+      "ps_scan.default",
+      "ncbi-blastp.COGS",
+      "ncbi-blastp.eggNOG",
+      "lipop.default",
+      "tmhmm.default",
+      "parse_evidence.hmmpfam3_pre",
+      "parse_evidence.hmmpfam3_post",
+      "parse_evidence.ber_pre",
+      "parse_evidence.ber_post",
+      "parse_evidence.tmhmm",
+      "parse_evidence.eggNOG",
+      "parse_evidence.lipoprotein",
+      "parse_evidence.hypothetical",
+      "p_func.default",
+      "pipeline_summary.default",
+      "prokpipe_consistency_checks.bsml"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_Gene_Annotations",
+   "pipeline_config" : {
+      "ber post_overlap_analysis" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "ber pre_overlap_analysis" : {
+         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+      },
+      "bsml2fasta create_blastx_pre_input" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_BSML_LIST$;"
+      },
+      "bsml2fasta pre_overlap_analysis" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_BSML_LIST$;"
+      },
+      "bsml2featurerelationships pre_overlap_analysis" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_BSML_LIST$;"
+      },
+      "global" : {
+         "$;ABBREVIATION$;" : "",
+         "$;GENOME$;" : "",
+         "$;INPUT_BSML_LIST$;" : "",
+         "$;TRANS_TABLE$;" : "11"
+      },
+      "lipop default" : {
+         "$;PROJECT_ABBR$;" : "$;ABBREVIATION$;"
+      },
+      "overlap_analysis default" : {
+         "$;BSML_INPUT_LIST$;" : "$;INPUT_BSML_LIST$;"
+      },
+      "p_func default" : {
+         "$;OUTPUT_FILE_BASE_NAME$;" : "$;ABBREVIATION$;"
+      },
+      "pipeline_summary default" : {
+         "$;LOCUS_PREFIX$;" : "$;ABBREVIATION$;",
+         "$;ORGANISM$;" : "$;GENOME$;",
+         "$;TRANSLATION_TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "translate_sequence final_polypeptides" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "translate_sequence translate" : {
+         "$;INPUT_FILE_LIST$;" : "$;INPUT_BSML_LIST$;",
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      },
+      "translate_sequence translate_new_models" : {
+         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
+         "$;TABLE$;" : "$;TRANS_TABLE$;"
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "translate_sequence.translate",
+                  "type" : "component"
+               },
+               {
+                  "id" : "filter_bogus_genes.filtered",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2fasta.create_blastx_pre_input",
+                  "type" : "component"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "hmmpfam3.pre_overlap_analysis",
+                        "type" : "component"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "children" : [
+                                 {
+                                    "id" : "RAPSearch2.pre_overlap_analysis",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "children" : [
+                                       {
+                                          "id" : "bsml2fasta.pre_overlap_analysis",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "formatdb.pre_overlap_analysis",
+                                          "type" : "component"
+                                       }
+                                    ],
+                                    "type" : "serial"
+                                 },
+                                 {
+                                    "id" : "bsml2featurerelationships.pre_overlap_analysis",
+                                    "type" : "component"
+                                 }
+                              ],
+                              "type" : "parallel"
+                           },
+                           {
+                              "id" : "ber.pre_overlap_analysis",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "id" : "overlap_analysis.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "start_site_curation.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "translate_sequence.translate_new_models",
+                  "type" : "component"
+               },
+               {
+                  "id" : "bsml2fasta.create_blastx_post_input",
+                  "type" : "component"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "hmmpfam3.post_overlap_analysis",
+                        "type" : "component"
+                     },
+                     {
+                        "children" : [
+                           {
+                              "children" : [
+                                 {
+                                    "id" : "RAPSearch2.post_overlap_analysis",
+                                    "type" : "component"
+                                 },
+                                 {
+                                    "children" : [
+                                       {
+                                          "id" : "bsml2fasta.post_overlap_analysis",
+                                          "type" : "component"
+                                       },
+                                       {
+                                          "id" : "formatdb.post_overlap_analysis",
+                                          "type" : "component"
+                                       }
+                                    ],
+                                    "type" : "serial"
+                                 },
+                                 {
+                                    "id" : "bsml2featurerelationships.post_overlap_analysis",
+                                    "type" : "component"
+                                 }
+                              ],
+                              "type" : "parallel"
+                           },
+                           {
+                              "id" : "ber.post_overlap_analysis",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "children" : [
+                     {
+                        "children" : [
+                           {
+                              "id" : "bsml2interevidence_fasta.default",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "split_multifasta.split_interevidence",
+                              "type" : "component"
+                           },
+                           {
+                              "id" : "RAPSearch2.interevidence_search",
+                              "type" : "component"
+                           }
+                        ],
+                        "type" : "serial"
+                     },
+                     {
+                        "id" : "translate_sequence.final_polypeptides",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "bsml2fasta.final_cds",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "signalp.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "ps_scan.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "ncbi-blastp.COGS",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "ncbi-blastp.eggNOG",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "lipop.default",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "tmhmm.default",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "children" : [
+                     {
+                        "id" : "parse_evidence.hmmpfam3_pre",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "parse_evidence.hmmpfam3_post",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "parse_evidence.ber_pre",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "parse_evidence.ber_post",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "parse_evidence.tmhmm",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "parse_evidence.eggNOG",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "parse_evidence.lipoprotein",
+                        "type" : "component"
+                     },
+                     {
+                        "id" : "parse_evidence.hypothetical",
+                        "type" : "component"
+                     }
+                  ],
+                  "type" : "parallel"
+               },
+               {
+                  "id" : "p_func.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "pipeline_summary.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "prokpipe_consistency_checks.bsml",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

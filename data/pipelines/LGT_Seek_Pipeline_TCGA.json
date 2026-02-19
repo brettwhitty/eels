@@ -1,0 +1,14 @@
+{
+   "component_configs" : {
+      "download_TCGA.default" : {
+         "component" : "download_TCGA",
+         "token" : "default"
+      }
+   },
+   "components" : [],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "LGT_Seek_Pipeline_TCGA",
+   "pipeline_config" : {},
+   "structure" : null
+}

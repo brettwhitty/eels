@@ -1,0 +1,37 @@
+{
+   "component_configs" : {
+      "SPAdes.assembly" : {
+         "component" : "SPAdes",
+         "token" : "assembly"
+      }
+   },
+   "components" : [
+      "SPAdes.assembly"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_SPAdes_Assembly",
+   "pipeline_config" : {
+      "SPAdes assembly" : {
+         "$;INPUT_FILE_LIST$;" : "$;FASTQ_LIST$;"
+      },
+      "global" : {
+         "$;FASTQ_LIST$;" : ""
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "SPAdes.assembly",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

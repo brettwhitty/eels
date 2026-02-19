@@ -1,0 +1,47 @@
+{
+   "component_configs" : {
+      "mummer.default" : {
+         "component" : "mummer",
+         "token" : "default"
+      },
+      "mumsgraph.default" : {
+         "component" : "mumsgraph",
+         "token" : "default"
+      },
+      "split_multifasta.default" : {
+         "component" : "split_multifasta",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "split_multifasta.default",
+      "mummer.default",
+      "mumsgraph.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : false,
+   "name" : "nonredundant_sequence_pipeline",
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "split_multifasta.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "mummer.default",
+                  "type" : "component"
+               },
+               {
+                  "id" : "mumsgraph.default",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}

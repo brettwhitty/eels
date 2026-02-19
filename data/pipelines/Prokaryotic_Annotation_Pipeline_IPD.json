@@ -1,0 +1,37 @@
+{
+   "component_configs" : {
+      "complete_study_stage.default" : {
+         "component" : "complete_study_stage",
+         "token" : "default"
+      }
+   },
+   "components" : [
+      "complete_study_stage.default"
+   ],
+   "has_layout" : true,
+   "has_pipeline_config" : true,
+   "name" : "Prokaryotic_Annotation_Pipeline_IPD",
+   "pipeline_config" : {
+      "complete_study_stage default" : {
+         "$;STUDY_STAGE_ID$;" : "$;IPD_STUDY_STAGE$;"
+      },
+      "global" : {
+         "$;IPD_STUDY_STAGE$;" : ""
+      }
+   },
+   "structure" : {
+      "children" : [
+         {
+            "children" : [
+               {
+                  "id" : "complete_study_stage.default",
+                  "type" : "component"
+               }
+            ],
+            "name" : "start pipeline:",
+            "type" : "serial"
+         }
+      ],
+      "type" : "instance"
+   }
+}
