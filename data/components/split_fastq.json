@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "split_fastq",
-      "executable": "$;BIN_DIR$;/split_fastq"
+      "executable": "{{BIN_DIR}}/split_fastq"
     }
   ],
   "converters": {

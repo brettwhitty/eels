@@ -31,7 +31,7 @@
   "parameters": [
     {
       "name": "DATABASE",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "DATABASE_TYPE",

@@ -33,24 +33,24 @@
    "name" : "RNA_Seq_Operon_Prediction",
    "pipeline_config" : {
       "bam2bigwig visualization" : {
-         "$;ABBR$;" : "$;ABBREVIATION$;"
+         "{{ABBR}}" : "{{ABBREVIATION}}"
       },
       "bowtie alignment" : {
-         "$;BOWTIE_INDEX_PREFIX$;" : "$;ABBREVIATION$;",
-         "$;INPUT_FILE_LIST$;" : "$;SHORT_READ_PAIRED_END_LIST$;"
+         "{{BOWTIE_INDEX_PREFIX}}" : "{{ABBREVIATION}}",
+         "{{INPUT_FILE_LIST}}" : "{{SHORT_READ_PAIRED_END_LIST}}"
       },
       "bowtie_build reference" : {
-         "$;BOWTIE_INDEX_PREFIX$;" : "$;ABBREVIATION$;"
+         "{{BOWTIE_INDEX_PREFIX}}" : "{{ABBREVIATION}}"
       },
       "global" : {
-         "$;ABBREVIATION$;" : "",
-         "$;GENOME$;" : "",
-         "$;INPUT_BSML_LIST$;" : "",
-         "$;SHORT_READ_PAIRED_END_LIST$;" : "",
-         "$;TRANS_TABLE$;" : "11"
+         "{{ABBREVIATION}}" : "",
+         "{{GENOME}}" : "",
+         "{{INPUT_BSML_LIST}}" : "",
+         "{{SHORT_READ_PAIRED_END_LIST}}" : "",
+         "{{TRANS_TABLE}}" : "11"
       },
       "predict_operons predict" : {
-         "$;ABBR$;" : "$;ABBREVIATION$;"
+         "{{ABBR}}" : "{{ABBREVIATION}}"
       }
    },
    "structure" : {

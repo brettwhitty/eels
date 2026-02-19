@@ -21,7 +21,7 @@
   "parameters": [
     {
       "name": "VELVET_PATH",
-      "default": "$;VELVET_INSTALL_DIR$;"
+      "default": "{{VELVET_INSTALL_DIR}}"
     }
   ]
 }

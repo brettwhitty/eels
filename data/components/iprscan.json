@@ -5,47 +5,47 @@
   "tool_execution": [
     {
       "name": "blastprodom",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "coils",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "hmmpir",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "hmmpfam",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "hmmsmart",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "hmmtigr",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "fprintscan",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "scanregexp",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "profilescan",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "superfamily",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "seg",
-      "executable": "$;IPRSCAN_EXEC$;"
+      "executable": "{{IPRSCAN_EXEC}}"
     },
     {
       "name": "combine raw output",
@@ -53,7 +53,7 @@
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -62,8 +62,8 @@
       {
         "script": "iprscan2bsml",
         "name": "iprscan2bsml",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.raw",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",

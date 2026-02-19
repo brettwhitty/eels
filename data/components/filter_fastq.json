@@ -13,7 +13,7 @@
     },
     {
       "name": "filter fastq",
-      "executable": "$;BIN_DIR$;/filter_fastq"
+      "executable": "{{BIN_DIR}}/filter_fastq"
     }
   ],
   "converters": {

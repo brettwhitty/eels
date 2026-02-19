@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "megablast",
-      "executable": "$;MEGABLAST_EXEC$;"
+      "executable": "{{MEGABLAST_EXEC}}"
     }
   ],
   "converters": {

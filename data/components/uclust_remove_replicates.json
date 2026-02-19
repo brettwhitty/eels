@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "uclust replicate removal",
-      "executable": "$;BIN_DIR$;/uclust_replicate_removal"
+      "executable": "{{BIN_DIR}}/uclust_replicate_removal"
     }
   ],
   "converters": {
@@ -34,7 +34,7 @@
     },
     {
       "name": "STAGEDATA",
-      "default": "$;REPOSITORY_ROOT$;/output_repository/uclust/$;PIPELINEID$;_default/uclust.sorted.list"
+      "default": "{{REPOSITORY_ROOT}}/output_repository/uclust/{{PIPELINEID}}_default/uclust.sorted.list"
     }
   ]
 }

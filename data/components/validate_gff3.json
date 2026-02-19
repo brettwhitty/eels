@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "Validation of GFF3 file",
-      "executable": "$;BIN_DIR$;/gff3Valid"
+      "executable": "{{BIN_DIR}}/gff3Valid"
     }
   ],
   "converters": {

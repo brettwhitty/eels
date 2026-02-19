@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "Create pie chart",
-      "executable": "$;PIECHART_PATH$;"
+      "executable": "{{PIECHART_PATH}}"
     }
   ],
   "converters": {

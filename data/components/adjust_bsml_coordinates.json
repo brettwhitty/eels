@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "adjust_bsml_coordinates",
-      "executable": "$;BIN_DIR$;/adjust_bsml_coordinates"
+      "executable": "{{BIN_DIR}}/adjust_bsml_coordinates"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -33,7 +33,7 @@
     },
     {
       "name": "BSML_LIST",
-      "default": "$;INPUT_FILE_LIST$;"
+      "default": "{{INPUT_FILE_LIST}}"
     }
   ]
 }

@@ -9,11 +9,11 @@
     },
     {
       "name": "usearch",
-      "executable": "$;USEARCH_EXEC$;"
+      "executable": "{{USEARCH_EXEC}}"
     },
     {
       "name": "extract stats",
-      "executable": "tail -10 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr >> $;OUTPUT_DIRECTORY$;/stats.txt;"
+      "executable": "tail -10 {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.stderr >> {{OUTPUT_DIRECTORY}}/stats.txt;"
     }
   ],
   "converters": {

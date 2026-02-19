@@ -9,11 +9,11 @@
     },
     {
       "name": "DTD validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     },
     {
       "name": "profileBSMLFile",
-      "executable": "$;BIN_DIR$;/profileBSMLFile"
+      "executable": "{{BIN_DIR}}/profileBSMLFile"
     }
   ],
   "converters": {
@@ -64,7 +64,7 @@
     },
     {
       "name": "BSML_DTD",
-      "default": "$;DOCS_DIR$;/bsml3_1.dtd"
+      "default": "{{DOCS_DIR}}/bsml3_1.dtd"
     },
     {
       "name": "INPUT_ID_MAPPING_DIRECTORIES",

@@ -13,7 +13,7 @@
     },
     {
       "name": "Filter duplicate and low complexity sequences",
-      "executable": "$;BIN_DIR$;/filter_dups_lc_seqs"
+      "executable": "{{BIN_DIR}}/filter_dups_lc_seqs"
     }
   ],
   "converters": {

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "align_to_rRNA_profile.pl",
-      "executable": "$;STAP_ALIGNER_EXEC$;"
+      "executable": "{{STAP_ALIGNER_EXEC}}"
     }
   ],
   "converters": {

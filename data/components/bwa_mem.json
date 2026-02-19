@@ -21,7 +21,7 @@
     },
     {
       "name": "BWA Execution",
-      "executable": "$;BWA_EXEC$;"
+      "executable": "{{BWA_EXEC}}"
     }
   ],
   "converters": {

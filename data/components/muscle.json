@@ -13,15 +13,15 @@
     },
     {
       "name": "muscle",
-      "executable": "$;MUSCLE_EXEC$;"
+      "executable": "{{MUSCLE_EXEC}}"
     },
     {
       "name": "validate muscle output",
-      "executable": "$;BIN_DIR$;/validate_clustalw_output"
+      "executable": "{{BIN_DIR}}/validate_clustalw_output"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -31,7 +31,7 @@
         "script": "MSF2Bsml",
         "name": "msf2bsml",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",
@@ -63,7 +63,7 @@
     },
     {
       "name": "ANALYSIS_CONF",
-      "default": "$;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.final.config"
+      "default": "{{REPOSITORY_ROOT}}/workflow/runtime/{{COMPONENT_NAME}}/{{PIPELINEID}}_{{OUTPUT_TOKEN}}/{{COMPONENT_NAME}}.{{OUTPUT_TOKEN}}.final.config"
     },
     {
       "name": "DESCRIPTION",

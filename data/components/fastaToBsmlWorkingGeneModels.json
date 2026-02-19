@@ -9,15 +9,15 @@
     },
     {
       "name": "fastaToBsmlWorkingGeneModels",
-      "executable": "$;BIN_DIR$;/fastaToBsmlWorkingGeneModels"
+      "executable": "{{BIN_DIR}}/fastaToBsmlWorkingGeneModels"
     },
     {
       "name": "DTD validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     },
     {
       "name": "profileBSMLFile",
-      "executable": "$;BIN_DIR$;/profileBSMLFile"
+      "executable": "{{BIN_DIR}}/profileBSMLFile"
     }
   ],
   "converters": {
@@ -35,7 +35,7 @@
   "parameters": [
     {
       "name": "DATABASE",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "INPUT_FASTA_LIST_FILE",

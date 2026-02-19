@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "Profile GFF3 file",
-      "executable": "$;BIN_DIR$;/gff3Profiler"
+      "executable": "{{BIN_DIR}}/gff3Profiler"
     }
   ],
   "converters": {

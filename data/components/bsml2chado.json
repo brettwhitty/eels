@@ -73,7 +73,7 @@
     },
     {
       "name": "DATABASE",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "SERVER",
@@ -117,7 +117,7 @@
     },
     {
       "name": "EMAIL",
-      "default": "$;USERNAME$;"
+      "default": "{{USERNAME}}"
     },
     {
       "name": "GZIP_BCP",

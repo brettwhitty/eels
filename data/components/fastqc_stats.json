@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "fastqc_stats",
-      "executable": "$;BIN_DIR$;/fastqc_stats"
+      "executable": "{{BIN_DIR}}/fastqc_stats"
     }
   ],
   "converters": {
@@ -23,7 +23,7 @@
   "parameters": [
     {
       "name": "FASTQC_BIN_DIR",
-      "default": "$;FASTQC_BIN$;"
+      "default": "{{FASTQC_BIN}}"
     },
     {
       "name": "OTHER_PARAMETERS",

@@ -26,7 +26,7 @@ for (const t of toolCatalog) {
 
 function resolveExe(exe) {
   // Strip template vars: {{BIN_DIR}}/foo → foo
-  const clean = exe.replace(/\{\{[^}]+\}\}\//g, '').replace(/\$;[^$]+\$;\//g, '');
+  const clean = exe.replace(/\{\{[^}]+\}\}\//g, '');
   const basename = clean.split('/').pop();
   return exeMap[basename] || null;
 }
@@ -138,8 +138,8 @@ if (steps?.steps?.length) {
   console.log(header('WORKFLOW STEPS'));
   for (const step of steps.steps) {
     const tool = resolveExe(step.executable);
-    // Normalize $;VAR$; → {{VAR}} but keep literal paths intact
-    const exeDisplay = step.executable.replace(/\$;([^$]+)\$;/g, '{{$1}}');
+    // Normalize display but keep literal paths intact
+    const exeDisplay = step.executable;
     const catColor = { tool_execution: 'green', converter: 'blue', provenance: 'magenta',
                        compression: 'dim', validation: 'yellow', infrastructure: 'cyan' }[step.category] || 'white';
     const catBadge = chalk[catColor](`[${step.category}]`);

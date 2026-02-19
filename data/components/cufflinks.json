@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "cufflinks",
-      "executable": "$;BIN_DIR$;/cufflinks"
+      "executable": "{{BIN_DIR}}/cufflinks"
     }
   ],
   "converters": {
@@ -99,7 +99,7 @@
     },
     {
       "name": "CUFFLINKS_BIN_DIR",
-      "default": "$;CUFFLINKS_BIN$;"
+      "default": "{{CUFFLINKS_BIN}}"
     },
     {
       "name": "OTHER_PARAMS",

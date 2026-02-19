@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "validate_genbank",
-      "executable": "$;BIN_DIR$;/validate_genbank"
+      "executable": "{{BIN_DIR}}/validate_genbank"
     }
   ],
   "converters": {

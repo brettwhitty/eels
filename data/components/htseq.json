@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "htseq",
-      "executable": "$;BIN_DIR$;/htseq"
+      "executable": "{{BIN_DIR}}/htseq"
     }
   ],
   "converters": {
@@ -23,11 +23,11 @@
   "parameters": [
     {
       "name": "PYTHON_BIN_DIR",
-      "default": "$;PYTHON_BIN$;"
+      "default": "{{PYTHON_BIN}}"
     },
     {
       "name": "PYTHON_LIB_DIR",
-      "default": "$;PYTHON_LIB$;"
+      "default": "{{PYTHON_LIB}}"
     },
     {
       "name": "MODE",

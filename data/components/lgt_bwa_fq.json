@@ -13,23 +13,23 @@
     },
     {
       "name": "BWA Execution",
-      "executable": "$;BIN_DIR$;/lgt_bwa"
+      "executable": "{{BIN_DIR}}/lgt_bwa"
     },
     {
       "name": "BWA Execution",
-      "executable": "$;BIN_DIR$;/lgt_bwa"
+      "executable": "{{BIN_DIR}}/lgt_bwa"
     },
     {
       "name": "POST PROCESSING",
-      "executable": "$;BIN_DIR$;/lgt_bwa_post_process"
+      "executable": "{{BIN_DIR}}/lgt_bwa_post_process"
     },
     {
       "name": "ZIP FILES",
-      "executable": "$;BIN_DIR$;/lgt_bwa_zip.sh"
+      "executable": "{{BIN_DIR}}/lgt_bwa_zip.sh"
     },
     {
       "name": "REMOVE FASTQ FILES",
-      "executable": "$;BIN_DIR$;/lgt_bwa_rm.sh"
+      "executable": "{{BIN_DIR}}/lgt_bwa_rm.sh"
     }
   ],
   "converters": {

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "curate common names",
-      "executable": "$;BIN_DIR$;/curate_common_names"
+      "executable": "{{BIN_DIR}}/curate_common_names"
     }
   ],
   "converters": {

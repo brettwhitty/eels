@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "samtools_file_convert",
-      "executable": "$;BIN_DIR$;/samtools_file_convert"
+      "executable": "{{BIN_DIR}}/samtools_file_convert"
     }
   ],
   "converters": {
@@ -27,7 +27,7 @@
     },
     {
       "name": "SAMTOOLS_BIN_DIR",
-      "default": "$;SAMTOOLS_BIN$;"
+      "default": "{{SAMTOOLS_BIN}}"
     },
     {
       "name": "SAMTOOLS_VIEW_PARAMETERS",

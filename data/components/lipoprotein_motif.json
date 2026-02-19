@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "lipoprotein_motif",
-      "executable": "$;BIN_DIR$;/lipoprotein_motif"
+      "executable": "{{BIN_DIR}}/lipoprotein_motif"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {

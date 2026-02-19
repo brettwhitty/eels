@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "gff32GBrowse",
-      "executable": "$;PYTHON_EXEC$; $;BIN_DIR$;/gff3_to_gbrowse.py"
+      "executable": "{{PYTHON_EXEC}} {{BIN_DIR}}/gff3_to_gbrowse.py"
     }
   ],
   "converters": {

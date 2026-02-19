@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "rRNA_hmm_fs",
-      "executable": "$;BIN_DIR$;/rrna_hmm_fs"
+      "executable": "{{BIN_DIR}}/rrna_hmm_fs"
     },
     {
       "name": "check env variables",

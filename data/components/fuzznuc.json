@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "fuzznuc",
-      "executable": "$;FUZZNUC_EXEC$;"
+      "executable": "{{FUZZNUC_EXEC}}"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -18,8 +18,8 @@
       {
         "script": "fuzznuc2bsml",
         "name": "fuzznuc2bsml",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.raw",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.raw",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.bsml"
       },
       {
         "script": "analysis2bsml",

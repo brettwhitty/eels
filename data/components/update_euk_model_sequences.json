@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "deriveCDSSequences",
-      "executable": "$;BIN_DIR$;/deriveCDSSequences"
+      "executable": "{{BIN_DIR}}/deriveCDSSequences"
     }
   ],
   "converters": {

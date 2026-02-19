@@ -9,7 +9,7 @@
     },
     {
       "name": "elph",
-      "executable": "$;ELPH_EXEC$;"
+      "executable": "{{ELPH_EXEC}}"
     }
   ],
   "converters": {

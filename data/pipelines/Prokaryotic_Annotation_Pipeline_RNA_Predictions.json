@@ -22,10 +22,10 @@
    "name" : "Prokaryotic_Annotation_Pipeline_RNA_Predictions",
    "pipeline_config" : {
       "global" : {
-         "$;ABBREVIATION$;" : ""
+         "{{ABBREVIATION}}" : ""
       },
       "tRNAscan-SE find_tRNA" : {
-         "$;ID_ROOT$;" : "$;ABBREVIATION$;"
+         "{{ID_ROOT}}" : "{{ABBREVIATION}}"
       }
    },
    "structure" : {

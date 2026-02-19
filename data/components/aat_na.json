@@ -5,19 +5,19 @@
   "tool_execution": [
     {
       "name": "dds",
-      "executable": "$;DDS_EXEC$;"
+      "executable": "{{DDS_EXEC}}"
     },
     {
       "name": "ext",
-      "executable": "$;EXT_EXEC$;"
+      "executable": "{{EXT_EXEC}}"
     },
     {
       "name": "ext collapse",
-      "executable": "$;EXT_COLLAPSE_EXEC$;"
+      "executable": "{{EXT_COLLAPSE_EXEC}}"
     },
     {
       "name": "filter",
-      "executable": "$;FILTER_EXEC$;"
+      "executable": "{{FILTER_EXEC}}"
     },
     {
       "name": "remove raw dds output",
@@ -41,14 +41,14 @@
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
     "main": [],
     "iterator": [
       {
-        "script": "$;GAP2_EXEC$;",
+        "script": "{{GAP2_EXEC}}",
         "name": "gap2",
         "input": null,
         "output": null
@@ -56,8 +56,8 @@
       {
         "script": "gap22bsml",
         "name": "gap22bsml",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.gap2.btab",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.gap2.btab",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",
@@ -90,7 +90,7 @@
     },
     {
       "name": "GAP2_DATABASE_PATH",
-      "default": "$;DATABASE_PATH$;"
+      "default": "{{DATABASE_PATH}}"
     },
     {
       "name": "EXT_OPTS",

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "cuffdiff",
-      "executable": "$;BIN_DIR$;/cuffdiff"
+      "executable": "{{BIN_DIR}}/cuffdiff"
     }
   ],
   "converters": {
@@ -55,7 +55,7 @@
     },
     {
       "name": "CUFFLINKS_BIN_DIR",
-      "default": "$;CUFFDIFF_BIN$;"
+      "default": "{{CUFFDIFF_BIN}}"
     },
     {
       "name": "OTHER_PARAMS",

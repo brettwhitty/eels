@@ -5,19 +5,19 @@
   "tool_execution": [
     {
       "name": "dps",
-      "executable": "$;DPS_EXEC$;"
+      "executable": "{{DPS_EXEC}}"
     },
     {
       "name": "ext",
-      "executable": "$;EXT_EXEC$;"
+      "executable": "{{EXT_EXEC}}"
     },
     {
       "name": "ext collapse",
-      "executable": "$;EXT_COLLAPSE_EXEC$;"
+      "executable": "{{EXT_COLLAPSE_EXEC}}"
     },
     {
       "name": "filter",
-      "executable": "$;FILTER_EXEC$;"
+      "executable": "{{FILTER_EXEC}}"
     },
     {
       "name": "relocate query seq",
@@ -25,7 +25,7 @@
     },
     {
       "name": "nap",
-      "executable": "$;NAP_EXEC$;"
+      "executable": "{{NAP_EXEC}}"
     },
     {
       "name": "remove temp query seq",
@@ -57,7 +57,7 @@
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -66,8 +66,8 @@
       {
         "script": "nap2bsml",
         "name": "nap2bsml",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.btab",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.nap.btab",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",
@@ -100,7 +100,7 @@
     },
     {
       "name": "DATABASE_PATH_FOR_NAP",
-      "default": "$;DATABASE_PATH$;"
+      "default": "{{DATABASE_PATH}}"
     },
     {
       "name": "EXT_OPTS",

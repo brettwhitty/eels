@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "prepare for genewise",
-      "executable": "$;BIN_DIR$;/prepare_for_genewise_best_loc"
+      "executable": "{{BIN_DIR}}/prepare_for_genewise_best_loc"
     }
   ],
   "converters": {
@@ -30,7 +30,7 @@
     },
     {
       "name": "WORK_DIR",
-      "default": "$;OUTPUT_DIRECTORY$;/work_dir"
+      "default": "{{OUTPUT_DIRECTORY}}/work_dir"
     },
     {
       "name": "PADDING_LENGTH",

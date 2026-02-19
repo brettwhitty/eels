@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "bsml_qc",
-      "executable": "$;BIN_DIR$;/bsml_qc"
+      "executable": "{{BIN_DIR}}/bsml_qc"
     }
   ],
   "converters": {

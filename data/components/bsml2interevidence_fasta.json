@@ -10,7 +10,7 @@
         "script": "bsml2interevidence_fasta",
         "name": "bsml2interevidence_fasta",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;"
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}"
       }
     ]
   },

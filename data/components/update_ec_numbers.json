@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "update ec numbers",
-      "executable": "$;BIN_DIR$;/update_ec_numbers"
+      "executable": "{{BIN_DIR}}/update_ec_numbers"
     }
   ],
   "converters": {

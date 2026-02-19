@@ -29,7 +29,7 @@
     },
     {
       "name": "CONFIG_FILE",
-      "default": "$;BLAST2GO_INSTALL$;/b2gPipe.properties"
+      "default": "{{BLAST2GO_INSTALL}}/b2gPipe.properties"
     }
   ]
 }

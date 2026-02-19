@@ -39,14 +39,13 @@ const template = readFileSync(join(import.meta.dirname, 'app.html'), 'utf8');
 const d3src = readFileSync(join(root, 'node_modules', 'd3', 'dist', 'd3.min.js'), 'utf8');
 let html = template;
 
-// Replace D3 CDN with inlined source (substring to avoid $ replacement issues)
+// Replace D3 CDN with inlined source (substring because d3.min.js contains $ in source)
 const cdnTag = '<script src="https://d3js.org/d3.v7.min.js"></script>';
 let idx = html.indexOf(cdnTag);
 html = html.substring(0, idx) + '<script>\n' + d3src + '\n</script>' + html.substring(idx + cdnTag.length);
 
-// Inline data — use split/join to avoid $ replacement issues
-const parts = html.split('/*__EELS_DATA__*/');
-html = parts[0] + 'const D = ' + JSON.stringify(data) + ';' + parts[1];
+// Inline data
+html = html.replace('/*__EELS_DATA__*/', 'const D = ' + JSON.stringify(data) + ';');
 
 writeFileSync(join(import.meta.dirname, 'index.html'), html);
 const size = (Buffer.byteLength(html) / 1024 / 1024).toFixed(1);

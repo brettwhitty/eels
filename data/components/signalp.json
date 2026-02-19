@@ -9,15 +9,15 @@
     },
     {
       "name": "Run signalp",
-      "executable": "$;SIGNALP_EXEC$;"
+      "executable": "{{SIGNALP_EXEC}}"
     },
     {
       "name": "Rename signalp graphics files",
-      "executable": "$;BIN_DIR$;/signalp_graphics_rename"
+      "executable": "{{BIN_DIR}}/signalp_graphics_rename"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -26,8 +26,8 @@
       {
         "script": "signalp2bsml",
         "name": "Convert signalp raw output to BSML",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.raw",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",

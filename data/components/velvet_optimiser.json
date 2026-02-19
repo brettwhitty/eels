@@ -20,7 +20,7 @@
   "parameters": [
     {
       "name": "VELVET_PATH",
-      "default": "$;VELVET_INSTALL_DIR$;"
+      "default": "{{VELVET_INSTALL_DIR}}"
     },
     {
       "name": "START_HASH_LENGTH",

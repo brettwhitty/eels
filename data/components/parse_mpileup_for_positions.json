@@ -9,7 +9,7 @@
     },
     {
       "name": "parse_mpileup",
-      "executable": "$;BIN_DIR$;/parse_mpileup"
+      "executable": "{{BIN_DIR}}/parse_mpileup"
     }
   ],
   "converters": {

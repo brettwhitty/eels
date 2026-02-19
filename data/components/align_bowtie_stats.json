@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "align_bowtie_stats",
-      "executable": "$;BIN_DIR$;/align_bowtie_stats"
+      "executable": "{{BIN_DIR}}/align_bowtie_stats"
     }
   ],
   "converters": {

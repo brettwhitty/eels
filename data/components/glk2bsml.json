@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "DTD validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     },
     {
       "name": "profileBSMLFile",
-      "executable": "$;BIN_DIR$;/profileBSMLFile"
+      "executable": "{{BIN_DIR}}/profileBSMLFile"
     }
   ],
   "converters": {
@@ -18,7 +18,7 @@
         "script": "create_legacy2bsml_iterator_list",
         "name": "Create the glk2bsml iterator list file",
         "input": null,
-        "output": "$;TMP_DIR$;/glk2bsml.list"
+        "output": "{{TMP_DIR}}/glk2bsml.list"
       }
     ],
     "iterator": [

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "snp_verify",
-      "executable": "$;BIN_DIR$;/snp_verify"
+      "executable": "{{BIN_DIR}}/snp_verify"
     }
   ],
   "converters": {

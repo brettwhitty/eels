@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "remove_non_unique_snps",
-      "executable": "$;BIN_DIR$;/remove_nonunique_snps"
+      "executable": "{{BIN_DIR}}/remove_nonunique_snps"
     },
     {
       "name": "make_comparative_circleator_figure",
-      "executable": "$;BIN_DIR$;/make_comparative_circleator_figure"
+      "executable": "{{BIN_DIR}}/make_comparative_circleator_figure"
     }
   ],
   "converters": {

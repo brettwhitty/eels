@@ -23,20 +23,20 @@
    "name" : "Prokaryotic_Annotation_Pipeline_Pseudomolecule_Generation",
    "pipeline_config" : {
       "clean_fasta default" : {
-         "$;INPUT_FILE$;" : "$;INPUT_FASTA$;"
+         "{{INPUT_FILE}}" : "{{INPUT_FASTA}}"
       },
       "create_pseudomolecules default" : {
-         "$;ACSN_FILE$;" : "$;ACCESSION_FILE$;",
-         "$;CONTIG_INPUT$;" : "$;REPOSITORY_ROOT$;/output_repository/clean_fasta/$;PIPELINEID$;_default/clean_fasta.list",
-         "$;STRAIN_NAME$;" : "$;ABBREVIATION$;"
+         "{{ACSN_FILE}}" : "{{ACCESSION_FILE}}",
+         "{{CONTIG_INPUT}}" : "{{REPOSITORY_ROOT}}/output_repository/clean_fasta/{{PIPELINEID}}_default/clean_fasta.list",
+         "{{STRAIN_NAME}}" : "{{ABBREVIATION}}"
       },
       "global" : {
-         "$;ABBREVIATION$;" : "",
-         "$;ACCESSION_FILE$;" : "",
-         "$;INPUT_FASTA$;" : ""
+         "{{ABBREVIATION}}" : "",
+         "{{ACCESSION_FILE}}" : "",
+         "{{INPUT_FASTA}}" : ""
       },
       "pmarks2bsml default" : {
-         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+         "{{PROJECT_ABBREVIATION}}" : "{{ABBREVIATION}}"
       }
    },
    "structure" : {

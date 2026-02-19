@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "bam_merge",
-      "executable": "$;BIN_DIR$;/bam_merge"
+      "executable": "{{BIN_DIR}}/bam_merge"
     }
   ],
   "converters": {

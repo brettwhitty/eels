@@ -43,7 +43,7 @@
   "parameters": [
     {
       "name": "DATABASE",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "SERVER",

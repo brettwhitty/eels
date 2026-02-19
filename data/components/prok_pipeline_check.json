@@ -26,11 +26,11 @@
     },
     {
       "name": "CHECK_PIPELINEID",
-      "default": "$;PIPELINEID$;"
+      "default": "{{PIPELINEID}}"
     },
     {
       "name": "CHECK_REPOSITORY_ROOT",
-      "default": "$;REPOSITORY_ROOT$;"
+      "default": "{{REPOSITORY_ROOT}}"
     }
   ]
 }

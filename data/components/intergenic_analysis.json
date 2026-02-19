@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "intergenic_analysis",
-      "executable": "$;BIN_DIR$;/intergenic_analysis"
+      "executable": "{{BIN_DIR}}/intergenic_analysis"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {

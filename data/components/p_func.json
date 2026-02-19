@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -53,11 +53,11 @@
     },
     {
       "name": "ROLES_DB_DIR",
-      "default": "$;TIGR_ROLES_DB_DIR$;"
+      "default": "{{TIGR_ROLES_DB_DIR}}"
     },
     {
       "name": "EC_DAT_FILE",
-      "default": "$;ENZYME_DAT$;"
+      "default": "{{ENZYME_DAT}}"
     },
     {
       "name": "HYPOTHETICAL",

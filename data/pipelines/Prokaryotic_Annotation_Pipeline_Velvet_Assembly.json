@@ -18,18 +18,18 @@
    "name" : "Prokaryotic_Annotation_Pipeline_Velvet_Assembly",
    "pipeline_config" : {
       "global" : {
-         "$;LONG_READ_PAIRED_END_LIST$;" : "",
-         "$;LONG_READ_SINGLE_END$;" : "",
-         "$;SHORT_READ_PAIRED_END_LIST$;" : "",
-         "$;SHORT_READ_SINGLE_END$;" : ""
+         "{{LONG_READ_PAIRED_END_LIST}}" : "",
+         "{{LONG_READ_SINGLE_END}}" : "",
+         "{{SHORT_READ_PAIRED_END_LIST}}" : "",
+         "{{SHORT_READ_SINGLE_END}}" : ""
       },
       "prepare_paired_ends_for_velvet default" : {
-         "$;LONG_INPUT_LIST$;" : "$;LONG_READ_PAIRED_END_LIST$;",
-         "$;SHORT_INPUT_LIST$;" : "$;SHORT_READ_PAIRED_END_LIST$;"
+         "{{LONG_INPUT_LIST}}" : "{{LONG_READ_PAIRED_END_LIST}}",
+         "{{SHORT_INPUT_LIST}}" : "{{SHORT_READ_PAIRED_END_LIST}}"
       },
       "velvet_optimiser assembly" : {
-         "$;LONG$;" : "$;LONG_READ_SINGLE_END$;",
-         "$;SHORT$;" : "$;SHORT_READ_SINGLE_END$;"
+         "{{LONG}}" : "{{LONG_READ_SINGLE_END}}",
+         "{{SHORT}}" : "{{SHORT_READ_SINGLE_END}}"
       }
    },
    "structure" : {

@@ -13,7 +13,7 @@
     },
     {
       "name": "snp-add-gene-info",
-      "executable": "$;BIN_DIR$;/snp-add-gene-info"
+      "executable": "{{BIN_DIR}}/snp-add-gene-info"
     }
   ],
   "converters": {

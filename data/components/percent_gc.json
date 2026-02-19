@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "percent_gc",
-      "executable": "$;BIN_DIR$;/percent_gc"
+      "executable": "{{BIN_DIR}}/percent_gc"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "open_reading_frames",
-      "executable": "$;BIN_DIR$;/open_reading_frames"
+      "executable": "{{BIN_DIR}}/open_reading_frames"
     }
   ],
   "converters": {

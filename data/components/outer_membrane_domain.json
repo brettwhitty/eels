@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "outer_membrane_domain",
-      "executable": "$;BIN_DIR$;/outer_membrane_domain"
+      "executable": "{{BIN_DIR}}/outer_membrane_domain"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -36,7 +36,7 @@
   "parameters": [
     {
       "name": "PROJECT_NAME",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     }
   ]
 }

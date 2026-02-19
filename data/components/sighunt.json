@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "SigHunt",
-      "executable": "$;BIN_DIR$;/run_sighunt"
+      "executable": "{{BIN_DIR}}/run_sighunt"
     }
   ],
   "converters": {
@@ -25,7 +25,7 @@
   "parameters": [
     {
       "name": "R_SCRIPT",
-      "default": "$;BIN_DIR$;/run_sighunt.R"
+      "default": "{{BIN_DIR}}/run_sighunt.R"
     },
     {
       "name": "CUTOFF",

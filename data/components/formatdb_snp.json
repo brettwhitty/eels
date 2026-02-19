@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "formatdb",
-      "executable": "$;BIN_DIR$;/formatdb_snp"
+      "executable": "{{BIN_DIR}}/formatdb_snp"
     }
   ],
   "converters": {

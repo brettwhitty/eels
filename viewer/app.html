@@ -119,7 +119,7 @@ svg .node:hover circle { stroke: var(--green); }
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const esc = s => { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; };
-const norm = s => (s || '').replace(/\$;([^$]+)\$;/g, '{{$1}}');
+const norm = s => s || '';
 
 let view = 'components';
 

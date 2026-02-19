@@ -7,7 +7,7 @@
     "main": [
       {
         "script": "db2fasta",
-        "name": "Generate FASTA files from database '$;DATABASE$;' on server '$;SERVER$;'",
+        "name": "Generate FASTA files from database '{{DATABASE}}' on server '{{SERVER}}'",
         "input": null,
         "output": null
       }
@@ -43,7 +43,7 @@
     },
     {
       "name": "DATABASE",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "SINGLE",

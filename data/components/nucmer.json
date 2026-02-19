@@ -13,11 +13,11 @@
     },
     {
       "name": "nucmer",
-      "executable": "$;NUCMER_EXEC$;"
+      "executable": "{{NUCMER_EXEC}}"
     },
     {
       "name": "create coordinates file",
-      "executable": "$;COORDS_EXEC$;"
+      "executable": "{{COORDS_EXEC}}"
     }
   ],
   "converters": {

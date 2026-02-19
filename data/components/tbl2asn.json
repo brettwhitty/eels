@@ -13,7 +13,7 @@
     },
     {
       "name": "Fix GenBank",
-      "executable": "$;BIN_DIR$;/fix_gbk"
+      "executable": "{{BIN_DIR}}/fix_gbk"
     },
     {
       "name": "Move GenBank",
@@ -30,7 +30,7 @@
         "output": null
       },
       {
-        "script": "$;TBL2ASN_EXEC$;",
+        "script": "{{TBL2ASN_EXEC}}",
         "name": "Run tbl2asn",
         "input": null,
         "output": null

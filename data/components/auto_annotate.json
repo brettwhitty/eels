@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "auto annotate compute",
-      "executable": "$;BIN_DIR$;/auto_annotate"
+      "executable": "{{BIN_DIR}}/auto_annotate"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {

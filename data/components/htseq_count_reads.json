@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "HTSeq counting",
-      "executable": "$;BIN_DIR$;/htseq_count_reads.sh"
+      "executable": "{{BIN_DIR}}/htseq_count_reads.sh"
     }
   ],
   "converters": {

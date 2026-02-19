@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "alien_hunter",
-      "executable": "$;ALIEN_HUNTER_EXEC$;"
+      "executable": "{{ALIEN_HUNTER_EXEC}}"
     }
   ],
   "converters": {

@@ -13,7 +13,7 @@
     },
     {
       "name": "bmtagger",
-      "executable": "$;BIN_DIR$;/run_bmtagger"
+      "executable": "{{BIN_DIR}}/run_bmtagger"
     }
   ],
   "converters": {

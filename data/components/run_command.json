@@ -20,7 +20,7 @@
   "parameters": [
     {
       "name": "INPUT_COMMAND",
-      "default": "touch $;ITER_FILE_PATH$;"
+      "default": "touch {{ITER_FILE_PATH}}"
     },
     {
       "name": "INPUT_ARGS",
@@ -28,11 +28,11 @@
     },
     {
       "name": "COMMAND_STDOUT",
-      "default": "$;TMP_DIR$;/runcommand.stdout"
+      "default": "{{TMP_DIR}}/runcommand.stdout"
     },
     {
       "name": "COMMAND_STDERR",
-      "default": "$;TMP_DIR$;/runcommand.stderr"
+      "default": "{{TMP_DIR}}/runcommand.stderr"
     }
   ]
 }

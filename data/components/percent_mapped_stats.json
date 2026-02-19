@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "percent_mapped_stats",
-      "executable": "$;BIN_DIR$;/percent_mapped_stats"
+      "executable": "{{BIN_DIR}}/percent_mapped_stats"
     }
   ],
   "converters": {
@@ -23,11 +23,11 @@
   "parameters": [
     {
       "name": "BEDTOOLS_BIN_DIR",
-      "default": "$;BEDTOOLS_BIN$;"
+      "default": "{{BEDTOOLS_BIN}}"
     },
     {
       "name": "SAMTOOLS_BIN_DIR",
-      "default": "$;SAMTOOLS_BIN$;"
+      "default": "{{SAMTOOLS_BIN}}"
     },
     {
       "name": "OTHER_PARAMETERS",

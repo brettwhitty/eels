@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "phage finder",
-      "executable": "$;BIN_DIR$;/run_phage_finder"
+      "executable": "{{BIN_DIR}}/run_phage_finder"
     }
   ],
   "converters": {

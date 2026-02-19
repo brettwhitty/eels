@@ -9,7 +9,7 @@
     },
     {
       "name": "soapdenovo",
-      "executable": "$;BIN_DIR$;/soapdenovo"
+      "executable": "{{BIN_DIR}}/soapdenovo"
     }
   ],
   "converters": {
@@ -29,7 +29,7 @@
   "parameters": [
     {
       "name": "SOAPDENOVO_BIN",
-      "default": "$;SOAPDENOVO_EXEC$;"
+      "default": "{{SOAPDENOVO_EXEC}}"
     },
     {
       "name": "PROCESS",

@@ -13,7 +13,7 @@
     },
     {
       "name": "BWA Execution",
-      "executable": "$;BIN_DIR$;/bwa_wrapper"
+      "executable": "{{BIN_DIR}}/bwa_wrapper"
     }
   ],
   "converters": {

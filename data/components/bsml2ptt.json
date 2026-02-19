@@ -9,7 +9,7 @@
       {
         "script": "bsml2ptt",
         "name": "bsml2ptt",
-        "input": "$;I_FILE_PATH$;",
+        "input": "{{I_FILE_PATH}}",
         "output": null
       }
     ]

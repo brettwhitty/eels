@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "predict_operons",
-      "executable": "$;BIN_DIR$;/predict_operons"
+      "executable": "{{BIN_DIR}}/predict_operons"
     }
   ],
   "converters": {

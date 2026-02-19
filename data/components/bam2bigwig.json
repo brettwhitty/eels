@@ -29,15 +29,15 @@
     },
     {
       "name": "UCSC_UTIL_DIR",
-      "default": "$;UCSC_UTIL$;"
+      "default": "{{UCSC_UTIL}}"
     },
     {
       "name": "BEDTOOLS_BIN_DIR",
-      "default": "$;BEDTOOLS_BIN$;"
+      "default": "{{BEDTOOLS_BIN}}"
     },
     {
       "name": "SAMTOOLS_BIN_DIR",
-      "default": "$;SAMTOOLS_BIN$;"
+      "default": "{{SAMTOOLS_BIN}}"
     },
     {
       "name": "OTHER_ARGS",

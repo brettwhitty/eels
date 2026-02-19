@@ -5,15 +5,15 @@
   "tool_execution": [
     {
       "name": "dump fasta",
-      "executable": "$;BIN_DIR$;/dump_fasta"
+      "executable": "{{BIN_DIR}}/dump_fasta"
     },
     {
       "name": "create sbt and cmt files",
-      "executable": "$;BIN_DIR$;/prepare_sbt_cmt"
+      "executable": "{{BIN_DIR}}/prepare_sbt_cmt"
     },
     {
       "name": "create agp",
-      "executable": "$;BIN_DIR$;/format_velvet_assembled_AGP"
+      "executable": "{{BIN_DIR}}/format_velvet_assembled_AGP"
     }
   ],
   "converters": {

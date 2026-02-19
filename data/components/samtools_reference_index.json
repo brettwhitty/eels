@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "samtools_reference_index",
-      "executable": "$;BIN_DIR$;/samtools_reference_index"
+      "executable": "{{BIN_DIR}}/samtools_reference_index"
     }
   ],
   "converters": {
@@ -23,7 +23,7 @@
   "parameters": [
     {
       "name": "SAMTOOLS_BIN_DIR",
-      "default": "$;SAMTOOLS_BIN$;"
+      "default": "{{SAMTOOLS_BIN}}"
     },
     {
       "name": "OTHER_ARGS",

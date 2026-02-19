@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "tmhmm",
-      "executable": "$;PSORTB_EXE$;"
+      "executable": "{{PSORTB_EXE}}"
     }
   ],
   "converters": {

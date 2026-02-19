@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "Metastats statistical comparison",
-      "executable": "$;METASTATS_PATH$;"
+      "executable": "{{METASTATS_PATH}}"
     }
   ],
   "converters": {

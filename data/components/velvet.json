@@ -13,23 +13,23 @@
     },
     {
       "name": "velveth",
-      "executable": "$;VELVETH_EXEC$;"
+      "executable": "{{VELVETH_EXEC}}"
     },
     {
       "name": "velveth post-processing",
-      "executable": "$;BIN_DIR$;/velveth_post_processing"
+      "executable": "{{BIN_DIR}}/velveth_post_processing"
     },
     {
       "name": "velvetg pre-processing",
-      "executable": "$;BIN_DIR$;/velvetg_pre_processing"
+      "executable": "{{BIN_DIR}}/velvetg_pre_processing"
     },
     {
       "name": "velvetg",
-      "executable": "$;VELVETG_EXEC$;"
+      "executable": "{{VELVETG_EXEC}}"
     },
     {
       "name": "velvetg post-processing",
-      "executable": "$;BIN_DIR$;/velvetg_post_processing"
+      "executable": "{{BIN_DIR}}/velvetg_post_processing"
     }
   ],
   "converters": {

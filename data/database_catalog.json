@@ -13,7 +13,7 @@
          "predict_prokaryotic_gene_function",
          "start_site_curation"
       ],
-      "path" : "$;DB_DIR$;/tchar/tchar.db",
+      "path" : "{{DB_DIR}}/tchar/tchar.db",
       "variable" : "CHAR_DB"
    },
    {
@@ -30,7 +30,7 @@
          "ncbi-blastp",
          "wu-blastp"
       ],
-      "path" : "$;DB_DIR$;/ncbi/COG/myva",
+      "path" : "{{DB_DIR}}/ncbi/COG/myva",
       "variable" : "COGS_DB"
    },
    {
@@ -38,7 +38,7 @@
       "components" : [
          "pipeline_summary"
       ],
-      "path" : "$;DB_DIR$;/ncbi/COG/whog",
+      "path" : "{{DB_DIR}}/ncbi/COG/whog",
       "variable" : "COGS_LOOKUP"
    },
    {
@@ -190,7 +190,7 @@
       "components" : [
          "auto_gene_curation"
       ],
-      "path" : "$;DB_DIR$;/ncbi/taxonomy/names.dmp",
+      "path" : "{{DB_DIR}}/ncbi/taxonomy/names.dmp",
       "variable" : "NCBI_TAX_NAMES"
    },
    {
@@ -198,7 +198,7 @@
       "components" : [
          "auto_gene_curation"
       ],
-      "path" : "$;DB_DIR$;/ncbi/taxonomy/nodes.dmp",
+      "path" : "{{DB_DIR}}/ncbi/taxonomy/nodes.dmp",
       "variable" : "NCBI_TAX_NODES"
    },
    {

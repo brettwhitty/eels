@@ -9,7 +9,7 @@
     },
     {
       "name": "prep the R input file",
-      "executable": "$;BIN_DIR$;/pangenome_make_graphs"
+      "executable": "{{BIN_DIR}}/pangenome_make_graphs"
     }
   ],
   "converters": {

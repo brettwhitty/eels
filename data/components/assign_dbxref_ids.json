@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "assign dbxref IDs",
-      "executable": "$;BIN_DIR$;/assign_dbxref_ids"
+      "executable": "{{BIN_DIR}}/assign_dbxref_ids"
     }
   ],
   "converters": {

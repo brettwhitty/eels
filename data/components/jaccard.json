@@ -9,11 +9,11 @@
     },
     {
       "name": "generate clusters",
-      "executable": "$;BIN_DIR$;/clusterBsmlPairwiseAlignments"
+      "executable": "{{BIN_DIR}}/clusterBsmlPairwiseAlignments"
     },
     {
       "name": "jaccard2fasta",
-      "executable": "$;BIN_DIR$;/CogProteinFastaNoMap"
+      "executable": "{{BIN_DIR}}/CogProteinFastaNoMap"
     },
     {
       "name": "create fasta list",
@@ -27,7 +27,7 @@
         "script": "bsml2idlookup",
         "name": "make asmbl lookup",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.asmbl.lookup"
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_GENOME}}.asmbl.lookup"
       }
     ]
   },

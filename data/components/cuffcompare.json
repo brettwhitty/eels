@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "cuffcompare",
-      "executable": "$;BIN_DIR$;/cuffcompare"
+      "executable": "{{BIN_DIR}}/cuffcompare"
     }
   ],
   "converters": {
@@ -31,7 +31,7 @@
     },
     {
       "name": "CUFFLINKS_BIN_DIR",
-      "default": "$;CUFFCOMPARE_BIN$;"
+      "default": "{{CUFFCOMPARE_BIN}}"
     },
     {
       "name": "OTHER_PARAMS",

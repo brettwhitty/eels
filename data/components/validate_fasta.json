@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "Validation of FASTA file",
-      "executable": "$;BIN_DIR$;/countHeadersWithoutSequence"
+      "executable": "{{BIN_DIR}}/countHeadersWithoutSequence"
     }
   ],
   "converters": {

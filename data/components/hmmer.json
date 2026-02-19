@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "hmmls",
-      "executable": "$;HMMLS_EXEC$;"
+      "executable": "{{HMMLS_EXEC}}"
     }
   ],
   "converters": {

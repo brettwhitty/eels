@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "infernal",
-      "executable": "$;BIN_DIR$;/run_cmsearch"
+      "executable": "{{BIN_DIR}}/run_cmsearch"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -18,8 +18,8 @@
       {
         "script": "infernal2bsml",
         "name": "infernal2bsml",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw.tbl",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.raw.tbl",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",
@@ -59,11 +59,11 @@
     },
     {
       "name": "CM_FILE",
-      "default": "$;CM_FILE_PATH$;"
+      "default": "{{CM_FILE_PATH}}"
     },
     {
       "name": "STOCKHOLM_PATH",
-      "default": "$;RFAM_STOCKHOLM_DIR$;"
+      "default": "{{RFAM_STOCKHOLM_DIR}}"
     },
     {
       "name": "DEFAULT_TYPE",

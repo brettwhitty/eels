@@ -9,7 +9,7 @@
         "script": "fasta2bsml",
         "name": "fasta2bsml",
         "input": null,
-        "output": "'$;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE$;'"
+        "output": "'{{OUTPUT_DIRECTORY}}/{{OUTPUT_FILE}}'"
       }
     ],
     "iterator": []

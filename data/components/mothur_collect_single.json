@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "collect single",
-      "executable": "$;BIN_DIR$;/mothur"
+      "executable": "{{BIN_DIR}}/mothur"
     }
   ],
   "converters": {

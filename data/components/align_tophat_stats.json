@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "align_tophat_stats",
-      "executable": "$;BIN_DIR$;/align_tophat_stats"
+      "executable": "{{BIN_DIR}}/align_tophat_stats"
     }
   ],
   "converters": {

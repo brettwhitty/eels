@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "read otu",
-      "executable": "$;BIN_DIR$;/mothur"
+      "executable": "{{BIN_DIR}}/mothur"
     }
   ],
   "converters": {

@@ -9,11 +9,11 @@
     },
     {
       "name": "merge contigs",
-      "executable": "$;BIN_DIR$;/ksnp_merge_reference"
+      "executable": "{{BIN_DIR}}/ksnp_merge_reference"
     },
     {
       "name": "parse reference fasta header",
-      "executable": "$;KSNP_DIR$;/genome_names.pl"
+      "executable": "{{KSNP_DIR}}/genome_names.pl"
     },
     {
       "name": "merge input and reference",
@@ -21,7 +21,7 @@
     },
     {
       "name": "ksnp",
-      "executable": "$;KSNP_EXEC$;"
+      "executable": "{{KSNP_EXEC}}"
     },
     {
       "name": "create raw output",
@@ -29,11 +29,11 @@
     },
     {
       "name": "convert ksnp to nucmer output",
-      "executable": "$;BIN_DIR$;/ksnp_to_addgeneinfo"
+      "executable": "{{BIN_DIR}}/ksnp_to_addgeneinfo"
     },
     {
       "name": "convert nucmer output to snp add gene info",
-      "executable": "$;BIN_DIR$;/ksnp-add-gene-info"
+      "executable": "{{BIN_DIR}}/ksnp-add-gene-info"
     },
     {
       "name": "remove temp dir",

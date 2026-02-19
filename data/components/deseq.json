@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "deseq",
-      "executable": "$;BIN_DIR$;/deseq"
+      "executable": "{{BIN_DIR}}/deseq"
     }
   ],
   "converters": {
@@ -27,7 +27,7 @@
     },
     {
       "name": "R_BIN_DIR",
-      "default": "$;R_BIN$;"
+      "default": "{{R_BIN}}"
     },
     {
       "name": "R_PARAMS",
@@ -35,7 +35,7 @@
     },
     {
       "name": "R_SCRIPT",
-      "default": "$;R_SCRIPT_PATH$;"
+      "default": "{{R_SCRIPT_PATH}}"
     },
     {
       "name": "OTHER_ARGS",

@@ -13,11 +13,11 @@
     },
     {
       "name": "BWA alignment",
-      "executable": "$;BIN_DIR$;/lgt_bwa"
+      "executable": "{{BIN_DIR}}/lgt_bwa"
     },
     {
       "name": "Filter reads",
-      "executable": "$;BIN_DIR$;/lgt_filter_reads"
+      "executable": "{{BIN_DIR}}/lgt_filter_reads"
     }
   ],
   "converters": {

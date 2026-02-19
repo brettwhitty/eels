@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -15,7 +15,7 @@
         "script": "pmarks2bsml",
         "name": "pmarks2bsml",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.pmarks.bsml"
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.pmarks.bsml"
       },
       {
         "script": "analysis2bsml",
@@ -38,7 +38,7 @@
   "parameters": [
     {
       "name": "PROJECT_ABBREVIATION",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     }
   ]
 }

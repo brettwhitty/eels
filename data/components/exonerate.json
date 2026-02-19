@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "exonerate",
-      "executable": "$;EXONERATE_EXEC$;"
+      "executable": "{{EXONERATE_EXEC}}"
     }
   ],
   "converters": {

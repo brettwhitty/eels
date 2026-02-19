@@ -5,15 +5,15 @@
   "tool_execution": [
     {
       "name": "auto gene curation",
-      "executable": "$;BIN_DIR$;/auto_gene_curation"
+      "executable": "{{BIN_DIR}}/auto_gene_curation"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -58,11 +58,11 @@
     },
     {
       "name": "NAMES_DUMP",
-      "default": "$;REPOSITORY_ROOT$;/data_dbs/taxdump/names.dmp"
+      "default": "{{REPOSITORY_ROOT}}/data_dbs/taxdump/names.dmp"
     },
     {
       "name": "NODES_DUMP",
-      "default": "$;REPOSITORY_ROOT$;/data_dbs/taxdump/nodes.dmp"
+      "default": "{{REPOSITORY_ROOT}}/data_dbs/taxdump/nodes.dmp"
     }
   ]
 }

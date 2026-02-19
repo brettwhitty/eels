@@ -13,7 +13,7 @@
     },
     {
       "name": "delta-filter",
-      "executable": "$;SHOW_SNPS_EXEC$;"
+      "executable": "{{SHOW_SNPS_EXEC}}"
     }
   ],
   "converters": {

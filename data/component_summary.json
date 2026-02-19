@@ -148,7 +148,7 @@
       "aat_aa",
       "aat_aa_masked"
     ],
-    "$;GAP2_EXEC$;": [
+    "{{GAP2_EXEC}}": [
       "aat_na",
       "aat_na_masked"
     ],
@@ -429,7 +429,7 @@
     "pepstats2bsml": [
       "pepstats"
     ],
-    "$;COMPONENT_NAME$;2bsml": [
+    "{{COMPONENT_NAME}}2bsml": [
       "phat"
     ],
     "phobos2bsml": [
@@ -484,7 +484,7 @@
     "prepare_for_tbl2asn": [
       "tbl2asn"
     ],
-    "$;TBL2ASN_EXEC$;": [
+    "{{TBL2ASN_EXEC}}": [
       "tbl2asn"
     ],
     "tmhmm2bsml": [

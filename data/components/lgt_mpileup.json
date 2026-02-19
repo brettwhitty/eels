@@ -13,7 +13,7 @@
     },
     {
       "name": "mpileup Execution",
-      "executable": "$;BIN_DIR$;/lgt_mpileup"
+      "executable": "{{BIN_DIR}}/lgt_mpileup"
     }
   ],
   "converters": {

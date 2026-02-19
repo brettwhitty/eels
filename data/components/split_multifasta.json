@@ -9,7 +9,7 @@
     },
     {
       "name": "split_multifasta",
-      "executable": "$;BIN_DIR$;/split_multifasta"
+      "executable": "{{BIN_DIR}}/split_multifasta"
     }
   ],
   "converters": {

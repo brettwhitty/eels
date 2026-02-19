@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "split_fasta",
-      "executable": "$;BIN_DIR$;/split_fasta"
+      "executable": "{{BIN_DIR}}/split_fasta"
     }
   ],
   "converters": {

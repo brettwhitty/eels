@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "get oturep",
-      "executable": "$;BIN_DIR$;/mothur"
+      "executable": "{{BIN_DIR}}/mothur"
     }
   ],
   "converters": {

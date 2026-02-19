@@ -9,7 +9,7 @@
     },
     {
       "name": "split_fasta_fastq",
-      "executable": "$;BIN_DIR$;/split_fasta_fastq"
+      "executable": "{{BIN_DIR}}/split_fasta_fastq"
     }
   ],
   "converters": {

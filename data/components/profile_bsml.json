@@ -13,7 +13,7 @@
     },
     {
       "name": "Profile BSML file",
-      "executable": "$;BIN_DIR$;/profileBSMLFile"
+      "executable": "{{BIN_DIR}}/profileBSMLFile"
     }
   ],
   "converters": {

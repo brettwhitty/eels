@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "dimob",
-      "executable": "$;DIMOB_PATH$;"
+      "executable": "{{DIMOB_PATH}}"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -18,8 +18,8 @@
       {
         "script": "islandpath2bsml",
         "name": "islandpath2bsml",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR1$;/g$;GROUP_NUMBER$;/$;PROT_FILE_NAME$;.out",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR1$;/g$;GROUP_NUMBER$;/$;PROT_FILE_NAME$;.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR1}}/g{{GROUP_NUMBER}}/{{PROT_FILE_NAME}}.out",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR1}}/g{{GROUP_NUMBER}}/{{PROT_FILE_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",

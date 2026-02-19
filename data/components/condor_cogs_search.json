@@ -9,7 +9,7 @@
     },
     {
       "name": "condor_cog_search.dbi",
-      "executable": "$;BIN_DIR$;/condor_cog_search"
+      "executable": "{{BIN_DIR}}/condor_cog_search"
     }
   ],
   "converters": {
@@ -18,7 +18,7 @@
         "script": "create_legacy2bsml_iterator_list",
         "name": "Create condor_cogs_search master iterator list file",
         "input": null,
-        "output": "$;WORKFLOW_REPOSITORY$;/condor_cogs_search.list"
+        "output": "{{WORKFLOW_REPOSITORY}}/condor_cogs_search.list"
       }
     ],
     "iterator": []

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "extract_snp_regions",
-      "executable": "$;BIN_DIR$;/extract_snp_regions"
+      "executable": "{{BIN_DIR}}/extract_snp_regions"
     }
   ],
   "converters": {

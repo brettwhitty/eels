@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "filter_deseq",
-      "executable": "$;BIN_DIR$;/filter_deseq"
+      "executable": "{{BIN_DIR}}/filter_deseq"
     }
   ],
   "converters": {

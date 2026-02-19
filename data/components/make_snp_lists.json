@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "make_snp_lists",
-      "executable": "$;BIN_DIR$;/make_snp_lists"
+      "executable": "{{BIN_DIR}}/make_snp_lists"
     }
   ],
   "converters": {

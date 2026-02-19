@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "wait",
-      "executable": "$;BIN_DIR$;/spin_wait"
+      "executable": "{{BIN_DIR}}/spin_wait"
     }
   ],
   "converters": {

@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "combine_ncRNA_alignments",
-      "executable": "$;BIN_DIR$;/combine_ncRNA_alignemnts"
+      "executable": "{{BIN_DIR}}/combine_ncRNA_alignemnts"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -38,7 +38,7 @@
   "parameters": [
     {
       "name": "PROJECT_NAME",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "OTHER_BSML_LISTS",

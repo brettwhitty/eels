@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "ncbi-blastn",
-      "executable": "$;BIN_DIR$;/blast_snp_regions"
+      "executable": "{{BIN_DIR}}/blast_snp_regions"
     },
     {
       "name": "parse raw BLAST results",
-      "executable": "$;BIN_DIR$;/parse_snp_blast"
+      "executable": "{{BIN_DIR}}/parse_snp_blast"
     }
   ],
   "converters": {

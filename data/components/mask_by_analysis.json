@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "mask_by_analysis",
-      "executable": "$;BIN_DIR$;/mask_by_analysis"
+      "executable": "{{BIN_DIR}}/mask_by_analysis"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {

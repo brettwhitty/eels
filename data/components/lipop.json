@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "lipop",
-      "executable": "$;LIPOP_EXEC$;"
+      "executable": "{{LIPOP_EXEC}}"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -19,7 +19,7 @@
         "script": "lipop2bsml",
         "name": "lipop2bsml",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml"
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.bsml"
       },
       {
         "script": "analysis2bsml",
@@ -47,7 +47,7 @@
     },
     {
       "name": "PROJECT_ABBR",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     }
   ]
 }

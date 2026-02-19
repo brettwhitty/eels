@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "Stacked histogram visualization",
-      "executable": "$;HIST_PATH$;"
+      "executable": "{{HIST_PATH}}"
     }
   ],
   "converters": {

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "skiff clustering",
-      "executable": "$;SKIFF_PATH$;"
+      "executable": "{{SKIFF_PATH}}"
     }
   ],
   "converters": {

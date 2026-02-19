@@ -13,7 +13,7 @@
     },
     {
       "name": "clean_fasta",
-      "executable": "$;BIN_DIR$;/clean_fasta"
+      "executable": "{{BIN_DIR}}/clean_fasta"
     },
     {
       "name": "create cf directory",
@@ -21,7 +21,7 @@
     },
     {
       "name": "replace_gaps_in_nucleotides",
-      "executable": "$;BIN_DIR$;/replace_nuc_gaps"
+      "executable": "{{BIN_DIR}}/replace_nuc_gaps"
     }
   ],
   "converters": {

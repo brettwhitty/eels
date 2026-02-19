@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "Run EMBOSS getorf",
-      "executable": "$;EMBOSS_BIN$;/getorf"
+      "executable": "{{EMBOSS_BIN}}/getorf"
     }
   ],
   "converters": {

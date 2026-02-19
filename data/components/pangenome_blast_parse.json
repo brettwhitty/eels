@@ -9,7 +9,7 @@
     },
     {
       "name": "parse blast results",
-      "executable": "$;BIN_DIR$;/pangenome_blast_parse"
+      "executable": "{{BIN_DIR}}/pangenome_blast_parse"
     }
   ],
   "converters": {

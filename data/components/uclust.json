@@ -5,23 +5,23 @@
   "tool_execution": [
     {
       "name": "sort",
-      "executable": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+      "executable": "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}"
     },
     {
       "name": "cluster",
-      "executable": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+      "executable": "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}"
     },
     {
       "name": "convert to fasta",
-      "executable": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+      "executable": "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}"
     },
     {
       "name": "format fasta",
-      "executable": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;BIN_DIR$;/format_uclust_fasta_ids"
+      "executable": "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{BIN_DIR}}/format_uclust_fasta_ids"
     },
     {
       "name": "format clustering file",
-      "executable": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+      "executable": "cd {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}} ; {{UCLUST_EXEC}}"
     }
   ],
   "converters": {

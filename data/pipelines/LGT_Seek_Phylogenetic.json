@@ -37,10 +37,10 @@
    "name" : "LGT_Seek_Phylogenetic",
    "pipeline_config" : {
       "blastp_plus outside" : {
-         "$;NEG_GI_LIST$;" : ""
+         "{{NEG_GI_LIST}}" : ""
       },
       "blastp_plus sister" : {
-         "$;GI_LIST$;" : ""
+         "{{GI_LIST}}" : ""
       }
    },
    "structure" : {

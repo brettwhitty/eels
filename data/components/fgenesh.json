@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "fgenesh",
-      "executable": "$;FGENESH_EXEC$;"
+      "executable": "{{FGENESH_EXEC}}"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -19,7 +19,7 @@
         "script": "fgenesh2bsml",
         "name": "fgenesh2bsml",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.fgenesh.bsml"
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.fgenesh.bsml"
       },
       {
         "script": "analysis2bsml",

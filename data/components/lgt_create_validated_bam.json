@@ -13,7 +13,7 @@
     },
     {
       "name": "Create validated BAM",
-      "executable": "$;BIN_DIR$;/lgt_create_validated_bam"
+      "executable": "{{BIN_DIR}}/lgt_create_validated_bam"
     }
   ],
   "converters": {

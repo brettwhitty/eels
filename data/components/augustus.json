@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "augustus",
-      "executable": "$;AUGUSTUS_BINARY_PATH$;"
+      "executable": "{{AUGUSTUS_BINARY_PATH}}"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -19,7 +19,7 @@
         "script": "augustus2bsml",
         "name": "augustus2bsml",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.{{COMPONENT_NAME}}.bsml"
       },
       {
         "script": "analysis2bsml",
@@ -67,15 +67,15 @@
     },
     {
       "name": "EXTRINSIC_CONFIG_FILE",
-      "default": "$;AUGUSTUS_CONFIG_PATH$;/extrinsic/extrinsic.cfg"
+      "default": "{{AUGUSTUS_CONFIG_PATH}}/extrinsic/extrinsic.cfg"
     },
     {
       "name": "AUGUSTUS_CONFIG_PATH",
-      "default": "$;AUGUSTUS_DIR$;/config"
+      "default": "{{AUGUSTUS_DIR}}/config"
     },
     {
       "name": "AUGUSTUS_BINARY_PATH",
-      "default": "$;AUGUSTUS_DIR$;/bin/augustus"
+      "default": "{{AUGUSTUS_DIR}}/bin/augustus"
     },
     {
       "name": "OTHER_OPTS",

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "rRNA_pipeline_for_one.pl",
-      "executable": "$;STAP_CLASSIFIER_EXEC$;"
+      "executable": "{{STAP_CLASSIFIER_EXEC}}"
     }
   ],
   "converters": {

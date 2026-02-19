@@ -28,19 +28,19 @@
    "name" : "Prokaryotic_Annotation_Pipeline_Prodigal_Predictions",
    "pipeline_config" : {
       "global" : {
-         "$;ABBREVIATION$;" : "",
-         "$;TRANS_TABLE$;" : "11"
+         "{{ABBREVIATION}}" : "",
+         "{{TRANS_TABLE}}" : "11"
       },
       "prodigal default" : {
-         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;",
-         "$;TRANSLATION_TABLE$;" : "$;TRANS_TABLE$;"
+         "{{PROJECT_ABBREVIATION}}" : "{{ABBREVIATION}}",
+         "{{TRANSLATION_TABLE}}" : "{{TRANS_TABLE}}"
       },
       "promote_gene_prediction promote_prediction" : {
-         "$;PROJECT_ABBREVIATION$;" : "$;ABBREVIATION$;"
+         "{{PROJECT_ABBREVIATION}}" : "{{ABBREVIATION}}"
       },
       "translate_sequence translate_prediction" : {
-         "$;PROJECT_NAME$;" : "$;ABBREVIATION$;",
-         "$;TABLE$;" : "$;TRANS_TABLE$;"
+         "{{PROJECT_NAME}}" : "{{ABBREVIATION}}",
+         "{{TABLE}}" : "{{TRANS_TABLE}}"
       }
    },
    "structure" : {

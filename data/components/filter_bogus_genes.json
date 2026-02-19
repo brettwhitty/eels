@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "filter_bogus_genes",
-      "executable": "$;BIN_DIR$;/filter_bogus_genes"
+      "executable": "{{BIN_DIR}}/filter_bogus_genes"
     }
   ],
   "converters": {

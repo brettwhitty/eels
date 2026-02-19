@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "parse_for_ncRNAs",
-      "executable": "$;BIN_DIR$;/parse_for_ncRNAs"
+      "executable": "{{BIN_DIR}}/parse_for_ncRNAs"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -33,7 +33,7 @@
     },
     {
       "name": "PROJECT",
-      "default": "$;DATABASE$;"
+      "default": "{{DATABASE}}"
     }
   ]
 }

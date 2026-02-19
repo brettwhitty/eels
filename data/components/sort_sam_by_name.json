@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "sort sam by read name",
-      "executable": "$;BIN_DIR$;/sort_sam_by_name.sh"
+      "executable": "{{BIN_DIR}}/sort_sam_by_name.sh"
     }
   ],
   "converters": {

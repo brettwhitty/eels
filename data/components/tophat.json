@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "tophat",
-      "executable": "$;BIN_DIR$;/tophat"
+      "executable": "{{BIN_DIR}}/tophat"
     }
   ],
   "converters": {
@@ -23,15 +23,15 @@
   "parameters": [
     {
       "name": "BOWTIE_BIN_DIR",
-      "default": "$;BOWTIE_BIN$;"
+      "default": "{{BOWTIE_BIN}}"
     },
     {
       "name": "SAMTOOLS_BIN_DIR",
-      "default": "$;SAMTOOLS_BIN$;"
+      "default": "{{SAMTOOLS_BIN}}"
     },
     {
       "name": "TOPHAT_BIN_DIR",
-      "default": "$;TOPHAT_BIN$;"
+      "default": "{{TOPHAT_BIN}}"
     },
     {
       "name": "MATE_INNER_DIST",

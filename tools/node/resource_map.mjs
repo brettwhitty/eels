@@ -27,7 +27,7 @@ for (const f of readdirSync(compDir).filter(f => f.endsWith('.json'))) {
     }
 
     // Template variable references to paths/execs/dbs
-    for (const m of (val.match(/\$;([A-Z_]+(?:PATH|DIR|EXEC|DB|LIB|BIN|INSTALL|HOME))\$;/g) || [])) {
+    for (const m of (val.match(/\{\{([A-Z_]+(?:PATH|DIR|EXEC|DB|LIB|BIN|INSTALL|HOME))\}\}/g) || [])) {
       refs.push({ value: m, component: name, context: key, source: 'config_template_var' });
     }
   }
@@ -106,7 +106,7 @@ function classifyAbsPath(p) {
 }
 
 function classifyTemplateVar(v) {
-  const name = v.replace(/^\{\{|\}\}$/g, '').replace(/^\$;|\$;$/g, '');
+  const name = v.replace(/^\{\{|\}\}$/g, '');
   const hb = `{{${name}}}`;
   let subtype;
   if (name.match(/_EXEC$/)) subtype = 'executable';

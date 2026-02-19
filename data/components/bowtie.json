@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "bowtie",
-      "executable": "$;BIN_DIR$;/bowtie"
+      "executable": "{{BIN_DIR}}/bowtie"
     }
   ],
   "converters": {
@@ -23,11 +23,11 @@
   "parameters": [
     {
       "name": "BOWTIE_BIN_DIR",
-      "default": "$;BOWTIE_BIN$;"
+      "default": "{{BOWTIE_BIN}}"
     },
     {
       "name": "SAMTOOLS_BIN_DIR",
-      "default": "$;SAMTOOLS_BIN$;"
+      "default": "{{SAMTOOLS_BIN}}"
     },
     {
       "name": "MODE",

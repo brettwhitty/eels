@@ -18,14 +18,14 @@
    "name" : "LGT_Seek_Pipeline_SRA",
    "pipeline_config" : {
       "download_sra default" : {
-         "$;RUN_ID$;" : "$;SRA_RUN_ID$;"
+         "{{RUN_ID}}" : "{{SRA_RUN_ID}}"
       },
       "global" : {
-         "$;DATA_DIR$;" : "",
-         "$;SRA_RUN_ID$;" : ""
+         "{{DATA_DIR}}" : "",
+         "{{SRA_RUN_ID}}" : ""
       },
       "sra2fastq default" : {
-         "$;DATA_DIRECTORY$;" : "$;DATA_DIR$;"
+         "{{DATA_DIRECTORY}}" : "{{DATA_DIR}}"
       }
    },
    "structure" : {

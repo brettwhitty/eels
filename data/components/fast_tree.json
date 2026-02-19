@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "fast_tree",
-      "executable": "$;FASTTREE_EXEC$;"
+      "executable": "{{FASTTREE_EXEC}}"
     }
   ],
   "converters": {

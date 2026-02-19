@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -37,7 +37,7 @@
     },
     {
       "name": "CHARACTERIZED_DB",
-      "default": "$;CHAR_DB$;"
+      "default": "{{CHAR_DB}}"
     },
     {
       "name": "DB_USERNAME",
@@ -49,7 +49,7 @@
     },
     {
       "name": "HMM_CODING_DB",
-      "default": "$;HMM_LIB_DB$;"
+      "default": "{{HMM_LIB_DB}}"
     },
     {
       "name": "BER_EXTENSION",

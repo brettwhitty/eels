@@ -9,11 +9,11 @@
     },
     {
       "name": "DTD validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     },
     {
       "name": "profileBSMLFile",
-      "executable": "$;BIN_DIR$;/profileBSMLFile"
+      "executable": "{{BIN_DIR}}/profileBSMLFile"
     }
   ],
   "converters": {
@@ -22,7 +22,7 @@
         "script": "create_legacy2bsml_iterator_list",
         "name": "Create legacy2bsml master iterator list file",
         "input": null,
-        "output": "$;TMP_DIR$;/legacy2bsml.list"
+        "output": "{{TMP_DIR}}/legacy2bsml.list"
       }
     ],
     "iterator": [
@@ -80,7 +80,7 @@
     },
     {
       "name": "BSML_DTD",
-      "default": "$;DOCS_DIR$;/bsml3_1.dtd"
+      "default": "{{DOCS_DIR}}/bsml3_1.dtd"
     },
     {
       "name": "INPUT_ID_MAPPING_DIRECTORIES",

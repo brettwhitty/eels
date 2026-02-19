@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "promote gene prediction",
-      "executable": "$;BIN_DIR$;/promote_gene_prediction"
+      "executable": "{{BIN_DIR}}/promote_gene_prediction"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -44,7 +44,7 @@
     },
     {
       "name": "PROJECT_ABBREVIATION",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     }
   ]
 }

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "bowtie_build",
-      "executable": "$;BIN_DIR$;/bowtie_build"
+      "executable": "{{BIN_DIR}}/bowtie_build"
     }
   ],
   "converters": {
@@ -23,7 +23,7 @@
   "parameters": [
     {
       "name": "BOWTIE_BIN_DIR",
-      "default": "$;BOWTIE_BUILD_BIN$;"
+      "default": "{{BOWTIE_BUILD_BIN}}"
     },
     {
       "name": "BOWTIE_INDEX_PREFIX",

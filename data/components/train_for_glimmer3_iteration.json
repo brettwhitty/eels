@@ -18,7 +18,7 @@
   "parameters": [
     {
       "name": "OUTPUT_PWM",
-      "default": "$;OUTPUT_DIRECTORY$;/all.motif"
+      "default": "{{OUTPUT_DIRECTORY}}/all.motif"
     },
     {
       "name": "GLIMMER3_OUTPUT_TOKEN",

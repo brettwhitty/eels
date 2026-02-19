@@ -21,7 +21,7 @@
     },
     {
       "name": "Get BAM Coverage",
-      "executable": "$;BAM_COVERAGE_DX_EXEC$;"
+      "executable": "{{BAM_COVERAGE_DX_EXEC}}"
     }
   ],
   "converters": {

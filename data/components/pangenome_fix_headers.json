@@ -9,7 +9,7 @@
     },
     {
       "name": "fix headers",
-      "executable": "$;BIN_DIR$;/pangenome_fix_headers.sh"
+      "executable": "{{BIN_DIR}}/pangenome_fix_headers.sh"
     }
   ],
   "converters": {

@@ -38,18 +38,18 @@
    "name" : "skirret",
    "pipeline_config" : {
       "genbank2fasta reference" : {
-         "$;INPUT_FILE$;" : "$;REFERENCE_GENBANK_FILE$;"
+         "{{INPUT_FILE}}" : "{{REFERENCE_GENBANK_FILE}}"
       },
       "global" : {
-         "$;QUERY_FSA_LIST$;" : "",
-         "$;REFERENCE_GENBANK_FILE$;" : ""
+         "{{QUERY_FSA_LIST}}" : "",
+         "{{REFERENCE_GENBANK_FILE}}" : ""
       },
       "nucmer default" : {
-         "$;INPUT_FILE_LIST$;" : "$;QUERY_FSA_LIST$;"
+         "{{INPUT_FILE_LIST}}" : "{{QUERY_FSA_LIST}}"
       },
       "snp-add-gene-info default" : {
-         "$;QUERY_FASTA_LIST$;" : "$;QUERY_FSA_LIST$;",
-         "$;REFERENCE_GENBANK$;" : "$;REFERENCE_GENBANK_FILE$;"
+         "{{QUERY_FASTA_LIST}}" : "{{QUERY_FSA_LIST}}",
+         "{{REFERENCE_GENBANK}}" : "{{REFERENCE_GENBANK_FILE}}"
       }
    },
    "structure" : {

@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "samtools idxstats",
-      "executable": "$;SAMTOOLS_EXEC$;"
+      "executable": "{{SAMTOOLS_EXEC}}"
     },
     {
       "name": "samtools flagstat",
-      "executable": "$;SAMTOOLS_EXEC$;"
+      "executable": "{{SAMTOOLS_EXEC}}"
     }
   ],
   "converters": {

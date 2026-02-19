@@ -9,7 +9,7 @@
       {
         "script": "btab2taxon",
         "name": "btab2taxon",
-        "input": "$;I_FILE_PATH$;",
+        "input": "{{I_FILE_PATH}}",
         "output": null
       }
     ]
@@ -49,7 +49,7 @@
     },
     {
       "name": "IDX_DIRECTORY",
-      "default": "$;TMP_DIR$;"
+      "default": "{{TMP_DIR}}"
     }
   ]
 }

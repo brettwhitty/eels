@@ -9,7 +9,7 @@
         "script": "bsml2featurerelationships",
         "name": "bsml2feature_relationships",
         "input": null,
-        "output": "$;OUTPUT_DIRECTORY$;/bsml2featurerelationships.mapping.list"
+        "output": "{{OUTPUT_DIRECTORY}}/bsml2featurerelationships.mapping.list"
       }
     ],
     "iterator": []

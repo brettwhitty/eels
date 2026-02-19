@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "sffinfo",
-      "executable": "$;BIN_DIR$;/sffinfo"
+      "executable": "{{BIN_DIR}}/sffinfo"
     }
   ],
   "converters": {

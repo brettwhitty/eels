@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "translate_sequence",
-      "executable": "$;BIN_DIR$;/translate_sequence"
+      "executable": "{{BIN_DIR}}/translate_sequence"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -57,7 +57,7 @@
     },
     {
       "name": "PROJECT_NAME",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "CLEANUP",

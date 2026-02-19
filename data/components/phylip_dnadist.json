@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "dnadist_worker_wrapper",
-      "executable": "$;BIN_DIR$;/dnadist_worker_wrapper"
+      "executable": "{{BIN_DIR}}/dnadist_worker_wrapper"
     },
     {
       "name": "sort output",
-      "executable": "$;DNADIST_SORT$;"
+      "executable": "{{DNADIST_SORT}}"
     },
     {
       "name": "remove unsorted output",

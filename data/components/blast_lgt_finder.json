@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "Filter BLAST for best hits",
-      "executable": "$;BIN_DIR$;/filter_lgt_best_hit"
+      "executable": "{{BIN_DIR}}/filter_lgt_best_hit"
     },
     {
       "name": "Find LGT",
-      "executable": "$;BIN_DIR$;/lgt_finder"
+      "executable": "{{BIN_DIR}}/lgt_finder"
     }
   ],
   "converters": {

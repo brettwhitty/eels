@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "fix gene symbols",
-      "executable": "$;BIN_DIR$;/fix_gene_symbols"
+      "executable": "{{BIN_DIR}}/fix_gene_symbols"
     }
   ],
   "converters": {

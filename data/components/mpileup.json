@@ -13,7 +13,7 @@
     },
     {
       "name": "mpileup Execution",
-      "executable": "$;BIN_DIR$;/mpileup_wrapper"
+      "executable": "{{BIN_DIR}}/mpileup_wrapper"
     }
   ],
   "converters": {

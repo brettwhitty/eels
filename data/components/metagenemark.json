@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "metagenemark",
-      "executable": "$;METAGENEMARK_EXEC$;"
+      "executable": "{{METAGENEMARK_EXEC}}"
     }
   ],
   "converters": {
@@ -25,7 +25,7 @@
   "parameters": [
     {
       "name": "TRAINING_MODEL",
-      "default": "$;MGM_DEFAULT_MODEL$;"
+      "default": "{{MGM_DEFAULT_MODEL}}"
     },
     {
       "name": "OTHER_OPTS",

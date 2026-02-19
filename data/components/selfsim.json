@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "selfsim",
-      "executable": "$;BIN_DIR$;/selfsim"
+      "executable": "{{BIN_DIR}}/selfsim"
     }
   ],
   "converters": {

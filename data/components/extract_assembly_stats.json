@@ -9,7 +9,7 @@
     },
     {
       "name": "extract_assembly_stats",
-      "executable": "$;BIN_DIR$;/extract_assembly_stats"
+      "executable": "{{BIN_DIR}}/extract_assembly_stats"
     }
   ],
   "converters": {

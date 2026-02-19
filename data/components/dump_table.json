@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "dump table",
-      "executable": "$;BIN_DIR$;/dump_table"
+      "executable": "{{BIN_DIR}}/dump_table"
     },
     {
       "name": "create sbt and cmt files",
-      "executable": "$;BIN_DIR$;/prepare_sbt_cmt"
+      "executable": "{{BIN_DIR}}/prepare_sbt_cmt"
     },
     {
       "name": "copy discrep file",
@@ -17,19 +17,19 @@
     },
     {
       "name": "delete overlapping genes",
-      "executable": "$;BIN_DIR$;/deleteOverlappingGenes"
+      "executable": "{{BIN_DIR}}/deleteOverlappingGenes"
     },
     {
       "name": "dump table",
-      "executable": "$;BIN_DIR$;/dump_table"
+      "executable": "{{BIN_DIR}}/dump_table"
     },
     {
       "name": "fix gene symbols in tbl",
-      "executable": "$;BIN_DIR$;/fix_gene_symbols"
+      "executable": "{{BIN_DIR}}/fix_gene_symbols"
     },
     {
       "name": "create agp",
-      "executable": "$;BIN_DIR$;/format_velvet_assembled_AGP"
+      "executable": "{{BIN_DIR}}/format_velvet_assembled_AGP"
     },
     {
       "name": "remove tbl file",

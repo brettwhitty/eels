@@ -9,31 +9,31 @@
     },
     {
       "name": "rewrite_seqs.dbi",
-      "executable": "$;BIN_DIR$;/rewrite_seqs"
+      "executable": "{{BIN_DIR}}/rewrite_seqs"
     },
     {
       "name": "sgc_GC_content_load.spl",
-      "executable": "$;BIN_DIR$;/sgc_GC_content_load"
+      "executable": "{{BIN_DIR}}/sgc_GC_content_load"
     },
     {
       "name": "molwt_update.dbi",
-      "executable": "$;BIN_DIR$;/molwt_update"
+      "executable": "{{BIN_DIR}}/molwt_update"
     },
     {
       "name": "signalP_update.dbi",
-      "executable": "$;BIN_DIR$;/signalP_update"
+      "executable": "{{BIN_DIR}}/signalP_update"
     },
     {
       "name": "lipoprotein_update.dbi",
-      "executable": "$;BIN_DIR$;/lipoprotein_update"
+      "executable": "{{BIN_DIR}}/lipoprotein_update"
     },
     {
       "name": "tm_update.dbi",
-      "executable": "$;BIN_DIR$;/tm_update"
+      "executable": "{{BIN_DIR}}/tm_update"
     },
     {
       "name": "omp_update.dbi",
-      "executable": "$;BIN_DIR$;/omp_update"
+      "executable": "{{BIN_DIR}}/omp_update"
     }
   ],
   "converters": {

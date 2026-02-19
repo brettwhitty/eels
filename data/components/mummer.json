@@ -9,7 +9,7 @@
     },
     {
       "name": "mummertab",
-      "executable": "$;BIN_DIR$;/mummertab"
+      "executable": "{{BIN_DIR}}/mummertab"
     }
   ],
   "converters": {

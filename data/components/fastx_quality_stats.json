@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "fastx_quality_stats",
-      "executable": "$;BIN_DIR$;/fastx_quality_stats"
+      "executable": "{{BIN_DIR}}/fastx_quality_stats"
     }
   ],
   "converters": {
@@ -23,7 +23,7 @@
   "parameters": [
     {
       "name": "FASTX_BIN_DIR",
-      "default": "$;FASTX_BIN$;"
+      "default": "{{FASTX_BIN}}"
     },
     {
       "name": "QUALITY_STRING",

@@ -131,116 +131,116 @@
    "name" : "Prokaryotic_Annotation_Pipeline_Chado_Loading",
    "pipeline_config" : {
       "bsml2chado ber_post" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado ber_pre" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado hmm_post" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado hmm_pre" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado lipop" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado pipeline_summary" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado ps_scan" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado signalp" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "bsml2chado tmhmm" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "formatdb genome" : {
-         "$;DATABASE_NAME$;" : "$;DB$;_genome_dbn.fa"
+         "{{DATABASE_NAME}}" : "{{DB}}_genome_dbn.fa"
       },
       "formatdb nuc" : {
-         "$;DATABASE_NAME$;" : "$;DB$;_dbn.fa"
+         "{{DATABASE_NAME}}" : "{{DB}}_dbn.fa"
       },
       "formatdb prot" : {
-         "$;DATABASE_NAME$;" : "$;DB$;_dbp.fa"
+         "{{DATABASE_NAME}}" : "{{DB}}_dbp.fa"
       },
       "global" : {
-         "$;DB$;" : "",
-         "$;GENOME$;" : "",
-         "$;HOST$;" : "",
-         "$;PASS$;" : "",
-         "$;PASS_FILE$;" : "",
-         "$;TAXID$;" : "",
-         "$;USER$;" : ""
+         "{{DB}}" : "",
+         "{{GENOME}}" : "",
+         "{{HOST}}" : "",
+         "{{PASS}}" : "",
+         "{{PASS_FILE}}" : "",
+         "{{TAXID}}" : "",
+         "{{USER}}" : ""
       },
       "initdb default" : {
-         "$;ADMIN_PASS$;" : "$;PASS$;",
-         "$;ADMIN_USER$;" : "$;USER$;",
-         "$;DATABASE$;" : "$;DB$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;SERVER$;" : "$;HOST$;"
+         "{{ADMIN_PASS}}" : "{{PASS}}",
+         "{{ADMIN_USER}}" : "{{USER}}",
+         "{{DATABASE}}" : "{{DB}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{SERVER}}" : "{{HOST}}"
       },
       "pathway_tools_input default" : {
-         "$;DATABASE$;" : "$;DB$;",
-         "$;DB_HOST$;" : "$;HOST$;",
-         "$;ORGANISM_NAME$;" : "$;GENOME$;",
-         "$;PASSWORD$;" : "$;PASS$;",
-         "$;PASSWORD_FILE$;" : "$;PASS_FILE$;",
-         "$;TAXON_ID$;" : "$;TAXID$;",
-         "$;USERNAME$;" : "$;USER$;"
+         "{{DATABASE}}" : "{{DB}}",
+         "{{DB_HOST}}" : "{{HOST}}",
+         "{{ORGANISM_NAME}}" : "{{GENOME}}",
+         "{{PASSWORD}}" : "{{PASS}}",
+         "{{PASSWORD_FILE}}" : "{{PASS_FILE}}",
+         "{{TAXON_ID}}" : "{{TAXID}}",
+         "{{USERNAME}}" : "{{USER}}"
       },
       "scp_files copy_ber_post" : {
-         "$;DATABASE$;" : "$;DB$;"
+         "{{DATABASE}}" : "{{DB}}"
       },
       "scp_files copy_ber_pre" : {
-         "$;DATABASE$;" : "$;DB$;"
+         "{{DATABASE}}" : "{{DB}}"
       },
       "scp_files copy_formatdb_nuc" : {
-         "$;DATABASE$;" : "$;DB$;"
+         "{{DATABASE}}" : "{{DB}}"
       },
       "scp_files copy_formatdb_prot" : {
-         "$;DATABASE$;" : "$;DB$;"
+         "{{DATABASE}}" : "{{DB}}"
       },
       "scp_files copy_genome" : {
-         "$;DATABASE$;" : "$;DB$;"
+         "{{DATABASE}}" : "{{DB}}"
       }
    },
    "structure" : {

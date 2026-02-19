@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "solsnp",
-      "executable": "java -jar $;SOLSNP_EXEC$;"
+      "executable": "java -jar {{SOLSNP_EXEC}}"
     }
   ],
   "converters": {

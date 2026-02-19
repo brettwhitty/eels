@@ -13,10 +13,10 @@
    "name" : "Prokaryotic_Annotation_Pipeline_SPAdes_Assembly",
    "pipeline_config" : {
       "SPAdes assembly" : {
-         "$;INPUT_FILE_LIST$;" : "$;FASTQ_LIST$;"
+         "{{INPUT_FILE_LIST}}" : "{{FASTQ_LIST}}"
       },
       "global" : {
-         "$;FASTQ_LIST$;" : ""
+         "{{FASTQ_LIST}}" : ""
       }
    },
    "structure" : {

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "genemark",
-      "executable": "$;GMHMME3_EXEC$;"
+      "executable": "{{GMHMME3_EXEC}}"
     },
     {
       "name": "migrate output file",
@@ -13,7 +13,7 @@
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {
@@ -22,8 +22,8 @@
       {
         "script": "genemark2bsml",
         "name": "genemark2bsml",
-        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.genemark.raw",
-        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.genemark.bsml"
+        "input": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.genemark.raw",
+        "output": "{{OUTPUT_DIRECTORY}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.genemark.bsml"
       },
       {
         "script": "analysis2bsml",

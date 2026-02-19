@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "priam_ec_assignment",
-      "executable": "$;BIN_DIR$;/assign_ec_from_rps"
+      "executable": "{{BIN_DIR}}/assign_ec_from_rps"
     },
     {
       "name": "dtd validation",
-      "executable": "$;BIN_DIR$;/dtdValid.pl"
+      "executable": "{{BIN_DIR}}/dtdValid.pl"
     }
   ],
   "converters": {

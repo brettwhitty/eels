@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "expression_plots",
-      "executable": "$;BIN_DIR$;/expression_plots"
+      "executable": "{{BIN_DIR}}/expression_plots"
     }
   ],
   "converters": {
@@ -23,7 +23,7 @@
   "parameters": [
     {
       "name": "R_BIN_DIR",
-      "default": "$;R_BIN$;"
+      "default": "{{R_BIN}}"
     },
     {
       "name": "R_PARAMS",
@@ -31,7 +31,7 @@
     },
     {
       "name": "R_SCRIPT",
-      "default": "$;R_SCRIPT_PATH$;"
+      "default": "{{R_SCRIPT_PATH}}"
     },
     {
       "name": "OTHER_ARGS",

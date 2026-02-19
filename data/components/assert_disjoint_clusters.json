@@ -34,7 +34,7 @@
     },
     {
       "name": "DATABASE",
-      "default": "$;PROJECT$;"
+      "default": "{{PROJECT}}"
     },
     {
       "name": "ANALYSIS_ID",

@@ -5,7 +5,7 @@
   "tool_execution": [
     {
       "name": "uchime chimera checker",
-      "executable": "$;UCHIME_EXEC$;"
+      "executable": "{{UCHIME_EXEC}}"
     }
   ],
   "converters": {

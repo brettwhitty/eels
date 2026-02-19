@@ -5,11 +5,11 @@
   "tool_execution": [
     {
       "name": "remove_hypothetical_ec",
-      "executable": "$;BIN_DIR$;/remove_hypothetical_ec"
+      "executable": "{{BIN_DIR}}/remove_hypothetical_ec"
     },
     {
       "name": "remove_db_gene_syms_with_hypotheticals",
-      "executable": "$;BIN_DIR$;/remove_db_gene_syms_with_hypos"
+      "executable": "{{BIN_DIR}}/remove_db_gene_syms_with_hypos"
     }
   ],
   "converters": {
