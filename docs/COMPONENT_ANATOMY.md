@@ -365,6 +365,62 @@ workflow {
 - Implicit output handling
 - Single-phase (definition → execution)
 
+## Workflow Architecture
+
+### 6-Level XML Hierarchy
+
+Based on `ergatis-git/doc/workflowxml.txt`:
+
+1. **Skeleton XML** - Saved pipeline template (component ordering + config)
+2. **Pipeline XML** - Instantiated workflow with PIPELINE_ID
+3. **Component XML** - Top-level component steps (created during pipeline execution)
+4. **Iterator XML** - Lists all groups/batches for parallel distribution
+5. **Group XML** - Serial execution of elements within one batch
+6. **Element XML** - Single input file processing (the actual compute work)
+
+### Execution Flow
+
+**Pipeline level:**
+- Skeleton XML → Pipeline XML (with PIPELINE_ID)
+- Pipeline XML references component XML files as subflows
+
+**Component level:**
+- Component XML created during pipeline execution
+- Contains setup/pre/post-processing steps
+- Includes steps to build iterator groups and iterator XML
+
+**Iterator level:**
+- Iterator XML lists all groups (parallel execution)
+- Groups can be distributed to compute grid or run locally
+- GROUP_COUNT determines number of batches
+- `create_iterator_groups` handles batching logic
+
+**Group level:**
+- Group XML executes serially on single compute node
+- Creates element XML from iterator template
+- One element XML per input file in the group
+
+**Element level:**
+- Element XML processes single input file
+- Where actual compute work happens
+- Generated from iterator template (e.g., `wu-blastp.i1.xml`)
+
+### Key Characteristics
+
+**What Works Well:**
+1. **Modular templates** - Reusable iterator patterns
+2. **Flexible batching** - GROUP_COUNT + max_elements controls distribution
+3. **Standard directory structure** - Predictable output locations
+4. **Variable inheritance** - Project → Component → Iterator
+5. **File-based subflows** - Composable workflow fragments
+
+**Complexity:**
+1. **Two-phase execution** - Template expansion before execution
+2. **Placeholder syntax** - `$;KEY$;` verbose but explicit
+3. **XML verbosity** - Many files for simple operations
+4. **Runtime generation** - Component/iterator XML created during execution
+5. **Manual wiring** - No automatic output→input matching
+
 ## Files for Reference
 
 - `ergatis-git/components/wait/wait.config`
