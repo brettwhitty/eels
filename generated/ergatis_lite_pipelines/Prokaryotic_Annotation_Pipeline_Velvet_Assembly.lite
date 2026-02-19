@@ -1,7 +1,5 @@
 # Prokaryotic_Annotation_Pipeline_Velvet_Assembly
 (
-    (
-        <prepare_paired_ends_for_velvet.default>,
-        <velvet_optimiser.assembly>
-    )
+    <prepare_paired_ends_for_velvet.default>,
+    <velvet_optimiser.assembly>
 )

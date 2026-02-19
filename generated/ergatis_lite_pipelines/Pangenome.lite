@@ -1,47 +1,45 @@
 # Pangenome
 (
     (
-        (
-            <create_map_file.default>,
-            <genbank2bsml.default>,
-            {
-                (
-                    <bsml2fasta.assembly>,
-                    <mugsyprep.assembly>,
-                    <pangenome_fix_headers.nuc>
-                ),
-                (
-                    <translate_sequence.polypeptide>,
-                    <mugsyprep.polypeptide>,
-                    <pangenome_fix_headers.prot>
-                )
-            }
-        ),
+        <create_map_file.default>,
+        <genbank2bsml.default>,
         {
             (
-                <formatdb.nuc>,
-                <tblastn_plus.default>
+                <bsml2fasta.assembly>,
+                <mugsyprep.assembly>,
+                <pangenome_fix_headers.nuc>
             ),
             (
-                <formatdb.prot>,
-                <blastp_plus.default>
+                <translate_sequence.polypeptide>,
+                <mugsyprep.polypeptide>,
+                <pangenome_fix_headers.prot>
             )
-        },
+        }
+    ),
+    {
         (
-            <pangenome_blast_parse.default>,
-            <pangenome_merge_results.default>,
-            <pangenome_make_profile.default>,
-            {
-                (
-                    <pangenome_make_table.default>,
-                    <pangenome_make_graphs.new_genes>,
-                    <pangenome_make_graphs.core_genes>
-                ),
-                (
-                    <pangenome_make_pangenome.default>,
-                    <pangenome_make_graphs.pangenome>
-                )
-            }
+            <formatdb.nuc>,
+            <tblastn_plus.default>
+        ),
+        (
+            <formatdb.prot>,
+            <blastp_plus.default>
         )
+    },
+    (
+        <pangenome_blast_parse.default>,
+        <pangenome_merge_results.default>,
+        <pangenome_make_profile.default>,
+        {
+            (
+                <pangenome_make_table.default>,
+                <pangenome_make_graphs.new_genes>,
+                <pangenome_make_graphs.core_genes>
+            ),
+            (
+                <pangenome_make_pangenome.default>,
+                <pangenome_make_graphs.pangenome>
+            )
+        }
     )
 )

@@ -1,27 +1,21 @@
 # Integrated_JOCs-pangenome_pipeline
 (
-    (
+    <bsml2fasta.fastamulti>,
+    <bsml2fasta.genomicseq>,
+    <xdformat.nuc>,
+    <xdformat.default>,
+    <split_multifasta.default>,
+    {
         (
-            (
-                <bsml2fasta.fastamulti>,
-                <bsml2fasta.genomicseq>,
-                <xdformat.nuc>,
-                <xdformat.default>,
-                <split_multifasta.default>,
-                {
-                    (
-                        <wu-blastp.default>,
-                        <jaccard.default>,
-                        <muscle.jaccard>,
-                        <j_ortholog_clusters.default>,
-                        <muscle.j_ortholog_clusters>
-                    ),
-                    (
-                        <wu-tblastn.default>
-                    )
-                },
-                <pangenome.default>
-            )
+            <wu-blastp.default>,
+            <jaccard.default>,
+            <muscle.jaccard>,
+            <j_ortholog_clusters.default>,
+            <muscle.j_ortholog_clusters>
+        ),
+        (
+            <wu-tblastn.default>
         )
-    )
+    },
+    <pangenome.default>
 )

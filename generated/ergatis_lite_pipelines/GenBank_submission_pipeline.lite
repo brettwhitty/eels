@@ -1,14 +1,10 @@
 # GenBank_submission_pipeline
 (
-    (
-        (
-            <create_db_list_file.default>,
-            <assign_dbxref_ids.default>,
-            <curate_common_names.default>,
-            <remove_db_gene_syms_with_hypos.default>,
-            <update_ec_numbers.default>,
-            <fix_gene_symbols.db>,
-            <dump_table.default>
-        )
-    )
+    <create_db_list_file.default>,
+    <assign_dbxref_ids.default>,
+    <curate_common_names.default>,
+    <remove_db_gene_syms_with_hypos.default>,
+    <update_ec_numbers.default>,
+    <fix_gene_symbols.db>,
+    <dump_table.default>
 )

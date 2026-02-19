@@ -1,7 +1,5 @@
 # Prokaryotic_Annotation_Pipeline_RNA_Predictions
 (
-    (
-        <infernal.default>,
-        <tRNAscan-SE.find_tRNA>
-    )
+    <infernal.default>,
+    <tRNAscan-SE.find_tRNA>
 )

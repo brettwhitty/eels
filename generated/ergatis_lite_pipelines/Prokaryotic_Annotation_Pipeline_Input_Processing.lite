@@ -1,7 +1,5 @@
 # Prokaryotic_Annotation_Pipeline_Input_Processing
 (
-    (
-        <clean_fasta.clean_fasta>,
-        <split_multifasta.default>
-    )
+    <clean_fasta.clean_fasta>,
+    <split_multifasta.default>
 )

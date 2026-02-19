@@ -1,6 +1,4 @@
 # Prokaryotic_Annotation_Pipeline_SPAdes_Assembly
 (
-    (
-        <SPAdes.assembly>
-    )
+    <SPAdes.assembly>
 )

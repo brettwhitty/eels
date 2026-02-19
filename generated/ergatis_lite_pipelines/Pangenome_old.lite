@@ -1,15 +1,9 @@
 # Pangenome_old
 (
-    (
-        (
-            (
-                <xdformat.default>,
-                <xdformat.pepdb>,
-                <split_multifasta.default>,
-                <wu-blastp.default>,
-                <wu-tblastn.default>,
-                <pangenome.default>
-            )
-        )
-    )
+    <xdformat.default>,
+    <xdformat.pepdb>,
+    <split_multifasta.default>,
+    <wu-blastp.default>,
+    <wu-tblastn.default>,
+    <pangenome.default>
 )

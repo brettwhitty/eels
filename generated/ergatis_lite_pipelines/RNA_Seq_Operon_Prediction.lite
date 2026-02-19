@@ -1,12 +1,8 @@
 # RNA_Seq_Operon_Prediction
 (
-    (
-        (
-            <bowtie_build.reference>,
-            <bowtie.alignment>,
-            <samtools_file_convert.sorted_position>,
-            <bam2bigwig.visualization>,
-            <predict_operons.predict>
-        )
-    )
+    <bowtie_build.reference>,
+    <bowtie.alignment>,
+    <samtools_file_convert.sorted_position>,
+    <bam2bigwig.visualization>,
+    <predict_operons.predict>
 )

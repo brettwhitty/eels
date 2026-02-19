@@ -1,13 +1,9 @@
 # Prokaryotic_Annotation_Pipeline_Prodigal_Predictions
 (
-    (
-        (
-            <prodigal.default>,
-            {
-                <translate_sequence.translate_prediction>,
-                <bsml2fasta.prediction_CDS>
-            },
-            <promote_gene_prediction.promote_prediction>
-        )
-    )
+    <prodigal.default>,
+    {
+        <translate_sequence.translate_prediction>,
+        <bsml2fasta.prediction_CDS>
+    },
+    <promote_gene_prediction.promote_prediction>
 )

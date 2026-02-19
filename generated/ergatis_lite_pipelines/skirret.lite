@@ -1,11 +1,9 @@
 # skirret
 (
-    (
-        <genbank2fasta.reference>,
-        <nucmer.default>,
-        <nucmer-delta-filter.default>,
-        <nucmer-show-snps.default>,
-        <snp-add-gene-info.default>,
-        <nucmer-snp2merged.default>
-    )
+    <genbank2fasta.reference>,
+    <nucmer.default>,
+    <nucmer-delta-filter.default>,
+    <nucmer-show-snps.default>,
+    <snp-add-gene-info.default>,
+    <nucmer-snp2merged.default>
 )

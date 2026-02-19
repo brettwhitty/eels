@@ -1,12 +1,6 @@
 # LGT_Seek_Parametric
-(
-    (
-        (
-            {
-                <selfsim.default>,
-                <sighunt.default>,
-                <alien_hunter.default>
-            }
-        )
-    )
-)
+{
+    <selfsim.default>,
+    <sighunt.default>,
+    <alien_hunter.default>
+}

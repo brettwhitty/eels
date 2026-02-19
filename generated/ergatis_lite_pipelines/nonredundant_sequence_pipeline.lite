@@ -1,8 +1,6 @@
 # nonredundant_sequence_pipeline
 (
-    (
-        <split_multifasta.default>,
-        <mummer.default>,
-        <mumsgraph.default>
-    )
+    <split_multifasta.default>,
+    <mummer.default>,
+    <mumsgraph.default>
 )

@@ -1,8 +1,4 @@
 # LGT_Seek_Pipeline_Post_Analysis
 (
-    (
-        (
-            <gather_lgtview_files.default>
-        )
-    )
+    <gather_lgtview_files.default>
 )

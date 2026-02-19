@@ -1,10 +1,6 @@
 # LGT_Seek_Pipeline_BWA_Index
-(
-    (
-        {
-            <lgt_build_bwa_index.recipient>,
-            <lgt_build_bwa_index.donor>,
-            <lgt_build_bwa_index.refseq>
-        }
-    )
-)
+{
+    <lgt_build_bwa_index.recipient>,
+    <lgt_build_bwa_index.donor>,
+    <lgt_build_bwa_index.refseq>
+}
