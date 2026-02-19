@@ -1,0 +1,5 @@
+<auto_annotate> = (
+  <auto annotate compute>,
+  <dtd validation>,
+  <analysis2bsml>
+)

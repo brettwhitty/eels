@@ -1,0 +1,10 @@
+<cleanse_sgc_database> = (
+  <Create database output directory>,
+  <rewrite_seqs.dbi>,
+  <sgc_GC_content_load.spl>,
+  <molwt_update.dbi>,
+  <signalP_update.dbi>,
+  <lipoprotein_update.dbi>,
+  <tm_update.dbi>,
+  <omp_update.dbi>
+)

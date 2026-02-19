@@ -1,0 +1,4 @@
+<blast_snp_regions> = (
+  <ncbi-blastn>,
+  <parse raw BLAST results>
+)

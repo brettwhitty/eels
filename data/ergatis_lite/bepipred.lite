@@ -1,0 +1,8 @@
+<bepipred> = (
+  <replace fasta headers>,
+  <bepipred>,
+  <fix output file>,
+  <dtd validation>,
+  <bepipred2bsml>,
+  <analysis2bsml>
+)

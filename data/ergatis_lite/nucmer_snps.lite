@@ -1,0 +1,5 @@
+<nucmer_snps> = (
+  <NUCmer>,
+  <delta-filter>,
+  <show-snps>
+)

@@ -1,0 +1,7 @@
+<blastp_plus> = (
+  <run blastp+>,
+  <dtd validation>,
+  <blast2btab>,
+  <blast2bsml>,
+  <analysis2bsml>
+)

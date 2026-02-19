@@ -1,0 +1,18 @@
+<aat_aa> = (
+  <dps>,
+  <ext>,
+  <ext collapse>,
+  <filter>,
+  <relocate query seq>,
+  <nap>,
+  <remove temp query seq>,
+  <remove raw dps output>,
+  <remove raw ext output>,
+  <remove raw ext collapsed output>,
+  <remove raw filter output>,
+  <ensure btab existence>,
+  <relocate btab>,
+  <dtd validation>,
+  <nap2bsml>,
+  <analysis2bsml>
+)

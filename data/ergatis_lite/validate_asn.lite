@@ -1,0 +1,6 @@
+<validate_asn> = (
+  <Create the asnval and asndisc temp output directories>,
+  <Create the asnval and asndisc output directories>,
+  <Run asnval>,
+  <Run asndisc>
+)

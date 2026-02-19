@@ -1,0 +1,4 @@
+<basic_alignment_stats> = (
+  <samtools idxstats>,
+  <samtools flagstat>
+)

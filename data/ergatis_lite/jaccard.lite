@@ -1,0 +1,7 @@
+<jaccard> = (
+  <create output directory>,
+  <generate clusters>,
+  <jaccard2fasta>,
+  <create fasta list>,
+  <bsml2idlookup>
+)

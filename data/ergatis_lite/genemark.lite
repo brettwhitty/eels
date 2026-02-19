@@ -1,0 +1,7 @@
+<genemark> = (
+  <genemark>,
+  <migrate output file>,
+  <dtd validation>,
+  <genemark2bsml>,
+  <analysis2bsml>
+)

@@ -1,0 +1,4 @@
+<parse_mpileup_for_positions> = (
+  <create output directory>,
+  <parse_mpileup>
+)

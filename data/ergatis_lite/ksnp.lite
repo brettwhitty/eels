@@ -1,0 +1,12 @@
+<ksnp> = (
+  <create output directory>,
+  <merge contigs>,
+  <parse reference fasta header>,
+  <merge input and reference>,
+  <ksnp>,
+  <create raw output>,
+  <convert ksnp to nucmer output>,
+  <convert nucmer output to snp add gene info>,
+  <remove temp dir>,
+  <remove fsplit dir>
+)

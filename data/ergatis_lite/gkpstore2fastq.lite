@@ -1,0 +1,5 @@
+<gkpstore2fastq> = (
+  <create output directory>,
+  <cat files>,
+  <gkpstore2fastq>
+)

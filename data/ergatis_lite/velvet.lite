@@ -1,0 +1,9 @@
+<velvet> = (
+  <create velveth temp directory>,
+  <create velvetg temp directory>,
+  <velveth>,
+  <velveth post-processing>,
+  <velvetg pre-processing>,
+  <velvetg>,
+  <velvetg post-processing>
+)

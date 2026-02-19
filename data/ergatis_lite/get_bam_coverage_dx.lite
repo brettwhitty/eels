@@ -1,0 +1,7 @@
+<get_bam_coverage_dx> = (
+  <create output directory>,
+  <create temp directory>,
+  <create output directory>,
+  <create temp directory>,
+  <Get BAM Coverage>
+)

@@ -1,0 +1,4 @@
+<pangenome_make_graphs> = (
+  <create output directory>,
+  <prep the R input file>
+)

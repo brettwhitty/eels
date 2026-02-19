@@ -1,0 +1,5 @@
+<genbank2fasta> = (
+  <create output directory>,
+  <create temp directory>,
+  <genbank2fasta>
+)

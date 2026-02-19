@@ -1,0 +1,17 @@
+<iprscan> = (
+  <blastprodom>,
+  <coils>,
+  <hmmpir>,
+  <hmmpfam>,
+  <hmmsmart>,
+  <hmmtigr>,
+  <fprintscan>,
+  <scanregexp>,
+  <profilescan>,
+  <superfamily>,
+  <seg>,
+  <combine raw output>,
+  <dtd validation>,
+  <iprscan2bsml>,
+  <analysis2bsml>
+)

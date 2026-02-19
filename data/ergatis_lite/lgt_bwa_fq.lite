@@ -1,0 +1,9 @@
+<lgt_bwa_fq> = (
+  <create output directory>,
+  <create temp directory>,
+  <BWA Execution>,
+  <BWA Execution>,
+  <POST PROCESSING>,
+  <ZIP FILES>,
+  <REMOVE FASTQ FILES>
+)

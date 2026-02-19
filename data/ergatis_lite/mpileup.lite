@@ -1,0 +1,5 @@
+<mpileup> = (
+  <create output directory>,
+  <create temp directory>,
+  <mpileup Execution>
+)

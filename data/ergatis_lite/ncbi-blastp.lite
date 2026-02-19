@@ -1,0 +1,8 @@
+<ncbi-blastp> = (
+  <create output directory>,
+  <ncbi-blastp>,
+  <dtd validation>,
+  <blast2btab>,
+  <blast2bsml>,
+  <analysis2bsml>
+)

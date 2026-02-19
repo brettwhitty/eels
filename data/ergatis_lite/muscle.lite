@@ -1,0 +1,9 @@
+<muscle> = (
+  <create output directory>,
+  <relocate query file>,
+  <muscle>,
+  <validate muscle output>,
+  <dtd validation>,
+  <MSF2Bsml>,
+  <analysis2bsml>
+)

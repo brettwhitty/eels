@@ -1,0 +1,11 @@
+<signalp> = (
+  <Create scratch dir for signalp output>,
+  <Run signalp>,
+  <Rename signalp graphics files>,
+  <dtd validation>,
+  <signalp2bsml>,
+  <analysis2bsml>,
+  <analysis2bsml>,
+  <analysis2bsml>,
+  <analysis2bsml>
+)

@@ -1,0 +1,7 @@
+<ncbi-tblastx> = (
+  <ncbi-tblastx>,
+  <dtd validation>,
+  <blast2btab>,
+  <blast2bsml>,
+  <analysis2bsml>
+)

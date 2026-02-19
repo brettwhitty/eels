@@ -1,0 +1,5 @@
+<metagene> = (
+  <metagene>,
+  <get_seq_by_metagene>,
+  <metagene2bsml>
+)

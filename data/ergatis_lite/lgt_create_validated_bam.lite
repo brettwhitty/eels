@@ -1,0 +1,5 @@
+<lgt_create_validated_bam> = (
+  <create output directory>,
+  <create temp directory>,
+  <Create validated BAM>
+)

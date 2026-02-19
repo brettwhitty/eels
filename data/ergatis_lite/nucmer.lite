@@ -1,0 +1,6 @@
+<nucmer> = (
+  <create group temp folder>,
+  <create group output folder>,
+  <nucmer>,
+  <create coordinates file>
+)

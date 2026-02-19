@@ -1,0 +1,4 @@
+<remove_db_gene_syms_with_hypos> = (
+  <remove_hypothetical_ec>,
+  <remove_db_gene_syms_with_hypotheticals>
+)

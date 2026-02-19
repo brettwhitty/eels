@@ -1,0 +1,7 @@
+<trf> = (
+  <trf>,
+  <relocate output>,
+  <dtd validation>,
+  <trf2bsml>,
+  <analysis2bsml>
+)

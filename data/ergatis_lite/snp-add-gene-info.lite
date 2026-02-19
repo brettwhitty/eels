@@ -1,0 +1,5 @@
+<snp-add-gene-info> = (
+  <create output directory>,
+  <create temp directory>,
+  <snp-add-gene-info>
+)

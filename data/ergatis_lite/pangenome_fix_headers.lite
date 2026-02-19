@@ -1,0 +1,4 @@
+<pangenome_fix_headers> = (
+  <create output directory>,
+  <fix headers>
+)

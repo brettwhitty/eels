@@ -1,0 +1,6 @@
+<lgt_bwa> = (
+  <create output directory>,
+  <create temp directory>,
+  <BWA alignment>,
+  <Filter reads>
+)

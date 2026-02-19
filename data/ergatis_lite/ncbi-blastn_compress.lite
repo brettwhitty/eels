@@ -1,0 +1,7 @@
+<ncbi-blastn_compress> = (
+  <ncbi-blastn_compress>,
+  <dtd validation>,
+  <blast2btab>,
+  <blast2bsml>,
+  <analysis2bsml>
+)

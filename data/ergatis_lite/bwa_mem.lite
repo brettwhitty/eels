@@ -1,0 +1,7 @@
+<bwa_mem> = (
+  <create output directory>,
+  <create temp directory>,
+  <create output directory>,
+  <create temp directory>,
+  <BWA Execution>
+)

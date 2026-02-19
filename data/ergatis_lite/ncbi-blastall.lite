@@ -1,0 +1,7 @@
+<ncbi-blastall> = (
+  <ncbi-blastall>,
+  <dtd validation>,
+  <blast2btab>,
+  <blast2bsml>,
+  <analysis2bsml>
+)

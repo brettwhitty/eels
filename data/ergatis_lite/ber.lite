@@ -1,0 +1,12 @@
+<ber> = (
+  <filter hits>,
+  <filter additional hits>,
+  <append to filtered hits>,
+  <append to mini db>,
+  <praze>,
+  <fix praze output>,
+  <rename fixed praze output>,
+  <dtd validation>,
+  <berbtab2bsml>,
+  <analysis2bsml>
+)

@@ -1,0 +1,8 @@
+<hmmls> = (
+  <replace fasta headers>,
+  <hmmls>,
+  <fix output file>,
+  <dtd validation>,
+  <hmmls2bsml>,
+  <analysis2bsml>
+)

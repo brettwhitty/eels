@@ -1,0 +1,4 @@
+<split_multifasta> = (
+  <create output directory>,
+  <split_multifasta>
+)

@@ -1,0 +1,7 @@
+<clean_fasta> = (
+  <create clean_fasta directory>,
+  <remove CR line breaks>,
+  <clean_fasta>,
+  <create cf directory>,
+  <replace_gaps_in_nucleotides>
+)

@@ -1,0 +1,15 @@
+<dump_table> = (
+  <dump table>,
+  <create sbt and cmt files>,
+  <copy discrep file>,
+  <delete overlapping genes>,
+  <dump table>,
+  <fix gene symbols in tbl>,
+  <create agp>,
+  <remove tbl file>,
+  <move tbl file>,
+  <move fsa file>,
+  <move agp file>,
+  <wrap_tbl2asn>,
+  <wrap_tbl2asn>
+)

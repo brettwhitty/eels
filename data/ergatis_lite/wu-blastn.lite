@@ -1,0 +1,7 @@
+<wu-blastn> = (
+  <wu-blastn>,
+  <dtd validation>,
+  <blast2btab>,
+  <blast2bsml>,
+  <analysis2bsml>
+)

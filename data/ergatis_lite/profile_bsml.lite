@@ -1,0 +1,5 @@
+<profile_bsml> = (
+  <Create the temp output directories>,
+  <Create the output directories>,
+  <Profile BSML file>
+)

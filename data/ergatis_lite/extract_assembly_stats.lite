@@ -1,0 +1,4 @@
+<extract_assembly_stats> = (
+  <create output directory>,
+  <extract_assembly_stats>
+)

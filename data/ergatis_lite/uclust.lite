@@ -1,0 +1,7 @@
+<uclust> = (
+  <sort>,
+  <cluster>,
+  <convert to fasta>,
+  <format fasta>,
+  <format clustering file>
+)

@@ -1,0 +1,5 @@
+<phylip_dnadist> = (
+  <dnadist_worker_wrapper>,
+  <sort output>,
+  <remove unsorted output>
+)

@@ -1,0 +1,4 @@
+<blast_lgt_finder> = (
+  <Filter BLAST for best hits>,
+  <Find LGT>
+)

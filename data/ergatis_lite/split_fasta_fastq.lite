@@ -1,0 +1,4 @@
+<split_fasta_fastq> = (
+  <create output directory>,
+  <split_fasta_fastq>
+)

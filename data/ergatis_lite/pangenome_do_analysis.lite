@@ -1,0 +1,4 @@
+<pangenome_do_analysis> = (
+  <create output directory>,
+  <parse blast results>
+)

@@ -1,0 +1,6 @@
+<dump_fasta> = (
+  <dump fasta>,
+  <create sbt and cmt files>,
+  <create agp>,
+  <wrap_tbl2asn>
+)

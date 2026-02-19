@@ -1,0 +1,7 @@
+<tbl2asn> = (
+  <Create the tbl2asn output directory>,
+  <Fix locus name>,
+  <Fix GenBank>,
+  <Move GenBank>,
+  <prepare_for_tbl2asn>
+)

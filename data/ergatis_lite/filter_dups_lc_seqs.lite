@@ -1,0 +1,5 @@
+<filter_dups_lc_seqs> = (
+  <create output directory>,
+  <create temp directory>,
+  <Filter duplicate and low complexity sequences>
+)

@@ -1,0 +1,4 @@
+<condor_cogs_search> = (
+  <Create database output directory>,
+  <condor_cog_search.dbi>
+)
