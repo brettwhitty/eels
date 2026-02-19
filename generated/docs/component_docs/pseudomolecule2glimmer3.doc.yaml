@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: pseudomolecule2glimmer3
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - pseudomolecule2glimmer3.config
   - pseudomolecule2glimmer3.xml

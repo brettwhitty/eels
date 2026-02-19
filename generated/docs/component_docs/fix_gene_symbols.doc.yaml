@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: fix_gene_symbols
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - fix_gene_symbols.config
   - fix_gene_symbols.xml

@@ -1,0 +1,137 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: region
+extracted_at: "2026-02-19T15:39:25"
+source_files:
+  - workflow/region-master.ini
+  - workflow/region.ini
+  - workflow/regionconf.ini
+
+# Workflow INI: region-master.ini
+workflow_ini_region-master.ini:
+  archive_output:
+    # archive old output
+    param.command: $;BIN_DIR$;/archive
+    param.--file: $;TMP_DIR$;/backup.tgz
+    param.--directory: $;OUTPUT_DIRECTORY$;
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: region.ini
+workflow_ini_region.ini:
+  calculate_syntenic_regions:
+    # calculate syn regions
+    param.command: $;BIN_DIR$;/gene_boundaries_bsml
+    param.--bsml_file: $;ITER_FILE_PATH$;
+    param.--bsml_dir: $;BSML_REPOSITORY$;
+    param.--xmin_gap: $;REGIONS_XMAX_GAP$;
+    param.--ymin_gap: $;REGIONS_YMAX_GAP$;
+    param.--min_cluster: $;REGIONS_MIN_CLUSTER$;
+    param.stdout: $;TMP_DIR$;/$;ITER_FILE_BASE$;_$;NAME$;.out
+    arg: -e
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;ITER_FILE_BASE$;_$;NAME$;.bsml
+  empty:
+  region2bsml:
+    # Encode gene boundaries info into BSML 
+    param.command: $;BIN_DIR$;/region2bsml
+    param.--region: $;TMP_DIR$;/$;ITER_FILE_BASE$;_$;NAME$;.out
+    param.--output: $;OUTPUT_DIRECTORY$;/$;ITER_FILE_BASE$;_$;NAME$;.bsml
+    param.--gzip_output: $;COMPRESS_BSML_OUTPUT$;
+    param.--class: assembly
+    param.--log: $;WORKFLOW_REPOSITORY$;/region.$;ITER_FILE_BASE$;_$;NAME$;.log
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/$;ITER_FILE_BASE$;_$;NAME$;.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    param.--analysis_id: $;NAME$;_analysis
+
+# Workflow INI: regionconf.ini
+workflow_ini_regionconf.ini:
+  _header:
+    # configuration file for the PROmer workflow
+  include region:
+    $;SHARED_CONFIG$;: ""
+  input region:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/BSML_repository/pe
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: bsml
+    $;BSML_REPOSITORY$;: $;REPOSITORY_ROOT$;/BSML_repository
+  output region:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/BSML_repository/$;NAME$;
+    $;COMPRESS_BSML_OUTPUT$;: 0
+  parameters region:
+    $;REGIONS_XMAX_GAP$;: 10000
+    $;REGIONS_YMAX_GAP$;: 10000
+    $;REGIONS_MIN_CLUSTER$;: 3000
+  workflowdocs region:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: region
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/region-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/region-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/region.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/region_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0

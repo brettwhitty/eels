@@ -1,0 +1,116 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: legacyparafam2bsml
+extracted_at: "2026-02-19T15:39:25"
+source_files:
+  - workflow/legacyparafam2bsml-master.ini
+  - workflow/legacyparafam2bsml.ini
+  - workflow/legacyparafam2bsmlconf.ini
+
+# Workflow INI: legacyparafam2bsml-master.ini
+workflow_ini_legacyparafam2bsml-master.ini:
+  create_bsml_list_file:
+    param.command: find
+    arg: "$;OUTPUT_DIRECTORY$; -name '*.bsml'"
+    param.stdout: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the scratch space
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_legacyparafam2bsml_list
+    param.control_file: $;LEGACYPARAFAM2BSML_CONTROL_FILE$;
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: legacyparafam2bsml.ini
+workflow_ini_legacyparafam2bsml.ini:
+  dtd_validation:
+    # Perform DTD validation on the output BSML gene model document in previous step
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.dtd: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;SOURCE_DATABASE$;_$;FAMILY_ID$;.bsml
+    param.stdout: $;TMP_DIR$;/$;SOURCE_DATABASE$;_$;FAMILY_ID$;.bsml.dtdvalid.stdout
+    param.stderr: $;TMP_DIR$;/$;SOURCE_DATABASE$;_$;FAMILY_ID$;.bsml.dtdvalid.stderr
+  empty:
+  legacyparafam2bsml:
+    param.command: $;BIN_DIR$;/legacyparafam2bsml
+    param.--username: $;USERNAME$;
+    param.--password: $;PASSWORD$;
+    param.--database: $;SOURCE_DATABASE$;
+    param.--log4perl: $;WORKFLOW_REPOSITORY$;/legacyparafam2bsml.$;SOURCE_DATABASE$;.$;FAMILY_ID$;.log
+    param.--debug_level: $;DEBUG$;
+    param.--outdir: $;OUTPUT_DIRECTORY$;
+    param.--family_id: $;FAMILY_ID$;
+    param.--schema_type: $;SCHEMA_TYPE$;
+    param.--alt-database: $;ALT_DATABASE$;
+    param.--alt-species: $;ALT_SPECIES$;
+    param.stdout: $;TMP_DIR$;/legacyparafam2bsml.$;SOURCE_DATABASE$;.$;FAMILY_ID$;.stdout
+    param.stderr: $;TMP_DIR$;/legacyparafam2bsml.$;SOURCE_DATABASE$;.$;FAMILY_ID$;.stderr
+
+# Workflow INI: legacyparafam2bsmlconf.ini
+workflow_ini_legacyparafam2bsmlconf.ini:
+  _header:
+    # configuration file for the legacyparafam2bsml workflow
+  include legacyparafam2bsml:
+    $;SHARED_CONFIG$;: ""
+  output legacyparafam2bsml:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;FASTA_DIRECTORY$;: $;REPOSITORY_ROOT$;/FASTA_repository
+  parameters legacyparafam2bsml:
+    $;USERNAME$;: access
+    $;PASSWORD$;: access
+    $;LEGACYPARAFAM2BSML_CONTROL_FILE$;: ""
+    # SYBTIGR or SYBIL (Sybase server from which legacy annotation should be drawn)
+    $;SERVER$;: SYBTIGR
+    # Valid EMAIL values are comma-separated list of TIGR UNIX email accounts with or without the @tigr.org suffix and even other external fully qualified accounts e.g. youraddress@someplace.com
+    $;EMAIL$;: ""
+  workflowdocs legacyparafam2bsml:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: legacyparafam2bsml
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/legacyparafam2bsml-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/legacyparafam2bsml-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/legacyparafam2bsml.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/legacyparafam2bsml_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 5
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0

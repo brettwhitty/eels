@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: clovr_16S_rdptables
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - clovr_16S_rdptables.config
   - clovr_16S_rdptables.xml

@@ -65,13 +65,29 @@ if (-d $src_perl_dir) {
 }
 
 # Process each component
+# Collect all component names from both components/ and workflow/ directories
+my %all_components;
+
 opendir(my $cdh, $components_dir) or die "Cannot open $components_dir: $!";
-my @components = sort grep { -d catfile($components_dir, $_) && !/^\./ } readdir($cdh);
+for (grep { -d catfile($components_dir, $_) && !/^\./ } readdir($cdh)) {
+    $all_components{$_} = 1;
+}
 closedir $cdh;
+
+if (-d $workflow_dir) {
+    opendir(my $wdh, $workflow_dir) or die "Cannot open $workflow_dir: $!";
+    for (grep { -d catfile($workflow_dir, $_) && !/^\./ && !/^(Attic|Sample)$/ } readdir($wdh)) {
+        $all_components{$_} = 1;
+    }
+    closedir $wdh;
+}
+
+my @components = sort keys %all_components;
 
 my $count = 0;
 for my $comp (@components) {
     my $comp_dir = catfile($components_dir, $comp);
+    $comp_dir = undef unless -d $comp_dir;
     my $doc = extract_component($comp, $comp_dir);
     
     write_yaml($doc, catfile($output_dir, "$comp.doc.yaml"));
@@ -90,26 +106,28 @@ sub extract_component {
     };
 
     # 1. Config file
-    my $config_file = catfile($comp_dir, "$name.config");
-    if (-f $config_file) {
+    my $config_file = $comp_dir ? catfile($comp_dir, "$name.config") : '';
+    if ($config_file && -f $config_file) {
         push @{$doc->{source_files}}, "$name.config";
         $doc->{config} = parse_config_with_docs($config_file);
     }
 
     # 2. Component XML (main workflow template)
-    my $xml_file = catfile($comp_dir, "$name.xml");
-    if (-f $xml_file) {
+    my $xml_file = $comp_dir ? catfile($comp_dir, "$name.xml") : '';
+    if ($xml_file && -f $xml_file) {
         push @{$doc->{source_files}}, "$name.xml";
         $doc->{workflow_xml} = parse_xml_docs($xml_file);
     }
 
     # 3. Iterator XMLs
-    for my $iter_file (sort glob(catfile($comp_dir, "$name.i*.xml"))) {
-        my $bn = basename($iter_file);
-        push @{$doc->{source_files}}, $bn;
-        my $iter_name = $bn;
-        $iter_name =~ s/^.*\.(i\d+)\.xml$/$1/;
-        $doc->{iterator_xml}{$iter_name} = parse_xml_docs($iter_file);
+    if ($comp_dir) {
+        for my $iter_file (sort glob(catfile($comp_dir, "$name.i*.xml"))) {
+            my $bn = basename($iter_file);
+            push @{$doc->{source_files}}, $bn;
+            my $iter_name = $bn;
+            $iter_name =~ s/^.*\.(i\d+)\.xml$/$1/;
+            $doc->{iterator_xml}{$iter_name} = parse_xml_docs($iter_file);
+        }
     }
 
     # 4. Workflow INI files

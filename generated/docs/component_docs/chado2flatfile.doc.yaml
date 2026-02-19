@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: chado2flatfile
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - chado2flatfile.config
   - chado2flatfile.xml

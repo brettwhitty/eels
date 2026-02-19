@@ -1,0 +1,139 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: id_test
+extracted_at: "2026-02-19T15:39:25"
+source_files:
+  - workflow/id_test-master.ini
+  - workflow/id_test.ini
+  - workflow/id_testconf.ini
+
+# Workflow INI: id_test-master.ini
+workflow_ini_id_test-master.ini:
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: id_test.ini
+workflow_ini_id_test.ini:
+  empty:
+  generate_ids:
+    param.command: $;BIN_DIR$;/id_test
+    param.--feat_type: $;FEAT_TYPE$;
+    param.--id_count: $;ID_COUNT$;
+    param.--project: $;DATABASE$;
+    param.--id_repository: $;PROJECT_ID_REPOSITORY$;
+
+# Workflow INI: id_testconf.ini
+workflow_ini_id_testconf.ini:
+  _header:
+    # configuration file for the id_test workflow
+  include id_test:
+    $;SHARED_CONFIG$;: ""
+  input id_test:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # input_extension is only used in combination with input_directory
+    $;INPUT_EXTENSION$;: fsa
+  output id_test:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  parameters id_test:
+    $;FEAT_TYPE$;: exon
+    $;ID_COUNT$;: 10
+  workflowdocs id_test:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: id_test
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/id_test-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/id_test-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/id_test.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/id_test_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: id_test.pl
+    pod: |
+  =head1  NAME 
+  
+  id_test.pl - generate IDs for testing
+  
+  =head1 SYNOPSIS
+  
+  USAGE: id_test.pl 
+          --feat_type=exon
+          --id_count=10000
+          --id_repository=/path/to/someids
+          --project=aa1 
+  
+  =head1 OPTIONS
+  
+  B<--feat_type> 
+      SO type of features to pull.
+  
+  B<--id_count> 
+      Number of IDs to pull.
+  
+  B<--id_repository>
+      Required for creating feature identifiers.  Each project should have
+      its own id_repository directory - use the full path to it here.  This
+      is used by the IdGenerator.pm module.
+  
+  B<--project> 
+      Project name to use in the IDs pulled.
+  
+  =head1   DESCRIPTION
+  
+  
+  =head1 INPUT
+  
+  
+  =head1 OUTPUT
+  
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org

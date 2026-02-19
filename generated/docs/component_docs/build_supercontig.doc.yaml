@@ -1,0 +1,105 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: build_supercontig
+extracted_at: "2026-02-19T15:39:24"
+source_files:
+  - workflow/build_supercontig-master.ini
+  - workflow/build_supercontigconf.ini
+
+# Workflow INI: build_supercontig-master.ini
+workflow_ini_build_supercontig-master.ini:
+  build_supercontig:
+    # run build_supercontig.pl
+    param.command: $;BIN_DIR$;/build_supercontig
+    param.--bsml_input: $;INPUT_FILE$;
+    param.--scaffold_class: $;SCAFFOLD_CLASS$;
+    param.--bsml_output: $;OUTPUT_DIRECTORY$;/build_supercontig.bsml
+    param.--fasta_output: $;OUTPUT_DIRECTORY$;/build_supercontig.fsa
+    param.--analysis_id: $;NAME$;_analysis
+    param.--contig_genome: "'$;CONTIG_GENOME$;'"
+    param.--gzip_output: $;COMPRESS_BSML_OUTPUT$;
+  create_bsml_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--regex: "\".*.$;NAME$;.bsml\""
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--output_list: $;BSML_OUTPUT_LIST$;
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the scratch space
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    # arg=$;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    arg: $;OUTPUT_DIRECTORY$;/build_supercontig.bsml
+  empty:
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    # param.--bsml_file=$;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/build_supercontig.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    param.--analysis_id: $;NAME$;_analysis
+
+# Workflow INI: build_supercontigconf.ini
+workflow_ini_build_supercontigconf.ini:
+  _header:
+    # notes on build_supercontig component:
+    # - Negative start coords occur when tiles "wrap" around origin
+    # - construction of supercontig begins with lowest (possibly negative) tile
+    # configuration file for build_supercontig workflow
+  include build_supercontig:
+    $;SHARED_CONFIG$;: ""
+  input build_supercontig:
+    # input is BSML, most likely from tiling
+    $;INPUT_FILE$;: ""
+    # value of class attribute for supercontig Sequence
+    $;SCAFFOLD_CLASS$;: supercontig
+    # (optional) Genome tag for output supercontig.  First word is genus, remainder is species.
+    $;CONTIG_GENOME$;: ""
+  output build_supercontig:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # build_supercontig.pl output files will be:
+    # $;OUTPUT_DIRECTORY$;/build_supercontig.bsml and
+    # $;OUTPUT_DIRECTORY$;/build_supercontig.fsa
+    $;BSML_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    $;COMPRESS_BSML_OUTPUT$;: 0
+  parameters build_supercontig:
+    # none
+  workflowdocs build_supercontig:
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: build_supercontig
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/build_supercontig-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/build_supercontig-master_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 400
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: build_supercontig.pl
+    pod: |
+  =head1  NAME 
+  
+  build_supercontig.pl - convert ordered Seq-pair-alignments into a single contig (most likely to be run on the output of tiling2bsml)

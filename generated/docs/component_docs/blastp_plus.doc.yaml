@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: blastp_plus
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - blastp_plus.config
   - blastp_plus.xml

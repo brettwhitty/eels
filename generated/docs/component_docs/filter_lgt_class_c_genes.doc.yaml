@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: filter_lgt_class_c_genes
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - filter_lgt_class_c_genes.config
   - filter_lgt_class_c_genes.xml

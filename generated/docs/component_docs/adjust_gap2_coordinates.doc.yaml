@@ -1,0 +1,208 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: adjust_gap2_coordinates
+extracted_at: "2026-02-19T15:39:24"
+source_files:
+  - workflow/adjust_gap2_coordinates-master.ini
+  - workflow/adjust_gap2_coordinatesconf.ini
+
+# Workflow INI: adjust_gap2_coordinates-master.ini
+workflow_ini_adjust_gap2_coordinates-master.ini:
+  adjust_gap2_coordinates:
+    # do the conversion
+    param.command: $;BIN_DIR$;/adjust_gap2_coordinates
+    param.--map_file: "'$;MAP_FILE$;'"
+    param.--map_dir: "'$;MAP_DIR$;'"
+    param.--list_file: "'$;LIST_FILE$;'"
+    param.--list_file_glob: "'$;LIST_FILE_GLOB$;'"
+    param.--output_dir: "'$;OUTPUT_DIRECTORY$;'"
+    param.--output_list: "'$;GAP2_OUTPUT_LIST$;'"
+    param.--output_subdir_size: 10000
+    param.stderr: $;TMP_DIR$;/$;NAME$;.stderr
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_output_directory:
+    # make sure the output directory exists
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  empty:
+
+# Workflow INI: adjust_gap2_coordinatesconf.ini
+workflow_ini_adjust_gap2_coordinatesconf.ini:
+  _header:
+    # configuration file for the adjust_gap2_coordinates workflow
+  include adjust_gap2_coordinates:
+    $;SHARED_CONFIG$;: ""
+  input adjust_gap2_coordinates:
+    # must have at least one of map_file or map_dir
+    $;MAP_FILE$;: ""
+    $;MAP_DIR$;: ""
+    $;LIST_FILE$;: ""
+    $;LIST_FILE_GLOB$;: "'.*.gap2.raw'"
+  output adjust_gap2_coordinates:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GAP2_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.list
+  parameters adjust_gap2_coordinates:
+  workflowdocs adjust_gap2_coordinates:
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: adjust_gap2_coordinates
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/adjust_gap2_coordinates-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/adjust_gap2_coordinates-master_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0
+
+# Perl script documentation (POD)
+perl_scripts:
+  - script: adjust_gap2_coordinates.pl
+    pod: |
+  =head1  NAME 
+  
+  adjust_gap2_coordinates.pl - adjust the positional coordinates within a gap2
+  output alignment file
+  
+  =head1 SYNOPSIS
+  
+  USAGE:  adjust_gap2_coordinates.pl
+              --map_file=/path/to/somemapfile.bsml
+              --map_dir=/or/path/to/somedir
+              --list_file=/path/to/somefile.list
+              --output_dir=/path/to/somedir
+            [ --list_file_glob='.*.gap2.raw'
+              --output_list=/path/to/some.list
+              --output_subdir_size=1000
+              --output_subdir_prefix=fasta
+              --debug=4
+              --log=/path/to/somefile.log
+            ]
+  
+  =head1 OPTIONS
+  
+  B<--map_file,-m> 
+      Input BSML map file.
+  
+  B<--map_dir,-d> 
+      Directory of input BSML map files.
+  
+  B<--list_file,-i> 
+      Path to a list of analysis output files.
+  
+  B<--list_file_glob,-g> 
+      Use to filter the analysis files considered in --list_file.  This should probably
+      be given as in the example above.
+  
+  B<--output_list,-u>
+      Optional.  If passed, will create an output list with the full paths to each of the 
+      BSML files created by this script.
+  
+  B<--output_dir,-o> 
+      Directory where output analysis files will be written.
+  
+  B<--output_subdir_size,-z>
+      If defined, this script will create numbered subdirectories in the output directory, each
+      containing this many sequences files.  Once this limit is reached, another subdirectory
+      is created.
+  
+  B<--output_subdir_prefix,-x>
+      To be used along with --output_subdir_size, this allows more control of the names of the
+      subdirectories created.  Rather than just incrementing numbers (like 10), each subdirectory 
+      will be named with this prefix (like prefix10).
+  
+  B<--debug,-d> 
+      Debug level.  Use a large number to turn on verbose debugging. 
+  
+  B<--log,-l> 
+      Log file
+  
+  B<--help,-h> 
+      This help message
+  
+  =head1   DESCRIPTION
+  
+  Because some sequences are too large to be analyzed directly by some analysis tools, 
+  it is sometimes necessary to first split those sequences into pieces, perform the 
+  analysis on each fragment, and then stitch them back together. This last step causes 
+  problems because any coordinates given in the result file will represent the 
+  coordinates of the query in the fragment, and not be representative of the coordinates 
+  of the original sequence.
+  
+  The purpose of this script is to read through the results of such an analysis and 
+  adjust the coordinates to reflect those in the original input file.  This is done using
+  a set of gap2 alignment files along with a mapping file.  Read the INPUT section for more
+  information.
+  
+  To use this component, you would most likely have used a splitting component previously
+  in the pipeline, such as split_fasta, which generates the input maps.
+  
+  =head1 INPUT
+  
+  Two types of input files are required to for this to work.  The first is a list of the
+  gap2 alignment files from an analysis, defined using --list_file.  The list file should
+  look something like this:
+  
+      /some/path/cpa1.assem.1.0.gap2.raw
+      /some/path/cpa1.assem.1.1.gap2.raw
+      /some/path/cpa1.assem.1.10.gap2.raw
+      /some/path/cpa1.assem.1.11.gap2.raw
+  
+  In this case, a gap2 analysis was run on 4 sequences, probably named like cpa1.assem.1.0
+  
+  If the list file contains more lines than you actually want to consider, you can filter which
+  will be included by using the --list_file_glob option.
+  
+  The BSML mapping file, passed with the --map_file option, gives information about how the
+  coordinates in these files relate to the original non-split file, here named cpa1.assem.1
+  
+  If mapping information for the files in your list come from multiple BSML maps, you can use
+  the --map_dir option.  This will load all maps in the specified directory whose names end
+  in '.map.bsml'
+  
+  It is important to note that currently the files must match the naming convention like the
+  examples above.  This convention is:
+  
+      featid.gap2.raw
+  
+  where featid must match the id of some Sequence element in the mapping file.  This is how
+  the relationship between the fragment and the map is defined.
+  
+  Also note this script handles compressed input.  If the input BSML files have been gzipped
+  and end in either the '.gz' or '.gzip' extension, they will be decompressed, modified and
+  recompressed on the fly.
+  
+  =head1 OUTPUT
+  
+  The output alignment files will be written to the directory specified by --output_dir.  You may
+  specify the output_dir to be the same location as the original files to overwrite them.
+  
+  As each alignment file is analyzed, a few changes are made to reflect the coordinates back onto
+  the non-fragmented sequence.  For each section of the file like this:
+  
+          720     .    :    .    :    .    :    .    :    .    :    .    :
+          522 CGTCTCCGTCGTCGACCTCACCTGCCGCCTCGAGAAGGGTGCTTCCTACGACGAGATCAA
+               ||||||||| | ||  | || |||||  | |||||| ||||  |||| || ||||||  
+          699 TGTCTCCGTCATTGATTTGACGTGCCGGATTGAGAAGAGTGCGACCTATGAGGAGATCGT
+  
+  the number representing the query sequence is always found on the second line.  It is
+  this number that is adjusted based on the adjustment value in the BSML map file.
+  
+  Note that the file names, such as cpa1.assem.1.0.gap2.raw, are not changed, though
+  they no longer contain information directly concerning the fragment.  This way these
+  sequences can be loaded as they are - else we would have to concatenate each of the
+  fragmented files into one large file before loading, which is not desirable.
+  
+  =head1 CONTACT
+  
+      Joshua Orvis
+      jorvis@tigr.org

@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: qiime_fasta_mothur_cnvr
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - qiime_fasta_mothur_cnvr.config
   - qiime_fasta_mothur_cnvr.xml

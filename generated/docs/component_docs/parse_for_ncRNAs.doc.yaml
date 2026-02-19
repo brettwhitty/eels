@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: parse_for_ncRNAs
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - parse_for_ncRNAs.config
   - parse_for_ncRNAs.xml

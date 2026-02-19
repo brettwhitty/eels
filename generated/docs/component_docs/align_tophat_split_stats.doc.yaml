@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: align_tophat_split_stats
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - align_tophat_split_stats.config
   - align_tophat_split_stats.xml

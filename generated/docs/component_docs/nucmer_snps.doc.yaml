@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: nucmer_snps
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - nucmer_snps.config
   - nucmer_snps.xml

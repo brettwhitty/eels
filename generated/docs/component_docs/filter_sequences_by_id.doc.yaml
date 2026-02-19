@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: filter_sequences_by_id
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - filter_sequences_by_id.config
   - filter_sequences_by_id.xml

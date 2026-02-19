@@ -1,0 +1,152 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pangenome
+extracted_at: "2026-02-19T15:39:25"
+source_files:
+  - workflow/pangenome-master.ini
+  - workflow/pangenome.ini
+  - workflow/pangenomeconf.ini
+
+# Workflow INI: pangenome-master.ini
+workflow_ini_pangenome-master.ini:
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_serialized_data_list:
+    param.command: find
+    arg: "$;OUTPUT_DIRECTORY$; -regex \".*.blast.stored\""
+    param.stdout: $;OUTPUT_DIRECTORY$;/pangenome.stored.list
+  empty:
+  pangenome_do_analysis:
+    # [create_bsml_list]
+    # param.command=find
+    # arg=$;OUTPUT_DIRECTORY$; -regex ".*.$;NAME$;.bsml"
+    # param.stdout=$;BSML_OUTPUT_LIST$;
+    # [create_raw_list]
+    # param.command=find
+    # arg=$;OUTPUT_DIRECTORY$; -regex ".*.$;NAME$;.raw"
+    # param.stdout=$;RAW_OUTPUT_LIST$;
+    # perform pangenome analysis on prepared blast results data
+    param.command: $;BIN_DIR$;/pangenome_do_analysis
+    param.--input_list: $;OUTPUT_DIRECTORY$;/pangenome.stored.list
+    param.--output_path: $;OUTPUT_DIRECTORY$;
+    param.--write_lists: $;WRITE_LISTS$;
+    dceSpec.os: linux
+  pangenome_merge_results:
+    # perform pangenome analysis on prepared blast results data
+    param.command: $;BIN_DIR$;/pangenome_merge_results
+    param.--input_list: $;OUTPUT_DIRECTORY$;/pangenome.stored.list
+    param.--output_path: $;OUTPUT_DIRECTORY$;
+    dceSpec.os: linux
+  pangenome_query_list:
+    # Generate the list of pangenome query sequences
+    param.command: $;BIN_DIR$;/pangenome_query_list
+    param.--input_list: "'$;GENOME_BSML_LIST$;'"
+    param.--output_path: $;OUTPUT_DIRECTORY$;
+    dceSpec.os: linux
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: pangenome.ini
+workflow_ini_pangenome.ini:
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+  empty:
+  pangenome_blast_parse:
+    # Parse the BLAST BSML
+    param.command: $;BIN_DIR$;/pangenome_blast_parse
+    param.--input: $;ITER_FILE_PATH$;
+    param.--output_path: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    param.--analysis_id: $;NAME$;_analysis
+
+# Workflow INI: pangenomeconf.ini
+workflow_ini_pangenomeconf.ini:
+  _header:
+    # configuration file for pangenome analysis
+  include pangenome:
+    $;SHARED_CONFIG$;: ""
+  input pangenome:
+    # List of BSML documents encoding genomes on which to perform pangenome analysis
+    $;GENOME_BSML_LIST$;: ""
+    # Input is a set of BLAST results BSML (typically pooled all vs. all WU-BLASTP and WU-TBLASTN) 
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: bsml
+  output pangenome:
+    # $;BSML_OUTPUT_LIST$; = $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  parameters pangenome:
+    # Write gene lists for shared / core / new categories 
+    # for each genome and for each comparison set performed
+    $;WRITE_LISTS$;: 0
+  workflowdocs pangenome:
+    $;VERSION$;: current
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;ALGORITHM$;: pangenome
+    $;NAME$;: pangenome
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/pangenome-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/pangenome-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/pangenome.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/pangenome_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0

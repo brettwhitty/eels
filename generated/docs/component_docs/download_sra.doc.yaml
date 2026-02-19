@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: download_sra
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - download_sra.config
   - download_sra.xml

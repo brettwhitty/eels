@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: open_reading_frames
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - open_reading_frames.config
   - open_reading_frames.xml

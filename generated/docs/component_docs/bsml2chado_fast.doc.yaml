@@ -1,0 +1,261 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: bsml2chado_fast
+extracted_at: "2026-02-19T15:39:24"
+source_files:
+  - workflow/bsml2chado_fast-master.ini
+  - workflow/bsml2chado_fast.ini
+  - workflow/bsml2chado_fastconf.ini
+
+# Workflow INI: bsml2chado_fast-master.ini
+workflow_ini_bsml2chado_fast-master.ini:
+  add_analysis_id:
+    # 
+    # 
+    param.command: $;BIN_DIR$;/get_analysis
+    param.subflow: $;WORKFLOW_REPOSITORY$;/subflow1.list
+    param.database: $;DATABASE$;
+    param.server: $;SERVER$;
+    param.username: $;USERNAME$;
+    param.password: $;PASSWORD$;
+    param.debug_level: $;DEBUG$;
+    param.log4perl: $;WORKFLOW_REPOSITORY$;/get_analysis.pl.log
+    param.bsml2chado_url: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline/$;PIPELINEID$;/pipline.xml
+    param.testmode: $;SKIP_LOAD$;
+    param.outdir: $;TMP_DIR$;/dupdir/analysis
+  cache_queries:
+    # 
+    # 
+    param.command: $;BIN_DIR$;/queries2Chado
+    param.database: $;DATABASE$;
+    param.server: $;SERVER$;
+    param.username: $;USERNAME$;
+    param.password: $;PASSWORD$;
+    param.debug_level: $;DEBUG$;
+    param.update: $;UPDATE$;
+    param.type: $;SEQUENCE_TYPE$;
+    param.log4perl: $;WORKFLOW_REPOSITORY$;/queries2Chado.pl.log
+    param.cache_dir: $;TMP_DIR$;/cache_dir
+  check_logfiles_repository:
+    param.command: $;BIN_DIR$;/check_logfiles
+    param.--debug_level: $;DEBUG$;
+    param.--log4perl: $;TMP_DIR$;/check_logfiles.pl.repository.log
+    param.--username: "'$;EMAIL$;'"
+    param.--workflow_id: $;REPOSITORY_ROOT$;/Workflow/pipeline/$;PIPELINEID$;/pipeline.xml.instance
+    param.--repository: $;WORKFLOW_REPOSITORY$;
+    param.--project: $;DATABASE$;
+    param.--component: $;NAME$;
+  check_logfiles_scratch:
+    param.command: $;BIN_DIR$;/check_logfiles
+    param.--debug_level: $;DEBUG$;
+    param.--log4perl: $;TMP_DIR$;/check_logfiles.pl.scratch.log
+    param.--username: "'$;EMAIL$;'"
+    param.--workflow_id: $;REPOSITORY_ROOT$;/Workflow/pipeline/$;PIPELINEID$;/pipeline.xml.instance
+    param.--repository: $;TMP_DIR$;
+    param.--project: $;DATABASE$;
+    param.--component: $;NAME$;
+  create_analysis_dir:
+    # 
+    # make output directory the analysis and analysisprop .out files
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;/dupdir/analysis
+  create_compute_output:
+    # 
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # 
+    # make the scratch space
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;/cache_dir
+  create_dupdir:
+    # 
+    # make output directory for all of the duplication direct
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;/dupdir
+  create_groups_subflow1:
+    # 
+    # 
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # 
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    # 
+    # 
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  drop_indexes:
+    # 
+    # Drop all indexes and constraints in the chado database to facilitate fast BCP
+    param.command: $;BIN_DIR$;/sql2Chado
+    param.--username: chado_admin
+    param.--password: chado_admin99
+    param.--database: $;DATABASE$;
+    param.--server: $;SERVER$;
+    param.--action: dropindexes
+    param.--log4perl: $;WORKFLOW_REPOSITORY$;/dropindex.log
+    param.--testmode: $;SKIP_LOAD$;
+    param.--indexmanip: $;INDEX_MANIP$;
+    param.--debug_level: $;DEBUG$;
+    param.--file: $;WORKFLOWDOCS_DIR$;/drop_indexes.ddl
+  empty:
+  load_tables:
+    # 
+    param.command: $;BIN_DIR$;/chadoloader
+    param.--username: chado_admin
+    param.--password: chado_admin99
+    param.--database: $;DATABASE$;
+    param.--server: $;SERVER$;
+    param.--bcpmode: in
+    param.--batchsize: 30000
+    param.--logfile: $;WORKFLOW_REPOSITORY$;/chadoloader.pl.log
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--stdout: $;WORKFLOW_REPOSITORY$;/chadoloader.pl.stdout
+    param.--abort: 1
+    param.--debug_level: $;DEBUG$;
+    param.--testmode: $;SKIP_LOAD$;
+    param.--noupdatestats: $;INDEX_MANIP$;
+  rebuild_indexes:
+    # 
+    # Rebuild all indexes and constraints in the chado database once BCP has completed
+    param.command: $;BIN_DIR$;/sql2Chado
+    param.--username: chado_admin
+    param.--password: chado_admin99
+    param.--database: $;DATABASE$;
+    param.--server: $;SERVER$;
+    param.--action: createindexes
+    param.--log4perl: $;WORKFLOW_REPOSITORY$;/createindex.log
+    param.testmode: $;SKIP_LOAD$;
+    param.indexmanip: $;INDEX_MANIP$;
+    param.--debug_level: $;DEBUG$;
+    param.--file: $;WORKFLOWDOCS_DIR$;/create_indexes.ddl
+  replace_placeholders:
+    # 
+    # 
+    param.command: $;BIN_DIR$;/replace_placeholders
+    param.--username: $;USERNAME$;
+    param.--password: $;PASSWORD$;
+    param.--database: $;DATABASE$;
+    param.--server: $;SERVER$;
+    param.--outdir: $;OUTPUT_DIRECTORY$;
+    param.--log4perl: $;WORKFLOW_REPOSITORY$;/replace_placeholders.pl.log
+    param.--directory: $;TMP_DIR$;/dupdir/
+    param.stdout: $;WORKFLOW_REPOSITORY$;/replace_placeholders.stdout
+    param.stderr: $;WORKFLOW_REPOSITORY$;/replace_placeholders.stderr
+  subflow1:
+    # 
+    # 
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: bsml2chado_fast.ini
+workflow_ini_bsml2chado_fast.ini:
+  _header:
+    # commands to load bsml files into a chado database
+  bsml2chado:
+    # Run the appropriate bsml2chado BSML migration script
+    param.command: $;BIN_DIR$;/bsml2chado
+    param.database: $;DATABASE$;
+    param.server: $;SERVER$;
+    param.password: $;PASSWORD$;
+    param.username: $;USERNAME$;
+    param.autogen_feat: $;AUTOGEN_FEAT$;
+    param.bsmldoc: $;ITER_FILE_PATH$;
+    param.debug_level: $;DEBUG$;
+    param.insert_new: $;INSERT_NEW$;
+    param.log4perl: $;TMP_DIR$;/dupdir/$;GROUP_NAME$;/$;ITER_FILE_BASE$;/bsml2chado.pl.log
+    param.outdir: $;TMP_DIR$;/dupdir/$;GROUP_NAME$;/$;ITER_FILE_BASE$;
+    param.autogen_seq: $;AUTOGEN_SEQ$;
+    param.cache_dir: $;TMP_DIR$;/cache_dir
+    param.update: $;UPDATE$;
+    param.lookup_type: $;SEQUENCE_TYPE$;
+    param.readonlycache: $;READONLYCACHE$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;/dupdir/$;GROUP_NAME$;/$;ITER_FILE_BASE$;
+  empty:
+
+# Workflow INI: bsml2chado_fastconf.ini
+workflow_ini_bsml2chado_fastconf.ini:
+  _header:
+    # configuration file for the bsml2chado_fast workflow
+  include bsml2chado_fast:
+    $;SHARED_CONFIG$;: ""
+  input bsml2chado_fast:
+    # This parameter can be a single file (or a comma-separated list of such files) containing a new-line separated list of .bsml documents to be loaded
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: bsml
+    # The following parameter is non-configurable.  When executed as part of a parallel-distributed workflow, bsml2chado_fast.pl depends on the cached query results generated by queries2Chado.pl.
+    # -no_modify
+    $;READONLYCACHE$;: 1
+  output bsml2chado_fast:
+    # $;REPOSITORY_ROOT$;/BCPFILES/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+  parameters bsml2chado_fast:
+    $;USERNAME$;: ""
+    $;PASSWORD$;: ""
+    $;SERVER$;: ""
+    $;AUTOGEN_FEAT$;: 0
+    $;AUTOGEN_SEQ$;: 0
+    $;INSERT_NEW$;: 1
+    $;UPDATE$;: 0
+    $;SKIP_LOAD$;: 0
+    $;INDEX_MANIP$;: 1
+    $;SEQUENCE_TYPE$;: assembly
+    # 
+    # editor:  sundaram@tigr.org
+    # date:    2005-09-14
+    # bgzcase: 2117
+    # URL:     http://serval.tigr.org:8080/bugzilla/show_bug.cgi?id=2117
+    # comment: Introducing the $;EMAIL$; workflow component variable to relieve the overloaded $;USERNAME$;
+    # 
+    $;EMAIL$;: ""
+  workflowdocs bsml2chado_fast:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: bsml2chado_fast
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/bsml2chado_fast-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/bsml2chado_fast-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/bsml2chado_fast.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/bsml2chado_fast_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0

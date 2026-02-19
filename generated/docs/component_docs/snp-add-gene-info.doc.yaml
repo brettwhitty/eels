@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: snp-add-gene-info
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - snp-add-gene-info.config
   - snp-add-gene-info.xml

@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: sfffile
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - sfffile.config
   - sfffile.xml

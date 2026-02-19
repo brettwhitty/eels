@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: update_ec_numbers
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - update_ec_numbers.config
   - update_ec_numbers.xml

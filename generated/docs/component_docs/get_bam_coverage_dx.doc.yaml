@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: get_bam_coverage_dx
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - get_bam_coverage_dx.config
   - get_bam_coverage_dx.xml

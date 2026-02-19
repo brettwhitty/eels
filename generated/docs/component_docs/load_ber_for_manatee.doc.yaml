@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: load_ber_for_manatee
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - load_ber_for_manatee.config
   - load_ber_for_manatee.xml

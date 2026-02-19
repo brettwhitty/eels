@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: wga_maf2tree
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - wga_maf2tree.config
   - wga_maf2tree.xml

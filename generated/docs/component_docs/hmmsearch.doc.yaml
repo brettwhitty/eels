@@ -1,0 +1,111 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: hmmsearch
+extracted_at: "2026-02-19T15:39:25"
+source_files:
+  - workflow/hmmsearch-master.ini
+  - workflow/hmmsearch.ini
+  - workflow/hmmsearchconf.ini
+
+# Workflow INI: hmmsearch-master.ini
+workflow_ini_hmmsearch-master.ini:
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;INPUT_FILE_LIST$;'"
+    param.file: "'$;INPUT_FILE$;'"
+    param.directory: "'$;INPUT_DIRECTORY$;'"
+    param.extension: "'$;INPUT_EXTENSION$;'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_raw_list:
+    param.command: find
+    arg: "$;OUTPUT_DIRECTORY$; -regex '.*.$;NAME$;.raw\\(.gz\\)?'"
+    param.stdout: $;RAW_OUTPUT_LIST$;
+  empty:
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: hmmsearch.ini
+workflow_ini_hmmsearch.ini:
+  empty:
+  hmmsearch:
+    # Execute the hmmsearch secondary structure prediction
+    param.command: $;BIN_DIR$;/run_hmmsearch
+    param.--seq_file: $;ITER_FILE_PATH$;
+    arg: -l $;HMM_LIST$; -f $;HMM_FILE$; -d $;HMM_DIR$; -e $;HMM_DIR_EXTENSION$; --other_opts $;OTHER_OPTS$;
+    param.--output_file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;.$;NAME$;.raw
+
+# Workflow INI: hmmsearchconf.ini
+workflow_ini_hmmsearchconf.ini:
+  hmm input hmmsearch:
+    $;HMM_LIST$;: ""
+    $;HMM_FILE$;: ""
+    $;HMM_DIR$;: ""
+    $;HMM_DIR_EXTENSION$;: ""
+  include hmmsearch:
+    $;SHARED_CONFIG$;: ""
+  input hmmsearch:
+    $;INPUT_FILE_LIST$;: ""
+    $;INPUT_FILE$;: ""
+    $;INPUT_DIRECTORY$;: ""
+    # the following is only used when iterating over an INPUT_DIRECTORY
+    $;INPUT_EXTENSION$;: fsa
+  output hmmsearch:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;BSML_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    $;BTAB_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.btab.list
+    $;RAW_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.raw.list
+    $;COMPRESS_RAW_OUTPUT$;: 1
+  parameters hmmsearch:
+    $;OTHER_OPTS$;: ""
+  workflowdocs hmmsearch:
+    $;VERSION$;: 2.0
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;ALGORITHM$;: hmmsearch
+    $;NAME$;: hmmsearch
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/hmmsearch-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/hmmsearch-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/hmmsearch.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/hmmsearch_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0

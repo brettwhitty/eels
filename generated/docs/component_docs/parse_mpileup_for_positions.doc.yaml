@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: parse_mpileup_for_positions
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - parse_mpileup_for_positions.config
   - parse_mpileup_for_positions.xml

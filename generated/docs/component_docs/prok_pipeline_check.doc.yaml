@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: prok_pipeline_check
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - prok_pipeline_check.config
   - prok_pipeline_check.xml

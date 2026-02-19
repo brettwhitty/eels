@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: assert_disjoint_clusters
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:24"
 source_files:
   - assert_disjoint_clusters.config
   - assert_disjoint_clusters.xml

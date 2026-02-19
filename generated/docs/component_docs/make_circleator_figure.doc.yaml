@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: make_circleator_figure
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - make_circleator_figure.config
   - make_circleator_figure.xml

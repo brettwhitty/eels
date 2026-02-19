@@ -1,0 +1,200 @@
+---
+# Ergatis Component Documentation
+# Extracted from source by extract_component_docs.pl
+# Source: TIGR/JCVI/IGS Ergatis bioinformatics workflow system
+#
+# This file preserves ALL documentation, comments, parameter descriptions,
+# and structural details from the original Ergatis source files.
+
+component: pe
+extracted_at: "2026-02-19T15:39:25"
+source_files:
+  - workflow/pe-master.ini
+  - workflow/pe.ini
+  - workflow/peconf.ini
+
+# Workflow INI: pe-master.ini
+workflow_ini_pe-master.ini:
+  cluster_pe:
+    param.command: /usr/local/devel/ANNOTATION/shared/bin/linux/PEClusterer
+    arg: -I $;RAW_OUTPUT_LIST$; -o $;TMP_DIR$;/clusters
+  create_bsml_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--regex: "\".*.$;NAME$;.bsml\""
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--output_list: $;BSML_OUTPUT_LIST$;
+  create_cluster_fasta:
+    param.command: $;BIN_DIR$;/pe_fasta_dumper
+    arg: -c $;TMP_DIR$;/clusters -d $;OUTPUT_DIRECTORY$;/clusters -F $;TMP_DIR$;/fasta.list
+  create_cluster_fasta_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--directory: $;OUTPUT_DIRECTORY$;/clusters
+    param.--regex: "\".*\\.fsa\""
+    param.--output_list: $;OUTPUT_DIRECTORY$;/clusters.fsa.list
+  create_cluster_output_dir:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;/clusters
+  create_compute_output:
+    # make the output directory
+    param.command: mkdir
+    arg: -p -m 777 $;OUTPUT_DIRECTORY$;
+  create_compute_scratch:
+    # make the new scratch directory
+    param.command: mkdir
+    arg: -p -m 777 $;TMP_DIR$;
+  create_groups_subflow1:
+    param.command: $;BIN_DIR$;/generate_groups
+    param.output_dir: $;WORKFLOW_REPOSITORY$;
+    param.prefix: subflow1groups
+    param.group_count: $;GROUP_COUNT$;
+    param.file: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_iterative_subflow1:
+    # create iterative subflow
+    param.command: $;BIN_DIR$;/generate_subflow
+    # workflow doc information
+    param.template: $;WORKFLOWDOCS_DIR$;/groups-iterator_template.xml
+    param.inifile: $;WORKFLOWDOCS_DIR$;/groups-iterator.ini
+    param.iteratortemplate: $;WORKFLOWDOCS_DIR$;/batch-paralleliterator_template.xml
+    param.iteratorini: $;WORKFLOWDOCS_DIR$;/batch-iterator.ini
+    param.iteratorlist: $;WORKFLOW_REPOSITORY$;/subflow1groups.list
+    param.conf: $;COMPONENT_CONFIG$;
+    param.wfname: $;NAME$;
+    param.nodistrib: $;NODISTRIB$;
+    # output information
+    param.outputdir: $;WORKFLOW_REPOSITORY$;
+    param.outputxml: $;WORKFLOW_REPOSITORY$;/groups.xml
+    param.debug: $;DEBUG$;
+  create_iterator_list_subflow1:
+    param.command: $;BIN_DIR$;/generate_input_list
+    param.filelist: "'$;QUERY_BSML_FILE_LIST$;'"
+    param.file: "'$;QUERY_BSML_FILE$;'"
+    param.directory: "'$;QUERY_BSML_DIRECTORY$;'"
+    param.extension: "'bsml'"
+    param.output: $;WORKFLOW_REPOSITORY$;/subflow1.list
+  create_raw_list:
+    param.command: $;BIN_DIR$;/create_list_file
+    param.--regex: "\".*.$;NAME$;.pe\""
+    param.--directory: $;OUTPUT_DIRECTORY$;
+    param.--output_list: $;RAW_OUTPUT_LIST$;
+  empty:
+  make_pe_position_xml:
+    # generate the gene position xml for PEffect workflow
+    param.command: $;BIN_DIR$;/bsml2PEposXML
+    param.--bsml_list: "'$;QUERY_BSML_FILE_LIST$;'"
+    param.--bsml_file: "'$;QUERY_BSML_FILE$;'"
+    param.--bsml_dir: "'$;QUERY_BSML_DIRECTORY$;'"
+    param.--output: $;TMP_DIR$;/$;DATABASE$;_$;NAME$;.xml
+    param.--gene_count_cutoff: $;GENE_COUNT_CUTOFF$;
+    param.--gene_length_cutoff: $;GENE_LENGTH_CUTOFF$;
+    dceSpec.os: linux
+  merge_fasta_list_files:
+    param.command: $;BIN_DIR$;/merge_lists
+    param.--input_dir: $;TMP_DIR$;
+    param.--output_list: $;TMP_DIR$;/fasta.list
+    param.--glob: "'*/*fasta.list'"
+  subflow1:
+    fileName: $;WORKFLOW_REPOSITORY$;/groups.xml
+
+# Workflow INI: pe.ini
+workflow_ini_pe.ini:
+  dtd_validation:
+    # perform document schema validation
+    param.command: $;BIN_DIR$;/dtdValid.pl
+    param.-d: $;SCHEMA_DIR$;/bsml3_1.dtd
+    arg: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;_$;NAME$;.bsml
+  empty:
+  make_asmbl_lookup:
+    param.command: $;BIN_DIR$;/bsml2idlookup
+    param.--bsml_input: $;ITER_FILE_PATH$;
+    param.--output: $;TMP_DIR$;/$;ITER_FILE_BASE$;.asmbl.lookup
+    arg: -f $;TMP_DIR$;/$;GROUP_NAME$;/fasta.list
+  make_pe_match_xml:
+    # construct gene match xml
+    param.command: $;BIN_DIR$;/bsml2PEmatchXML
+    param.--bsml_file: "'$;MATCH_BSML_FILE$;'"
+    param.--bsml_list: "'$;MATCH_BSML_FILE_LIST$;'"
+    param.--bsml_dir: "'$;MATCH_BSML_DIRECTORY$;'"
+    param.--output: $;TMP_DIR$;/$;ITER_FILE_BASE$;.pexml
+    param.--scorefield: $;SCOREFIELD$;
+    param.--rankfield: $;RANKFIELD$;
+    param.--ranktype: $;RANKTYPE$;
+    param.--asmbl_lookup: $;TMP_DIR$;/$;ITER_FILE_BASE$;.asmbl.lookup
+  pe2bsml:
+    # encode PEffect output into BSML doc
+    param.command: $;BIN_DIR$;/pe2bsml
+    param.--file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;_$;NAME$;.pe
+    param.--bsml_repository: $;BSML_REPOSITORY$;
+    param.--output: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;_$;NAME$;.bsml
+    param.--num_hits: 1
+    param.--class: polypeptide
+    param.--gzip_output: $;COMPRESS_BSML_OUTPUT$;
+    param.--query_file_path: $;ITER_FILE_PATH$;
+  peffect:
+    # Execute peffect
+    param.command: /usr/local/devel/ANNOTATION/shared/bin/linux/peffect
+    param.stdin: $;TMP_DIR$;/$;ITER_FILE_BASE$;.pexml
+    param.stdout: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;_$;NAME$;.pe
+    arg: -f $;TMP_DIR$;/$;DATABASE$;_$;NAME$;.xml
+    arg: -w $;WINDOW_SIZE$;
+    arg: -g $;GAP_PENALTY$;
+    arg: -r $;ORIENTATION_PENALTY$;
+    arg: -m $;MIN_MATCHES_PER_WINDOW$;
+    arg: -o 3
+  store_config_params:
+    # store parameters associated with analysis in bsml file
+    # workflow will pass add'l optional parameters if invoked with LoggedUnixCommand
+    # --command-id
+    param.command: $;BIN_DIR$;/analysis2bsml
+    param.--ergatis_control_file: $;ERGATIS_DIR$;.ini
+    param.--conf: $;COMPONENT_CONFIG$;
+    param.--bsml_file: $;OUTPUT_DIRECTORY$;/$;GROUP_NAME$;/$;ITER_FILE_BASE$;_$;NAME$;.bsml
+    param.--componenturl: $;WORKFLOW_REPOSITORY$;/pipeline.xml
+    param.--pipelineurl: $;REPOSITORY_ROOT$;/Workflow/pipeline/pipeline$;PIPELINEID$;.xml
+    param.--analysis_id: $;NAME$;_analysis
+
+# Workflow INI: peconf.ini
+workflow_ini_peconf.ini:
+  _header:
+    # configuration file for the peffect workflow
+  include pe:
+    $;SHARED_CONFIG$;: ""
+  input pe:
+    $;QUERY_BSML_FILE_LIST$;: ""
+    $;QUERY_BSML_FILE$;: ""
+    $;QUERY_BSML_DIRECTORY$;: ""
+    $;MATCH_BSML_FILE_LIST$;: ""
+    $;MATCH_BSML_FILE$;: ""
+    $;MATCH_BSML_DIRECTORY$;: ""
+    $;BSML_REPOSITORY$;: $;REPOSITORY_ROOT$;/BSML_repository
+  output pe:
+    $;OUTPUT_TOKEN$;: default
+    $;OUTPUT_DIRECTORY$;: $;REPOSITORY_ROOT$;/output_repository/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;BSML_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.bsml.list
+    $;RAW_OUTPUT_LIST$;: $;OUTPUT_DIRECTORY$;/$;NAME$;.raw.list
+    $;COMPRESS_BSML_OUTPUT$;: 1
+  parameters pe:
+    $;GENE_LENGTH_CUTOFF$;: 0
+    $;GENE_COUNT_CUTOFF$;: 2
+    $;SCOREFIELD$;: percent_similarity
+    $;RANKFIELD$;: p_value
+    $;RANKTYPE$;: 0
+    $;WINDOW_SIZE$;: 11
+    $;GAP_PENALTY$;: -50
+    $;ORIENTATION_PENALTY$;: -100
+    $;MIN_MATCHES_PER_WINDOW$;: 2
+  workflowdocs pe:
+    # The version here is set by an interpolated CVS tag
+    $;VERSION$;: $Name$
+    $;REVISION$;: $Revision$
+    $;TAG$;: $Name$
+    $;NAME$;: pe
+    $;MASTER_TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/pe-master.ini
+    $;MASTER_TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/pe-master_template.xml
+    $;TEMPLATE_INI$;: $;WORKFLOWDOCS_DIR$;/pe.ini
+    $;TEMPLATE_XML$;: $;WORKFLOWDOCS_DIR$;/pe_template.xml
+    $;WORKFLOW_REPOSITORY$;: $;REPOSITORY_ROOT$;/Workflow/$;NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;
+    $;GROUP_COUNT$;: 150
+    # the following keys are replaced at runtime by the invocation script
+    $;COMPONENT_CONFIG$;: ""
+    $;NODISTRIB$;: 0

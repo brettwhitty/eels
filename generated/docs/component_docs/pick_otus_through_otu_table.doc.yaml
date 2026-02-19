@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: pick_otus_through_otu_table
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - pick_otus_through_otu_table.config
   - pick_otus_through_otu_table.xml

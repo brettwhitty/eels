@@ -7,7 +7,7 @@
 # and structural details from the original Ergatis source files.
 
 component: validate_sgc_records
-extracted_at: "2026-02-19T15:34:47"
+extracted_at: "2026-02-19T15:39:25"
 source_files:
   - validate_sgc_records.config
   - validate_sgc_records.xml
