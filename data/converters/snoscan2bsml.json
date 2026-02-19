@@ -1,0 +1,49 @@
+{
+  "name": "snoscan2bsml",
+  "script": "snoscan2bsml.pl",
+  "description": "converts snoscan output to BSML",
+  "synopsis": "USAGE: snoscan2bsml.pl --input=/path/to/snoscanfile --output=/path/to/output.bsml [ --project=projectName --class=class of sequence --degug=integer(level of debug) --fasta_file=input file to snoscan ]",
+  "options": [
+    {
+      "long": "input_file,-i",
+      "short": null,
+      "description": "Input file from the snoscan search."
+    },
+    {
+      "long": "output_file,-o",
+      "short": null,
+      "description": "The file will be created"
+    },
+    {
+      "long": "class,-c",
+      "short": null,
+      "description": "This is used by the workflow (for Id purporses)"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature IDs. Defaults to unknown if not passed."
+    },
+    {
+      "long": "command_id",
+      "short": null,
+      "description": "The command passed in from the workflow"
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message."
+    }
+  ],
+  "manpage": "snoscan2bsml.pl.1p"
+}

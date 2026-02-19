@@ -1,0 +1,44 @@
+{
+  "name": "glimmer32bsml",
+  "script": "glimmer32bsml.pl",
+  "description": "Creates a bsml document from glimmer3 raw output",
+  "synopsis": "USAGE: glimmer32bsml.pl --input_list=/path/to/some/glimmer3.raw.list --input_file=/path/to/some/glimmer3.raw --output=/path/to/transterm.bsml --id_repository=/path/to/id_repository --fasta_input=/path/to/glimmer3/input.fsa [ --log=/path/to/file.log --debug=4 --help ]",
+  "options": [
+    {
+      "long": "input_list,-i",
+      "short": null,
+      "description": "Input list of glimmer3 raw output files (.predict)"
+    },
+    {
+      "long": "input_file,-f",
+      "short": null,
+      "description": "Input glimmer3 raw file (.predict)"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "The output bsml file."
+    },
+    {
+      "long": "id_repository,-r",
+      "short": null,
+      "description": "Id repository for use by Workflow::IdGenerator.pm"
+    },
+    {
+      "long": "fasta_input,-a",
+      "short": null,
+      "description": "The input file that was used as input for the glimmer3 run"
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Logfile."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "Print this message"
+    }
+  ],
+  "manpage": "glimmer32bsml.pl.1p"
+}

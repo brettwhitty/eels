@@ -1,0 +1,44 @@
+{
+  "name": "iprscan2bsml",
+  "script": "iprscan2bsml.pl",
+  "description": "convert iprscan btab output to BSML",
+  "synopsis": "USAGE: iprscan2bsml.pl --input=/path/to/somefile.iprscan.raw --output=/path/to/somefile.iprscan.bsml [ --fasta_input=/path/to/iprscan/input.fsa --gzip_output=1 ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input tab-delimited file from an iprscan search."
+    },
+    {
+      "long": "query_file_path,-q",
+      "short": null,
+      "description": "Full path to FASTA file containing query sequence. This allows the creation of a Sequence element in BSML even if there are no matches."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "Optional. Non-zero value will give you a compressed bsml file. If output does not contain a .gz extension, it will be added automatically."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "iprscan2bsml.pl.1p"
+}

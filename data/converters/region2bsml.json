@@ -1,0 +1,8 @@
+{
+  "name": "region2bsml",
+  "script": "region2bsml.pl",
+  "description": "Convert gene_boundaries(region) output to BSML",
+  "synopsis": "USAGE: region2bsml -r region_file -o output_file [--gzip_output 1] [--debug debug_level] [--log log_file] [--help]",
+  "options": [],
+  "manpage": "region2bsml.pl.1p"
+}

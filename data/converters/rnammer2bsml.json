@@ -1,0 +1,54 @@
+{
+  "name": "rnammer2bsml",
+  "script": "rnammer2bsml.pl",
+  "description": "convert RNAmmer output to BSML",
+  "synopsis": "USAGE: RNAmmer2bsml.pl --input=/path/to/rnammerfile --output=/path/to/output.bsml --fasta_input=/path/to/fastafile --id_repository=/path/to/id_repository --project=aa1 [ --gzip_output=1 --log=/path/to/logfile --debug=3 ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file file from a RNAmmer search."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "fasta_input,-a",
+      "short": null,
+      "description": "The input file that was used as input for the RNAmmer run"
+    },
+    {
+      "long": "id_repository,-r",
+      "short": null,
+      "description": "Path to the project's id repository"
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "Optional. A non-zero value will make compressed output."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Required. Project ID. Used in creating feature ids. If 'aa1' is passed, repeat feature IDs created are like aa1.repeat_region.4231.1 If 'parse' is passed, will parse from already present ids."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "rnammer2bsml.pl.1p"
+}

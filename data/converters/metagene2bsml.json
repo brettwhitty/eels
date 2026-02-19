@@ -1,0 +1,39 @@
+{
+  "name": "metagene2bsml",
+  "script": "metagene2bsml.pl",
+  "description": "converts raw metagene output into BSML",
+  "synopsis": "USAGE: metagene2bsml.pl -i raw_metagene_output.txt -f /path/to/fasta_input.fsa -o /path/to/outfile.bsml [-l /path/to/logfile.log] --project project_name --id_repository /path/to/id_repository",
+  "options": [
+    {
+      "long": "input_file,-i",
+      "short": null,
+      "description": "The input raw output from metagene."
+    },
+    {
+      "long": "fasta_input,-f",
+      "short": null,
+      "description": "The full path to the fasta sequence file that was input to metagene."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "The full path to the BSML output file to be created."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "metagene2bsml.pl.1p"
+}

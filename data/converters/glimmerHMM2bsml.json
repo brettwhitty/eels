@@ -1,0 +1,44 @@
+{
+  "name": "glimmerHMM2bsml",
+  "script": "glimmerHMM2bsml.pl",
+  "description": "convert glimmerHMM output to BSML",
+  "synopsis": "USAGE: glimmerHMM2bsml.pl --input=/path/to/glimmerHMM.output.file --output=/path/to/output.bsml [ --project=aa1 ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file file from a glimmerHMM scan."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "fasta_file,-f",
+      "short": null,
+      "description": "If passed, will create a Seq-data-import element referencing this path."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids. Defaults to 'unknown' if not passed."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "glimmerHMM2bsml.pl.1p"
+}

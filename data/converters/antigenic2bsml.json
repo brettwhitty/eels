@@ -1,0 +1,54 @@
+{
+  "name": "antigenic2bsml",
+  "script": "antigenic2bsml.pl",
+  "description": "convert ANTIGENIC output to BSML",
+  "synopsis": "USAGE: antigenic2bsml.pl --input=/path/to/antigenic_file --output=/path/to/output.bsml --project=aa1 --input=/path/to/antigenic/input.fsa --compress_bsml_output=0",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file file from a antigenic run [long format only!]."
+    },
+    {
+      "long": "project",
+      "short": null,
+      "description": "[OPTIONAL] The project (used for id making). Default: unknown"
+    },
+    {
+      "long": "input",
+      "short": null,
+      "description": "The fasta file used as input to the antigenic run."
+    },
+    {
+      "long": "compress_bsml_output",
+      "short": null,
+      "description": "Will create gzipped output"
+    },
+    {
+      "long": "id_repository,-r",
+      "short": null,
+      "description": "Required for creating feature identifiers. Each project should have its own id_repository directory - use the full path to it here. This is used by the IdGenerator.pm module."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "antigenic2bsml.pl.1p"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "gap22bsml",
+  "script": "gap22bsml.pl",
+  "description": "convert gap2 btab output to BSML",
+  "synopsis": "USAGE: gap22bsml.pl --input=/path/to/somefile.gap2.btab --output=/path/to/somefile.gap2.bsml",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input btab file from a gap2 search."
+    },
+    {
+      "long": "query_file_path,-q",
+      "short": null,
+      "description": "Full path to FASTA file containing query sequence."
+    },
+    {
+      "long": "query_id",
+      "short": null,
+      "description": "ID of query sequence"
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "gap22bsml.pl.1p"
+}

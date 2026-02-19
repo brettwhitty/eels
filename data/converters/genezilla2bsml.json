@@ -1,0 +1,54 @@
+{
+  "name": "genezilla2bsml",
+  "script": "genezilla2bsml.pl",
+  "description": "convert genezilla GFF output to BSML",
+  "synopsis": "USAGE: genezilla2bsml.pl --input_file=/path/to/genezilla.output.file.raw --output=/path/to/output.bsml --project=aa1 --fasta_file=/path/to/somefile.fsa --id_repository=/path/to/repository --sourcename=sourcename",
+  "options": [
+    {
+      "long": "input_file,-f",
+      "short": null,
+      "description": "Input file from an genezilla scan. -i, --input_list, will take in a list of input files, all of which will be stored in a single output bsml."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids."
+    },
+    {
+      "long": "fasta_file,-a",
+      "short": null,
+      "description": "Needed tp create a Seq-data-import element referencing this path."
+    },
+    {
+      "long": "id_repository,",
+      "short": null,
+      "description": "-r path to --project's id_repository"
+    },
+    {
+      "long": "sourcename,-s",
+      "short": null,
+      "description": "Value to be used for the sourcename, required for the analysis section. Most often should be the output_directory for the run."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    }
+  ],
+  "manpage": "genezilla2bsml.pl.1p"
+}

@@ -1,0 +1,64 @@
+{
+  "name": "fasta2bsml",
+  "script": "fasta2bsml.pl",
+  "description": "convert fasta files to BSML",
+  "synopsis": "USAGE: fasta2bsml.pl --fasta_input=/path/to/fileORdir | --fasta_list=/path/to/file --format=multi|single --output=/path/to/somefile.fsa | /path/to/somedir [ --class=assembly --output_list=/path/to/somefile.list --output_subdir_size=20000 --output_subdir_prefix='somename' --debug=debug_level --log=log_file ]",
+  "options": [
+    {
+      "long": "class,-c",
+      "short": null,
+      "description": "Sets the class attribute of each Sequence element created. Default = assembly."
+    },
+    {
+      "long": "fasta_input,-i",
+      "short": null,
+      "description": "Input files or folders. Can be a comma-separated list of mixed input types."
+    },
+    {
+      "long": "fasta_list,-s",
+      "short": null,
+      "description": "Text file that is a list of input files and/or folders."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "format,-f",
+      "short": null,
+      "description": "Format. 'multi' (default) writes all sequences to a multi-entry bsml file, and 'single' writes each sequence in a separate file named like $id.bsml"
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output file (if --format=multi) or directory (if --format=single)"
+    },
+    {
+      "long": "output_list,-u",
+      "short": null,
+      "description": "Optional. If passed, will create a list file containing the path to each of the files created."
+    },
+    {
+      "long": "output_subdir_size,-z",
+      "short": null,
+      "description": "Optional. Number of files to create within each output subdirectory."
+    },
+    {
+      "long": "output_subdir_prefix,-x",
+      "short": null,
+      "description": "Optional. Rather than just plain numberical names (N), output subdirectories will be named like \"prefixN\" if you pass a prefix with this."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "fasta2bsml.pl.1p"
+}

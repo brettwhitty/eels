@@ -1,0 +1,54 @@
+{
+  "name": "snp2bsml",
+  "script": "snp2bsml.pl",
+  "description": "convert clustered snp output information from show-snps to bsml",
+  "synopsis": "usage: snp2bsml.pl [ --input|-i=/path/to/show-snps_clustered_output ] [ --output|-o=/path/to/snp_data.bsml ] --project [ --log|-l=/path/to/logfile ] [ --debug|-d=debug_level ] [ --moltype|-m=molecule_type ] [ --seqdata|-s=sequence_data ]",
+  "options": [
+    {
+      "long": "input,",
+      "short": null,
+      "description": "-i Clustered output from show-snps tool from MUMer suite"
+    },
+    {
+      "long": "output,",
+      "short": null,
+      "description": "-o BSML multiple sequence alignment file for SNP representation"
+    },
+    {
+      "long": "project",
+      "short": null,
+      "description": "Project name"
+    },
+    {
+      "long": "id_repository",
+      "short": null,
+      "description": "Path to project id repository"
+    },
+    {
+      "long": "log,",
+      "short": null,
+      "description": "-l Log file"
+    },
+    {
+      "long": "debug,",
+      "short": null,
+      "description": "-D Debug level"
+    },
+    {
+      "long": "moltype,",
+      "short": null,
+      "description": "-m Molecule type (nucleotide, protein) Defaults to nucleotide"
+    },
+    {
+      "long": "seqdata,",
+      "short": null,
+      "description": "-s SNP sequence data, in tab delimited format, containing: sequence_id, position, orientation, base_call"
+    },
+    {
+      "long": "help,",
+      "short": null,
+      "description": "-h This help message"
+    }
+  ],
+  "manpage": "snp2bsml.pl.1p"
+}

@@ -1,0 +1,59 @@
+{
+  "name": "nap2bsml",
+  "script": "nap2bsml.pl",
+  "description": "convert nap btab output to BSML",
+  "synopsis": "USAGE: nap2bsml.pl --input=/path/to/somefile.nap.btab --output=/path/to/somefile.nap.bsml",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input btab file from a nap search."
+    },
+    {
+      "long": "query_file_path,-q",
+      "short": null,
+      "description": "Full path to FASTA file containing query sequence."
+    },
+    {
+      "long": "query_id",
+      "short": null,
+      "description": "ID of query sequence"
+    },
+    {
+      "long": "cutoff_identity",
+      "short": null,
+      "description": "Filter results on % identity (exclude < cutoff)."
+    },
+    {
+      "long": "cutoff_similarity",
+      "short": null,
+      "description": "Filter results on % similarity (exclude < cutoff)."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "qzip_output,-g",
+      "short": null,
+      "description": "Optional. A non-zero value will make compressed output."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "nap2bsml.pl.1p"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "seg2bsml",
+  "script": "seg2bsml.pl",
+  "description": "convert seg output to bsml.",
+  "synopsis": "USAGE: seg2bsml.pl --input|-i seg.raw --seg_input_file|-s model.fsa --output|-o seg.bsml --project|-p foo --id_repository|-r /path/to/repository [ --log|-l seg2bsml.log --help --debug (currently unimplemented) ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "- The raw seg output (from a seg run using the -l option)"
+    },
+    {
+      "long": "seg_input_file,",
+      "short": null,
+      "description": "-s - The file used as input for seg"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "- Display this help"
+    }
+  ],
+  "manpage": "seg2bsml.pl.1p"
+}

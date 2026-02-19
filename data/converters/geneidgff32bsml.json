@@ -1,0 +1,34 @@
+{
+  "name": "geneidgff32bsml",
+  "script": "geneidgff32bsml.pl",
+  "description": "",
+  "synopsis": "USAGE: geneidgff32bsml.pl --input|-i --output|-o --project|-p --id_repository|r --help|-h",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input gff3 format file created by geneid."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file name."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project/database name used to create feature identifiers."
+    },
+    {
+      "long": "id_repository,r",
+      "short": null,
+      "description": "Path to the id repository for the named project."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help documentation"
+    }
+  ],
+  "manpage": "geneidgff32bsml.pl.1p"
+}

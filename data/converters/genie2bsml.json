@@ -1,0 +1,44 @@
+{
+  "name": "genie2bsml",
+  "script": "genie2bsml.pl",
+  "description": "convert genie GFF output to BSML",
+  "synopsis": "USAGE: genie2bsml.pl --input=/path/to/genie.output.file.gff --output=/path/to/output.bsml [ --project=aa1 --fasta_file=/path/to/somefile.fsa ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file file from a genie scan."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "fasta_file,-f",
+      "short": null,
+      "description": "If passed, will create a Seq-data-import element referencing this path."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids. Defaults to 'unknown' if not passed."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "genie2bsml.pl.1p"
+}

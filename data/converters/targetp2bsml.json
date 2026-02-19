@@ -1,0 +1,39 @@
+{
+  "name": "targetp2bsml",
+  "script": "targetp2bsml.pl",
+  "description": "convert TargetP output to BSML",
+  "synopsis": "USAGE: targetp2bsml.pl --input=/path/to/targetp_file --output=/path/to/output.bsml",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file file from a targetp run."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "[DEPRECATED] Parses project name from input sequence id."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "targetp2bsml.pl.1p"
+}

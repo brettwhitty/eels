@@ -1,0 +1,34 @@
+{
+  "name": "psortb2bsml",
+  "script": "psortb2bsml.pl",
+  "description": "convert psortb output to BSML",
+  "synopsis": "USAGE: psortb2bsml.pl --input=/path/to/psortb_out.raw --output=/path/to/output.bsml",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file file from a psortb run."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "psortb2bsml.pl.1p"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "berbtab2bsml",
+  "script": "berbtab2bsml.pl",
+  "description": "convert info stored in BER btab files into BSML documents",
+  "synopsis": "USAGE: berbtab2bsml.pl -b btab_dir -o blastp.bsml -d bsml_dir",
+  "options": [
+    {
+      "long": "bsml_dir,-d",
+      "short": null,
+      "description": "[REQUIRED] Dir containing BSML documents (repository) \u2022 --output,-o [REQUIRED] output BSML file containing bit_score information \u2022 --btab_dir,-b [REQUIRED] Dir containing btab files \u2022 --max_hsp_count [REQUIRED] Maximum number of HSPs stored per alignment \u2022 --gzip_output [OPTIONAL] A non-zero value will result in compressed bsml output. A .gz extension will be added to the output file name if it doesn't already exist. \u2022 --query_file_path,-q [OPTIONAL] The input fasta file to ber. \u2022 --class,-c The ref/comp sequence type. Default is 'assembly' \u2022 --project_abbreviation,-a The project abbreviation, used in id generation. See Ergatis::IdGenerator for details. \u2022 --help,-h This help message"
+    }
+  ],
+  "manpage": "berbtab2bsml.pl.1p"
+}

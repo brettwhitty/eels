@@ -1,0 +1,39 @@
+{
+  "name": "quicktree2bsml",
+  "script": "quicktree2bsml.pl",
+  "description": "Convert output from quicktree to BSML.",
+  "synopsis": "USAGE: quicktree2bsml.pl --quicktree_output=/path/to/output/of/quicktree --quicktree_input=/path/to/input/of/quicktree --output=/path/to/output.bsml [ --log=/path/to/some.log --debug=4 ]",
+  "options": [
+    {
+      "long": "quicktree_input,-i",
+      "short": null,
+      "description": "Input multiple sequence alignment file, used as quicktree input. Alternatively, this may be the distance matrix used as input. If the input is a MSA file, the alignment is stored in the bsml. If only given a distance matrix, we can at the moment only store the sequence ids, with no seq-data-import and no alignment info."
+    },
+    {
+      "long": "quicktree_output,-j",
+      "short": null,
+      "description": "Quicktree output in Newick (New Hampshire) format."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "The full path to the BSML file that will be created."
+    },
+    {
+      "long": "debug",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "quicktree2bsml.pl.1p"
+}

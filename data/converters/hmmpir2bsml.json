@@ -1,0 +1,44 @@
+{
+  "name": "hmmpir2bsml",
+  "script": "hmmpir2bsml.pl",
+  "description": "convert hmmpir raw output to BSML",
+  "synopsis": "USAGE: hmmpir2bsml.pl --input=/path/to/somefile.hmmpir.raw --output=/path/to/somefile.hmmpir.bsml [ --fasta_input=/path/to/hmmpir/input.fsa --gzip_output=1 --log=/path/to/some.log --debug=4 --help ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input raw alignment file from an hmmpir search."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "fasta_input,-f",
+      "short": null,
+      "description": "Optional. The input file used in the hmmpir run that created the raw file."
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "Optional. Compress the bsml output if a non-zero value."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "hmmpir2bsml.pl.1p"
+}

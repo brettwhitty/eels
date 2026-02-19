@@ -1,0 +1,14 @@
+{
+  "name": "MSF_domain2bsml",
+  "script": "MSF_domain2bsml.pl",
+  "description": "convert MSF format alignment files into BSML documents",
+  "synopsis": "USAGE: MSF_domain2bsml.pl -a ali_dir -o msf.bsml",
+  "options": [
+    {
+      "long": "ali_dir,-a",
+      "short": null,
+      "description": "[REQUIRED] Dir containing MSF format alignment files that ends in *.msf \u2022 --output,-o [REQUIRED] output BSML file \u2022 --suffix,-s suffix of the multiple sequence alignment file. Default(msf) \u2022 --program,-p projects this analyisi is for. Default(clustal) \u2022 --help,-h This help message"
+    }
+  ],
+  "manpage": "MSF_domain2bsml.pl.1p"
+}

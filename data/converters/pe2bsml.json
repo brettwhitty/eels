@@ -1,0 +1,14 @@
+{
+  "name": "pe2bsml",
+  "script": "pe2bsml.pl",
+  "description": "do nothing",
+  "synopsis": "USAGE: dummy.pl --debug debug_level --log log_file",
+  "options": [
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging. \u2022 --log,-l Log file \u2022 --gzip_output,-g Optional. Compresses bsml output. \u2022 --class,-c ref/comp sequence class type. Default is 'assembly' \u2022 --help,-h This help message"
+    }
+  ],
+  "manpage": "pe2bsml.pl.1p"
+}

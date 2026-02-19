@@ -1,0 +1,14 @@
+{
+  "name": "blastbtab2bsml",
+  "script": "blastbtab2bsml.pl",
+  "description": "convert info stored in btab files into BSML documents",
+  "synopsis": "USAGE: blastbtab2bsml.pl -b btab_dir -o blastp.bsml",
+  "options": [
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "[REQUIRED] output BSML file containing bit_score information \u2022 --btab_dir,-b [REQUIRED] Dir containing btab files \u2022 --max_hsp_count,-m Maximum number of HSPs stored per alignment \u2022 --class,-c The ref/comp sequence type. Default is 'assembly' \u2022 --gzip,-z gzip bsml output \u2022 --help,-h This help message"
+    }
+  ],
+  "manpage": "blastbtab2bsml.pl.1p"
+}

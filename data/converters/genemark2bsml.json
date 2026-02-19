@@ -1,0 +1,8 @@
+{
+  "name": "genemark2bsml",
+  "script": "genemark2bsml.pl",
+  "description": "",
+  "synopsis": "",
+  "options": [],
+  "manpage": "genemark2bsml.pl.1p"
+}

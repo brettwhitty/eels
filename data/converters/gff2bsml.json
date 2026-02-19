@@ -1,0 +1,204 @@
+{
+  "name": "gff2bsml",
+  "script": "gff2bsml.pl",
+  "description": "Convert GFF3 annotation data into BSML.",
+  "synopsis": "gff32bsml.pl --input=/path/to/annotation.gff3 --output=/path/to/results.bsml --project=rca1 --id_repository=/usr/local/projects/rca1/workflow/project_id_repository --organism='Aspergillus nidulans' [--peptide_fasta=/path/to/peptide-seqs.fsa --peptide_id_regex='^>(\\S+)' --peptide_id_prefix='' --peptide_id_suffix='-Protein' --peptide_no_seqdata --dna_fasta=/path/to/dna-seqs.fsa --dna_id_regex='^>(\\S+)' --dna_id_prefix='Chr' --dna_id_suffix='' --dna_no_seqdata --gene_type=gene --organism_genetic_code=1 --organism_mt_genetic_code=4 --use_cds_parent_ids --insert_missing_mrnas --insert_missing_exons --insert_polypeptides --inserted_polypeptide_id_type=CDS --default_seq_class=assembly --default_seq_attributes='SO:contig' --feat_attribute_mappings='Name:gene_product_name,comment:comment' --clone_feat_attribute_mappings='gene:gene_product_name:transcript,gene:gene_product_name:CDS' --feat_xref_mappings='ID:mydb:accession,Name:mydb:pub_locus' --clone_feat_xref_mappings='gene:NCBILocus:transcript,gene:NCBILocus:CDS' --seq_xref_mappings='ID:mydb:seq_id' --atts_with_unescaped_commas='ID,Name' --allow_genes_with_no_cds --sofa_type_mappings='transcript=>CDS,ORF=>gene' --log=/path/to/some.log --debug=4 --help --man ]",
+  "options": [
+    {
+      "long": "input,",
+      "short": null,
+      "description": "-g path to the input GFF file."
+    },
+    {
+      "long": "peptide_fasta,",
+      "short": null,
+      "description": "-e optional. path to a multi-FASTA file containing the polypeptides for the genes in the GFF file. if this argument is supplied then the named file _must_ contain all the sequences for the polypeptide/protein features in the input GFF file, _except_ those that appear in the ##FASTA section of the GFF file."
+    },
+    {
+      "long": "peptide_id_regex",
+      "short": null,
+      "description": "optional. regular expression used to parse peptide unique id from FASTA deflines in --peptide_fasta and the FASTA section of the GFF file itself. in the latter case, the regular expression must NOT match any non-peptide ids, otherwise --peptide_id_prefix and --peptide_id_suffix may be misapplied. default = ^>(\\S+)"
+    },
+    {
+      "long": "peptide_id_prefix",
+      "short": null,
+      "description": "optional. prefix to prepend to the id parsed by --peptide_id_regex to produce the polypeptide ID used by the corresponding GFF feature."
+    },
+    {
+      "long": "peptide_id_suffix",
+      "short": null,
+      "description": "optional. suffix to append to the id parsed by --peptide_id_regex to produce the polypeptide ID used by the corresponding GFF feature."
+    },
+    {
+      "long": "peptide_no_seqdata",
+      "short": null,
+      "description": "do not create Seq-data or Seq-data-import entries for the polypeptide sequences; use --peptide_fasta, if specified, only to determine the sequence length(s)."
+    },
+    {
+      "long": "dna_fasta",
+      "short": null,
+      "description": "optional. path to a multi-FASTA file containing the DNA sequences for the reference sequences in the GFF file. if this argument is supplied then the named file _must_ contain all of the sequences for the genomic sequence features in the input GFF file, _except_ those that appear in the ##FASTA section of the GFF file."
+    },
+    {
+      "long": "dna_id_regex",
+      "short": null,
+      "description": "optional. regular expression used to parse the sequence unique id from FASTA deflines in"
+    },
+    {
+      "long": "dna_fasta",
+      "short": null,
+      "description": "and the FASTA section of the GFF file itself. in the latter case, the regular expression must NOT match any non-peptide ids, otherwise --dna_id_prefix and --dna_id_suffix may be misapplied.. default = ^>(\\S+)"
+    },
+    {
+      "long": "dna_id_prefix",
+      "short": null,
+      "description": "optional. prefix to prepend to the id parsed by --dna_id_regex to produce the sequence ID used by the corresponding GFF feature."
+    },
+    {
+      "long": "dna_id_suffix",
+      "short": null,
+      "description": "optional. suffix to append to the id parsed by --dna_id_regex to produce the sequence ID used by the corresponding GFF feature."
+    },
+    {
+      "long": "dna_no_seqdata",
+      "short": null,
+      "description": "do not create Seq-data or Seq-data-import entries for the DNA/reference sequences; use --dna_fasta, if specified, or the sequences present in the GFF file, only to determine the sequence length(s)."
+    },
+    {
+      "long": "gene_type",
+      "short": null,
+      "description": "optional. specifies a SO type in the input GFF file that should be replaced with \"gene\". this can be used to handle nonstandard inputs in which, for example, the term \"match\" is used as the parent of one or more CDS features (e.g., as in GeneWise GFF output) Note that the SO types _are_ case-sensitive."
+    },
+    {
+      "long": "organism_genetic_code",
+      "short": null,
+      "description": "optional. specifies a genetic code value to appear in the BSML <Organism> element for --organism see http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=c#SG1 for values"
+    },
+    {
+      "long": "organism_mt_genetic_code",
+      "short": null,
+      "description": "optional. specifies a mitochondrial genetic code value to appear in the BSML <Organism> element for --organism. see http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=c#SG1 for values"
+    },
+    {
+      "long": "output,",
+      "short": null,
+      "description": "-o output BSML file (which should not exist before running the script.)"
+    },
+    {
+      "long": "project,",
+      "short": null,
+      "description": "-p project/database name used to create unique feature identifiers."
+    },
+    {
+      "long": "id_repository,",
+      "short": null,
+      "description": "-i path to the Ergatis project_id_repository for the current project."
+    },
+    {
+      "long": "organism,",
+      "short": null,
+      "description": "-r organism to place in the BSML <Genomes> section. the first word will be used as the BSML genus, and the rest of the string will be placed in the BSML species attribute."
+    },
+    {
+      "long": "use_cds_parent_ids,-c",
+      "short": null,
+      "description": "optional. whether to use the GFF parent id to identify CDS features that lack an ID of their own."
+    },
+    {
+      "long": "insert_missing_mrnas",
+      "short": null,
+      "description": "optional. automatically insert missing mRNA features wherever they are missing from the GFF (i.e., anytime a CDS feature is found hanging directly off a gene feature)"
+    },
+    {
+      "long": "insert_missing_exons",
+      "short": null,
+      "description": "optional. automatically inserts missing exon features in any gene model that does not have _any_ exons but does have CDS features. in this case a single exon will be created to exactly span each CDS."
+    },
+    {
+      "long": "insert_polypeptides",
+      "short": null,
+      "description": "optional. automatically inserts a polypeptide feature in any gene model that has one or more CDS features but no polypeptide feature."
+    },
+    {
+      "long": "inserted_polypeptide_id_type",
+      "short": null,
+      "description": "optional. specifies which feature ('CDS', 'gene', 'transcript', or 'mRNA') the newly-inserted polypeptide ids should be based on (default = 'gene') the id of the new polypeptide will be formed by taking the GFF id of the corresponding named feature and appending \"-Protein\" Note that \"transcript\" and \"mRNA\" are synonymous for the purposes of this option."
+    },
+    {
+      "long": "default_seq_class,-e",
+      "short": null,
+      "description": "optional. default sequence class/SO type (e.g., 'assembly', 'supercontig') to use for sequences for which the type cannot be parsed from the GFF file."
+    },
+    {
+      "long": "default_seq_attributes,-e",
+      "short": null,
+      "description": "optional. comma-delimited list of BSML attributes (in colon-delimited key:value form) to associate with each genomic sequence in the GFF file."
+    },
+    {
+      "long": "feat_attribute_mappings",
+      "short": null,
+      "description": "optional. a comma-delimited list of GFF attribute -> BSML Attribute mappings, each of which is defined by a source (GFF) attribute name and a target (BSML) attribute name, separated by a colon, for example \"Name:gene_product_name\" will take each BSML 'Name' value and insert it into the BSML document as an <Attribute> with name=\"Name\" and content=the corresponding GFF attribute value. Any embedded colons may be escaped with a backslash (\"\\:\")"
+    },
+    {
+      "long": "clone_feat_attribute_mappings",
+      "short": null,
+      "description": "optional. a comma-delimited list of colon-separated values. each member of the list is a colon- separated triplet that contains 1. a source SOFA type, 2. a BSML attribute name, and 3. a target SOFA type. e.g., \"gene:gene_product_name:CDS,gene:gene_product_name:transcript\" This particular example specifies that--within each gene model/feature group--any gene_product_name BSML Attributes attached to the gene feature will be copied over to the associated transcript and CDS features (without introducing duplicate attribute values). This cloning/copying is done _after_ any applicable"
+    },
+    {
+      "long": "feat_attribute_mappings",
+      "short": null,
+      "description": "have been processed for all of the involved features."
+    },
+    {
+      "long": "feat_xref_mappings,-x",
+      "short": null,
+      "description": "optional. a comma-delimited list of GFF attribute -> BSML Cross-reference mappings, each of which is defined by a set of 3 values separated by colons, as in 'ID:mydb:accession', which specifies that each BSML 'ID' value should be inserted into the BSML document as a <Cross-reference> element with database=\"mydb\" and identifier-type=\"accession\" (and identifier set to the ID value.) Any embedded colons may be escaped with a backslash (\"\\:\")"
+    },
+    {
+      "long": "clone_feat_xref_mappings",
+      "short": null,
+      "description": "optional. behaves similarly to --clone_feat_attribute_mappings, but copying BSML <Cross-references> instead of <Attributes>"
+    },
+    {
+      "long": "seq_xref_mappings",
+      "short": null,
+      "description": "optional. identical to --xref_mappings except that it defines cross-reference mappings for the reference _sequences_ in the GFF files (i.e., those things whose IDs appear in GFF column 1) in the case where the sequences are not themselves defined as GFF features the only attribute for which a mapping may be specified is 'ID'."
+    },
+    {
+      "long": "atts_with_unescaped_commas",
+      "short": null,
+      "description": "optional. a comma-delimited list of GFF3 attributes whose values (incorrectly) contain unescaped commas. instead of parsing these values as comma-delimited lists the program will treat each as a single value and will parse it as though the commas embedded in the value had been correctly URL-escaped."
+    },
+    {
+      "long": "allow_genes_with_no_cds",
+      "short": null,
+      "description": "optional. normally the script expects that any non-protein-coding gene will either: 1. be assigned an explicit SO type of 'pseudogene' instead of 'gene' or 2. have a non-coding RNA SO type at the transcript level (e.g., ncRNA, tRNA, etc.) therefore if the script is running with --insert_polypeptides and finds a gene for which neither of these things are true, it will fail with an error if the gene lacks a CDS. use this flag to permit the conversion to continue with a warning instead."
+    },
+    {
+      "long": "sofa_type_mappings",
+      "short": null,
+      "description": "optional. a comma-delimited list of SOFA id or name mappings, in the form id1=>id2 or name1=>name2. each occurrence of id1 or name1 in the GFF3 SOFA feature type column (GFF3 column #3) will be replaced by id2/name2 prior to performing any subsequent parsing. this option can be useful for making a GFF3 file more closely match the canonical gene encoding. for example, if a GFF3 file uses the term \"ORF\" instead of \"gene\" it can be rectified by specifying"
+    },
+    {
+      "long": "sofa_type_mappings='ORF=>gene'",
+      "short": null,
+      "description": "--log,-l optional. path to a log file the script should create. will be overwritten if it already exists."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "optional. the debug level for the logger (an integer)"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "print usage/help documentation"
+    },
+    {
+      "long": "man,-m",
+      "short": null,
+      "description": "print detailed usage/help documentation"
+    }
+  ],
+  "manpage": "gff2bsml.pl.1p"
+}

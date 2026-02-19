@@ -1,0 +1,44 @@
+{
+  "name": "fuzznuc2bsml",
+  "script": "fuzznuc2bsml.pl",
+  "description": "convert fuzznuc raw output to BSML",
+  "synopsis": "USAGE: fuzznuc2bsml.pl --input=/path/to/somefile.hmmpfam.raw --output=/path/to/somefile.hmmpfam.bsml --fasta_input=/path/to/hmmpfam/input.fsa --gzip_output=1 --log=/path/to/some.log --debug=4 --help ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input raw alignment file from an hmmpfam search."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "fasta_input,-f",
+      "short": null,
+      "description": "Optional. If included, will make a seq data import element and include the defline with the sequences."
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "Optional. If given a non-zero value, will compress the output and give the output file a .gz extension. If the file already contains one, it won't add another."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "fuzznuc2bsml.pl.1p"
+}

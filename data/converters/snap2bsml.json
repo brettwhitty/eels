@@ -1,0 +1,44 @@
+{
+  "name": "snap2bsml",
+  "script": "snap2bsml.pl",
+  "description": "convert snap ZFF output to BSML",
+  "synopsis": "USAGE: snap2bsml.pl --input=/path/to/snap.output.file.raw --output=/path/to/output.bsml [ --project=aa1 --fasta_file=/path/to/somefile.fsa ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file from a snap search."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "fasta_file,-f",
+      "short": null,
+      "description": "If passed, will create a Seq-data-import element referencing this path."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids. Defaults to 'unknown' if not passed."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "snap2bsml.pl.1p"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "findhomopolymers2bsml",
+  "script": "findhomopolymers2bsml.pl",
+  "description": "convert findhomopolymers output to BSML",
+  "synopsis": "USAGE: findhomopolymers2bsml.pl --input=/path/to/somefile.out --output=/path/to/output.bsml [ --project=aa1 ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input .out file from a Findhomopolymers search."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, or overwritten)"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids. Defaults to whatever the prefix of the input file is (i.e. spntigr4.assembly.1.1 would be spntigr4)."
+    },
+    {
+      "long": "id_repository,-r",
+      "short": null,
+      "description": "Required for creating feature identifiers. Each project should have its own id_repository directory - use the full path to it here."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "findhomopolymers2bsml.pl.1p"
+}

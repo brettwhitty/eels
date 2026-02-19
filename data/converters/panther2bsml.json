@@ -1,0 +1,44 @@
+{
+  "name": "panther2bsml",
+  "script": "panther2bsml.pl",
+  "description": "convert panther raw output to BSML",
+  "synopsis": "USAGE: panther2bsml.pl --input=/path/to/somefile.panther.raw --output=/path/to/somefile.panther.bsml --query_file_path=/path/to/query.fasta.fsa --gzip_output=1 [ --log=/path/to/some.log --debug=4 --help ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input raw alignment file from an panther search."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "query_file_path,-q",
+      "short": null,
+      "description": "Full path to query sequence file used for Panther run."
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "A non-zero will result in compressed bsml output. If there is not a .gz extension on the output file name, one will be added."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "panther2bsml.pl.1p"
+}

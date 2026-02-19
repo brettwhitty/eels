@@ -1,0 +1,74 @@
+{
+  "name": "infernal2bsml",
+  "script": "infernal2bsml.pl",
+  "description": "Turns infernal raw output into bsml.",
+  "synopsis": "USAGE: template.pl --input_file=/path/to/some/transterm.raw --output=/path/to/transterm.bsml --project=aa1 --id_repository=/some/id_repository/dir --query_file_path=/input/file.fsa --gzip_output=1 [ --infernal_v1 --annot_bsml_list=/path/to/annot_bsml.list --stockholm_path=/path/to/stockholm/files --default_type=ncRNA --log=/path/to/file.log --debug=4 --help ]",
+  "options": [
+    {
+      "long": "input_file,-i",
+      "short": null,
+      "description": "The table output from Infernal's 'cmsearch' run."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Where the output bsml file should be"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "[DEPRECATED] The script will parse the project from the sequence id. Used in id generation. It's the first token in the id. (Ex. project.class.number.version)"
+    },
+    {
+      "long": "id_repository,-r",
+      "short": null,
+      "description": "Used to make the ids (See Ergatis::IdGenerator for details)"
+    },
+    {
+      "long": "query_file_path,-q",
+      "short": null,
+      "description": "Path to the query file (input fasta file) for infernal."
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "A non-zero value will result in compressed bsml output. If no .gz is on the end of the bsml output name, one will be added."
+    },
+    {
+      "long": "infernal_v1,-v1",
+      "short": null,
+      "description": "Whether or not to expect infernal 1.0 or later output. If left off then the assumption is that the input is pre-infernal 1.0"
+    },
+    {
+      "long": "annot_bsml_list,-v1",
+      "short": null,
+      "description": "A list file containing the existing annotation bsml. This will activate the appending of the genome tag to the output bsml."
+    },
+    {
+      "long": "stockholm_path,-sp",
+      "short": null,
+      "description": "The path to the stockholm files that contain the alignments for the Rfam CMs. This is required if you want a good type to be assigned to your hits. Can be a directory with the CM IDs in the file names, or a file with all CMs."
+    },
+    {
+      "long": "default_type,-dt",
+      "short": null,
+      "description": "The default SO type to be assigned to either all hits or only those hits that don't have a valid SO mapping in their stockholm file (if --stockholm_path is specified)."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "In case you wanted a log file."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "There are no debug statements in this program. Sorry."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "Displays this message."
+    }
+  ],
+  "manpage": "infernal2bsml.pl.1p"
+}

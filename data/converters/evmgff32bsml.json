@@ -1,0 +1,29 @@
+{
+  "name": "evmgff32bsml",
+  "script": "evmgff32bsml.pl",
+  "description": "",
+  "synopsis": "USAGE: evmgff32bsml.pl --input|-i --output|-o --project|-p --help|-h",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input gff3 format file created by EVM."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file name."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project/database name used to create feature identifiers."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help documentation"
+    }
+  ],
+  "manpage": "evmgff32bsml.pl.1p"
+}

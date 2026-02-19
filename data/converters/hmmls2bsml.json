@@ -1,0 +1,69 @@
+{
+  "name": "hmmls2bsml",
+  "script": "hmmls2bsml.pl",
+  "description": "convert hmmpfam raw output to BSML",
+  "synopsis": "USAGE: hmmls2bsml.pl --input=/path/to/somefile.hmmls.raw --output=/path/to/somefile.hmmls.bsml --model_name=boxA_repeat [ --search_method=hmmls --query_mol_type=aa --query_mol_class=polypeptide --model_mol_type=aa --model_mol_class=polypeptide --fasta_input=/path/to/hmmls/input.fsa --gzip_output=1 --log=/path/to/some.log --debug=4 --help ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input raw alignment file from an hmmls search."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file"
+    },
+    {
+      "long": "model_name,-m",
+      "short": null,
+      "description": "Uniquename of the model searched."
+    },
+    {
+      "long": "query_mol_type,-qt",
+      "short": null,
+      "description": "Query molecule type (like 'aa' or 'dna')."
+    },
+    {
+      "long": "query_mol_class,-qc",
+      "short": null,
+      "description": "Query molecule type (like 'polypeptide' or 'DNA')."
+    },
+    {
+      "long": "model_mol_type,-mt",
+      "short": null,
+      "description": "Model molecule type (like 'aa' or 'dna')."
+    },
+    {
+      "long": "model_mol_class,-mc",
+      "short": null,
+      "description": "Query molecule type (like 'polypeptide' or 'DNA')."
+    },
+    {
+      "long": "fasta_input,-f",
+      "short": null,
+      "description": "Optional. If included, will make a seq data import element and include the defline with the sequences."
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "Optional. If given a non-zero value, will compress the output and give the output file a .gz extension. If the file already contains one, it won't add another."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "hmmls2bsml.pl.1p"
+}

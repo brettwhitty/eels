@@ -1,0 +1,54 @@
+{
+  "name": "lipop2bsml",
+  "script": "lipop2bsml.pl",
+  "description": "Takes raw lipop output (short) and prints to bsml",
+  "synopsis": "USAGE: lipop2bsml.pl --input_file=/path/to/some/lipop.raw --input_fasta=/path/to/polypeptide.fsa --id_repository=/path/to/valid_id_repo/ --project=db1 --output=/path/to/lipop.bsml [ --analysis_id=lipoP_analysis --sourcename=/path/to/all_output_dir --log=/path/to/file.log --debug=4 --help ]",
+  "options": [
+    {
+      "long": "input_file,-i",
+      "short": null,
+      "description": "Raw output from a LipoP run (using the -short option)"
+    },
+    {
+      "long": "input_fasta,-f",
+      "short": null,
+      "description": "The input fasta file used to generate the lipop output"
+    },
+    {
+      "long": "id_repository,-d",
+      "short": null,
+      "description": "A valid id repository (used for Ergatis::IdGenerator)"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "The project (database name). Used in id generation"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Path to the output bsml file"
+    },
+    {
+      "long": "analysis_id,-a",
+      "short": null,
+      "description": "Optional. Default = lipoP_analysis"
+    },
+    {
+      "long": "sourcename,-s",
+      "short": null,
+      "description": "Optional. Path to where the output for the analysis was located (raw output). Default is parse the directory from the input_file (and traverse 2 dirs up)"
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Logfile."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "Print this message"
+    }
+  ],
+  "manpage": "lipop2bsml.pl.1p"
+}

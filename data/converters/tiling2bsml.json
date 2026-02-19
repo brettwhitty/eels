@@ -1,0 +1,19 @@
+{
+  "name": "tiling2bsml",
+  "script": "tiling2bsml.pl",
+  "description": "convert show_tiling output into BSML sequence mapping documents",
+  "synopsis": "USAGE: tiling2bsml.pl -t tilings_file -b path_to_bsml_repository -o output_file_bsml",
+  "options": [
+    {
+      "long": "tilingPath,-t",
+      "short": null,
+      "description": "[REQUIRED] file containing tiling path data from show_tiling \u2022 --bsml_repository,-b [REQUIRED] filepath to the bsml repository"
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "[OPTIONAL] a non-zero value will result in compressed bsml output \u2022 --output,-o [REQUIRED] output BSML file containing coverage information \u2022 --help,-h This help message"
+    }
+  ],
+  "manpage": "tiling2bsml.pl.1p"
+}

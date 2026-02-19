@@ -1,0 +1,14 @@
+{
+  "name": "analysis2bsml",
+  "script": "analysis2bsml.pl",
+  "description": "add analysis parameters to a BSML result doc",
+  "synopsis": "USAGE: analysis2bsml.pl --bsml_file=/path/to/some/output.bsml --conf=/path/to/some/pipeline.config [ --ergatis_control_file=/path/to/ergatis_install.ini ] [ --componenturl=/path/to/some/pipeline.xml ] [ --pipelineurl=/path/to/some/pipeline0.xml ] [ --debug debug_level ] [ --log log_file ] [ --analysis_id=some_id ]",
+  "options": [
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging. \u2022 --analysis_id,-a Analysis id (optional). If given, will be the id attribute for the Analysis element created or appended to. If the value 'first' is passed, the first Analysis element will be used. If not given, the Analysis element will be created with no id attribute. \u2022 --log,-l Log file \u2022 --help,-h This help message \u2022 --ergatis_control_file,-e Control file defining software versions for ergatis install. \u2022 --componenturl,-u Stores component url in <Analysis> \u2022 --pipelineurl,-p Store pipeline.xml url in <Analysis>"
+    }
+  ],
+  "manpage": "analysis2bsml.pl.1p"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "trf2bsml",
+  "script": "trf2bsml.pl",
+  "description": "convert Tandem Repeat Finder (trf) output to BSML",
+  "synopsis": "USAGE: trf2bsml.pl --input=/path/to/somefile.dat --output=/path/to/output.bsml --id_repository=/path/to/valid/id_repository [--fasta_input=/path/to/trf/input.fsa --gzip_output=1 --project=aa1 ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input .dat file from a RepeatMasker search."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids. Defaults to 'unknown' if not passed and is unable to parse from input file name."
+    },
+    {
+      "long": "id_repository",
+      "short": null,
+      "description": "Used in the generation of ids."
+    },
+    {
+      "long": "gzip_output,-g",
+      "short": null,
+      "description": "[OPTIONAL] A non-zero value will result in compressed bsml output. If there is no .gz extension on the output file name, one will be added."
+    },
+    {
+      "long": "fasta_input,-f",
+      "short": null,
+      "description": "[OPTIONAL] The file used as input for the trf run."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "trf2bsml.pl.1p"
+}

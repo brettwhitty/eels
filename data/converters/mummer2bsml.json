@@ -1,0 +1,14 @@
+{
+  "name": "mummer2bsml",
+  "script": "mummer2bsml.pl",
+  "description": "convert info stored in mummer coord files into BSML documents",
+  "synopsis": "USAGE: mummer2bsml.pl -m mummer_coord.txt -o nucmer.bsml -t 1",
+  "options": [
+    {
+      "long": "mummer_coords,-m",
+      "short": null,
+      "description": "[REQUIRED] mummer coordinate file \u2022 --output,-o [REQUIRED] output BSML file containing mummer coordinate information \u2022 --mummer_type,-t [REQUIRED] Type of mummer files: 1 = full promer coords, 2 = collapsed promer coords, 3 = collapsed nucmer coords \u2022 --debug,-d Debug level. Use a large number to turn on verbose debugging. \u2022 --log,-l Log file \u2022 --class,-c ref/comp sequence class type. Default class is 'assembly' \u2022 --help,-h This help message"
+    }
+  ],
+  "manpage": "mummer2bsml.pl.1p"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "tcov2bsml",
+  "script": "tcov2bsml.pl",
+  "description": "convert tcov files into BSML documents",
+  "synopsis": "USAGE: tcov2bsml.pl -t tcov_file -b bsml_repository_path -o output_file_bsml -d database -a assembly_id",
+  "options": [
+    {
+      "long": "tcov,-t",
+      "short": null,
+      "description": "[REQUIRED] file containing tcov data \u2022 --output,-o [REQUIRED] output BSML file containing coverage information \u2022 --bsml_repository,-b [REQUIRED] filepath to the bsml repository \u2022 --chunk_size,-c [OPTIONAL] optional chunk size (default is 1000 bases) \u2022 --help,-h This help message"
+    }
+  ],
+  "manpage": "tcov2bsml.pl.1p"
+}

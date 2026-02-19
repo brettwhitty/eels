@@ -1,0 +1,39 @@
+{
+  "name": "mreps2bsml",
+  "script": "mreps2bsml.pl",
+  "description": "convert mreps output to BSML",
+  "synopsis": "USAGE: mreps2bsml.pl --input=/path/to/somefile.dat --output=/path/to/output.bsml [ --project=aa1 ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input .raw file from an mreps search."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids. Defaults to 'unknown' if not passed."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "mreps2bsml.pl.1p"
+}

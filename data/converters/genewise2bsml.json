@@ -1,0 +1,44 @@
+{
+  "name": "genewise2bsml",
+  "script": "genewise2bsml.pl",
+  "description": "",
+  "synopsis": "USAGE: genewise2bsml.pl --input_file|-i --input_seq|-s --output|-o --project|-p --id_repository|r --help|-h --log|-l",
+  "options": [
+    {
+      "long": "input_file,-i",
+      "short": null,
+      "description": "Input is a genewise raw file."
+    },
+    {
+      "long": "input_seq,-s",
+      "short": null,
+      "description": "File used as input to genewise and containing the genomic fasta sequence."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file name."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project/database name used to create feature identifiers."
+    },
+    {
+      "long": "id_repository,-r",
+      "short": null,
+      "description": "Path to the id repository for the named project."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help documentation"
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Path to intended log file."
+    }
+  ],
+  "manpage": "genewise2bsml.pl.1p"
+}

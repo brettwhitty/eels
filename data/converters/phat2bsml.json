@@ -1,0 +1,44 @@
+{
+  "name": "phat2bsml",
+  "script": "phat2bsml.pl",
+  "description": "convert phat GFF output to BSML",
+  "synopsis": "USAGE: phat2bsml.pl --input=/path/to/phat.output.file.gff --output=/path/to/output.bsml [ --project=aa1 ]",
+  "options": [
+    {
+      "long": "input,-i",
+      "short": null,
+      "description": "Input file from a phat scan."
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids. Defaults to 'unknown' if not passed."
+    },
+    {
+      "long": "command_id",
+      "short": null,
+      "description": "This is passed automatically by workflow and is used in creating unique feature IDs. It represents the command ID of the phat2bsml step withing the phat workflow component."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "phat2bsml.pl.1p"
+}

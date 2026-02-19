@@ -1,0 +1,59 @@
+{
+  "name": "twinscan2bsml",
+  "script": "twinscan2bsml.pl",
+  "description": "convert twinscan GTF output to BSML",
+  "synopsis": "USAGE: twinscan2bsml.pl --input_file=/path/to/twinscan.raw.file --output=/path/to/output.bsml --project=aa1 --fasta_input=/path/to/somefile.fsa --id_repository=/path/to/repository --sourcename=sourcename --programversion='current'",
+  "options": [
+    {
+      "long": "input_file,-f",
+      "short": null,
+      "description": "Input file file from a twinscan run. -i, --input_list, will take in a list of input files, all of which will be stored in a single output bsml."
+    },
+    {
+      "long": "output,-o",
+      "short": null,
+      "description": "Output BSML file (will be created, must not exist)"
+    },
+    {
+      "long": "project,-p",
+      "short": null,
+      "description": "Project ID. Used in creating feature ids."
+    },
+    {
+      "long": "fasta_input,-a",
+      "short": null,
+      "description": "Needed to create a Seq-data-import element referencing this path."
+    },
+    {
+      "long": "id_repository,-r",
+      "short": null,
+      "description": "path to --project's id_repository"
+    },
+    {
+      "long": "programversion,-v",
+      "short": null,
+      "description": "Version string to be used as value for the analysis attribute 'programversion'"
+    },
+    {
+      "long": "sourcename,-s",
+      "short": null,
+      "description": "Sourcename string to be used as value for the analysis attribute 'sourcename' Due to a silly hack in analysis2bsml.pl, you might need to put /dummy/dir at the end of it."
+    },
+    {
+      "long": "log,-l",
+      "short": null,
+      "description": "Log file"
+    },
+    {
+      "long": "debug,-d",
+      "short": null,
+      "description": "Debug level. Use a large number to turn on verbose debugging."
+    },
+    {
+      "long": "help,-h",
+      "short": null,
+      "description": "This help message"
+    }
+  ],
+  "manpage": "twinscan2bsml.pl.1p"
+}
