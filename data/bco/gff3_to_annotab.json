@@ -1,0 +1,63 @@
+{
+  "object_id": "https://example.org/bco/ergatis/gff3_to_annotab",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis gff3_to_annotab Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.206518",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "file / conversion component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "file",
+      "conversion"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "gff3_to_annotab",
+        "description": "Execute gff3_to_annotab",
+        "version": "unknown",
+        "prerequisite": []
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/gff3_to_annotab"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.annotab_output_list"
+        }
+      }
+    ]
+  }
+}

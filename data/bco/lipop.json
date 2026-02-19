@@ -1,0 +1,95 @@
+{
+  "object_id": "https://example.org/bco/ergatis/lipop",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis lipop Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.214031",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "functional prediction component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "functional prediction"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "lipop",
+        "description": "Execute lipop",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "dtd validation",
+        "description": "Execute dtd validation",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "lipop2bsml",
+        "description": "Convert using lipop2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "analysis2bsml",
+        "description": "Convert using analysis2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/lipop"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.raw_output_list"
+        }
+      },
+      {
+        "mediatype": "application/xml",
+        "uri": {
+          "filename": "output.bsml_output_list"
+        }
+      }
+    ]
+  }
+}

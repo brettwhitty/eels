@@ -1,0 +1,96 @@
+{
+  "object_id": "https://example.org/bco/ergatis/tRNAscan-SE_compress",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis tRNAscan-SE_compress Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.248043",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "feature prediction / tRNAs component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "feature prediction",
+      "tRNAs"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "tRNAscan-SE_compress",
+        "description": "Execute tRNAscan-SE_compress",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "dtd validation",
+        "description": "Execute dtd validation",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "tRNAscan-SE2bsml",
+        "description": "Convert using tRNAscan-SE2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "analysis2bsml",
+        "description": "Convert using analysis2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/tRNAscan-SE_compress"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "application/xml",
+        "uri": {
+          "filename": "output.bsml_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.raw_output_list"
+        }
+      }
+    ]
+  }
+}

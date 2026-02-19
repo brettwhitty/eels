@@ -1,0 +1,69 @@
+{
+  "object_id": "https://example.org/bco/ergatis/open_reading_frames",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis open_reading_frames Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.225849",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "feature prediction / ORFs component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "feature prediction",
+      "ORFs"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "open_reading_frames",
+        "description": "Execute open_reading_frames",
+        "version": "unknown",
+        "prerequisite": []
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/open_reading_frames"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.fna_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.faa_output_list"
+        }
+      }
+    ]
+  }
+}

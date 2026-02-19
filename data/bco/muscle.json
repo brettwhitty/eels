@@ -1,0 +1,123 @@
+{
+  "object_id": "https://example.org/bco/ergatis/muscle",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis muscle Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.222204",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "alignment / multiple component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "alignment",
+      "multiple"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "create output directory",
+        "description": "Execute create output directory",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "relocate query file",
+        "description": "Execute relocate query file",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "muscle",
+        "description": "Execute muscle",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "validate muscle output",
+        "description": "Execute validate muscle output",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      },
+      {
+        "step_number": 5,
+        "name": "dtd validation",
+        "description": "Execute dtd validation",
+        "version": "unknown",
+        "prerequisite": [
+          4
+        ]
+      },
+      {
+        "step_number": 6,
+        "name": "MSF2Bsml",
+        "description": "Convert using MSF2Bsml",
+        "version": "unknown",
+        "prerequisite": [
+          5
+        ]
+      },
+      {
+        "step_number": 7,
+        "name": "analysis2bsml",
+        "description": "Convert using analysis2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          6
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/muscle"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "application/xml",
+        "uri": {
+          "filename": "output.bsml_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.raw_output_list"
+        }
+      }
+    ]
+  }
+}

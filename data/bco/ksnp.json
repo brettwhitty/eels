@@ -1,0 +1,143 @@
+{
+  "object_id": "https://example.org/bco/ergatis/ksnp",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis ksnp Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.211901",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "SNP component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "SNP"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "create output directory",
+        "description": "Execute create output directory",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "merge contigs",
+        "description": "Execute merge contigs",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "parse reference fasta header",
+        "description": "Execute parse reference fasta header",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "merge input and reference",
+        "description": "Execute merge input and reference",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      },
+      {
+        "step_number": 5,
+        "name": "ksnp",
+        "description": "Execute ksnp",
+        "version": "unknown",
+        "prerequisite": [
+          4
+        ]
+      },
+      {
+        "step_number": 6,
+        "name": "create raw output",
+        "description": "Execute create raw output",
+        "version": "unknown",
+        "prerequisite": [
+          5
+        ]
+      },
+      {
+        "step_number": 7,
+        "name": "convert ksnp to nucmer output",
+        "description": "Execute convert ksnp to nucmer output",
+        "version": "unknown",
+        "prerequisite": [
+          6
+        ]
+      },
+      {
+        "step_number": 8,
+        "name": "convert nucmer output to snp add gene info",
+        "description": "Execute convert nucmer output to snp add gene info",
+        "version": "unknown",
+        "prerequisite": [
+          7
+        ]
+      },
+      {
+        "step_number": 9,
+        "name": "remove temp dir",
+        "description": "Execute remove temp dir",
+        "version": "unknown",
+        "prerequisite": [
+          8
+        ]
+      },
+      {
+        "step_number": 10,
+        "name": "remove fsplit dir",
+        "description": "Execute remove fsplit dir",
+        "version": "unknown",
+        "prerequisite": [
+          9
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/ksnp"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.raw_output_list"
+        }
+      }
+    ]
+  }
+}

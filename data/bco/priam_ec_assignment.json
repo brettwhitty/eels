@@ -1,0 +1,80 @@
+{
+  "object_id": "https://example.org/bco/ergatis/priam_ec_assignment",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis priam_ec_assignment Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.233757",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "functional prediction component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "functional prediction"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "priam_ec_assignment",
+        "description": "Execute priam_ec_assignment",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "dtd validation",
+        "description": "Execute dtd validation",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "analysis2bsml",
+        "description": "Convert using analysis2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/priam_ec_assignment"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "application/xml",
+        "uri": {
+          "filename": "output.bsml_output_list"
+        }
+      }
+    ]
+  }
+}

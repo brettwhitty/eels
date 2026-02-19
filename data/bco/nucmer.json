@@ -1,0 +1,82 @@
+{
+  "object_id": "https://example.org/bco/ergatis/nucmer",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis nucmer Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.225172",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "alignment component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "alignment"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "create group temp folder",
+        "description": "Execute create group temp folder",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "create group output folder",
+        "description": "Execute create group output folder",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "nucmer",
+        "description": "Execute nucmer",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "create coordinates file",
+        "description": "Execute create coordinates file",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/nucmer"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": []
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "object_id": "https://example.org/bco/ergatis/aat_aa_masked",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis aat_aa_masked Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.177514",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "alignment / pairwise component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "alignment",
+      "pairwise"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "dps",
+        "description": "Execute dps",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "ext",
+        "description": "Execute ext",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "ext collapse",
+        "description": "Execute ext collapse",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "filter",
+        "description": "Execute filter",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      },
+      {
+        "step_number": 5,
+        "name": "relocate query seq",
+        "description": "Execute relocate query seq",
+        "version": "unknown",
+        "prerequisite": [
+          4
+        ]
+      },
+      {
+        "step_number": 6,
+        "name": "nap",
+        "description": "Execute nap",
+        "version": "unknown",
+        "prerequisite": [
+          5
+        ]
+      },
+      {
+        "step_number": 7,
+        "name": "remove temp query seq",
+        "description": "Execute remove temp query seq",
+        "version": "unknown",
+        "prerequisite": [
+          6
+        ]
+      },
+      {
+        "step_number": 8,
+        "name": "remove raw dps output",
+        "description": "Execute remove raw dps output",
+        "version": "unknown",
+        "prerequisite": [
+          7
+        ]
+      },
+      {
+        "step_number": 9,
+        "name": "remove raw ext output",
+        "description": "Execute remove raw ext output",
+        "version": "unknown",
+        "prerequisite": [
+          8
+        ]
+      },
+      {
+        "step_number": 10,
+        "name": "remove raw ext collapsed output",
+        "description": "Execute remove raw ext collapsed output",
+        "version": "unknown",
+        "prerequisite": [
+          9
+        ]
+      },
+      {
+        "step_number": 11,
+        "name": "remove raw filter output",
+        "description": "Execute remove raw filter output",
+        "version": "unknown",
+        "prerequisite": [
+          10
+        ]
+      },
+      {
+        "step_number": 12,
+        "name": "ensure btab existence",
+        "description": "Execute ensure btab existence",
+        "version": "unknown",
+        "prerequisite": [
+          11
+        ]
+      },
+      {
+        "step_number": 13,
+        "name": "relocate btab",
+        "description": "Execute relocate btab",
+        "version": "unknown",
+        "prerequisite": [
+          12
+        ]
+      },
+      {
+        "step_number": 14,
+        "name": "dtd validation",
+        "description": "Execute dtd validation",
+        "version": "unknown",
+        "prerequisite": [
+          13
+        ]
+      },
+      {
+        "step_number": 15,
+        "name": "nap2bsml",
+        "description": "Convert using nap2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          14
+        ]
+      },
+      {
+        "step_number": 16,
+        "name": "analysis2bsml",
+        "description": "Convert using analysis2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          15
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/aat_aa_masked"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "application/xml",
+        "uri": {
+          "filename": "output.bsml_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.btab_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.nap_output_list"
+        }
+      }
+    ]
+  }
+}

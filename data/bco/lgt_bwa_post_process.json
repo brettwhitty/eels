@@ -1,0 +1,78 @@
+{
+  "object_id": "https://example.org/bco/ergatis/lgt_bwa_post_process",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis lgt_bwa_post_process Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.213372",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "LGT component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "LGT"
+    ],
+    "pipeline_steps": []
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/lgt_bwa_post_process"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.mb_bam_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.lgt_h_bam_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.single_bam_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.no_map_bam_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.single_paired_bam_output_list"
+        }
+      }
+    ]
+  }
+}

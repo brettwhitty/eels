@@ -1,0 +1,146 @@
+{
+  "object_id": "https://example.org/bco/ergatis/velvet",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis velvet Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.253714",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "assembly component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "assembly"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "create velveth temp directory",
+        "description": "Execute create velveth temp directory",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "create velvetg temp directory",
+        "description": "Execute create velvetg temp directory",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "velveth",
+        "description": "Execute velveth",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "velveth post-processing",
+        "description": "Execute velveth post-processing",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      },
+      {
+        "step_number": 5,
+        "name": "velvetg pre-processing",
+        "description": "Execute velvetg pre-processing",
+        "version": "unknown",
+        "prerequisite": [
+          4
+        ]
+      },
+      {
+        "step_number": 6,
+        "name": "velvetg",
+        "description": "Execute velvetg",
+        "version": "unknown",
+        "prerequisite": [
+          5
+        ]
+      },
+      {
+        "step_number": 7,
+        "name": "velvetg post-processing",
+        "description": "Execute velvetg post-processing",
+        "version": "unknown",
+        "prerequisite": [
+          6
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/velvet"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.sequence_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.roadmap_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.contig_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.stats_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.graph_output_list"
+        }
+      },
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.amos_output_list"
+        }
+      }
+    ]
+  }
+}

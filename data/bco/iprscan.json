@@ -1,0 +1,195 @@
+{
+  "object_id": "https://example.org/bco/ergatis/iprscan",
+  "spec_version": "1.4.0",
+  "etag": "generated",
+  "provenance_domain": {
+    "name": "Ergatis iprscan Component",
+    "version": "1.0",
+    "created": "2003-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:19:43.210867",
+    "contributors": [
+      {
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
+        "contribution": [
+          "createdBy",
+          "authoredBy"
+        ]
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "alignment / model component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+  ],
+  "description_domain": {
+    "keywords": [
+      "alignment",
+      "model"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "blastprodom",
+        "description": "Execute blastprodom",
+        "version": "unknown",
+        "prerequisite": []
+      },
+      {
+        "step_number": 2,
+        "name": "coils",
+        "description": "Execute coils",
+        "version": "unknown",
+        "prerequisite": [
+          1
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "hmmpir",
+        "description": "Execute hmmpir",
+        "version": "unknown",
+        "prerequisite": [
+          2
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "hmmpfam",
+        "description": "Execute hmmpfam",
+        "version": "unknown",
+        "prerequisite": [
+          3
+        ]
+      },
+      {
+        "step_number": 5,
+        "name": "hmmsmart",
+        "description": "Execute hmmsmart",
+        "version": "unknown",
+        "prerequisite": [
+          4
+        ]
+      },
+      {
+        "step_number": 6,
+        "name": "hmmtigr",
+        "description": "Execute hmmtigr",
+        "version": "unknown",
+        "prerequisite": [
+          5
+        ]
+      },
+      {
+        "step_number": 7,
+        "name": "fprintscan",
+        "description": "Execute fprintscan",
+        "version": "unknown",
+        "prerequisite": [
+          6
+        ]
+      },
+      {
+        "step_number": 8,
+        "name": "scanregexp",
+        "description": "Execute scanregexp",
+        "version": "unknown",
+        "prerequisite": [
+          7
+        ]
+      },
+      {
+        "step_number": 9,
+        "name": "profilescan",
+        "description": "Execute profilescan",
+        "version": "unknown",
+        "prerequisite": [
+          8
+        ]
+      },
+      {
+        "step_number": 10,
+        "name": "superfamily",
+        "description": "Execute superfamily",
+        "version": "unknown",
+        "prerequisite": [
+          9
+        ]
+      },
+      {
+        "step_number": 11,
+        "name": "seg",
+        "description": "Execute seg",
+        "version": "unknown",
+        "prerequisite": [
+          10
+        ]
+      },
+      {
+        "step_number": 12,
+        "name": "combine raw output",
+        "description": "Execute combine raw output",
+        "version": "unknown",
+        "prerequisite": [
+          11
+        ]
+      },
+      {
+        "step_number": 13,
+        "name": "dtd validation",
+        "description": "Execute dtd validation",
+        "version": "unknown",
+        "prerequisite": [
+          12
+        ]
+      },
+      {
+        "step_number": 14,
+        "name": "iprscan2bsml",
+        "description": "Convert using iprscan2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          13
+        ]
+      },
+      {
+        "step_number": 15,
+        "name": "analysis2bsml",
+        "description": "Convert using analysis2bsml",
+        "version": "unknown",
+        "prerequisite": [
+          14
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "ergatis://component/iprscan"
+      }
+    ],
+    "script_driver": "TIGR Workflow Engine",
+    "software_prerequisites": [],
+    "environment_variables": {}
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": [
+      {
+        "mediatype": "text/plain",
+        "uri": {
+          "filename": "output.raw_output_list"
+        }
+      },
+      {
+        "mediatype": "application/xml",
+        "uri": {
+          "filename": "output.bsml_output_list"
+        }
+      }
+    ]
+  }
+}

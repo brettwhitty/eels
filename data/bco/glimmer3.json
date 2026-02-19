@@ -6,7 +6,7 @@
     "name": "Ergatis glimmer3 Component",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:03:11.361418",
+    "modified": "2026-02-19T01:19:43.207338",
     "contributors": [
       {
         "name": "TIGR/JCVI/IGS Bioinformatics Team",
@@ -20,8 +20,8 @@
     "license": "Artistic-2.0"
   },
   "usability_domain": [
-    "feature prediction / genes component from Ergatis workflow system",
-    "Production-grade genome annotation component from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "feature prediction / genes component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
   ],
   "description_domain": {
     "keywords": [
@@ -48,7 +48,7 @@
       {
         "step_number": 3,
         "name": "glimmer32bsml",
-        "description": "Convert output using glimmer32bsml",
+        "description": "Convert using glimmer32bsml",
         "version": "unknown",
         "prerequisite": [
           2
@@ -57,7 +57,7 @@
       {
         "step_number": 4,
         "name": "analysis2bsml",
-        "description": "Convert output using analysis2bsml",
+        "description": "Convert using analysis2bsml",
         "version": "unknown",
         "prerequisite": [
           3

@@ -6,7 +6,7 @@
     "name": "Ergatis aragorn Component",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:03:11.362018",
+    "modified": "2026-02-19T01:19:43.179974",
     "contributors": [
       {
         "name": "TIGR/JCVI/IGS Bioinformatics Team",
@@ -20,8 +20,8 @@
     "license": "Artistic-2.0"
   },
   "usability_domain": [
-    " component from Ergatis workflow system",
-    "Production-grade genome annotation component from TIGR/JCVI/IGS Gold-Standard pipelines"
+    " component",
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
   ],
   "description_domain": {
     "keywords": [],
@@ -45,7 +45,7 @@
       {
         "step_number": 3,
         "name": "aragorn2bsml",
-        "description": "Convert output using aragorn2bsml",
+        "description": "Convert using aragorn2bsml",
         "version": "unknown",
         "prerequisite": [
           2
@@ -54,7 +54,7 @@
       {
         "step_number": 4,
         "name": "analysis2bsml",
-        "description": "Convert output using analysis2bsml",
+        "description": "Convert using analysis2bsml",
         "version": "unknown",
         "prerequisite": [
           3
