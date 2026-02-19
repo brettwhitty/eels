@@ -25,6 +25,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - Perl scripting for tool wrappers and converters
 - No proprietary languages or complex frameworks required
 - Bioinformaticians could create custom components for new tools and analyses
+- **Available and production-ready in 2006** - downloadable, installable, usable system with complete documentation
 
 **Advanced Features Preserved:**
 - **Hierarchical composition** - Workflows compose components (subworkflows), components compose tools
