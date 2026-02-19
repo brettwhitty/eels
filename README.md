@@ -10,13 +10,15 @@ Extract and preserve 20+ years of production genomics annotation knowledge encod
 
 ## What is Ergatis?
 
-Ergatis is a web-based utility for creating, running, and monitoring reusable computational analysis pipelines. It contains pre-built components for common bioinformatics analysis tasks that can be arranged graphically to form highly-configurable pipelines. Each component supports multiple output formats, including BSML (Bioinformatic Sequence Markup Language), with support for data loading into Chado-schema project databases.
+Ergatis is a web-based utility for creating, running, and monitoring reusable computational analysis pipelines. It contains pre-built components for common bioinformatics analysis tasks that can be arranged graphically to form highly-configurable pipelines.
 
-Ergatis uses the Workflow engine to process work on a compute grid, providing an XML language for specifying pipeline steps with detailed execution status, logging, error recovery from point of failure, and support for distributed computing. Commands can be run serially, in parallel, and in any combination or nesting level.
+- Orvis J, et al. *Bioinformatics*. 2010 Jun 15;26(12). https://ergatis.sourceforge.net/
 
-**Citation:** Orvis J, Crabtree J, Galens K, Gussman A, Inman JM, Lee E, Nampally S, Riley D, Sundaram JP, Felix V, Whitty B, Mahurkar A, Wortman J, White O, Angiuoli SV. Ergatis: A web interface and scalable software system for bioinformatics workflows. *Bioinformatics*. 2010 Jun 15;26(12).
+## What is EELS preserving?
 
-**Website:** https://ergatis.sourceforge.net/
+The components, converters, and pipeline templates that were developed by contributors at TIGR, JCVI, and IGS over many years of production genome annotation work. This knowledge is encoded in configuration files, workflow templates, and Perl scripts - not in the Ergatis platform itself. Many of the people who built these components are not on the Ergatis paper.
+
+See `CONTRIBUTORS.md` for attribution.
 
 ## Progress
 
