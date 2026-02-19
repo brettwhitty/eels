@@ -1,6 +1,9 @@
 [tools]
 node = "lts"
 
+[env]
+FORCE_COLOR = "1"
+
 [tasks."viewer:build"]
 description = "Build component_index.json for the web viewer"
 run = "node viewer/build_index.js"
