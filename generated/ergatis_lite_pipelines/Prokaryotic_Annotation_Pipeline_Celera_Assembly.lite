@@ -1,0 +1,7 @@
+# Prokaryotic_Annotation_Pipeline_Celera_Assembly
+(
+    (
+        <sff_to_CA.default>,
+        <celera-assembler.assembly>
+    )
+)

@@ -1,0 +1,124 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: extract_snp_regions.default",
+            "name" : "extract_snp_regions.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: formatdb.default",
+            "name" : "formatdb.default",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: split_multifasta.default",
+            "name" : "split_multifasta.default",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: ncbi-blastn.default",
+            "name" : "ncbi-blastn.default",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: snp_verify.default",
+            "name" : "snp_verify.default",
+            "step_number" : 5
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "f086b4cf38473f712f0b8ebf40a4a8c7cb0ff64c9375b15c26e11ce52576e067",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "extract_snp_regions.default",
+            "uri" : {
+               "uri" : "urn:eels:component:extract_snp_regions.default"
+            }
+         },
+         {
+            "name" : "formatdb.default",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.default"
+            }
+         },
+         {
+            "name" : "split_multifasta.default",
+            "uri" : {
+               "uri" : "urn:eels:component:split_multifasta.default"
+            }
+         },
+         {
+            "name" : "ncbi-blastn.default",
+            "uri" : {
+               "uri" : "urn:eels:component:ncbi-blastn.default"
+            }
+         },
+         {
+            "name" : "snp_verify.default",
+            "uri" : {
+               "uri" : "urn:eels:component:snp_verify.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:snp_verification",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "snp_verification",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: snp_verification",
+      "Contains 5 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

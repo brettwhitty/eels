@@ -1,0 +1,124 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: getorf.assembly",
+            "name" : "getorf.assembly",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: blastp_plus.sister",
+            "name" : "blastp_plus.sister",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: concatenate_files.sister",
+            "name" : "concatenate_files.sister",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: blastp_plus.outside",
+            "name" : "blastp_plus.outside",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: concatenate_files.outside",
+            "name" : "concatenate_files.outside",
+            "step_number" : 5
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "b658952996470bed3308011867745a1cdd33d87b9f9d76df9e3f9e3f4882967c",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "getorf.assembly",
+            "uri" : {
+               "uri" : "urn:eels:component:getorf.assembly"
+            }
+         },
+         {
+            "name" : "blastp_plus.sister",
+            "uri" : {
+               "uri" : "urn:eels:component:blastp_plus.sister"
+            }
+         },
+         {
+            "name" : "concatenate_files.sister",
+            "uri" : {
+               "uri" : "urn:eels:component:concatenate_files.sister"
+            }
+         },
+         {
+            "name" : "blastp_plus.outside",
+            "uri" : {
+               "uri" : "urn:eels:component:blastp_plus.outside"
+            }
+         },
+         {
+            "name" : "concatenate_files.outside",
+            "uri" : {
+               "uri" : "urn:eels:component:concatenate_files.outside"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:LGT_Seek_Phylogenetic",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "LGT_Seek_Phylogenetic",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: LGT_Seek_Phylogenetic",
+      "Contains 5 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

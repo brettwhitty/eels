@@ -1,0 +1,15 @@
+# JOCs_comparative_pipeline
+(
+    (
+        (
+            <bsml2fasta.fastamulti>,
+            <split_multifasta.default>,
+            <xdformat.default>,
+            <wu-blastp.default>,
+            <jaccard.default>,
+            <muscle.jaccard>,
+            <j_ortholog_clusters.default>,
+            <muscle.j_ortholog_clusters>
+        )
+    )
+)

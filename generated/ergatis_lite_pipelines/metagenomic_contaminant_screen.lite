@@ -1,0 +1,9 @@
+# metagenomic_contaminant_screen
+(
+    (
+        (
+            <bmtagger.default>,
+            <filter_sequences_by_id.default>
+        )
+    )
+)

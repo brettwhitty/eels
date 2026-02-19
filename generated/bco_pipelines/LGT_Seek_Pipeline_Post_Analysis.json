@@ -1,0 +1,80 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: gather_lgtview_files.default",
+            "name" : "gather_lgtview_files.default",
+            "step_number" : 1
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "b37403416cbd93f0604115a34574905a1a3099145a4e167276963b08d2c180d2",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "gather_lgtview_files.default",
+            "uri" : {
+               "uri" : "urn:eels:component:gather_lgtview_files.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:LGT_Seek_Pipeline_Post_Analysis",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "LGT_Seek_Pipeline_Post_Analysis",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: LGT_Seek_Pipeline_Post_Analysis",
+      "Contains 1 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

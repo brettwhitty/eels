@@ -1,0 +1,135 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: xdformat.default",
+            "name" : "xdformat.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: xdformat.pepdb",
+            "name" : "xdformat.pepdb",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: split_multifasta.default",
+            "name" : "split_multifasta.default",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: wu-blastp.default",
+            "name" : "wu-blastp.default",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: wu-tblastn.default",
+            "name" : "wu-tblastn.default",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: pangenome.default",
+            "name" : "pangenome.default",
+            "step_number" : 6
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "34218f8b2dd14891982c2b479dd0925ba0b2aec15dded5b837701362538afba4",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "xdformat.default",
+            "uri" : {
+               "uri" : "urn:eels:component:xdformat.default"
+            }
+         },
+         {
+            "name" : "xdformat.pepdb",
+            "uri" : {
+               "uri" : "urn:eels:component:xdformat.pepdb"
+            }
+         },
+         {
+            "name" : "split_multifasta.default",
+            "uri" : {
+               "uri" : "urn:eels:component:split_multifasta.default"
+            }
+         },
+         {
+            "name" : "wu-blastp.default",
+            "uri" : {
+               "uri" : "urn:eels:component:wu-blastp.default"
+            }
+         },
+         {
+            "name" : "wu-tblastn.default",
+            "uri" : {
+               "uri" : "urn:eels:component:wu-tblastn.default"
+            }
+         },
+         {
+            "name" : "pangenome.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Pangenome_old",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Pangenome_old",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Pangenome_old",
+      "Contains 6 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

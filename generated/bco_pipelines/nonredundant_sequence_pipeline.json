@@ -1,0 +1,102 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: split_multifasta.default",
+            "name" : "split_multifasta.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: mummer.default",
+            "name" : "mummer.default",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: mumsgraph.default",
+            "name" : "mumsgraph.default",
+            "step_number" : 3
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "91a6be5105d6ba1aaf3860df872894748cce1106d82744ab0974ec78fd6a26cc",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "split_multifasta.default",
+            "uri" : {
+               "uri" : "urn:eels:component:split_multifasta.default"
+            }
+         },
+         {
+            "name" : "mummer.default",
+            "uri" : {
+               "uri" : "urn:eels:component:mummer.default"
+            }
+         },
+         {
+            "name" : "mumsgraph.default",
+            "uri" : {
+               "uri" : "urn:eels:component:mumsgraph.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:nonredundant_sequence_pipeline",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "nonredundant_sequence_pipeline",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: nonredundant_sequence_pipeline",
+      "Contains 3 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

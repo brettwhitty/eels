@@ -1,0 +1,289 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: create_map_file.default",
+            "name" : "create_map_file.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: genbank2bsml.default",
+            "name" : "genbank2bsml.default",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.assembly",
+            "name" : "bsml2fasta.assembly",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: mugsyprep.assembly",
+            "name" : "mugsyprep.assembly",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: pangenome_fix_headers.nuc",
+            "name" : "pangenome_fix_headers.nuc",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: translate_sequence.polypeptide",
+            "name" : "translate_sequence.polypeptide",
+            "step_number" : 6
+         },
+         {
+            "description" : "Ergatis component: mugsyprep.polypeptide",
+            "name" : "mugsyprep.polypeptide",
+            "step_number" : 7
+         },
+         {
+            "description" : "Ergatis component: pangenome_fix_headers.prot",
+            "name" : "pangenome_fix_headers.prot",
+            "step_number" : 8
+         },
+         {
+            "description" : "Ergatis component: formatdb.nuc",
+            "name" : "formatdb.nuc",
+            "step_number" : 9
+         },
+         {
+            "description" : "Ergatis component: tblastn_plus.default",
+            "name" : "tblastn_plus.default",
+            "step_number" : 10
+         },
+         {
+            "description" : "Ergatis component: formatdb.prot",
+            "name" : "formatdb.prot",
+            "step_number" : 11
+         },
+         {
+            "description" : "Ergatis component: blastp_plus.default",
+            "name" : "blastp_plus.default",
+            "step_number" : 12
+         },
+         {
+            "description" : "Ergatis component: pangenome_blast_parse.default",
+            "name" : "pangenome_blast_parse.default",
+            "step_number" : 13
+         },
+         {
+            "description" : "Ergatis component: pangenome_merge_results.default",
+            "name" : "pangenome_merge_results.default",
+            "step_number" : 14
+         },
+         {
+            "description" : "Ergatis component: pangenome_make_profile.default",
+            "name" : "pangenome_make_profile.default",
+            "step_number" : 15
+         },
+         {
+            "description" : "Ergatis component: pangenome_make_table.default",
+            "name" : "pangenome_make_table.default",
+            "step_number" : 16
+         },
+         {
+            "description" : "Ergatis component: pangenome_make_graphs.new_genes",
+            "name" : "pangenome_make_graphs.new_genes",
+            "step_number" : 17
+         },
+         {
+            "description" : "Ergatis component: pangenome_make_graphs.core_genes",
+            "name" : "pangenome_make_graphs.core_genes",
+            "step_number" : 18
+         },
+         {
+            "description" : "Ergatis component: pangenome_make_pangenome.default",
+            "name" : "pangenome_make_pangenome.default",
+            "step_number" : 19
+         },
+         {
+            "description" : "Ergatis component: pangenome_make_graphs.pangenome",
+            "name" : "pangenome_make_graphs.pangenome",
+            "step_number" : 20
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "b5342ac88156079122fabccaebd3588f36ca722bbc49a84c69cf797cf81c1173",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "create_map_file.default",
+            "uri" : {
+               "uri" : "urn:eels:component:create_map_file.default"
+            }
+         },
+         {
+            "name" : "genbank2bsml.default",
+            "uri" : {
+               "uri" : "urn:eels:component:genbank2bsml.default"
+            }
+         },
+         {
+            "name" : "bsml2fasta.assembly",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.assembly"
+            }
+         },
+         {
+            "name" : "mugsyprep.assembly",
+            "uri" : {
+               "uri" : "urn:eels:component:mugsyprep.assembly"
+            }
+         },
+         {
+            "name" : "pangenome_fix_headers.nuc",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_fix_headers.nuc"
+            }
+         },
+         {
+            "name" : "translate_sequence.polypeptide",
+            "uri" : {
+               "uri" : "urn:eels:component:translate_sequence.polypeptide"
+            }
+         },
+         {
+            "name" : "mugsyprep.polypeptide",
+            "uri" : {
+               "uri" : "urn:eels:component:mugsyprep.polypeptide"
+            }
+         },
+         {
+            "name" : "pangenome_fix_headers.prot",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_fix_headers.prot"
+            }
+         },
+         {
+            "name" : "formatdb.nuc",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.nuc"
+            }
+         },
+         {
+            "name" : "tblastn_plus.default",
+            "uri" : {
+               "uri" : "urn:eels:component:tblastn_plus.default"
+            }
+         },
+         {
+            "name" : "formatdb.prot",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.prot"
+            }
+         },
+         {
+            "name" : "blastp_plus.default",
+            "uri" : {
+               "uri" : "urn:eels:component:blastp_plus.default"
+            }
+         },
+         {
+            "name" : "pangenome_blast_parse.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_blast_parse.default"
+            }
+         },
+         {
+            "name" : "pangenome_merge_results.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_merge_results.default"
+            }
+         },
+         {
+            "name" : "pangenome_make_profile.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_make_profile.default"
+            }
+         },
+         {
+            "name" : "pangenome_make_table.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_make_table.default"
+            }
+         },
+         {
+            "name" : "pangenome_make_graphs.new_genes",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_make_graphs.new_genes"
+            }
+         },
+         {
+            "name" : "pangenome_make_graphs.core_genes",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_make_graphs.core_genes"
+            }
+         },
+         {
+            "name" : "pangenome_make_pangenome.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_make_pangenome.default"
+            }
+         },
+         {
+            "name" : "pangenome_make_graphs.pangenome",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome_make_graphs.pangenome"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Pangenome",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Pangenome",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Pangenome",
+      "Contains 20 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

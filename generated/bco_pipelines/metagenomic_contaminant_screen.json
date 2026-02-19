@@ -1,0 +1,91 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: bmtagger.default",
+            "name" : "bmtagger.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: filter_sequences_by_id.default",
+            "name" : "filter_sequences_by_id.default",
+            "step_number" : 2
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "473f8c2f6d79c2d1921d5c0949d7fc01e0dff9993f66a23a98c8d400d84ba1b8",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "bmtagger.default",
+            "uri" : {
+               "uri" : "urn:eels:component:bmtagger.default"
+            }
+         },
+         {
+            "name" : "filter_sequences_by_id.default",
+            "uri" : {
+               "uri" : "urn:eels:component:filter_sequences_by_id.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:metagenomic_contaminant_screen",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "metagenomic_contaminant_screen",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: metagenomic_contaminant_screen",
+      "Contains 2 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

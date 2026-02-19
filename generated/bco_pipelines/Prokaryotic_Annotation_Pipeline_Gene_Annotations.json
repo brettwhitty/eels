@@ -1,0 +1,520 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: translate_sequence.translate",
+            "name" : "translate_sequence.translate",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: filter_bogus_genes.filtered",
+            "name" : "filter_bogus_genes.filtered",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.create_blastx_pre_input",
+            "name" : "bsml2fasta.create_blastx_pre_input",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: hmmpfam3.pre_overlap_analysis",
+            "name" : "hmmpfam3.pre_overlap_analysis",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: RAPSearch2.pre_overlap_analysis",
+            "name" : "RAPSearch2.pre_overlap_analysis",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.pre_overlap_analysis",
+            "name" : "bsml2fasta.pre_overlap_analysis",
+            "step_number" : 6
+         },
+         {
+            "description" : "Ergatis component: formatdb.pre_overlap_analysis",
+            "name" : "formatdb.pre_overlap_analysis",
+            "step_number" : 7
+         },
+         {
+            "description" : "Ergatis component: bsml2featurerelationships.pre_overlap_analysis",
+            "name" : "bsml2featurerelationships.pre_overlap_analysis",
+            "step_number" : 8
+         },
+         {
+            "description" : "Ergatis component: ber.pre_overlap_analysis",
+            "name" : "ber.pre_overlap_analysis",
+            "step_number" : 9
+         },
+         {
+            "description" : "Ergatis component: overlap_analysis.default",
+            "name" : "overlap_analysis.default",
+            "step_number" : 10
+         },
+         {
+            "description" : "Ergatis component: start_site_curation.default",
+            "name" : "start_site_curation.default",
+            "step_number" : 11
+         },
+         {
+            "description" : "Ergatis component: translate_sequence.translate_new_models",
+            "name" : "translate_sequence.translate_new_models",
+            "step_number" : 12
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.create_blastx_post_input",
+            "name" : "bsml2fasta.create_blastx_post_input",
+            "step_number" : 13
+         },
+         {
+            "description" : "Ergatis component: hmmpfam3.post_overlap_analysis",
+            "name" : "hmmpfam3.post_overlap_analysis",
+            "step_number" : 14
+         },
+         {
+            "description" : "Ergatis component: RAPSearch2.post_overlap_analysis",
+            "name" : "RAPSearch2.post_overlap_analysis",
+            "step_number" : 15
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.post_overlap_analysis",
+            "name" : "bsml2fasta.post_overlap_analysis",
+            "step_number" : 16
+         },
+         {
+            "description" : "Ergatis component: formatdb.post_overlap_analysis",
+            "name" : "formatdb.post_overlap_analysis",
+            "step_number" : 17
+         },
+         {
+            "description" : "Ergatis component: bsml2featurerelationships.post_overlap_analysis",
+            "name" : "bsml2featurerelationships.post_overlap_analysis",
+            "step_number" : 18
+         },
+         {
+            "description" : "Ergatis component: ber.post_overlap_analysis",
+            "name" : "ber.post_overlap_analysis",
+            "step_number" : 19
+         },
+         {
+            "description" : "Ergatis component: bsml2interevidence_fasta.default",
+            "name" : "bsml2interevidence_fasta.default",
+            "step_number" : 20
+         },
+         {
+            "description" : "Ergatis component: split_multifasta.split_interevidence",
+            "name" : "split_multifasta.split_interevidence",
+            "step_number" : 21
+         },
+         {
+            "description" : "Ergatis component: RAPSearch2.interevidence_search",
+            "name" : "RAPSearch2.interevidence_search",
+            "step_number" : 22
+         },
+         {
+            "description" : "Ergatis component: translate_sequence.final_polypeptides",
+            "name" : "translate_sequence.final_polypeptides",
+            "step_number" : 23
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.final_cds",
+            "name" : "bsml2fasta.final_cds",
+            "step_number" : 24
+         },
+         {
+            "description" : "Ergatis component: signalp.default",
+            "name" : "signalp.default",
+            "step_number" : 25
+         },
+         {
+            "description" : "Ergatis component: ps_scan.default",
+            "name" : "ps_scan.default",
+            "step_number" : 26
+         },
+         {
+            "description" : "Ergatis component: ncbi-blastp.COGS",
+            "name" : "ncbi-blastp.COGS",
+            "step_number" : 27
+         },
+         {
+            "description" : "Ergatis component: ncbi-blastp.eggNOG",
+            "name" : "ncbi-blastp.eggNOG",
+            "step_number" : 28
+         },
+         {
+            "description" : "Ergatis component: lipop.default",
+            "name" : "lipop.default",
+            "step_number" : 29
+         },
+         {
+            "description" : "Ergatis component: tmhmm.default",
+            "name" : "tmhmm.default",
+            "step_number" : 30
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.hmmpfam3_pre",
+            "name" : "parse_evidence.hmmpfam3_pre",
+            "step_number" : 31
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.hmmpfam3_post",
+            "name" : "parse_evidence.hmmpfam3_post",
+            "step_number" : 32
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.ber_pre",
+            "name" : "parse_evidence.ber_pre",
+            "step_number" : 33
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.ber_post",
+            "name" : "parse_evidence.ber_post",
+            "step_number" : 34
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.tmhmm",
+            "name" : "parse_evidence.tmhmm",
+            "step_number" : 35
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.eggNOG",
+            "name" : "parse_evidence.eggNOG",
+            "step_number" : 36
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.lipoprotein",
+            "name" : "parse_evidence.lipoprotein",
+            "step_number" : 37
+         },
+         {
+            "description" : "Ergatis component: parse_evidence.hypothetical",
+            "name" : "parse_evidence.hypothetical",
+            "step_number" : 38
+         },
+         {
+            "description" : "Ergatis component: p_func.default",
+            "name" : "p_func.default",
+            "step_number" : 39
+         },
+         {
+            "description" : "Ergatis component: pipeline_summary.default",
+            "name" : "pipeline_summary.default",
+            "step_number" : 40
+         },
+         {
+            "description" : "Ergatis component: prokpipe_consistency_checks.bsml",
+            "name" : "prokpipe_consistency_checks.bsml",
+            "step_number" : 41
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "393dc591f51d8acbb463bee1b0cf01b269eee5b48332494a801da9a1ceeb8822",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "translate_sequence.translate",
+            "uri" : {
+               "uri" : "urn:eels:component:translate_sequence.translate"
+            }
+         },
+         {
+            "name" : "filter_bogus_genes.filtered",
+            "uri" : {
+               "uri" : "urn:eels:component:filter_bogus_genes.filtered"
+            }
+         },
+         {
+            "name" : "bsml2fasta.create_blastx_pre_input",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.create_blastx_pre_input"
+            }
+         },
+         {
+            "name" : "hmmpfam3.pre_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:hmmpfam3.pre_overlap_analysis"
+            }
+         },
+         {
+            "name" : "RAPSearch2.pre_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:RAPSearch2.pre_overlap_analysis"
+            }
+         },
+         {
+            "name" : "bsml2fasta.pre_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.pre_overlap_analysis"
+            }
+         },
+         {
+            "name" : "formatdb.pre_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.pre_overlap_analysis"
+            }
+         },
+         {
+            "name" : "bsml2featurerelationships.pre_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2featurerelationships.pre_overlap_analysis"
+            }
+         },
+         {
+            "name" : "ber.pre_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:ber.pre_overlap_analysis"
+            }
+         },
+         {
+            "name" : "overlap_analysis.default",
+            "uri" : {
+               "uri" : "urn:eels:component:overlap_analysis.default"
+            }
+         },
+         {
+            "name" : "start_site_curation.default",
+            "uri" : {
+               "uri" : "urn:eels:component:start_site_curation.default"
+            }
+         },
+         {
+            "name" : "translate_sequence.translate_new_models",
+            "uri" : {
+               "uri" : "urn:eels:component:translate_sequence.translate_new_models"
+            }
+         },
+         {
+            "name" : "bsml2fasta.create_blastx_post_input",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.create_blastx_post_input"
+            }
+         },
+         {
+            "name" : "hmmpfam3.post_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:hmmpfam3.post_overlap_analysis"
+            }
+         },
+         {
+            "name" : "RAPSearch2.post_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:RAPSearch2.post_overlap_analysis"
+            }
+         },
+         {
+            "name" : "bsml2fasta.post_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.post_overlap_analysis"
+            }
+         },
+         {
+            "name" : "formatdb.post_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.post_overlap_analysis"
+            }
+         },
+         {
+            "name" : "bsml2featurerelationships.post_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2featurerelationships.post_overlap_analysis"
+            }
+         },
+         {
+            "name" : "ber.post_overlap_analysis",
+            "uri" : {
+               "uri" : "urn:eels:component:ber.post_overlap_analysis"
+            }
+         },
+         {
+            "name" : "bsml2interevidence_fasta.default",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2interevidence_fasta.default"
+            }
+         },
+         {
+            "name" : "split_multifasta.split_interevidence",
+            "uri" : {
+               "uri" : "urn:eels:component:split_multifasta.split_interevidence"
+            }
+         },
+         {
+            "name" : "RAPSearch2.interevidence_search",
+            "uri" : {
+               "uri" : "urn:eels:component:RAPSearch2.interevidence_search"
+            }
+         },
+         {
+            "name" : "translate_sequence.final_polypeptides",
+            "uri" : {
+               "uri" : "urn:eels:component:translate_sequence.final_polypeptides"
+            }
+         },
+         {
+            "name" : "bsml2fasta.final_cds",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.final_cds"
+            }
+         },
+         {
+            "name" : "signalp.default",
+            "uri" : {
+               "uri" : "urn:eels:component:signalp.default"
+            }
+         },
+         {
+            "name" : "ps_scan.default",
+            "uri" : {
+               "uri" : "urn:eels:component:ps_scan.default"
+            }
+         },
+         {
+            "name" : "ncbi-blastp.COGS",
+            "uri" : {
+               "uri" : "urn:eels:component:ncbi-blastp.COGS"
+            }
+         },
+         {
+            "name" : "ncbi-blastp.eggNOG",
+            "uri" : {
+               "uri" : "urn:eels:component:ncbi-blastp.eggNOG"
+            }
+         },
+         {
+            "name" : "lipop.default",
+            "uri" : {
+               "uri" : "urn:eels:component:lipop.default"
+            }
+         },
+         {
+            "name" : "tmhmm.default",
+            "uri" : {
+               "uri" : "urn:eels:component:tmhmm.default"
+            }
+         },
+         {
+            "name" : "parse_evidence.hmmpfam3_pre",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.hmmpfam3_pre"
+            }
+         },
+         {
+            "name" : "parse_evidence.hmmpfam3_post",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.hmmpfam3_post"
+            }
+         },
+         {
+            "name" : "parse_evidence.ber_pre",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.ber_pre"
+            }
+         },
+         {
+            "name" : "parse_evidence.ber_post",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.ber_post"
+            }
+         },
+         {
+            "name" : "parse_evidence.tmhmm",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.tmhmm"
+            }
+         },
+         {
+            "name" : "parse_evidence.eggNOG",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.eggNOG"
+            }
+         },
+         {
+            "name" : "parse_evidence.lipoprotein",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.lipoprotein"
+            }
+         },
+         {
+            "name" : "parse_evidence.hypothetical",
+            "uri" : {
+               "uri" : "urn:eels:component:parse_evidence.hypothetical"
+            }
+         },
+         {
+            "name" : "p_func.default",
+            "uri" : {
+               "uri" : "urn:eels:component:p_func.default"
+            }
+         },
+         {
+            "name" : "pipeline_summary.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pipeline_summary.default"
+            }
+         },
+         {
+            "name" : "prokpipe_consistency_checks.bsml",
+            "uri" : {
+               "uri" : "urn:eels:component:prokpipe_consistency_checks.bsml"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Prokaryotic_Annotation_Pipeline_Gene_Annotations",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Prokaryotic_Annotation_Pipeline_Gene_Annotations",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Prokaryotic_Annotation_Pipeline_Gene_Annotations",
+      "Contains 41 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

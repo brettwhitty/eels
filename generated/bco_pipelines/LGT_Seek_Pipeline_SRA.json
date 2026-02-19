@@ -1,0 +1,91 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: download_sra.default",
+            "name" : "download_sra.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: sra2fastq.default",
+            "name" : "sra2fastq.default",
+            "step_number" : 2
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "69cc9a1199e9b549c3866ec2ac6daaf50f4309f801c8b493cdc3315b8d74191f",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "download_sra.default",
+            "uri" : {
+               "uri" : "urn:eels:component:download_sra.default"
+            }
+         },
+         {
+            "name" : "sra2fastq.default",
+            "uri" : {
+               "uri" : "urn:eels:component:sra2fastq.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:LGT_Seek_Pipeline_SRA",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "LGT_Seek_Pipeline_SRA",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: LGT_Seek_Pipeline_SRA",
+      "Contains 2 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

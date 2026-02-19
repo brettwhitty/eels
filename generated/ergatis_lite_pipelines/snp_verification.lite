@@ -1,0 +1,12 @@
+# snp_verification
+(
+    (
+        {
+            <extract_snp_regions.default>,
+            <formatdb.default>
+        },
+        <split_multifasta.default>,
+        <ncbi-blastn.default>,
+        <snp_verify.default>
+    )
+)

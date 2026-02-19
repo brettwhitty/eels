@@ -1,0 +1,113 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: prodigal.default",
+            "name" : "prodigal.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: translate_sequence.translate_prediction",
+            "name" : "translate_sequence.translate_prediction",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.prediction_CDS",
+            "name" : "bsml2fasta.prediction_CDS",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: promote_gene_prediction.promote_prediction",
+            "name" : "promote_gene_prediction.promote_prediction",
+            "step_number" : 4
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "4f2f932cf66664d7acf5644237c5c41c78e2b2d407fba10a90f2b2b736be9410",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "prodigal.default",
+            "uri" : {
+               "uri" : "urn:eels:component:prodigal.default"
+            }
+         },
+         {
+            "name" : "translate_sequence.translate_prediction",
+            "uri" : {
+               "uri" : "urn:eels:component:translate_sequence.translate_prediction"
+            }
+         },
+         {
+            "name" : "bsml2fasta.prediction_CDS",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.prediction_CDS"
+            }
+         },
+         {
+            "name" : "promote_gene_prediction.promote_prediction",
+            "uri" : {
+               "uri" : "urn:eels:component:promote_gene_prediction.promote_prediction"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Prokaryotic_Annotation_Pipeline_Prodigal_Predictions",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Prokaryotic_Annotation_Pipeline_Prodigal_Predictions",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Prokaryotic_Annotation_Pipeline_Prodigal_Predictions",
+      "Contains 4 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

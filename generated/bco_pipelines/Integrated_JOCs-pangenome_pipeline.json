@@ -1,0 +1,201 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: bsml2fasta.fastamulti",
+            "name" : "bsml2fasta.fastamulti",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.genomicseq",
+            "name" : "bsml2fasta.genomicseq",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: xdformat.nuc",
+            "name" : "xdformat.nuc",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: xdformat.default",
+            "name" : "xdformat.default",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: split_multifasta.default",
+            "name" : "split_multifasta.default",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: wu-blastp.default",
+            "name" : "wu-blastp.default",
+            "step_number" : 6
+         },
+         {
+            "description" : "Ergatis component: jaccard.default",
+            "name" : "jaccard.default",
+            "step_number" : 7
+         },
+         {
+            "description" : "Ergatis component: muscle.jaccard",
+            "name" : "muscle.jaccard",
+            "step_number" : 8
+         },
+         {
+            "description" : "Ergatis component: j_ortholog_clusters.default",
+            "name" : "j_ortholog_clusters.default",
+            "step_number" : 9
+         },
+         {
+            "description" : "Ergatis component: muscle.j_ortholog_clusters",
+            "name" : "muscle.j_ortholog_clusters",
+            "step_number" : 10
+         },
+         {
+            "description" : "Ergatis component: wu-tblastn.default",
+            "name" : "wu-tblastn.default",
+            "step_number" : 11
+         },
+         {
+            "description" : "Ergatis component: pangenome.default",
+            "name" : "pangenome.default",
+            "step_number" : 12
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "3b91d9981bbecdea302b3eae447b2315dc5b6bdeae9e19cb4d4d058e6eb2720a",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "bsml2fasta.fastamulti",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.fastamulti"
+            }
+         },
+         {
+            "name" : "bsml2fasta.genomicseq",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.genomicseq"
+            }
+         },
+         {
+            "name" : "xdformat.nuc",
+            "uri" : {
+               "uri" : "urn:eels:component:xdformat.nuc"
+            }
+         },
+         {
+            "name" : "xdformat.default",
+            "uri" : {
+               "uri" : "urn:eels:component:xdformat.default"
+            }
+         },
+         {
+            "name" : "split_multifasta.default",
+            "uri" : {
+               "uri" : "urn:eels:component:split_multifasta.default"
+            }
+         },
+         {
+            "name" : "wu-blastp.default",
+            "uri" : {
+               "uri" : "urn:eels:component:wu-blastp.default"
+            }
+         },
+         {
+            "name" : "jaccard.default",
+            "uri" : {
+               "uri" : "urn:eels:component:jaccard.default"
+            }
+         },
+         {
+            "name" : "muscle.jaccard",
+            "uri" : {
+               "uri" : "urn:eels:component:muscle.jaccard"
+            }
+         },
+         {
+            "name" : "j_ortholog_clusters.default",
+            "uri" : {
+               "uri" : "urn:eels:component:j_ortholog_clusters.default"
+            }
+         },
+         {
+            "name" : "muscle.j_ortholog_clusters",
+            "uri" : {
+               "uri" : "urn:eels:component:muscle.j_ortholog_clusters"
+            }
+         },
+         {
+            "name" : "wu-tblastn.default",
+            "uri" : {
+               "uri" : "urn:eels:component:wu-tblastn.default"
+            }
+         },
+         {
+            "name" : "pangenome.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pangenome.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Integrated_JOCs-pangenome_pipeline",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Integrated_JOCs-pangenome_pipeline",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Integrated_JOCs-pangenome_pipeline",
+      "Contains 12 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

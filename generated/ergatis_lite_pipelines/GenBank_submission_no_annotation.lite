@@ -1,0 +1,9 @@
+# GenBank_submission_no_annotation
+(
+    (
+        (
+            <create_db_list_file.default>,
+            <dump_fasta.default>
+        )
+    )
+)

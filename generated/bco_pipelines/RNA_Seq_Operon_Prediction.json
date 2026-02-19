@@ -1,0 +1,124 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: bowtie_build.reference",
+            "name" : "bowtie_build.reference",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: bowtie.alignment",
+            "name" : "bowtie.alignment",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: samtools_file_convert.sorted_position",
+            "name" : "samtools_file_convert.sorted_position",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: bam2bigwig.visualization",
+            "name" : "bam2bigwig.visualization",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: predict_operons.predict",
+            "name" : "predict_operons.predict",
+            "step_number" : 5
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "933252c1bfc3e3a6b88959a0f96aeb0c06148740867b453751be05dd9293f0d7",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "bowtie_build.reference",
+            "uri" : {
+               "uri" : "urn:eels:component:bowtie_build.reference"
+            }
+         },
+         {
+            "name" : "bowtie.alignment",
+            "uri" : {
+               "uri" : "urn:eels:component:bowtie.alignment"
+            }
+         },
+         {
+            "name" : "samtools_file_convert.sorted_position",
+            "uri" : {
+               "uri" : "urn:eels:component:samtools_file_convert.sorted_position"
+            }
+         },
+         {
+            "name" : "bam2bigwig.visualization",
+            "uri" : {
+               "uri" : "urn:eels:component:bam2bigwig.visualization"
+            }
+         },
+         {
+            "name" : "predict_operons.predict",
+            "uri" : {
+               "uri" : "urn:eels:component:predict_operons.predict"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:RNA_Seq_Operon_Prediction",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "RNA_Seq_Operon_Prediction",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: RNA_Seq_Operon_Prediction",
+      "Contains 5 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

@@ -1,0 +1,102 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: lgt_build_bwa_index.recipient",
+            "name" : "lgt_build_bwa_index.recipient",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: lgt_build_bwa_index.donor",
+            "name" : "lgt_build_bwa_index.donor",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: lgt_build_bwa_index.refseq",
+            "name" : "lgt_build_bwa_index.refseq",
+            "step_number" : 3
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "ddcc2c3c85498bbe7157a07fa0bfb52b7feb6d47c1f17cc8f139be00a8bcdd2d",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "lgt_build_bwa_index.recipient",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_build_bwa_index.recipient"
+            }
+         },
+         {
+            "name" : "lgt_build_bwa_index.donor",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_build_bwa_index.donor"
+            }
+         },
+         {
+            "name" : "lgt_build_bwa_index.refseq",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_build_bwa_index.refseq"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:LGT_Seek_Pipeline_BWA_Index",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "LGT_Seek_Pipeline_BWA_Index",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: LGT_Seek_Pipeline_BWA_Index",
+      "Contains 3 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

@@ -1,0 +1,91 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: infernal.default",
+            "name" : "infernal.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: tRNAscan-SE.find_tRNA",
+            "name" : "tRNAscan-SE.find_tRNA",
+            "step_number" : 2
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "117327147a8c60f15825dfbb4bdca8a77da265200c6eb2f9eaf9755ec56bc18c",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "infernal.default",
+            "uri" : {
+               "uri" : "urn:eels:component:infernal.default"
+            }
+         },
+         {
+            "name" : "tRNAscan-SE.find_tRNA",
+            "uri" : {
+               "uri" : "urn:eels:component:tRNAscan-SE.find_tRNA"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Prokaryotic_Annotation_Pipeline_RNA_Predictions",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Prokaryotic_Annotation_Pipeline_RNA_Predictions",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Prokaryotic_Annotation_Pipeline_RNA_Predictions",
+      "Contains 2 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

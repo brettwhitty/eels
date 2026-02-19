@@ -1,0 +1,8 @@
+# Prokaryotic_Annotation_Pipeline_Pseudomolecule_Generation
+(
+    (
+        <clean_fasta.default>,
+        <create_pseudomolecules.default>,
+        <pmarks2bsml.default>
+    )
+)

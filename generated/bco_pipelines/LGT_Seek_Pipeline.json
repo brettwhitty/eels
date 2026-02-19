@@ -1,0 +1,267 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: lgt_bwa.recipient",
+            "name" : "lgt_bwa.recipient",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: lgt_bwa.donor",
+            "name" : "lgt_bwa.donor",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: lgt_bwa_post_process.default",
+            "name" : "lgt_bwa_post_process.default",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: filter_dups_lc_seqs.lgt",
+            "name" : "filter_dups_lc_seqs.lgt",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: lgt_bwa.lgt",
+            "name" : "lgt_bwa.lgt",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: sam2lca.lgt",
+            "name" : "sam2lca.lgt",
+            "step_number" : 6
+         },
+         {
+            "description" : "Ergatis component: sam2fasta.fasta",
+            "name" : "sam2fasta.fasta",
+            "step_number" : 7
+         },
+         {
+            "description" : "Ergatis component: split_multifasta.fasta",
+            "name" : "split_multifasta.fasta",
+            "step_number" : 8
+         },
+         {
+            "description" : "Ergatis component: blastn_plus.nt",
+            "name" : "blastn_plus.nt",
+            "step_number" : 9
+         },
+         {
+            "description" : "Ergatis component: concatenate_files.blast",
+            "name" : "concatenate_files.blast",
+            "step_number" : 10
+         },
+         {
+            "description" : "Ergatis component: blast_lgt_finder.lgt",
+            "name" : "blast_lgt_finder.lgt",
+            "step_number" : 11
+         },
+         {
+            "description" : "Ergatis component: blast2lca.lgt",
+            "name" : "blast2lca.lgt",
+            "step_number" : 12
+         },
+         {
+            "description" : "Ergatis component: lgt_create_validated_bam.lgt",
+            "name" : "lgt_create_validated_bam.lgt",
+            "step_number" : 13
+         },
+         {
+            "description" : "Ergatis component: lgt_bwa.validation",
+            "name" : "lgt_bwa.validation",
+            "step_number" : 14
+         },
+         {
+            "description" : "Ergatis component: lgt_mpileup.lgt",
+            "name" : "lgt_mpileup.lgt",
+            "step_number" : 15
+         },
+         {
+            "description" : "Ergatis component: filter_dups_lc_seqs.mb",
+            "name" : "filter_dups_lc_seqs.mb",
+            "step_number" : 16
+         },
+         {
+            "description" : "Ergatis component: lgt_bwa.mb",
+            "name" : "lgt_bwa.mb",
+            "step_number" : 17
+         },
+         {
+            "description" : "Ergatis component: sam2lca.mb",
+            "name" : "sam2lca.mb",
+            "step_number" : 18
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "e521a45b85017e6140e9a2777526489b2c992e896750cae6fac92aa79a13b988",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "lgt_bwa.recipient",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_bwa.recipient"
+            }
+         },
+         {
+            "name" : "lgt_bwa.donor",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_bwa.donor"
+            }
+         },
+         {
+            "name" : "lgt_bwa_post_process.default",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_bwa_post_process.default"
+            }
+         },
+         {
+            "name" : "filter_dups_lc_seqs.lgt",
+            "uri" : {
+               "uri" : "urn:eels:component:filter_dups_lc_seqs.lgt"
+            }
+         },
+         {
+            "name" : "lgt_bwa.lgt",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_bwa.lgt"
+            }
+         },
+         {
+            "name" : "sam2lca.lgt",
+            "uri" : {
+               "uri" : "urn:eels:component:sam2lca.lgt"
+            }
+         },
+         {
+            "name" : "sam2fasta.fasta",
+            "uri" : {
+               "uri" : "urn:eels:component:sam2fasta.fasta"
+            }
+         },
+         {
+            "name" : "split_multifasta.fasta",
+            "uri" : {
+               "uri" : "urn:eels:component:split_multifasta.fasta"
+            }
+         },
+         {
+            "name" : "blastn_plus.nt",
+            "uri" : {
+               "uri" : "urn:eels:component:blastn_plus.nt"
+            }
+         },
+         {
+            "name" : "concatenate_files.blast",
+            "uri" : {
+               "uri" : "urn:eels:component:concatenate_files.blast"
+            }
+         },
+         {
+            "name" : "blast_lgt_finder.lgt",
+            "uri" : {
+               "uri" : "urn:eels:component:blast_lgt_finder.lgt"
+            }
+         },
+         {
+            "name" : "blast2lca.lgt",
+            "uri" : {
+               "uri" : "urn:eels:component:blast2lca.lgt"
+            }
+         },
+         {
+            "name" : "lgt_create_validated_bam.lgt",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_create_validated_bam.lgt"
+            }
+         },
+         {
+            "name" : "lgt_bwa.validation",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_bwa.validation"
+            }
+         },
+         {
+            "name" : "lgt_mpileup.lgt",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_mpileup.lgt"
+            }
+         },
+         {
+            "name" : "filter_dups_lc_seqs.mb",
+            "uri" : {
+               "uri" : "urn:eels:component:filter_dups_lc_seqs.mb"
+            }
+         },
+         {
+            "name" : "lgt_bwa.mb",
+            "uri" : {
+               "uri" : "urn:eels:component:lgt_bwa.mb"
+            }
+         },
+         {
+            "name" : "sam2lca.mb",
+            "uri" : {
+               "uri" : "urn:eels:component:sam2lca.mb"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:LGT_Seek_Pipeline",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "LGT_Seek_Pipeline",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: LGT_Seek_Pipeline",
+      "Contains 18 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

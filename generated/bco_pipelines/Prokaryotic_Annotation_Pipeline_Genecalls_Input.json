@@ -1,0 +1,146 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: clean_fasta.genecalls",
+            "name" : "clean_fasta.genecalls",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: create_pseudomolecules.genecalls",
+            "name" : "create_pseudomolecules.genecalls",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: pmarks2bsml.genecalls",
+            "name" : "pmarks2bsml.genecalls",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: pseudomolecule2glimmer3.genecalls",
+            "name" : "pseudomolecule2glimmer3.genecalls",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: translate_sequence.translate_prediction",
+            "name" : "translate_sequence.translate_prediction",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: bsml2fasta.prediction_CDS",
+            "name" : "bsml2fasta.prediction_CDS",
+            "step_number" : 6
+         },
+         {
+            "description" : "Ergatis component: promote_gene_prediction.promote_prediction",
+            "name" : "promote_gene_prediction.promote_prediction",
+            "step_number" : 7
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "c0b43c9d0b811c7d330bdd0794f2bf8ef09e0b0f1c1d4b581fc311a701cbdf9a",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "clean_fasta.genecalls",
+            "uri" : {
+               "uri" : "urn:eels:component:clean_fasta.genecalls"
+            }
+         },
+         {
+            "name" : "create_pseudomolecules.genecalls",
+            "uri" : {
+               "uri" : "urn:eels:component:create_pseudomolecules.genecalls"
+            }
+         },
+         {
+            "name" : "pmarks2bsml.genecalls",
+            "uri" : {
+               "uri" : "urn:eels:component:pmarks2bsml.genecalls"
+            }
+         },
+         {
+            "name" : "pseudomolecule2glimmer3.genecalls",
+            "uri" : {
+               "uri" : "urn:eels:component:pseudomolecule2glimmer3.genecalls"
+            }
+         },
+         {
+            "name" : "translate_sequence.translate_prediction",
+            "uri" : {
+               "uri" : "urn:eels:component:translate_sequence.translate_prediction"
+            }
+         },
+         {
+            "name" : "bsml2fasta.prediction_CDS",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2fasta.prediction_CDS"
+            }
+         },
+         {
+            "name" : "promote_gene_prediction.promote_prediction",
+            "uri" : {
+               "uri" : "urn:eels:component:promote_gene_prediction.promote_prediction"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Prokaryotic_Annotation_Pipeline_Genecalls_Input",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Prokaryotic_Annotation_Pipeline_Genecalls_Input",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Prokaryotic_Annotation_Pipeline_Genecalls_Input",
+      "Contains 7 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

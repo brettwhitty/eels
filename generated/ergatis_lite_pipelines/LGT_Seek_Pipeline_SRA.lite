@@ -1,0 +1,9 @@
+# LGT_Seek_Pipeline_SRA
+(
+    (
+        (
+            <download_sra.default>,
+            <sra2fastq.default>
+        )
+    )
+)

@@ -1,0 +1,322 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: initdb.default",
+            "name" : "initdb.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.pipeline_summary",
+            "name" : "bsml2chado.pipeline_summary",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.signalp",
+            "name" : "bsml2chado.signalp",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.lipop",
+            "name" : "bsml2chado.lipop",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.ps_scan",
+            "name" : "bsml2chado.ps_scan",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.hmm_pre",
+            "name" : "bsml2chado.hmm_pre",
+            "step_number" : 6
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.hmm_post",
+            "name" : "bsml2chado.hmm_post",
+            "step_number" : 7
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.tmhmm",
+            "name" : "bsml2chado.tmhmm",
+            "step_number" : 8
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.ber_pre",
+            "name" : "bsml2chado.ber_pre",
+            "step_number" : 9
+         },
+         {
+            "description" : "Ergatis component: bsml2chado.ber_post",
+            "name" : "bsml2chado.ber_post",
+            "step_number" : 10
+         },
+         {
+            "description" : "Ergatis component: scp_files.copy_ber_pre",
+            "name" : "scp_files.copy_ber_pre",
+            "step_number" : 11
+         },
+         {
+            "description" : "Ergatis component: scp_files.copy_ber_post",
+            "name" : "scp_files.copy_ber_post",
+            "step_number" : 12
+         },
+         {
+            "description" : "Ergatis component: pathway_tools_input.default",
+            "name" : "pathway_tools_input.default",
+            "step_number" : 13
+         },
+         {
+            "description" : "Ergatis component: concatenate_files.prot",
+            "name" : "concatenate_files.prot",
+            "step_number" : 14
+         },
+         {
+            "description" : "Ergatis component: replace_defline_with_locusID.prot",
+            "name" : "replace_defline_with_locusID.prot",
+            "step_number" : 15
+         },
+         {
+            "description" : "Ergatis component: formatdb.prot",
+            "name" : "formatdb.prot",
+            "step_number" : 16
+         },
+         {
+            "description" : "Ergatis component: scp_files.copy_formatdb_prot",
+            "name" : "scp_files.copy_formatdb_prot",
+            "step_number" : 17
+         },
+         {
+            "description" : "Ergatis component: concatenate_files.nuc",
+            "name" : "concatenate_files.nuc",
+            "step_number" : 18
+         },
+         {
+            "description" : "Ergatis component: replace_defline_with_locusID.nuc",
+            "name" : "replace_defline_with_locusID.nuc",
+            "step_number" : 19
+         },
+         {
+            "description" : "Ergatis component: formatdb.nuc",
+            "name" : "formatdb.nuc",
+            "step_number" : 20
+         },
+         {
+            "description" : "Ergatis component: scp_files.copy_formatdb_nuc",
+            "name" : "scp_files.copy_formatdb_nuc",
+            "step_number" : 21
+         },
+         {
+            "description" : "Ergatis component: formatdb.genome",
+            "name" : "formatdb.genome",
+            "step_number" : 22
+         },
+         {
+            "description" : "Ergatis component: scp_files.copy_genome",
+            "name" : "scp_files.copy_genome",
+            "step_number" : 23
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "ddd422e97e622ca92ee952581ee1e613d168774cc40b31881f9f6e96cf7175f9",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "initdb.default",
+            "uri" : {
+               "uri" : "urn:eels:component:initdb.default"
+            }
+         },
+         {
+            "name" : "bsml2chado.pipeline_summary",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.pipeline_summary"
+            }
+         },
+         {
+            "name" : "bsml2chado.signalp",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.signalp"
+            }
+         },
+         {
+            "name" : "bsml2chado.lipop",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.lipop"
+            }
+         },
+         {
+            "name" : "bsml2chado.ps_scan",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.ps_scan"
+            }
+         },
+         {
+            "name" : "bsml2chado.hmm_pre",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.hmm_pre"
+            }
+         },
+         {
+            "name" : "bsml2chado.hmm_post",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.hmm_post"
+            }
+         },
+         {
+            "name" : "bsml2chado.tmhmm",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.tmhmm"
+            }
+         },
+         {
+            "name" : "bsml2chado.ber_pre",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.ber_pre"
+            }
+         },
+         {
+            "name" : "bsml2chado.ber_post",
+            "uri" : {
+               "uri" : "urn:eels:component:bsml2chado.ber_post"
+            }
+         },
+         {
+            "name" : "scp_files.copy_ber_pre",
+            "uri" : {
+               "uri" : "urn:eels:component:scp_files.copy_ber_pre"
+            }
+         },
+         {
+            "name" : "scp_files.copy_ber_post",
+            "uri" : {
+               "uri" : "urn:eels:component:scp_files.copy_ber_post"
+            }
+         },
+         {
+            "name" : "pathway_tools_input.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pathway_tools_input.default"
+            }
+         },
+         {
+            "name" : "concatenate_files.prot",
+            "uri" : {
+               "uri" : "urn:eels:component:concatenate_files.prot"
+            }
+         },
+         {
+            "name" : "replace_defline_with_locusID.prot",
+            "uri" : {
+               "uri" : "urn:eels:component:replace_defline_with_locusID.prot"
+            }
+         },
+         {
+            "name" : "formatdb.prot",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.prot"
+            }
+         },
+         {
+            "name" : "scp_files.copy_formatdb_prot",
+            "uri" : {
+               "uri" : "urn:eels:component:scp_files.copy_formatdb_prot"
+            }
+         },
+         {
+            "name" : "concatenate_files.nuc",
+            "uri" : {
+               "uri" : "urn:eels:component:concatenate_files.nuc"
+            }
+         },
+         {
+            "name" : "replace_defline_with_locusID.nuc",
+            "uri" : {
+               "uri" : "urn:eels:component:replace_defline_with_locusID.nuc"
+            }
+         },
+         {
+            "name" : "formatdb.nuc",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.nuc"
+            }
+         },
+         {
+            "name" : "scp_files.copy_formatdb_nuc",
+            "uri" : {
+               "uri" : "urn:eels:component:scp_files.copy_formatdb_nuc"
+            }
+         },
+         {
+            "name" : "formatdb.genome",
+            "uri" : {
+               "uri" : "urn:eels:component:formatdb.genome"
+            }
+         },
+         {
+            "name" : "scp_files.copy_genome",
+            "uri" : {
+               "uri" : "urn:eels:component:scp_files.copy_genome"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Prokaryotic_Annotation_Pipeline_Chado_Loading",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Prokaryotic_Annotation_Pipeline_Chado_Loading",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Prokaryotic_Annotation_Pipeline_Chado_Loading",
+      "Contains 23 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

@@ -1,0 +1,91 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: create_db_list_file.default",
+            "name" : "create_db_list_file.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: dump_fasta.default",
+            "name" : "dump_fasta.default",
+            "step_number" : 2
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "f514838e7af1b527275f842c86e0e768d41930b38358dfb4e89b777ebce9add4",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "create_db_list_file.default",
+            "uri" : {
+               "uri" : "urn:eels:component:create_db_list_file.default"
+            }
+         },
+         {
+            "name" : "dump_fasta.default",
+            "uri" : {
+               "uri" : "urn:eels:component:dump_fasta.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:GenBank_submission_no_annotation",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "GenBank_submission_no_annotation",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: GenBank_submission_no_annotation",
+      "Contains 2 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

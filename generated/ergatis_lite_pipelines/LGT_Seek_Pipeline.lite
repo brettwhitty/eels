@@ -1,0 +1,37 @@
+# LGT_Seek_Pipeline
+(
+    (
+        (
+            <lgt_bwa.recipient>,
+            <lgt_bwa.donor>,
+            <lgt_bwa_post_process.default>,
+            {
+                (
+                    <filter_dups_lc_seqs.lgt>,
+                    {
+                        (
+                            <lgt_bwa.lgt>,
+                            <sam2lca.lgt>
+                        ),
+                        (
+                            <sam2fasta.fasta>,
+                            <split_multifasta.fasta>,
+                            <blastn_plus.nt>,
+                            <concatenate_files.blast>,
+                            <blast_lgt_finder.lgt>,
+                            <blast2lca.lgt>,
+                            <lgt_create_validated_bam.lgt>,
+                            <lgt_bwa.validation>
+                        ),
+                        <lgt_mpileup.lgt>
+                    }
+                ),
+                (
+                    <filter_dups_lc_seqs.mb>,
+                    <lgt_bwa.mb>,
+                    <sam2lca.mb>
+                )
+            }
+        )
+    )
+)

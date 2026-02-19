@@ -1,0 +1,102 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: clean_fasta.default",
+            "name" : "clean_fasta.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: create_pseudomolecules.default",
+            "name" : "create_pseudomolecules.default",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: pmarks2bsml.default",
+            "name" : "pmarks2bsml.default",
+            "step_number" : 3
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "826fc79dec4d90323992dd340ef916d8d9e51dc5ca163404a4c9b417b4cbc61a",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "clean_fasta.default",
+            "uri" : {
+               "uri" : "urn:eels:component:clean_fasta.default"
+            }
+         },
+         {
+            "name" : "create_pseudomolecules.default",
+            "uri" : {
+               "uri" : "urn:eels:component:create_pseudomolecules.default"
+            }
+         },
+         {
+            "name" : "pmarks2bsml.default",
+            "uri" : {
+               "uri" : "urn:eels:component:pmarks2bsml.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:Prokaryotic_Annotation_Pipeline_Pseudomolecule_Generation",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "Prokaryotic_Annotation_Pipeline_Pseudomolecule_Generation",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: Prokaryotic_Annotation_Pipeline_Pseudomolecule_Generation",
+      "Contains 3 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

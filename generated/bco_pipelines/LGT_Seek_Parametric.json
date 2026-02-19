@@ -1,0 +1,102 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: selfsim.default",
+            "name" : "selfsim.default",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: sighunt.default",
+            "name" : "sighunt.default",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: alien_hunter.default",
+            "name" : "alien_hunter.default",
+            "step_number" : 3
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "87d2c18d9d9942ad3c1a308dd30e0d50c4910a236415fad4d3ebab2bde8a014b",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "selfsim.default",
+            "uri" : {
+               "uri" : "urn:eels:component:selfsim.default"
+            }
+         },
+         {
+            "name" : "sighunt.default",
+            "uri" : {
+               "uri" : "urn:eels:component:sighunt.default"
+            }
+         },
+         {
+            "name" : "alien_hunter.default",
+            "uri" : {
+               "uri" : "urn:eels:component:alien_hunter.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:LGT_Seek_Parametric",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "LGT_Seek_Parametric",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: LGT_Seek_Parametric",
+      "Contains 3 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}

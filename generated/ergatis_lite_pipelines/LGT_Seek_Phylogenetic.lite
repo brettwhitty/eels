@@ -1,0 +1,20 @@
+# LGT_Seek_Phylogenetic
+(
+    (
+        {
+            (
+                <getorf.assembly>,
+                {
+                    (
+                        <blastp_plus.sister>,
+                        <concatenate_files.sister>
+                    ),
+                    (
+                        <blastp_plus.outside>,
+                        <concatenate_files.outside>
+                    )
+                }
+            )
+        }
+    )
+)

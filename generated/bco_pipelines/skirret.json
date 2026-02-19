@@ -1,0 +1,135 @@
+{
+   "description_domain" : {
+      "keywords" : [
+         "ergatis",
+         "pipeline",
+         "bioinformatics"
+      ],
+      "pipeline_steps" : [
+         {
+            "description" : "Ergatis component: genbank2fasta.reference",
+            "name" : "genbank2fasta.reference",
+            "step_number" : 1
+         },
+         {
+            "description" : "Ergatis component: nucmer.default",
+            "name" : "nucmer.default",
+            "step_number" : 2
+         },
+         {
+            "description" : "Ergatis component: nucmer-delta-filter.default",
+            "name" : "nucmer-delta-filter.default",
+            "step_number" : 3
+         },
+         {
+            "description" : "Ergatis component: nucmer-show-snps.default",
+            "name" : "nucmer-show-snps.default",
+            "step_number" : 4
+         },
+         {
+            "description" : "Ergatis component: snp-add-gene-info.default",
+            "name" : "snp-add-gene-info.default",
+            "step_number" : 5
+         },
+         {
+            "description" : "Ergatis component: nucmer-snp2merged.default",
+            "name" : "nucmer-snp2merged.default",
+            "step_number" : 6
+         }
+      ]
+   },
+   "error_domain" : {
+      "algorithmic_error" : {},
+      "empirical_error" : {}
+   },
+   "etag" : "778135f5b6435a517f71166c80efcc02ec57bcb06aea87f5b89825e33b9e6cd2",
+   "execution_domain" : {
+      "environment_variables" : {},
+      "external_data_endpoints" : [],
+      "script" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.layout"
+            }
+         }
+      ],
+      "script_driver" : "Ergatis workflow engine",
+      "software_prerequisites" : [
+         {
+            "name" : "genbank2fasta.reference",
+            "uri" : {
+               "uri" : "urn:eels:component:genbank2fasta.reference"
+            }
+         },
+         {
+            "name" : "nucmer.default",
+            "uri" : {
+               "uri" : "urn:eels:component:nucmer.default"
+            }
+         },
+         {
+            "name" : "nucmer-delta-filter.default",
+            "uri" : {
+               "uri" : "urn:eels:component:nucmer-delta-filter.default"
+            }
+         },
+         {
+            "name" : "nucmer-show-snps.default",
+            "uri" : {
+               "uri" : "urn:eels:component:nucmer-show-snps.default"
+            }
+         },
+         {
+            "name" : "snp-add-gene-info.default",
+            "uri" : {
+               "uri" : "urn:eels:component:snp-add-gene-info.default"
+            }
+         },
+         {
+            "name" : "nucmer-snp2merged.default",
+            "uri" : {
+               "uri" : "urn:eels:component:nucmer-snp2merged.default"
+            }
+         }
+      ]
+   },
+   "io_domain" : {
+      "input_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline.config"
+            }
+         }
+      ],
+      "output_subdomain" : [
+         {
+            "uri" : {
+               "uri" : "pipeline output directory"
+            }
+         }
+      ]
+   },
+   "object_id" : "urn:eels:pipeline:skirret",
+   "parametric_domain" : [],
+   "provenance_domain" : {
+      "contributors" : [
+         {
+            "contribution" : [
+               "createdBy"
+            ],
+            "name" : "EELS extraction"
+         }
+      ],
+      "created" : "2026-02-19T00:00:00Z",
+      "license" : "https://opensource.org/licenses/Artistic-2.0",
+      "modified" : "2026-02-19T00:00:00Z",
+      "name" : "skirret",
+      "version" : "1.0"
+   },
+   "spec_version" : "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+   "usability_domain" : [
+      "Ergatis pipeline template: skirret",
+      "Contains 6 component steps",
+      "Extracted from ergatis-install/templates/pipelines/"
+   ]
+}
