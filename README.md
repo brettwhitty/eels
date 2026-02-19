@@ -65,11 +65,6 @@ eels/
 │   ├── COMPONENT_ANATOMY.md
 │   ├── CONVERTER_REFERENCE.md
 │   └── BSML_CONVERTER_CATALOG.md
-├── scripts/                 # Extraction tools
-│   ├── analyze_components.py
-│   ├── catalog_iterators.py
-│   ├── catalog_workflows.py
-│   └── catalog_utilities.py
 ├── CONTRIBUTORS.md          # Attribution
 ├── NEXT_STEPS.md           # Remaining work
 ├── STATUS.md               # Progress tracking
