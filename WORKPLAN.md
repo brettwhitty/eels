@@ -2,6 +2,7 @@
 
 **Project:** Ergatis Extended Lifetime Support - Knowledge Extraction
 **Date:** 2026-02-18
+**Lead:** Brett Whitty
 
 ## Objective
 
