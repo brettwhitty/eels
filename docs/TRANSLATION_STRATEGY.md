@@ -31,9 +31,9 @@
 - Easy to read and modify
 - Natural representation of Ergatis structure
 
-### Tier 2: CWL (Executable)
-**Purpose:** Full workflow execution specification  
-**Use case:** Running workflows, parameter validation, type checking
+### Tier 2: CWL (Component Configuration)
+**Purpose:** Capture individual tool configurations and parameters  
+**Use case:** Tool-level parameter documentation, type validation
 
 **Format:**
 ```yaml
@@ -63,18 +63,21 @@ outputs:
 ```
 
 **Captures:**
-- Complete parameter spaces
+- Individual tool parameters (not multi-step workflows)
 - Type definitions (File, string, int, float, etc.)
 - Default values and flags
-- Input/output bindings
-- Requirements (Docker, environment, resources)
-- Scatter/gather patterns (from iterators)
+- Input/output bindings for single tools
+- Tool-specific requirements
+
+**Scope:**
+- ONE tool per CWL file
+- Component configs → multiple CWL CommandLineTools
+- Multi-step execution → Ergatis Lite or BCO, NOT CWL Workflow
 
 **Benefits:**
-- Executable workflows
-- Type safety
-- Tool validation
-- Portable across CWL runners
+- Type safety for tool parameters
+- Validation of individual tool configs
+- Reusable tool definitions
 
 ### Tier 3: BioCompute Object (Documentation)
 **Purpose:** Regulatory compliance, provenance, full documentation  
@@ -191,46 +194,96 @@ outputs:
 
 ### From Ergatis Component
 
+**Important:** Ergatis components contain multi-step execution (tool + converters + validation). This multi-step nature is captured in Ergatis Lite and BCO, NOT in CWL.
+
 1. **Extract to Ergatis Lite:**
-   - Parse component XML
+   - Parse component XML (full multi-step execution)
    - Identify serial/parallel structure
    - Extract required databases from `.config`
    - Document default parameters
-   - Create minimal notation
+   - Create minimal notation showing ALL steps
 
-2. **Generate CWL:**
-   - Map tool executables to `baseCommand`
+2. **Generate CWL (per tool):**
+   - ONE CWL file per tool in component
+   - Map tool executable to `baseCommand`
    - Extract parameters from `.config` → CWL inputs
    - Define types (File, string, int, float)
-   - Map iterator patterns → scatter
    - Add requirements (Docker, resources)
+   - **DO NOT** create CWL Workflow for multi-step component
 
 3. **Generate BCO:**
+   - Capture full multi-step execution in pipeline_steps
    - Extract provenance from git history
    - Map contributors from `CONTRIBUTORS.md`
    - Document tool versions from production
-   - Create execution domain from component XML
+   - Create execution domain from component XML (all steps)
    - Add parametric domain from `.config`
    - Build I/O domain from input/output specs
 
-### Example: BLAST Component
+### Example: BLAST Component (Multi-Step)
 
-**Ergatis Lite:**
+**Ergatis Component Structure:**
+1. Run BLAST (tool)
+2. Convert to BTAB (converter)
+3. Convert to BSML (converter)
+4. Validate BSML (validation)
+
+**Ergatis Lite (captures all steps):**
 ```
-<blast:query=$INPUT:database=/db/nr.fasta:evalue=1e-5:output=$OUTPUT>
+(
+  <blast:query=$INPUT:database=/db/nr.fasta:evalue=1e-5>,
+  <blast2btab:input=blast.raw:output=blast.btab>,
+  <blast2bsml:input=blast.raw:output=blast.bsml>,
+  <validate:input=blast.bsml>
+)
 ```
 
-**CWL:** (see Tier 2 example above)
+**CWL (one per tool, NOT workflow):**
+- `blast.cwl` - BLAST tool only
+- `blast2btab.cwl` - Converter tool only
+- `blast2bsml.cwl` - Converter tool only
+- `validate.cwl` - Validation tool only
 
-**BCO:** (see Tier 3 example above)
+**BCO (captures full multi-step execution):**
+```json
+{
+  "description_domain": {
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "BLAST protein alignment",
+        "description": "Run NCBI BLASTP"
+      },
+      {
+        "step_number": 2,
+        "name": "Convert to BTAB",
+        "description": "Parse BLAST raw to tabular format"
+      },
+      {
+        "step_number": 3,
+        "name": "Convert to BSML",
+        "description": "Parse BLAST raw to BSML XML"
+      },
+      {
+        "step_number": 4,
+        "name": "Validate BSML",
+        "description": "DTD validation of BSML output"
+      }
+    ]
+  }
+}
+```
 
 ## Use Cases
 
-### Quick Reference
-→ Use Ergatis Lite notation in documentation
+### Tool Parameter Documentation
+→ Use CWL CommandLineTool for individual tools
+
+### Multi-Step Component Documentation
+→ Use Ergatis Lite notation
 
 ### Workflow Execution
-→ Use CWL for running pipelines
+→ Use Ergatis Lite or BCO (NOT CWL Workflow)
 
 ### Regulatory Submission
 → Use BCO for FDA compliance
@@ -239,7 +292,7 @@ outputs:
 → Include all three formats for completeness
 
 ### Long-term Preservation
-→ BCO as primary format, CWL for reproducibility, Ergatis Lite for human readability
+→ BCO as primary format, CWL for tool configs, Ergatis Lite for human readability
 
 ## Implementation Plan
 
@@ -251,10 +304,10 @@ outputs:
 
 ## Benefits of Multi-Format Approach
 
-- **Ergatis Lite:** Preserves original design philosophy (minimal, mathematical)
-- **CWL:** Enables modern workflow execution
-- **BCO:** Ensures regulatory compliance and long-term preservation
-- **Together:** Complete knowledge transfer from Ergatis to modern ecosystem
+- **Ergatis Lite:** Preserves original design philosophy (minimal, mathematical), captures multi-step execution
+- **CWL:** Documents individual tool parameters with type safety (NOT for multi-step workflows)
+- **BCO:** Ensures regulatory compliance, captures full multi-step execution, long-term preservation
+- **Together:** Complete knowledge transfer - Ergatis Lite and BCO for workflows, CWL for tool configs
 
 ## References
 
