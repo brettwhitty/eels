@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gitea.gnomatix.com/gnomatix/eels/raw/branch/main/data/schemas/ergatis-component.schema.json",
+  "title": "Ergatis Component",
+  "description": "Schema for Ergatis bioinformatics workflow component definitions extracted by EELS",
+  "type": "object",
+  "required": ["name", "parameters", "has_iterator"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Component name (e.g., ncbi-blastp, hmmpfam3, glimmer3)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the component function"
+    },
+    "classification": {
+      "type": "string",
+      "description": "Functional classification (e.g., 'alignment / pairwise', 'feature prediction / genes')"
+    },
+    "has_iterator": {
+      "type": "boolean",
+      "description": "Whether the component uses an iterator for parallelization via GROUP_COUNT batching"
+    },
+    "group_count": {
+      "type": "string",
+      "description": "Default number of parallel groups for iterator-based execution"
+    },
+    "parameters": {
+      "type": "array",
+      "description": "Configurable parameters from the component .config file",
+      "items": { "$ref": "#/$defs/parameter" }
+    },
+    "tool_execution": {
+      "type": "array",
+      "description": "Tool executables invoked by this component",
+      "items": { "$ref": "#/$defs/toolExecution" }
+    },
+    "converters": {
+      "type": "object",
+      "description": "Output format converters at main and iterator levels",
+      "properties": {
+        "main": { "type": "array", "items": { "$ref": "#/$defs/converter" } },
+        "iterator": { "type": "array", "items": { "$ref": "#/$defs/converter" } }
+      },
+      "additionalProperties": false
+    },
+    "input_modes": {
+      "type": "object",
+      "description": "Supported input modes",
+      "properties": {
+        "file": { "type": "boolean" },
+        "list": { "type": "boolean" },
+        "directory": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "output_formats": {
+      "type": "array",
+      "description": "Output list file names indicating available output formats",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "parameter": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "description": "Parameter name from .config INI file" },
+        "default": { "type": "string", "description": "Default value" }
+      },
+      "additionalProperties": false
+    },
+    "toolExecution": {
+      "type": "object",
+      "required": ["name", "executable"],
+      "properties": {
+        "name": { "type": "string", "description": "Step name" },
+        "executable": { "type": "string", "description": "Executable path or variable reference" }
+      },
+      "additionalProperties": false
+    },
+    "converter": {
+      "type": "object",
+      "required": ["name", "script"],
+      "properties": {
+        "name": { "type": "string", "description": "Converter step name" },
+        "script": { "type": "string", "description": "Converter script name (e.g., blast2bsml)" },
+        "input": { "type": ["string", "null"], "description": "Input file path pattern" },
+        "output": { "type": ["string", "null"], "description": "Output file path pattern" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
