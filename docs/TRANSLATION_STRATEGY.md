@@ -1,115 +1,101 @@
 # EELS Multi-Format Translation Strategy
 
-## Primary Format: Component JSON
+## Data Hierarchy
 
-**Source:** `data/components/*.json` (362 files from dev-component project, 2017)
+### Level 1: Components (362 files)
+**Source:** `data/components/*.json`  
+**Scope:** Individual atomic workflow units  
+**Captures:** Tool execution chains, converters, parameters within ONE component
 
-**Example:** `data/components/aat_na.json`
+**Example:** `aat_na.json`
 ```json
 {
   "name": "aat_na",
-  "classification": "alignment / pairwise",
   "tool_execution": [
     {"name": "dds", "executable": "$;DDS_EXEC$;"},
-    {"name": "ext", "executable": "$;EXT_EXEC$;"},
-    {"name": "filter", "executable": "$;FILTER_EXEC$;"}
+    {"name": "ext", "executable": "$;EXT_EXEC$;"}
   ],
   "converters": {
     "iterator": [
       {"script": "gap22bsml", "input": "*.btab", "output": "*.bsml"}
     ]
-  },
-  "output_formats": ["bsml_output_list", "btab_output_list"],
-  "has_iterator": true,
-  "group_count": "150"
-}
-```
-
-**This is the canonical representation.** All other formats are derived from this.
-
-## Derived Formats
-
-### Tier 1: Ergatis Lite (Minimal Notation)
-**Purpose:** Compact, human-readable representation  
-**Derived from:** Component JSON
-
-**Format:**
-```
-(
-  <dds:executable=$;DDS_EXEC$;>,
-  <ext:executable=$;EXT_EXEC$;>,
-  <filter:executable=$;FILTER_EXEC$;>,
-  <gap22bsml:input=*.btab:output=*.bsml>
-)
-```
-
-**Captures:**
-- Component execution order (from `tool_execution` array)
-- Converter chain (from `converters` object)
-- Minimal parameters
-- Serial/parallel structure
-
-### Tier 2: CWL (Tool Parameter Documentation)
-**Purpose:** Type-safe parameter documentation for individual tools  
-**Derived from:** Component JSON `tool_execution` entries
-
-**Scope:** ONE CWL file per tool in `tool_execution` array
-
-**Example:** From `aat_na.json` → generate `dds.cwl`, `ext.cwl`, `filter.cwl`
-
-```yaml
-# dds.cwl
-cwlVersion: v1.2
-class: CommandLineTool
-baseCommand: [$DDS_EXEC]
-inputs:
-  query:
-    type: File
-  database:
-    type: File
-outputs:
-  raw_output:
-    type: File
-```
-
-**Does NOT capture:**
-- Multi-step execution (that's in Component JSON)
-- Converter chains (that's in Component JSON)
-- Workflow composition (that's in Component JSON)
-
-### Tier 3: BioCompute Object (Regulatory Documentation)
-**Purpose:** IEEE 2791-2020 standard for regulatory compliance  
-**Derived from:** Component JSON + CONTRIBUTORS.md + git history
-
-**Format:**
-```json
-{
-  "provenance_domain": {
-    "name": "AAT Nucleotide Alignment",
-    "contributors": [/* from CONTRIBUTORS.md */]
-  },
-  "description_domain": {
-    "pipeline_steps": [
-      {"step_number": 1, "name": "dds"},
-      {"step_number": 2, "name": "ext"},
-      {"step_number": 3, "name": "filter"},
-      {"step_number": 4, "name": "gap22bsml"}
-    ]
-  },
-  "parametric_domain": [/* from component .config */],
-  "io_domain": {
-    "output_subdomain": [
-      {"mediatype": "application/xml", "uri": "*.bsml"}
-    ]
   }
 }
 ```
 
-**Captures:**
-- Full multi-step execution (from `tool_execution` + `converters`)
-- Provenance and attribution
-- Complete parameter documentation
-- Regulatory compliance metadata
+### Level 2: Workflows (56 workflows, 108 XML files)
+**Source:** `ergatis-git/workflow/` (XML templates)  
+**Current catalog:** `data/workflow_catalog.json` (file counts only)  
+**Scope:** Component composition and ordering  
+**Captures:** Which components run in what order, data flow between components
+
+**NOT YET EXTRACTED:** Actual workflow logic (component ordering, data dependencies)
+
+**Example workflow structure:**
+```
+Prokaryotic Annotation Pipeline:
+1. glimmer3 (gene prediction)
+2. blast (protein alignment)
+3. hmmpfam (domain search)
+4. merge_annotations (combine results)
+5. bsml2chado (database load)
+```
+
+### Level 3: Converters (65 files)
+**Source:** `data/converters/*.json` (from manpages)  
+**Scope:** Tool output → BSML transformation  
+**Captures:** Converter parameters, input/output formats
+
+## Translation Targets
+
+### For Components: Ergatis Lite + CWL + BCO
+
+**Component JSON → Ergatis Lite:**
+```
+(<dds>, <ext>, <filter>, <gap22bsml>)
+```
+
+**Component JSON → CWL (one per tool):**
+- `dds.cwl`
+- `ext.cwl`
+- `gap22bsml.cwl`
+
+**Component JSON → BCO:**
+```json
+{
+  "pipeline_steps": [
+    {"step_number": 1, "name": "dds"},
+    {"step_number": 2, "name": "ext"}
+  ]
+}
+```
+
+### For Workflows: Ergatis Lite + BCO (NOT CWL)
+
+**Workflow XML → Ergatis Lite:**
+```
+(
+  <glimmer3:input=genome.fsa>,
+  {<blast:database=/db/nr>, <hmmpfam:database=/db/Pfam>},
+  <merge_annotations>,
+  <bsml2chado>
+)
+```
+
+**Workflow XML → BCO:**
+```json
+{
+  "pipeline_steps": [
+    {"step_number": 1, "name": "glimmer3 gene prediction"},
+    {"step_number": 2, "name": "blast alignment", "prerequisite": [1]},
+    {"step_number": 3, "name": "hmmpfam domains", "prerequisite": [1]},
+    {"step_number": 4, "name": "merge", "prerequisite": [2, 3]},
+    {"step_number": 5, "name": "load to chado", "prerequisite": [4]}
+  ]
+}
+```
+
+**CWL:** NOT used for workflow composition - only for individual tool configs
 
 ## Translation Workflow
 
@@ -193,13 +179,27 @@ outputs:
 ### Long-term Preservation
 → BCO as primary format, CWL for tool configs, Ergatis Lite for human readability
 
-## Implementation Plan
+## Current Status
 
-1. **Phase 1:** Component JSON is already complete (362 files, 2017)
-2. **Phase 2:** Generate Ergatis Lite notation from Component JSON
-3. **Phase 3:** Generate CWL CommandLineTools from Component JSON `tool_execution` arrays
-4. **Phase 4:** Generate BCO from Component JSON + CONTRIBUTORS.md + .config files
-5. **Phase 5:** Validation and testing
+### Complete
+- ✅ Component JSON (362 files) - individual component structure
+- ✅ Converter JSON (65 files) - converter parameters
+- ✅ Workflow catalog (56 workflows) - file counts only
+
+### Incomplete
+- ❌ Workflow logic extraction - component ordering, data flow
+- ❌ Workflow JSON - structured representation of pipelines
+- ❌ Ergatis Lite generation
+- ❌ CWL generation
+- ❌ BCO generation
+
+## Next Steps
+
+1. **Parse workflow XML files** - Extract component ordering and data dependencies
+2. **Create workflow JSON** - Structured representation of 56 workflows
+3. **Generate Ergatis Lite** - For components and workflows
+4. **Generate CWL** - For individual tools only
+5. **Generate BCO** - For components and workflows
 
 ## Benefits of Multi-Format Approach
 
