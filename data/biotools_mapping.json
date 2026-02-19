@@ -1771,7 +1771,7 @@
       },
       "ps_scan" : {
          "biotoolsID" : "ps_scan",
-         "description" : "ps_scan (ScanProsite tool) is a perl program used to scan one or several patterns, rules and/or profiles from PROSITE against one or several protein sequnces in Swiss-Prot or FASTA format. It requires two compiled external programs from the PFTOOLS package : Ã¢ÂÂpfscanÃ¢ÂÂ used to scan a sequence against a profile library and Ã¢ÂÂpsa2msaÃ¢ÂÂ which is necessary for the Ã¢ÂÂ-o msaÃ¢ÂÂ output format only.",
+         "description" : "ps_scan (ScanProsite tool) is a perl program used to scan one or several patterns, rules and/or profiles from PROSITE against one or several protein sequnces in Swiss-Prot or FASTA format. It requires two compiled external programs from the PFTOOLS package : âpfscanâ used to scan a sequence against a profile library and âpsa2msaâ which is necessary for the â-o msaâ output format only.",
          "function" : [
             {
                "input" : [],
@@ -1790,7 +1790,7 @@
       },
       "psortb" : {
          "biotoolsID" : "psortb",
-         "description" : "It is a high-precision localization prediction method for bacterial proteins. It has remained the most precise bacterial protein subcellular localization (SCL) predictor. ÃÂ PSORTb version improved recall, higher proteome-scale prediction coverage, and new refined localization subcategories. It is the first SCL predictor specifically geared for all prokaryotes, including archaea and bacteria with atypical membrane/cell wall topologies.",
+         "description" : "It is a high-precision localization prediction method for bacterial proteins. It has remained the most precise bacterial protein subcellular localization (SCL) predictor. Â PSORTb version improved recall, higher proteome-scale prediction coverage, and new refined localization subcategories. It is the first SCL predictor specifically geared for all prokaryotes, including archaea and bacteria with atypical membrane/cell wall topologies.",
          "function" : [
             {
                "input" : [],
@@ -2033,7 +2033,7 @@
       },
       "spades" : {
          "biotoolsID" : "spades",
-         "description" : "St. Petersburg genome assembler Ã¢ÂÂ is intended for both standard isolates and single-cell MDA bacteria assemblies. SPAdes 3.9 works with Illumina or IonTorrent reads and is capable of providing hybrid assemblies using PacBio, Oxford Nanopore and Sanger reads. Additional contigs can be provided and can be used as long reads.",
+         "description" : "St. Petersburg genome assembler â is intended for both standard isolates and single-cell MDA bacteria assemblies. SPAdes 3.9 works with Illumina or IonTorrent reads and is capable of providing hybrid assemblies using PacBio, Oxford Nanopore and Sanger reads. Additional contigs can be provided and can be used as long reads.",
          "function" : [
             {
                "input" : [
@@ -4610,14 +4610,270 @@
                "name" : "wu-tblastn"
             }
          ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/solsnp",
+         "biotoolsID" : "solsnp",
+         "component" : "solsnp",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "SolSNP",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "SolSNP"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/alien_hunter",
+         "biotoolsID" : "alien_hunter",
+         "component" : "alien_hunter",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "alien_hunter",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "alien_hunter"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/circleator",
+         "biotoolsID" : "circleator",
+         "component" : "make_circleator_figure",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "circleator",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "circleator"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/circleator",
+         "biotoolsID" : "circleator",
+         "component" : "make_comparative_circleator_figure",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "circleator",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "circleator"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/celera_assembler",
+         "biotoolsID" : "celera_assembler",
+         "component" : "fastq_to_CA",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "fastqToCA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "fastqToCA"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/fastx-toolkit",
+         "biotoolsID" : "fastx-toolkit",
+         "component" : "fastx_quality_stat",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "fastx_quality_stats",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "fastx_quality_stats"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/gmap-gsnap",
+         "biotoolsID" : "gmap-gsnap",
+         "component" : "gsnap",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "gmap_setup",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "gmap_setup"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/interproscan_5",
+         "biotoolsID" : "interproscan_5",
+         "component" : "iprscan",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "iprscan",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "iprscan"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/predotar",
+         "biotoolsID" : "predotar",
+         "component" : "predotar",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "predotar",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "predotar"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/prinseq",
+         "biotoolsID" : "prinseq",
+         "component" : "filter_dups_lc_seqs",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "prinseq-lite",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "prinseq-lite"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/quicktree",
+         "biotoolsID" : "quicktree",
+         "component" : "quicktree",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "quicktree",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "quicktree"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/ksnp",
+         "biotoolsID" : "ksnp",
+         "component" : "ksnp",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "run_kSNP_v2",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "run_kSNP_v2"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/tbl2asn",
+         "biotoolsID" : "tbl2asn",
+         "component" : "dump_fasta",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "tbl2asn",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "tbl2asn"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/tbl2asn",
+         "biotoolsID" : "tbl2asn",
+         "component" : "dump_table",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "tbl2asn",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "tbl2asn"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/tbl2asn",
+         "biotoolsID" : "tbl2asn",
+         "component" : "tbl2asn",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "tbl2asn",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "tbl2asn"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/uchime",
+         "biotoolsID" : "uchime",
+         "component" : "uchime",
+         "homepage" : "",
+         "matched" : true,
+         "tool_name" : "uchime",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "",
+               "idx" : 0,
+               "name" : "uchime"
+            }
+         ]
       }
    ],
    "summary" : {
-      "biotools_found" : 55,
-      "mapped_components" : 126,
+      "biotools_found" : 68,
+      "mapped_components" : 137,
       "total_components" : 383,
-      "unique_biotools" : 58,
-      "unmapped_components" : 257
+      "unique_biotools" : 68,
+      "unmapped_components" : 242
    },
    "unmapped" : [
       "454_mplex_seq_bin_trim",
@@ -4626,7 +4882,6 @@
       "aat_na",
       "aat_na_masked",
       "adjust_bsml_coordinates",
-      "alien_hunter",
       "align_bowtie_stats",
       "align_tophat_split_stats",
       "align_tophat_stats",
@@ -4683,8 +4938,6 @@
       "download_sra",
       "download_tcga",
       "drop_chado_indexes",
-      "dump_fasta",
-      "dump_table",
       "elph",
       "error_detector",
       "expression_plots",
@@ -4693,13 +4946,11 @@
       "fasta2bsml",
       "fastaToBsmlWorkingGeneModels",
       "fastortho",
-      "fastq_to_CA",
       "fastx_quality_stats",
       "fastx_trimming",
       "fetch_genbank",
       "filter_bogus_genes",
       "filter_deseq",
-      "filter_dups_lc_seqs",
       "filter_fastq",
       "filter_lgt_class_c_genes",
       "filter_merged_table",
@@ -4718,7 +4969,6 @@
       "gff3_to_gbrowse",
       "gkpstore2fastq",
       "glk2bsml",
-      "gsnap",
       "histogram_stacked",
       "htseq",
       "htseq_count_reads",
@@ -4726,12 +4976,10 @@
       "initdb",
       "insert_pmarks_in_scaffolds",
       "intergenic_analysis",
-      "iprscan",
       "islandpath",
       "j_ortholog_clusters",
       "j_ortholog_clusters_distributed_work",
       "jaccard",
-      "ksnp",
       "leech",
       "legacy2bsml",
       "lgt_bwa_post_process",
@@ -4739,8 +4987,6 @@
       "lgt_mpileup",
       "lipoprotein_motif",
       "load_ber_for_manatee",
-      "make_circleator_figure",
-      "make_comparative_circleator_figure",
       "make_snp_lists",
       "map_snp_query_pos",
       "mask_by_analysis",
@@ -4801,7 +5047,6 @@
       "pmarks2bsml",
       "predict_operons",
       "predict_prokaryotic_gene_function",
-      "predotar",
       "prepare_paired_ends_for_velvet",
       "preserve_reads_in_fastq",
       "profile_bsml",
@@ -4811,7 +5056,6 @@
       "promote_gene_prediction",
       "qiime_fasta_mothur_cnvr",
       "qiime_fastq_mothur_cnvr",
-      "quicktree",
       "rdp_classifier",
       "refresh_chado_mart",
       "remove_db_gene_syms_with_hypos",
@@ -4840,7 +5084,6 @@
       "skiff",
       "snp-add-gene-info",
       "snp_verify",
-      "solsnp",
       "sort_sam_by_name",
       "split_fasta",
       "split_fasta_fastq",
@@ -4857,10 +5100,8 @@
       "summarize_mugsy_comparative_pipeline_distributed",
       "tabula_rasa",
       "tag_data",
-      "tbl2asn",
       "translate_sequence",
       "truncate_chado_mart",
-      "uchime",
       "uclust",
       "uclust_remove_replicates",
       "update_ec_numbers",

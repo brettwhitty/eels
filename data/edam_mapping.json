@@ -1,32 +1,22 @@
 {
   "description": "EDAM ontology terms for Ergatis components via bio.tools registry",
-  "total_mapped": 121,
-  "unique_operations": 80,
-  "unique_topics": 47,
   "mapping": [
     {
-      "component": "RAPSearch2",
       "biotoolsID": "rapsearch",
-      "tool_name": "RAPSearch",
+      "component": "RAPSearch2",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence alignment"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Metagenomics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "RAPSearch"
     },
     {
-      "component": "RNAmmer",
       "biotoolsID": "rnammer",
-      "tool_name": "RNAmmer",
-      "edam_operations": [
-        "Nucleic acid feature detection"
-      ],
-      "edam_topics": [
-        "Sequence sites, features and motifs"
-      ],
+      "component": "RNAmmer",
       "edam_inputs": [
         {
           "format": [
@@ -35,81 +25,88 @@
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Nucleic acid feature detection"
+      ],
       "edam_outputs": [
         {
-          "term": "Protein features",
           "format": [
             "GFF"
-          ]
+          ],
+          "term": "Protein features"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence sites, features and motifs"
+      ],
+      "tool_name": "RNAmmer"
     },
     {
-      "component": "SPAdes",
       "biotoolsID": "spades",
-      "tool_name": "SPAdes",
+      "component": "SPAdes",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTQ"
+          ],
+          "term": "Data"
+        },
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence alignment"
+        }
+      ],
       "edam_operations": [
         "Genome assembly"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "TSV"
+          ],
+          "term": "Data"
+        },
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence alignment"
+        },
+        {
+          "format": [
+            "Textual format"
+          ],
+          "term": "Data"
+        }
       ],
       "edam_topics": [
         "Sequence assembly"
       ],
-      "edam_inputs": [
-        {
-          "term": "Data",
-          "format": [
-            "FASTQ"
-          ]
-        },
-        {
-          "format": [
-            "FASTA"
-          ],
-          "term": "Sequence alignment"
-        }
-      ],
-      "edam_outputs": [
-        {
-          "term": "Data",
-          "format": [
-            "TSV"
-          ]
-        },
-        {
-          "format": [
-            "FASTA"
-          ],
-          "term": "Sequence alignment"
-        },
-        {
-          "term": "Data",
-          "format": [
-            "Textual format"
-          ]
-        }
-      ]
+      "tool_name": "SPAdes"
     },
     {
-      "component": "amoscmp",
       "biotoolsID": "amos",
-      "tool_name": "AMOS",
+      "component": "amoscmp",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence assembly visualisation",
         "Formatting",
         "Sequence assembly",
         "Sequence assembly validation"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Genomics",
         "Sequence assembly"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "AMOS"
     },
     {
-      "component": "antigenic",
       "biotoolsID": "emboss",
-      "tool_name": "EMBOSS",
+      "component": "antigenic",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence analysis",
         "Local alignment",
@@ -117,64 +114,48 @@
         "Global alignment",
         "Sequence alignment"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Molecular biology",
         "Sequence analysis",
         "Biology"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "EMBOSS"
     },
     {
-      "component": "aragorn",
       "biotoolsID": "aragorn",
-      "tool_name": "aragorn",
+      "component": "aragorn",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Functional, regulatory and non-coding RNA",
         "Genomics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "aragorn"
     },
     {
-      "component": "augustus",
       "biotoolsID": "augustus",
-      "tool_name": "AUGUSTUS",
+      "component": "augustus",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction",
         "Ab-initio gene prediction",
         "Homology-based gene prediction",
         "Operation"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Gene transcripts",
         "Gene and protein families"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "AUGUSTUS"
     },
     {
+      "biotoolsID": "samtools",
       "component": "bam2bigwig",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -185,6 +166,15 @@
           "term": "Sequence trace"
         }
       ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -194,27 +184,18 @@
           ],
           "term": "Sequence trace"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
     },
     {
+      "biotoolsID": "samtools",
       "component": "bam2coverage",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -225,6 +206,15 @@
           "term": "Sequence trace"
         }
       ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -234,27 +224,18 @@
           ],
           "term": "Sequence trace"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
     },
     {
+      "biotoolsID": "samtools",
       "component": "bam2sam",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -265,6 +246,15 @@
           "term": "Sequence trace"
         }
       ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -274,27 +264,18 @@
           ],
           "term": "Sequence trace"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
     },
     {
+      "biotoolsID": "samtools",
       "component": "bam_merge",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -305,6 +286,15 @@
           "term": "Sequence trace"
         }
       ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -314,77 +304,79 @@
           ],
           "term": "Sequence trace"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
     },
     {
-      "component": "bepipred",
       "biotoolsID": "bepipred",
-      "tool_name": "BepiPred",
+      "component": "bepipred",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Epitope mapping"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "GFF"
+          ],
+          "term": "Protein features"
+        }
       ],
       "edam_topics": [
         "Protein binding sites"
       ],
+      "tool_name": "BepiPred"
+    },
+    {
+      "biotoolsID": "blast2go",
+      "component": "blast2go",
       "edam_inputs": [
         {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
+          "format": [],
+          "term": "Sequence alignment (nucleic acid)"
         }
+      ],
+      "edam_operations": [
+        "Gene functional annotation"
       ],
       "edam_outputs": [
         {
-          "term": "Protein features",
-          "format": [
-            "GFF"
-          ]
+          "format": [],
+          "term": "Over-representation data"
         }
-      ]
-    },
-    {
-      "component": "blast2go",
-      "biotoolsID": "blast2go",
-      "tool_name": "Blast2GO",
-      "edam_operations": [
-        "Gene functional annotation"
       ],
       "edam_topics": [
         "Nucleic acid sites, features and motifs"
       ],
-      "edam_inputs": [
-        {
-          "term": "Sequence alignment (nucleic acid)",
-          "format": []
-        }
-      ],
-      "edam_outputs": [
-        {
-          "term": "Over-representation data",
-          "format": []
-        }
-      ]
+      "tool_name": "Blast2GO"
     },
     {
+      "biotoolsID": "blast",
       "component": "blastn_plus",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -400,27 +392,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "blastp_plus",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -436,49 +428,44 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "bmtagger",
       "component": "bmtagger",
-      "biotoolsID": "bmtagger",
-      "tool_name": "bmtagger",
+      "edam_inputs": [],
       "edam_operations": [
         "Data filtering",
         "Read pre-processing"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Metagenomics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "bmtagger"
     },
     {
+      "biotoolsID": "bmtagger",
       "component": "bmtagger_index",
-      "biotoolsID": "bmtagger",
-      "tool_name": "bmtagger",
+      "edam_inputs": [],
       "edam_operations": [
         "Data filtering",
         "Read pre-processing"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Metagenomics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "bmtagger"
     },
     {
+      "biotoolsID": "bowtie",
       "component": "bowtie",
-      "biotoolsID": "bowtie",
-      "tool_name": "Bowtie",
-      "edam_operations": [
-        "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Genomics",
-        "Sequencing",
-        "Sequence assembly"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -496,18 +483,21 @@
           "term": "Data"
         }
       ],
+      "edam_operations": [
+        "Sequence alignment"
+      ],
       "edam_outputs": [
         {
-          "term": "Sequence trace",
           "format": [
             "SAM"
-          ]
+          ],
+          "term": "Sequence trace"
         },
         {
-          "term": "Data",
           "format": [
             "Textual format"
-          ]
+          ],
+          "term": "Data"
         },
         {
           "format": [
@@ -515,21 +505,18 @@
           ],
           "term": "Data"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Genomics",
+        "Sequencing",
+        "Sequence assembly"
+      ],
+      "tool_name": "Bowtie"
     },
     {
+      "biotoolsID": "bowtie",
       "component": "bowtie_build",
-      "biotoolsID": "bowtie",
-      "tool_name": "Bowtie",
-      "edam_operations": [
-        "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Genomics",
-        "Sequencing",
-        "Sequence assembly"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -547,18 +534,21 @@
           "term": "Data"
         }
       ],
+      "edam_operations": [
+        "Sequence alignment"
+      ],
       "edam_outputs": [
         {
-          "term": "Sequence trace",
           "format": [
             "SAM"
-          ]
+          ],
+          "term": "Sequence trace"
         },
         {
-          "term": "Data",
           "format": [
             "Textual format"
-          ]
+          ],
+          "term": "Data"
         },
         {
           "format": [
@@ -566,27 +556,24 @@
           ],
           "term": "Data"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Genomics",
+        "Sequencing",
+        "Sequence assembly"
+      ],
+      "tool_name": "Bowtie"
     },
     {
+      "biotoolsID": "bwa",
       "component": "bwa",
-      "biotoolsID": "bwa",
-      "tool_name": "BWA",
-      "edam_operations": [
-        "Genome indexing",
-        "Sequence alignment",
-        "Read mapping",
-        "Generation"
-      ],
-      "edam_topics": [
-        "Mapping"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -599,28 +586,34 @@
           "term": "Sequence"
         },
         {
-          "term": "Sequence",
           "format": [
             "FASTA search results format"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Genome indexing",
+        "Sequence alignment",
+        "Read mapping",
+        "Generation"
+      ],
       "edam_outputs": [
         {
-          "term": "Genome index",
-          "format": []
+          "format": [],
+          "term": "Genome index"
         },
         {
-          "term": "Alignment",
-          "format": []
+          "format": [],
+          "term": "Alignment"
         },
         {
-          "term": "Sequence coordinates",
-          "format": []
+          "format": [],
+          "term": "Sequence coordinates"
         },
         {
           "format": [
@@ -629,30 +622,24 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Sequence alignment",
-          "format": []
+          "format": [],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping"
+      ],
+      "tool_name": "BWA"
     },
     {
+      "biotoolsID": "bwa",
       "component": "bwa_align",
-      "biotoolsID": "bwa",
-      "tool_name": "BWA",
-      "edam_operations": [
-        "Genome indexing",
-        "Sequence alignment",
-        "Read mapping",
-        "Generation"
-      ],
-      "edam_topics": [
-        "Mapping"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -665,28 +652,34 @@
           "term": "Sequence"
         },
         {
-          "term": "Sequence",
           "format": [
             "FASTA search results format"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Genome indexing",
+        "Sequence alignment",
+        "Read mapping",
+        "Generation"
+      ],
       "edam_outputs": [
         {
-          "term": "Genome index",
-          "format": []
+          "format": [],
+          "term": "Genome index"
         },
         {
-          "term": "Alignment",
-          "format": []
+          "format": [],
+          "term": "Alignment"
         },
         {
-          "term": "Sequence coordinates",
-          "format": []
+          "format": [],
+          "term": "Sequence coordinates"
         },
         {
           "format": [
@@ -695,30 +688,24 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Sequence alignment",
-          "format": []
+          "format": [],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping"
+      ],
+      "tool_name": "BWA"
     },
     {
+      "biotoolsID": "bwa",
       "component": "bwa_index",
-      "biotoolsID": "bwa",
-      "tool_name": "BWA",
-      "edam_operations": [
-        "Genome indexing",
-        "Sequence alignment",
-        "Read mapping",
-        "Generation"
-      ],
-      "edam_topics": [
-        "Mapping"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -731,28 +718,34 @@
           "term": "Sequence"
         },
         {
-          "term": "Sequence",
           "format": [
             "FASTA search results format"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Genome indexing",
+        "Sequence alignment",
+        "Read mapping",
+        "Generation"
+      ],
       "edam_outputs": [
         {
-          "term": "Genome index",
-          "format": []
+          "format": [],
+          "term": "Genome index"
         },
         {
-          "term": "Alignment",
-          "format": []
+          "format": [],
+          "term": "Alignment"
         },
         {
-          "term": "Sequence coordinates",
-          "format": []
+          "format": [],
+          "term": "Sequence coordinates"
         },
         {
           "format": [
@@ -761,30 +754,24 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Sequence alignment",
-          "format": []
+          "format": [],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping"
+      ],
+      "tool_name": "BWA"
     },
     {
+      "biotoolsID": "bwa",
       "component": "bwa_mem",
-      "biotoolsID": "bwa",
-      "tool_name": "BWA",
-      "edam_operations": [
-        "Genome indexing",
-        "Sequence alignment",
-        "Read mapping",
-        "Generation"
-      ],
-      "edam_topics": [
-        "Mapping"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -797,28 +784,34 @@
           "term": "Sequence"
         },
         {
-          "term": "Sequence",
           "format": [
             "FASTA search results format"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Genome indexing",
+        "Sequence alignment",
+        "Read mapping",
+        "Generation"
+      ],
       "edam_outputs": [
         {
-          "term": "Genome index",
-          "format": []
+          "format": [],
+          "term": "Genome index"
         },
         {
-          "term": "Alignment",
-          "format": []
+          "format": [],
+          "term": "Alignment"
         },
         {
-          "term": "Sequence coordinates",
-          "format": []
+          "format": [],
+          "term": "Sequence coordinates"
         },
         {
           "format": [
@@ -827,89 +820,76 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Sequence alignment",
-          "format": []
+          "format": [],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping"
+      ],
+      "tool_name": "BWA"
     },
     {
-      "component": "clustalw",
       "biotoolsID": "clustalw",
-      "tool_name": "Clustal 1.8 (Clustal W, Clustal X)",
+      "component": "clustalw",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Multiple sequence alignment"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence alignment"
+        }
       ],
       "edam_topics": [
         "Sequence analysis"
       ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
-      ],
-      "edam_outputs": [
-        {
-          "format": [
-            "FASTA"
-          ],
-          "term": "Sequence alignment"
-        }
-      ]
+      "tool_name": "Clustal 1.8 (Clustal W, Clustal X)"
     },
     {
-      "component": "core_qiime",
       "biotoolsID": "qiime",
-      "tool_name": "QIIME",
+      "component": "core_qiime",
+      "edam_inputs": [],
       "edam_operations": [
         "Analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Biology"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "QIIME"
     },
     {
-      "component": "crossbow",
       "biotoolsID": "crossbow",
-      "tool_name": "Crossbow",
+      "component": "crossbow",
+      "edam_inputs": [],
       "edam_operations": [
         "Genotyping",
         "SNP detection",
         "Read mapping",
         "Service composition"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Genomics",
         "Mapping",
         "Genetic variation"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Crossbow"
     },
     {
+      "biotoolsID": "cufflinks",
       "component": "cuffcompare",
-      "biotoolsID": "cufflinks",
-      "tool_name": "Cufflinks",
-      "edam_operations": [
-        "RNA-seq time series data analysis",
-        "Transcriptome assembly",
-        "Sequence comparison",
-        "DNA transcription",
-        "Aggregation",
-        "RNA-seq read count analysis",
-        "Gene expression analysis",
-        "Gene expression comparison",
-        "Standardisation and normalisation"
-      ],
-      "edam_topics": [
-        "RNA splicing",
-        "Transcriptomics",
-        "RNA-Seq"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -945,6 +925,17 @@
           "term": "Annotation track"
         }
       ],
+      "edam_operations": [
+        "RNA-seq time series data analysis",
+        "Transcriptome assembly",
+        "Sequence comparison",
+        "DNA transcription",
+        "Aggregation",
+        "RNA-seq read count analysis",
+        "Gene expression analysis",
+        "Gene expression comparison",
+        "Standardisation and normalisation"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -961,8 +952,8 @@
           "term": "Gene expression data"
         },
         {
-          "term": "Statistical estimate score",
-          "format": []
+          "format": [],
+          "term": "Statistical estimate score"
         },
         {
           "format": [
@@ -979,31 +970,20 @@
           "term": "Gene expression profile"
         },
         {
-          "term": "Gene report",
-          "format": []
+          "format": [],
+          "term": "Gene report"
         }
-      ]
+      ],
+      "edam_topics": [
+        "RNA splicing",
+        "Transcriptomics",
+        "RNA-Seq"
+      ],
+      "tool_name": "Cufflinks"
     },
     {
+      "biotoolsID": "cufflinks",
       "component": "cuffdiff",
-      "biotoolsID": "cufflinks",
-      "tool_name": "Cufflinks",
-      "edam_operations": [
-        "RNA-seq time series data analysis",
-        "Transcriptome assembly",
-        "Sequence comparison",
-        "DNA transcription",
-        "Aggregation",
-        "RNA-seq read count analysis",
-        "Gene expression analysis",
-        "Gene expression comparison",
-        "Standardisation and normalisation"
-      ],
-      "edam_topics": [
-        "RNA splicing",
-        "Transcriptomics",
-        "RNA-Seq"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -1039,6 +1019,17 @@
           "term": "Annotation track"
         }
       ],
+      "edam_operations": [
+        "RNA-seq time series data analysis",
+        "Transcriptome assembly",
+        "Sequence comparison",
+        "DNA transcription",
+        "Aggregation",
+        "RNA-seq read count analysis",
+        "Gene expression analysis",
+        "Gene expression comparison",
+        "Standardisation and normalisation"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -1055,8 +1046,8 @@
           "term": "Gene expression data"
         },
         {
-          "term": "Statistical estimate score",
-          "format": []
+          "format": [],
+          "term": "Statistical estimate score"
         },
         {
           "format": [
@@ -1073,31 +1064,20 @@
           "term": "Gene expression profile"
         },
         {
-          "term": "Gene report",
-          "format": []
+          "format": [],
+          "term": "Gene report"
         }
-      ]
+      ],
+      "edam_topics": [
+        "RNA splicing",
+        "Transcriptomics",
+        "RNA-Seq"
+      ],
+      "tool_name": "Cufflinks"
     },
     {
+      "biotoolsID": "cufflinks",
       "component": "cuffdiff_filter",
-      "biotoolsID": "cufflinks",
-      "tool_name": "Cufflinks",
-      "edam_operations": [
-        "RNA-seq time series data analysis",
-        "Transcriptome assembly",
-        "Sequence comparison",
-        "DNA transcription",
-        "Aggregation",
-        "RNA-seq read count analysis",
-        "Gene expression analysis",
-        "Gene expression comparison",
-        "Standardisation and normalisation"
-      ],
-      "edam_topics": [
-        "RNA splicing",
-        "Transcriptomics",
-        "RNA-Seq"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -1133,6 +1113,17 @@
           "term": "Annotation track"
         }
       ],
+      "edam_operations": [
+        "RNA-seq time series data analysis",
+        "Transcriptome assembly",
+        "Sequence comparison",
+        "DNA transcription",
+        "Aggregation",
+        "RNA-seq read count analysis",
+        "Gene expression analysis",
+        "Gene expression comparison",
+        "Standardisation and normalisation"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -1149,8 +1140,8 @@
           "term": "Gene expression data"
         },
         {
-          "term": "Statistical estimate score",
-          "format": []
+          "format": [],
+          "term": "Statistical estimate score"
         },
         {
           "format": [
@@ -1167,31 +1158,20 @@
           "term": "Gene expression profile"
         },
         {
-          "term": "Gene report",
-          "format": []
+          "format": [],
+          "term": "Gene report"
         }
-      ]
+      ],
+      "edam_topics": [
+        "RNA splicing",
+        "Transcriptomics",
+        "RNA-Seq"
+      ],
+      "tool_name": "Cufflinks"
     },
     {
+      "biotoolsID": "cufflinks",
       "component": "cufflinks",
-      "biotoolsID": "cufflinks",
-      "tool_name": "Cufflinks",
-      "edam_operations": [
-        "RNA-seq time series data analysis",
-        "Transcriptome assembly",
-        "Sequence comparison",
-        "DNA transcription",
-        "Aggregation",
-        "RNA-seq read count analysis",
-        "Gene expression analysis",
-        "Gene expression comparison",
-        "Standardisation and normalisation"
-      ],
-      "edam_topics": [
-        "RNA splicing",
-        "Transcriptomics",
-        "RNA-Seq"
-      ],
       "edam_inputs": [
         {
           "format": [
@@ -1227,6 +1207,17 @@
           "term": "Annotation track"
         }
       ],
+      "edam_operations": [
+        "RNA-seq time series data analysis",
+        "Transcriptome assembly",
+        "Sequence comparison",
+        "DNA transcription",
+        "Aggregation",
+        "RNA-seq read count analysis",
+        "Gene expression analysis",
+        "Gene expression comparison",
+        "Standardisation and normalisation"
+      ],
       "edam_outputs": [
         {
           "format": [
@@ -1243,8 +1234,8 @@
           "term": "Gene expression data"
         },
         {
-          "term": "Statistical estimate score",
-          "format": []
+          "format": [],
+          "term": "Statistical estimate score"
         },
         {
           "format": [
@@ -1261,35 +1252,34 @@
           "term": "Gene expression profile"
         },
         {
-          "term": "Gene report",
-          "format": []
+          "format": [],
+          "term": "Gene report"
         }
-      ]
+      ],
+      "edam_topics": [
+        "RNA splicing",
+        "Transcriptomics",
+        "RNA-Seq"
+      ],
+      "tool_name": "Cufflinks"
     },
     {
-      "component": "cummerbund",
       "biotoolsID": "cummerbund",
-      "tool_name": "cummeRbund",
+      "component": "cummerbund",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence analysis",
         "Sequence visualisation"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequencing"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "cummeRbund"
     },
     {
-      "component": "deseq",
       "biotoolsID": "deseq",
-      "tool_name": "DESeq",
-      "edam_operations": [
-        "Differential gene expression analysis"
-      ],
-      "edam_topics": [
-        "Gene expression"
-      ],
+      "component": "deseq",
       "edam_inputs": [
         {
           "format": [
@@ -1297,6 +1287,9 @@
           ],
           "term": "Data"
         }
+      ],
+      "edam_operations": [
+        "Differential gene expression analysis"
       ],
       "edam_outputs": [
         {
@@ -1306,25 +1299,20 @@
           "term": "Data"
         },
         {
-          "term": "Data",
           "format": [
             "Textual format"
-          ]
+          ],
+          "term": "Data"
         }
-      ]
-    },
-    {
-      "component": "edgeR",
-      "biotoolsID": "edger",
-      "tool_name": "edgeR",
-      "edam_operations": [
-        "Differential gene expression analysis"
       ],
       "edam_topics": [
-        "Genetics",
-        "RNA-Seq",
-        "ChIP-seq"
+        "Gene expression"
       ],
+      "tool_name": "DESeq"
+    },
+    {
+      "biotoolsID": "edger",
+      "component": "edgeR",
       "edam_inputs": [
         {
           "format": [
@@ -1332,6 +1320,9 @@
           ],
           "term": "Sequence"
         }
+      ],
+      "edam_operations": [
+        "Differential gene expression analysis"
       ],
       "edam_outputs": [
         {
@@ -1348,106 +1339,107 @@
           ],
           "term": "P-value"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Genetics",
+        "RNA-Seq",
+        "ChIP-seq"
+      ],
+      "tool_name": "edgeR"
     },
     {
-      "component": "exonerate",
       "biotoolsID": "exonerate",
-      "tool_name": "Exonerate",
+      "component": "exonerate",
+      "edam_inputs": [],
       "edam_operations": [
         "Pairwise sequence alignment",
         "Protein threading",
         "Genome alignment"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequence analysis",
         "Sequence sites, features and motifs",
         "Molecular interactions, pathways and networks"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Exonerate"
     },
     {
-      "component": "fast_tree",
       "biotoolsID": "fasttree",
-      "tool_name": "FastTree",
+      "component": "fast_tree",
+      "edam_inputs": [],
       "edam_operations": [
         "Phylogenetic tree generation (from molecular sequences)",
         "Phylogenetic tree generation (maximum likelihood and Bayesian methods)"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Phylogenetics",
         "Sequence analysis"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "FastTree"
     },
     {
-      "component": "fastqc_stats",
       "biotoolsID": "fastqc",
-      "tool_name": "FastQC",
+      "component": "fastqc_stats",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTQ-like format (text)",
+            "SAM",
+            "FASTQ",
+            "BAM"
+          ],
+          "term": "Raw sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence composition calculation",
         "Sequencing quality control",
         "Statistical calculation"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "HTML"
+          ],
+          "term": "Sequence report"
+        }
       ],
       "edam_topics": [
         "Sequencing",
         "Data quality management",
         "Sequence analysis"
       ],
-      "edam_inputs": [
-        {
-          "term": "Raw sequence",
-          "format": [
-            "FASTQ-like format (text)",
-            "SAM",
-            "FASTQ",
-            "BAM"
-          ]
-        }
-      ],
-      "edam_outputs": [
-        {
-          "term": "Sequence report",
-          "format": [
-            "HTML"
-          ]
-        }
-      ]
+      "tool_name": "FastQC"
     },
     {
-      "component": "fgenesh",
       "biotoolsID": "fgenesh",
-      "tool_name": "FGENESH",
+      "component": "fgenesh",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Gene structure"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "FGENESH"
     },
     {
-      "component": "formatdb",
       "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "component": "formatdb",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -1463,14 +1455,30 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
-      "component": "geneid",
       "biotoolsID": "geneid",
-      "tool_name": "Geneid",
+      "component": "geneid",
+      "edam_inputs": [
+        {
+          "format": [],
+          "term": "Nucleic acid sequence"
+        }
+      ],
       "edam_operations": [
         "Genome annotation"
+      ],
+      "edam_outputs": [
+        {
+          "format": [],
+          "term": "Nucleic acid features"
+        }
       ],
       "edam_topics": [
         "Nucleic acid sites, features and motifs",
@@ -1479,83 +1487,73 @@
         "Gene structure",
         "Molecular genetics"
       ],
-      "edam_inputs": [
-        {
-          "term": "Nucleic acid sequence",
-          "format": []
-        }
+      "tool_name": "Geneid"
+    },
+    {
+      "biotoolsID": "genemark",
+      "component": "genemark",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Gene prediction"
       ],
-      "edam_outputs": [
+      "edam_outputs": [],
+      "edam_topics": [
+        "Gene structure"
+      ],
+      "tool_name": "GeneMark"
+    },
+    {
+      "biotoolsID": "genemark",
+      "component": "genemark-es",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Gene prediction"
+      ],
+      "edam_outputs": [],
+      "edam_topics": [
+        "Gene structure"
+      ],
+      "tool_name": "GeneMark"
+    },
+    {
+      "biotoolsID": "genewise",
+      "component": "genewise",
+      "edam_inputs": [
         {
           "format": [],
-          "term": "Nucleic acid features"
-        }
-      ]
-    },
-    {
-      "component": "genemark",
-      "biotoolsID": "genemark",
-      "tool_name": "GeneMark",
-      "edam_operations": [
-        "Gene prediction"
-      ],
-      "edam_topics": [
-        "Gene structure"
-      ],
-      "edam_inputs": [],
-      "edam_outputs": []
-    },
-    {
-      "component": "genemark-es",
-      "biotoolsID": "genemark",
-      "tool_name": "GeneMark",
-      "edam_operations": [
-        "Gene prediction"
-      ],
-      "edam_topics": [
-        "Gene structure"
-      ],
-      "edam_inputs": [],
-      "edam_outputs": []
-    },
-    {
-      "component": "genewise",
-      "biotoolsID": "genewise",
-      "tool_name": "GeneWise (EBI)",
-      "edam_operations": [
-        "Pairwise sequence alignment",
-        "Local alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Protein sequence",
-          "format": []
+          "term": "Protein sequence"
         },
         {
           "format": [],
           "term": "DNA sequence"
         }
       ],
+      "edam_operations": [
+        "Pairwise sequence alignment",
+        "Local alignment"
+      ],
       "edam_outputs": [
         {
           "format": [],
           "term": "Sequence alignment (pair)"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis"
+      ],
+      "tool_name": "GeneWise (EBI)"
     },
     {
-      "component": "genezilla",
       "biotoolsID": "genezilla",
-      "tool_name": "GeneZilla",
+      "component": "genezilla",
+      "edam_inputs": [],
       "edam_operations": [
         "CpG island and isochore detection",
         "Gene prediction",
         "Differential gene expression analysis",
         "Genetic variation analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Transcription factors and regulatory sites",
         "Gene transcripts",
@@ -1563,43 +1561,42 @@
         "Gene expression",
         "Model organisms"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "GeneZilla"
     },
     {
+      "biotoolsID": "genscan",
       "component": "genscan",
-      "biotoolsID": "genscan",
-      "tool_name": "GENSCAN",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Molecular genetics",
         "DNA",
         "Gene structure"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "GENSCAN"
     },
     {
+      "biotoolsID": "genscan",
       "component": "genscan-plus",
-      "biotoolsID": "genscan",
-      "tool_name": "GENSCAN",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Molecular genetics",
         "DNA",
         "Gene structure"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "GENSCAN"
     },
     {
-      "component": "getorf",
       "biotoolsID": "emboss",
-      "tool_name": "EMBOSS",
+      "component": "getorf",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence analysis",
         "Local alignment",
@@ -1607,77 +1604,58 @@
         "Global alignment",
         "Sequence alignment"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Molecular biology",
         "Sequence analysis",
         "Biology"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "EMBOSS"
     },
     {
+      "biotoolsID": "glimmer",
       "component": "glimmer3",
-      "biotoolsID": "glimmer",
-      "tool_name": "Glimmer",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Gene structure"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Glimmer"
     },
     {
+      "biotoolsID": "glimmer",
       "component": "glimmer3_cloud",
-      "biotoolsID": "glimmer",
-      "tool_name": "Glimmer",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Gene structure"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Glimmer"
     },
     {
-      "component": "glimmerHMM",
       "biotoolsID": "glimmer-hmm",
-      "tool_name": "Glimmer-HMM",
+      "component": "glimmerHMM",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction",
         "Ab-initio gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Gene structure",
         "Genomics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Glimmer-HMM"
     },
     {
+      "biotoolsID": "hmmer3",
       "component": "hmmer",
-      "biotoolsID": "hmmer3",
-      "tool_name": "HMMER3",
-      "edam_operations": [
-        "Formatting",
-        "Multiple sequence alignment",
-        "Sequence profile generation",
-        "Format validation",
-        "Conversion",
-        "Sequence generation",
-        "Data retrieval",
-        "Statistical calculation",
-        "Database search",
-        "Probabilistic sequence generation",
-        "Sequence database search"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Sequence sites, features and motifs",
-        "Gene and protein families"
-      ],
       "edam_inputs": [
         {
           "format": [],
@@ -1698,8 +1676,8 @@
           "term": "Hidden Markov model"
         },
         {
-          "term": "Keyword",
-          "format": []
+          "format": [],
+          "term": "Keyword"
         },
         {
           "format": [
@@ -1708,13 +1686,13 @@
           "term": "Hidden Markov model"
         },
         {
-          "term": "Protein sequence",
           "format": [
             "EMBL format",
             "GenBank format",
             "UniProtKB format",
             "FASTA"
-          ]
+          ],
+          "term": "Protein sequence"
         },
         {
           "format": [],
@@ -1725,21 +1703,34 @@
           "term": "Protein sequence"
         },
         {
-          "term": "Sequence set (protein)",
-          "format": []
+          "format": [],
+          "term": "Sequence set (protein)"
         },
         {
-          "term": "DNA sequence",
-          "format": []
+          "format": [],
+          "term": "DNA sequence"
         },
         {
-          "term": "Nucleic acid sequence",
-          "format": []
+          "format": [],
+          "term": "Nucleic acid sequence"
         },
         {
           "format": [],
           "term": "Sequence set (nucleic acid)"
         }
+      ],
+      "edam_operations": [
+        "Formatting",
+        "Multiple sequence alignment",
+        "Sequence profile generation",
+        "Format validation",
+        "Conversion",
+        "Sequence generation",
+        "Data retrieval",
+        "Statistical calculation",
+        "Database search",
+        "Probabilistic sequence generation",
+        "Sequence database search"
       ],
       "edam_outputs": [
         {
@@ -1747,14 +1738,14 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Alignment",
           "format": [
             "Stockholm format"
-          ]
+          ],
+          "term": "Alignment"
         },
         {
-          "term": "Hidden Markov model",
-          "format": []
+          "format": [],
+          "term": "Hidden Markov model"
         },
         {
           "format": [
@@ -1767,8 +1758,8 @@
           "term": "Sequence"
         },
         {
-          "term": "Position frequency matrix",
-          "format": []
+          "format": [],
+          "term": "Position frequency matrix"
         },
         {
           "format": [],
@@ -1783,61 +1774,48 @@
           "term": "Database search results"
         },
         {
-          "term": "Sequence search results",
-          "format": []
+          "format": [],
+          "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Sequence sites, features and motifs",
+        "Gene and protein families"
+      ],
+      "tool_name": "HMMER3"
     },
     {
+      "biotoolsID": "HMMER2",
       "component": "hmmls",
-      "biotoolsID": "HMMER2",
-      "tool_name": "HMMER2",
+      "edam_inputs": [],
       "edam_operations": [
         "Database search",
         "Protein feature detection"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequence sites, features and motifs"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "HMMER2"
     },
     {
+      "biotoolsID": "HMMER2",
       "component": "hmmpfam",
-      "biotoolsID": "HMMER2",
-      "tool_name": "HMMER2",
+      "edam_inputs": [],
       "edam_operations": [
         "Database search",
         "Protein feature detection"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequence sites, features and motifs"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "HMMER2"
     },
     {
-      "component": "hmmpfam3",
       "biotoolsID": "hmmer3",
-      "tool_name": "HMMER3",
-      "edam_operations": [
-        "Formatting",
-        "Multiple sequence alignment",
-        "Sequence profile generation",
-        "Format validation",
-        "Conversion",
-        "Sequence generation",
-        "Data retrieval",
-        "Statistical calculation",
-        "Database search",
-        "Probabilistic sequence generation",
-        "Sequence database search"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Sequence sites, features and motifs",
-        "Gene and protein families"
-      ],
+      "component": "hmmpfam3",
       "edam_inputs": [
         {
           "format": [],
@@ -1858,8 +1836,8 @@
           "term": "Hidden Markov model"
         },
         {
-          "term": "Keyword",
-          "format": []
+          "format": [],
+          "term": "Keyword"
         },
         {
           "format": [
@@ -1868,13 +1846,13 @@
           "term": "Hidden Markov model"
         },
         {
-          "term": "Protein sequence",
           "format": [
             "EMBL format",
             "GenBank format",
             "UniProtKB format",
             "FASTA"
-          ]
+          ],
+          "term": "Protein sequence"
         },
         {
           "format": [],
@@ -1885,21 +1863,34 @@
           "term": "Protein sequence"
         },
         {
-          "term": "Sequence set (protein)",
-          "format": []
+          "format": [],
+          "term": "Sequence set (protein)"
         },
         {
-          "term": "DNA sequence",
-          "format": []
+          "format": [],
+          "term": "DNA sequence"
         },
         {
-          "term": "Nucleic acid sequence",
-          "format": []
+          "format": [],
+          "term": "Nucleic acid sequence"
         },
         {
           "format": [],
           "term": "Sequence set (nucleic acid)"
         }
+      ],
+      "edam_operations": [
+        "Formatting",
+        "Multiple sequence alignment",
+        "Sequence profile generation",
+        "Format validation",
+        "Conversion",
+        "Sequence generation",
+        "Data retrieval",
+        "Statistical calculation",
+        "Database search",
+        "Probabilistic sequence generation",
+        "Sequence database search"
       ],
       "edam_outputs": [
         {
@@ -1907,14 +1898,14 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Alignment",
           "format": [
             "Stockholm format"
-          ]
+          ],
+          "term": "Alignment"
         },
         {
-          "term": "Hidden Markov model",
-          "format": []
+          "format": [],
+          "term": "Hidden Markov model"
         },
         {
           "format": [
@@ -1927,8 +1918,8 @@
           "term": "Sequence"
         },
         {
-          "term": "Position frequency matrix",
-          "format": []
+          "format": [],
+          "term": "Position frequency matrix"
         },
         {
           "format": [],
@@ -1943,39 +1934,35 @@
           "term": "Database search results"
         },
         {
-          "term": "Sequence search results",
-          "format": []
+          "format": [],
+          "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Sequence sites, features and motifs",
+        "Gene and protein families"
+      ],
+      "tool_name": "HMMER3"
     },
     {
-      "component": "infernal",
       "biotoolsID": "infernal",
-      "tool_name": "Infernal",
-      "edam_operations": [],
-      "edam_topics": [],
+      "component": "infernal",
       "edam_inputs": [],
-      "edam_outputs": []
+      "edam_operations": [],
+      "edam_outputs": [],
+      "edam_topics": [],
+      "tool_name": "Infernal"
     },
     {
+      "biotoolsID": "bwa",
       "component": "lgt_build_bwa_index",
-      "biotoolsID": "bwa",
-      "tool_name": "BWA",
-      "edam_operations": [
-        "Genome indexing",
-        "Sequence alignment",
-        "Read mapping",
-        "Generation"
-      ],
-      "edam_topics": [
-        "Mapping"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -1988,28 +1975,34 @@
           "term": "Sequence"
         },
         {
-          "term": "Sequence",
           "format": [
             "FASTA search results format"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Genome indexing",
+        "Sequence alignment",
+        "Read mapping",
+        "Generation"
+      ],
       "edam_outputs": [
         {
-          "term": "Genome index",
-          "format": []
+          "format": [],
+          "term": "Genome index"
         },
         {
-          "term": "Alignment",
-          "format": []
+          "format": [],
+          "term": "Alignment"
         },
         {
-          "term": "Sequence coordinates",
-          "format": []
+          "format": [],
+          "term": "Sequence coordinates"
         },
         {
           "format": [
@@ -2018,30 +2011,24 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Sequence alignment",
-          "format": []
+          "format": [],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping"
+      ],
+      "tool_name": "BWA"
     },
     {
+      "biotoolsID": "bwa",
       "component": "lgt_bwa",
-      "biotoolsID": "bwa",
-      "tool_name": "BWA",
-      "edam_operations": [
-        "Genome indexing",
-        "Sequence alignment",
-        "Read mapping",
-        "Generation"
-      ],
-      "edam_topics": [
-        "Mapping"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -2054,28 +2041,34 @@
           "term": "Sequence"
         },
         {
-          "term": "Sequence",
           "format": [
             "FASTA search results format"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Genome indexing",
+        "Sequence alignment",
+        "Read mapping",
+        "Generation"
+      ],
       "edam_outputs": [
         {
-          "term": "Genome index",
-          "format": []
+          "format": [],
+          "term": "Genome index"
         },
         {
-          "term": "Alignment",
-          "format": []
+          "format": [],
+          "term": "Alignment"
         },
         {
-          "term": "Sequence coordinates",
-          "format": []
+          "format": [],
+          "term": "Sequence coordinates"
         },
         {
           "format": [
@@ -2084,30 +2077,24 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Sequence alignment",
-          "format": []
+          "format": [],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping"
+      ],
+      "tool_name": "BWA"
     },
     {
+      "biotoolsID": "bwa",
       "component": "lgt_bwa_fq",
-      "biotoolsID": "bwa",
-      "tool_name": "BWA",
-      "edam_operations": [
-        "Genome indexing",
-        "Sequence alignment",
-        "Read mapping",
-        "Generation"
-      ],
-      "edam_topics": [
-        "Mapping"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -2120,28 +2107,34 @@
           "term": "Sequence"
         },
         {
-          "term": "Sequence",
           "format": [
             "FASTA search results format"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Genome indexing",
+        "Sequence alignment",
+        "Read mapping",
+        "Generation"
+      ],
       "edam_outputs": [
         {
-          "term": "Genome index",
-          "format": []
+          "format": [],
+          "term": "Genome index"
         },
         {
-          "term": "Alignment",
-          "format": []
+          "format": [],
+          "term": "Alignment"
         },
         {
-          "term": "Sequence coordinates",
-          "format": []
+          "format": [],
+          "term": "Sequence coordinates"
         },
         {
           "format": [
@@ -2150,58 +2143,57 @@
           "term": "Sequence alignment"
         },
         {
-          "term": "Sequence alignment",
-          "format": []
+          "format": [],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Mapping"
+      ],
+      "tool_name": "BWA"
     },
     {
-      "component": "lipop",
       "biotoolsID": "lipop",
-      "tool_name": "LipoP",
+      "component": "lipop",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Protein signal peptide detection"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "GFF"
+          ],
+          "term": "Sequence report"
+        }
       ],
       "edam_topics": [
         "Sequence analysis",
         "Membrane and lipoproteins"
       ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
-      ],
-      "edam_outputs": [
-        {
-          "term": "Sequence report",
-          "format": [
-            "GFF"
-          ]
-        }
-      ]
+      "tool_name": "LipoP"
     },
     {
-      "component": "megablast",
       "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "component": "megablast",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2217,40 +2209,45 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "metagenemark",
       "component": "metagene",
-      "biotoolsID": "metagenemark",
-      "tool_name": "MetaGeneMark",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Metagenomics",
         "Genetics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "MetaGeneMark"
     },
     {
+      "biotoolsID": "metagenemark",
       "component": "metagenemark",
-      "biotoolsID": "metagenemark",
-      "tool_name": "MetaGeneMark",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Metagenomics",
         "Genetics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "MetaGeneMark"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_align_seqs",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2260,19 +2257,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_chimera_slayer",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2282,19 +2279,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_classify_seqs",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2304,19 +2301,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_cluster",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2326,19 +2323,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_collect_single",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2348,19 +2345,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_dist_seqs",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2370,19 +2367,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_filter_seqs",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2392,19 +2389,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_get_oturep",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2414,19 +2411,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_rarefaction_single",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2436,19 +2433,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_read_otu",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2458,19 +2455,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_screen_seqs",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2480,19 +2477,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_summary",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2502,19 +2499,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_tree_shared",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2524,19 +2521,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_trim_seqs",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2546,19 +2543,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_unique_seq_limit",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2568,19 +2565,19 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
+      "biotoolsID": "mothur",
       "component": "mothur_unique_seqs",
-      "biotoolsID": "mothur",
-      "tool_name": "mothur",
+      "edam_inputs": [],
       "edam_operations": [
         "DNA barcoding",
         "Sequencing quality control",
@@ -2590,25 +2587,18 @@
         "Sequence read processing",
         "Phylogenetic analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Microbial ecology",
         "Taxonomy",
         "Sequence analysis",
         "Phylogeny"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "mothur"
     },
     {
-      "component": "muscle",
       "biotoolsID": "muscle",
-      "tool_name": "MUSCLE",
-      "edam_operations": [
-        "Multiple sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis"
-      ],
+      "component": "muscle",
       "edam_inputs": [
         {
           "format": [
@@ -2622,7 +2612,6 @@
           "term": "DNA sequence"
         },
         {
-          "term": "RNA sequence",
           "format": [
             "nbrf/pir",
             "FASTA",
@@ -2630,41 +2619,44 @@
             "PHYLIP format",
             "EMBL format",
             "GenBank format"
-          ]
+          ],
+          "term": "RNA sequence"
         }
+      ],
+      "edam_operations": [
+        "Multiple sequence alignment"
       ],
       "edam_outputs": [
         {
-          "term": "Sequence alignment",
           "format": [
             "ClustalW format",
             "HTML",
             "PHYLIP format",
             "GCG MSF",
             "FASTA"
-          ]
+          ],
+          "term": "Sequence alignment"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis"
+      ],
+      "tool_name": "MUSCLE"
     },
     {
+      "biotoolsID": "blast",
       "component": "ncbi-blastall",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2680,27 +2672,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "ncbi-blastn",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2716,27 +2708,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "ncbi-blastn_compress",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2752,27 +2744,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "ncbi-blastp",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2788,27 +2780,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "ncbi-blastx",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2824,27 +2816,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "ncbi-tblastn",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2860,27 +2852,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "ncbi-tblastx",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -2896,60 +2888,65 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "mummer",
       "component": "nucmer",
-      "biotoolsID": "mummer",
-      "tool_name": "MUMmer",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence alignment",
         "Read mapping"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Genomics",
         "Mapping",
         "Sequencing"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "MUMmer"
     },
     {
+      "biotoolsID": "mummer",
       "component": "nucmer-snp2merged",
-      "biotoolsID": "mummer",
-      "tool_name": "MUMmer",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence alignment",
         "Read mapping"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Genomics",
         "Mapping",
         "Sequencing"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "MUMmer"
     },
     {
+      "biotoolsID": "mummer",
       "component": "nucmer_snps",
-      "biotoolsID": "mummer",
-      "tool_name": "MUMmer",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence alignment",
         "Read mapping"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Genomics",
         "Mapping",
         "Sequencing"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "MUMmer"
     },
     {
-      "component": "pepstats",
       "biotoolsID": "emboss",
-      "tool_name": "EMBOSS",
+      "component": "pepstats",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence analysis",
         "Local alignment",
@@ -2957,86 +2954,81 @@
         "Global alignment",
         "Sequence alignment"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Molecular biology",
         "Sequence analysis",
         "Biology"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "EMBOSS"
     },
     {
-      "component": "priam_ec_assignment",
       "biotoolsID": "priam_search",
-      "tool_name": "PRIAM search",
+      "component": "priam_ec_assignment",
+      "edam_inputs": [],
       "edam_operations": [
         "Analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Biology"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "PRIAM search"
     },
     {
-      "component": "prodigal",
       "biotoolsID": "prodigal",
-      "tool_name": "Prodigal",
+      "component": "prodigal",
+      "edam_inputs": [],
       "edam_operations": [
         "Genome annotation"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Genomics",
         "Sequence analysis"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Prodigal"
     },
     {
-      "component": "ps_scan",
       "biotoolsID": "ps_scan",
-      "tool_name": "ps_scan",
+      "component": "ps_scan",
+      "edam_inputs": [],
       "edam_operations": [
         "Protein sequence analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Proteomics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "ps_scan"
     },
     {
-      "component": "pseudomolecule2glimmer3",
       "biotoolsID": "glimmer",
-      "tool_name": "Glimmer",
+      "component": "pseudomolecule2glimmer3",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Gene structure"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Glimmer"
     },
     {
-      "component": "psiblast",
       "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "component": "psiblast",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -3052,57 +3044,57 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
-      "component": "psortb",
       "biotoolsID": "psortb",
-      "tool_name": "PSORTb",
+      "component": "psortb",
+      "edam_inputs": [],
       "edam_operations": [
         "Protein sequence analysis",
         "Prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequences",
         "Proteins",
         "Plant"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "PSORTb"
     },
     {
-      "component": "repeatmasker",
       "biotoolsID": "repeatmasker",
-      "tool_name": "RepeatMasker",
+      "component": "repeatmasker",
+      "edam_inputs": [],
       "edam_operations": [
         "Genome annotation"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequence analysis",
         "Sequence composition, complexity and repeats"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "RepeatMasker"
     },
     {
-      "component": "rpsblast",
       "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "component": "rpsblast",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -3118,18 +3110,243 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
-      "component": "rrna_hmm_fs",
       "biotoolsID": "rnammer",
-      "tool_name": "RNAmmer",
+      "component": "rrna_hmm_fs",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Nucleic acid feature detection"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "GFF"
+          ],
+          "term": "Protein features"
+        }
       ],
       "edam_topics": [
         "Sequence sites, features and motifs"
       ],
+      "tool_name": "RNAmmer"
+    },
+    {
+      "biotoolsID": "samtools",
+      "component": "sam2bam",
+      "edam_inputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
+    },
+    {
+      "biotoolsID": "samtools",
+      "component": "samtools_alignment_stats",
+      "edam_inputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
+    },
+    {
+      "biotoolsID": "samtools",
+      "component": "samtools_file_convert",
+      "edam_inputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
+    },
+    {
+      "biotoolsID": "samtools",
+      "component": "samtools_merge",
+      "edam_inputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
+    },
+    {
+      "biotoolsID": "samtools",
+      "component": "samtools_reference_index",
+      "edam_inputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_operations": [
+        "Data filtering",
+        "Visualisation",
+        "Data formatting",
+        "Indexing",
+        "Data parsing",
+        "Data sorting",
+        "Data editing"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "CRAM",
+            "SAM",
+            "BAM"
+          ],
+          "term": "Sequence trace"
+        }
+      ],
+      "edam_topics": [
+        "Mapping",
+        "Sequence analysis",
+        "Sequencing",
+        "Rare diseases"
+      ],
+      "tool_name": "SAMtools"
+    },
+    {
+      "biotoolsID": "signalp",
+      "component": "signalp",
       "edam_inputs": [
         {
           "format": [
@@ -3138,317 +3355,90 @@
           "term": "Sequence"
         }
       ],
-      "edam_outputs": [
-        {
-          "term": "Protein features",
-          "format": [
-            "GFF"
-          ]
-        }
-      ]
-    },
-    {
-      "component": "sam2bam",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
-      "edam_inputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ],
-      "edam_outputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ]
-    },
-    {
-      "component": "samtools_alignment_stats",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
-      "edam_inputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ],
-      "edam_outputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ]
-    },
-    {
-      "component": "samtools_file_convert",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
-      "edam_inputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ],
-      "edam_outputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ]
-    },
-    {
-      "component": "samtools_merge",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
-      "edam_inputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ],
-      "edam_outputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ]
-    },
-    {
-      "component": "samtools_reference_index",
-      "biotoolsID": "samtools",
-      "tool_name": "SAMtools",
-      "edam_operations": [
-        "Data filtering",
-        "Visualisation",
-        "Data formatting",
-        "Indexing",
-        "Data parsing",
-        "Data sorting",
-        "Data editing"
-      ],
-      "edam_topics": [
-        "Mapping",
-        "Sequence analysis",
-        "Sequencing",
-        "Rare diseases"
-      ],
-      "edam_inputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ],
-      "edam_outputs": [
-        {
-          "format": [
-            "CRAM",
-            "SAM",
-            "BAM"
-          ],
-          "term": "Sequence trace"
-        }
-      ]
-    },
-    {
-      "component": "signalp",
-      "biotoolsID": "signalp",
-      "tool_name": "SignalP",
       "edam_operations": [
         "Protein signal peptide detection",
         "Protein cleavage site prediction"
       ],
-      "edam_topics": [
-        "Protein sites, features and motifs"
-      ],
-      "edam_inputs": [
-        {
-          "format": [
-            "FASTA"
-          ],
-          "term": "Sequence"
-        }
-      ],
       "edam_outputs": [
         {
-          "term": "Protein features",
           "format": [
             "GFF"
-          ]
+          ],
+          "term": "Protein features"
         },
         {
           "format": [],
           "term": "Sequence report"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Protein sites, features and motifs"
+      ],
+      "tool_name": "SignalP"
     },
     {
-      "component": "snap",
       "biotoolsID": "snap",
-      "tool_name": "SNAP",
+      "component": "snap",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "DNA",
         "DNA polymorphism",
         "Genetics"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "SNAP"
     },
     {
-      "component": "soapdenovo",
       "biotoolsID": "soapdenovo",
-      "tool_name": "SOAPdenovo",
+      "component": "soapdenovo",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence assembly"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequence assembly"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "SOAPdenovo"
     },
     {
+      "biotoolsID": "trnascan-se",
       "component": "tRNAscan-SE",
-      "biotoolsID": "trnascan-se",
-      "tool_name": "Trnascan-SE",
+      "edam_inputs": [],
       "edam_operations": [
         "tRNA gene prediction",
         "Sequence feature detection"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "RNA",
         "Genomics",
         "Sequence analysis"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Trnascan-SE"
     },
     {
+      "biotoolsID": "trnascan-se",
       "component": "tRNAscan-SE_compress",
-      "biotoolsID": "trnascan-se",
-      "tool_name": "Trnascan-SE",
+      "edam_inputs": [],
       "edam_operations": [
         "tRNA gene prediction",
         "Sequence feature detection"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "RNA",
         "Genomics",
         "Sequence analysis"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Trnascan-SE"
     },
     {
-      "component": "targetp",
       "biotoolsID": "targetp",
-      "tool_name": "TargetP",
-      "edam_operations": [
-        "Protein cleavage site prediction"
-      ],
-      "edam_topics": [
-        "Protein sites, features and motifs"
-      ],
+      "component": "targetp",
       "edam_inputs": [
         {
           "format": [
@@ -3457,34 +3447,36 @@
           "term": "Sequence"
         }
       ],
+      "edam_operations": [
+        "Protein cleavage site prediction"
+      ],
       "edam_outputs": [
         {
-          "term": "Protein features",
           "format": [
             "Textual format"
-          ]
+          ],
+          "term": "Protein features"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Protein sites, features and motifs"
+      ],
+      "tool_name": "TargetP"
     },
     {
-      "component": "tblastn_plus",
       "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "component": "tblastn_plus",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -3500,14 +3492,40 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
-      "component": "tmhmm",
       "biotoolsID": "tmhmm",
-      "tool_name": "TMHMM",
+      "component": "tmhmm",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Transmembrane protein prediction"
+      ],
+      "edam_outputs": [
+        {
+          "format": [
+            "GFF"
+          ],
+          "term": "Protein features"
+        },
+        {
+          "format": [
+            "Binary format"
+          ],
+          "term": "Sequence report"
+        }
       ],
       "edam_topics": [
         "Membrane and lipoproteins",
@@ -3516,42 +3534,11 @@
         "Protein folds and structural domains",
         "Protein secondary structure"
       ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
-      ],
-      "edam_outputs": [
-        {
-          "term": "Protein features",
-          "format": [
-            "GFF"
-          ]
-        },
-        {
-          "term": "Sequence report",
-          "format": [
-            "Binary format"
-          ]
-        }
-      ]
+      "tool_name": "TMHMM"
     },
     {
-      "component": "tophat",
       "biotoolsID": "tophat",
-      "tool_name": "TopHat",
-      "edam_operations": [
-        "Splice site prediction",
-        "Read mapping"
-      ],
-      "edam_topics": [
-        "RNA-Seq",
-        "Mapping",
-        "Rare diseases"
-      ],
+      "component": "tophat",
       "edam_inputs": [
         {
           "format": [],
@@ -3565,83 +3552,85 @@
           "term": "Sequence set (nucleic acid)"
         }
       ],
+      "edam_operations": [
+        "Splice site prediction",
+        "Read mapping"
+      ],
       "edam_outputs": [
         {
-          "term": "Sequence alignment",
           "format": [
             "SAM"
-          ]
+          ],
+          "term": "Sequence alignment"
         },
         {
-          "term": "Annotation track",
           "format": [
             "BED"
-          ]
+          ],
+          "term": "Annotation track"
         }
-      ]
+      ],
+      "edam_topics": [
+        "RNA-Seq",
+        "Mapping",
+        "Rare diseases"
+      ],
+      "tool_name": "TopHat"
     },
     {
-      "component": "train_for_glimmer3_iteration",
       "biotoolsID": "glimmer",
-      "tool_name": "Glimmer",
+      "component": "train_for_glimmer3_iteration",
+      "edam_inputs": [],
       "edam_operations": [
         "Gene prediction"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Gene structure"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "Glimmer"
     },
     {
-      "component": "trf",
       "biotoolsID": "trf",
-      "tool_name": "TRF",
+      "component": "trf",
+      "edam_inputs": [],
       "edam_operations": [
         "Repeat sequence detection"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "Sequence analysis",
         "Sequence composition, complexity and repeats"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "TRF"
     },
     {
-      "component": "usearch",
       "biotoolsID": "usearch",
-      "tool_name": "USEARCH",
+      "component": "usearch",
+      "edam_inputs": [],
       "edam_operations": [
         "Sequence analysis"
       ],
+      "edam_outputs": [],
       "edam_topics": [
         "DNA",
         "Sequence analysis",
         "Sequencing"
       ],
-      "edam_inputs": [],
-      "edam_outputs": []
+      "tool_name": "USEARCH"
     },
     {
+      "biotoolsID": "velvet",
       "component": "velvet",
-      "biotoolsID": "velvet",
-      "tool_name": "Velvet",
-      "edam_operations": [
-        "Formatting",
-        "De-novo assembly"
-      ],
-      "edam_topics": [
-        "Sequence assembly"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "BAM",
             "SAM",
             "FASTQ",
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -3651,6 +3640,10 @@
           "format": [],
           "term": "Resource metadata"
         }
+      ],
+      "edam_operations": [
+        "Formatting",
+        "De-novo assembly"
       ],
       "edam_outputs": [
         {
@@ -3665,28 +3658,24 @@
           "format": [],
           "term": "Sequence assembly"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence assembly"
+      ],
+      "tool_name": "Velvet"
     },
     {
+      "biotoolsID": "velvet",
       "component": "velvet_optimiser",
-      "biotoolsID": "velvet",
-      "tool_name": "Velvet",
-      "edam_operations": [
-        "Formatting",
-        "De-novo assembly"
-      ],
-      "edam_topics": [
-        "Sequence assembly"
-      ],
       "edam_inputs": [
         {
-          "term": "Sequence",
           "format": [
             "BAM",
             "SAM",
             "FASTQ",
             "FASTA"
-          ]
+          ],
+          "term": "Sequence"
         },
         {
           "format": [],
@@ -3696,6 +3685,10 @@
           "format": [],
           "term": "Resource metadata"
         }
+      ],
+      "edam_operations": [
+        "Formatting",
+        "De-novo assembly"
       ],
       "edam_outputs": [
         {
@@ -3710,27 +3703,26 @@
           "format": [],
           "term": "Sequence assembly"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence assembly"
+      ],
+      "tool_name": "Velvet"
     },
     {
+      "biotoolsID": "blast",
       "component": "wu-blastn",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -3746,27 +3738,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "wu-blastp",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -3782,27 +3774,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
+      "biotoolsID": "blast",
       "component": "wu-blastx",
-      "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -3818,27 +3810,27 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
     },
     {
-      "component": "wu-tblastn",
       "biotoolsID": "blast",
-      "tool_name": "BLAST",
+      "component": "wu-tblastn",
+      "edam_inputs": [
+        {
+          "format": [
+            "FASTA"
+          ],
+          "term": "Sequence"
+        }
+      ],
       "edam_operations": [
         "Sequence similarity search",
         "Sequence alignment"
-      ],
-      "edam_topics": [
-        "Sequence analysis",
-        "Bioinformatics"
-      ],
-      "edam_inputs": [
-        {
-          "term": "Sequence",
-          "format": [
-            "FASTA"
-          ]
-        }
       ],
       "edam_outputs": [
         {
@@ -3854,7 +3846,98 @@
           ],
           "term": "Sequence search results"
         }
-      ]
+      ],
+      "edam_topics": [
+        "Sequence analysis",
+        "Bioinformatics"
+      ],
+      "tool_name": "BLAST"
+    },
+    {
+      "biotoolsID": "fastx-toolkit",
+      "component": "fastx_quality_stat",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Read pre-processing",
+        "Sequence editing"
+      ],
+      "edam_outputs": [],
+      "edam_topics": [
+        "Sequence analysis"
+      ],
+      "tool_name": "fastx-toolkit"
+    },
+    {
+      "biotoolsID": "prinseq",
+      "component": "filter_dups_lc_seqs",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Read pre-processing",
+        "Sequence trimming",
+        "Sequence contamination filtering"
+      ],
+      "edam_outputs": [],
+      "edam_topics": [
+        "Transcriptomics",
+        "Metagenomics",
+        "Genomics"
+      ],
+      "tool_name": "prinseq"
+    },
+    {
+      "biotoolsID": "quicktree",
+      "component": "quicktree",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Phylogenetic inference (from molecular sequences)"
+      ],
+      "edam_outputs": [],
+      "edam_topics": [
+        "Phylogenetics"
+      ],
+      "tool_name": "quicktree"
+    },
+    {
+      "biotoolsID": "tbl2asn",
+      "component": "dump_fasta",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Deposition"
+      ],
+      "edam_outputs": [],
+      "edam_topics": [
+        "Data submission, annotation and curation"
+      ],
+      "tool_name": "tbl2asn"
+    },
+    {
+      "biotoolsID": "tbl2asn",
+      "component": "dump_table",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Deposition"
+      ],
+      "edam_outputs": [],
+      "edam_topics": [
+        "Data submission, annotation and curation"
+      ],
+      "tool_name": "tbl2asn"
+    },
+    {
+      "biotoolsID": "tbl2asn",
+      "component": "tbl2asn",
+      "edam_inputs": [],
+      "edam_operations": [
+        "Deposition"
+      ],
+      "edam_outputs": [],
+      "edam_topics": [
+        "Data submission, annotation and curation"
+      ],
+      "tool_name": "tbl2asn"
     }
-  ]
+  ],
+  "total_mapped": 127,
+  "unique_operations": 85,
+  "unique_topics": 48
 }
