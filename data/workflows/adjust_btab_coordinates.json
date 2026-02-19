@@ -1,0 +1,33 @@
+{
+  "file": "ergatis-git/workflow/adjust_btab_coordinates/adjust_btab_coordinates-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "adjust_btab_coordinates workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output directory",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_output_directory",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "adjust_btab_coordinates",
+      "command_type": "RunDistributedCommand",
+      "config": "adjust_btab_coordinates",
+      "level": 1
+    }
+  ],
+  "step_count": 4
+}

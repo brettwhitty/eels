@@ -1,0 +1,109 @@
+{
+  "file": "ergatis-git/workflow/pe/pe-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "PEffect workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output repository",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_output",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "make_pe_position_xml",
+      "command_type": "RunDistributedCommand",
+      "config": "make_pe_position_xml",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterator list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterator_list_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create groups",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_groups_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterative subflow",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterative_subflow1",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "Iterated subflow",
+      "execution": "parallel",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create bsml list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_bsml_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create raw list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_raw_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Merge fasta list files",
+      "command_type": "RunJavaUnixCommand",
+      "config": "merge_fasta_list_files",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Cluster PE",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cluster_pe",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create cluster output directory",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_cluster_output_dir",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create clustered FASTA",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_cluster_fasta",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create cluster fasta list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_cluster_fasta_list",
+      "level": 1
+    }
+  ],
+  "step_count": 15
+}

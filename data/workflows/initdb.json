@@ -1,0 +1,467 @@
+{
+  "file": "ergatis-git/workflow/initdb/initdb-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "initdbo workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create cache dir space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_cache_dir",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create_dupdir",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_dupdir",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create component scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_component_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create rel scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_rel_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create ec scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_ec_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create ard scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_ard_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create evidence scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_evidence_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create goprop scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_goprop_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create tigr scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_tigr_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create anno scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_anno_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create annotation flags scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_annflg_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create gff3 scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_gff3_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create so scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_so_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create so-aux scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_so_aux_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create go scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_go_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create_tigr_schemas_scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_tigr_schemas_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_output_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create final scratch",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_final_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create relationship aux",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_rel_aux_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Drop all tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "drop_all_tables",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Drop all chado_mart views",
+      "command_type": "RunJavaUnixCommand",
+      "config": "drop_all_chado_mart_views",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create all tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_all_tables",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create all chado_mart views",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_all_chado_mart_views",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Partition tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "partition",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "load_pub_table",
+      "command_type": "RunJavaUnixCommand",
+      "config": "load_pub_table",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Relation Typedef Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_rel_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Load Relation Typedef Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "load_rel_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Auxiliary Relation Typedef Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_aux_rel_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Load Auxiliary Relation Typedef Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "load_aux_rel_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Restore indexes constraints",
+      "command_type": "RunJavaUnixCommand",
+      "config": "rebuild_indexes1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "File-cache the queries",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cache_queries",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Annotation Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_anno_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Annotation Flag Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_annflg_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process GFF3_attributes Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_gff3_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Component Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_comp_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Output Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_output_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Enzyme Commission Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_ec_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process ARD Custom Feature Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_ard_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Evidence Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_evidence_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Gene Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_go_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "parse_tigr_schemas_onto",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_tigr_schemas_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process GO Properties Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_go_properties_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Sequence Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_so_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process TIGR Roles Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_tigr_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_db",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_db",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_dbxrefprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_dbxrefprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_cv",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_cv",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_cvterm",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_cvterm",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_cvterm_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_cvterm_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_cvterm_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_cvterm_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_cvtermsynonym",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_cvtermsynonym",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_cvtermpath",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_cvtermpath",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "collate_all_bcp_files_cvtermprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "collate_all_bcp_files_cvtermprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "insert_serial_identifiers",
+      "command_type": "RunJavaUnixCommand",
+      "config": "insert_serial_identifiers",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "drop_indexes2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "drop_indexes2",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "load_tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "load_tables",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "rebuild_indexes2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "rebuild_indexes2",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Process Auxiliary Sequence Ontology",
+      "command_type": "RunJavaUnixCommand",
+      "config": "parse_aux_so_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "load_aux_so_onto",
+      "command_type": "RunJavaUnixCommand",
+      "config": "load_aux_so_onto",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Grant public",
+      "command_type": "RunJavaUnixCommand",
+      "config": "grant_public",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "store_chado_version",
+      "command_type": "RunJavaUnixCommand",
+      "config": "store_chado_version",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Check logfiles",
+      "command_type": "RunJavaUnixCommand",
+      "config": "check_logfiles",
+      "level": 1
+    }
+  ],
+  "step_count": 66
+}

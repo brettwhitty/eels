@@ -1,0 +1,54 @@
+{
+  "file": "ergatis-git/workflow/subfeature_mapping/subfeature_mapping-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "subfeature_mapping",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "create_database_lockfile",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_database_lockfile",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create_output_directory",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_output_directory",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "mapping",
+      "command_type": "RunJavaUnixCommand",
+      "config": "mapping",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "load_featureloc",
+      "command_type": "RunJavaUnixCommand",
+      "config": "load_featureloc",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "remove_database_lockfile",
+      "command_type": "RunJavaUnixCommand",
+      "config": "remove_database_lockfile",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_files",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_files",
+      "level": 1
+    }
+  ],
+  "step_count": 7
+}
