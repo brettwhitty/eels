@@ -1,49 +1,62 @@
-# EELLMS Project Status
+# EELS Project Status
 
-## 2026-02-18 - Initial Extraction
+## 2026-02-18 - Phase 2 Complete
 
-### Completed
+### Phase 1: Initial Extraction (Complete)
 
-✅ Created `eellms` directory structure
-✅ Built BSML converter metadata extraction script
-✅ Extracted metadata from 67 `*2bsml.pl` BSML converter scripts
-✅ Generated structured JSON catalog (`data/converter_catalog.json`)
-✅ Created markdown summary (`docs/BSML_CONVERTER_CATALOG.md`)
+✅ BSML Converter Catalog - 67 converters documented
+✅ Repository Analysis - Structure documented
+✅ Architecture Documentation - 6-level XML hierarchy
+✅ Contributor Extraction - 28 contributors identified
+✅ CONTRIBUTORS.md - Attribution document created
+✅ Component Anatomy - Complete `wait` component walkthrough
 
-### Findings
+### Phase 2: Structured Analysis (Complete)
 
-- **67 BSML converters** identified and documented
-- Each converter contains:
-  - Tool name and purpose
-  - Input/output formats
-  - Command-line parameters
-  - Author/contact information (mostly Brett Whitty, pre-2008 TIGR era)
-  - Usage examples
+✅ **Component Execution Analysis** - 362 components analyzed
+  - Individual JSON per component in `data/components/`
+  - Summary in `data/component_summary.json`
+  - Tool execution chains extracted
+  - Converter usage identified
+  - 91 unique converters found
 
-### Key Converters Identified
+✅ **Iterator Pattern Catalog** - 254 components with iterators
+  - Catalog in `data/iterator_catalog.json`
+  - Iterator types documented (serial/parallel)
+  - Command counts extracted
+  - Nested commandSet detection
 
-High-value tools for initial deep analysis:
-- `blast2bsml.pl` - BLAST output parsing (fundamental)
-- `glimmer32bsml.pl` - Gene prediction
-- `hmmpfam2bsml.pl` / `hmmpfam32bsml.pl` - Protein domain search
-- `aragorn2bsml.pl` - tRNA/tmRNA prediction
-- `augustus2bsml.pl` - Eukaryotic gene prediction
-- `prodigal2bsml.pl` - Prokaryotic gene prediction
+✅ **Component Catalog Summary** - Complete inventory
+  - 362 total components
+  - 253 with iterators
+  - Classifications extracted
+  - Output formats documented
 
-### Next Steps
+### Data Model Created
 
-1. **Deep analysis of BLAST converter** - Extract full parsing logic, understand BSML output structure
-2. **Component config extraction** - Parse the `.config` and `.xml` files for each component
-3. **Iterator pattern analysis** - Identify parallelization strategies from component templates
-4. **BSML schema documentation** - Understand the output data model
-5. **Build component catalog** - Link converters → components → pipelines
+All component data now in structured JSON format:
+- `data/components/*.json` - Individual component metadata
+- `data/component_summary.json` - Aggregate statistics
+- `data/iterator_catalog.json` - Iterator patterns
+- `data/component_catalog_summary.json` - Complete inventory
+- `data/converter_catalog.json` - BSML converter metadata
+- `data/contributors.json` - Contributor information
 
-### Technical Debt
+### Next Steps (Phase 3)
 
-- Need to handle gzipped files in extraction
-- Some converters have embedded Perl code in POD (need better parsing)
-- Contact info parsing could be improved
-- Should extract version information where available
+**Deep Converter Analysis:**
+1. Extract parsing logic from `blast2bsml.pl` (40K file)
+2. Document BSML XML structure generated
+3. Identify semantic mappings (BLAST → BSML)
+4. Analyze 5-10 priority converters
+
+**Priority Converters:**
+- blast2bsml.pl - Alignment tool (fundamental)
+- glimmer32bsml.pl - Gene prediction
+- hmmpfam2bsml.pl - Protein domains
+- aragorn2bsml.pl - tRNA prediction
+- augustus2bsml.pl - Eukaryotic genes
+- prodigal2bsml.pl - Prokaryotic genes
 
 ### Repository Structure
 
