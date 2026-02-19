@@ -23,6 +23,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - **Data flow management** - Explicit dependencies and file-based communication
 - **Grid computing integration** - SGE/Grid Engine scheduling, shared filesystem architecture
 - **Complete execution logging** - Every single execution step logged for debugging, auditing, and provenance tracking
+- **Recoverable error states** - Every error state is recoverable; pipelines can be resumed from failure points without restarting (critical for multi-day/multi-week production runs)
 
 These JSON files preserve the complete component library structure:
 - Component configuration parameters
