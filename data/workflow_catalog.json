@@ -1,0 +1,870 @@
+{
+  "legacy2bsml": [
+    {
+      "file": "legacy2bsml/legacy2bsml_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 2,
+      "includes": 0
+    },
+    {
+      "file": "legacy2bsml/legacy2bsml-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    }
+  ],
+  "shared": [
+    {
+      "file": "shared/iterator_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 3,
+      "includes": 0
+    },
+    {
+      "file": "shared/groups-iterator_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 3,
+      "includes": 0
+    }
+  ],
+  "obo2chado": [
+    {
+      "file": "obo2chado/obo2chado_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 7,
+      "includes": 0
+    },
+    {
+      "file": "obo2chado/obo2chado-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 5,
+      "includes": 0
+    }
+  ],
+  "pangenome": [
+    {
+      "file": "pangenome/pangenome_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "pangenome/pangenome-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 9,
+      "includes": 0
+    }
+  ],
+  "tiling": [
+    {
+      "file": "tiling/tiling-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 10,
+      "includes": 0
+    }
+  ],
+  "legacyparafam2bsml": [
+    {
+      "file": "legacyparafam2bsml/legacyparafam2bsml-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "legacyparafam2bsml/legacyparafam2bsml_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 2,
+      "includes": 0
+    }
+  ],
+  "mask_by_analysis": [
+    {
+      "file": "mask_by_analysis/mask_by_analysis_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 3,
+      "includes": 0
+    },
+    {
+      "file": "mask_by_analysis/mask_by_analysis-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    }
+  ],
+  "hmmsmart": [
+    {
+      "file": "hmmsmart/hmmsmart-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    },
+    {
+      "file": "hmmsmart/hmmsmart_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 5,
+      "includes": 0
+    }
+  ],
+  "tabula_rasa": [
+    {
+      "file": "tabula_rasa/tabula_rasa_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "tabula_rasa/tabula_rasa-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "split_fasta": [
+    {
+      "file": "split_fasta/split_fasta-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "split_fasta/split_fasta_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    }
+  ],
+  "initdb": [
+    {
+      "file": "initdb/initdb-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 65,
+      "includes": 0
+    }
+  ],
+  "subfeature_mapping": [
+    {
+      "file": "subfeature_mapping/subfeature_mapping-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "psipred": [
+    {
+      "file": "psipred/psipred_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "psipred/psipred-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "delete_analysis": [
+    {
+      "file": "delete_analysis/delete_analysis-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 25,
+      "includes": 0
+    }
+  ],
+  "hmmsearch": [
+    {
+      "file": "hmmsearch/hmmsearch-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "hmmsearch/hmmsearch_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    }
+  ],
+  "adjust_btab_coordinates": [
+    {
+      "file": "adjust_btab_coordinates/adjust_btab_coordinates-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 3,
+      "includes": 0
+    }
+  ],
+  "statistics2chado": [
+    {
+      "file": "statistics2chado/statistics2chado-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 7,
+      "includes": 0
+    }
+  ],
+  "wu-tblastn": [
+    {
+      "file": "wu-tblastn/wu-tblastn-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    },
+    {
+      "file": "wu-tblastn/wu-tblastn_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "ncbi-tblastx": [
+    {
+      "file": "ncbi-tblastx/ncbi-tblastx_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "ncbi-tblastx/ncbi-tblastx-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    }
+  ],
+  "genbank2bsml": [
+    {
+      "file": "genbank2bsml/genbank2bsml_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    },
+    {
+      "file": "genbank2bsml/genbank2bsml-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    }
+  ],
+  "snoscan": [
+    {
+      "file": "snoscan/snoscan_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 5,
+      "includes": 0
+    },
+    {
+      "file": "snoscan/snoscan-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    }
+  ],
+  "backupdb": [
+    {
+      "file": "backupdb/backupdb-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 99,
+      "includes": 0
+    }
+  ],
+  "bsml2chado": [
+    {
+      "file": "bsml2chado/bsml2chado-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 44,
+      "includes": 0
+    },
+    {
+      "file": "bsml2chado/bsml2chado_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 3,
+      "includes": 0
+    }
+  ],
+  "blat": [
+    {
+      "file": "blat/blat-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "blat/blat_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    }
+  ],
+  "cogs": [
+    {
+      "file": "cogs/cogs_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 5,
+      "includes": 0
+    },
+    {
+      "file": "cogs/cogs-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 8,
+      "includes": 0
+    }
+  ],
+  "id_test": [
+    {
+      "file": "id_test/id_test_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "id_test/id_test-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 3,
+      "includes": 0
+    }
+  ],
+  "jaccard": [
+    {
+      "file": "jaccard/jaccard-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    },
+    {
+      "file": "jaccard/jaccard_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 5,
+      "includes": 0
+    }
+  ],
+  "chado2bsml": [
+    {
+      "file": "chado2bsml/chado2bsml-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 9,
+      "includes": 0
+    },
+    {
+      "file": "chado2bsml/chado2bsml_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    }
+  ],
+  "region": [
+    {
+      "file": "region/region-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "region/region_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    }
+  ],
+  "nucmer": [
+    {
+      "file": "nucmer/nucmer-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "nucmer/nucmer_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 5,
+      "includes": 0
+    }
+  ],
+  "wu-tblastx": [
+    {
+      "file": "wu-tblastx/wu-tblastx-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    },
+    {
+      "file": "wu-tblastx/wu-tblastx_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "muscle": [
+    {
+      "file": "muscle/muscle_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "muscle/muscle-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    }
+  ],
+  "mreps": [
+    {
+      "file": "mreps/mreps-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    },
+    {
+      "file": "mreps/mreps_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    }
+  ],
+  "ncbi-tblastn": [
+    {
+      "file": "ncbi-tblastn/ncbi-tblastn_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "ncbi-tblastn/ncbi-tblastn-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    }
+  ],
+  "build_supercontig": [
+    {
+      "file": "build_supercontig/build_supercontig-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "snp": [
+    {
+      "file": "snp/snp-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 18,
+      "includes": 0
+    }
+  ],
+  "promer": [
+    {
+      "file": "promer/promer_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "hmmpir": [
+    {
+      "file": "hmmpir/hmmpir_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    },
+    {
+      "file": "hmmpir/hmmpir-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    }
+  ],
+  "restoredb": [
+    {
+      "file": "restoredb/restoredb-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 15,
+      "includes": 0
+    }
+  ],
+  "coverage": [
+    {
+      "file": "coverage/coverage-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 17,
+      "includes": 0
+    },
+    {
+      "file": "coverage/coverage_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    }
+  ],
+  "gff2bsml": [
+    {
+      "file": "gff2bsml/gff2bsml_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "gff2bsml/gff2bsml-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 9,
+      "includes": 0
+    }
+  ],
+  "adjust_bsml_coordinates": [
+    {
+      "file": "adjust_bsml_coordinates/adjust_bsml_coordinates-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 6,
+      "includes": 0
+    },
+    {
+      "file": "adjust_bsml_coordinates/adjust_bsml_coordinates_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 2,
+      "includes": 0
+    }
+  ],
+  "iprscan": [
+    {
+      "file": "iprscan/iprscan-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    },
+    {
+      "file": "iprscan/iprscan_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 14,
+      "includes": 0
+    }
+  ],
+  "ncbi-blastp": [
+    {
+      "file": "ncbi-blastp/ncbi-blastp-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    },
+    {
+      "file": "ncbi-blastp/ncbi-blastp_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "ncbi-blastn": [
+    {
+      "file": "ncbi-blastn/ncbi-blastn-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    },
+    {
+      "file": "ncbi-blastn/ncbi-blastn_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 6,
+      "includes": 0
+    }
+  ],
+  "pe": [
+    {
+      "file": "pe/pe_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 5,
+      "includes": 0
+    },
+    {
+      "file": "pe/pe-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 13,
+      "includes": 0
+    }
+  ],
+  "hmmtigr": [
+    {
+      "file": "hmmtigr/hmmtigr-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    },
+    {
+      "file": "hmmtigr/hmmtigr_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 5,
+      "includes": 0
+    }
+  ],
+  "transterm": [
+    {
+      "file": "transterm/transterm_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    },
+    {
+      "file": "transterm/transterm-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 8,
+      "includes": 0
+    }
+  ],
+  "adjust_nap_coordinates": [
+    {
+      "file": "adjust_nap_coordinates/adjust_nap_coordinates-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 3,
+      "includes": 0
+    }
+  ],
+  "genie": [
+    {
+      "file": "genie/genie_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    },
+    {
+      "file": "genie/genie-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    }
+  ],
+  "bsml2chado_fast": [
+    {
+      "file": "bsml2chado_fast/bsml2chado_fast_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 2,
+      "includes": 0
+    }
+  ],
+  "copydb": [
+    {
+      "file": "copydb/copydb-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 3,
+      "commands": 110,
+      "includes": 0
+    }
+  ],
+  "adjust_gap2_coordinates": [
+    {
+      "file": "adjust_gap2_coordinates/adjust_gap2_coordinates-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 3,
+      "includes": 0
+    }
+  ],
+  "mepipe": [
+    {
+      "file": "mepipe/mepipe_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 4,
+      "includes": 0
+    },
+    {
+      "file": "mepipe/mepipe-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 2,
+      "commands": 7,
+      "includes": 0
+    }
+  ],
+  "Attic": [
+    {
+      "file": "Attic/legacy2chado/legacy2chado-master_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 3,
+      "commands": 13,
+      "includes": 0
+    },
+    {
+      "file": "Attic/legacy2chado/legacy2chado_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 14,
+      "includes": 0
+    }
+  ],
+  "database_components": [
+    {
+      "file": "database_components/dump_tables/dump_tables_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/drop_views/drop_views_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/unpartition_tables/unpartition_tables_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/create_indices/create_indices_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/duplicate_detection_elimination/duplicate_detection_elimination_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/revoke_permissions/revoke_permissions_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/partition_tables/partition_tables_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/load_tables/load_tables_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/grant_permissions/grant_permissions_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/create_views/create_views_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/drop_indices/drop_indices_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/drop_tables/drop_tables_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    },
+    {
+      "file": "database_components/create_tables/create_tables_template.xml",
+      "type": "commandSetRoot",
+      "commandsets": 1,
+      "commands": 1,
+      "includes": 0
+    }
+  ]
+}
