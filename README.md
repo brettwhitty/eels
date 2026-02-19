@@ -91,6 +91,8 @@ eels/
 
 **Lead:** Brett Whitty (GNOMATIX), original TIGR developer  
 **Started:** 2026-02-18  
-**Status:** Phase 3 complete (data extraction), Phase 4-7 remaining
+**Status:** Phase 5 in progress (translation formats)
 
-This is a multi-month knowledge preservation effort. Current focus is systematic extraction and documentation, not running code.
+This is a multi-month knowledge preservation effort. Current focus is systematic extraction and documentation.
+
+**See:** `PROJECT_SUMMARY.md` for complete project overview
