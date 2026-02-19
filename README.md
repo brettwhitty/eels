@@ -20,6 +20,8 @@ The components, converters, and pipeline templates that were developed by contri
 
 See `CONTRIBUTORS.md` for attribution.
 
+![]()<img src='https://outrage.dataglut.org/assets/badges/ioa-safe-badge-provisional.svg' width='250px'>
+
 ## Progress
 
 ### Completed (Phases 1-3)
@@ -99,3 +101,5 @@ eels/
 
 **Lead:** Brett Whitty (GNOMATIX), original TIGR developer  
 **Started:** 2026-02-18
+
+!["GNOMATIX"](assets/images/gnomatix-new-xs.png)
