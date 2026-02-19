@@ -46,15 +46,16 @@
 
 ### Phase 5: Translation Strategy
 
-**Goal:** Map Ergatis primitives to modern workflow languages
+**Goal:** Map Ergatis primitives to modern workflow languages and standards
 
 **Tasks:**
 1. Define primitive mappings:
-   - Component → CWL CommandLineTool / Nextflow process / WDL task
+   - Component → CWL CommandLineTool / Nextflow process / WDL task / BCO step
    - Iterator → scatter/gather patterns
-   - Pipeline → workflow composition
+   - Pipeline → workflow composition / BCO pipeline
 2. Document variable expansion strategies
 3. Evaluate Ergatis Lite S-expression as native format
+4. Map to BioCompute Object (BCO) IEEE standard
 
 **Output:** `docs/TRANSLATION_GUIDE.md`
 
@@ -66,11 +67,11 @@
 
 **Tasks:**
 1. Select 3 simple components (wait, split_multifasta, blast)
-2. Translate each to CWL, Nextflow, WDL
-3. Test translations execute correctly
+2. Translate each to CWL, Nextflow, WDL, BCO
+3. Test translations execute correctly (where applicable)
 4. Document translation patterns
 
-**Output:** `examples/{cwl,nextflow,wdl}/` with working examples
+**Output:** `examples/{cwl,nextflow,wdl,bco}/` with working examples
 
 **Estimated effort:** 8-12 hours
 

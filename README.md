@@ -6,7 +6,7 @@ Systematic extraction and preservation of institutional knowledge from the Ergat
 
 ## Objective
 
-Extract and preserve 20+ years of production genomics annotation knowledge encoded in Ergatis components, converters, and workflows. Document in structured formats for translation to modern workflow languages (CWL/Nextflow/WDL).
+Extract and preserve 20+ years of production genomics annotation knowledge encoded in Ergatis components, converters, and workflows. Document in structured formats for translation to modern workflow languages (CWL/Nextflow/WDL) and standards (BioCompute Object).
 
 ## What is Ergatis?
 
