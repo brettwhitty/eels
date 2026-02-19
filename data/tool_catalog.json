@@ -1,0 +1,1442 @@
+[
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "01_generatePairLists",
+      "path" : "/usr/local/projects/jorvis/metaref/01_generatePairLists.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "02_runMUMi",
+      "path" : "/usr/local/projects/jorvis/metaref/02_runMUMi.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "03_MUMi",
+      "path" : "/usr/local/projects/jorvis/metaref/03_MUMi.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "04_aggregateScores",
+      "path" : "/usr/local/projects/jorvis/metaref/04_aggregateScores.pl"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "05_clusterSequences",
+      "path" : "/usr/local/projects/jorvis/metaref/05_clusterSequences.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "fasttree",
+         "name" : "FastTree",
+         "url" : "https://bio.tools/fasttree"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fast_tree"
+      ],
+      "name" : "FastTree",
+      "path" : "/usr/local/bioinf/FastTree/FastTree"
+   },
+   {
+      "biotools" : {
+         "id" : "lipop",
+         "name" : "LipoP",
+         "url" : "https://bio.tools/lipop"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "lipop"
+      ],
+      "name" : "LipoP",
+      "path" : "/usr/local/bin/LipoP"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared",
+         "pangenome_make_graphs"
+      ],
+      "name" : "R",
+      "path" : "/usr/bin/R"
+   },
+   {
+      "biotools" : {
+         "id" : "repeatmasker",
+         "name" : "RepeatMasker",
+         "url" : "https://bio.tools/repeatmasker"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "repeatmasker"
+      ],
+      "name" : "RepeatMasker",
+      "path" : "/usr/local/bin/RepeatMasker"
+   },
+   {
+      "biotools" : {
+         "id" : "soapdenovo",
+         "name" : "SOAPdenovo",
+         "url" : "https://bio.tools/soapdenovo"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "soapdenovo"
+      ],
+      "name" : "SOAPdenovo",
+      "path" : "/opt/SOAPdenovo/SOAPdenovo"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "solsnp"
+      ],
+      "name" : "SolSNP",
+      "path" : "/usr/local/packages/solSNP/SolSNP.jar"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "alien_hunter"
+      ],
+      "name" : "alien_hunter",
+      "path" : "/usr/local/packages/alien_hunter/alien_hunter"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "stap_aligner"
+      ],
+      "name" : "align_to_rRNA_profile",
+      "path" : "/usr/local/packages/STAP/bin/align_to_rRNA_profile.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "aragorn",
+         "name" : "aragorn",
+         "url" : "https://bio.tools/aragorn"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "aragorn"
+      ],
+      "name" : "aragorn",
+      "path" : "/usr/local/devel/ANNOTATION/wnelson/aragorn"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "celera2hawkeye"
+      ],
+      "name" : "bank-transact",
+      "path" : "/opt/opt-packages/bioinf-v1r4b1/AMOS/bin/bank-transact"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ncbi-blastp",
+         "ncbi-blastn",
+         "ncbi-blastx",
+         "ncbi-blastn_compress",
+         "ncbi-tblastn",
+         "ncbi-tblastx",
+         "ncbi-blastall",
+         "panther"
+      ],
+      "name" : "blastall",
+      "path" : "/usr/bin/blastall"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-blastn"
+      ],
+      "name" : "blastn",
+      "path" : "/usr/local/common/blastn"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-blastp"
+      ],
+      "name" : "blastp",
+      "path" : "/usr/local/common/blastp"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ec_assignment",
+         "psiblast"
+      ],
+      "name" : "blastpgp",
+      "path" : "/usr/local/devel/ANNOTATION/elee/blast/stable/bin/blastpgp"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-blastx"
+      ],
+      "name" : "blastx",
+      "path" : "/usr/local/common/blastx"
+   },
+   {
+      "biotools" : {
+         "id" : "bmtagger",
+         "name" : "bmtagger",
+         "url" : "https://bio.tools/bmtagger"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bmtagger"
+      ],
+      "name" : "bmtagger",
+      "path" : "/usr/local/packages/bmtagger/bmtagger.sh"
+   },
+   {
+      "biotools" : {
+         "id" : "bmtagger",
+         "name" : "bmtagger",
+         "url" : "https://bio.tools/bmtagger"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bmtagger_index"
+      ],
+      "name" : "bmtool",
+      "path" : "/usr/local/packages/bmtagger/bmtool"
+   },
+   {
+      "biotools" : {
+         "id" : "bowtie",
+         "name" : "Bowtie",
+         "url" : "https://bio.tools/bowtie"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bowtie",
+         "tophat"
+      ],
+      "name" : "bowtie",
+      "path" : "/usr/local/bin/bowtie"
+   },
+   {
+      "biotools" : {
+         "id" : "bowtie",
+         "name" : "Bowtie",
+         "url" : "https://bio.tools/bowtie"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bowtie_build"
+      ],
+      "name" : "bowtie-build",
+      "path" : "/usr/local/bin/bowtie-build"
+   },
+   {
+      "biotools" : {
+         "id" : "bwa",
+         "name" : "BWA",
+         "url" : "https://bio.tools/bwa"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared",
+         "bwa",
+         "lgt_bwa",
+         "lgt_build_bwa_index"
+      ],
+      "name" : "bwa",
+      "path" : "/usr/local/packages/bwa-0.7.12/bwa"
+   },
+   {
+      "biotools" : {
+         "id" : "bwa",
+         "name" : "BWA",
+         "url" : "https://bio.tools/bwa"
+      },
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bwa_align"
+      ],
+      "name" : "bwa_align",
+      "path" : "/local/projects/ergatis/package-devel/bin/bwa_align.sh"
+   },
+   {
+      "biotools" : {
+         "id" : "bwa",
+         "name" : "BWA",
+         "url" : "https://bio.tools/bwa"
+      },
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "bwa_index"
+      ],
+      "name" : "bwa_index",
+      "path" : "/local/projects/ergatis/package-devel/bin/bwa_index.sh"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "piecharts"
+      ],
+      "name" : "cherrypie",
+      "path" : "/opt/CherryPie/cherrypie"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "make_circleator_figure",
+         "make_comparative_circleator_figure"
+      ],
+      "name" : "circleator",
+      "path" : "/usr/local/packages/circleator/bin/circleator"
+   },
+   {
+      "biotools" : {
+         "id" : "clustalw",
+         "name" : "Clustal 1.8 (Clustal W, Clustal X)",
+         "url" : "https://bio.tools/clustalw"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "clustalw"
+      ],
+      "name" : "clustalw",
+      "path" : "/usr/local/devel/ANNOTATION/clustalw1.83/clustalw"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "jaccard"
+      ],
+      "name" : "cluster",
+      "path" : "/opt/ergatis/bin/cluster"
+   },
+   {
+      "biotools" : {
+         "id" : "infernal",
+         "name" : "Infernal",
+         "url" : "https://bio.tools/infernal"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "infernal"
+      ],
+      "name" : "cmsearch",
+      "path" : "/usr/local/bin/cmsearch"
+   },
+   {
+      "biotools" : {
+         "id" : "crossbow",
+         "name" : "Crossbow",
+         "url" : "https://bio.tools/crossbow"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "crossbow"
+      ],
+      "name" : "crossbow",
+      "path" : "/opt/crossbow/local/crossbow.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "cufflinks",
+         "name" : "Cufflinks",
+         "url" : "https://bio.tools/cufflinks"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cuffcompare"
+      ],
+      "name" : "cuffcompare",
+      "path" : "/usr/local/bin/cuffcompare"
+   },
+   {
+      "biotools" : {
+         "id" : "cufflinks",
+         "name" : "Cufflinks",
+         "url" : "https://bio.tools/cufflinks"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cuffdiff"
+      ],
+      "name" : "cuffdiff",
+      "path" : "/usr/local/bin/cuffdiff"
+   },
+   {
+      "biotools" : {
+         "id" : "cufflinks",
+         "name" : "Cufflinks",
+         "url" : "https://bio.tools/cufflinks"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cufflinks"
+      ],
+      "name" : "cufflinks",
+      "path" : "/usr/local/bin/cufflinks"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "cuffmerge"
+      ],
+      "name" : "cuffmerge",
+      "path" : "/usr/local/bin/cuffmerge"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "dds",
+      "path" : "/usr/local/devel/ANNOTATION/elee/bin/aat/dds"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "nucmer-delta-filter"
+      ],
+      "name" : "delta-filter",
+      "path" : "/usr/local/bin/delta-filter"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked"
+      ],
+      "name" : "dps",
+      "path" : "/usr/local/devel/ANNOTATION/elee/bin/aat/dps"
+   },
+   {
+      "biotools" : {
+         "id" : "glimmer",
+         "name" : "Glimmer",
+         "url" : "https://bio.tools/glimmer"
+      },
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "train_for_glimmer3_iteration"
+      ],
+      "name" : "elph",
+      "path" : "/usr/local/bin/elph"
+   },
+   {
+      "biotools" : {
+         "id" : "exonerate",
+         "name" : "Exonerate",
+         "url" : "https://bio.tools/exonerate"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "exonerate"
+      ],
+      "name" : "exonerate",
+      "path" : "/usr/local/packages/exonerate/bin/exonerate"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked",
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "ext",
+      "path" : "/usr/local/bin/ext"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked",
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "extCollapse",
+      "path" : "/usr/local/common/extCollapse.pl"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fastq_to_CA"
+      ],
+      "name" : "fastqToCA",
+      "path" : "/usr/local/packages/wgs-assembler-6.1/Linux-amd64/bin/fastqToCA"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fastx_quality_stat"
+      ],
+      "name" : "fastx_quality_stats",
+      "path" : "/usr/local/bin/fastx_quality_stats"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fastx_trimming"
+      ],
+      "name" : "fastx_trimmer",
+      "path" : "/usr/local/bin/fastx_trimmer"
+   },
+   {
+      "biotools" : {
+         "id" : "fgenesh",
+         "name" : "FGENESH",
+         "url" : "https://bio.tools/fgenesh"
+      },
+      "category" : "5. Closed-source private tools",
+      "category_id" : "closed_source",
+      "components" : [
+         "fgenesh"
+      ],
+      "name" : "fgenesh",
+      "path" : "/usr/local/devel/ANNOTATION/euk_genome_control/bin/fgenesh/Linux/fgenesh"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked",
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "filter",
+      "path" : "/usr/local/common/filter.pl"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "phat"
+      ],
+      "name" : "fullphat",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/phat/fullphat"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "fuzznuc"
+      ],
+      "name" : "fuzznuc",
+      "path" : "/usr/local/packages/EMBOSS/bin/fuzznuc"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_na",
+         "aat_na_masked"
+      ],
+      "name" : "gap2",
+      "path" : "/usr/local/bin/gap2"
+   },
+   {
+      "biotools" : {
+         "id" : "geneid",
+         "name" : "Geneid",
+         "url" : "https://bio.tools/geneid"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "geneid"
+      ],
+      "name" : "geneid",
+      "path" : "/usr/local/packages/geneid/bin/geneid"
+   },
+   {
+      "biotools" : {
+         "id" : "genewise",
+         "name" : "GeneWise (EBI)",
+         "url" : "https://bio.tools/genewise"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "genewise"
+      ],
+      "name" : "genewise",
+      "path" : "/usr/local/devel/ANNOTATION/EGC_utilities/WISE2/wise2.2.0/src/bin/genewise"
+   },
+   {
+      "biotools" : {
+         "id" : "genezilla",
+         "name" : "GeneZilla",
+         "url" : "https://bio.tools/genezilla"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "genezilla"
+      ],
+      "name" : "genezilla",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/opt/genezilla"
+   },
+   {
+      "biotools" : {
+         "id" : "glimmer",
+         "name" : "Glimmer",
+         "url" : "https://bio.tools/glimmer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "glimmer3"
+      ],
+      "name" : "glimmer3",
+      "path" : "/usr/local/bin/glimmer3"
+   },
+   {
+      "biotools" : {
+         "id" : "glimmer-hmm",
+         "name" : "Glimmer-HMM",
+         "url" : "https://bio.tools/glimmer-hmm"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "glimmerHMM"
+      ],
+      "name" : "glimmerhmm",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/glimmerHMM/glimmerhmm"
+   },
+   {
+      "biotools" : {
+         "id" : "genemark",
+         "name" : "GeneMark",
+         "url" : "https://bio.tools/genemark"
+      },
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "genemark-es"
+      ],
+      "name" : "gm_es",
+      "path" : "/usr/local/packages/GeneMarkHMM_ES_64_v2.3a/gm_es.pl"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "gsnap"
+      ],
+      "name" : "gmap_setup",
+      "path" : "/usr/local/bin/gmap_setup"
+   },
+   {
+      "biotools" : {
+         "id" : "genemark",
+         "name" : "GeneMark",
+         "url" : "https://bio.tools/genemark"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "genemark"
+      ],
+      "name" : "gmhmme3",
+      "path" : "/usr/local/bin/gmhmme3"
+   },
+   {
+      "biotools" : {
+         "id" : "metagenemark",
+         "name" : "MetaGeneMark",
+         "url" : "https://bio.tools/metagenemark"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "metagenemark"
+      ],
+      "name" : "gmhmmp",
+      "path" : "/usr/local/packages/metagenemark/gmhmmp"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "gsnap"
+      ],
+      "name" : "gsnap",
+      "path" : "/usr/local/bin/gsnap"
+   },
+   {
+      "category" : "1. OS/System tools",
+      "category_id" : "os_system",
+      "components" : [
+         "panther"
+      ],
+      "name" : "gunzip",
+      "path" : "/usr/bin/gunzip"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "hadoop",
+      "path" : "/opt/hadoop/bin/hadoop"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "histogram_stacked"
+      ],
+      "name" : "histogram_stacked",
+      "path" : "/opt/histogram/histogram_stacked"
+   },
+   {
+      "biotools" : {
+         "id" : "HMMER2",
+         "name" : "HMMER2",
+         "url" : "https://bio.tools/HMMER2"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "hmmls"
+      ],
+      "name" : "hmmls",
+      "path" : "/usr/local/bin/hmmls"
+   },
+   {
+      "biotools" : {
+         "id" : "HMMER2",
+         "name" : "HMMER2",
+         "url" : "https://bio.tools/HMMER2"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "hmmpfam"
+      ],
+      "name" : "hmmpfam",
+      "path" : "/usr/bin/hmmpfam"
+   },
+   {
+      "biotools" : {
+         "id" : "hmmer3",
+         "name" : "HMMER3",
+         "url" : "https://bio.tools/hmmer3"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "hmmpfam3"
+      ],
+      "name" : "hmmscan",
+      "path" : "/usr/local/packages/hmmer-3.0/bin/hmmscan"
+   },
+   {
+      "biotools" : {
+         "id" : "hmmer3",
+         "name" : "HMMER3",
+         "url" : "https://bio.tools/hmmer3"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "panther",
+         "hmmer"
+      ],
+      "name" : "hmmsearch",
+      "path" : "/usr/local/bin/hmmsearch"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "iprscan"
+      ],
+      "name" : "iprscan",
+      "path" : "/usr/local/packages/iprscan/bin/iprscan.sh"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "filter_dups_lc_seqs",
+         "rdp_classifier"
+      ],
+      "name" : "java",
+      "path" : "/usr/local/packages/java-jre-1.8.0/bin/java"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "megablast"
+      ],
+      "name" : "megablast",
+      "path" : "/usr/bin/megablast"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "metastats"
+      ],
+      "name" : "metastats",
+      "path" : "/opt/metastats/metastats"
+   },
+   {
+      "biotools" : {
+         "id" : "metagenemark",
+         "name" : "MetaGeneMark",
+         "url" : "https://bio.tools/metagenemark"
+      },
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "metagene"
+      ],
+      "name" : "mga_linux_ia32",
+      "path" : "/usr/local/bioinf/metagene/mga_linux_ia32"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "mothur",
+      "path" : "/opt/opt-packages/mothur-1.12.0/mothur"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "mumi-reduce"
+      ],
+      "name" : "mummer",
+      "path" : "/usr/local/bin/mummer"
+   },
+   {
+      "biotools" : {
+         "id" : "muscle",
+         "name" : "MUSCLE",
+         "url" : "https://bio.tools/muscle"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "muscle"
+      ],
+      "name" : "muscle",
+      "path" : "/usr/local/bin/muscle"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "aat_aa",
+         "aat_aa_masked"
+      ],
+      "name" : "nap",
+      "path" : "/usr/local/bin/nap"
+   },
+   {
+      "biotools" : {
+         "id" : "mummer",
+         "name" : "MUMmer",
+         "url" : "https://bio.tools/mummer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "create_pseudomolecules",
+         "nucmer"
+      ],
+      "name" : "nucmer",
+      "path" : "/usr/local/bin/nucmer"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "panther"
+      ],
+      "name" : "pantherScore",
+      "path" : "/usr/local/devel/ANNOTATION/jorvis/opt/pantherScore1.0/pantherScore.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "pfscan",
+      "path" : "/usr/local/bin/pfscan"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "phobos"
+      ],
+      "name" : "phobos_64bit",
+      "path" : "/usr/local/bin/phobos_64bit"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "ber"
+      ],
+      "name" : "praze",
+      "path" : "/usr/local/bin/praze"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "predotar"
+      ],
+      "name" : "predotar",
+      "path" : "/usr/local/bin/predotar"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "filter_dups_lc_seqs"
+      ],
+      "name" : "prinseq-lite",
+      "path" : "/usr/local/packages/prinseq-lite/bin/prinseq-lite.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "prodigal",
+         "name" : "Prodigal",
+         "url" : "https://bio.tools/prodigal"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "prodigal"
+      ],
+      "name" : "prodigal",
+      "path" : "/usr/local/bin/prodigal"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "prosite.dat",
+      "path" : "/usr/local/projects/db/prosite/prosite.dat"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "ps_scan",
+      "path" : "/usr/local/bin/ps_scan.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "ps_scan",
+         "name" : "ps_scan",
+         "url" : "https://bio.tools/ps_scan"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ps_scan"
+      ],
+      "name" : "psa2msa",
+      "path" : "/usr/local/bin/psa2msa"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "python3",
+      "path" : "/usr/local/packages/Python-3.4.3/bin/python3"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "quicktree"
+      ],
+      "name" : "quicktree",
+      "path" : "/home/jinman/bin/quicktree"
+   },
+   {
+      "category" : "2. Custom Perl scripts/wrappers (TIGR/JCVI/IGS)",
+      "category_id" : "custom_perl",
+      "components" : [
+         "stap_classifier"
+      ],
+      "name" : "rRNA_pipeline_for_one",
+      "path" : "/usr/local/packages/STAP/bin/rRNA_pipeline_for_one.pl"
+   },
+   {
+      "biotools" : {
+         "id" : "rapsearch",
+         "name" : "RAPSearch",
+         "url" : "https://bio.tools/rapsearch"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "RAPSearch2",
+         "RAPSearch2"
+      ],
+      "name" : "rapsearch",
+      "path" : "/usr/local/bin/rapsearch"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "make_circleator_figure",
+         "make_comparative_circleator_figure",
+         "wga_maf2tree"
+      ],
+      "name" : "rasterize-svg",
+      "path" : "/usr/local/packages/circleator/bin/rasterize-svg"
+   },
+   {
+      "biotools" : {
+         "id" : "rnammer",
+         "name" : "RNAmmer",
+         "url" : "https://bio.tools/rnammer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "RNAmmer"
+      ],
+      "name" : "rnammer",
+      "path" : "/usr/local/bioinf/rnammer/rnammer"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "rpsblast"
+      ],
+      "name" : "rpsblast",
+      "path" : "/usr/local/bin/rpsblast"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "celera-assembler"
+      ],
+      "name" : "runCA",
+      "path" : "/usr/local/bioinf/celera-assembler/wgs-5.4/Linux-amd64/bin/runCA"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "ksnp"
+      ],
+      "name" : "run_kSNP_v2",
+      "path" : "/usr/local/packages/kSNP_v2_alt/run_kSNP_v2"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "common shared"
+      ],
+      "name" : "samtools",
+      "path" : "/usr/local/bin/samtools"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "scripture"
+      ],
+      "name" : "scripture-beta2",
+      "path" : "/usr/local/packages/scripture-beta2/scripture-beta2.jar"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "seg"
+      ],
+      "name" : "seg",
+      "path" : "/usr/local/bin/seg"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "sff_to_CA"
+      ],
+      "name" : "sffToCA",
+      "path" : "/usr/local/bioinf/celera-assembler/wgs-5.4/Linux-amd64/bin/sffToCA"
+   },
+   {
+      "biotools" : {
+         "id" : "mummer",
+         "name" : "MUMmer",
+         "url" : "https://bio.tools/mummer"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "create_pseudomolecules",
+         "nucmer"
+      ],
+      "name" : "show-coords",
+      "path" : "/usr/local/bin/show-coords"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "nucmer-show-snps"
+      ],
+      "name" : "show-snps",
+      "path" : "/usr/local/bin/show-snps"
+   },
+   {
+      "biotools" : {
+         "id" : "signalp",
+         "name" : "SignalP",
+         "url" : "https://bio.tools/signalp"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "signalp"
+      ],
+      "name" : "signalp",
+      "path" : "/usr/local/bin/signalp"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "skiff"
+      ],
+      "name" : "skiff",
+      "path" : "/opt/SKIFF/skiff"
+   },
+   {
+      "biotools" : {
+         "id" : "snap",
+         "name" : "SNAP",
+         "url" : "https://bio.tools/snap"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "snap"
+      ],
+      "name" : "snap",
+      "path" : "/usr/local/devel/ANNOTATION/EGC_utilities/SNAP/SNAP/snap"
+   },
+   {
+      "biotools" : {
+         "id" : "bmtagger",
+         "name" : "bmtagger",
+         "url" : "https://bio.tools/bmtagger"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "bmtagger_index"
+      ],
+      "name" : "srprism",
+      "path" : "/usr/local/packages/bmtagger/srprism"
+   },
+   {
+      "biotools" : {
+         "id" : "trnascan-se",
+         "name" : "Trnascan-SE",
+         "url" : "https://bio.tools/trnascan-se"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "tRNAscan-SE",
+         "tRNAscan-SE_compress"
+      ],
+      "name" : "tRNAscan-SE",
+      "path" : "/usr/local/bioinf/tRNAscan-SE/tRNAscan-SE"
+   },
+   {
+      "biotools" : {
+         "id" : "targetp",
+         "name" : "TargetP",
+         "url" : "https://bio.tools/targetp"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "targetp"
+      ],
+      "name" : "targetp",
+      "path" : "/usr/local/bin/targetp"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "dump_fasta",
+         "dump_table",
+         "tbl2asn"
+      ],
+      "name" : "tbl2asn",
+      "path" : "/usr/local/packages/tbl2asn/bin/tbl2asn"
+   },
+   {
+      "biotools" : {
+         "id" : "blast",
+         "name" : "BLAST",
+         "url" : "https://bio.tools/blast"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-tblastn"
+      ],
+      "name" : "tblastn",
+      "path" : "/usr/local/common/tblastn"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "wu-tblastx"
+      ],
+      "name" : "tblastx",
+      "path" : "/usr/local/common/tblastx"
+   },
+   {
+      "biotools" : {
+         "id" : "tmhmm",
+         "name" : "TMHMM",
+         "url" : "https://bio.tools/tmhmm"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "tmhmm"
+      ],
+      "name" : "tmhmm",
+      "path" : "/usr/local/bin/tmhmm"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "celera2hawkeye"
+      ],
+      "name" : "toAmos",
+      "path" : "/opt/opt-packages/bioinf-v1r4b1/AMOS/bin/toAmos"
+   },
+   {
+      "biotools" : {
+         "id" : "tophat",
+         "name" : "TopHat",
+         "url" : "https://bio.tools/tophat"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "tophat"
+      ],
+      "name" : "tophat",
+      "path" : "/usr/local/bin/tophat"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "translate_sequence"
+      ],
+      "name" : "transeq",
+      "path" : "/usr/bin/transeq"
+   },
+   {
+      "biotools" : {
+         "id" : "trf",
+         "name" : "TRF",
+         "url" : "https://bio.tools/trf"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "trf"
+      ],
+      "name" : "trf",
+      "path" : "/usr/local/bin/trf"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "uchime"
+      ],
+      "name" : "uchime",
+      "path" : "/usr/local/packages/uchime/uchime"
+   },
+   {
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "uclust"
+      ],
+      "name" : "uclust",
+      "path" : "/usr/local/bioinf/UCLUST/uclust"
+   },
+   {
+      "biotools" : {
+         "id" : "usearch",
+         "name" : "USEARCH",
+         "url" : "https://bio.tools/usearch"
+      },
+      "category" : "4. Open-source public tools",
+      "category_id" : "open_source",
+      "components" : [
+         "usearch"
+      ],
+      "name" : "usearch",
+      "path" : "/opt/usearch/usearch"
+   },
+   {
+      "category" : "3. Custom binaries (TIGR/JCVI/IGS)",
+      "category_id" : "custom_binary",
+      "components" : [
+         "xdformat"
+      ],
+      "name" : "xdformat",
+      "path" : "/usr/local/common/xdformat"
+   }
+]

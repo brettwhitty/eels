@@ -1,0 +1,301 @@
+[
+   {
+      "category" : "Other",
+      "components" : [
+         "ber"
+      ],
+      "path" : "/usr/local/bin",
+      "variable" : "CDBFASTA_PATH"
+   },
+   {
+      "category" : "Custom DB (tchar - TIGR/JCVI)",
+      "components" : [
+         "predict_prokaryotic_gene_function",
+         "start_site_curation"
+      ],
+      "path" : "$;DB_DIR$;/tchar/tchar.db",
+      "variable" : "CHAR_DB"
+   },
+   {
+      "category" : "RNA DB (Rfam)",
+      "components" : [
+         "infernal"
+      ],
+      "path" : "/home/sadkins/Downloads/Rfam.cm",
+      "variable" : "CM_FILE_PATH"
+   },
+   {
+      "category" : "Orthology DB (COG)",
+      "components" : [
+         "ncbi-blastp",
+         "wu-blastp"
+      ],
+      "path" : "$;DB_DIR$;/ncbi/COG/myva",
+      "variable" : "COGS_DB"
+   },
+   {
+      "category" : "Orthology DB (COG)",
+      "components" : [
+         "pipeline_summary"
+      ],
+      "path" : "$;DB_DIR$;/ncbi/COG/whog",
+      "variable" : "COGS_LOOKUP"
+   },
+   {
+      "category" : "Other",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/mnt/staging/db",
+      "variable" : "DB_DIR"
+   },
+   {
+      "category" : "Sequence DB (PANDA/AllGroup)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/panda/latest/AllGroup/AllGroup.niaa",
+      "variable" : "DB_NR_PEPTIDE"
+   },
+   {
+      "category" : "Sequence DB (UniRef/UniProt)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/projects/uniref/uniref100.fasta",
+      "variable" : "DB_UNIPROT_100"
+   },
+   {
+      "category" : "Orthology DB (eggNOG)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/eggnog/latest/protein.aliases.v3.txt",
+      "variable" : "EGGNOG_ALIAS"
+   },
+   {
+      "category" : "Orthology DB (eggNOG)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/eggnog/latest/all.members/NOG.funccat.txt",
+      "variable" : "EGGNOG_CAT"
+   },
+   {
+      "category" : "Orthology DB (eggNOG)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/eggnog/latest/sequences.v3.db",
+      "variable" : "EGGNOG_DB"
+   },
+   {
+      "category" : "Orthology DB (eggNOG)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/eggnog/latest/all.description/NOG.description.txt",
+      "variable" : "EGGNOG_DESC"
+   },
+   {
+      "category" : "Orthology DB (eggNOG)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/eggnog/latest/fun.txt",
+      "variable" : "EGGNOG_FUNCTION"
+   },
+   {
+      "category" : "Orthology DB (eggNOG)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/eggnog/latest/all.members/NOG.members.txt",
+      "variable" : "EGGNOG_MEMBERS"
+   },
+   {
+      "category" : "Enzyme DB (ExPASy)",
+      "components" : [
+         "p_func"
+      ],
+      "path" : "/local/db/expasy/enzyme/latest/enzyme.dat",
+      "variable" : "ENZYME_DAT"
+   },
+   {
+      "category" : "Sequence DB (PANDA/AllGroup)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/mnt/staging/db/panda/AllGroup/AllGroup.fasta",
+      "variable" : "FASTA_NR_PEPTIDE"
+   },
+   {
+      "category" : "Other",
+      "components" : [
+         "ber"
+      ],
+      "path" : "/usr/bin",
+      "variable" : "FORMATDB_PATH"
+   },
+   {
+      "category" : "Domain/Family DB (coding_hmm - Pfam+TIGRFAMs)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/mnt/staging/db/coding_hmm/coding_hmm.lib.bin",
+      "variable" : "HMM_ALL"
+   },
+   {
+      "category" : "Domain/Family DB (coding_hmm - Pfam+TIGRFAMs)",
+      "components" : [
+         "auto_gene_curation"
+      ],
+      "path" : "/mnt/coding_hmm.lib.db",
+      "variable" : "HMM_INFO_DB"
+   },
+   {
+      "category" : "Domain/Family DB (coding_hmm - Pfam+TIGRFAMs)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/mnt/staging/db/coding_hmm/coding_hmm.lib.db",
+      "variable" : "HMM_LIB_DB"
+   },
+   {
+      "category" : "Scoring Matrix (AAT)",
+      "components" : [
+         "aat_aa"
+      ],
+      "path" : "/usr/local/packages/AAT/matrices/BS",
+      "variable" : "MATRIX"
+   },
+   {
+      "category" : "Sequence DB (NCBI nr/nt)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/db/ncbi/blast/db/nt",
+      "variable" : "NCBI_BLAST_NT"
+   },
+   {
+      "category" : "Sequence DB (NCBI nr/nt)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/mnt/staging/db/ncbi/nr",
+      "variable" : "NCBI_BLAST_NUC_NR"
+   },
+   {
+      "category" : "Taxonomy DB (NCBI)",
+      "components" : [
+         "auto_gene_curation"
+      ],
+      "path" : "$;DB_DIR$;/ncbi/taxonomy/names.dmp",
+      "variable" : "NCBI_TAX_NAMES"
+   },
+   {
+      "category" : "Taxonomy DB (NCBI)",
+      "components" : [
+         "auto_gene_curation"
+      ],
+      "path" : "$;DB_DIR$;/ncbi/taxonomy/nodes.dmp",
+      "variable" : "NCBI_TAX_NODES"
+   },
+   {
+      "category" : "Domain/Family DB (PANTHER)",
+      "components" : [
+         "panther"
+      ],
+      "path" : "/usr/local/db/common/PANTHER6.0",
+      "variable" : "PANTHER_HMM_LIBRARY"
+   },
+   {
+      "category" : "Enzyme DB (PRIAM)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/mnt/staging/db/priam/profile_EZ",
+      "variable" : "PRIAM_PROFILES"
+   },
+   {
+      "category" : "Sequence DB (UniRef/UniProt)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/projects/uniref/uniref100_rapsearch",
+      "variable" : "RAPSEARCH_UNIREF100"
+   },
+   {
+      "category" : "RNA DB (Rfam)",
+      "components" : [
+         "infernal"
+      ],
+      "path" : "/usr/local/projects/db/Rfam/current/hmm_cm_mapping",
+      "variable" : "RFAM_HMM_CM_MAPPING"
+   },
+   {
+      "category" : "RNA DB (Rfam)",
+      "components" : [
+         "infernal"
+      ],
+      "path" : "/usr/local/projects/db/Rfam/current/stockholm",
+      "variable" : "RFAM_STOCKHOLM_DIR"
+   },
+   {
+      "category" : "RNA DB (RDP)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/mnt/staging/db/RDPII/release9_56_unaligned.fasta",
+      "variable" : "RNA_LIB"
+   },
+   {
+      "category" : "Repeat DB (RepeatMasker)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/usr/local/packages/RepeatMasker/Libraries/RepeatMasker.lib",
+      "variable" : "SIMPLE_REPEAT_LIB"
+   },
+   {
+      "category" : "Domain/Family DB (TIGRFAMs/TIGR Roles)",
+      "components" : [
+         "p_func",
+         "parse_evidence"
+      ],
+      "path" : "/local/db/by_source/jcvi/tigr_roles",
+      "variable" : "TIGR_ROLES_DB_DIR"
+   },
+   {
+      "category" : "Other",
+      "components" : [
+         "tmhmm"
+      ],
+      "path" : "/usr/local/packages/TMHMM/lib",
+      "variable" : "TMHMM_LIB"
+   },
+   {
+      "category" : "Other",
+      "components" : [
+         "tRNAscan-SE"
+      ],
+      "path" : "/usr/local/packages/trnascan-se/bin/",
+      "variable" : "TRNASCAN_LIB"
+   },
+   {
+      "category" : "Sequence DB (UniRef/UniProt)",
+      "components" : [
+         "RAPSearch2"
+      ],
+      "path" : "/local/projects/uniref/uniprot_trembl.sqlite3",
+      "variable" : "UNIPROT_SQLITE"
+   },
+   {
+      "category" : "Sequence DB (UniRef/UniProt)",
+      "components" : [
+         "common inputs"
+      ],
+      "path" : "/local/projects/uniref/uniref100_lookup.db",
+      "variable" : "UNIREF100_LOOKUP_FILE"
+   }
+]
