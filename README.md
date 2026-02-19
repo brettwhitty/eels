@@ -6,94 +6,95 @@ Systematic extraction and preservation of institutional knowledge from the Ergat
 
 ## Objective
 
-Extract and preserve 20+ years of production genomics annotation knowledge encoded in Ergatis components, converters, and workflows. Document in structured formats: Component JSON, Ergatis Lite notation, CWL (tool configs), and BioCompute Object (IEEE standard).
+Extract and preserve 20+ years of production genomics annotation knowledge encoded in Ergatis components, converters, and pipeline templates. Translate to modern structured formats (CWL, Nextflow, BioCompute Object, Ergatis Lite) and map tools to community registries (bio.tools, EDAM ontology).
 
 ## What is Ergatis?
 
-Ergatis is a web-based utility for creating, running, and monitoring reusable computational analysis pipelines. It contains pre-built components for common bioinformatics analysis tasks that can be arranged graphically to form highly-configurable pipelines.
+Ergatis is a web-based workflow management system for creating, running, and monitoring reusable computational analysis pipelines. Components for common bioinformatics tasks can be arranged graphically to form highly-configurable, parallelized workflows with automatic provenance tracking.
 
-- Orvis J, et al. *Bioinformatics*. 2010 Jun 15;26(12). https://ergatis.sourceforge.net/
+- Orvis J, et al. *Ergatis: a web interface and scalable software system for bioinformatics workflows.* Bioinformatics. 2010 Jun 15;26(12):1488-92. https://ergatis.sourceforge.net/
 
 ## What is EELS preserving?
 
-The components, converters, and pipeline templates that were developed by contributors at TIGR, JCVI, and IGS over many years of production genome annotation work. This knowledge is encoded in configuration files, workflow templates, and Perl scripts - not in the Ergatis platform itself. Many of the people who built these components are not on the Ergatis paper.
+The components, converters, and pipeline templates developed by contributors at TIGR, JCVI, and IGS over many years of production genome annotation work. This knowledge is encoded in XML workflow templates, INI configuration files, and Perl scripts — it represents the accumulated expertise of the people who built and ran these pipelines, not the Ergatis platform itself. Many of the people who built these components are not on the Ergatis paper.
 
-See `CONTRIBUTORS.md` for attribution.
+See `CONTRIBUTORS.md` for attribution of the 33 identified contributors.
 
 ![]()<img src='https://outrage.dataglut.org/assets/badges/ioa-safe-badge-provisional.svg' width='250px'>
 
-## Progress
+## Current State
 
-### Completed (Phases 1-3)
+**Extracted Data:**
+- 362 component configurations → `data/components/`
+- 383 categorized workflow steps → `data/categorized_steps/`
+- 65 converter configurations → `data/converters/`
+- 40 pipeline templates → `data/pipelines/`
+- 51 component workflow templates → `data/component_templates/`
+- 437 tool executables cataloged → `data/tool_catalog_full.json`
+- 37 reference databases cataloged → `data/database_catalog.json`
+- 65 converter→component mappings → `data/converter_mapping.json`
+- 121 components mapped to bio.tools → `data/biotools_mapping.json`
+- 121 components mapped to EDAM ontology → `data/edam_mapping.json`
+- JSON Schema for component data → `data/schemas/`
 
-**Data Extraction:**
-- 362 components analyzed → `data/components/*.json`
-- 254 iterator patterns cataloged → `data/iterator_catalog.json`
-- 40 pipeline templates extracted → `data/pipelines/*.json`
-- 51 component templates extracted → `data/component_templates/*.json`
-- 472 utility scripts cataloged → `data/utility_catalog.json`
-- 91 converters identified → `data/converter_catalog.json`
-- 65 converter configs → `data/converters/*.json`
-- 28 contributors identified → `data/contributors.json`
+**Generated Translations:**
+- 362 CWL tool definitions → `generated/cwl_improved/`
+- 383 Nextflow process definitions → `generated/nextflow/`
+- 40 Nextflow pipeline workflows → `generated/nextflow/pipelines/`
+- 362 BioCompute Objects → `generated/bco/`
+- 40 pipeline BioCompute Objects → `generated/bco_pipelines/`
+- 362 Ergatis Lite notations → `generated/ergatis_lite/`
+- 40 pipeline Ergatis Lite notations → `generated/ergatis_lite_pipelines/`
 
-**Translation Formats Generated:**
-- 362 Ergatis Lite component notations → `generated/ergatis_lite/*.lite`
-- 362 BioCompute Objects → `generated/bco/*.json`
-- 399 CWL tool definitions → `generated/cwl/*.cwl`
-
-**Note:** Converter manpages exist in `ergatis-install/man/man1/*2bsml.pl.1p` (65 files)
+**Tools & Viewer:**
+- Web-based component viewer → `viewer/`
+- Perl extraction and translation tools → `tools/`
 
 **Documentation:**
-- Component anatomy walkthrough → `docs/COMPONENT_ANATOMY.md`
-- Converter reference guide → `docs/CONVERTER_REFERENCE.md`
+- [Wiki](https://gitea.gnomatix.com/gnomatix/eels/wiki/) — Iterator system, pipeline architecture, tool catalog, database catalog
+- Component anatomy → `docs/COMPONENT_ANATOMY.md`
 - Ergatis Lite specification → `docs/ERGATIS_LITE_SPEC.md`
 - Contributor attribution → `CONTRIBUTORS.md`
-
-### In Progress
-
-Work is ongoing. See `docs/ARCHITECTURE_CLARIFICATION.md` for current understanding.
 
 ## Repository Structure
 
 ```
 eels/
-├── data/                        # Source data (Ergatis extractions)
-│   ├── components/              # 362 component configs (Brett, 2017)
+├── data/                        # Extracted source data
+│   ├── components/              # 362 component configs (JSON, from Brett's 2017 extraction)
+│   ├── categorized_steps/       # 383 step-level analysis (tool/converter/infra/validation)
 │   ├── component_templates/     # 51 component workflow templates (parsed XML)
-│   ├── component_docs/          # 75 HTML documentation templates
-│   ├── converters/              # 65 converter definitions (from manpages)
+│   ├── converters/              # 65 converter definitions
 │   ├── pipelines/               # 40 production pipeline templates
-│   ├── reference/               # DTD, XSD, iterator templates, project config, software config
+│   ├── reference/               # DTD, XSD, software.config, project.config
 │   ├── schemas/                 # JSON Schema for component data
-│   ├── biotools_mapping.json    # Component → bio.tools registry mapping
+│   ├── biotools_mapping.json    # Component → bio.tools registry
 │   ├── edam_mapping.json        # Component → EDAM ontology terms
-│   ├── pipeline_catalog.json    # Pipeline summary
-│   ├── converter_catalog.json   # All converters (91)
-│   ├── utility_catalog.json     # Utility scripts (472)
-│   ├── iterator_catalog.json    # Iterator patterns
-│   └── contributors.json       # Attribution
+│   ├── tool_catalog.json        # 122 tools from software.config
+│   ├── tool_catalog_full.json   # 437 tools from all sources
+│   ├── database_catalog.json    # 37 reference databases
+│   ├── converter_mapping.json   # 65 converters → components with tool chains
+│   └── contributors.json        # 33 contributors
 │
-├── generated/                   # Generated/derivative data
-│   ├── bco/                     # Component BCO files (362)
-│   ├── bco_pipelines/           # Pipeline BCO files (40)
-│   ├── cwl/                     # CWL tool definitions (399)
+├── generated/                   # Translated formats
+│   ├── bco/                     # Component BioCompute Objects (362)
+│   ├── bco_pipelines/           # Pipeline BioCompute Objects (40)
+│   ├── cwl_improved/            # CWL tool definitions (362)
 │   ├── ergatis_lite/            # Component Ergatis Lite notation (362)
-│   └── ergatis_lite_pipelines/  # Pipeline Ergatis Lite notation (40)
+│   ├── ergatis_lite_pipelines/  # Pipeline Ergatis Lite notation (40)
+│   └── nextflow/                # Nextflow processes (383) + pipelines (40)
 │
-├── tools/                       # EELS Perl scripts (Brett's extraction tools)
-│   ├── workflow_xml_to_json.pl  # Core XML to JSON converter
-│   ├── to_json.pl               # Batch component XML converter
-│   ├── simple_to_nextflow.pl    # JSON to Nextflow converter
-│   ├── parse_pipeline_layout.pl # Pipeline layout parser
-│   ├── categorize_steps.pl      # Step categorizer (tool/infra/converter)
+├── viewer/                      # Web-based component viewer (HTML/JS)
+│
+├── tools/                       # EELS Perl scripts
+│   ├── workflow_xml_to_json.pl  # Core XML→JSON converter (Brett)
+│   ├── simple_to_nextflow.pl    # JSON→Nextflow converter (Brett)
+│   ├── categorize_steps.pl      # Step categorizer
 │   ├── map_biotools.pl          # bio.tools registry mapper
-│   ├── pipeline_to_lite.pl      # Pipeline to Ergatis Lite converter
-│   └── pipeline_to_bco.pl       # Pipeline to BCO converter
-│
-├── ergatis_lite/                # Ergatis Lite source code (Brett, 2007)
+│   ├── catalog_tools_and_dbs.pl # Tool/database cataloger
+│   └── ...
 │
 ├── docs/                        # Documentation
-│
 ├── CONTRIBUTORS.md
 ├── PHILOSOPHY.md
 └── README.md
@@ -102,13 +103,13 @@ eels/
 ## Source Material
 
 - **Ergatis source:** `ergatis-eels-devel/ergatis-git/`
-- **Components:** `components/` (configs) + `workflow/` (templates)
-- **Scripts:** Perl scripts in `src/perl/` (converters + utilities)
+- **Components:** `components/` (INI configs) + `workflow/` (XML templates)
+- **Converters:** Perl scripts in `src/perl/` with manpages in `man/man1/`
 - **Ergatis Lite:** Brett Whitty, JCVI, 2007
 
 ## Project Context
 
-**Lead:** Brett Whitty (GNOMATIX), original TIGR developer  
+**Lead:** Brett Whitty (GNOMATIX), original TIGR developer
 **Started:** 2026-02-18
 
 !["GNOMATIX"](assets/images/gnomatix-new-xs.png)
