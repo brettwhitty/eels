@@ -15,6 +15,11 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - Flexibility for complex multi-step biological analyses
 - Production reliability for regulatory submissions (FDA-approved workflows)
 
+**Deployment Flexibility:** While designed for institutional HPC environments, Ergatis could be deployed at any scale:
+- **Production scale:** Multi-institutional HPC clusters with SGE/Grid Engine
+- **Development scale:** Individual workstations or laptops with SGE, Java, Apache, and Perl
+- Same workflow definitions work across deployment scales
+
 **Advanced Features Preserved:**
 - **Hierarchical composition** - Workflows compose components (subworkflows), components compose tools
 - **Reusable subworkflows** - Components as first-class compositional units
