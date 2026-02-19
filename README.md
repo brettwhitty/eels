@@ -26,7 +26,8 @@ This is production-tested, FDA-approved software representing institutional know
 **Data Extraction:**
 - 362 components analyzed → `data/components/*.json`
 - 254 iterator patterns cataloged → `data/iterator_catalog.json`
-- 56 workflows cataloged → `data/workflow_catalog.json`
+- 56 workflows cataloged → `data/workflow_catalog.json` (108 XML files)
+- 472 utility scripts cataloged → `data/utility_catalog.json`
 - 91 converters identified → `data/converter_catalog.json`
 - 65 converter manpages extracted → `data/manpages/*.txt`
 - 28 contributors identified → `data/contributors.json`
@@ -57,6 +58,7 @@ eels/
 │   ├── component_summary.json
 │   ├── iterator_catalog.json
 │   ├── workflow_catalog.json
+│   ├── utility_catalog.json # 472 utility scripts
 │   └── converter_catalog.json
 ├── docs/                    # Generated documentation
 │   ├── converters/          # Deep converter analysis
@@ -66,7 +68,8 @@ eels/
 ├── scripts/                 # Extraction tools
 │   ├── analyze_components.py
 │   ├── catalog_iterators.py
-│   └── catalog_workflows.py
+│   ├── catalog_workflows.py
+│   └── catalog_utilities.py
 ├── CONTRIBUTORS.md          # Attribution
 ├── NEXT_STEPS.md           # Remaining work
 ├── STATUS.md               # Progress tracking
@@ -78,8 +81,8 @@ eels/
 
 - **Ergatis source:** `~/repos/eels/ergatis-eels-devel/ergatis-git/`
 - **Components:** 371 directories in `components/`
-- **Converters:** 91+ scripts in `src/perl/`
-- **Workflows:** 56 templates in `workflow/`
+- **Scripts:** 472 Perl scripts in `src/perl/` (91 converters, 381 utilities)
+- **Workflows:** 56 templates in `workflow/` (108 XML files)
 - **Documentation:** `doc/workflowxml.txt`, POD in scripts
 
 ## Project Context
