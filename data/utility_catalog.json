@@ -1,0 +1,3047 @@
+{
+  "total_scripts": 472,
+  "categories": {
+    "other": 265,
+    "converter": 74,
+    "alignment": 40,
+    "annotation": 26,
+    "database": 12,
+    "assembly": 14,
+    "statistics": 8,
+    "file_manipulation": 33
+  },
+  "scripts": [
+    {
+      "filename": "CogBsmlLoader.pl",
+      "category": "other",
+      "size": 22029,
+      "name": "CogBsmlLoader.pl",
+      "description": "Preprocess data stored in BSML pairwise alignment documents into BTAB\nstructure for COG analysis using best_hits.pl."
+    },
+    {
+      "filename": "CogProteinFasta.pl",
+      "category": "other",
+      "size": 7645
+    },
+    {
+      "filename": "CogProteinFastaNoMap.pl",
+      "category": "other",
+      "size": 6331
+    },
+    {
+      "filename": "Create_Qiime_tables.pl",
+      "category": "other",
+      "size": 4719
+    },
+    {
+      "filename": "MSF2Bsml.pl",
+      "category": "other",
+      "size": 13367,
+      "name": "MSF2Bsml.pl",
+      "description": "Convert a multiple sequence alignment file (such as clustalw) to BSML."
+    },
+    {
+      "filename": "MSF_domain2bsml.pl",
+      "category": "converter",
+      "size": 8227,
+      "name": "MSF_domain2bsml.pl",
+      "description": "convert MSF format alignment files into BSML documents"
+    },
+    {
+      "filename": "RAPSearch2btab.pl",
+      "category": "converter",
+      "size": 7065,
+      "name": "RAPSearch2btab.pl",
+      "description": "Convert RAPSearch .m8 to BLAST .btab format"
+    },
+    {
+      "filename": "RunBestHit.pl",
+      "category": "other",
+      "size": 251
+    },
+    {
+      "filename": "SNP_Analysis.pl",
+      "category": "other",
+      "size": 7196
+    },
+    {
+      "filename": "SNP_ExtractFASTA.pl",
+      "category": "other",
+      "size": 3233
+    },
+    {
+      "filename": "add_blast_polypeptide_links.pl",
+      "category": "alignment",
+      "size": 15054,
+      "name": "add_blast_polypeptide_links.pl",
+      "description": "Adds a BLAST analysis and associated analysisprops from a BSML file\nto a chado database.  Does NOT load match features, only the analysis and attributes."
+    },
+    {
+      "filename": "add_pvalue_to_praze_output.pl",
+      "category": "other",
+      "size": 3748
+    },
+    {
+      "filename": "adjust_bsml_coordinates.pl",
+      "category": "other",
+      "size": 28148,
+      "name": "adjust_bsml_coordinates.pl",
+      "description": "adjust the positional coordinates within a BSML file"
+    },
+    {
+      "filename": "adjust_btab_coordinates.pl",
+      "category": "other",
+      "size": 13234,
+      "name": "adjust_btab_coordinates.pl",
+      "description": "adjust the positional coordinates within a nap\noutput alignment file"
+    },
+    {
+      "filename": "adjust_gap2_coordinates.pl",
+      "category": "other",
+      "size": 13748,
+      "name": "adjust_gap2_coordinates.pl",
+      "description": "adjust the positional coordinates within a gap2\noutput alignment file"
+    },
+    {
+      "filename": "adjust_nap_coordinates.pl",
+      "category": "other",
+      "size": 13152,
+      "name": "adjust_nap_coordinates.pl",
+      "description": "adjust the positional coordinates within a nap\noutput alignment file"
+    },
+    {
+      "filename": "align_bowtie_stats.pl",
+      "category": "alignment",
+      "size": 5680,
+      "name": "align_bowtie_stats.pl",
+      "description": "script to calculate alignment statistics for Bowtie output."
+    },
+    {
+      "filename": "align_tophat_split_stats.pl",
+      "category": "alignment",
+      "size": 8814,
+      "name": "align_tophat_stats.pl",
+      "description": "script to calculate alignment statistics."
+    },
+    {
+      "filename": "align_tophat_stats.pl",
+      "category": "alignment",
+      "size": 8005,
+      "name": "align_tophat_stats.pl",
+      "description": "script to calculate alignment statistics."
+    },
+    {
+      "filename": "analysis2bsml.pl",
+      "category": "converter",
+      "size": 12589,
+      "name": "analysis2bsml.pl",
+      "description": "add analysis parameters to a BSML result doc"
+    },
+    {
+      "filename": "annotation_collection_to_bsml.pl",
+      "category": "other",
+      "size": 12425,
+      "name": "annotation_collection2bsml.pl",
+      "description": "Uses output from AnnotationCollection module (using Annotation::to_string \n    subroutine) and writes information to bsml"
+    },
+    {
+      "filename": "antigenic2bsml.pl",
+      "category": "converter",
+      "size": 6447,
+      "name": "antigenic2bsml.pl",
+      "description": "convert ANTIGENIC output to BSML"
+    },
+    {
+      "filename": "appendfile.pl",
+      "category": "other",
+      "size": 4772,
+      "name": "appendfile.pl",
+      "description": "=head1 SYNOPSIS"
+    },
+    {
+      "filename": "aragorn2bsml.pl",
+      "category": "converter",
+      "size": 11571,
+      "name": "aragorn2bsml.pl",
+      "description": "Creates a bsml document from aragorn raw\n    output"
+    },
+    {
+      "filename": "archive.pl",
+      "category": "other",
+      "size": 1869,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "assign_annotations.pl",
+      "category": "annotation",
+      "size": 2422
+    },
+    {
+      "filename": "assign_dbxref_ids.pl",
+      "category": "annotation",
+      "size": 22341,
+      "name": "assign_dbxref_ids.pl",
+      "description": "creates dbxref IDs (such as locus accessions) within a chado database"
+    },
+    {
+      "filename": "assign_ec_from_rps.pl",
+      "category": "annotation",
+      "size": 7602,
+      "name": "assign_ec_from_priam_rps.pl",
+      "description": "assigns ec numbers to gene predictions based on rpsblast against priam\n    profile database."
+    },
+    {
+      "filename": "assign_taxa.pl",
+      "category": "annotation",
+      "size": 1769
+    },
+    {
+      "filename": "augustus2bsml.pl",
+      "category": "converter",
+      "size": 11229,
+      "name": "augustus2bsml.pl",
+      "description": "Creates a bsml document from augustus raw\n    output"
+    },
+    {
+      "filename": "auto_annotate.pl",
+      "category": "annotation",
+      "size": 43639
+    },
+    {
+      "filename": "auto_gene_curation.pl",
+      "category": "annotation",
+      "size": 54919
+    },
+    {
+      "filename": "bam2bigwig.pl",
+      "category": "alignment",
+      "size": 26390,
+      "name": "bam2bigwig.pl",
+      "description": "program to generate BedGraph and BigWig files from alignment BAM file."
+    },
+    {
+      "filename": "bam2coverage.pl",
+      "category": "alignment",
+      "size": 8233,
+      "name": "bam2coverage.pl",
+      "description": "Generate coverage stats for alignments in BAM files.  \n                - If given a gff3 file, also computes expression of genes. \n\t            - Produces a chromosomes.expr,genes.expr, and genes.counts file."
+    },
+    {
+      "filename": "bam2sam.pl",
+      "category": "alignment",
+      "size": 1704,
+      "name": "bam2sam.pl",
+      "description": "convert bam file back to sam file"
+    },
+    {
+      "filename": "bam_merge.pl",
+      "category": "alignment",
+      "size": 6320,
+      "name": "bam_merge.pl",
+      "description": "program to merge bam file from alignment of splitted fastq file"
+    },
+    {
+      "filename": "bepipred2bsml.pl",
+      "category": "converter",
+      "size": 8915,
+      "name": "tmhmm2bsml.pl",
+      "description": "convert TMHMM output to BSML"
+    },
+    {
+      "filename": "ber_blast_hit_selector.pl",
+      "category": "alignment",
+      "size": 5879,
+      "name": "ber_blast_hit_selector.pl",
+      "description": "flter hits from blast btab output"
+    },
+    {
+      "filename": "berbtab2bsml.pl",
+      "category": "converter",
+      "size": 22126,
+      "name": "berbtab2bsml.pl",
+      "description": "convert info stored in BER btab files into BSML documents"
+    },
+    {
+      "filename": "best_hit.pl",
+      "category": "other",
+      "size": 9996
+    },
+    {
+      "filename": "bin_and_trim_barcoded_seqs.pl",
+      "category": "other",
+      "size": 27456,
+      "name": "bin_and_trim_barcoded_seqs.pl",
+      "description": "Take a set of barcoded sequences, group them by barcode and trim primers."
+    },
+    {
+      "filename": "blast2bsml.pl",
+      "category": "converter",
+      "size": 40777,
+      "name": "blast2bsml.pl",
+      "description": "convert raw blast output to BSML documents"
+    },
+    {
+      "filename": "blast2btab.pl",
+      "category": "converter",
+      "size": 6506,
+      "name": "blast2btab.pl",
+      "description": "convert a raw wu-blast output file to btab."
+    },
+    {
+      "filename": "blast2lca.pl",
+      "category": "alignment",
+      "size": 5172,
+      "name": "blast2lca.pl",
+      "description": "Wrapper script to generate Lowest Common Ancestors from filtered blast results"
+    },
+    {
+      "filename": "blast_snp_regions.pl",
+      "category": "alignment",
+      "size": 4595
+    },
+    {
+      "filename": "blastbsml2btab.pl",
+      "category": "converter",
+      "size": 9502,
+      "name": "blastbsml2btab.pl",
+      "description": "Converts blast bsml into btab"
+    },
+    {
+      "filename": "blastbtab2bsml.pl",
+      "category": "converter",
+      "size": 25151,
+      "name": "blastbtab2bsml.pl",
+      "description": "convert info stored in btab files into BSML documents"
+    },
+    {
+      "filename": "bowtie.pl",
+      "category": "alignment",
+      "size": 11961,
+      "name": "bowtie.pl",
+      "description": "script to execute reference based alignment for input sequence file(s)."
+    },
+    {
+      "filename": "bowtie_build.pl",
+      "category": "alignment",
+      "size": 5219,
+      "name": "bowtie_build.pl",
+      "description": "script to create Bowtie index for a reference FastA file"
+    },
+    {
+      "filename": "brcGff3ToBsml.pl",
+      "category": "other",
+      "size": 85531,
+      "name": "brcGff3ToBsml.pl",
+      "description": "Parse IOWG GFF file and produces BSML document"
+    },
+    {
+      "filename": "bsml2PEmatchXML.pl",
+      "category": "other",
+      "size": 6567,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "bsml2PEposXML.pl",
+      "category": "other",
+      "size": 6698,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "bsml2agp.pl",
+      "category": "other",
+      "size": 2495
+    },
+    {
+      "filename": "bsml2fasta.pl",
+      "category": "other",
+      "size": 39757,
+      "name": "bsml2fasta.pl",
+      "description": "convert BSML files to fasta"
+    },
+    {
+      "filename": "bsml2featurerelationships.pl",
+      "category": "other",
+      "size": 8401
+    },
+    {
+      "filename": "bsml2idlookup.pl",
+      "category": "other",
+      "size": 7051
+    },
+    {
+      "filename": "bsml2interevidence_fasta.pl",
+      "category": "other",
+      "size": 8472,
+      "name": "bsml2interevidence_fasta.pl",
+      "description": "Searches intergenic and evidence-less regions"
+    },
+    {
+      "filename": "bsml2legacydb.pl",
+      "category": "database",
+      "size": 24775,
+      "name": "bsm2legacydb.pl",
+      "description": "load WorkFlow BSML files into the legacy database"
+    },
+    {
+      "filename": "bsml2mugsymap.pl",
+      "category": "other",
+      "size": 8961
+    },
+    {
+      "filename": "bsml2ptt.pl",
+      "category": "other",
+      "size": 13706
+    },
+    {
+      "filename": "bsml2tbl.pl",
+      "category": "other",
+      "size": 11747
+    },
+    {
+      "filename": "bsml_qc.pl",
+      "category": "other",
+      "size": 20108,
+      "name": "bsml_qc.pl",
+      "description": "Perform a series of quality control checks (counts, etc) on BSML files"
+    },
+    {
+      "filename": "btab2taxon.pl",
+      "category": "other",
+      "size": 4034
+    },
+    {
+      "filename": "build_supercontig.pl",
+      "category": "assembly",
+      "size": 11423,
+      "name": "build_supercontig.pl",
+      "description": "convert ordered Seq-pair-alignments into a single contig (most likely to be run on the output of tiling2bsml)"
+    },
+    {
+      "filename": "bwa_wrapper.pl",
+      "category": "alignment",
+      "size": 6894
+    },
+    {
+      "filename": "calc_avg_coverage.pl",
+      "category": "other",
+      "size": 2235
+    },
+    {
+      "filename": "cat_files.pl",
+      "category": "other",
+      "size": 791
+    },
+    {
+      "filename": "chado2flatfile.pl",
+      "category": "database",
+      "size": 14051,
+      "name": "chado2flatfile.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "chado_aengine_dumper.pl",
+      "category": "database",
+      "size": 53068,
+      "name": "chado_aengine_dumper.pl",
+      "description": "creates a genbank or GFF file from a prokaryotic annotation stored\n    in chado."
+    },
+    {
+      "filename": "check_file_size.pl",
+      "category": "other",
+      "size": 3068,
+      "name": "generate_asmbl_list.pl",
+      "description": "Default output is a workflow iterator that\ncan be used to iterator over a set of asmbl_ids"
+    },
+    {
+      "filename": "check_logfiles.pl",
+      "category": "other",
+      "size": 15055,
+      "name": "check_logfiles.pl",
+      "description": "greps all log4perl logfiles and checks for FATAL, ERROR, WARN"
+    },
+    {
+      "filename": "checksum.pl",
+      "category": "other",
+      "size": 1698
+    },
+    {
+      "filename": "classify_class_a_genes.pl",
+      "category": "annotation",
+      "size": 4790,
+      "name": "classify_class_a_genes.pl",
+      "description": "Determine if class C genes are class B LGT genes by the avg h-score of their ortholog group"
+    },
+    {
+      "filename": "classify_class_b_genes.pl",
+      "category": "annotation",
+      "size": 5763,
+      "name": "classify_class_b_genes.pl",
+      "description": "Determine if class C genes are class B LGT genes by the avg h-score of their ortholog group"
+    },
+    {
+      "filename": "classify_class_c_genes.pl",
+      "category": "annotation",
+      "size": 5511,
+      "name": "classify_class_c_genes.pl",
+      "description": "Calculate h-score of two blast files and filter out the class-c genes"
+    },
+    {
+      "filename": "clean_fasta.pl",
+      "category": "other",
+      "size": 15854
+    },
+    {
+      "filename": "cloVRMapFileCheck.pl",
+      "category": "other",
+      "size": 6664
+    },
+    {
+      "filename": "clovr16S_rdp_tables.pl",
+      "category": "other",
+      "size": 8735
+    },
+    {
+      "filename": "clovr_map_MiSeq_check.pl",
+      "category": "other",
+      "size": 1540
+    },
+    {
+      "filename": "clovr_mapfasta_check.pl",
+      "category": "other",
+      "size": 3298
+    },
+    {
+      "filename": "clovr_metagenomics_prep.pl",
+      "category": "other",
+      "size": 3144
+    },
+    {
+      "filename": "clovr_metagenomics_tsvtables.pl",
+      "category": "other",
+      "size": 18094
+    },
+    {
+      "filename": "clovr_snps_to_vcf.pl",
+      "category": "other",
+      "size": 11219,
+      "name": "clovr-snps-to-vcf.pl",
+      "description": "Convert CloVR-Comparative SNP output file to a set of VCF 4.2."
+    },
+    {
+      "filename": "clusterBsmlPairwiseAlignments.pl",
+      "category": "other",
+      "size": 13596,
+      "name": "clusterBsmlPairwiseAlignments.pl",
+      "description": "=head1 SYNOPSIS"
+    },
+    {
+      "filename": "cogs_summary.pl",
+      "category": "other",
+      "size": 2722
+    },
+    {
+      "filename": "collate_counts_by_phenotype.pl",
+      "category": "statistics",
+      "size": 1439,
+      "name": "collate_couns_by_phenotype.pl",
+      "description": "given a file with a list of read count files\nand a file with how filename prefixes in those files match to a replicate and phenotyp group,\nthis script will output a tab-delimeted file like this:\n<replicate id> <phenotype> <read count file>"
+    },
+    {
+      "filename": "combine_lgt_phylo_para_evidence.pl",
+      "category": "other",
+      "size": 6404,
+      "name": "combine_lgt_phylo_para_evidence.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "combine_ncRNA_alignments.pl",
+      "category": "alignment",
+      "size": 12660,
+      "name": "combine_ncRNA_alignments.pl",
+      "description": "creates a bsml document from mulitple wu-blastn results ( against various ncRNA databases )."
+    },
+    {
+      "filename": "complete_study_stage.pl",
+      "category": "other",
+      "size": 3438,
+      "name": "complete_study_stage.pl",
+      "description": "Connects to IPD and marks a study stage of type \"automatic annotation\" with the status \"complete\""
+    },
+    {
+      "filename": "compress_file.pl",
+      "category": "other",
+      "size": 6039,
+      "name": "compress_file.pl",
+      "description": "wrapper to gzip an output file"
+    },
+    {
+      "filename": "concat_and_sort_dnadist_worker_output.pl",
+      "category": "other",
+      "size": 8177,
+      "name": "concat_and_sort_dnadist_worker_output.pl",
+      "description": "Concatenates and sorts intermediate output from dnadist_worker processes."
+    },
+    {
+      "filename": "concatenate_files.pl",
+      "category": "other",
+      "size": 1747,
+      "name": "concatenate_files.pl",
+      "description": "will concatenate files."
+    },
+    {
+      "filename": "configure_manatee.pl",
+      "category": "other",
+      "size": 5792,
+      "name": "mysql_credential.pl",
+      "description": "Script used to create MySQL user and database to store prokaryotic annotation durind the pipeline run"
+    },
+    {
+      "filename": "configure_sybil.pl",
+      "category": "other",
+      "size": 16769
+    },
+    {
+      "filename": "convert_snp_output_to_clusterer_input.pl",
+      "category": "file_manipulation",
+      "size": 2256
+    },
+    {
+      "filename": "count_barcoded_seqs.pl",
+      "category": "statistics",
+      "size": 10296,
+      "name": "count_barcoded_seqs.pl",
+      "description": "Summarize the output of bin_and_trim_barcoded_seqs.pl in tabular form."
+    },
+    {
+      "filename": "create_amoscmp_input.pl",
+      "category": "other",
+      "size": 3744,
+      "name": "create_amoscmp_input.pl",
+      "description": "takes input from identify_human_contaminates to amoscmp"
+    },
+    {
+      "filename": "create_amoscmp_iterator_list.pl",
+      "category": "other",
+      "size": 6904,
+      "name": "create_amoscmp_iterator_list.pl",
+      "description": "Default output is a workflow iterator that can be used to iterator over input for amoscmp."
+    },
+    {
+      "filename": "create_blast_query_view_bcp.pl",
+      "category": "alignment",
+      "size": 9592,
+      "name": "create_blast_query_view_bcp.pl",
+      "description": "reads blast results from a chado instance and creates a\nbcp file to load a table (cm_blast) more appropriate for fast querying."
+    },
+    {
+      "filename": "create_bowtie_ref_list_from_index_list.pl",
+      "category": "alignment",
+      "size": 4304
+    },
+    {
+      "filename": "create_bsml_scaffolds.pl",
+      "category": "assembly",
+      "size": 13710,
+      "name": "create_bsml_scaffolds.pl",
+      "description": "Convert a tab-delimited scaffold description file into a set of BSML scaffold documents."
+    },
+    {
+      "filename": "create_chado2bsml_iterator_list.pl",
+      "category": "converter",
+      "size": 7668
+    },
+    {
+      "filename": "create_clovrtag_iterator_list.pl",
+      "category": "other",
+      "size": 2183,
+      "name": "create_clovrtag_iterator_list.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "create_comparative_summary_report.pl",
+      "category": "other",
+      "size": 10050
+    },
+    {
+      "filename": "create_cuffsuite_files.pl",
+      "category": "other",
+      "size": 10558,
+      "name": "create_cuffsuite_files.pl",
+      "description": "script to create cuffcompare and cuffdiff input files."
+    },
+    {
+      "filename": "create_db_list_file.pl",
+      "category": "database",
+      "size": 5411,
+      "name": "create_db_list_file.pl",
+      "description": "Converts a csv or tab delimited file with database properties into a list\n\tof individual file paths for each individual entry"
+    },
+    {
+      "filename": "create_distributed_iterator_xml.pl",
+      "category": "other",
+      "size": 1692
+    },
+    {
+      "filename": "create_dnadist_control_file.pl",
+      "category": "other",
+      "size": 3501,
+      "name": "create_dnadist_control_file.pl",
+      "description": "Creates a complete dnadist control file from a partial control file."
+    },
+    {
+      "filename": "create_dnadist_iterator_list.pl",
+      "category": "other",
+      "size": 4634,
+      "name": "create_dnadist_iterator_list.pl",
+      "description": "Create ergatis/workflow iterator for distributed dnadist job."
+    },
+    {
+      "filename": "create_download_tag_iterator_list.pl",
+      "category": "database",
+      "size": 3940
+    },
+    {
+      "filename": "create_ec_list.pl",
+      "category": "other",
+      "size": 5364
+    },
+    {
+      "filename": "create_euk_rnaseq_pipeline_config.pl",
+      "category": "other",
+      "size": 75940,
+      "name": "create_euk_rnaseq_pipeline_config.pl",
+      "description": "Creates the pipeline.layout and pipeline.config for the\n                                       automated eukaryotic rna-seq pipeline"
+    },
+    {
+      "filename": "create_euk_rnaseq_pipeline_configbeta.pl",
+      "category": "other",
+      "size": 71515,
+      "name": "create_euk_rnaseq_pipeline_config.pl",
+      "description": "Creates the pipeline.layout and pipeline.config for the\n                                       automated eukaryotic rna-seq pipeline"
+    },
+    {
+      "filename": "create_fasta_bam_map.pl",
+      "category": "alignment",
+      "size": 4351,
+      "name": "create_fasta_bam_map.pl",
+      "description": "Will create an output list mapping input query fasta to output bam files. Written to be\n    used as part of the BWA component."
+    },
+    {
+      "filename": "create_fasta_pseudomolecules.pl",
+      "category": "other",
+      "size": 9773,
+      "name": "create_fasta_pseudomolecules.pl",
+      "description": "reads a collection of FASTA files and input options to create\none or more pseudomolecules."
+    },
+    {
+      "filename": "create_fastq_contigs_map.pl",
+      "category": "assembly",
+      "size": 5115
+    },
+    {
+      "filename": "create_file_iterator_list.pl",
+      "category": "other",
+      "size": 11406,
+      "name": "create_file_iterator_list.pl",
+      "description": "generates list file from various input sources of filenames."
+    },
+    {
+      "filename": "create_filter_fastq_file_iterator_list.pl",
+      "category": "file_manipulation",
+      "size": 1455
+    },
+    {
+      "filename": "create_genome_file_iterator_list.pl",
+      "category": "other",
+      "size": 5747,
+      "name": "generate_input_list.pl",
+      "description": "Default output is a workflow iterator that\ncan be used to iterator over a set of files"
+    },
+    {
+      "filename": "create_islandpath_iterator_list.pl",
+      "category": "other",
+      "size": 3157
+    },
+    {
+      "filename": "create_iterator_groups.pl",
+      "category": "other",
+      "size": 9771,
+      "name": "create_iterator_groups.pl",
+      "description": "generates groups of iterator list files from various input sources."
+    },
+    {
+      "filename": "create_iterator_list.pl",
+      "category": "other",
+      "size": 2173,
+      "name": "create_iterator_list.pl",
+      "description": "=head1 SYNOPSIS"
+    },
+    {
+      "filename": "create_legacy2bsml_iterator_list.pl",
+      "category": "converter",
+      "size": 13701,
+      "name": "generate_asmbl_list.pl",
+      "description": "Default output is a workflow iterator that\ncan be used to iterator over a set of asmbl_ids"
+    },
+    {
+      "filename": "create_list_file.pl",
+      "category": "other",
+      "size": 3877,
+      "name": "create_list_file.pl",
+      "description": "script to create a list of files given a certain regex"
+    },
+    {
+      "filename": "create_map_file.pl",
+      "category": "other",
+      "size": 1961
+    },
+    {
+      "filename": "create_metagene_bsml_iterator_list.pl",
+      "category": "annotation",
+      "size": 3308
+    },
+    {
+      "filename": "create_mothur_cluster_iterator_list.pl",
+      "category": "other",
+      "size": 6623,
+      "name": "create_mothur_cluster_iterator_list.pl",
+      "description": "Default output is a workflow iterator that can be used to iterator over input for cluster"
+    },
+    {
+      "filename": "create_mothur_get_oturep_iterator_list.pl",
+      "category": "other",
+      "size": 8117,
+      "name": "create_mothur_get_oturep_iterator_list.pl",
+      "description": "Default output is a workflow iterator that can be used to iterator over input for cluster"
+    },
+    {
+      "filename": "create_mothur_read_otu_iterator_list.pl",
+      "category": "other",
+      "size": 6642,
+      "name": "create_mothur_read_otu_iterator_list.pl",
+      "description": "Default output is a workflow iterator that can be used to iterator over input for read.otu"
+    },
+    {
+      "filename": "create_mothur_screen_seqs_iterator_list.pl",
+      "category": "other",
+      "size": 7493,
+      "name": "create_mothur_screen_seqs_iterator_list.pl",
+      "description": "Default output is a workflow iterator that can be used to iterator over input for screen.seqs"
+    },
+    {
+      "filename": "create_mothur_unique_seqs_iterator_list.pl",
+      "category": "other",
+      "size": 6670,
+      "name": "create_mothur_unique_seqs_iterator_list.pl",
+      "description": "Default output is a workflow iterator that can be used to iterator over input for screen.seqs"
+    },
+    {
+      "filename": "create_multi_file_list_file.pl",
+      "category": "other",
+      "size": 3732,
+      "name": "create_multi_file_list_file.pl",
+      "description": "script to create a list of files or groups of file given a certain regex"
+    },
+    {
+      "filename": "create_newline_sep_file_iterator_list.pl",
+      "category": "other",
+      "size": 9858,
+      "name": "create_file_iterator_list.pl",
+      "description": "generates list file from various input sources of filenames."
+    },
+    {
+      "filename": "create_nucmer_iterator_list.pl",
+      "category": "other",
+      "size": 6519,
+      "name": "create_nucmer_iterator_list.pl",
+      "description": "Default output is a workflow iterator that can be used to iterate over input for nucmer"
+    },
+    {
+      "filename": "create_paired_file_iterator_list.pl",
+      "category": "other",
+      "size": 12459,
+      "name": "create_file_iterator_list.pl",
+      "description": "generates list file from various paired input sources of filenames."
+    },
+    {
+      "filename": "create_paired_iterator_list.pl",
+      "category": "other",
+      "size": 7989,
+      "name": "create_paired_iterator_list.pl",
+      "description": "generates list file from various input sources of filenames."
+    },
+    {
+      "filename": "create_paired_list_file.pl",
+      "category": "other",
+      "size": 7489,
+      "name": "create_paired_list_file.pl",
+      "description": "script to generate paired list file from two list files."
+    },
+    {
+      "filename": "create_pairwise_iterator_list.pl",
+      "category": "other",
+      "size": 2493
+    },
+    {
+      "filename": "create_parse_mpileup_iterator_list.pl",
+      "category": "other",
+      "size": 1337
+    },
+    {
+      "filename": "create_phage_find_info.pl",
+      "category": "other",
+      "size": 6462
+    },
+    {
+      "filename": "create_pipeline.pl",
+      "category": "other",
+      "size": 1207
+    },
+    {
+      "filename": "create_prok_rnaseq_pipeline_config.pl",
+      "category": "other",
+      "size": 53804,
+      "name": "create_prok_rnaseq_pipeline_config.pl",
+      "description": "Creates the pipeline.layout and pipeline.config for the\n                                        automated prokaryotic rna-seq pipeline"
+    },
+    {
+      "filename": "create_pseudomolecules.pl",
+      "category": "other",
+      "size": 15302,
+      "name": "create_pseudomolecules.pl",
+      "description": "program to generate pseudomolecules from contigs for annotation."
+    },
+    {
+      "filename": "create_pssm_list.pl",
+      "category": "other",
+      "size": 1127
+    },
+    {
+      "filename": "create_ptools_input_files.pl",
+      "category": "other",
+      "size": 6320
+    },
+    {
+      "filename": "create_samtools_pileup_iterator_list.pl",
+      "category": "alignment",
+      "size": 6419,
+      "name": "create_samtools_pileup_iterator_list.pl",
+      "description": "Creates an iterator file list associated SAM files with a \n                                          corresponding reference FASTA file."
+    },
+    {
+      "filename": "create_scaffold_file.pl",
+      "category": "assembly",
+      "size": 10061,
+      "name": "create_scaffold_file.pl",
+      "description": "Converts a set of scaffolds into a tab-delimited scaffold description file."
+    },
+    {
+      "filename": "create_strictly_paired_iterator_list.pl",
+      "category": "other",
+      "size": 7547,
+      "name": "create_paired_iterator_list.pl",
+      "description": "generates list file from various input sources of filenames."
+    },
+    {
+      "filename": "create_summary_report.pl",
+      "category": "other",
+      "size": 9945,
+      "name": "create_summary_report.pl",
+      "description": "Script to generate a summary report for the Microbe pipeline"
+    },
+    {
+      "filename": "create_table_iterator_list.pl",
+      "category": "other",
+      "size": 2106,
+      "name": "create_table_iterator_list.pl",
+      "description": "=head1 SYNOPSIS"
+    },
+    {
+      "filename": "create_trivial_scaffold_files.pl",
+      "category": "assembly",
+      "size": 7832,
+      "name": "create_trivial_scaffold_files.pl",
+      "description": "Create a tab-delimited scaffold description file for each set of assemblies not already in a scaffold."
+    },
+    {
+      "filename": "create_update_euk_model_sequences_iterator_list.pl",
+      "category": "other",
+      "size": 6726,
+      "name": "create_update_euk_model_sequences_iterator_list.pl",
+      "description": "Default output is a workflow iterator that\ncan be used to iterator over a set of database-asmbl_id values.  Can read in the standard legacy2bsml\ncontrol file."
+    },
+    {
+      "filename": "cuffcompare.pl",
+      "category": "statistics",
+      "size": 6606,
+      "name": "cuffcompare.pl",
+      "description": "script to compare Cufflinks transcript GTF files against a reference or within samples."
+    },
+    {
+      "filename": "cuffdiff.pl",
+      "category": "other",
+      "size": 8797,
+      "name": "cuffdiff.pl",
+      "description": "script to generate Cuffdiff transcript differential expression for Cufflinks/Cuffcompare results."
+    },
+    {
+      "filename": "cuffdiff_filter.pl",
+      "category": "file_manipulation",
+      "size": 8511,
+      "name": "cuffdiff_filter.pl",
+      "description": "filter cuffdiff output on \n                      [FDR, log_fold_change, FPKM, P value]"
+    },
+    {
+      "filename": "cufflinks.pl",
+      "category": "other",
+      "size": 8550,
+      "name": "cufflinks.pl",
+      "description": "script to generate Cufflinks transcript detection from sorted SAM/BAM alignment file"
+    },
+    {
+      "filename": "cummerbund.pl",
+      "category": "other",
+      "size": 6526,
+      "name": "cummerbund.pl",
+      "description": "Uses R cummerbund package to generate plots from cuffdiff \n                           analysis."
+    },
+    {
+      "filename": "curate_common_names.pl",
+      "category": "other",
+      "size": 30276,
+      "name": "curate_common_names.pl",
+      "description": "=head1 SYNOPSIS"
+    },
+    {
+      "filename": "dataprep_dual16S.pl",
+      "category": "other",
+      "size": 34448
+    },
+    {
+      "filename": "deleteOverlappingGenes.pl",
+      "category": "other",
+      "size": 13723,
+      "name": "deleteOverlappingGenes.pl",
+      "description": "Parse RNA_CDS_OVERLAP errors from the tbl2asn discrepancy file and use the Manatee delete_gene.cgi script to delete the corresponding genes."
+    },
+    {
+      "filename": "deprecated_blast2btab.pl",
+      "category": "converter",
+      "size": 1585
+    },
+    {
+      "filename": "deseq.pl",
+      "category": "other",
+      "size": 8467,
+      "name": "deseq.pl",
+      "description": "script to analyze differential gene expression from HTSeq read counts."
+    },
+    {
+      "filename": "die_if_empty.pl",
+      "category": "other",
+      "size": 2990,
+      "name": "die_if_empty.pl",
+      "description": "takes a list of input files and exits with an error if any are empty"
+    },
+    {
+      "filename": "diff_wrapper.pl",
+      "category": "other",
+      "size": 1989,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "dnadist_combiner_wrapper.pl",
+      "category": "other",
+      "size": 4559,
+      "name": "dnadist_combiner_wrapper.pl",
+      "description": "Wrapper for dnadist_combiner executable in a parallel version of dnadist."
+    },
+    {
+      "filename": "dnadist_worker_wrapper.pl",
+      "category": "other",
+      "size": 6766,
+      "name": "dnadist_worker_wrapper.pl",
+      "description": "Wrapper for dnadist_worker executable in a parallel version of dnadist."
+    },
+    {
+      "filename": "download_sra.pl",
+      "category": "database",
+      "size": 11418,
+      "name": "download_sra.pl",
+      "description": "Script to download read files from NCBI SRA FTP site"
+    },
+    {
+      "filename": "dummy.pl",
+      "category": "other",
+      "size": 1284,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "dump_fasta.pl",
+      "category": "other",
+      "size": 13304,
+      "name": "dump_fasta.pl",
+      "description": "Dump the contents of an IGS MySQL Chado annotation database into .fsa files that can be processed by NCBI's tbl2asn utility."
+    },
+    {
+      "filename": "dump_table.pl",
+      "category": "other",
+      "size": 24467,
+      "name": "dump_table.pl",
+      "description": "Dump the contents of an IGS MySQL Chado annotation database into .fsa and .tbl files that can be processed by NCBI's tbl2asn utility."
+    },
+    {
+      "filename": "edgeR.pl",
+      "category": "other",
+      "size": 8129,
+      "name": "edgeR.pl",
+      "description": "script to analyze differential gene expression from HTSeq read counts."
+    },
+    {
+      "filename": "enzyme2obo.pl",
+      "category": "other",
+      "size": 16109,
+      "name": "enzyme2obo.pl",
+      "description": "Reads an ExPASy release of Enzyme Commission data and converts to an OBO file."
+    },
+    {
+      "filename": "evmgff32bsml.pl",
+      "category": "converter",
+      "size": 11747
+    },
+    {
+      "filename": "expression_plots.pl",
+      "category": "other",
+      "size": 7096,
+      "name": "expression_plots.pl",
+      "description": "Creates plots for deseq/cuffdiff or rpkm analysis."
+    },
+    {
+      "filename": "extract_assembly_stats.pl",
+      "category": "assembly",
+      "size": 6278,
+      "name": "extract_assembly_stats.pl",
+      "description": "Extracts statistics from an assembly file"
+    },
+    {
+      "filename": "extract_blast_hits_by_id.pl",
+      "category": "alignment",
+      "size": 2144
+    },
+    {
+      "filename": "extract_seq_data_from_snp_output.pl",
+      "category": "file_manipulation",
+      "size": 1691
+    },
+    {
+      "filename": "extract_snp_regions.pl",
+      "category": "file_manipulation",
+      "size": 7867,
+      "name": "extract_snp_regions.pl",
+      "description": "Script to extract reference sequence surrounding predicted SNP positions"
+    },
+    {
+      "filename": "fasta2bsml.pl",
+      "category": "converter",
+      "size": 18837,
+      "name": "fasta2bsml.pl",
+      "description": "convert fasta files to BSML"
+    },
+    {
+      "filename": "fasta2seqlen.pl",
+      "category": "other",
+      "size": 436
+    },
+    {
+      "filename": "fasta_align2Bsml.pl",
+      "category": "alignment",
+      "size": 6536,
+      "name": "fasta_align2bsml.pl",
+      "description": "convert FA format alignment files into BSML documents"
+    },
+    {
+      "filename": "fasta_masker.pl",
+      "category": "other",
+      "size": 1455
+    },
+    {
+      "filename": "fastortho_write_config.pl",
+      "category": "other",
+      "size": 4636,
+      "name": "perl_template.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "fastq_to_CA.pl",
+      "category": "other",
+      "size": 6420,
+      "name": "fastq_to_CA.pl",
+      "description": "runs the fastqToCA utility found in the wgs-assembler software package. This script acts as a wrapper to ensure that input and \n                 command-line parameters are handled correctly while running this utility through the Ergatis framework."
+    },
+    {
+      "filename": "fastqc_stats.pl",
+      "category": "statistics",
+      "size": 5593,
+      "name": "fastqc_stats.pl",
+      "description": "script to execute fastqc_quality_stats on Fastq files."
+    },
+    {
+      "filename": "fastx_quality_stats.pl",
+      "category": "statistics",
+      "size": 5459,
+      "name": "fastx_quality_stats.pl",
+      "description": "script to execute fastx_quality_stats on FastA/Q file"
+    },
+    {
+      "filename": "fastx_trimming.pl",
+      "category": "other",
+      "size": 8488,
+      "name": "fastx_trimming.pl",
+      "description": "script to execute fastx_trimmer on FastA/Q file"
+    },
+    {
+      "filename": "fetch_fasta_from_db.pl",
+      "category": "database",
+      "size": 3065
+    },
+    {
+      "filename": "fetch_genbank.pl",
+      "category": "other",
+      "size": 4098,
+      "name": "fetch_genbank.pl",
+      "description": "Fetches data from GenBank for the provided accession numbers list"
+    },
+    {
+      "filename": "fetch_gis_from_taxon_id.pl",
+      "category": "other",
+      "size": 4697,
+      "name": "fetch_gis_from_taxon_id.pl",
+      "description": "Fetch GIs given a taxon id"
+    },
+    {
+      "filename": "fgenesh2bsml.pl",
+      "category": "converter",
+      "size": 16984,
+      "name": "fgenesh2bsml.pl",
+      "description": "convert fgenesh output to BSML"
+    },
+    {
+      "filename": "filter_blast_output.pl",
+      "category": "alignment",
+      "size": 3135
+    },
+    {
+      "filename": "filter_blastx_output.pl",
+      "category": "alignment",
+      "size": 3137
+    },
+    {
+      "filename": "filter_bogus_genes.pl",
+      "category": "annotation",
+      "size": 4819,
+      "name": "filter_bogus_genes.pl",
+      "description": "Filters out genes with lots of N's from a nuc fasta file or X's from a polypeptide fasta file"
+    },
+    {
+      "filename": "filter_deseq.pl",
+      "category": "file_manipulation",
+      "size": 10472,
+      "name": "filter_deseq.pl",
+      "description": "filter DESeq output on [FDR, log fold change, Read Count, P value]"
+    },
+    {
+      "filename": "filter_dups_lc_seqs.pl",
+      "category": "file_manipulation",
+      "size": 5134,
+      "name": "filter_dups_lc_seqs.pl",
+      "description": "Run Picard tools & Prinseq to filter out duplicate and low-complexity sequences"
+    },
+    {
+      "filename": "filter_fasta_by_length.pl",
+      "category": "file_manipulation",
+      "size": 2933,
+      "name": "filter_fasta_by_length.pl",
+      "description": "Remove sequences shorter than specified length"
+    },
+    {
+      "filename": "filter_fastq.pl",
+      "category": "file_manipulation",
+      "size": 5795,
+      "name": "filter_fastq.pl",
+      "description": "Will filter input fastq files with input list of read names"
+    },
+    {
+      "filename": "filter_lgt_best_hit.pl",
+      "category": "file_manipulation",
+      "size": 6202,
+      "name": "filter_lgt_best_hit.pl",
+      "description": "Wrapper script to find best blast result hit per query ID"
+    },
+    {
+      "filename": "filter_low_scoring_bers.pl",
+      "category": "file_manipulation",
+      "size": 5980,
+      "name": "filter_low_scoring_bers.pl",
+      "description": "Filters out BER entries with low-scoring identity and similarity"
+    },
+    {
+      "filename": "filter_merged_table.pl",
+      "category": "file_manipulation",
+      "size": 9811,
+      "name": "filter_merged_table.pl",
+      "description": "Script to filter the merged table obtained after SNP verification to remove rows with No Hits or indels or more than one nucleotide at a SNP position in a query genome.\n\t\t\t It also prints the FASTA file of all the SNPs from the filtered results"
+    },
+    {
+      "filename": "filter_sequences_by_id.pl",
+      "category": "file_manipulation",
+      "size": 9810,
+      "name": "filter_sequences_by_id.pl",
+      "description": "Filter a sequence file to include/exclude entries by their IDs."
+    },
+    {
+      "filename": "filter_subjects_based_on_align_score.pl",
+      "category": "alignment",
+      "size": 2919
+    },
+    {
+      "filename": "filtermummer.pl",
+      "category": "file_manipulation",
+      "size": 767
+    },
+    {
+      "filename": "find_homopolymers.pl",
+      "category": "other",
+      "size": 2618,
+      "name": "find_homopolymers.pl",
+      "description": "Find homopolymeric tracts in a sequence file."
+    },
+    {
+      "filename": "find_overlapping_features.pl",
+      "category": "other",
+      "size": 4404
+    },
+    {
+      "filename": "find_transcripts.pl",
+      "category": "other",
+      "size": 16165,
+      "name": "find_transcripts.pl",
+      "description": "finds transcripts from an alignment based on coverage islands."
+    },
+    {
+      "filename": "findhomopolymers2bsml.pl",
+      "category": "converter",
+      "size": 4527,
+      "name": "findhomopolymers2bsml.pl",
+      "description": "convert findhomopolymers output to BSML"
+    },
+    {
+      "filename": "fix_gbk.pl",
+      "category": "other",
+      "size": 4367,
+      "name": "fix_gbk.pl",
+      "description": "Script to add accession numbers and fix taxonomy information in newly created GenBank file thorough the clovr microbe pipeline"
+    },
+    {
+      "filename": "fix_gene_symbols.pl",
+      "category": "annotation",
+      "size": 19773,
+      "name": "fix_gene_symbols.pl",
+      "description": "Script to remove upper case, duplicate gene symbols as well replace existing gene symbols in DB with new ones provided in the rules file"
+    },
+    {
+      "filename": "format_uclust_fasta_ids.pl",
+      "category": "other",
+      "size": 4390,
+      "name": "format_uclust_fasta_ids.pl",
+      "description": "Renames uclust-generated FASTA sequence identifiers to a friendlier format."
+    },
+    {
+      "filename": "format_velvet_assembled_AGP.pl",
+      "category": "assembly",
+      "size": 20162,
+      "name": "format_velvet_assembled.pl",
+      "description": "Program to format velvet assembled, annotated genomes to split the contigs at the sequence of N (gaps) \n\t\t\t     and modify the original .tbl and .fsa files."
+    },
+    {
+      "filename": "format_velvet_assembled_AGP_cleanup.pl",
+      "category": "assembly",
+      "size": 2381
+    },
+    {
+      "filename": "formatdb.pl",
+      "category": "database",
+      "size": 1008
+    },
+    {
+      "filename": "formatdb_snp.pl",
+      "category": "database",
+      "size": 1896
+    },
+    {
+      "filename": "fq_mergelines.pl",
+      "category": "file_manipulation",
+      "size": 247
+    },
+    {
+      "filename": "fq_splitlines.pl",
+      "category": "file_manipulation",
+      "size": 258
+    },
+    {
+      "filename": "fuzznuc2bsml.pl",
+      "category": "converter",
+      "size": 9099,
+      "name": "fuzznuc2bsml.pl",
+      "description": "convert fuzznuc raw output to BSML"
+    },
+    {
+      "filename": "gap22bsml.pl",
+      "category": "converter",
+      "size": 10100,
+      "name": "gap22bsml.pl",
+      "description": "convert gap2 btab output to BSML"
+    },
+    {
+      "filename": "gatekeeper.pl",
+      "category": "other",
+      "size": 13597,
+      "name": "gatekeeper.pl",
+      "description": "Creates/removes database lock file from project repository root"
+    },
+    {
+      "filename": "genbank2bsml.pl",
+      "category": "converter",
+      "size": 64397
+    },
+    {
+      "filename": "genbank2fasta.pl",
+      "category": "other",
+      "size": 1594,
+      "name": "genbank2fasta.pl",
+      "description": "Takes genbank files and create fasta"
+    },
+    {
+      "filename": "genbank2gff3.pl",
+      "category": "other",
+      "size": 1809,
+      "name": "genbank2gff3.pl",
+      "description": "create a gff3 file from a gbk file"
+    },
+    {
+      "filename": "genbank2gtf.pl",
+      "category": "other",
+      "size": 17223,
+      "name": "genbank2gtf.pl",
+      "description": "program to generate a GTF format file from a GenBank file."
+    },
+    {
+      "filename": "gene_boundaries_bsml.pl",
+      "category": "annotation",
+      "size": 22639,
+      "name": "gene_boundaries_bsml",
+      "description": "Clusters gene matches into syntenic regions"
+    },
+    {
+      "filename": "gene_pos_bsml.pl",
+      "category": "annotation",
+      "size": 8772,
+      "name": "gene_pos_bsml.pl",
+      "description": "Generates gene position XML files from BSML files"
+    },
+    {
+      "filename": "geneidgff32bsml.pl",
+      "category": "converter",
+      "size": 11283
+    },
+    {
+      "filename": "genemark2bsml.pl",
+      "category": "converter",
+      "size": 2697
+    },
+    {
+      "filename": "genemarkes2bsml.pl",
+      "category": "converter",
+      "size": 2616
+    },
+    {
+      "filename": "generate_asmbl_list.pl",
+      "category": "annotation",
+      "size": 6663,
+      "name": "generate_asmbl_list.pl",
+      "description": "Default output is a workflow iterator that\ncan be used to iterator over a set of asmbl_ids"
+    },
+    {
+      "filename": "generate_legacy2bsml_list.pl",
+      "category": "converter",
+      "size": 11842,
+      "name": "generate_asmbl_list.pl",
+      "description": "Default output is a workflow iterator that\ncan be used to iterator over a set of asmbl_ids"
+    },
+    {
+      "filename": "generate_list_file.pl",
+      "category": "annotation",
+      "size": 5613,
+      "name": "generate_list_file.pl",
+      "description": "script to generate a list of files in a directory that\n                        satisfy the given regular expression."
+    },
+    {
+      "filename": "genewise2bsml.pl",
+      "category": "converter",
+      "size": 9996
+    },
+    {
+      "filename": "genezilla2bsml.pl",
+      "category": "converter",
+      "size": 13519,
+      "name": "genezilla2bsml.pl",
+      "description": "convert genezilla GFF output to BSML"
+    },
+    {
+      "filename": "genie2bsml.pl",
+      "category": "converter",
+      "size": 10710,
+      "name": "genie2bsml.pl",
+      "description": "convert genie GFF output to BSML"
+    },
+    {
+      "filename": "genscan2bsml.pl",
+      "category": "converter",
+      "size": 14175,
+      "name": "genscan2bsml.pl",
+      "description": "convert genscan output to BSML"
+    },
+    {
+      "filename": "get_blast_querynames.pl",
+      "category": "alignment",
+      "size": 1222
+    },
+    {
+      "filename": "get_filtered_reads.pl",
+      "category": "file_manipulation",
+      "size": 2198
+    },
+    {
+      "filename": "get_genbank_entries.pl",
+      "category": "other",
+      "size": 1961
+    },
+    {
+      "filename": "get_read_IDs.pl",
+      "category": "other",
+      "size": 1511
+    },
+    {
+      "filename": "get_read_length.pl",
+      "category": "other",
+      "size": 1798
+    },
+    {
+      "filename": "get_resistome_table.pl",
+      "category": "other",
+      "size": 1975
+    },
+    {
+      "filename": "get_seq_by_blastx.pl",
+      "category": "alignment",
+      "size": 2418
+    },
+    {
+      "filename": "get_seq_by_metagene.pl",
+      "category": "annotation",
+      "size": 3149
+    },
+    {
+      "filename": "get_seq_included.pl",
+      "category": "other",
+      "size": 1635
+    },
+    {
+      "filename": "gff2bsml.pl",
+      "category": "converter",
+      "size": 67960,
+      "name": "gff32bsml.pl",
+      "description": "Convert GFF3 annotation data into BSML."
+    },
+    {
+      "filename": "gff3Valid.pl",
+      "category": "other",
+      "size": 19048
+    },
+    {
+      "filename": "gff3_to_annotab.pl",
+      "category": "other",
+      "size": 10452
+    },
+    {
+      "filename": "gff3_to_fasta.pl",
+      "category": "other",
+      "size": 6613
+    },
+    {
+      "filename": "gkpstore2fastq.pl",
+      "category": "other",
+      "size": 3265,
+      "name": "gkpstore2fastq.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "glimmer32bsml.pl",
+      "category": "converter",
+      "size": 10346,
+      "name": "glimmer32bsml.pl",
+      "description": "Creates a bsml document from glimmer3 raw\n    output"
+    },
+    {
+      "filename": "glimmerHMM2bsml.pl",
+      "category": "converter",
+      "size": 9740,
+      "name": "glimmerHMM2bsml.pl",
+      "description": "convert glimmerHMM output to BSML"
+    },
+    {
+      "filename": "hmmls2bsml.pl",
+      "category": "converter",
+      "size": 10277,
+      "name": "hmmls2bsml.pl",
+      "description": "convert hmmpfam raw output to BSML"
+    },
+    {
+      "filename": "hmmpfam2bsml.pl",
+      "category": "converter",
+      "size": 14991,
+      "name": "hmmpfam2bsml.pl",
+      "description": "convert hmmpfam raw output to BSML"
+    },
+    {
+      "filename": "hmmpfam2htab.pl",
+      "category": "other",
+      "size": 9984,
+      "name": "hmmpfam2htab.pl",
+      "description": "creates an htab file from hmmpfam raw input\n    using HmmTools.pm"
+    },
+    {
+      "filename": "hmmpfam32bsml.pl",
+      "category": "converter",
+      "size": 9051,
+      "name": "hmmer2bsml.pl",
+      "description": "convert hmmpfam or hmmscan raw output to BSML"
+    },
+    {
+      "filename": "hmmpfam32htab.pl",
+      "category": "other",
+      "size": 14076,
+      "name": "hmmer2htab.pl",
+      "description": "creates an htab file from hmmscan or hmmpfam raw input depending on the version of hmmer passed using HmmTools.pm"
+    },
+    {
+      "filename": "hmmpir2bsml.pl",
+      "category": "converter",
+      "size": 8863,
+      "name": "hmmpir2bsml.pl",
+      "description": "convert hmmpir raw output to BSML"
+    },
+    {
+      "filename": "htseq.pl",
+      "category": "other",
+      "size": 7228,
+      "name": "htseq.pl",
+      "description": "script to generate HTSeq read counts from sorted-by-name SAM alignment file"
+    },
+    {
+      "filename": "id_test.pl",
+      "category": "other",
+      "size": 2143,
+      "name": "id_test.pl",
+      "description": "generate IDs for testing"
+    },
+    {
+      "filename": "identify_human_contaminants.pl",
+      "category": "other",
+      "size": 6948,
+      "name": "identify_human_contaminants.pl",
+      "description": "allows you to identify human contaminants and divide sequences in those similar to human, ref bacterial genomes and those that are similar to nothing or are inconclusive."
+    },
+    {
+      "filename": "infernal2bsml.pl",
+      "category": "converter",
+      "size": 23442,
+      "name": "infernal.pl",
+      "description": "Turns infernal raw output into bsml."
+    },
+    {
+      "filename": "input_linker.pl",
+      "category": "other",
+      "size": 1864
+    },
+    {
+      "filename": "insert_pmarks_in_scaffolds.pl",
+      "category": "assembly",
+      "size": 8042,
+      "name": "insert_pmarks_in_scaffold.pl",
+      "description": "program to replace a string of Ns within scaffolds with PMARKS."
+    },
+    {
+      "filename": "intergenic_analysis.pl",
+      "category": "other",
+      "size": 16834
+    },
+    {
+      "filename": "iprscan2bsml.pl",
+      "category": "converter",
+      "size": 12171,
+      "name": "iprscan2bsml.pl",
+      "description": "convert iprscan btab output to BSML"
+    },
+    {
+      "filename": "islandpath2bsml.pl",
+      "category": "converter",
+      "size": 4556,
+      "name": "islandpath2bsml.pl",
+      "description": "convert islandpath output to BSML"
+    },
+    {
+      "filename": "join_multifasta.pl",
+      "category": "other",
+      "size": 4557,
+      "name": "join_multifasta.pl",
+      "description": "joins a set of fasta input files into one multifasta file"
+    },
+    {
+      "filename": "ksnp-add-gene-info.pl",
+      "category": "annotation",
+      "size": 19429,
+      "name": "snp-add-gene-info.pl",
+      "description": "Adds gene information to show-snps [nucmer] output: intergenic vs genic, ref vs query codons/amino acids, etc."
+    },
+    {
+      "filename": "ksnp_merge_reference.pl",
+      "category": "file_manipulation",
+      "size": 2896
+    },
+    {
+      "filename": "ksnp_to_addgeneinfo.pl",
+      "category": "annotation",
+      "size": 5086
+    },
+    {
+      "filename": "lgt_build_index.pl",
+      "category": "other",
+      "size": 6392
+    },
+    {
+      "filename": "lgt_bwa.pl",
+      "category": "alignment",
+      "size": 26912
+    },
+    {
+      "filename": "lgt_bwa_post_process.pl",
+      "category": "alignment",
+      "size": 8727,
+      "name": "lgt_bwa_post_process.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "lgt_create_validated_bam.pl",
+      "category": "alignment",
+      "size": 4023,
+      "name": "lgt_create_validated_bam.pl",
+      "description": "Validated a create a BAM file after finding LGT hits"
+    },
+    {
+      "filename": "lgt_filter_reads.pl",
+      "category": "file_manipulation",
+      "size": 9694
+    },
+    {
+      "filename": "lgt_finder.pl",
+      "category": "other",
+      "size": 3703,
+      "name": "lgt_finder.pl",
+      "description": "Wrapper script to find LGT hits between donor and host"
+    },
+    {
+      "filename": "lgt_mpileup.pl",
+      "category": "other",
+      "size": 3031,
+      "name": "lgt_mpileup.pl",
+      "description": "Wrapper to call samtools 'mpileup' method"
+    },
+    {
+      "filename": "lgt_wrapper.pl",
+      "category": "other",
+      "size": 18805
+    },
+    {
+      "filename": "lipop2bsml.pl",
+      "category": "converter",
+      "size": 6829,
+      "name": "lipop2bsml.pl",
+      "description": "Takes raw lipop output (short) and prints to bsml"
+    },
+    {
+      "filename": "lipoprotein_motif.pl",
+      "category": "other",
+      "size": 8373,
+      "name": "lipoprotein_motif.pl",
+      "description": "Scans for membrane lipoprotein lipid attachment sites on amino acid sequence.\n    Uses prosite motif."
+    },
+    {
+      "filename": "list_to_tab.pl",
+      "category": "other",
+      "size": 2946,
+      "name": "prepare_soapdenovo_config.pl",
+      "description": "Collates all info and creates config file passed to soapdenovo"
+    },
+    {
+      "filename": "load_phage_finder.pl",
+      "category": "database",
+      "size": 14876,
+      "name": "load_phage_finder.pl",
+      "description": "Loads phage finder tab delimited output to sgc schema databases"
+    },
+    {
+      "filename": "make_circleator_figure.pl",
+      "category": "other",
+      "size": 9906,
+      "name": "make-circleator-figure.pl",
+      "description": "Automatically generate and rasterize a Circleator figure given GenBank format input file(s)."
+    },
+    {
+      "filename": "make_comparative_circleator_figure.pl",
+      "category": "other",
+      "size": 23116,
+      "name": "make-clovr-comparative-circleator-figure.pl",
+      "description": "Automatically generate and rasterize a Circleator figure given GenBank format input file(s)."
+    },
+    {
+      "filename": "make_pathologic_dat_files.pl",
+      "category": "other",
+      "size": 6103,
+      "name": "make_pathologic_dat_files.pl",
+      "description": "Will create files needed to use pathologic (pathway tools)"
+    },
+    {
+      "filename": "make_snp_lists.pl",
+      "category": "other",
+      "size": 6295
+    },
+    {
+      "filename": "map_clovr_ergatis_comp_config.pl",
+      "category": "other",
+      "size": 3343,
+      "name": "map_clovr_ergatis_comp_config.pl",
+      "description": "generates those variables that are different in clovr from that of ergatis into new pipeline_tmpl.config."
+    },
+    {
+      "filename": "map_header_to_transcript_in_tab.pl",
+      "category": "other",
+      "size": 8332,
+      "name": "map_header_to_transcript_in_tab.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "map_query_pos.pl",
+      "category": "other",
+      "size": 8437,
+      "name": "map_query_pos.pl",
+      "description": "Will map SNP positions on reference sequence from raw blast results to query postions."
+    },
+    {
+      "filename": "mask_by_analysis.pl",
+      "category": "other",
+      "size": 17371
+    },
+    {
+      "filename": "mepipe_create_tree.pl",
+      "category": "other",
+      "size": 9338,
+      "name": "mepipe_create_tree.pl",
+      "description": "molecular evolution pipeline script that creates tree files."
+    },
+    {
+      "filename": "mepipe_prepare_input.pl",
+      "category": "other",
+      "size": 10032,
+      "name": "mepipe_prepare_input.pl",
+      "description": "prepares input files for molecular evolution pipeline"
+    },
+    {
+      "filename": "mepipe_run_paml.pl",
+      "category": "other",
+      "size": 11562,
+      "name": "mepipe_run_paml.pl",
+      "description": "molecular evolution pipeline script that executes PAML"
+    },
+    {
+      "filename": "merge_lists.pl",
+      "category": "file_manipulation",
+      "size": 3916,
+      "name": "merge_lists.pl",
+      "description": "Iterate through a directory of lists and merge them into a single list."
+    },
+    {
+      "filename": "merge_mothur_chimera_ids.pl",
+      "category": "file_manipulation",
+      "size": 2393
+    },
+    {
+      "filename": "merge_rarefaction_data.pl",
+      "category": "file_manipulation",
+      "size": 4299
+    },
+    {
+      "filename": "merge_sorted_files.pl",
+      "category": "file_manipulation",
+      "size": 487
+    },
+    {
+      "filename": "merge_uchime_ids.pl",
+      "category": "file_manipulation",
+      "size": 3134
+    },
+    {
+      "filename": "metagene2bsml.pl",
+      "category": "converter",
+      "size": 6466,
+      "name": "metagene2bsml.pl",
+      "description": "converts raw metagene output into BSML"
+    },
+    {
+      "filename": "mothur.pl",
+      "category": "other",
+      "size": 5214,
+      "name": "mother.pl",
+      "description": "Wrapper to facilitate the execution of mothur through ergatis."
+    },
+    {
+      "filename": "mothur_unique_seq_limit.pl",
+      "category": "other",
+      "size": 1591
+    },
+    {
+      "filename": "move_ber_files_for_manatee.pl",
+      "category": "other",
+      "size": 3450,
+      "name": "move_ber_files_for_manatee.pl",
+      "description": "will copy a set of files in a given directory to a remote server"
+    },
+    {
+      "filename": "move_to_scratch.pl",
+      "category": "other",
+      "size": 3540
+    },
+    {
+      "filename": "mpileup_wrapper.pl",
+      "category": "other",
+      "size": 1978,
+      "name": "mpileup_wrapper.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "mreps2bsml.pl",
+      "category": "converter",
+      "size": 8145,
+      "name": "mreps2bsml.pl",
+      "description": "convert mreps output to BSML"
+    },
+    {
+      "filename": "mugsy_callsnps.pl",
+      "category": "other",
+      "size": 6937,
+      "name": "mugsy_callsnp.pl",
+      "description": "Will call SNPs from whole genome alignment MAF"
+    },
+    {
+      "filename": "mugsy_concat_fasta.pl",
+      "category": "other",
+      "size": 5959,
+      "name": "mugsy_concat_fasta.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "multialign2pairwise.pl",
+      "category": "alignment",
+      "size": 5862,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "mummer2bsml.pl",
+      "category": "converter",
+      "size": 9601,
+      "name": "mummer2bsml.pl",
+      "description": "convert info stored in mummer coord files into BSML documents"
+    },
+    {
+      "filename": "mummertab.pl",
+      "category": "other",
+      "size": 591
+    },
+    {
+      "filename": "nap2bsml.pl",
+      "category": "converter",
+      "size": 10263,
+      "name": "nap2bsml.pl",
+      "description": "convert nap btab output to BSML"
+    },
+    {
+      "filename": "new_id.pl",
+      "category": "other",
+      "size": 3904,
+      "name": "new_id.pl",
+      "description": "generate a single id for a given project and feature type, using Ergatis::IdGenerator."
+    },
+    {
+      "filename": "ngap.pl",
+      "category": "other",
+      "size": 6934,
+      "name": "ngap.pl",
+      "description": "find N-gap positions in nucleotide sequences"
+    },
+    {
+      "filename": "notify_database_users.pl",
+      "category": "other",
+      "size": 13521,
+      "name": "gatekeeper.pl",
+      "description": "Notifies all users logged into specified database"
+    },
+    {
+      "filename": "nucmer-snp2merged.pl",
+      "category": "file_manipulation",
+      "size": 11187,
+      "name": "nucmer_snp2_merged_table.pl",
+      "description": "Will take in a concatenated snp file (output of SNP add gene info)"
+    },
+    {
+      "filename": "obo_term_count.pl",
+      "category": "statistics",
+      "size": 1138
+    },
+    {
+      "filename": "observer_script.pl",
+      "category": "other",
+      "size": 7127,
+      "name": "observer_script.pl",
+      "description": "documentation forthcoming"
+    },
+    {
+      "filename": "open_reading_frames.pl",
+      "category": "other",
+      "size": 52123,
+      "name": "open_reading_frames.pl",
+      "description": "orf finding script for GOS sequence data"
+    },
+    {
+      "filename": "order_paired_list.pl",
+      "category": "other",
+      "size": 4163,
+      "name": "order_paired_list.pl",
+      "description": "ensures list file orders files correctly: member 1 then member 2"
+    },
+    {
+      "filename": "outer_membrane_domain.pl",
+      "category": "other",
+      "size": 7502,
+      "name": "outer_membrane_domain.pl",
+      "description": "looks for carboxy-terminal motif correlated with sorting to outer membrane"
+    },
+    {
+      "filename": "overlap_analysis.pl",
+      "category": "other",
+      "size": 15759,
+      "name": "overlap_analysis.pl",
+      "description": "Analyzes overlaps and attempts to resolve them"
+    },
+    {
+      "filename": "panda2genbank.pl",
+      "category": "other",
+      "size": 12359
+    },
+    {
+      "filename": "pangenome_blast_parse.pl",
+      "category": "alignment",
+      "size": 11527,
+      "name": "pangenome_blast_parse.pl",
+      "description": "Parses BLAST BSML output files and extracts data needed for pangenome analysis."
+    },
+    {
+      "filename": "pangenome_make_graphs.pl",
+      "category": "other",
+      "size": 3338,
+      "name": "pangenome_do_R.pl",
+      "description": "Runs a specified R file on the specified input file."
+    },
+    {
+      "filename": "pangenome_make_profile.pl",
+      "category": "other",
+      "size": 4356,
+      "name": "do_pangenome_analysis.pl",
+      "description": "Performs the merging and analysis of BLAST results to create pangenome data."
+    },
+    {
+      "filename": "pangenome_make_table.pl",
+      "category": "other",
+      "size": 19939,
+      "name": "pangenome_make_table.pl",
+      "description": "Creates counts of new and core genes per pangenome size"
+    },
+    {
+      "filename": "pangenome_merge_results.pl",
+      "category": "file_manipulation",
+      "size": 4216,
+      "name": "pangenome_merge_results_pl",
+      "description": "Performs the merging of BLAST results to create pangenome data."
+    },
+    {
+      "filename": "pangenome_query_list.pl",
+      "category": "other",
+      "size": 3810,
+      "name": "pangenome_query_list.pl",
+      "description": "Prepare a list of polypeptide and assembly sequence IDs from the set of pangenome BSML input files."
+    },
+    {
+      "filename": "panther2bsml.pl",
+      "category": "converter",
+      "size": 7267,
+      "name": "panther2bsml.pl",
+      "description": "convert panther raw output to BSML"
+    },
+    {
+      "filename": "parse_evidence.pl",
+      "category": "other",
+      "size": 6155,
+      "name": "parse_evidence.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "parse_for_ncRNAs.pl",
+      "category": "other",
+      "size": 11032,
+      "name": "parse_for_ncRNAs.pl",
+      "description": "parse and combine the output for blast searches\n    (using 16s and 23s rRNA), tRNAscan-SE and infernal (covariance model\n    search) of Rfam CMs."
+    },
+    {
+      "filename": "parse_mpileup.pl",
+      "category": "other",
+      "size": 5156,
+      "name": "parse_mpileup.pl",
+      "description": "=head1 SYNOPSIS"
+    },
+    {
+      "filename": "parse_snp_blast.pl",
+      "category": "alignment",
+      "size": 2645,
+      "name": "parse_snp_blast.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "pasagff32bsml.pl",
+      "category": "converter",
+      "size": 10585
+    },
+    {
+      "filename": "pause.pl",
+      "category": "other",
+      "size": 1844,
+      "name": "pause.pl",
+      "description": "Spins until a condition is met"
+    },
+    {
+      "filename": "pe2bsml.pl",
+      "category": "converter",
+      "size": 6743,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "pe_fasta_dumper.pl",
+      "category": "other",
+      "size": 2270
+    },
+    {
+      "filename": "pepstats2bsml.pl",
+      "category": "converter",
+      "size": 4755,
+      "name": "pepstats2bsml.pl",
+      "description": "convert EMBOSS pepstats output to BSML"
+    },
+    {
+      "filename": "percent_gc.pl",
+      "category": "other",
+      "size": 10058,
+      "name": "percent_gc.pl",
+      "description": "calculates the percent GC content of nucleotide sequences"
+    },
+    {
+      "filename": "percent_mapped_stats.pl",
+      "category": "statistics",
+      "size": 31236,
+      "name": "percent_mapped_stats.pl",
+      "description": "program to generate percentage of reads mapping to exon/intron/intergenic region in euk\n\t\t\t\t\t     and genic/intergenic region in prok."
+    },
+    {
+      "filename": "phat2bsml.pl",
+      "category": "converter",
+      "size": 9768,
+      "name": "phat2bsml.pl",
+      "description": "convert phat GFF output to BSML"
+    },
+    {
+      "filename": "phobos2bsml.pl",
+      "category": "converter",
+      "size": 4621,
+      "name": "phobos2bsml.pl",
+      "description": "convert phobos output to BSML"
+    },
+    {
+      "filename": "pileup2wig.pl",
+      "category": "other",
+      "size": 5754,
+      "name": "pileup2wig.pl",
+      "description": "program to convert a pileup file to a wig format file."
+    },
+    {
+      "filename": "pipeline_summary.pl",
+      "category": "other",
+      "size": 35793,
+      "name": "pipeline_summary.pl",
+      "description": "Creates one BSML document describing annotation from a pipeline \n    from other bsml files.  Combines all the features."
+    },
+    {
+      "filename": "pmarks2bsml.pl",
+      "category": "converter",
+      "size": 6288,
+      "name": "pmarks2bsml.pl",
+      "description": "Creates a bsml document for pmarks location on a pseudomolecule"
+    },
+    {
+      "filename": "post_process_annotations.pl",
+      "category": "other",
+      "size": 10238,
+      "name": "post_process_annotations.pl",
+      "description": "Contains functionality to refine final annotations."
+    },
+    {
+      "filename": "predict_operons.pl",
+      "category": "other",
+      "size": 2753,
+      "name": "predict_operons.pl",
+      "description": "wrapper script for predict_operons.sh"
+    },
+    {
+      "filename": "predict_prokaryotic_gene_function.pl",
+      "category": "annotation",
+      "size": 43525,
+      "name": "predict_gene_function.pl",
+      "description": "Reads annotation evidence for a gene and generates a functional\nprediction with product name, gene symbol, EC number and GO terms where possible."
+    },
+    {
+      "filename": "predotar2bsml.pl",
+      "category": "converter",
+      "size": 9792,
+      "name": "predotar2bsml.pl",
+      "description": "convert predotar output to BSML"
+    },
+    {
+      "filename": "prepare_ber_extended_nt_db.pl",
+      "category": "database",
+      "size": 26855
+    },
+    {
+      "filename": "prepare_for_genewise_best_loc.pl",
+      "category": "annotation",
+      "size": 27651
+    },
+    {
+      "filename": "prepare_for_tbl2asn.pl",
+      "category": "other",
+      "size": 2030,
+      "name": "prepare_for_tbl2asn.pl",
+      "description": "Copies files to a directory which tbl2asn expects"
+    },
+    {
+      "filename": "prepare_for_transterm.pl",
+      "category": "other",
+      "size": 12341,
+      "name": "prepare_for_transterm.pl",
+      "description": "creates coordinate files for the tranterm program"
+    },
+    {
+      "filename": "prepare_input_for_bowtie.pl",
+      "category": "alignment",
+      "size": 7815,
+      "name": "prepare_input_for_bwotie.pl",
+      "description": "Collates all input files together and creates a\n                              single input file list passed to the bowtie \n                              component"
+    },
+    {
+      "filename": "prepare_paired_ends_for_velvet.pl",
+      "category": "assembly",
+      "size": 7218,
+      "name": "prepare_input_for_velvet.pl",
+      "description": "Will read in a file and run shuffle sequences (provided by velvlet)\n    for any paired end. Will simply copy non-paired end data into the output directory"
+    },
+    {
+      "filename": "prepare_sbt_cmt.pl",
+      "category": "other",
+      "size": 15563,
+      "name": "prepare_sbt_cmt.pl",
+      "description": "Script to take precompiled tabular data and submit to the NCBI Genbank Submission Template"
+    },
+    {
+      "filename": "prepare_soapdenovo_config.pl",
+      "category": "other",
+      "size": 4125,
+      "name": "prepare_soapdenovo_config.pl",
+      "description": "Collates all info and creates config file passed to soapdenovo"
+    },
+    {
+      "filename": "prepfasta4mugsy.pl",
+      "category": "other",
+      "size": 3507,
+      "name": "prepfasta4mugsy.pl",
+      "description": "make organism specific fasta files for mugsy"
+    },
+    {
+      "filename": "preserveGivenReadsInFastq.pl",
+      "category": "other",
+      "size": 4017
+    },
+    {
+      "filename": "preserve_reads_in_fastq.pl",
+      "category": "other",
+      "size": 4017
+    },
+    {
+      "filename": "printmatchgraph.pl",
+      "category": "other",
+      "size": 755
+    },
+    {
+      "filename": "printrepresentative.pl",
+      "category": "other",
+      "size": 1578
+    },
+    {
+      "filename": "processFastaForNewbler.pl",
+      "category": "other",
+      "size": 3829
+    },
+    {
+      "filename": "process_crossbow_input.pl",
+      "category": "other",
+      "size": 4164,
+      "name": "process_crossbow_input.pl",
+      "description": "Processes crossbow input"
+    },
+    {
+      "filename": "process_crossbow_reference_genome.pl",
+      "category": "other",
+      "size": 6695,
+      "name": "process_crossbow_reference_genome.pl",
+      "description": "Processes one or more reference genomes to be used in short read mapping via crossbow."
+    },
+    {
+      "filename": "prodigal2bsml.pl",
+      "category": "converter",
+      "size": 7725,
+      "name": "prodigal2bsml.pl",
+      "description": "Creates a bsml document from prodigal raw output"
+    },
+    {
+      "filename": "prok_pipeline_check.pl",
+      "category": "other",
+      "size": 7935,
+      "name": "data_consistency_check.pl",
+      "description": "Checks data produced in the prokaryotic pipeline"
+    },
+    {
+      "filename": "prokpipe_consistency_checks.pl",
+      "category": "other",
+      "size": 7754
+    },
+    {
+      "filename": "promote_gene_prediction.pl",
+      "category": "annotation",
+      "size": 14007,
+      "name": "promote_gene_prediction.pl",
+      "description": "will create bsml documents that will represent working models from gene \n    prediction bsml."
+    },
+    {
+      "filename": "ps_scan2bsml.pl",
+      "category": "converter",
+      "size": 8987,
+      "name": "ps_scan2bsml.pl",
+      "description": "Formats prosite scan output into bsml format."
+    },
+    {
+      "filename": "pseudomolecule2glimmer3.pl",
+      "category": "other",
+      "size": 5956,
+      "name": "pseudomolecule2glimmer3.pl",
+      "description": "Get coordinates from genes that were put into a pseudomolecule in glimmer3 form"
+    },
+    {
+      "filename": "psortb2bsml.pl",
+      "category": "converter",
+      "size": 3934,
+      "name": "psortb2bsml.pl",
+      "description": "convert psortb output to BSML"
+    },
+    {
+      "filename": "qiime_to_mothur_meta.pl",
+      "category": "other",
+      "size": 2127
+    },
+    {
+      "filename": "qiime_to_otulist.pl",
+      "category": "other",
+      "size": 1222
+    },
+    {
+      "filename": "quicktree2bsml.pl",
+      "category": "converter",
+      "size": 11059,
+      "name": "qiucktree2bsml.pl",
+      "description": "Convert output from quicktree to BSML."
+    },
+    {
+      "filename": "reference_genome_match_tiler.pl",
+      "category": "other",
+      "size": 20147
+    },
+    {
+      "filename": "region2bsml.pl",
+      "category": "converter",
+      "size": 3808,
+      "name": "region2bsml",
+      "description": "Convert gene_boundaries(region) output to BSML"
+    },
+    {
+      "filename": "remove_db_gene_syms_with_hypos.pl",
+      "category": "annotation",
+      "size": 6381,
+      "name": "remove_db_gene_syms_with_hypos.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "remove_hypothetical_ec.pl",
+      "category": "other",
+      "size": 5073,
+      "name": "remove_hypothetical_ec.pl",
+      "description": "Will remove EC numbers from genes annotated as hypothetical proteins"
+    },
+    {
+      "filename": "remove_nonunique_snps.pl",
+      "category": "other",
+      "size": 6334,
+      "name": "remove-nonunique-clovr-comparative-snps.pl",
+      "description": "Remove all SNPs from a CloVR-Comparative SNP file _except_ those unique to a specified reference."
+    },
+    {
+      "filename": "rename-final-group.pl",
+      "category": "other",
+      "size": 1203
+    },
+    {
+      "filename": "repeatmasker2bsml.pl",
+      "category": "converter",
+      "size": 8058,
+      "name": "repeatmasker2bsml.pl",
+      "description": "convert RepeatMasker output to BSML"
+    },
+    {
+      "filename": "replace_amoscmp_fasta_seqids.pl",
+      "category": "other",
+      "size": 3201,
+      "name": "./replace_amoscmp_fasta_seqids.pl",
+      "description": "takes FASTA output from amoscmp and replaces the sequence identifiers with unique counterparts"
+    },
+    {
+      "filename": "replace_config_keys.pl",
+      "category": "other",
+      "size": 8880
+    },
+    {
+      "filename": "replace_defline_with_locusID.pl",
+      "category": "other",
+      "size": 6809,
+      "name": "replace_defline_with_locusID.pl",
+      "description": "script that replaces the FastA header with the locus ID of that protein or nucleotide."
+    },
+    {
+      "filename": "replace_fasta_headers.pl",
+      "category": "other",
+      "size": 2739,
+      "name": "replace_fasta_headers.pl",
+      "description": "Replace fasta headers with a short code (prot_#) and create a mapping file"
+    },
+    {
+      "filename": "replace_maf_ids.pl",
+      "category": "other",
+      "size": 5552,
+      "name": "replace_maf_ids.pl",
+      "description": "Script to replace checksum ids from MAF file with organism names using a mapping file produced earlier in prepmugsy step."
+    },
+    {
+      "filename": "replace_nuc_gaps.pl",
+      "category": "other",
+      "size": 3250,
+      "name": "perl_template.pl",
+      "description": "Description"
+    },
+    {
+      "filename": "replace_template_keys.pl",
+      "category": "other",
+      "size": 17530
+    },
+    {
+      "filename": "repository_info.pl",
+      "category": "other",
+      "size": 2862
+    },
+    {
+      "filename": "rna2bsml.pl",
+      "category": "converter",
+      "size": 14234,
+      "name": "rna2bsml",
+      "description": "Produces RNA/repeat BSML documents"
+    },
+    {
+      "filename": "rnammer2bsml.pl",
+      "category": "converter",
+      "size": 13270,
+      "name": "RNAmmer2bsml.pl",
+      "description": "convert RNAmmer output to BSML"
+    },
+    {
+      "filename": "rotate_molecule.pl",
+      "category": "other",
+      "size": 8086,
+      "name": "rotate_molecule.pl",
+      "description": "rotates a molecule and maps all features and evidence to new coordinate system given a coordinate as origin of replication"
+    },
+    {
+      "filename": "rpkm_coverage_stats.pl",
+      "category": "statistics",
+      "size": 31735,
+      "name": "rpkm_coverage_stats.pl",
+      "description": "program to generate read counts and coverage statistics across features."
+    },
+    {
+      "filename": "runCA_wrapper.pl",
+      "category": "other",
+      "size": 876
+    },
+    {
+      "filename": "run_bmtagger.pl",
+      "category": "other",
+      "size": 6499,
+      "name": "run_bmtagger.pl",
+      "description": "Generates a command line string and runs bmtagger based on input options"
+    },
+    {
+      "filename": "run_cmsearch.pl",
+      "category": "other",
+      "size": 25046,
+      "name": "run_cmsearch.pl",
+      "description": "Takes hmmpfam files as input and runs the hits against\n    cmsearch.  Optimization for cmsearch."
+    },
+    {
+      "filename": "run_genemark-es.pl",
+      "category": "annotation",
+      "size": 3622,
+      "name": "run_genemark-es.pl",
+      "description": "Executes gm_es.pl from the GeneMark-ES package but with magic around it\nto make up for some 'problems' with the original program."
+    },
+    {
+      "filename": "run_hmmsearch.pl",
+      "category": "other",
+      "size": 9830,
+      "name": "run_hmmsearch.pl",
+      "description": "runs hmmsearch using multiple hmms against one seq_file"
+    },
+    {
+      "filename": "run_humann.pl",
+      "category": "other",
+      "size": 5051,
+      "name": "run_humann.pl",
+      "description": "will create directory structure for the hummann pipeline and run it."
+    },
+    {
+      "filename": "run_humann2.pl",
+      "category": "other",
+      "size": 8436,
+      "name": "run_humann2.pl",
+      "description": "runs humann2 and humann2_renorm_table"
+    },
+    {
+      "filename": "run_phage_finder.pl",
+      "category": "other",
+      "size": 8223
+    },
+    {
+      "filename": "run_qsub_cmd.pl",
+      "category": "other",
+      "size": 6503,
+      "name": "run_qsub_cmd.pl",
+      "description": "Wrapper to facilitate the execution of a qsub command through ergatis."
+    },
+    {
+      "filename": "run_rnaseq_pipeline.pl",
+      "category": "other",
+      "size": 3016
+    },
+    {
+      "filename": "run_sighunt.pl",
+      "category": "other",
+      "size": 3271,
+      "name": "run_sighunt.pl",
+      "description": "Run the SigHunt R package using the assembly input"
+    },
+    {
+      "filename": "run_velvet_optimiser.pl",
+      "category": "assembly",
+      "size": 8273,
+      "name": "run_velvet_optimiser.pl",
+      "description": "Eragtis wrapper script for running Velvet Optimiser."
+    },
+    {
+      "filename": "run_wf.pl",
+      "category": "other",
+      "size": 2776,
+      "name": "run_wf.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "runcc.pl",
+      "category": "other",
+      "size": 69
+    },
+    {
+      "filename": "sam2bam.pl",
+      "category": "alignment",
+      "size": 2928,
+      "name": "sam2bam.pl",
+      "description": "run the samtools convert sam files to sorted bam (by position and name) and indexed bam files (by position)"
+    },
+    {
+      "filename": "sam2fasta.pl",
+      "category": "alignment",
+      "size": 14916
+    },
+    {
+      "filename": "sam2lca.pl",
+      "category": "alignment",
+      "size": 5447,
+      "name": "sam2lca.pl",
+      "description": "Wrapper script to generate Lowest Common Ancestors from a BAM/SAM file"
+    },
+    {
+      "filename": "samtools_alignment_stats.pl",
+      "category": "alignment",
+      "size": 5422,
+      "name": "samtools_alignment_stats.pl",
+      "description": "script to generate alignment stats from BAM file"
+    },
+    {
+      "filename": "samtools_file_convert.pl",
+      "category": "alignment",
+      "size": 11418,
+      "name": "samtools_file_convert.pl",
+      "description": "script to convert alignment files between SAM and BAM file formats."
+    },
+    {
+      "filename": "samtools_reference_index.pl",
+      "category": "alignment",
+      "size": 4781,
+      "name": "samtools_reference_index.pl",
+      "description": "script to generate samtools reference for reference FastA file"
+    },
+    {
+      "filename": "scp_files.pl",
+      "category": "other",
+      "size": 7204,
+      "name": "scp_files.pl",
+      "description": "Will scp some files."
+    },
+    {
+      "filename": "screen_seqs_by_ids.pl",
+      "category": "other",
+      "size": 2331
+    },
+    {
+      "filename": "script_template.pl",
+      "category": "other",
+      "size": 3261,
+      "name": "template.pl",
+      "description": "you should put a one-line description of your script here"
+    },
+    {
+      "filename": "seg2bsml.pl",
+      "category": "converter",
+      "size": 6429,
+      "name": "seg2bsml.pl",
+      "description": "convert seg output to bsml."
+    },
+    {
+      "filename": "sff_to_CA.pl",
+      "category": "other",
+      "size": 4808,
+      "name": "sff_to_CA.pl",
+      "description": "run sffToCA from the wgs-assembler software package. This script acts as a wrapper to ensure input is handled correctly in the Ergatis framework."
+    },
+    {
+      "filename": "sfffile.pl",
+      "category": "other",
+      "size": 4002,
+      "name": "sfffile.pl",
+      "description": "Wrapper script for sfffile to facilitate its execuction via Ergatis"
+    },
+    {
+      "filename": "sffinfo.pl",
+      "category": "other",
+      "size": 4010,
+      "name": "sffinfo.pl",
+      "description": "Wrapper script for sffinfo to facilitate its execution via Ergatis."
+    },
+    {
+      "filename": "signalp2bsml.pl",
+      "category": "converter",
+      "size": 21650,
+      "name": "signalp2bsml.pl",
+      "description": "convert SignalP output to BSML"
+    },
+    {
+      "filename": "signalp_graphics_rename.pl",
+      "category": "other",
+      "size": 10611,
+      "name": "rename_signalp_graphics_output.pl",
+      "description": "renames gif, eps, ps, and gnu output files"
+    },
+    {
+      "filename": "snap2bsml.pl",
+      "category": "converter",
+      "size": 8299,
+      "name": "snap2bsml.pl",
+      "description": "convert snap ZFF output to BSML"
+    },
+    {
+      "filename": "snoscan2bsml.pl",
+      "category": "converter",
+      "size": 11900,
+      "name": "snoscan2bsml.pl",
+      "description": "converts snoscan output to BSML"
+    },
+    {
+      "filename": "snp-add-gene-info.pl",
+      "category": "annotation",
+      "size": 19796,
+      "name": "snp-add-gene-info.pl",
+      "description": "Adds gene information to show-snps [nucmer] output: intergenic vs genic, ref vs query codons/amino acids, etc."
+    },
+    {
+      "filename": "snp2bsml.pl",
+      "category": "converter",
+      "size": 12223,
+      "name": "snp2bsml.pl",
+      "description": "convert clustered snp output information from show-snps to bsml"
+    },
+    {
+      "filename": "snp_verify.pl",
+      "category": "other",
+      "size": 34227,
+      "name": "snp_verify.pl",
+      "description": "Script to parse BLAST results and annotate verified SNPs to output merged table."
+    },
+    {
+      "filename": "soapdenovo.pl",
+      "category": "other",
+      "size": 4070,
+      "name": "soapdenovo.pl",
+      "description": "Wrapper to facilitate the execution of SOAPdenovo through ergatis."
+    },
+    {
+      "filename": "sort_snoscan_output.pl",
+      "category": "other",
+      "size": 5951,
+      "name": "sort_snoscan_output.pl",
+      "description": "run sort-snos on snoscan output."
+    },
+    {
+      "filename": "spin_wait.pl",
+      "category": "other",
+      "size": 1308,
+      "name": "dummy.pl",
+      "description": "do nothing"
+    },
+    {
+      "filename": "splitFastq.pl",
+      "category": "file_manipulation",
+      "size": 4841
+    },
+    {
+      "filename": "split_fasta.pl",
+      "category": "file_manipulation",
+      "size": 13239,
+      "name": "split_fasta.pl",
+      "description": "split a single-sequence FASTA file into separate, optionally overlapping, portions."
+    },
+    {
+      "filename": "split_fasta_fastq.pl",
+      "category": "file_manipulation",
+      "size": 16933,
+      "name": "split_fasta_fastq.pl",
+      "description": "split a single FASTA or FASTQ file containing multiple sequences into separate files."
+    },
+    {
+      "filename": "split_fastq.pl",
+      "category": "file_manipulation",
+      "size": 12531,
+      "name": "split_fastq.pl",
+      "description": "program to split_fastq file."
+    },
+    {
+      "filename": "split_file.pl",
+      "category": "file_manipulation",
+      "size": 3649,
+      "name": "split_file.pl",
+      "description": "will split a file (or list of files) into chunks of the specified size or into the specified number of chunks."
+    },
+    {
+      "filename": "split_multifasta.pl",
+      "category": "file_manipulation",
+      "size": 15224,
+      "name": "split_multifasta.pl",
+      "description": "split a single FASTA file containing multiple sequences into separate files."
+    },
+    {
+      "filename": "split_paired_files.pl",
+      "category": "file_manipulation",
+      "size": 3643,
+      "name": "split_paired_files.pl",
+      "description": "Splits two ordered files with paths to paired reads into files containing paths to one pair each."
+    },
+    {
+      "filename": "sra2fastq.pl",
+      "category": "other",
+      "size": 7501,
+      "name": "sra2fastq.pl",
+      "description": "Script to convert .sra files downloaded from NCBI SRA FTP site to FASTQ format"
+    },
+    {
+      "filename": "start_site_curation.pl",
+      "category": "annotation",
+      "size": 33499,
+      "name": "start_site_curation.pl",
+      "description": "Looks at the start sites of genes in a bsml file and will\n    move the start site based on alignment evidence"
+    },
+    {
+      "filename": "store_chado_version.pl",
+      "category": "database",
+      "size": 3403,
+      "name": "store_chado_version.pl",
+      "description": "=head1 SYNOPSIS"
+    },
+    {
+      "filename": "store_read_dataset_info.pl",
+      "category": "other",
+      "size": 1327
+    },
+    {
+      "filename": "strip_partition_files.pl",
+      "category": "other",
+      "size": 1621
+    },
+    {
+      "filename": "submit_for_harvesting.pl",
+      "category": "other",
+      "size": 2265,
+      "name": "submit_for_harvesting.pl",
+      "description": "A small script to submit a specific output directory for harvesting by a master node ina CloVR cluster."
+    },
+    {
+      "filename": "summarize_mugsy_comparative_pipeline.pl",
+      "category": "other",
+      "size": 12286,
+      "name": "create_genome_comparative_summary.pl",
+      "description": "Will create a summary file"
+    },
+    {
+      "filename": "tRNAscan-SE2bsml.pl",
+      "category": "converter",
+      "size": 13590,
+      "name": "tRNAscan-SE2bsml.pl",
+      "description": "convert tRNAcan-SE output to BSML"
+    },
+    {
+      "filename": "tabula_rasa.pl",
+      "category": "other",
+      "size": 1320
+    },
+    {
+      "filename": "tag_data.pl",
+      "category": "other",
+      "size": 10229,
+      "name": "transform_WWARN_input.pl",
+      "description": "Transforms input data to WWARN to a common format."
+    },
+    {
+      "filename": "tag_website.pl",
+      "category": "other",
+      "size": 841
+    },
+    {
+      "filename": "targetp2bsml.pl",
+      "category": "converter",
+      "size": 9952,
+      "name": "targetp2bsml.pl",
+      "description": "convert TargetP output to BSML"
+    },
+    {
+      "filename": "tcov2bsml.pl",
+      "category": "converter",
+      "size": 10695,
+      "name": "tcov2bsml.pl",
+      "description": "convert tcov files into BSML documents"
+    },
+    {
+      "filename": "template.pl",
+      "category": "other",
+      "size": 3667,
+      "name": "template.pl",
+      "description": "you should put a one-line description of your script here"
+    },
+    {
+      "filename": "tiling2bsml.pl",
+      "category": "converter",
+      "size": 11037,
+      "name": "tiling2bsml.pl",
+      "description": "convert show_tiling output into BSML sequence mapping documents"
+    },
+    {
+      "filename": "tmhmm2bsml.pl",
+      "category": "converter",
+      "size": 10597,
+      "name": "tmhmm2bsml.pl",
+      "description": "convert TMHMM output to BSML"
+    },
+    {
+      "filename": "tophat.pl",
+      "category": "other",
+      "size": 10908,
+      "name": "tophat.pl",
+      "description": "script to execute reference based alignment for input sequence file(s)."
+    },
+    {
+      "filename": "train_for_glimmer3.pl",
+      "category": "other",
+      "size": 6135,
+      "name": "train_for_glimmer.pl",
+      "description": "generates a training file for use with glimmer3"
+    },
+    {
+      "filename": "train_for_glimmer3_iteration.pl",
+      "category": "other",
+      "size": 8785
+    },
+    {
+      "filename": "transform_mugsycog.pl",
+      "category": "other",
+      "size": 4965
+    },
+    {
+      "filename": "translate_sequence.pl",
+      "category": "other",
+      "size": 28471,
+      "name": "translate_sequence.pl",
+      "description": "translates nt fasta or gene describing BSML into polypeptide fasta"
+    },
+    {
+      "filename": "transterm2bsml.pl",
+      "category": "converter",
+      "size": 11224,
+      "name": "transterm2bsml.pl",
+      "description": "turns tranterm raw output to bsml"
+    },
+    {
+      "filename": "trf2bsml.pl",
+      "category": "converter",
+      "size": 9610,
+      "name": "trf2bsml.pl",
+      "description": "convert Tandem Repeat Finder (trf) output to BSML"
+    },
+    {
+      "filename": "trf_wrapper.pl",
+      "category": "other",
+      "size": 4536,
+      "name": "trf_wrapper.pl",
+      "description": "wraps tandem repeat finder (trf) to allow proper return values\nand output location options."
+    },
+    {
+      "filename": "twinscan2bsml.pl",
+      "category": "converter",
+      "size": 14565,
+      "name": "twinscan2bsml.pl",
+      "description": "convert twinscan GTF output to BSML"
+    },
+    {
+      "filename": "uclust_replicate_removal.pl",
+      "category": "other",
+      "size": 2418
+    },
+    {
+      "filename": "update_ec_numbers.pl",
+      "category": "other",
+      "size": 15147,
+      "name": "update_ec_numbers.pl",
+      "description": "Will read in a current enzyme.dat file and update\n    annotated EC numbers with suggestions from the file. Does not\n    change partial EC numbers."
+    },
+    {
+      "filename": "validate_clustalw_output.pl",
+      "category": "other",
+      "size": 4294,
+      "name": "validate_clustalw_output.pl",
+      "description": "Verifies the clustalw output is correct"
+    },
+    {
+      "filename": "velvetg_post_processing.pl",
+      "category": "assembly",
+      "size": 3535,
+      "name": "velvetg_post_processing.pl",
+      "description": "Renames default velvetg output to store each file with a unique filename"
+    },
+    {
+      "filename": "velvetg_pre_processing.pl",
+      "category": "assembly",
+      "size": 3541,
+      "name": "velvetg_pre_processing.pl",
+      "description": "Renames velveth output to default naming schema."
+    },
+    {
+      "filename": "velveth_post_processing.pl",
+      "category": "assembly",
+      "size": 3565,
+      "name": "velvet_post_processing_rename.pl",
+      "description": "Renames default velvet output to store each file with a unique filename"
+    },
+    {
+      "filename": "wrap_tbl2asn.pl",
+      "category": "other",
+      "size": 11162,
+      "name": "fix_gene_symbols.pl",
+      "description": "Script to remove upper case, duplicate gene symbols as well replace existing gene symbols in DB with new ones provided in the rules file"
+    },
+    {
+      "filename": "wrapper_align.pl",
+      "category": "alignment",
+      "size": 11393,
+      "name": "wrapper.pl",
+      "description": "script to combines various statistics output and creates a PDF."
+    }
+  ]
+}
