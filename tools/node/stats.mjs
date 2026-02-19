@@ -1,50 +1,31 @@
 #!/usr/bin/env node
 // stats.mjs — Terminal dashboard summarizing the EELS repository artifacts
-import { readFileSync, readdirSync, statSync } from 'fs';
-import { join, resolve } from 'path';
 import { box, header, barLine, stat, divider, chalk } from './lib/display.mjs';
+import { getSummary, getTools, getBiotools, getEdam, getPipelines, getDatabases,
+         getIterators, getConverters, getArtifactCounts, getToolCategories } from './lib/data.mjs';
 
-const root = resolve(import.meta.dirname, '../..');
-const load = f => JSON.parse(readFileSync(join(root, f), 'utf8'));
-const count = (dir, ext) => {
-  try { return readdirSync(join(root, dir)).filter(f => f.endsWith(ext)).length; }
-  catch { return 0; }
-};
-
-// --- Data ---
-const components = count('data/components', '.json');
-const stepFiles = count('data/categorized_steps', '.json');
-const docYamls = count('generated/docs/component_docs', '.yaml');
-const cwlFiles = count('generated/wfl-lang/cwl/components', '.cwl');
-const nfComps = count('generated/wfl-lang/nextflow/components', '.nf');
-const nfPipes = count('generated/wfl-lang/nextflow/pipeline_templates', '.nf');
-const liteComps = count('generated/wfl-lang/ergatis_lite/components', '.lite');
-const litePipes = count('generated/wfl-lang/ergatis_lite/pipeline_templates', '.lite');
-const bcoComps = count('generated/docs/bco/components', '.json');
-const bcoPipes = count('generated/docs/bco/pipeline_templates', '.json');
-
-const summary = load('data/component_summary.json');
-const tools = load('data/tool_catalog_full.json');
-const biotools = load('data/biotools_mapping.json');
-const edam = load('data/edam_mapping.json');
-const pipelines = load('data/pipeline_catalog.json');
-const databases = load('data/database_catalog.json');
-const iterators = load('data/iterator_catalog.json');
-const converters = load('data/converter_mapping.json');
+const a = getArtifactCounts();
+const tools = getTools();
+const { raw: biotools } = getBiotools();
+const { raw: edam } = getEdam();
+const pipelines = getPipelines();
+const databases = getDatabases();
+const converters = getConverters();
+const iterators = getIterators();
+const summary = getSummary();
 
 const biotoolsMapped = biotools.mapping.filter(m => m.matched).length;
 const edamMapped = edam.mapping.length;
 const iterComps = Object.keys(iterators).length;
 
-// --- Output ---
 console.log('\n' + box(
   'EELS — Ergatis Extended Lifetime Support',
   'Preserving the Golden Age of Open Source Bioinformatics Engineering'
 ));
 
 console.log(header('SOURCE DATA'));
-console.log(stat(components, 'component configurations'));
-console.log(stat(stepFiles, 'categorized workflow step files'));
+console.log(stat(a.components, 'component configurations'));
+console.log(stat(a.stepFiles, 'categorized workflow step files'));
 console.log(stat(tools.length, 'tool executables cataloged'));
 console.log(stat(pipelines.length, 'production pipeline templates'));
 console.log(stat(databases.length, 'reference databases'));
@@ -52,25 +33,24 @@ console.log(stat(Object.keys(converters).length, 'converter mappings'));
 
 console.log(header('GENERATED ARTIFACTS'));
 console.log(`  ${chalk.dim('Documentation:')}`);
-console.log(stat(docYamls, 'component doc YAML files', 'yellow'));
-console.log(`  ${chalk.yellow(String(bcoComps).padStart(5))} component BCOs              ${chalk.yellow(String(bcoPipes).padStart(5))} pipeline BCOs`);
+console.log(stat(a.docYamls, 'component doc YAML files', 'yellow'));
+console.log(`  ${chalk.yellow(String(a.bcoComponents).padStart(5))} component BCOs              ${chalk.yellow(String(a.bcoPipelines).padStart(5))} pipeline BCOs`);
 console.log(`  ${chalk.dim('Workflow Languages:')}`);
-console.log(stat(cwlFiles, 'CWL tool definitions', 'cyan'));
-console.log(`  ${chalk.cyan(String(nfComps).padStart(5))} Nextflow component processes ${chalk.cyan(String(nfPipes).padStart(5))} pipeline workflows`);
-console.log(`  ${chalk.cyan(String(liteComps).padStart(5))} Ergatis Lite components      ${chalk.cyan(String(litePipes).padStart(5))} pipeline templates`);
+console.log(stat(a.cwl, 'CWL tool definitions', 'cyan'));
+console.log(`  ${chalk.cyan(String(a.nfComponents).padStart(5))} Nextflow component processes ${chalk.cyan(String(a.nfPipelines).padStart(5))} pipeline workflows`);
+console.log(`  ${chalk.cyan(String(a.liteComponents).padStart(5))} Ergatis Lite components      ${chalk.cyan(String(a.litePipelines).padStart(5))} pipeline templates`);
 
 console.log(header('REGISTRY MAPPINGS'));
-console.log(barLine('bio.tools', biotoolsMapped, components, { color: 'green' }));
-console.log(barLine('EDAM', edamMapped, components, { color: 'blue' }));
-console.log(barLine('Iterators', iterComps, components, { color: 'magenta' }));
+console.log(barLine('bio.tools', biotoolsMapped, a.components, { color: 'green' }));
+console.log(barLine('EDAM', edamMapped, a.components, { color: 'blue' }));
+console.log(barLine('Iterators', iterComps, a.components, { color: 'magenta' }));
 
 console.log(header('TOOL EXECUTABLES BY CATEGORY'));
-const toolCats = {};
-for (const t of tools) toolCats[t.category_id] = (toolCats[t.category_id] || 0) + 1;
+const toolCats = getToolCategories();
 const catLabels = { custom_perl: 'Custom Perl', open_source: 'Open Source', custom_binary: 'Custom Binary', os_system: 'OS/System', closed_source: 'Closed Source' };
-const maxTool = Math.max(...Object.values(toolCats));
-for (const [id, n] of Object.entries(toolCats).sort((a, b) => b[1] - a[1])) {
-  console.log(barLine(catLabels[id] || id, n, maxTool, { barWidth: 25, color: 'yellow', showTotal: false }));
+const maxTool = Math.max(...Object.values(toolCats).map(c => c.count));
+for (const [id, cat] of Object.entries(toolCats).sort((a, b) => b[1].count - a[1].count)) {
+  console.log(barLine(catLabels[id] || id, cat.count, maxTool, { barWidth: 25, color: 'yellow', showTotal: false }));
 }
 
 console.log(header('COMPONENT CLASSIFICATIONS (top 15)'));
@@ -90,7 +70,7 @@ for (const p of sortedPipes.slice(0, 10)) {
 }
 if (sortedPipes.length > 10) console.log(chalk.dim(`    ... and ${sortedPipes.length - 10} more pipelines`));
 
-const totalArtifacts = docYamls + bcoComps + bcoPipes + cwlFiles + nfComps + nfPipes + liteComps + litePipes;
+const totalArtifacts = a.docYamls + a.bcoComponents + a.bcoPipelines + a.cwl + a.nfComponents + a.nfPipelines + a.liteComponents + a.litePipelines;
 console.log('\n' + divider());
-console.log(`  ${chalk.bold(`Total: ${chalk.cyan(components)} components → ${chalk.yellow(totalArtifacts)} generated artifacts`)}`);
+console.log(`  ${chalk.bold(`Total: ${chalk.cyan(a.components)} components → ${chalk.yellow(totalArtifacts)} generated artifacts`)}`);
 console.log(divider() + '\n');

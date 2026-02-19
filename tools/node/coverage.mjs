@@ -1,55 +1,30 @@
 #!/usr/bin/env node
 // coverage.mjs — Coverage/mapping report across all registry and documentation sources
-import { readFileSync, readdirSync } from 'fs';
-import { join, resolve } from 'path';
-import { box, header, barLine, divider, chalk } from './lib/display.mjs';
+import { barLine, chalk } from './lib/display.mjs';
+import { getCoverage, getBiotools, getEdam, getComponentNames } from './lib/data.mjs';
 
-const root = resolve(import.meta.dirname, '../..');
-const load = f => JSON.parse(readFileSync(join(root, f), 'utf8'));
-const nameSet = (dir, ext) => {
-  try { return new Set(readdirSync(join(root, dir)).filter(f => f.endsWith(ext)).map(f => f.replace(ext, ''))); }
-  catch { return new Set(); }
-};
-
-const compNames = nameSet('data/components', '.json');
+const coverage = getCoverage();
+const compNames = new Set(getComponentNames());
 const total = compNames.size;
 
-const docSet = new Set(readdirSync(join(root, 'generated/docs/component_docs'))
-  .filter(f => f.endsWith('.doc.yaml')).map(f => f.replace('.doc.yaml', '')));
-const cwlSet = nameSet('generated/wfl-lang/cwl/components', '.cwl');
-const nfSet = nameSet('generated/wfl-lang/nextflow/components', '.nf');
-const liteSet = nameSet('generated/wfl-lang/ergatis_lite/components', '.lite');
-const bcoSet = nameSet('generated/docs/bco/components', '.json');
-
-const biotools = load('data/biotools_mapping.json');
-const btSet = new Set(biotools.mapping.filter(m => m.matched).map(m => m.component));
-const edam = load('data/edam_mapping.json');
-const edSet = new Set(edam.mapping.map(m => m.component));
-const iterators = load('data/iterator_catalog.json');
-const itSet = new Set(Object.keys(iterators));
-const stepSet = nameSet('data/categorized_steps', '.json');
-
-const sources = [
-  ['Categorized Steps', stepSet],
-  ['Documentation YAML', docSet],
-  ['CWL Definitions', cwlSet],
-  ['Nextflow Processes', nfSet],
-  ['Ergatis Lite', liteSet],
-  ['BioCompute Objects', bcoSet],
-  ['bio.tools Mapping', btSet],
-  ['EDAM Mapping', edSet],
-  ['Iterator Defined', itSet],
-];
+const labels = {
+  steps: 'Categorized Steps', docs: 'Documentation YAML', cwl: 'CWL Definitions',
+  nextflow: 'Nextflow Processes', lite: 'Ergatis Lite', bco: 'BioCompute Objects',
+  biotools: 'bio.tools Mapping', edam: 'EDAM Mapping', iterators: 'Iterator Defined',
+};
 
 console.log(`\n${chalk.bold.cyan('  EELS Coverage Report')}`);
 console.log(chalk.dim(`  Coverage of ${total} extracted components across all artifact types\n`));
 
-for (const [label, set] of sources) {
-  const n = [...set].filter(s => compNames.has(s)).length;
-  console.log(barLine(label, n, total, { barWidth: 40 }));
+for (const [key, label] of Object.entries(labels)) {
+  console.log(barLine(label, coverage[key].count, total, { barWidth: 40 }));
 }
 
 console.log(`\n${chalk.bold.cyan('  Gap Analysis')}\n`);
+const btSet = new Set(coverage.biotools.names);
+const edSet = new Set(coverage.edam.names);
+const itSet = new Set(coverage.iterators.names);
+
 const missingBt = [...compNames].filter(n => !btSet.has(n)).sort();
 const missingEdam = [...compNames].filter(n => !edSet.has(n)).sort();
 const missingIter = [...compNames].filter(n => !itSet.has(n)).sort();

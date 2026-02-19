@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 // pipeline.mjs — Pipeline composition diagrams (text and optional SVG)
 // Usage: node pipeline.mjs [pipeline_name] [--svg output.svg]
-import { readFileSync, writeFileSync } from 'fs';
-import { join, resolve } from 'path';
+import { writeFileSync } from 'fs';
 import { pipelineGroup, chalk } from './lib/display.mjs';
-
-const root = resolve(import.meta.dirname, '../..');
-const load = f => JSON.parse(readFileSync(join(root, f), 'utf8'));
+import { getPipelines, getBiotools, getPipelineDetail } from './lib/data.mjs';
 
 const args = process.argv.slice(2);
 const svgIdx = args.indexOf('--svg');
@@ -14,35 +11,21 @@ let svgOut = null;
 if (svgIdx >= 0) { svgOut = args[svgIdx + 1]; args.splice(svgIdx, 2); }
 const query = args[0]?.toLowerCase();
 
-const pipelines = load('data/pipeline_catalog.json');
-const biotools = load('data/biotools_mapping.json');
-const btMap = {};
-for (const m of biotools.mapping) { if (m.matched) btMap[m.component] = m.tool_name; }
+const { map: btMap } = getBiotools();
 
 if (!query) {
+  const pipelines = getPipelines();
   console.log(`\n${chalk.bold.cyan('  Available Pipeline Templates')}\n`);
-  const sorted = [...pipelines].sort((a, b) => b.num_components - a.num_components);
-  for (const p of sorted) {
+  for (const p of [...pipelines].sort((a, b) => b.num_components - a.num_components)) {
     console.log(`  ${chalk.green(p.name.padEnd(45))} ${chalk.dim(String(p.num_components).padStart(3) + ' components')}`);
   }
   console.log(`\n${chalk.dim('  Usage: node pipeline.mjs <name> [--svg output.svg]')}\n`);
   process.exit(0);
 }
 
-const pipeline = pipelines.find(p => p.name.toLowerCase().includes(query));
-if (!pipeline) { console.error(`No pipeline matching "${query}"`); process.exit(1); }
-
-const instances = pipeline.components.map(c => {
-  const parts = c.split('.');
-  return { full: c, component: parts[0], group: parts.slice(1).join('.') || null };
-});
-
-const groups = {};
-for (const inst of instances) {
-  const g = inst.group || 'ungrouped';
-  if (!groups[g]) groups[g] = [];
-  groups[g].push(inst);
-}
+const detail = getPipelineDetail(query);
+if (!detail) { console.error(`No pipeline matching "${query}"`); process.exit(1); }
+const { pipeline, instances, groups } = detail;
 
 console.log(`\n${chalk.bold.cyan(`  Pipeline: ${pipeline.name}`)}`);
 console.log(chalk.dim(`  ${instances.length} component instances, ${Object.keys(groups).length} groups\n`));
@@ -52,13 +35,12 @@ for (const [group, insts] of Object.entries(groups)) {
   const steps = insts.map(inst => ({
     num: ++step,
     name: inst.component,
-    annotation: btMap[inst.component] || null,
+    annotation: btMap[inst.component]?.name || null,
   }));
   console.log(pipelineGroup(group, steps));
 }
 console.log();
 
-// SVG output
 if (svgOut) {
   const boxW = 500, boxH = 32, gap = 4, groupPad = 12, margin = 20;
   let y = margin;
@@ -77,7 +59,7 @@ if (svgOut) {
       const bt = btMap[inst.component];
       elements.push(`<rect x="${margin + 10}" y="${y}" width="${boxW - 20}" height="${boxH}" rx="4" fill="white" stroke="#aaa"/>`);
       elements.push(`<text x="${margin + 18}" y="${y + 20}" font-size="13" font-family="monospace">${esc(inst.component)}</text>`);
-      if (bt) elements.push(`<text x="${boxW - 10}" y="${y + 20}" font-size="10" fill="#888" text-anchor="end">${esc(bt)}</text>`);
+      if (bt) elements.push(`<text x="${boxW - 10}" y="${y + 20}" font-size="10" fill="#888" text-anchor="end">${esc(bt.name)}</text>`);
       y += boxH + gap;
     }
     y += groupPad;
