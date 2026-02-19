@@ -56,9 +56,9 @@ Prokaryotic Annotation Pipeline:
 ```
 
 **Component JSON → CWL (one per tool):**
-- `dds.cwl`
-- `ext.cwl`
-- `gap22bsml.cwl`
+- `dds.cwl` - individual tool config
+- `ext.cwl` - individual tool config
+- `gap22bsml.cwl` - individual tool config
 
 **Component JSON → BCO:**
 ```json
@@ -70,7 +70,7 @@ Prokaryotic Annotation Pipeline:
 }
 ```
 
-### For Workflows: Ergatis Lite + BCO (NOT CWL)
+### For Workflows: Ergatis Lite + BCO ONLY
 
 **Workflow XML → Ergatis Lite:**
 ```
@@ -95,7 +95,11 @@ Prokaryotic Annotation Pipeline:
 }
 ```
 
-**CWL:** NOT used for workflow composition - only for individual tool configs
+**Why not CWL/Nextflow/WDL for workflows?**
+- CWL: Only for individual tool configs, not workflow composition
+- Nextflow: No proper workflow/subflow concepts to represent Ergatis hierarchy
+- WDL: Similar limitations
+- Ergatis Lite + BCO: Properly capture the workflow/component/tool hierarchy
 
 ## Translation Workflow
 
