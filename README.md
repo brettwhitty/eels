@@ -27,9 +27,15 @@ This is production-tested, FDA-approved software representing institutional know
 - 362 components analyzed → `data/components/*.json`
 - 254 iterator patterns cataloged → `data/iterator_catalog.json`
 - 56 workflows cataloged → `data/workflow_catalog.json` (108 XML files)
+- 51 workflow structures extracted → `data/workflow_structure.json` (784 steps)
 - 472 utility scripts cataloged → `data/utility_catalog.json`
 - 91 converters identified → `data/converter_catalog.json`
+- 65 converter configs → `data/converters/*.json`
 - 28 contributors identified → `data/contributors.json`
+
+**Translation Formats Generated:**
+- 362 Ergatis Lite component notations → `data/ergatis_lite/*.lite`
+- 5 BioCompute Objects (samples) → `data/bco/*.json`
 
 **Note:** Converter manpages exist in `ergatis-install/man/man1/*2bsml.pl.1p` (65 files)
 

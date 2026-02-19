@@ -1,25 +1,29 @@
 # EELS Project Status
 
-## 2026-02-19 - Phase 3 In Progress
+## 2026-02-19 - Phase 5 In Progress
 
 ### Current Status
 
 **Completed:**
 - Phase 1: Initial extraction (converters, contributors, architecture)
 - Phase 2: Structured analysis (components, iterators, workflows)
-- Phase 3: Converter documentation (manpages extracted)
+- Phase 3: Converter documentation (65 converter JSON from manpages)
+- Phase 4: Workflow structure extraction (51 workflows, 784 steps)
+- Phase 5: Translation formats (Ergatis Lite, BCO samples)
 
 **In Progress:**
-- Phase 4: BSML schema analysis
-- Phase 5: Translation strategy
+- Complete BCO generation for all components
+- Workflow-level Ergatis Lite notation
+- CWL tool definitions
 
 **Remaining:**
-- Phase 6: Proof-of-concept translations
-- Phase 7: Final documentation
+- BSML schema documentation
+- Complete translation guide
+- Final documentation and archive
 
 ---
 
-## 2026-02-18 - Phase 2 Complete
+## 2026-02-19 - Phase 3 Complete
 
 ### Phase 1: Initial Extraction (Complete)
 
