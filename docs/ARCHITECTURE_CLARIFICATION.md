@@ -224,8 +224,30 @@ eels/
 
 ## Next Steps
 
-1. Parse pipeline master templates to extract component composition
-2. Create pipeline catalog with proper categorization
-3. Generate accurate pipeline documentation
-4. Review and fix all generated BCO/CWL/Ergatis Lite files
-5. Document the complete architecture properly
+1. Extract and catalog the 40 production pipeline templates from `ergatis-install/templates/pipelines/`
+2. Parse `pipeline.layout` files to document component composition (serial/parallel structure)
+3. Document component configs with tokens (e.g., `ncbi-blastp.COGS`, `hmmpfam3.pre_overlap_analysis`)
+4. Generate proper pipeline BCO from real pipeline data
+5. Review and fix all generated BCO/CWL/Ergatis Lite files
+
+## Critical Discovery
+
+The real production pipeline templates are in `ergatis-install/templates/pipelines/`, NOT in `workflow/`.
+
+Each pipeline template directory contains:
+- `pipeline.layout` - XML defining component composition (serial/parallel)
+- `component.token.config` - Per-component config with specific parameters
+
+Example: `Prokaryotic_Annotation_Pipeline_Gene_Annotations/` contains:
+- 52 config files for different component instances
+- `pipeline.layout` showing serial/parallel composition
+- Components like `hmmpfam3.pre_overlap_analysis`, `ncbi-blastp.COGS`
+
+The 40 production pipelines include:
+- Prokaryotic annotation (multiple stages)
+- Eukaryotic RNA-Seq
+- GenBank submission
+- LGT Seek (multiple variants)
+- Pangenome analysis
+- SNP verification
+- Metagenomic screening
