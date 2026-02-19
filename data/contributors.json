@@ -1,16 +1,280 @@
 {
    "contributors" : [
       {
-         "commits" : 1447,
+         "emails" : [],
+         "first_commit" : "2005-08-19T18:06:26+00:00",
+         "last_commit" : "2011-05-25T22:46:05+00:00",
+         "name" : "Aaron Gussman",
+         "svn_usernames" : [
+            "agussman"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2012-06-15T14:40:54+00:00",
+         "last_commit" : "2013-04-18T21:33:36+00:00",
+         "name" : "Amol Carl Shetty",
+         "svn_usernames" : [
+            "acshetty"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2010-07-28T19:26:27+00:00",
+         "last_commit" : "2010-08-07T14:31:44+00:00",
+         "name" : "Brandi Cantarel",
+         "svn_usernames" : [
+            "bcantarel"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2005-12-16T19:02:48+00:00",
+         "last_commit" : "2007-12-27T20:34:23+00:00",
+         "name" : "Brett Whitty",
+         "svn_usernames" : [
+            "bwhitty"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2005-08-25T13:47:58+00:00",
+         "last_commit" : "2006-12-20T13:03:36+00:00",
+         "name" : "Brian Haas",
+         "svn_usernames" : [
+            "bhaas"
+         ]
+      },
+      {
+         "emails" : [
+            "cesar.arze@gmail.com"
+         ],
+         "first_commit" : "2009-10-28T17:11:05+00:00",
+         "last_commit" : "2014-07-24T09:33:55-04:00",
+         "name" : "Cesar Arze",
+         "svn_usernames" : [
+            "carze",
+            "cesar"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2003-06-17T16:52:30+00:00",
+         "last_commit" : "2004-05-13T17:35:19+00:00",
+         "name" : "Chris Hauser",
+         "svn_usernames" : [
+            "chauser"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2010-07-29T06:11:06+00:00",
+         "last_commit" : "2011-12-21T00:00:31+00:00",
+         "name" : "Chris Hemmeri",
+         "svn_usernames" : [
+            "chemmeri"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2003-04-02T15:27:35+00:00",
+         "last_commit" : "2003-08-04T14:33:32+00:00",
+         "name" : "Chunhui Lu",
+         "svn_usernames" : [
+            "clu"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2008-04-16T19:58:35+00:00",
+         "last_commit" : "2013-06-07T20:52:43+00:00",
+         "name" : "David Riley",
+         "svn_usernames" : [
+            "daveriley"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2005-05-26T18:14:04+00:00",
+         "last_commit" : "2007-06-12T20:06:26+00:00",
+         "name" : "Ed Lee",
+         "svn_usernames" : [
+            "elee",
+            "gk_fan"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2008-12-16T19:34:00+00:00",
+         "last_commit" : "2008-12-16T19:34:00+00:00",
+         "name" : "Gaurav Jain",
+         "svn_usernames" : [
+            "gauravj49"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2006-02-01T13:55:51+00:00",
+         "last_commit" : "2006-04-10T20:22:48+00:00",
+         "name" : "hamilton"
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2010-08-20T19:41:26+00:00",
+         "last_commit" : "2012-06-08T17:40:26+00:00",
+         "name" : "James Robert White",
+         "svn_usernames" : [
+            "jamesrwhite"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2006-03-24T14:58:45+00:00",
+         "last_commit" : "2011-03-10T18:40:31+00:00",
+         "name" : "Jason Inman",
+         "svn_usernames" : [
+            "jinman"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2003-07-15T18:16:57+00:00",
+         "last_commit" : "2009-07-14T15:27:58+00:00",
+         "name" : "Jay Sundaram",
+         "svn_usernames" : [
+            "jaysundaram",
+            "sundaram"
+         ]
+      },
+      {
+         "emails" : [
+            "jonathancrabtree@gmail.com"
+         ],
+         "first_commit" : "2003-10-16T13:27:22+00:00",
+         "last_commit" : "2017-02-17T11:40:53-05:00",
+         "name" : "Jonathan Crabtree",
+         "svn_usernames" : [
+            "crabtree",
+            "jcrabtree",
+            "jonathan"
+         ]
+      },
+      {
          "emails" : [
             "jorvis@gmail.com"
          ],
          "first_commit" : "2004-11-16T19:50:33+00:00",
          "last_commit" : "2015-09-30T10:15:23-05:00",
-         "name" : "Joshua Orvis"
+         "name" : "Joshua Orvis",
+         "svn_usernames" : [
+            "jorvis",
+            "joshua"
+         ]
       },
       {
-         "commits" : 1128,
+         "emails" : [
+            "kabolude@som.umaryland.edu"
+         ],
+         "first_commit" : "2011-01-27T16:35:18+00:00",
+         "last_commit" : "2015-07-15T11:07:19-04:00",
+         "name" : "Kemi Abolude",
+         "svn_usernames" : [
+            "kabolude",
+            "kemi"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2012-05-30T14:26:55+00:00",
+         "last_commit" : "2013-02-04T20:52:09+00:00",
+         "name" : "Kent Shefchek",
+         "svn_usernames" : [
+            "kshefchek"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2006-03-20T15:52:46+00:00",
+         "last_commit" : "2006-06-14T17:19:32+00:00",
+         "name" : "Kevin Childs",
+         "svn_usernames" : [
+            "kchilds"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2006-03-23T15:23:21+00:00",
+         "last_commit" : "2012-12-17T15:01:32+00:00",
+         "name" : "Kevin Galens",
+         "svn_usernames" : [
+            "kevingalens",
+            "kgalens"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2010-10-05T14:05:50+00:00",
+         "last_commit" : "2012-02-10T17:45:55+00:00",
+         "name" : "Mahesh Vangala",
+         "svn_usernames" : [
+            "vangalamaheshh"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2010-01-05T20:24:18+00:00",
+         "last_commit" : "2011-08-18T18:44:21+00:00",
+         "name" : "Mark Matalka",
+         "svn_usernames" : [
+            "mmatalka"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2003-09-08T17:27:12+00:00",
+         "last_commit" : "2003-09-08T17:27:12+00:00",
+         "name" : "Owen White",
+         "svn_usernames" : [
+            "owhite"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2005-07-20T13:30:30+00:00",
+         "last_commit" : "2006-05-02T19:38:35+00:00",
+         "name" : "Phil Amedeo",
+         "svn_usernames" : [
+            "pamedeo"
+         ]
+      },
+      {
+         "emails" : [
+            "priti88@gwu.edu"
+         ],
+         "first_commit" : "2013-02-11T22:02:54+00:00",
+         "last_commit" : "2014-02-27T16:41:10-05:00",
+         "name" : "Priti Kumari",
+         "svn_usernames" : [
+            "priti",
+            "priti88"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2003-04-01T23:58:26+00:00",
+         "last_commit" : "2011-06-29T14:23:52+00:00",
+         "name" : "Sam Angiuoli",
+         "svn_usernames" : [
+            "angiuoli"
+         ]
+      },
+      {
+         "emails" : [],
+         "first_commit" : "2004-02-03T22:16:23+00:00",
+         "last_commit" : "2007-03-12T18:34:36+00:00",
+         "name" : "sgc"
+      },
+      {
          "emails" : [
             "sadkins@sadkins-lx.igs.umaryland.edu",
             "sadkins@sadkinslt-osx.igs.umaryland.edu",
@@ -20,260 +284,58 @@
          ],
          "first_commit" : "2011-08-17T20:24:17+00:00",
          "last_commit" : "2017-11-13T15:52:12-05:00",
-         "name" : "Shaun Adkins"
+         "name" : "Shaun Adkins",
+         "svn_usernames" : [
+            "adkinsrs",
+            "shaun"
+         ]
       },
       {
-         "commits" : 794,
-         "emails" : [],
-         "first_commit" : "2006-03-23T15:23:21+00:00",
-         "last_commit" : "2012-12-17T15:01:32+00:00",
-         "name" : "Kevin Galens"
-      },
-      {
-         "commits" : 681,
-         "emails" : [],
-         "first_commit" : "2003-07-15T18:16:57+00:00",
-         "last_commit" : "2009-07-14T15:27:58+00:00",
-         "name" : "Jay Sundaram"
-      },
-      {
-         "commits" : 627,
-         "emails" : [],
-         "first_commit" : "2003-04-01T23:58:26+00:00",
-         "last_commit" : "2011-06-29T14:23:52+00:00",
-         "name" : "Sam Angiuoli"
-      },
-      {
-         "commits" : 478,
-         "emails" : [],
-         "first_commit" : "2005-12-16T19:02:48+00:00",
-         "last_commit" : "2007-12-27T20:34:23+00:00",
-         "name" : "Brett Whitty"
-      },
-      {
-         "commits" : 252,
-         "emails" : [],
-         "first_commit" : "2008-04-16T19:58:35+00:00",
-         "last_commit" : "2013-06-07T20:52:43+00:00",
-         "name" : "David Riley"
-      },
-      {
-         "commits" : 218,
-         "emails" : [],
-         "first_commit" : "2006-03-24T14:58:45+00:00",
-         "last_commit" : "2011-03-10T18:40:31+00:00",
-         "name" : "Jin-Man"
-      },
-      {
-         "commits" : 196,
-         "emails" : [],
-         "first_commit" : "2005-08-19T18:06:26+00:00",
-         "last_commit" : "2011-05-25T22:46:05+00:00",
-         "name" : "Aaron Gussman"
-      },
-      {
-         "commits" : 154,
-         "emails" : [
-            "cesar.arze@gmail.com"
-         ],
-         "first_commit" : "2009-10-28T17:11:05+00:00",
-         "last_commit" : "2014-07-24T09:33:55-04:00",
-         "name" : "Cesar Arze"
-      },
-      {
-         "commits" : 145,
          "emails" : [
             "sagrawal@sagrawal-lx.igs.umaryland.edu"
          ],
          "first_commit" : "2011-02-08T18:14:54+00:00",
          "last_commit" : "2015-09-30T11:11:19-04:00",
-         "name" : "Sonia Agrawal"
+         "name" : "Sonia Agrawal",
+         "svn_usernames" : [
+            "sagrawal9",
+            "sonia"
+         ]
       },
       {
-         "commits" : 127,
-         "emails" : [],
-         "first_commit" : "2003-04-02T15:27:35+00:00",
-         "last_commit" : "2003-08-04T14:33:32+00:00",
-         "name" : "Chunhui Lu"
-      },
-      {
-         "commits" : 90,
-         "emails" : [
-            "jonathancrabtree@gmail.com"
-         ],
-         "first_commit" : "2003-10-16T13:27:22+00:00",
-         "last_commit" : "2017-02-17T11:40:53-05:00",
-         "name" : "Jonathan Crabtree"
-      },
-      {
-         "commits" : 76,
-         "emails" : [],
-         "first_commit" : "2010-10-05T14:05:50+00:00",
-         "last_commit" : "2012-02-10T17:45:55+00:00",
-         "name" : "Mahesh Vangala"
-      },
-      {
-         "commits" : 71,
-         "emails" : [],
-         "first_commit" : "2010-08-20T19:41:26+00:00",
-         "last_commit" : "2012-06-08T17:40:26+00:00",
-         "name" : "James Robert White"
-      },
-      {
-         "commits" : 68,
-         "emails" : [],
-         "first_commit" : "2005-05-26T18:14:04+00:00",
-         "last_commit" : "2007-03-26T21:37:25+00:00",
-         "name" : "Eric Lee"
-      },
-      {
-         "commits" : 47,
-         "emails" : [],
-         "first_commit" : "2003-06-17T16:52:30+00:00",
-         "last_commit" : "2004-05-13T17:35:19+00:00",
-         "name" : "Chris Hauser"
-      },
-      {
-         "commits" : 30,
-         "emails" : [],
-         "first_commit" : "2005-07-20T13:30:30+00:00",
-         "last_commit" : "2006-05-02T19:38:35+00:00",
-         "name" : "Phil Amedeo"
-      },
-      {
-         "commits" : 29,
-         "emails" : [],
-         "first_commit" : "2012-06-15T14:40:54+00:00",
-         "last_commit" : "2013-04-18T21:33:36+00:00",
-         "name" : "Amol Carl Shetty"
-      },
-      {
-         "commits" : 27,
          "emails" : [],
          "first_commit" : "2005-09-21T16:43:03+00:00",
          "last_commit" : "2012-06-07T19:39:17+00:00",
-         "name" : "Todd Creasy"
+         "name" : "Todd Creasy",
+         "svn_usernames" : [
+            "tcreasy",
+            "toddcreasy"
+         ]
       },
       {
-         "commits" : 22,
-         "emails" : [
-            "kabolude@som.umaryland.edu"
-         ],
-         "first_commit" : "2011-01-27T16:35:18+00:00",
-         "last_commit" : "2015-07-15T11:07:19-04:00",
-         "name" : "Kemi Abolude"
-      },
-      {
-         "commits" : 10,
          "emails" : [],
-         "first_commit" : "2010-01-05T20:24:18+00:00",
-         "last_commit" : "2011-08-18T18:44:21+00:00",
-         "name" : "Mark Matalka"
+         "first_commit" : "2010-05-17T18:06:49+00:00",
+         "last_commit" : "2011-03-31T04:58:53+00:00",
+         "name" : "Umar Farooq",
+         "svn_usernames" : [
+            "ufarooq",
+            "ufarooq2"
+         ]
       },
       {
-         "commits" : 10,
-         "emails" : [],
-         "first_commit" : "2012-05-30T14:26:55+00:00",
-         "last_commit" : "2013-02-04T20:52:09+00:00",
-         "name" : "Kent Shefchek"
-      },
-      {
-         "commits" : 9,
-         "emails" : [
-            "priti88@gwu.edu"
-         ],
-         "first_commit" : "2013-02-11T22:02:54+00:00",
-         "last_commit" : "2014-02-27T16:41:10-05:00",
-         "name" : "Priti Kumari"
-      },
-      {
-         "commits" : 9,
          "emails" : [
             "wchang@wchanglt-osx.igs.umaryland.edu",
             "wchang@wchanglt-osx.som.umaryland.edu"
          ],
          "first_commit" : "2013-05-21T19:30:52+00:00",
          "last_commit" : "2014-04-04T14:40:22-04:00",
-         "name" : "Weizhong Chang"
-      },
-      {
-         "commits" : 8,
-         "emails" : [],
-         "first_commit" : "2005-08-25T13:47:58+00:00",
-         "last_commit" : "2006-12-20T13:03:36+00:00",
-         "name" : "Brian Haas"
-      },
-      {
-         "commits" : 7,
-         "emails" : [],
-         "first_commit" : "2010-07-29T06:11:06+00:00",
-         "last_commit" : "2011-12-21T00:00:31+00:00",
-         "name" : "Chris Hemmeri"
-      },
-      {
-         "commits" : 7,
-         "emails" : [],
-         "first_commit" : "2007-04-19T18:07:52+00:00",
-         "last_commit" : "2007-06-12T20:06:26+00:00",
-         "name" : "GK Fan"
-      },
-      {
-         "commits" : 6,
-         "emails" : [],
-         "first_commit" : "2006-03-20T15:52:46+00:00",
-         "last_commit" : "2006-06-14T17:19:32+00:00",
-         "name" : "Kevin Childs"
-      },
-      {
-         "commits" : 5,
-         "emails" : [],
-         "first_commit" : "2010-05-17T18:06:49+00:00",
-         "last_commit" : "2011-03-31T04:58:53+00:00",
-         "name" : "Umar Farooq"
-      },
-      {
-         "commits" : 4,
-         "emails" : [],
-         "first_commit" : "2004-02-03T22:16:23+00:00",
-         "last_commit" : "2007-03-12T18:34:36+00:00",
-         "name" : "SGC"
-      },
-      {
-         "commits" : 4,
-         "emails" : [],
-         "first_commit" : "2006-02-01T13:55:51+00:00",
-         "last_commit" : "2006-04-10T20:22:48+00:00",
-         "name" : "Hamilton"
-      },
-      {
-         "commits" : 2,
-         "emails" : [],
-         "first_commit" : "2010-07-28T19:26:27+00:00",
-         "last_commit" : "2010-08-07T14:31:44+00:00",
-         "name" : "Brandi Cantarel"
-      },
-      {
-         "commits" : 1,
-         "emails" : [],
-         "first_commit" : "2008-12-16T19:34:00+00:00",
-         "last_commit" : "2008-12-16T19:34:00+00:00",
-         "name" : "Gaurav Jain"
-      },
-      {
-         "commits" : 1,
-         "emails" : [],
-         "first_commit" : "2003-09-08T17:27:12+00:00",
-         "last_commit" : "2003-09-08T17:27:12+00:00",
-         "name" : "Owen White"
-      },
-      {
-         "commits" : 1,
-         "emails" : [],
-         "first_commit" : "2003-04-01T23:58:26+00:00",
-         "last_commit" : "2003-04-01T23:58:26+00:00",
-         "name" : "(no author)"
+         "name" : "Weizhong Chang",
+         "svn_usernames" : [
+            "weizhong",
+            "wzchang"
+         ]
       }
    ],
-   "source" : "git log from ergatis-git repository",
-   "total_commits" : 35
+   "note" : "Contributor identities from git history (SVN-era forward). Does NOT reflect pre-SVN contributions from CVS at TIGR (pre-2006) or SourceForge (2006-2007). Many contributors did significant work before version control migration.",
+   "source" : "git log from ergatis-git repository (git-svn mirror)"
 }
