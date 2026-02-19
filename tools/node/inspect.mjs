@@ -138,28 +138,48 @@ if (steps?.steps?.length) {
   console.log(header('WORKFLOW STEPS'));
   for (const step of steps.steps) {
     const tool = resolveExe(step.executable);
-    const exeClean = step.executable.replace(/\$;([^$]+)\$;/g, '{{$1}}');
+    // Normalize $;VAR$; → {{VAR}} but keep literal paths intact
+    const exeDisplay = step.executable.replace(/\$;([^$]+)\$;/g, '{{$1}}');
     const catColor = { tool_execution: 'green', converter: 'blue', provenance: 'magenta',
                        compression: 'dim', validation: 'yellow', infrastructure: 'cyan' }[step.category] || 'white';
     const catBadge = chalk[catColor](`[${step.category}]`);
 
-    let status;
+    // Color the executable path by what it is
+    let exeStyled;
+    if (exeDisplay.match(/^\{\{[^}]+\}\}$/)) {
+      // Pure template var (e.g. {{BLASTALL_EXEC}}) — unresolved external tool
+      exeStyled = chalk.red(exeDisplay);
+    } else if (exeDisplay.match(/^\//)) {
+      // Literal absolute path — show exact path, color by location
+      if (exeDisplay.match(/^\/bin\/|^\/usr\/bin\//)) exeStyled = chalk.dim(exeDisplay);
+      else if (exeDisplay.match(/^\/usr\/local\/bin\//)) exeStyled = chalk.yellow(exeDisplay);
+      else if (exeDisplay.match(/^\/usr\/local\/(packages|common|devel)\//)) exeStyled = chalk.magenta(exeDisplay);
+      else if (exeDisplay.match(/^\/opt\//)) exeStyled = chalk.magenta(exeDisplay);
+      else exeStyled = chalk.yellow(exeDisplay);
+    } else if (exeDisplay.match(/^\{\{BIN_DIR\}\}\//)) {
+      // Ergatis script
+      exeStyled = chalk.cyan(exeDisplay);
+    } else if (exeDisplay.match(/^\{\{/)) {
+      // Template var prefix + path
+      exeStyled = chalk.yellow(exeDisplay);
+    } else {
+      exeStyled = chalk.white(exeDisplay);
+    }
+
+    let status = '';
     if (step.category === 'tool_execution') {
       if (tool) {
         const catLabel = { open_source: chalk.green('open source'), custom_perl: chalk.cyan('custom Perl'),
                            custom_binary: chalk.yellow('custom binary'), os_system: chalk.dim('OS/system'),
                            closed_source: chalk.red('closed source') }[tool.category_id] || tool.category_id;
-        status = `${chalk.green('✓')} ${catLabel}`;
+        status = `\n      ${chalk.green('✓')} ${catLabel}`;
       } else {
-        status = chalk.red('? unresolved');
+        status = `\n      ${chalk.red('? unresolved')}`;
       }
-    } else {
-      status = chalk.dim('—');
     }
 
     console.log(`  ${chalk.dim(String(step.idx).padStart(2) + '.')} ${step.name || '(unnamed)'}`);
-    console.log(`      ${catBadge}  ${exeClean}`);
-    if (step.category === 'tool_execution') console.log(`      ${status}`);
+    console.log(`      ${catBadge}  ${exeStyled}${status}`);
   }
 }
 
