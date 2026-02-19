@@ -35,7 +35,8 @@ This is production-tested, FDA-approved software representing institutional know
 
 **Translation Formats Generated:**
 - 362 Ergatis Lite component notations → `data/ergatis_lite/*.lite`
-- 5 BioCompute Objects (samples) → `data/bco/*.json`
+- 362 BioCompute Objects (complete) → `data/bco/*.json`
+- 402 CWL tool definitions (complete) → `data/cwl/*.cwl`
 
 **Note:** Converter manpages exist in `ergatis-install/man/man1/*2bsml.pl.1p` (65 files)
 
