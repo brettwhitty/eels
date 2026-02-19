@@ -1,0 +1,1500 @@
+{
+  "RAPSearch2btab": {
+    "components": [
+      {
+        "component": "RAPSearch2",
+        "tool_steps": [
+          {
+            "executable": "{{RAPSEARCH_EXEC}}",
+            "name": "RAPSearch2"
+          }
+        ]
+      }
+    ],
+    "converter": "RAPSearch2btab",
+    "pattern": "tool_output \u2192 btab"
+  },
+  "antigenic2bsml": {
+    "components": [
+      {
+        "component": "antigenic",
+        "tool_steps": [
+          {
+            "executable": "/usr/local/packages/EMBOSS/bin/antigenic",
+            "name": "antigenic"
+          }
+        ]
+      }
+    ],
+    "converter": "antigenic2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "aragorn2bsml": {
+    "components": [
+      {
+        "component": "aragorn",
+        "tool_steps": [
+          {
+            "executable": "{{ARAGORN_EXEC}}",
+            "name": "aragorn"
+          }
+        ]
+      }
+    ],
+    "converter": "aragorn2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "augustus2bsml": {
+    "components": [
+      {
+        "component": "augustus",
+        "tool_steps": [
+          {
+            "executable": "{{AUGUSTUS_BINARY_PATH}}",
+            "name": "augustus"
+          }
+        ]
+      }
+    ],
+    "converter": "augustus2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "bepipred2bsml": {
+    "components": [
+      {
+        "component": "bepipred",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/replace_fasta_headers.pl",
+            "name": "replace fasta headers"
+          },
+          {
+            "executable": "/local/projects/STREP/bepipred-1.0b/bepipred",
+            "name": "bepipred"
+          },
+          {
+            "executable": "{{BIN_DIR}}/replace_fasta_headers.pl",
+            "name": "fix output file"
+          }
+        ]
+      }
+    ],
+    "converter": "bepipred2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "berbtab2bsml": {
+    "components": [
+      {
+        "component": "ber",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/ber_blast_hit_selector",
+            "name": "filter hits"
+          },
+          {
+            "executable": "{{BIN_DIR}}/extract_blast_hits_by_id",
+            "name": "filter additional hits"
+          },
+          {
+            "executable": "cat",
+            "name": "append to filtered hits"
+          },
+          {
+            "executable": "{{BIN_DIR}}/create_ber_db.sh",
+            "name": "create mini db"
+          },
+          {
+            "executable": "cat",
+            "name": "append to mini db"
+          },
+          {
+            "executable": "{{BIN_DIR}}/create_ber_db.sh",
+            "name": "create nuc db"
+          },
+          {
+            "executable": "{{PRAZE_EXEC}}",
+            "name": "praze"
+          },
+          {
+            "executable": "{{BIN_DIR}}/add_pvalue_to_praze_output",
+            "name": "fix praze output"
+          },
+          {
+            "executable": "mv",
+            "name": "rename fixed praze output"
+          }
+        ]
+      }
+    ],
+    "converter": "berbtab2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "blast2bsml": {
+    "components": [
+      {
+        "component": "blastn_plus",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_blast_plus",
+            "name": "run blastn+"
+          }
+        ]
+      },
+      {
+        "component": "blastp_plus",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_blast_plus",
+            "name": "run blastp+"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastall",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastall"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastn",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastn"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastn_compress",
+        "tool_steps": [
+          {
+            "executable": "zcat -f {{I_FILE_PATH}} | {{BLASTALL_EXEC}}",
+            "name": "ncbi-blastn_compress"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastp",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastp"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastx",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastx"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-tblastn",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-tblastn"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-tblastx",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-tblastx"
+          }
+        ]
+      },
+      {
+        "component": "tblastn_plus",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_blast_plus",
+            "name": "run tblastn+"
+          }
+        ]
+      },
+      {
+        "component": "wu-blastn",
+        "tool_steps": [
+          {
+            "executable": "/usr/local/bin/blastn",
+            "name": "wu-blastn"
+          }
+        ]
+      },
+      {
+        "component": "wu-blastp",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTP_EXEC}}",
+            "name": "wu-blastp"
+          }
+        ]
+      },
+      {
+        "component": "wu-blastx",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTX_EXEC}}",
+            "name": "wu-blastx"
+          }
+        ]
+      },
+      {
+        "component": "wu-tblastn",
+        "tool_steps": [
+          {
+            "executable": "{{TBLASTN_EXEC}}",
+            "name": "wu-tblastn"
+          }
+        ]
+      }
+    ],
+    "converter": "blast2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "blast2btab": {
+    "components": [
+      {
+        "component": "blastn_plus",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_blast_plus",
+            "name": "run blastn+"
+          }
+        ]
+      },
+      {
+        "component": "blastp_plus",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_blast_plus",
+            "name": "run blastp+"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastall",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastall"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastn",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastn"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastn_compress",
+        "tool_steps": [
+          {
+            "executable": "zcat -f {{I_FILE_PATH}} | {{BLASTALL_EXEC}}",
+            "name": "ncbi-blastn_compress"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastp",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastp"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-blastx",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-blastx"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-tblastn",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-tblastn"
+          }
+        ]
+      },
+      {
+        "component": "ncbi-tblastx",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTALL_EXEC}}",
+            "name": "ncbi-tblastx"
+          }
+        ]
+      },
+      {
+        "component": "psiblast",
+        "tool_steps": [
+          {
+            "executable": "{{PSIBLAST_EXEC}}",
+            "name": "psiblast"
+          }
+        ]
+      },
+      {
+        "component": "rpsblast",
+        "tool_steps": [
+          {
+            "executable": "{{RPSBLAST_EXEC}}",
+            "name": "rpsblast"
+          }
+        ]
+      },
+      {
+        "component": "tblastn_plus",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_blast_plus",
+            "name": "run tblastn+"
+          }
+        ]
+      },
+      {
+        "component": "wu-blastn",
+        "tool_steps": [
+          {
+            "executable": "/usr/local/bin/blastn",
+            "name": "wu-blastn"
+          }
+        ]
+      },
+      {
+        "component": "wu-blastp",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTP_EXEC}}",
+            "name": "wu-blastp"
+          }
+        ]
+      },
+      {
+        "component": "wu-blastx",
+        "tool_steps": [
+          {
+            "executable": "{{BLASTX_EXEC}}",
+            "name": "wu-blastx"
+          }
+        ]
+      },
+      {
+        "component": "wu-tblastn",
+        "tool_steps": [
+          {
+            "executable": "{{TBLASTN_EXEC}}",
+            "name": "wu-tblastn"
+          }
+        ]
+      }
+    ],
+    "converter": "blast2btab",
+    "pattern": "tool_output \u2192 btab"
+  },
+  "blast2lca": {
+    "components": [
+      {
+        "component": "blast2lca",
+        "tool_steps": []
+      }
+    ],
+    "converter": "blast2lca",
+    "pattern": "format \u2192 LCA"
+  },
+  "blastbtab2bsml": {
+    "components": [
+      {
+        "component": "RAPSearch2",
+        "tool_steps": [
+          {
+            "executable": "{{RAPSEARCH_EXEC}}",
+            "name": "RAPSearch2"
+          }
+        ]
+      },
+      {
+        "component": "psiblast",
+        "tool_steps": [
+          {
+            "executable": "{{PSIBLAST_EXEC}}",
+            "name": "psiblast"
+          }
+        ]
+      },
+      {
+        "component": "rpsblast",
+        "tool_steps": [
+          {
+            "executable": "{{RPSBLAST_EXEC}}",
+            "name": "rpsblast"
+          }
+        ]
+      }
+    ],
+    "converter": "blastbtab2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "bsml2fasta": {
+    "components": [
+      {
+        "component": "bsml2fasta",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/fix_nuc_fasta",
+            "name": "Fix fasta (nucleotide only)"
+          }
+        ]
+      }
+    ],
+    "converter": "bsml2fasta",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "bsml2featurerelationships": {
+    "components": [
+      {
+        "component": "bsml2featurerelationships",
+        "tool_steps": []
+      }
+    ],
+    "converter": "bsml2featurerelationships",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "bsml2gff3": {
+    "components": [
+      {
+        "component": "bsml2gff3",
+        "tool_steps": []
+      }
+    ],
+    "converter": "bsml2gff3",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "bsml2idlookup": {
+    "components": [
+      {
+        "component": "jaccard",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/clusterBsmlPairwiseAlignments",
+            "name": "generate clusters"
+          },
+          {
+            "executable": "{{BIN_DIR}}/CogProteinFastaNoMap",
+            "name": "jaccard2fasta"
+          }
+        ]
+      }
+    ],
+    "converter": "bsml2idlookup",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "bsml2interevidence_fasta": {
+    "components": [
+      {
+        "component": "bsml2interevidence_fasta",
+        "tool_steps": []
+      }
+    ],
+    "converter": "bsml2interevidence_fasta",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "bsml2mugsymap": {
+    "components": [
+      {
+        "component": "bsml2mugsymap",
+        "tool_steps": []
+      }
+    ],
+    "converter": "bsml2mugsymap",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "bsml2ptt": {
+    "components": [
+      {
+        "component": "bsml2ptt",
+        "tool_steps": []
+      }
+    ],
+    "converter": "bsml2ptt",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "bsml2tbl": {
+    "components": [
+      {
+        "component": "bsml2tbl",
+        "tool_steps": []
+      }
+    ],
+    "converter": "bsml2tbl",
+    "pattern": "BSML \u2192 other_format"
+  },
+  "chado2bsml": {
+    "components": [
+      {
+        "component": "chado2bsml",
+        "tool_steps": []
+      }
+    ],
+    "converter": "chado2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "db2bsml": {
+    "components": [
+      {
+        "component": "db2bsml",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/profileBSMLFile",
+            "name": "profileBSMLFile"
+          }
+        ]
+      }
+    ],
+    "converter": "db2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "db2fasta": {
+    "components": [
+      {
+        "component": "db2fasta",
+        "tool_steps": []
+      }
+    ],
+    "converter": "db2fasta",
+    "pattern": "format \u2192 FASTA"
+  },
+  "fasta2bsml": {
+    "components": [
+      {
+        "component": "fasta2bsml",
+        "tool_steps": []
+      }
+    ],
+    "converter": "fasta2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "fgenesh2bsml": {
+    "components": [
+      {
+        "component": "fgenesh",
+        "tool_steps": [
+          {
+            "executable": "{{FGENESH_EXEC}}",
+            "name": "fgenesh"
+          }
+        ]
+      }
+    ],
+    "converter": "fgenesh2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "findhomopolymers2bsml": {
+    "components": [
+      {
+        "component": "find_homopolymers",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/find_homopolymers.pl",
+            "name": "find_homopolymers"
+          }
+        ]
+      }
+    ],
+    "converter": "findhomopolymers2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "fuzznuc2bsml": {
+    "components": [
+      {
+        "component": "fuzznuc",
+        "tool_steps": [
+          {
+            "executable": "{{FUZZNUC_EXEC}}",
+            "name": "fuzznuc"
+          }
+        ]
+      }
+    ],
+    "converter": "fuzznuc2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "gap22bsml": {
+    "components": [
+      {
+        "component": "aat_na",
+        "tool_steps": [
+          {
+            "executable": "{{DDS_EXEC}}",
+            "name": "dds"
+          },
+          {
+            "executable": "{{EXT_EXEC}}",
+            "name": "ext"
+          },
+          {
+            "executable": "{{EXT_COLLAPSE_EXEC}}",
+            "name": "ext collapse"
+          },
+          {
+            "executable": "{{FILTER_EXEC}}",
+            "name": "filter"
+          },
+          {
+            "executable": "{{GAP2_EXEC}}",
+            "name": "gap2"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw dds output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext collapsed output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw filter output"
+          },
+          {
+            "executable": "touch",
+            "name": "ensure btab existence"
+          }
+        ]
+      },
+      {
+        "component": "aat_na_masked",
+        "tool_steps": [
+          {
+            "executable": "{{DDS_EXEC}}",
+            "name": "dds"
+          },
+          {
+            "executable": "{{EXT_EXEC}}",
+            "name": "ext"
+          },
+          {
+            "executable": "{{EXT_COLLAPSE_EXEC}}",
+            "name": "ext collapse"
+          },
+          {
+            "executable": "{{FILTER_EXEC}}",
+            "name": "filter"
+          },
+          {
+            "executable": "{{GAP2_EXEC}}",
+            "name": "gap2"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw dds output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext collapsed output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw filter output"
+          },
+          {
+            "executable": "touch",
+            "name": "ensure btab existence"
+          }
+        ]
+      }
+    ],
+    "converter": "gap22bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "genbank2bsml": {
+    "components": [
+      {
+        "component": "genbank2bsml",
+        "tool_steps": []
+      }
+    ],
+    "converter": "genbank2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "genbank2fasta": {
+    "components": [
+      {
+        "component": "genbank2fasta",
+        "tool_steps": []
+      }
+    ],
+    "converter": "genbank2fasta",
+    "pattern": "format \u2192 FASTA"
+  },
+  "genbank2gff3": {
+    "components": [
+      {
+        "component": "genbank2gff3",
+        "tool_steps": []
+      }
+    ],
+    "converter": "genbank2gff3",
+    "pattern": "format \u2192 GFF3"
+  },
+  "geneidgff32bsml": {
+    "components": [
+      {
+        "component": "geneid",
+        "tool_steps": [
+          {
+            "executable": "{{GENEID_EXEC}}",
+            "name": "geneid"
+          }
+        ]
+      }
+    ],
+    "converter": "geneidgff32bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "genemark2bsml": {
+    "components": [
+      {
+        "component": "genemark",
+        "tool_steps": [
+          {
+            "executable": "{{GMHMME3_EXEC}}",
+            "name": "genemark"
+          },
+          {
+            "executable": "mv",
+            "name": "migrate output file"
+          }
+        ]
+      }
+    ],
+    "converter": "genemark2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "genemarkes2bsml": {
+    "components": [
+      {
+        "component": "genemark-es",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_genemark-es",
+            "name": "genemark"
+          }
+        ]
+      }
+    ],
+    "converter": "genemarkes2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "genezilla2bsml": {
+    "components": [
+      {
+        "component": "genezilla",
+        "tool_steps": [
+          {
+            "executable": "{{GENEZILLA_EXEC}}",
+            "name": "genezilla"
+          }
+        ]
+      }
+    ],
+    "converter": "genezilla2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "genscan2bsml": {
+    "components": [
+      {
+        "component": "genscan-plus",
+        "tool_steps": [
+          {
+            "executable": "{{GENSCAN_PLUS_EXEC}}",
+            "name": "genscan-plus"
+          }
+        ]
+      },
+      {
+        "component": "genscan",
+        "tool_steps": [
+          {
+            "executable": "{{GENSCAN_EXEC}}",
+            "name": "genscan"
+          }
+        ]
+      }
+    ],
+    "converter": "genscan2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "glimmer32bsml": {
+    "components": [
+      {
+        "component": "glimmer3",
+        "tool_steps": [
+          {
+            "executable": "{{GLIMMER3_DIR}}/bin/glimmer3",
+            "name": "glimmer3"
+          }
+        ]
+      },
+      {
+        "component": "pseudomolecule2glimmer3",
+        "tool_steps": []
+      }
+    ],
+    "converter": "glimmer32bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "glimmerHMM2bsml": {
+    "components": [
+      {
+        "component": "glimmerHMM",
+        "tool_steps": [
+          {
+            "executable": "{{GLIMMERHMM_EXEC}}",
+            "name": "glimmerHMM"
+          }
+        ]
+      }
+    ],
+    "converter": "glimmerHMM2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "glk2bsml": {
+    "components": [
+      {
+        "component": "glk2bsml",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/profileBSMLFile",
+            "name": "profileBSMLFile"
+          }
+        ]
+      }
+    ],
+    "converter": "glk2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "hmmls2bsml": {
+    "components": [
+      {
+        "component": "hmmls",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/replace_fasta_headers.pl",
+            "name": "replace fasta headers"
+          },
+          {
+            "executable": "{{HMMLS_EXEC}}",
+            "name": "hmmls"
+          },
+          {
+            "executable": "{{BIN_DIR}}/replace_fasta_headers.pl",
+            "name": "fix output file"
+          }
+        ]
+      }
+    ],
+    "converter": "hmmls2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "hmmpfam2bsml": {
+    "components": [
+      {
+        "component": "hmmpfam",
+        "tool_steps": [
+          {
+            "executable": "{{HMMPFAM_EXEC}}",
+            "name": "hmmpfam"
+          },
+          {
+            "executable": "{{BIN_DIR}}/hmmpfam2htab",
+            "name": "hmmpfam2htab"
+          }
+        ]
+      }
+    ],
+    "converter": "hmmpfam2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "hmmpfam32bsml": {
+    "components": [
+      {
+        "component": "hmmpfam3",
+        "tool_steps": [
+          {
+            "executable": "{{HMMSCAN_EXEC}}",
+            "name": "hmmpfam3"
+          },
+          {
+            "executable": "{{BIN_DIR}}/hmmpfam32htab",
+            "name": "hmmpfam32htab"
+          }
+        ]
+      }
+    ],
+    "converter": "hmmpfam32bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "infernal2bsml": {
+    "components": [
+      {
+        "component": "infernal",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/run_cmsearch",
+            "name": "infernal"
+          }
+        ]
+      }
+    ],
+    "converter": "infernal2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "iprscan2bsml": {
+    "components": [
+      {
+        "component": "iprscan",
+        "tool_steps": [
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "blastprodom"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "coils"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "hmmpir"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "hmmpfam"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "hmmsmart"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "hmmtigr"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "fprintscan"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "scanregexp"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "profilescan"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "superfamily"
+          },
+          {
+            "executable": "{{IPRSCAN_EXEC}}",
+            "name": "seg"
+          },
+          {
+            "executable": "find",
+            "name": "combine raw output"
+          }
+        ]
+      }
+    ],
+    "converter": "iprscan2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "islandpath2bsml": {
+    "components": [
+      {
+        "component": "islandpath",
+        "tool_steps": [
+          {
+            "executable": "{{DIMOB_PATH}}",
+            "name": "dimob"
+          }
+        ]
+      }
+    ],
+    "converter": "islandpath2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "legacy2bsml": {
+    "components": [
+      {
+        "component": "legacy2bsml",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/profileBSMLFile",
+            "name": "profileBSMLFile"
+          }
+        ]
+      }
+    ],
+    "converter": "legacy2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "lipop2bsml": {
+    "components": [
+      {
+        "component": "lipop",
+        "tool_steps": [
+          {
+            "executable": "{{LIPOP_EXEC}}",
+            "name": "lipop"
+          }
+        ]
+      }
+    ],
+    "converter": "lipop2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "metagene2bsml": {
+    "components": [
+      {
+        "component": "metagene",
+        "tool_steps": [
+          {
+            "executable": "{{METAGENE_EXEC}}",
+            "name": "metagene"
+          },
+          {
+            "executable": "{{BIN_DIR}}/get_seq_by_metagene",
+            "name": "get_seq_by_metagene"
+          }
+        ]
+      }
+    ],
+    "converter": "metagene2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "nap2bsml": {
+    "components": [
+      {
+        "component": "aat_aa",
+        "tool_steps": [
+          {
+            "executable": "{{DPS_EXEC}}",
+            "name": "dps"
+          },
+          {
+            "executable": "{{EXT_EXEC}}",
+            "name": "ext"
+          },
+          {
+            "executable": "{{EXT_COLLAPSE_EXEC}}",
+            "name": "ext collapse"
+          },
+          {
+            "executable": "{{FILTER_EXEC}}",
+            "name": "filter"
+          },
+          {
+            "executable": "cp",
+            "name": "relocate query seq"
+          },
+          {
+            "executable": "{{NAP_EXEC}}",
+            "name": "nap"
+          },
+          {
+            "executable": "rm",
+            "name": "remove temp query seq"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw dps output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext collapsed output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw filter output"
+          },
+          {
+            "executable": "touch",
+            "name": "ensure btab existence"
+          },
+          {
+            "executable": "mv",
+            "name": "relocate btab"
+          }
+        ]
+      },
+      {
+        "component": "aat_aa_masked",
+        "tool_steps": [
+          {
+            "executable": "{{DPS_EXEC}}",
+            "name": "dps"
+          },
+          {
+            "executable": "{{EXT_EXEC}}",
+            "name": "ext"
+          },
+          {
+            "executable": "{{EXT_COLLAPSE_EXEC}}",
+            "name": "ext collapse"
+          },
+          {
+            "executable": "{{FILTER_EXEC}}",
+            "name": "filter"
+          },
+          {
+            "executable": "cp",
+            "name": "relocate query seq"
+          },
+          {
+            "executable": "{{NAP_EXEC}}",
+            "name": "nap"
+          },
+          {
+            "executable": "rm",
+            "name": "remove temp query seq"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw dps output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw ext collapsed output"
+          },
+          {
+            "executable": "rm",
+            "name": "remove raw filter output"
+          },
+          {
+            "executable": "touch",
+            "name": "ensure btab existence"
+          },
+          {
+            "executable": "mv",
+            "name": "relocate btab"
+          }
+        ]
+      }
+    ],
+    "converter": "nap2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "panther2bsml": {
+    "components": [
+      {
+        "component": "panther",
+        "tool_steps": [
+          {
+            "executable": "{{PANTHER_EXEC}}",
+            "name": "panther"
+          }
+        ]
+      }
+    ],
+    "converter": "panther2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "pepstats2bsml": {
+    "components": [
+      {
+        "component": "pepstats",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/pepstats.sh",
+            "name": "pepstats"
+          }
+        ]
+      }
+    ],
+    "converter": "pepstats2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "phobos2bsml": {
+    "components": [
+      {
+        "component": "phobos",
+        "tool_steps": [
+          {
+            "executable": "{{PHOBOS_EXEC}}",
+            "name": "phobos"
+          }
+        ]
+      }
+    ],
+    "converter": "phobos2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "pmarks2bsml": {
+    "components": [
+      {
+        "component": "pmarks2bsml",
+        "tool_steps": []
+      }
+    ],
+    "converter": "pmarks2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "predotar2bsml": {
+    "components": [
+      {
+        "component": "predotar",
+        "tool_steps": [
+          {
+            "executable": "{{PREDOTAR_EXEC}}",
+            "name": "predotar"
+          }
+        ]
+      }
+    ],
+    "converter": "predotar2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "prodigal2bsml": {
+    "components": [
+      {
+        "component": "prodigal",
+        "tool_steps": [
+          {
+            "executable": "{{PRODIGAL_EXEC}}",
+            "name": "prodigal"
+          }
+        ]
+      }
+    ],
+    "converter": "prodigal2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "ps_scan2bsml": {
+    "components": [
+      {
+        "component": "ps_scan",
+        "tool_steps": [
+          {
+            "executable": "{{PS_SCAN_EXEC}}",
+            "name": "ps_scan"
+          }
+        ]
+      }
+    ],
+    "converter": "ps_scan2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "quicktree2bsml": {
+    "components": [
+      {
+        "component": "quicktree",
+        "tool_steps": [
+          {
+            "executable": "{{QUICKTREE_EXEC}}",
+            "name": "quicktree"
+          }
+        ]
+      }
+    ],
+    "converter": "quicktree2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "repeatmasker2bsml": {
+    "components": [
+      {
+        "component": "repeatmasker",
+        "tool_steps": [
+          {
+            "executable": "{{REPEATMASKER_EXEC}}",
+            "name": "repeatmasker"
+          }
+        ]
+      }
+    ],
+    "converter": "repeatmasker2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "rnammer2bsml": {
+    "components": [
+      {
+        "component": "RNAmmer",
+        "tool_steps": [
+          {
+            "executable": "{{RNAMMER_EXEC}}",
+            "name": "RNAmmer"
+          }
+        ]
+      }
+    ],
+    "converter": "rnammer2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "sam2fasta": {
+    "components": [
+      {
+        "component": "sam2fasta",
+        "tool_steps": []
+      }
+    ],
+    "converter": "sam2fasta",
+    "pattern": "format \u2192 FASTA"
+  },
+  "seg2bsml": {
+    "components": [
+      {
+        "component": "seg",
+        "tool_steps": [
+          {
+            "executable": "{{SEG_EXEC}}",
+            "name": "seg"
+          }
+        ]
+      }
+    ],
+    "converter": "seg2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "signalp2bsml": {
+    "components": [
+      {
+        "component": "signalp",
+        "tool_steps": [
+          {
+            "executable": "{{SIGNALP_EXEC}}",
+            "name": "Run signalp"
+          },
+          {
+            "executable": "{{BIN_DIR}}/signalp_graphics_rename",
+            "name": "Rename signalp graphics files"
+          }
+        ]
+      }
+    ],
+    "converter": "signalp2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "snap2bsml": {
+    "components": [
+      {
+        "component": "snap",
+        "tool_steps": [
+          {
+            "executable": "{{SNAP_EXEC}}",
+            "name": "snap"
+          }
+        ]
+      }
+    ],
+    "converter": "snap2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "tRNAscan-SE2bsml": {
+    "components": [
+      {
+        "component": "tRNAscan-SE",
+        "tool_steps": [
+          {
+            "executable": "export TMPDIR={{TMP_DIR}}; perl -I {{TRNASCAN_LIB}} {{TRNASCANSE_EXEC}}",
+            "name": "tRNAscan-SE"
+          }
+        ]
+      },
+      {
+        "component": "tRNAscan-SE_compress",
+        "tool_steps": [
+          {
+            "executable": "{{TRNASCANSE_EXEC}}",
+            "name": "tRNAscan-SE_compress"
+          }
+        ]
+      }
+    ],
+    "converter": "tRNAscan-SE2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "targetp2bsml": {
+    "components": [
+      {
+        "component": "targetp",
+        "tool_steps": [
+          {
+            "executable": "{{TARGETP_EXEC}}",
+            "name": "targetp"
+          }
+        ]
+      }
+    ],
+    "converter": "targetp2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "tmhmm2bsml": {
+    "components": [
+      {
+        "component": "tmhmm",
+        "tool_steps": [
+          {
+            "executable": "{{TMHMM_EXEC}}",
+            "name": "tmhmm"
+          }
+        ]
+      }
+    ],
+    "converter": "tmhmm2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  },
+  "trf2bsml": {
+    "components": [
+      {
+        "component": "trf",
+        "tool_steps": [
+          {
+            "executable": "{{BIN_DIR}}/trf_wrapper",
+            "name": "trf"
+          },
+          {
+            "executable": "find",
+            "name": "relocate output"
+          }
+        ]
+      }
+    ],
+    "converter": "trf2bsml",
+    "pattern": "tool_output \u2192 BSML"
+  }
+}
