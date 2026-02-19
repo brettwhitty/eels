@@ -1,0 +1,27 @@
+{
+  "name": "bsml2interevidence_fasta",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bsml2interevidence_fasta",
+        "name": "bsml2interevidence_fasta",
+        "input": null,
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;"
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fsa_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

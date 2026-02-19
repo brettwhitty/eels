@@ -1,0 +1,26 @@
+{
+  "name": "genewise",
+  "classification": "feature prediction / genes",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "prepare for genewise",
+      "executable": "$;BIN_DIR$;/prepare_for_genewise_best_loc"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

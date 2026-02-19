@@ -1,0 +1,27 @@
+{
+  "name": "parse_mpileup_for_positions",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "parse_mpileup",
+      "executable": "$;BIN_DIR$;/parse_mpileup"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

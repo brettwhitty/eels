@@ -1,0 +1,25 @@
+{
+  "name": "gff3_to_fasta",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "gff3_to_fasta",
+      "executable": "$;BIN_DIR$;/gff3_to_fasta"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fasta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

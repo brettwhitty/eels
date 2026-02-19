@@ -1,0 +1,23 @@
+{
+  "name": "percent_mapped_stats",
+  "classification": "RNA-Seq",
+  "description": "Calculates percentage of reads mapping to exonic/intronic/intergenic region for euk and genic/intergenic for prok.",
+  "tool_execution": [
+    {
+      "name": "percent_mapped_stats",
+      "executable": "$;BIN_DIR$;/percent_mapped_stats"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

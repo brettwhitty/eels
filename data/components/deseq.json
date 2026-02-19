@@ -1,0 +1,23 @@
+{
+  "name": "deseq",
+  "classification": "RNA-Seq",
+  "description": "generates DESeq analysis for given sample info and counts filelist",
+  "tool_execution": [
+    {
+      "name": "deseq",
+      "executable": "$;BIN_DIR$;/deseq"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

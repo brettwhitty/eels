@@ -1,0 +1,26 @@
+{
+  "name": "uclust_remove_replicates",
+  "classification": "clustering",
+  "description": "",
+  "tool_execution": [
+    {
+      "name": "uclust replicate removal",
+      "executable": "$;BIN_DIR$;/uclust_replicate_removal"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "cluster_output_list",
+    "replicate_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

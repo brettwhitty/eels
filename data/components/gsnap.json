@@ -1,0 +1,20 @@
+{
+  "name": "gsnap",
+  "classification": "alignment",
+  "description": "runs the slice-aware GSNAP aligner after setting up a GMAP database",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

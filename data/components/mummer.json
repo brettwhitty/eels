@@ -1,0 +1,30 @@
+{
+  "name": "mummer",
+  "classification": "alignment",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "mummer",
+      "executable": "/usr/local/bin/mummer"
+    },
+    {
+      "name": "mummertab",
+      "executable": "$;BIN_DIR$;/mummertab"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "tab_output_list",
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

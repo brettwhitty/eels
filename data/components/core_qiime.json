@@ -1,0 +1,22 @@
+{
+  "name": "core_qiime",
+  "classification": "phylogenetic",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "results_output_list",
+    "table_output_list",
+    "paired_table_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "1"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "ps_scan",
+  "classification": "alignment / model",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "ps_scan",
+      "executable": "$;PS_SCAN_EXEC$;"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "ps_scan2bsml",
+        "name": "ps_scan2bsml",
+        "input": null,
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "clean_fasta",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create clean_fasta directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "remove CR line breaks",
+      "executable": "/usr/bin/perl"
+    },
+    {
+      "name": "clean_fasta",
+      "executable": "$;BIN_DIR$;/clean_fasta"
+    },
+    {
+      "name": "create cf directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "replace_gaps_in_nucleotides",
+      "executable": "$;BIN_DIR$;/replace_nuc_gaps"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

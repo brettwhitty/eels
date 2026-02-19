@@ -1,0 +1,44 @@
+{
+  "name": "jaccard",
+  "classification": "clustering",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "generate clusters",
+      "executable": "$;BIN_DIR$;/clusterBsmlPairwiseAlignments"
+    },
+    {
+      "name": "jaccard2fasta",
+      "executable": "$;BIN_DIR$;/CogProteinFastaNoMap"
+    },
+    {
+      "name": "create fasta list",
+      "executable": "find"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bsml2idlookup",
+        "name": "make asmbl lookup",
+        "input": null,
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_GENOME$;.asmbl.lookup"
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fasta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

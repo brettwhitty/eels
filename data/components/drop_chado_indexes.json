@@ -1,0 +1,31 @@
+{
+  "name": "drop_chado_indexes",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "ddl2iterator",
+        "name": "Drop chado-mart indices",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Drop indexes",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": "1"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "nucmer_snps",
+  "classification": "alignment / multiple",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "NUCmer",
+      "executable": "/usr/local/common/nucmer"
+    },
+    {
+      "name": "delta-filter",
+      "executable": "/usr/local/common/delta-filter"
+    },
+    {
+      "name": "show-snps",
+      "executable": "/usr/local/common/show-snps"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

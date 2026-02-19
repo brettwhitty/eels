@@ -1,0 +1,27 @@
+{
+  "name": "db2fasta",
+  "classification": "database / extraction",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "db2fasta",
+        "name": "Generate FASTA files from database '$;DATABASE$;' on server '$;SERVER$;'",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fasta_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "50"
+}

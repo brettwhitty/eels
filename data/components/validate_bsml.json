@@ -1,0 +1,23 @@
+{
+  "name": "validate_bsml",
+  "classification": "validation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "DTD validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "1"
+}

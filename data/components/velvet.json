@@ -1,0 +1,54 @@
+{
+  "name": "velvet",
+  "classification": "assembly",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create velveth temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create velvetg temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "velveth",
+      "executable": "$;VELVETH_EXEC$;"
+    },
+    {
+      "name": "velveth post-processing",
+      "executable": "$;BIN_DIR$;/velveth_post_processing"
+    },
+    {
+      "name": "velvetg pre-processing",
+      "executable": "$;BIN_DIR$;/velvetg_pre_processing"
+    },
+    {
+      "name": "velvetg",
+      "executable": "$;VELVETG_EXEC$;"
+    },
+    {
+      "name": "velvetg post-processing",
+      "executable": "$;BIN_DIR$;/velvetg_post_processing"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "sequence_output_list",
+    "roadmap_output_list",
+    "contig_output_list",
+    "stats_output_list",
+    "graph_output_list",
+    "amos_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

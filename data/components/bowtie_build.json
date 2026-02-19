@@ -1,0 +1,23 @@
+{
+  "name": "bowtie_build",
+  "classification": "RNA-Seq",
+  "description": "generates bowtie index files for the given reference fasta file",
+  "tool_execution": [
+    {
+      "name": "bowtie_build",
+      "executable": "$;BIN_DIR$;/bowtie_build"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "blast2go",
+  "classification": "functional prediction",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "blast2go",
+      "executable": "java"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "usearch",
+  "classification": "clustering",
+  "description": "",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "usearch",
+      "executable": "$;USEARCH_EXEC$;"
+    },
+    {
+      "name": "extract stats",
+      "executable": "tail -10 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr >> $;OUTPUT_DIRECTORY$;/stats.txt;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fasta_output_list",
+    "clusters_output_list",
+    "usearch_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

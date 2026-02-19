@@ -1,0 +1,31 @@
+{
+  "name": "lgt_create_validated_bam",
+  "classification": "LGT",
+  "description": "Validate the LGT Finder results and create a BAM file",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Create validated BAM",
+      "executable": "$;BIN_DIR$;/lgt_create_validated_bam"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

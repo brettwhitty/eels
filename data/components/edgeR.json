@@ -1,0 +1,23 @@
+{
+  "name": "edgeR",
+  "classification": "RNA-Seq",
+  "description": "generates edgeR analysis for given sample info and counts filelist",
+  "tool_execution": [
+    {
+      "name": "edgeR",
+      "executable": "$;BIN_DIR$;/edgeR"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

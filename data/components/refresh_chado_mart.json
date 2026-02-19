@@ -1,0 +1,43 @@
+{
+  "name": "refresh_chado_mart",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "ddl2iterator",
+        "name": "Create truncate chado-mart tables list",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Create drop chado-mart indices and constraints list",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "bcpdir2iterator",
+        "name": "list bcp files",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Create chado-mart indices and constraints list",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": "1"
+}

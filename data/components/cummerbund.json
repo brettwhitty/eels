@@ -1,0 +1,23 @@
+{
+  "name": "cummerbund",
+  "classification": "RNA-Seq",
+  "description": "generates visualization PDF and png image for given cuffdiff analysis results",
+  "tool_execution": [
+    {
+      "name": "cummerbund",
+      "executable": "$;BIN_DIR$;/cummerbund"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

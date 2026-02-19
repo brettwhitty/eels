@@ -1,0 +1,34 @@
+{
+  "name": "condor_cogs_search",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create database output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "condor_cog_search.dbi",
+      "executable": "$;BIN_DIR$;/condor_cog_search"
+    }
+  ],
+  "converters": {
+    "main": [
+      {
+        "script": "create_legacy2bsml_iterator_list",
+        "name": "Create condor_cogs_search master iterator list file",
+        "input": null,
+        "output": "$;WORKFLOW_REPOSITORY$;/condor_cogs_search.list"
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "1"
+}

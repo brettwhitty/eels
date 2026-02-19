@@ -1,0 +1,76 @@
+{
+  "name": "dump_table",
+  "classification": "utility",
+  "description": "Dump a database into a tbl file and prepares it for GenBank submission",
+  "tool_execution": [
+    {
+      "name": "dump table",
+      "executable": "$;BIN_DIR$;/dump_table"
+    },
+    {
+      "name": "create sbt and cmt files",
+      "executable": "$;BIN_DIR$;/prepare_sbt_cmt"
+    },
+    {
+      "name": "copy discrep file",
+      "executable": "/bin/cp"
+    },
+    {
+      "name": "delete overlapping genes",
+      "executable": "$;BIN_DIR$;/deleteOverlappingGenes"
+    },
+    {
+      "name": "dump table",
+      "executable": "$;BIN_DIR$;/dump_table"
+    },
+    {
+      "name": "fix gene symbols in tbl",
+      "executable": "$;BIN_DIR$;/fix_gene_symbols"
+    },
+    {
+      "name": "create agp",
+      "executable": "$;BIN_DIR$;/format_velvet_assembled_AGP"
+    },
+    {
+      "name": "remove tbl file",
+      "executable": "/bin/rm"
+    },
+    {
+      "name": "move tbl file",
+      "executable": "/bin/mv"
+    },
+    {
+      "name": "move fsa file",
+      "executable": "/bin/mv"
+    },
+    {
+      "name": "move agp file",
+      "executable": "/bin/mv"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "wrap_tbl2asn",
+        "name": "run tbl2asn",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "wrap_tbl2asn",
+        "name": "rerun tbl2asn",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

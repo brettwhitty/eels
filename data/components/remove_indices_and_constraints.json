@@ -1,0 +1,31 @@
+{
+  "name": "remove_indices_and_constraints",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "ddl2iterator",
+        "name": "Convert DDL to iterator (for known chado-mart indices and constraints)",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Convert DDL to iterator (for known chado indices and constraints)",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": "1"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "bsml2mugsymap",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bsml2mugsymap",
+        "name": "bsml2mugsymap",
+        "input": "$;I_FILE_PATH$;",
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "25"
+}

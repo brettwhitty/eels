@@ -1,0 +1,36 @@
+{
+  "name": "sra2fastq",
+  "classification": "file / conversion",
+  "description": "Convert SRA files to FASTQ format",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "sra2fastq",
+        "name": "Convert sra file to fastq",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

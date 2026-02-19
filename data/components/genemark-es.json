@@ -1,0 +1,43 @@
+{
+  "name": "genemark-es",
+  "classification": "feature prediction / genes",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "genemark",
+      "executable": "$;BIN_DIR$;/run_genemark-es"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "genemarkes2bsml",
+        "name": "genemarkes2bsml",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.gtf",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "gtf_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

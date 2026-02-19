@@ -1,0 +1,25 @@
+{
+  "name": "histogram_stacked",
+  "classification": "visualization",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Stacked histogram visualization",
+      "executable": "$;HIST_PATH$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "results_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "1"
+}

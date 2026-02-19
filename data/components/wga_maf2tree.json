@@ -1,0 +1,18 @@
+{
+  "name": "wga_maf2tree",
+  "classification": "phylogeny",
+  "description": "Take a whole genome alignment maf file and make a tree (uses phylomark)",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": ""
+}

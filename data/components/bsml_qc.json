@@ -1,0 +1,25 @@
+{
+  "name": "bsml_qc",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "bsml_qc",
+      "executable": "$;BIN_DIR$;/bsml_qc"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "summary_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

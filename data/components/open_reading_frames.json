@@ -1,0 +1,26 @@
+{
+  "name": "open_reading_frames",
+  "classification": "feature prediction / ORFs",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "open_reading_frames",
+      "executable": "$;BIN_DIR$;/open_reading_frames"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fna_output_list",
+    "faa_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

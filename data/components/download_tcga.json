@@ -1,0 +1,20 @@
+{
+  "name": "download_tcga",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

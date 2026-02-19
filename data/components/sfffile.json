@@ -1,0 +1,25 @@
+{
+  "name": "sfffile",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "sfffile",
+      "executable": "$;BIN_DIR$;/sfffile"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "sff_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

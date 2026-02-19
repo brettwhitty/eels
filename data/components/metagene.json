@@ -1,0 +1,40 @@
+{
+  "name": "metagene",
+  "classification": "feature prediction / ORFs",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "metagene",
+      "executable": "$;METAGENE_EXEC$;"
+    },
+    {
+      "name": "get_seq_by_metagene",
+      "executable": "$;BIN_DIR$;/get_seq_by_metagene"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "metagene2bsml",
+        "name": "metagene2bsml",
+        "input": null,
+        "output": "$;I_FILE_BASE$;.$;COMPONENT_NAME$;"
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "fasta_output_list",
+    "raw_output_list",
+    "tbl_output_list",
+    "gbk_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

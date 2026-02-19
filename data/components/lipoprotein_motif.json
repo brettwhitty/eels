@@ -1,0 +1,36 @@
+{
+  "name": "lipoprotein_motif",
+  "classification": "functional prediction",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "lipoprotein_motif",
+      "executable": "$;BIN_DIR$;/lipoprotein_motif"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

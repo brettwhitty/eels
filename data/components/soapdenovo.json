@@ -1,0 +1,29 @@
+{
+  "name": "soapdenovo",
+  "classification": "assembly",
+  "description": "novel short-read assembly method that builds denovo draft assembly for large genomes.",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "soapdenovo",
+      "executable": "$;BIN_DIR$;/soapdenovo"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

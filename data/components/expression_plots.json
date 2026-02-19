@@ -1,0 +1,23 @@
+{
+  "name": "expression_plots",
+  "classification": "RNA-Seq",
+  "description": "generates visualization PDF fie of image for given expression analysis results",
+  "tool_execution": [
+    {
+      "name": "expression_plots",
+      "executable": "$;BIN_DIR$;/expression_plots"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

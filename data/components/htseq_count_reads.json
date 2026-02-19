@@ -1,0 +1,23 @@
+{
+  "name": "htseq_count_reads",
+  "classification": "alignment",
+  "description": "uses the HTseq Python package to count reads aligning to features",
+  "tool_execution": [
+    {
+      "name": "HTSeq counting",
+      "executable": "$;BIN_DIR$;/htseq_count_reads.sh"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "RNAmmer",
+  "classification": "feature prediction / RNAs",
+  "description": "",
+  "tool_execution": [
+    {
+      "name": "RNAmmer",
+      "executable": "$;RNAMMER_EXEC$;"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "rnammer2bsml",
+        "name": "RNAmmer2bsml",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.gff",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "xml_output_list",
+    "gff_output_list",
+    "hmmreport_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

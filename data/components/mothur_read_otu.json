@@ -1,0 +1,26 @@
+{
+  "name": "mothur_read_otu",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "read otu",
+      "executable": "$;BIN_DIR$;/mothur"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "rabund_output_list",
+    "shared_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

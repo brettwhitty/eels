@@ -1,0 +1,18 @@
+{
+  "name": "summarize_mugsy_comparative_pipeline",
+  "classification": "comparative",
+  "description": "NA",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": ""
+}

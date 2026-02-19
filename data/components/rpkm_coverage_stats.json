@@ -1,0 +1,23 @@
+{
+  "name": "rpkm_coverage_stats",
+  "classification": "RNA-Seq",
+  "description": "generates RPKM coverage stats for the given BAM alignment file",
+  "tool_execution": [
+    {
+      "name": "rpkm_coverage_stats",
+      "executable": "$;BIN_DIR$;/rpkm_coverage_stats"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

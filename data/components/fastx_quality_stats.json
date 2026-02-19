@@ -1,0 +1,23 @@
+{
+  "name": "fastx_quality_stats",
+  "classification": "RNA-Seq",
+  "description": "generates quality statistics for input FastX file",
+  "tool_execution": [
+    {
+      "name": "fastx_quality_stats",
+      "executable": "$;BIN_DIR$;/fastx_quality_stats"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

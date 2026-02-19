@@ -1,0 +1,25 @@
+{
+  "name": "rdp_classifier",
+  "classification": "phylogeny",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "RDP classifier",
+      "executable": "$;JAVA_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "results_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

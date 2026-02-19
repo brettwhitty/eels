@@ -1,0 +1,74 @@
+{
+  "name": "signalp",
+  "classification": "functional prediction",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create scratch dir for signalp output",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Run signalp",
+      "executable": "$;SIGNALP_EXEC$;"
+    },
+    {
+      "name": "Rename signalp graphics files",
+      "executable": "$;BIN_DIR$;/signalp_graphics_rename"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "signalp2bsml",
+        "name": "Convert signalp raw output to BSML",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params for SignalP Best",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params for SignalP NoTM",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params for SignalP NN",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params for SignalP HMM",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "btab_output_list",
+    "raw_output_list",
+    "gif_output_list",
+    "eps_output_list",
+    "ps_output_list",
+    "gnu_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

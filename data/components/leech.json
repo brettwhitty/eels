@@ -1,0 +1,25 @@
+{
+  "name": "leech",
+  "classification": "visualization",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "leech plotting",
+      "executable": "/opt/leech/leech"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "results_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "2"
+}

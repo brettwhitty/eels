@@ -1,0 +1,25 @@
+{
+  "name": "truncate_chado_mart",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "ddl2iterator",
+        "name": "Truncate chado-mart tables list",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": "1"
+}

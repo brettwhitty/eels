@@ -1,0 +1,23 @@
+{
+  "name": "fix_gene_symbols",
+  "classification": "utility",
+  "description": "Fix gene symbols by removing duplicates in database or provided .tbl file",
+  "tool_execution": [
+    {
+      "name": "fix gene symbols",
+      "executable": "$;BIN_DIR$;/fix_gene_symbols"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

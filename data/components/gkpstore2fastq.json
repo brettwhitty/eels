@@ -1,0 +1,36 @@
+{
+  "name": "gkpstore2fastq",
+  "classification": "utility",
+  "description": "Filter fastq files",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "cat files",
+      "executable": "/bin/cat"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "gkpstore2fastq",
+        "name": "gkpstore2fastq",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fastq_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

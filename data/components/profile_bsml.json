@@ -1,0 +1,33 @@
+{
+  "name": "profile_bsml",
+  "classification": "profile",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create the temp output directories",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Create the output directories",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Profile BSML file",
+      "executable": "$;BIN_DIR$;/profileBSMLFile"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "prof_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "1"
+}

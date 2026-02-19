@@ -1,0 +1,27 @@
+{
+  "name": "bsml2gff3",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bsml2gff3",
+        "name": "bsml2gff3",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "gff3_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

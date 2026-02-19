@@ -1,0 +1,25 @@
+{
+  "name": "gff3_to_annotab",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "gff3_to_annotab",
+      "executable": "$;BIN_DIR$;/gff3_to_annotab"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "annotab_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

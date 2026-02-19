@@ -1,0 +1,33 @@
+{
+  "name": "bwa",
+  "classification": "alignment",
+  "description": "BWA aligner",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "BWA Execution",
+      "executable": "$;BIN_DIR$;/bwa_wrapper"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bam_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

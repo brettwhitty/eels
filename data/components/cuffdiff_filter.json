@@ -1,0 +1,23 @@
+{
+  "name": "cuffdiff_filter",
+  "classification": "RNA-Seq",
+  "description": "Filters cuffdiff output based on FDR,P value,Log fold change, FPKM.",
+  "tool_execution": [
+    {
+      "name": "cuffdiff_filter",
+      "executable": "$;BIN_DIR$;/cuffdiff_filter"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

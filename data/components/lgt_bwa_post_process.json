@@ -1,0 +1,24 @@
+{
+  "name": "lgt_bwa_post_process",
+  "classification": "LGT",
+  "description": "Post processing of aligned and filtered reads to detect LGT",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "mb_bam_output_list",
+    "lgt_h_bam_output_list",
+    "single_bam_output_list",
+    "no_map_bam_output_list",
+    "single_paired_bam_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

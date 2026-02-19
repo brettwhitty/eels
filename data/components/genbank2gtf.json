@@ -1,0 +1,25 @@
+{
+  "name": "genbank2gtf",
+  "classification": "RNA-Seq",
+  "description": "Convert Genbank file into GTF reference file",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "genbank2gtf",
+        "name": "genbank2gtf",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

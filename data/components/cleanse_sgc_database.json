@@ -1,0 +1,51 @@
+{
+  "name": "cleanse_sgc_database",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create database output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "rewrite_seqs.dbi",
+      "executable": "$;BIN_DIR$;/rewrite_seqs"
+    },
+    {
+      "name": "sgc_GC_content_load.spl",
+      "executable": "$;BIN_DIR$;/sgc_GC_content_load"
+    },
+    {
+      "name": "molwt_update.dbi",
+      "executable": "$;BIN_DIR$;/molwt_update"
+    },
+    {
+      "name": "signalP_update.dbi",
+      "executable": "$;BIN_DIR$;/signalP_update"
+    },
+    {
+      "name": "lipoprotein_update.dbi",
+      "executable": "$;BIN_DIR$;/lipoprotein_update"
+    },
+    {
+      "name": "tm_update.dbi",
+      "executable": "$;BIN_DIR$;/tm_update"
+    },
+    {
+      "name": "omp_update.dbi",
+      "executable": "$;BIN_DIR$;/omp_update"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "1"
+}

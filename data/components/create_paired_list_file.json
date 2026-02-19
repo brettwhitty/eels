@@ -1,0 +1,18 @@
+{
+  "name": "create_paired_list_file",
+  "classification": "RNA-Seq",
+  "description": "Generates a paired list file from two associated list files",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": "150"
+}

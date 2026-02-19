@@ -1,0 +1,52 @@
+{
+  "name": "hmmls",
+  "classification": "alignment / model",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "replace fasta headers",
+      "executable": "$;BIN_DIR$;/replace_fasta_headers.pl"
+    },
+    {
+      "name": "hmmls",
+      "executable": "$;HMMLS_EXEC$;"
+    },
+    {
+      "name": "fix output file",
+      "executable": "$;BIN_DIR$;/replace_fasta_headers.pl"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "hmmls2bsml",
+        "name": "hmmls2bsml",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.raw",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list",
+    "htab_output_list",
+    "bsml_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

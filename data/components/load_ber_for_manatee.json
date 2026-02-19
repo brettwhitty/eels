@@ -1,0 +1,22 @@
+{
+  "name": "load_ber_for_manatee",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "btab_output_list",
+    "raw_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

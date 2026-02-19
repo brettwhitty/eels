@@ -1,0 +1,23 @@
+{
+  "name": "cuffcompare",
+  "classification": "RNA-Seq",
+  "description": "generates cuffcompare analysis for the given Cufflinks GTF file",
+  "tool_execution": [
+    {
+      "name": "cuffcompare",
+      "executable": "$;BIN_DIR$;/cuffcompare"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

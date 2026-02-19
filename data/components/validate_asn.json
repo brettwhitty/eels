@@ -1,0 +1,38 @@
+{
+  "name": "validate_asn",
+  "classification": "validation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create the asnval and asndisc temp output directories",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Create the asnval and asndisc output directories",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Run asnval",
+      "executable": "/usr/local/bin/asnval"
+    },
+    {
+      "name": "Run asndisc",
+      "executable": "/usr/local/bin/asndisc"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "val_output_list",
+    "discrpt_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "1"
+}

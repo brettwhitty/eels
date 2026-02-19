@@ -1,0 +1,27 @@
+{
+  "name": "remove_db_gene_syms_with_hypos",
+  "classification": "utility",
+  "description": "Remove EC numbers and gene symbols that have hypothetical gene product names",
+  "tool_execution": [
+    {
+      "name": "remove_hypothetical_ec",
+      "executable": "$;BIN_DIR$;/remove_hypothetical_ec"
+    },
+    {
+      "name": "remove_db_gene_syms_with_hypotheticals",
+      "executable": "$;BIN_DIR$;/remove_db_gene_syms_with_hypos"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

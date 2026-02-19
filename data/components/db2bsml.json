@@ -1,0 +1,48 @@
+{
+  "name": "db2bsml",
+  "classification": "database / extraction",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create the FASTA output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "DTD validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    },
+    {
+      "name": "profileBSMLFile",
+      "executable": "$;BIN_DIR$;/profileBSMLFile"
+    }
+  ],
+  "converters": {
+    "main": [
+      {
+        "script": "create_legacy2bsml_iterator_list",
+        "name": "Create legacy2bsml master iterator list file",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": [
+      {
+        "script": "db2bsml",
+        "name": "db2bsml",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "fasta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "50"
+}

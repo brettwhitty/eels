@@ -1,0 +1,23 @@
+{
+  "name": "validate_fasta",
+  "classification": "validation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Validation of FASTA file",
+      "executable": "$;BIN_DIR$;/countHeadersWithoutSequence"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "1"
+}

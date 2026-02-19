@@ -1,0 +1,23 @@
+{
+  "name": "cuffdiff",
+  "classification": "RNA-Seq",
+  "description": "generates cuffdiff analysis for the given annotation GTF file and sam filelist",
+  "tool_execution": [
+    {
+      "name": "cuffdiff",
+      "executable": "$;BIN_DIR$;/cuffdiff"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

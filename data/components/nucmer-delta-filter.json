@@ -1,0 +1,33 @@
+{
+  "name": "nucmer-delta-filter",
+  "classification": "alignment",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "delta-filter",
+      "executable": "$;DELTA_FILTER_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "delta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

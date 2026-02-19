@@ -1,0 +1,27 @@
+{
+  "name": "genbank2gff3",
+  "classification": "RNA-Seq",
+  "description": "aligns reads against a single reference file contining one or more contigs",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "genbank2gff3",
+        "name": "genbank2gff3",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

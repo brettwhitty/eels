@@ -1,0 +1,25 @@
+{
+  "name": "solsnp",
+  "classification": "SNP",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "solsnp",
+      "executable": "java -jar $;SOLSNP_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "vcf_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

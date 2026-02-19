@@ -1,0 +1,29 @@
+{
+  "name": "sffinfo",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "sffinfo",
+      "executable": "$;BIN_DIR$;/sffinfo"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "accession_output_list",
+    "sequence_output_list",
+    "quality_output_list",
+    "flowgram_output_list",
+    "tab_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

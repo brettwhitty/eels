@@ -1,0 +1,25 @@
+{
+  "name": "make_snp_lists",
+  "classification": "SNP",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "make_snp_lists",
+      "executable": "$;BIN_DIR$;/make_snp_lists"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

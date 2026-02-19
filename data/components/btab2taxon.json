@@ -1,0 +1,25 @@
+{
+  "name": "btab2taxon",
+  "classification": "LGT",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "btab2taxon",
+        "name": "btab2taxon",
+        "input": "$;I_FILE_PATH$;",
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

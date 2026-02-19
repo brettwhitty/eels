@@ -1,0 +1,23 @@
+{
+  "name": "fastqc_stats",
+  "classification": "RNA-Seq",
+  "description": "Generates stats on the fastq files used for input into an aligner",
+  "tool_execution": [
+    {
+      "name": "fastqc_stats",
+      "executable": "$;BIN_DIR$;/fastqc_stats"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

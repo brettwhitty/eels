@@ -1,0 +1,31 @@
+{
+  "name": "mothur_collect_single",
+  "classification": "unclassified",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "collect single",
+      "executable": "$;BIN_DIR$;/mothur"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "sobs_output_list",
+    "simpson_output_list",
+    "shannon_output_list",
+    "np_shannon_output_list",
+    "jack_output_list",
+    "chao_output_list",
+    "ace_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

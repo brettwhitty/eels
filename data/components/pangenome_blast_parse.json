@@ -1,0 +1,27 @@
+{
+  "name": "pangenome_blast_parse",
+  "classification": "unclassified",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "parse blast results",
+      "executable": "$;BIN_DIR$;/pangenome_blast_parse"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "mosaik",
+  "classification": "alignment",
+  "description": "aligns reads against a single reference file contining one or more contigs",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

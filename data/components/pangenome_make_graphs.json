@@ -1,0 +1,30 @@
+{
+  "name": "pangenome_make_graphs",
+  "classification": "unclassified",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "prep the R input file",
+      "executable": "$;BIN_DIR$;/pangenome_make_graphs"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "ps_output_list",
+    "eps_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

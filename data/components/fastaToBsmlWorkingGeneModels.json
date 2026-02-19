@@ -1,0 +1,35 @@
+{
+  "name": "fastaToBsmlWorkingGeneModels",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create the FASTA output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "fastaToBsmlWorkingGeneModels",
+      "executable": "$;BIN_DIR$;/fastaToBsmlWorkingGeneModels"
+    },
+    {
+      "name": "DTD validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    },
+    {
+      "name": "profileBSMLFile",
+      "executable": "$;BIN_DIR$;/profileBSMLFile"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

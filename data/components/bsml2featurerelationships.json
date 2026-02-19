@@ -1,0 +1,25 @@
+{
+  "name": "bsml2featurerelationships",
+  "classification": "unclassified",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "bsml2featurerelationships",
+        "name": "bsml2feature_relationships",
+        "input": null,
+        "output": "$;OUTPUT_DIRECTORY$;/bsml2featurerelationships.mapping.list"
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": ""
+}

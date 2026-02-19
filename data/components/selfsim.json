@@ -1,0 +1,25 @@
+{
+  "name": "selfsim",
+  "classification": "LGT",
+  "description": "Perform chi-squared analysis to find lateral gene transfer in eukaryotic assemblies",
+  "tool_execution": [
+    {
+      "name": "selfsim",
+      "executable": "$;BIN_DIR$;/selfsim"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "txt_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

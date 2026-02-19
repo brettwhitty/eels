@@ -1,0 +1,49 @@
+{
+  "name": "bulk_delete_chado",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "ddl2iterator",
+        "name": "Revoke permissions",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Truncate tables",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Drop indices and constraints",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Restore indices and constraints",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Grant permissions",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": "150"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "sam2fasta",
+  "classification": "LGT",
+  "description": "Lateral Genome Transfer sam2fasta converter",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "sam2fasta",
+        "name": "Convert sam to fasta",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "sighunt",
+  "classification": "LGT",
+  "description": "Find lateral gene transfer in eukaryotic assemblies",
+  "tool_execution": [
+    {
+      "name": "SigHunt",
+      "executable": "$;BIN_DIR$;/run_sighunt"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "txt_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

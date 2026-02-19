@@ -1,0 +1,26 @@
+{
+  "name": "psortb",
+  "classification": "clustering",
+  "description": "Executes the PSortB script",
+  "tool_execution": [
+    {
+      "name": "tmhmm",
+      "executable": "$;PSORTB_EXE$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list",
+    "bsml_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "getorf",
+  "classification": "feature prediction / genes",
+  "description": "Find open reading frames (ORFs) in eukaryotic assemblies",
+  "tool_execution": [
+    {
+      "name": "Run EMBOSS getorf",
+      "executable": "$;EMBOSS_BIN$;/getorf"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "fsa_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "bam2bigwig",
+  "classification": "RNA-Seq",
+  "description": "converts alignment BAM files to BedGraph and BigWig formats for visualization",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bam2bigwig",
+        "name": "bam2bigwig",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

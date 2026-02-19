@@ -1,0 +1,25 @@
+{
+  "name": "pileup_to_wig",
+  "classification": "alignment",
+  "description": "parses samtools pileup and outputs a wig file with entries for any base-pairs with coverage",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "pileup2wig",
+        "name": "pileup2wig script",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

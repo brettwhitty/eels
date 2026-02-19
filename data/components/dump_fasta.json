@@ -1,0 +1,38 @@
+{
+  "name": "dump_fasta",
+  "classification": "utility",
+  "description": "Dump a database into a fasta file with contigs and prepares it for GenBank submission",
+  "tool_execution": [
+    {
+      "name": "dump fasta",
+      "executable": "$;BIN_DIR$;/dump_fasta"
+    },
+    {
+      "name": "create sbt and cmt files",
+      "executable": "$;BIN_DIR$;/prepare_sbt_cmt"
+    },
+    {
+      "name": "create agp",
+      "executable": "$;BIN_DIR$;/format_velvet_assembled_AGP"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "wrap_tbl2asn",
+        "name": "run tbl2asn",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

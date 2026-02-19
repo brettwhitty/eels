@@ -1,0 +1,25 @@
+{
+  "name": "alien_hunter",
+  "classification": "LGT",
+  "description": "Use longer oligomers in models to find LGT regions, then refine using HMMs",
+  "tool_execution": [
+    {
+      "name": "alien_hunter",
+      "executable": "$;ALIEN_HUNTER_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "txt_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

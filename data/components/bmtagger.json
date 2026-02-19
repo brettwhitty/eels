@@ -1,0 +1,33 @@
+{
+  "name": "bmtagger",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "bmtagger",
+      "executable": "$;BIN_DIR$;/run_bmtagger"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

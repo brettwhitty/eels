@@ -1,0 +1,44 @@
+{
+  "name": "glk2bsml",
+  "classification": "database / extraction",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "DTD validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    },
+    {
+      "name": "profileBSMLFile",
+      "executable": "$;BIN_DIR$;/profileBSMLFile"
+    }
+  ],
+  "converters": {
+    "main": [
+      {
+        "script": "create_legacy2bsml_iterator_list",
+        "name": "Create the glk2bsml iterator list file",
+        "input": null,
+        "output": "$;TMP_DIR$;/glk2bsml.list"
+      }
+    ],
+    "iterator": [
+      {
+        "script": "glk2bsml",
+        "name": "glk2bsml",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "fasta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "50"
+}

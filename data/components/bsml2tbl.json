@@ -1,0 +1,27 @@
+{
+  "name": "bsml2tbl",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bsml2tbl",
+        "name": "bsml2tbl",
+        "input": "$;I_FILE_PATH$;",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.tbl"
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "tbl_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

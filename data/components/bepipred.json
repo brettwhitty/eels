@@ -1,0 +1,51 @@
+{
+  "name": "bepipred",
+  "classification": "functional prediction",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "replace fasta headers",
+      "executable": "$;BIN_DIR$;/replace_fasta_headers.pl"
+    },
+    {
+      "name": "bepipred",
+      "executable": "/local/projects/STREP/bepipred-1.0b/bepipred"
+    },
+    {
+      "name": "fix output file",
+      "executable": "$;BIN_DIR$;/replace_fasta_headers.pl"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bepipred2bsml",
+        "name": "bepipred2bsml",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list",
+    "bsml_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

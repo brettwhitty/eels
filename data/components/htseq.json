@@ -1,0 +1,23 @@
+{
+  "name": "htseq",
+  "classification": "RNA-Seq",
+  "description": "generates htseq alignment counts for the given SAM alignment file",
+  "tool_execution": [
+    {
+      "name": "htseq",
+      "executable": "$;BIN_DIR$;/htseq"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

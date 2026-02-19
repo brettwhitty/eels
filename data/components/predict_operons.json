@@ -1,0 +1,25 @@
+{
+  "name": "predict_operons",
+  "classification": "feature prediction / genes",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "predict_operons",
+      "executable": "$;BIN_DIR$;/predict_operons"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "gff3_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

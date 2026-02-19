@@ -1,0 +1,49 @@
+{
+  "name": "lgt_bwa_fq",
+  "classification": "LGT",
+  "description": "Lateral Genome Transfer",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "BWA Execution",
+      "executable": "$;BIN_DIR$;/lgt_bwa"
+    },
+    {
+      "name": "BWA Execution",
+      "executable": "$;BIN_DIR$;/lgt_bwa"
+    },
+    {
+      "name": "POST PROCESSING",
+      "executable": "$;BIN_DIR$;/lgt_bwa_post_process"
+    },
+    {
+      "name": "ZIP FILES",
+      "executable": "$;BIN_DIR$;/lgt_bwa_zip.sh"
+    },
+    {
+      "name": "REMOVE FASTQ FILES",
+      "executable": "$;BIN_DIR$;/lgt_bwa_rm.sh"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "sam_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

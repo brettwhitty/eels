@@ -1,0 +1,25 @@
+{
+  "name": "filter_sequences_by_id",
+  "classification": "sequence / manipulation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "filter",
+      "executable": "$;BIN_DIR$;/filter_sequences_by_id"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "seq_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

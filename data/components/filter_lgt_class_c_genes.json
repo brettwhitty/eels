@@ -1,0 +1,20 @@
+{
+  "name": "filter_lgt_class_c_genes",
+  "classification": "LGT",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": false,
+  "group_count": ""
+}

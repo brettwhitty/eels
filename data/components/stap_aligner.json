@@ -1,0 +1,25 @@
+{
+  "name": "stap_aligner",
+  "classification": "phylogeny",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "align_to_rRNA_profile.pl",
+      "executable": "$;STAP_ALIGNER_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "results_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "filter_dups_lc_seqs",
+  "classification": "LGT",
+  "description": "Lateral Genome Transfer - filter duplicate and low_complexity seqs",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Filter duplicate and low complexity sequences",
+      "executable": "$;BIN_DIR$;/filter_dups_lc_seqs"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bam_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

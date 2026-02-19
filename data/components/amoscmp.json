@@ -1,0 +1,21 @@
+{
+  "name": "amoscmp",
+  "classification": "sequence / assembly",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "contig_output_list",
+    "fasta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

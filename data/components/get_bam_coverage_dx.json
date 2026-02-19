@@ -1,0 +1,42 @@
+{
+  "name": "get_bam_coverage_dx",
+  "classification": "alignment",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "Get BAM Coverage",
+      "executable": "$;BAM_COVERAGE_DX_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "avg_cov_output_list",
+    "breadth_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

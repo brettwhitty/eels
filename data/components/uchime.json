@@ -1,0 +1,23 @@
+{
+  "name": "uchime",
+  "classification": "alignment/classification/quality filtering",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "uchime chimera checker",
+      "executable": "$;UCHIME_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "3000"
+}

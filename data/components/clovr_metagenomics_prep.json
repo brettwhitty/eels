@@ -1,0 +1,18 @@
+{
+  "name": "clovr_metagenomics_prep",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": ""
+}

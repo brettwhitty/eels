@@ -1,0 +1,29 @@
+{
+  "name": "extract_assembly_stats",
+  "classification": "assembly",
+  "description": "extracts assembly statistics",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "extract_assembly_stats",
+      "executable": "$;BIN_DIR$;/extract_assembly_stats"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

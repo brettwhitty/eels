@@ -1,0 +1,27 @@
+{
+  "name": "bsml2ptt",
+  "classification": "file / conversion",
+  "description": "Convert BSML files to ptt",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "bsml2ptt",
+        "name": "bsml2ptt",
+        "input": "$;I_FILE_PATH$;",
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "ptt_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "bam_merge",
+  "classification": "RNA-Seq",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "bam_merge",
+      "executable": "$;BIN_DIR$;/bam_merge"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "RAPSearch2",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "RAPSearch2",
+      "executable": "$;RAPSEARCH_EXEC$;"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "RAPSearch2btab",
+        "name": "convert m8 to btab",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "blastbtab2bsml",
+        "name": "convert btab to bsml",
+        "input": null,
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "btab_output_list",
+    "aln_output_list",
+    "m8_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "exonerate",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "exonerate",
+      "executable": "$;EXONERATE_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

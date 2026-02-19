@@ -1,0 +1,82 @@
+{
+  "name": "aat_na",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "dds",
+      "executable": "$;DDS_EXEC$;"
+    },
+    {
+      "name": "ext",
+      "executable": "$;EXT_EXEC$;"
+    },
+    {
+      "name": "ext collapse",
+      "executable": "$;EXT_COLLAPSE_EXEC$;"
+    },
+    {
+      "name": "filter",
+      "executable": "$;FILTER_EXEC$;"
+    },
+    {
+      "name": "remove raw dds output",
+      "executable": "rm"
+    },
+    {
+      "name": "remove raw ext output",
+      "executable": "rm"
+    },
+    {
+      "name": "remove raw ext collapsed output",
+      "executable": "rm"
+    },
+    {
+      "name": "remove raw filter output",
+      "executable": "rm"
+    },
+    {
+      "name": "ensure btab existence",
+      "executable": "touch"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "$;GAP2_EXEC$;",
+        "name": "gap2",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "gap22bsml",
+        "name": "gap22bsml",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.gap2.btab",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "btab_output_list",
+    "gap2_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

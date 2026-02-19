@@ -1,0 +1,23 @@
+{
+  "name": "filter_deseq",
+  "classification": "RNA-Seq",
+  "description": "Filters deseq output based on FDR,P value,Log fold change, Read count.",
+  "tool_execution": [
+    {
+      "name": "filter_deseq",
+      "executable": "$;BIN_DIR$;/filter_deseq"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

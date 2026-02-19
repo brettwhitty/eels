@@ -1,0 +1,27 @@
+{
+  "name": "fasta2bsml",
+  "classification": "file / conversion",
+  "description": "",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "fasta2bsml",
+        "name": "fasta2bsml",
+        "input": null,
+        "output": "'$;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE$;'"
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": false,
+  "group_count": ""
+}

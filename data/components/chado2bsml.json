@@ -1,0 +1,44 @@
+{
+  "name": "chado2bsml",
+  "classification": "database / extraction",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Create the FASTA output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "DTD validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [
+      {
+        "script": "create_chado2bsml_iterator_list",
+        "name": "Create chado2bsml iterator list file",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": [
+      {
+        "script": "chado2bsml",
+        "name": "chado2bsml",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "fasta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "5"
+}

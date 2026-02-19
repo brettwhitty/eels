@@ -1,0 +1,497 @@
+{
+  "total_components": 362,
+  "components_by_classification": {
+    "sequence / manipulation": 8,
+    "alignment / pairwise": 27,
+    "feature prediction / RNAs": 3,
+    "assembly": 6,
+    "utility": 52,
+    "LGT": 18,
+    "RNA-Seq": 35,
+    "sequence / assembly": 3,
+    "functional prediction": 19,
+    "unclassified": 17,
+    "cluster analysis": 2,
+    "feature prediction / genes": 19,
+    "database / utilities": 1,
+    "alignment": 18,
+    "file / conversion": 24,
+    "sequence manipulation": 1,
+    "SNP": 10,
+    "file / indexing": 3,
+    "database / manipulation": 17,
+    "database / extraction": 7,
+    "alignment / multiple": 4,
+    "phylogenetic": 2,
+    "validation": 7,
+    "phylogeny": 9,
+    "clustering": 11,
+    "sequence / masking": 4,
+    "alignment / model": 8,
+    "visualization": 4,
+    "snp": 1,
+    "feature prediction / ORFs": 2,
+    "comparative": 2,
+    "alignment/classification/quality filtering": 2,
+    "sequence / properties": 2,
+    "structural prediction": 1,
+    "profile": 2,
+    "preliminary": 2,
+    "database / loading": 1,
+    "omnidexterous": 3,
+    "rnaseq": 1,
+    "feature prediction / tRNAs": 2,
+    "database modification": 1,
+    "database validation": 1
+  },
+  "converter_usage": {
+    "RAPSearch2btab": [
+      "RAPSearch2"
+    ],
+    "blastbtab2bsml": [
+      "RAPSearch2",
+      "psiblast",
+      "rpsblast"
+    ],
+    "analysis2bsml": [
+      "RAPSearch2",
+      "RNAmmer",
+      "aat_aa",
+      "aat_aa_masked",
+      "aat_na",
+      "aat_na_masked",
+      "antigenic",
+      "aragorn",
+      "augustus",
+      "auto_annotate",
+      "auto_gene_curation",
+      "auto_gene_curation",
+      "bepipred",
+      "ber",
+      "blastn_plus",
+      "blastp_plus",
+      "clustalw",
+      "combine_ncRNA_alignments",
+      "fgenesh",
+      "find_homopolymers",
+      "fuzznuc",
+      "geneid",
+      "genemark",
+      "genemark-es",
+      "genezilla",
+      "genscan",
+      "genscan-plus",
+      "glimmer3",
+      "glimmerHMM",
+      "hmmls",
+      "hmmpfam",
+      "hmmpfam3",
+      "infernal",
+      "intergenic_analysis",
+      "iprscan",
+      "islandpath",
+      "lipop",
+      "lipoprotein_motif",
+      "mask_by_analysis",
+      "muscle",
+      "ncbi-blastall",
+      "ncbi-blastn",
+      "ncbi-blastn_compress",
+      "ncbi-blastp",
+      "ncbi-blastx",
+      "ncbi-tblastn",
+      "ncbi-tblastx",
+      "ngap",
+      "outer_membrane_domain",
+      "overlap_analysis",
+      "p_func",
+      "panther",
+      "pepstats",
+      "percent_gc",
+      "phat",
+      "phobos",
+      "pipeline_summary",
+      "pmarks2bsml",
+      "predotar",
+      "priam_ec_assignment",
+      "prodigal",
+      "promote_gene_prediction",
+      "ps_scan",
+      "pseudomolecule2glimmer3",
+      "psiblast",
+      "quicktree",
+      "repeatmasker",
+      "rpsblast",
+      "seg",
+      "signalp",
+      "signalp",
+      "signalp",
+      "signalp",
+      "snap",
+      "start_site_curation",
+      "tRNAscan-SE",
+      "tRNAscan-SE_compress",
+      "targetp",
+      "tblastn_plus",
+      "tmhmm",
+      "translate_sequence",
+      "trf",
+      "wu-blastn",
+      "wu-blastp",
+      "wu-blastx",
+      "wu-tblastn"
+    ],
+    "rnammer2bsml": [
+      "RNAmmer"
+    ],
+    "nap2bsml": [
+      "aat_aa",
+      "aat_aa_masked"
+    ],
+    "$;GAP2_EXEC$;": [
+      "aat_na",
+      "aat_na_masked"
+    ],
+    "gap22bsml": [
+      "aat_na",
+      "aat_na_masked"
+    ],
+    "antigenic2bsml": [
+      "antigenic"
+    ],
+    "aragorn2bsml": [
+      "aragorn"
+    ],
+    "augustus2bsml": [
+      "augustus"
+    ],
+    "bam2bigwig": [
+      "bam2bigwig"
+    ],
+    "bam2coverage": [
+      "bam2coverage"
+    ],
+    "bam2sam": [
+      "bam2sam"
+    ],
+    "bepipred2bsml": [
+      "bepipred"
+    ],
+    "berbtab2bsml": [
+      "ber"
+    ],
+    "blast2lca": [
+      "blast2lca"
+    ],
+    "blast2btab": [
+      "blastn_plus",
+      "blastp_plus",
+      "ncbi-blastall",
+      "ncbi-blastn",
+      "ncbi-blastn_compress",
+      "ncbi-blastp",
+      "ncbi-blastx",
+      "ncbi-tblastn",
+      "ncbi-tblastx",
+      "psiblast",
+      "rpsblast",
+      "tblastn_plus",
+      "wu-blastn",
+      "wu-blastp",
+      "wu-blastx",
+      "wu-tblastn"
+    ],
+    "blast2bsml": [
+      "blastn_plus",
+      "blastp_plus",
+      "ncbi-blastall",
+      "ncbi-blastn",
+      "ncbi-blastn_compress",
+      "ncbi-blastp",
+      "ncbi-blastx",
+      "ncbi-tblastn",
+      "ncbi-tblastx",
+      "tblastn_plus",
+      "wu-blastn",
+      "wu-blastp",
+      "wu-blastx",
+      "wu-tblastn"
+    ],
+    "queries2Chado": [
+      "bsml2chado"
+    ],
+    "ddl2iterator": [
+      "bsml2chado",
+      "bsml2chado",
+      "bsml2chado",
+      "bsml2chado",
+      "bsml2chado",
+      "bulk_delete_chado",
+      "bulk_delete_chado",
+      "bulk_delete_chado",
+      "bulk_delete_chado",
+      "bulk_delete_chado",
+      "delete_bcp",
+      "delete_bcp",
+      "delete_bcp",
+      "delete_bcp",
+      "delete_by_bcp",
+      "delete_by_bcp",
+      "drop_chado_indexes",
+      "drop_chado_indexes",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "initdb",
+      "refresh_chado_mart",
+      "refresh_chado_mart",
+      "refresh_chado_mart",
+      "remove_indices_and_constraints",
+      "remove_indices_and_constraints",
+      "restore_indices_and_constraints",
+      "restore_indices_and_constraints",
+      "restoredb",
+      "restoredb",
+      "restoredb",
+      "restoredb",
+      "restoredb",
+      "restoredb",
+      "restoredb",
+      "runsql",
+      "truncate_chado_mart",
+      "update_euk_model_sequences",
+      "update_euk_model_sequences"
+    ],
+    "bcpdir2iterator": [
+      "bsml2chado",
+      "refresh_chado_mart"
+    ],
+    "bsml2fasta": [
+      "bsml2fasta"
+    ],
+    "bsml2featurerelationships": [
+      "bsml2featurerelationships"
+    ],
+    "bsml2gff3": [
+      "bsml2gff3"
+    ],
+    "bsml2interevidence_fasta": [
+      "bsml2interevidence_fasta"
+    ],
+    "bsml2mugsymap": [
+      "bsml2mugsymap"
+    ],
+    "bsml2ptt": [
+      "bsml2ptt"
+    ],
+    "bsml2tbl": [
+      "bsml2tbl"
+    ],
+    "btab2taxon": [
+      "btab2taxon"
+    ],
+    "create_chado2bsml_iterator_list": [
+      "chado2bsml"
+    ],
+    "chado2bsml": [
+      "chado2bsml"
+    ],
+    "chado2flatfile": [
+      "chado2flatfile"
+    ],
+    "MSF2Bsml": [
+      "clustalw",
+      "muscle"
+    ],
+    "create_legacy2bsml_iterator_list": [
+      "condor_cogs_search",
+      "db2bsml",
+      "glk2bsml",
+      "legacy2bsml",
+      "validate_euk_records"
+    ],
+    "db2bsml": [
+      "db2bsml"
+    ],
+    "db2fasta": [
+      "db2fasta"
+    ],
+    "wrap_tbl2asn": [
+      "dump_fasta",
+      "dump_table",
+      "dump_table"
+    ],
+    "fasta2bsml": [
+      "fasta2bsml"
+    ],
+    "fgenesh2bsml": [
+      "fgenesh"
+    ],
+    "findhomopolymers2bsml": [
+      "find_homopolymers"
+    ],
+    "fuzznuc2bsml": [
+      "fuzznuc"
+    ],
+    "genbank2bsml": [
+      "genbank2bsml"
+    ],
+    "genbank2fasta": [
+      "genbank2fasta"
+    ],
+    "genbank2gff3": [
+      "genbank2gff3"
+    ],
+    "genbank2gtf": [
+      "genbank2gtf"
+    ],
+    "geneidgff32bsml": [
+      "geneid"
+    ],
+    "genemark2bsml": [
+      "genemark"
+    ],
+    "genemarkes2bsml": [
+      "genemark-es"
+    ],
+    "genezilla2bsml": [
+      "genezilla"
+    ],
+    "genscan2bsml": [
+      "genscan",
+      "genscan-plus"
+    ],
+    "gkpstore2fastq": [
+      "gkpstore2fastq"
+    ],
+    "glimmer32bsml": [
+      "glimmer3",
+      "pseudomolecule2glimmer3"
+    ],
+    "glimmerHMM2bsml": [
+      "glimmerHMM"
+    ],
+    "glk2bsml": [
+      "glk2bsml"
+    ],
+    "hmmls2bsml": [
+      "hmmls"
+    ],
+    "hmmpfam2htab": [
+      "hmmpfam"
+    ],
+    "hmmpfam2bsml": [
+      "hmmpfam"
+    ],
+    "hmmpfam32htab": [
+      "hmmpfam3"
+    ],
+    "hmmpfam32bsml": [
+      "hmmpfam3"
+    ],
+    "infernal2bsml": [
+      "infernal"
+    ],
+    "iprscan2bsml": [
+      "iprscan"
+    ],
+    "islandpath2bsml": [
+      "islandpath"
+    ],
+    "bsml2idlookup": [
+      "jaccard"
+    ],
+    "legacy2bsml": [
+      "legacy2bsml"
+    ],
+    "lipop2bsml": [
+      "lipop"
+    ],
+    "metagene2bsml": [
+      "metagene"
+    ],
+    "fasta2seqlen": [
+      "mumsgraph"
+    ],
+    "nucmer-snp2merged": [
+      "nucmer-snp2merged"
+    ],
+    "panther2bsml": [
+      "panther"
+    ],
+    "pepstats2bsml": [
+      "pepstats"
+    ],
+    "$;COMPONENT_NAME$;2bsml": [
+      "phat"
+    ],
+    "phobos2bsml": [
+      "phobos"
+    ],
+    "pileup2wig": [
+      "pileup_to_wig"
+    ],
+    "pmarks2bsml": [
+      "pmarks2bsml"
+    ],
+    "predotar2bsml": [
+      "predotar"
+    ],
+    "prodigal2bsml": [
+      "prodigal"
+    ],
+    "ps_scan2bsml": [
+      "ps_scan"
+    ],
+    "quicktree2bsml": [
+      "quicktree"
+    ],
+    "repeatmasker2bsml": [
+      "repeatmasker"
+    ],
+    "sam2bam": [
+      "sam2bam"
+    ],
+    "sam2fasta": [
+      "sam2fasta"
+    ],
+    "seg2bsml": [
+      "seg"
+    ],
+    "signalp2bsml": [
+      "signalp"
+    ],
+    "snap2bsml": [
+      "snap"
+    ],
+    "sra2fastq": [
+      "sra2fastq"
+    ],
+    "tRNAscan-SE2bsml": [
+      "tRNAscan-SE",
+      "tRNAscan-SE_compress"
+    ],
+    "targetp2bsml": [
+      "targetp"
+    ],
+    "prepare_for_tbl2asn": [
+      "tbl2asn"
+    ],
+    "$;TBL2ASN_EXEC$;": [
+      "tbl2asn"
+    ],
+    "tmhmm2bsml": [
+      "tmhmm"
+    ],
+    "trf2bsml": [
+      "trf"
+    ]
+  }
+}

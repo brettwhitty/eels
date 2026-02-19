@@ -1,0 +1,92 @@
+{
+  "name": "aat_aa",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "dps",
+      "executable": "$;DPS_EXEC$;"
+    },
+    {
+      "name": "ext",
+      "executable": "$;EXT_EXEC$;"
+    },
+    {
+      "name": "ext collapse",
+      "executable": "$;EXT_COLLAPSE_EXEC$;"
+    },
+    {
+      "name": "filter",
+      "executable": "$;FILTER_EXEC$;"
+    },
+    {
+      "name": "relocate query seq",
+      "executable": "cp"
+    },
+    {
+      "name": "nap",
+      "executable": "$;NAP_EXEC$;"
+    },
+    {
+      "name": "remove temp query seq",
+      "executable": "rm"
+    },
+    {
+      "name": "remove raw dps output",
+      "executable": "rm"
+    },
+    {
+      "name": "remove raw ext output",
+      "executable": "rm"
+    },
+    {
+      "name": "remove raw ext collapsed output",
+      "executable": "rm"
+    },
+    {
+      "name": "remove raw filter output",
+      "executable": "rm"
+    },
+    {
+      "name": "ensure btab existence",
+      "executable": "touch"
+    },
+    {
+      "name": "relocate btab",
+      "executable": "mv"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "nap2bsml",
+        "name": "nap2bsml",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.nap.btab",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "btab_output_list",
+    "nap_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

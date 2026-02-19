@@ -1,0 +1,23 @@
+{
+  "name": "validate_gff3",
+  "classification": "validation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "Validation of GFF3 file",
+      "executable": "$;BIN_DIR$;/gff3Valid"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "1"
+}

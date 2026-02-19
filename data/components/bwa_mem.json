@@ -1,0 +1,41 @@
+{
+  "name": "bwa_mem",
+  "classification": "alignment",
+  "description": "BWA mem aligner",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "BWA Execution",
+      "executable": "$;BWA_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "sam_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

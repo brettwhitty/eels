@@ -1,0 +1,27 @@
+{
+  "name": "basic_alignment_stats",
+  "classification": "alignment",
+  "description": "runs samtools idxstats and samtools flagstat on a sorted bam file and index to generate basic read alignment information",
+  "tool_execution": [
+    {
+      "name": "samtools idxstats",
+      "executable": "$;SAMTOOLS_EXEC$;"
+    },
+    {
+      "name": "samtools flagstat",
+      "executable": "$;SAMTOOLS_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

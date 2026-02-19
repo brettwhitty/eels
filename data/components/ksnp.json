@@ -1,0 +1,61 @@
+{
+  "name": "ksnp",
+  "classification": "SNP",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "merge contigs",
+      "executable": "$;BIN_DIR$;/ksnp_merge_reference"
+    },
+    {
+      "name": "parse reference fasta header",
+      "executable": "$;KSNP_DIR$;/genome_names.pl"
+    },
+    {
+      "name": "merge input and reference",
+      "executable": "cat"
+    },
+    {
+      "name": "ksnp",
+      "executable": "$;KSNP_EXEC$;"
+    },
+    {
+      "name": "create raw output",
+      "executable": "mv"
+    },
+    {
+      "name": "convert ksnp to nucmer output",
+      "executable": "$;BIN_DIR$;/ksnp_to_addgeneinfo"
+    },
+    {
+      "name": "convert nucmer output to snp add gene info",
+      "executable": "$;BIN_DIR$;/ksnp-add-gene-info"
+    },
+    {
+      "name": "remove temp dir",
+      "executable": "rm"
+    },
+    {
+      "name": "remove fsplit dir",
+      "executable": "rm"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

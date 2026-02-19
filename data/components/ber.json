@@ -1,0 +1,68 @@
+{
+  "name": "ber",
+  "classification": "alignment / pairwise",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "filter hits",
+      "executable": "$;BIN_DIR$;/ber_blast_hit_selector"
+    },
+    {
+      "name": "filter additional hits",
+      "executable": "$;BIN_DIR$;/extract_blast_hits_by_id"
+    },
+    {
+      "name": "append to filtered hits",
+      "executable": "cat"
+    },
+    {
+      "name": "append to mini db",
+      "executable": "cat"
+    },
+    {
+      "name": "praze",
+      "executable": "$;PRAZE_EXEC$;"
+    },
+    {
+      "name": "fix praze output",
+      "executable": "$;BIN_DIR$;/add_pvalue_to_praze_output"
+    },
+    {
+      "name": "rename fixed praze output",
+      "executable": "mv"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "berbtab2bsml",
+        "name": "berbtab2bsml",
+        "input": null,
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "btab_output_list",
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

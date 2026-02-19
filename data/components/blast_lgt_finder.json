@@ -1,0 +1,27 @@
+{
+  "name": "blast_lgt_finder",
+  "classification": "LGT",
+  "description": "Take best blast hits and find LGT for the given donor/host lineages",
+  "tool_execution": [
+    {
+      "name": "Filter BLAST for best hits",
+      "executable": "$;BIN_DIR$;/filter_lgt_best_hit"
+    },
+    {
+      "name": "Find LGT",
+      "executable": "$;BIN_DIR$;/lgt_finder"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

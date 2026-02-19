@@ -1,0 +1,29 @@
+{
+  "name": "split_fasta_fastq",
+  "classification": "sequence / manipulation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "split_fasta_fastq",
+      "executable": "$;BIN_DIR$;/split_fasta_fastq"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

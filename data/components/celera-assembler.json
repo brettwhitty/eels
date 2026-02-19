@@ -1,0 +1,25 @@
+{
+  "name": "celera-assembler",
+  "classification": "sequence / assembly",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "asm_output_list",
+    "qc_output_list",
+    "chimera_summary_output_list",
+    "chimera_report_output_list",
+    "merge_log_output_list",
+    "scf_fasta_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

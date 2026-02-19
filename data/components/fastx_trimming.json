@@ -1,0 +1,23 @@
+{
+  "name": "fastx_trimming",
+  "classification": "RNA-Seq",
+  "description": "generates trimmed FastX sequences for the given input FastX file",
+  "tool_execution": [
+    {
+      "name": "fastx_trimming",
+      "executable": "$;BIN_DIR$;/fastx_trimming"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

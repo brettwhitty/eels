@@ -1,0 +1,25 @@
+{
+  "name": "fast_tree",
+  "classification": "phylogeny",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "fast_tree",
+      "executable": "$;FASTTREE_EXEC$;"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "tree_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

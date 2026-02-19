@@ -1,0 +1,30 @@
+{
+  "name": "mothur_screen_seqs",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "screen seqs",
+      "executable": "$;BIN_DIR$;/mothur"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "good_align_output_list",
+    "bad_align_output_list",
+    "good_groups_output_list",
+    "bad_groups_output_list",
+    "good_names_output_list",
+    "bad_names_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

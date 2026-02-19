@@ -1,0 +1,20 @@
+{
+  "name": "qiime_fasta_mothur_cnvr",
+  "classification": "preliminary",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "results_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": ""
+}

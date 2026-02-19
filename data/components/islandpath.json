@@ -1,0 +1,44 @@
+{
+  "name": "islandpath",
+  "classification": "unclassified",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "dimob",
+      "executable": "$;DIMOB_PATH$;"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "islandpath2bsml",
+        "name": "islandpath2bsml",
+        "input": "$;OUTPUT_DIRECTORY$;/$;ITERATOR1$;/g$;GROUP_NUMBER$;/$;PROT_FILE_NAME$;.out",
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR1$;/g$;GROUP_NUMBER$;/$;PROT_FILE_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "raw_output_list",
+    "fasta_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "validate_euk_records",
+  "classification": "database validation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "create_legacy2bsml_iterator_list",
+        "name": "Create validate_euk_records master iterator list file",
+        "input": null,
+        "output": "$;TMP_DIR$;/validate_euk_records.list"
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "1"
+}

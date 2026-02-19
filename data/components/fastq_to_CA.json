@@ -1,0 +1,20 @@
+{
+  "name": "fastq_to_CA",
+  "classification": "file / conversion",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "frg_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

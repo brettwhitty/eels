@@ -1,0 +1,30 @@
+{
+  "name": "blast_snp_regions",
+  "classification": "SNP",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "ncbi-blastn",
+      "executable": "$;BIN_DIR$;/blast_snp_regions"
+    },
+    {
+      "name": "parse raw BLAST results",
+      "executable": "$;BIN_DIR$;/parse_snp_blast"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "raw_output_list",
+    "parsed_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

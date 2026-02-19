@@ -1,0 +1,29 @@
+{
+  "name": "rrna_hmm_fs",
+  "classification": "feature prediction / RNAs",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "rRNA_hmm_fs",
+      "executable": "$;BIN_DIR$;/rrna_hmm_fs"
+    },
+    {
+      "name": "check env variables",
+      "executable": "env"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "rrna_hmm_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "454_mplex_seq_bin_trim",
+  "classification": "sequence / manipulation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "filtered_output_list",
+    "discarded_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

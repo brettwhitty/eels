@@ -1,0 +1,37 @@
+{
+  "name": "lgt_bwa",
+  "classification": "LGT",
+  "description": "Lateral Genome Transfer",
+  "tool_execution": [
+    {
+      "name": "create output directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "create temp directory",
+      "executable": "mkdir"
+    },
+    {
+      "name": "BWA alignment",
+      "executable": "$;BIN_DIR$;/lgt_bwa"
+    },
+    {
+      "name": "Filter reads",
+      "executable": "$;BIN_DIR$;/lgt_filter_reads"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bam_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "samtools_reference_index",
+  "classification": "RNA-Seq",
+  "description": "generates samtools index for the given reference FastA file",
+  "tool_execution": [
+    {
+      "name": "samtools_reference_index",
+      "executable": "$;BIN_DIR$;/samtools_reference_index"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "bowtie",
+  "classification": "RNA-Seq",
+  "description": "generates bowtie alignment for the input sequence file(s) against the given reference index file.",
+  "tool_execution": [
+    {
+      "name": "bowtie",
+      "executable": "$;BIN_DIR$;/bowtie"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "mothur_trim_seqs",
+  "classification": "utility",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "trim seqs",
+      "executable": "$;BIN_DIR$;/mothur"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

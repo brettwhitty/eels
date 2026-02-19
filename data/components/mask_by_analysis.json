@@ -1,0 +1,37 @@
+{
+  "name": "mask_by_analysis",
+  "classification": "sequence / manipulation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "mask_by_analysis",
+      "executable": "$;BIN_DIR$;/mask_by_analysis"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "fsa_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}

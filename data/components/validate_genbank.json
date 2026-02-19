@@ -1,0 +1,23 @@
+{
+  "name": "validate_genbank",
+  "classification": "validation",
+  "description": "none",
+  "tool_execution": [
+    {
+      "name": "validate_genbank",
+      "executable": "$;BIN_DIR$;/validate_genbank"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": true,
+  "group_count": "150"
+}

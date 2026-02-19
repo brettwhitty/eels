@@ -1,0 +1,27 @@
+{
+  "name": "bam2coverage",
+  "classification": "RNA-Seq",
+  "description": "aligns reads against a single reference file contining one or more contigs",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "bam2coverage",
+        "name": "bam2coverage",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list"
+  ],
+  "has_iterator": false,
+  "group_count": "150"
+}

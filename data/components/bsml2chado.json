@@ -1,0 +1,61 @@
+{
+  "name": "bsml2chado",
+  "classification": "database / manipulation",
+  "description": "none",
+  "tool_execution": [],
+  "converters": {
+    "main": [
+      {
+        "script": "queries2Chado",
+        "name": "Cache primary keys",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Drop chado-mart indices",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Drop indexes",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "bcpdir2iterator",
+        "name": "list bcp files",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Rebuild indexes",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "Restore chado-mart indices",
+        "input": null,
+        "output": null
+      },
+      {
+        "script": "ddl2iterator",
+        "name": "List tables",
+        "input": null,
+        "output": null
+      }
+    ],
+    "iterator": []
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [],
+  "has_iterator": false,
+  "group_count": "150"
+}

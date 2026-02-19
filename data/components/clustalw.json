@@ -1,0 +1,51 @@
+{
+  "name": "clustalw",
+  "classification": "alignment / multiple",
+  "description": "",
+  "tool_execution": [
+    {
+      "name": "relocate query file",
+      "executable": "cp"
+    },
+    {
+      "name": "clustalw",
+      "executable": "$;CLUSTALW_EXEC$;"
+    },
+    {
+      "name": "validate clustalw output",
+      "executable": "$;BIN_DIR$;/validate_clustalw_output"
+    },
+    {
+      "name": "dtd validation",
+      "executable": "$;BIN_DIR$;/dtdValid.pl"
+    }
+  ],
+  "converters": {
+    "main": [],
+    "iterator": [
+      {
+        "script": "MSF2Bsml",
+        "name": "msf2bsml",
+        "input": null,
+        "output": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+      },
+      {
+        "script": "analysis2bsml",
+        "name": "store config params",
+        "input": null,
+        "output": null
+      }
+    ]
+  },
+  "input_modes": {
+    "file": false,
+    "list": false,
+    "directory": false
+  },
+  "output_formats": [
+    "bsml_output_list",
+    "raw_output_list"
+  ],
+  "has_iterator": true,
+  "group_count": "150"
+}
