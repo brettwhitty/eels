@@ -10,7 +10,7 @@
 ```
 wait/
 ├── wait.config       # Configuration template (INI format)
-├── wait.xml          # Component template (main workflow)
+├── wait.xml          # Component template (instantiated into pipeline workflow)
 ├── wait.i1.xml       # Iterator 1 template (per-element processing)
 ├── wait.i2.xml       # Iterator 2 template (optional second iterator)
 └── wait.tmpl         # Legacy template (unused)
@@ -67,7 +67,7 @@ $;NODISTRIB$; = 0
 ```
 
 Key concepts:
-- **TEMPLATE_XML** - Main component workflow template
+- **TEMPLATE_XML** - Main component template
 - **ITERATOR1/2** - Iterator names and templates
 - **GROUP_COUNT** - Parallelization factor (150 groups)
 - **NODISTRIB** - Distribution flag (0 = distribute to grid)
@@ -207,7 +207,7 @@ $;OUTPUT_DIRECTORY$; = /usr/local/projects/db1/output_repository/wait/12345_defa
 
 **Input:** `wait.xml` + `wait.token.final.config`  
 **Tool:** `replace_template_keys`  
-**Output:** `component.xml` (instantiated workflow)
+**Output:** `component.xml` (instantiated component)
 
 Placeholders replaced with actual values from config.
 

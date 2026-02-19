@@ -28,7 +28,7 @@ These 362 JSON files were created by Brett Whitty as part of the `dev-component`
 - **Available and production-ready in 2006** - downloadable, installable, usable system with complete documentation
 
 **Advanced Features Preserved:**
-- **Hierarchical composition** - Workflows compose components (subworkflows), components compose tools
+- **Hierarchical composition** - Pipelines compose components (templates), components define tool execution
 - **Reusable subworkflows** - Components as first-class compositional units
 - **Iterator patterns** - Sophisticated parallelization strategies for batch processing
 - **Multi-step execution** - Tool execution, format conversion, validation within single component

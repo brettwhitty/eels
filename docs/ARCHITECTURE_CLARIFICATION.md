@@ -2,22 +2,34 @@
 
 ## Core Concepts
 
+### TIGR-Workflow vs Ergatis
+
+**TIGR-Workflow** is a workflow engine that uses XML to encode computational workflows with serial or parallel, distributed or local, execution steps.
+
+**Ergatis** provides:
+- Libraries to convert TIGR-Workflow pipeline XML into pipeline "templates"
+- Libraries to support the concept of workflow "components"
+- A web UI builder for TIGR-Workflow pipeline XML
+- A web UI launcher and monitor for running workflows
+- A mechanism to save pipelines as pipeline templates
+
 ### Components vs Pipelines
 
-**Components** are reusable workflow units that:
-- Execute one or more tools
-- Transform outputs via converters
-- Have their own config files (`.config`) with parameters
-- Have workflow templates defining execution structure
-- Are atomic units of work
+**Components** are templates that define a reusable unit of analysis:
+- Defined in a template format that includes TIGR-Workflow component XML and accompanying config files, dependent tools, scripts, and databases
+- Component XML does NOT contain the appropriate structure to be executed by TIGR-Workflow directly
+- Components must be added to a pipeline workflow XML to be runnable
+- Have config files (`.config`) with parameters
+- Are the building blocks that pipelines are composed from
 
-**Pipelines** are compositions of components that:
-- Orchestrate multiple components in series or parallel
+**Components are NOT workflows.** They are templates that get incorporated into workflows.
+
+**Pipelines** are the actual workflows:
+- Pipeline XML must have at least one component to be runnable
+- Can have any number of sub-workflows, either serial or parallel, nested as deeply as feasible
 - Are defined by master template XML files
-- Can be pre-configured templates or custom-built in web UI
-- Represent complete analysis workflows
-
-**Key distinction:** Components ARE workflows (reusable units). Pipelines compose components into larger workflows.
+- Can be pre-configured templates or custom-built in the web UI
+- Represent complete, executable analysis workflows
 
 ### Directory Structure
 

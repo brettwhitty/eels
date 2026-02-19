@@ -14,7 +14,7 @@ Ergatis Lite uses a bracket-based syntax designed for command-line one-liners. T
 ```
 ()  = Ordered list (serial execution - order matters)
 {}  = Unordered set (parallel execution - order doesn't matter)
-<>  = Component (atomic workflow element)
+<>  = Component (reusable template)
 ```
 
 ### Component Definition

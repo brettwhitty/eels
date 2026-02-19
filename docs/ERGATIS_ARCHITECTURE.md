@@ -1,33 +1,37 @@
 # Ergatis Architecture: Hierarchical Workflow Composition
 
-## Core Concept: Workflows Compose Subworkflows
+## Core Concepts
 
-Ergatis is built on **hierarchical composition**.
+**TIGR-Workflow** is a workflow engine that uses XML to encode computational workflows with serial or parallel, distributed or local, execution steps.
+
+**Ergatis** provides libraries, templates, and a web UI on top of TIGR-Workflow. It introduces the concept of reusable **components** — templates that define analysis steps — which are composed into executable **pipeline workflows**.
 
 ### Three-Level Hierarchy
 
 ```
-Workflow (Pipeline)
-  ├─ Component (Subworkflow)
+Pipeline Workflow (executable by TIGR-Workflow)
+  ├─ Component (template, instantiated into pipeline)
   │   ├─ Tool execution
   │   ├─ Tool execution
   │   └─ Converter
-  ├─ Component (Subworkflow)
+  ├─ Component (template, instantiated into pipeline)
   │   ├─ Tool execution
   │   └─ Converter
-  └─ Component (Subworkflow)
+  └─ Component (template, instantiated into pipeline)
       └─ Tool execution
 ```
 
 ### Level 1: Tool
 **Atomic executable** - BLAST, HMMer, Glimmer3, etc.
 
-### Level 2: Component (Subworkflow)
-**Composition of tools** - Multi-step execution unit
+### Level 2: Component (Template)
+**Reusable template** defining a multi-step analysis unit:
 - Run tool(s)
 - Convert output formats
 - Validate results
 - Clean up intermediate files
+
+Components are NOT directly executable by TIGR-Workflow. They must be instantiated into a pipeline workflow XML to run.
 
 **Example:** BLAST component
 1. Run BLAST (tool)

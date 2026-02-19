@@ -4,7 +4,7 @@
 
 ### Level 1: Components (362 files)
 **Source:** `data/components/*.json`  
-**Scope:** Individual atomic workflow units  
+**Scope:** Individual component templates (reusable analysis units)  
 **Captures:** Tool execution chains, converters, parameters within ONE component
 
 **Example:** `aat_na.json`
