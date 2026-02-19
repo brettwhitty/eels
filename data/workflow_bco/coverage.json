@@ -1,0 +1,366 @@
+{
+  "object_id": "https://eels.gnomatix.com/bco/workflow/coverage",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "workflow_coverage",
+  "provenance_domain": {
+    "name": "Ergatis Workflow: coverage",
+    "version": "1.0",
+    "created": "2006-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:40:21Z",
+    "contributors": [
+      {
+        "contribution": [
+          "createdBy"
+        ],
+        "name": "TIGR Informatics"
+      },
+      {
+        "contribution": [
+          "authoredBy"
+        ],
+        "name": "Ergatis Development Team"
+      },
+      {
+        "contribution": [
+          "curatedBy"
+        ],
+        "name": "Brett Whitty"
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "Complete coverage workflow pipeline",
+    "Orchestrates 19 execution steps",
+    "Production genomics workflow from TIGR/JCVI/IGS"
+  ],
+  "description_domain": {
+    "keywords": [
+      "workflow",
+      "pipeline",
+      "ergatis",
+      "coverage"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "coverage workflow",
+        "description": "commandSet: coverage workflow",
+        "version": "1.0",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 2,
+        "name": "Create scratch space",
+        "description": "command: Create scratch space",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_1",
+            "uri": {
+              "uri": "#step_1"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 3,
+        "name": "Archive compute output",
+        "description": "command: Archive compute output",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_2",
+            "uri": {
+              "uri": "#step_2"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 4,
+        "name": "Create output repository",
+        "description": "command: Create output repository",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_3",
+            "uri": {
+              "uri": "#step_3"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 5,
+        "name": "Set workflowdocs permissions",
+        "description": "command: Set workflowdocs permissions",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_4",
+            "uri": {
+              "uri": "#step_4"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 6,
+        "name": "copy the contig file to the temp directory",
+        "description": "command: copy the contig file to the temp directory",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_5",
+            "uri": {
+              "uri": "#step_5"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 7,
+        "name": "copy the qual file to the temp directory",
+        "description": "command: copy the qual file to the temp directory",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_6",
+            "uri": {
+              "uri": "#step_6"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 8,
+        "name": "copy the seq file to the temp directory",
+        "description": "command: copy the seq file to the temp directory",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_7",
+            "uri": {
+              "uri": "#step_7"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 9,
+        "name": "Create iterator list",
+        "description": "command: Create iterator list",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_8",
+            "uri": {
+              "uri": "#step_8"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 10,
+        "name": "Create groups",
+        "description": "command: Create groups",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_9",
+            "uri": {
+              "uri": "#step_9"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 11,
+        "name": "Create iterative subflow",
+        "description": "command: Create iterative subflow",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_10",
+            "uri": {
+              "uri": "#step_10"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 12,
+        "name": "Iterated subflow",
+        "description": "commandSet: Iterated subflow",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_11",
+            "uri": {
+              "uri": "#step_11"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 13,
+        "name": "Create file list for checksums",
+        "description": "command: Create file list for checksums",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_12",
+            "uri": {
+              "uri": "#step_12"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 14,
+        "name": "Generate checksums",
+        "description": "command: Generate checksums",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_13",
+            "uri": {
+              "uri": "#step_13"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 15,
+        "name": "Create file list for checksums.sum",
+        "description": "command: Create file list for checksums.sum",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_14",
+            "uri": {
+              "uri": "#step_14"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 16,
+        "name": "Create checksums.sum",
+        "description": "command: Create checksums.sum",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_15",
+            "uri": {
+              "uri": "#step_15"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 17,
+        "name": "Set workflowdocs permissions",
+        "description": "command: Set workflowdocs permissions",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_16",
+            "uri": {
+              "uri": "#step_16"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 18,
+        "name": "Set permissions for scratch area",
+        "description": "command: Set permissions for scratch area",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_17",
+            "uri": {
+              "uri": "#step_17"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 19,
+        "name": "Set permissions for output",
+        "description": "command: Set permissions for output",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_18",
+            "uri": {
+              "uri": "#step_18"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/workflow/coverage"
+        }
+      }
+    ],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": []
+  },
+  "parametric_domain": [],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
+  }
+}

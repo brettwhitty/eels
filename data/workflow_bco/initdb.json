@@ -1,0 +1,1118 @@
+{
+  "object_id": "https://eels.gnomatix.com/bco/workflow/initdb",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "workflow_initdb",
+  "provenance_domain": {
+    "name": "Ergatis Workflow: initdb",
+    "version": "1.0",
+    "created": "2006-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:40:21Z",
+    "contributors": [
+      {
+        "contribution": [
+          "createdBy"
+        ],
+        "name": "TIGR Informatics"
+      },
+      {
+        "contribution": [
+          "authoredBy"
+        ],
+        "name": "Ergatis Development Team"
+      },
+      {
+        "contribution": [
+          "curatedBy"
+        ],
+        "name": "Brett Whitty"
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "Complete initdb workflow pipeline",
+    "Orchestrates 66 execution steps",
+    "Production genomics workflow from TIGR/JCVI/IGS"
+  ],
+  "description_domain": {
+    "keywords": [
+      "workflow",
+      "pipeline",
+      "ergatis",
+      "initdb"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "initdbo workflow",
+        "description": "commandSet: initdbo workflow",
+        "version": "1.0",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 2,
+        "name": "Create scratch space",
+        "description": "command: Create scratch space",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_1",
+            "uri": {
+              "uri": "#step_1"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 3,
+        "name": "Create cache dir space",
+        "description": "command: Create cache dir space",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_2",
+            "uri": {
+              "uri": "#step_2"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 4,
+        "name": "create_dupdir",
+        "description": "command: create_dupdir",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_3",
+            "uri": {
+              "uri": "#step_3"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 5,
+        "name": "Create component scratch",
+        "description": "command: Create component scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_4",
+            "uri": {
+              "uri": "#step_4"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 6,
+        "name": "Create rel scratch",
+        "description": "command: Create rel scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_5",
+            "uri": {
+              "uri": "#step_5"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 7,
+        "name": "Create ec scratch",
+        "description": "command: Create ec scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_6",
+            "uri": {
+              "uri": "#step_6"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 8,
+        "name": "Create ard scratch",
+        "description": "command: Create ard scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_7",
+            "uri": {
+              "uri": "#step_7"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 9,
+        "name": "Create evidence scratch",
+        "description": "command: Create evidence scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_8",
+            "uri": {
+              "uri": "#step_8"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 10,
+        "name": "Create goprop scratch",
+        "description": "command: Create goprop scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_9",
+            "uri": {
+              "uri": "#step_9"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 11,
+        "name": "Create tigr scratch",
+        "description": "command: Create tigr scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_10",
+            "uri": {
+              "uri": "#step_10"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 12,
+        "name": "Create anno scratch",
+        "description": "command: Create anno scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_11",
+            "uri": {
+              "uri": "#step_11"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 13,
+        "name": "Create annotation flags scratch",
+        "description": "command: Create annotation flags scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_12",
+            "uri": {
+              "uri": "#step_12"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 14,
+        "name": "Create gff3 scratch",
+        "description": "command: Create gff3 scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_13",
+            "uri": {
+              "uri": "#step_13"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 15,
+        "name": "Create so scratch",
+        "description": "command: Create so scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_14",
+            "uri": {
+              "uri": "#step_14"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 16,
+        "name": "Create so-aux scratch",
+        "description": "command: Create so-aux scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_15",
+            "uri": {
+              "uri": "#step_15"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 17,
+        "name": "Create go scratch",
+        "description": "command: Create go scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_16",
+            "uri": {
+              "uri": "#step_16"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 18,
+        "name": "create_tigr_schemas_scratch",
+        "description": "command: create_tigr_schemas_scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_17",
+            "uri": {
+              "uri": "#step_17"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 19,
+        "name": "Create output scratch",
+        "description": "command: Create output scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_18",
+            "uri": {
+              "uri": "#step_18"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 20,
+        "name": "Create final scratch",
+        "description": "command: Create final scratch",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_19",
+            "uri": {
+              "uri": "#step_19"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 21,
+        "name": "Create relationship aux",
+        "description": "command: Create relationship aux",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_20",
+            "uri": {
+              "uri": "#step_20"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 22,
+        "name": "Drop all tables",
+        "description": "command: Drop all tables",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_21",
+            "uri": {
+              "uri": "#step_21"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 23,
+        "name": "Drop all chado_mart views",
+        "description": "command: Drop all chado_mart views",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_22",
+            "uri": {
+              "uri": "#step_22"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 24,
+        "name": "Create all tables",
+        "description": "command: Create all tables",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_23",
+            "uri": {
+              "uri": "#step_23"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 25,
+        "name": "Create all chado_mart views",
+        "description": "command: Create all chado_mart views",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_24",
+            "uri": {
+              "uri": "#step_24"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 26,
+        "name": "Partition tables",
+        "description": "command: Partition tables",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_25",
+            "uri": {
+              "uri": "#step_25"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 27,
+        "name": "load_pub_table",
+        "description": "command: load_pub_table",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_26",
+            "uri": {
+              "uri": "#step_26"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 28,
+        "name": "Process Relation Typedef Ontology",
+        "description": "command: Process Relation Typedef Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_27",
+            "uri": {
+              "uri": "#step_27"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 29,
+        "name": "Load Relation Typedef Ontology",
+        "description": "command: Load Relation Typedef Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_28",
+            "uri": {
+              "uri": "#step_28"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 30,
+        "name": "Process Auxiliary Relation Typedef Ontology",
+        "description": "command: Process Auxiliary Relation Typedef Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_29",
+            "uri": {
+              "uri": "#step_29"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 31,
+        "name": "Load Auxiliary Relation Typedef Ontology",
+        "description": "command: Load Auxiliary Relation Typedef Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_30",
+            "uri": {
+              "uri": "#step_30"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 32,
+        "name": "Restore indexes constraints",
+        "description": "command: Restore indexes constraints",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_31",
+            "uri": {
+              "uri": "#step_31"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 33,
+        "name": "File-cache the queries",
+        "description": "command: File-cache the queries",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_32",
+            "uri": {
+              "uri": "#step_32"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 34,
+        "name": "Process Annotation Ontology",
+        "description": "command: Process Annotation Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_33",
+            "uri": {
+              "uri": "#step_33"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 35,
+        "name": "Process Annotation Flag Ontology",
+        "description": "command: Process Annotation Flag Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_34",
+            "uri": {
+              "uri": "#step_34"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 36,
+        "name": "Process GFF3_attributes Ontology",
+        "description": "command: Process GFF3_attributes Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_35",
+            "uri": {
+              "uri": "#step_35"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 37,
+        "name": "Process Component Ontology",
+        "description": "command: Process Component Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_36",
+            "uri": {
+              "uri": "#step_36"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 38,
+        "name": "Process Output Ontology",
+        "description": "command: Process Output Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_37",
+            "uri": {
+              "uri": "#step_37"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 39,
+        "name": "Process Enzyme Commission Ontology",
+        "description": "command: Process Enzyme Commission Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_38",
+            "uri": {
+              "uri": "#step_38"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 40,
+        "name": "Process ARD Custom Feature Ontology",
+        "description": "command: Process ARD Custom Feature Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_39",
+            "uri": {
+              "uri": "#step_39"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 41,
+        "name": "Process Evidence Ontology",
+        "description": "command: Process Evidence Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_40",
+            "uri": {
+              "uri": "#step_40"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 42,
+        "name": "Process Gene Ontology",
+        "description": "command: Process Gene Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_41",
+            "uri": {
+              "uri": "#step_41"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 43,
+        "name": "parse_tigr_schemas_onto",
+        "description": "command: parse_tigr_schemas_onto",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_42",
+            "uri": {
+              "uri": "#step_42"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 44,
+        "name": "Process GO Properties Ontology",
+        "description": "command: Process GO Properties Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_43",
+            "uri": {
+              "uri": "#step_43"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 45,
+        "name": "Process Sequence Ontology",
+        "description": "command: Process Sequence Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_44",
+            "uri": {
+              "uri": "#step_44"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 46,
+        "name": "Process TIGR Roles Ontology",
+        "description": "command: Process TIGR Roles Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_45",
+            "uri": {
+              "uri": "#step_45"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 47,
+        "name": "collate_all_bcp_files_db",
+        "description": "command: collate_all_bcp_files_db",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_46",
+            "uri": {
+              "uri": "#step_46"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 48,
+        "name": "collate_all_bcp_files_dbxref",
+        "description": "command: collate_all_bcp_files_dbxref",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_47",
+            "uri": {
+              "uri": "#step_47"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 49,
+        "name": "collate_all_bcp_files_dbxrefprop",
+        "description": "command: collate_all_bcp_files_dbxrefprop",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_48",
+            "uri": {
+              "uri": "#step_48"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 50,
+        "name": "collate_all_bcp_files_pub",
+        "description": "command: collate_all_bcp_files_pub",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_49",
+            "uri": {
+              "uri": "#step_49"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 51,
+        "name": "collate_all_bcp_files_cv",
+        "description": "command: collate_all_bcp_files_cv",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_50",
+            "uri": {
+              "uri": "#step_50"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 52,
+        "name": "collate_all_bcp_files_cvterm",
+        "description": "command: collate_all_bcp_files_cvterm",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_51",
+            "uri": {
+              "uri": "#step_51"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 53,
+        "name": "collate_all_bcp_files_cvterm_dbxref",
+        "description": "command: collate_all_bcp_files_cvterm_dbxref",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_52",
+            "uri": {
+              "uri": "#step_52"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 54,
+        "name": "collate_all_bcp_files_cvterm_relationship",
+        "description": "command: collate_all_bcp_files_cvterm_relationship",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_53",
+            "uri": {
+              "uri": "#step_53"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 55,
+        "name": "collate_all_bcp_files_cvtermsynonym",
+        "description": "command: collate_all_bcp_files_cvtermsynonym",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_54",
+            "uri": {
+              "uri": "#step_54"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 56,
+        "name": "collate_all_bcp_files_cvtermpath",
+        "description": "command: collate_all_bcp_files_cvtermpath",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_55",
+            "uri": {
+              "uri": "#step_55"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 57,
+        "name": "collate_all_bcp_files_cvtermprop",
+        "description": "command: collate_all_bcp_files_cvtermprop",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_56",
+            "uri": {
+              "uri": "#step_56"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 58,
+        "name": "insert_serial_identifiers",
+        "description": "command: insert_serial_identifiers",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_57",
+            "uri": {
+              "uri": "#step_57"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 59,
+        "name": "drop_indexes2",
+        "description": "command: drop_indexes2",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_58",
+            "uri": {
+              "uri": "#step_58"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 60,
+        "name": "load_tables",
+        "description": "command: load_tables",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_59",
+            "uri": {
+              "uri": "#step_59"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 61,
+        "name": "rebuild_indexes2",
+        "description": "command: rebuild_indexes2",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_60",
+            "uri": {
+              "uri": "#step_60"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 62,
+        "name": "Process Auxiliary Sequence Ontology",
+        "description": "command: Process Auxiliary Sequence Ontology",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_61",
+            "uri": {
+              "uri": "#step_61"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 63,
+        "name": "load_aux_so_onto",
+        "description": "command: load_aux_so_onto",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_62",
+            "uri": {
+              "uri": "#step_62"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 64,
+        "name": "Grant public",
+        "description": "command: Grant public",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_63",
+            "uri": {
+              "uri": "#step_63"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 65,
+        "name": "store_chado_version",
+        "description": "command: store_chado_version",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_64",
+            "uri": {
+              "uri": "#step_64"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 66,
+        "name": "Check logfiles",
+        "description": "command: Check logfiles",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_65",
+            "uri": {
+              "uri": "#step_65"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/workflow/initdb"
+        }
+      }
+    ],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": []
+  },
+  "parametric_domain": [],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
+  }
+}

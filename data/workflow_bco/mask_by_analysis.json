@@ -1,0 +1,206 @@
+{
+  "object_id": "https://eels.gnomatix.com/bco/workflow/mask_by_analysis",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "workflow_mask_by_analysis",
+  "provenance_domain": {
+    "name": "Ergatis Workflow: mask_by_analysis",
+    "version": "1.0",
+    "created": "2006-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:40:21Z",
+    "contributors": [
+      {
+        "contribution": [
+          "createdBy"
+        ],
+        "name": "TIGR Informatics"
+      },
+      {
+        "contribution": [
+          "authoredBy"
+        ],
+        "name": "Ergatis Development Team"
+      },
+      {
+        "contribution": [
+          "curatedBy"
+        ],
+        "name": "Brett Whitty"
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "Complete mask_by_analysis workflow pipeline",
+    "Orchestrates 9 execution steps",
+    "Production genomics workflow from TIGR/JCVI/IGS"
+  ],
+  "description_domain": {
+    "keywords": [
+      "workflow",
+      "pipeline",
+      "ergatis",
+      "mask_by_analysis"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "mask_by_analysis workflow",
+        "description": "commandSet: mask_by_analysis workflow",
+        "version": "1.0",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 2,
+        "name": "Create scratch space",
+        "description": "command: Create scratch space",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_1",
+            "uri": {
+              "uri": "#step_1"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 3,
+        "name": "Create output repository",
+        "description": "command: Create output repository",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_2",
+            "uri": {
+              "uri": "#step_2"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 4,
+        "name": "Create iterator list",
+        "description": "command: Create iterator list",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_3",
+            "uri": {
+              "uri": "#step_3"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 5,
+        "name": "Create groups",
+        "description": "command: Create groups",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_4",
+            "uri": {
+              "uri": "#step_4"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 6,
+        "name": "Create iterative subflow",
+        "description": "command: Create iterative subflow",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_5",
+            "uri": {
+              "uri": "#step_5"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 7,
+        "name": "Iterated subflow",
+        "description": "commandSet: Iterated subflow",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_6",
+            "uri": {
+              "uri": "#step_6"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 8,
+        "name": "create bsml list",
+        "description": "command: create bsml list",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_7",
+            "uri": {
+              "uri": "#step_7"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 9,
+        "name": "create fsa list",
+        "description": "command: create fsa list",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_8",
+            "uri": {
+              "uri": "#step_8"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/workflow/mask_by_analysis"
+        }
+      }
+    ],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": []
+  },
+  "parametric_domain": [],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
+  }
+}

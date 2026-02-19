@@ -1,0 +1,142 @@
+{
+  "object_id": "https://eels.gnomatix.com/bco/workflow/id_test",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "workflow_id_test",
+  "provenance_domain": {
+    "name": "Ergatis Workflow: id_test",
+    "version": "1.0",
+    "created": "2006-01-01T00:00:00Z",
+    "modified": "2026-02-19T01:40:21Z",
+    "contributors": [
+      {
+        "contribution": [
+          "createdBy"
+        ],
+        "name": "TIGR Informatics"
+      },
+      {
+        "contribution": [
+          "authoredBy"
+        ],
+        "name": "Ergatis Development Team"
+      },
+      {
+        "contribution": [
+          "curatedBy"
+        ],
+        "name": "Brett Whitty"
+      }
+    ],
+    "license": "Artistic-2.0"
+  },
+  "usability_domain": [
+    "Complete id_test workflow pipeline",
+    "Orchestrates 5 execution steps",
+    "Production genomics workflow from TIGR/JCVI/IGS"
+  ],
+  "description_domain": {
+    "keywords": [
+      "workflow",
+      "pipeline",
+      "ergatis",
+      "id_test"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "ID test workflow",
+        "description": "commandSet: ID test workflow",
+        "version": "1.0",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 2,
+        "name": "Create iterator list",
+        "description": "command: Create iterator list",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_1",
+            "uri": {
+              "uri": "#step_1"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 3,
+        "name": "Create groups",
+        "description": "command: Create groups",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_2",
+            "uri": {
+              "uri": "#step_2"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 4,
+        "name": "Create iterative subflow",
+        "description": "command: Create iterative subflow",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_3",
+            "uri": {
+              "uri": "#step_3"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 5,
+        "name": "Iterated subflow",
+        "description": "commandSet: Iterated subflow",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "step_4",
+            "uri": {
+              "uri": "#step_4"
+            }
+          }
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/workflow/id_test"
+        }
+      }
+    ],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "io_domain": {
+    "input_subdomain": [],
+    "output_subdomain": []
+  },
+  "parametric_domain": [],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
+  }
+}
