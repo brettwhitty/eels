@@ -25,5 +25,27 @@
     "output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SOAPDENOVO_BIN",
+      "default": "$;SOAPDENOVO_EXEC$;"
+    },
+    {
+      "name": "PROCESS",
+      "default": "all"
+    },
+    {
+      "name": "KMER_SIZE",
+      "default": "23"
+    },
+    {
+      "name": "OUTPUT_PREFIX",
+      "default": "output"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "-R -M 3 -d 1"
+    }
+  ]
 }

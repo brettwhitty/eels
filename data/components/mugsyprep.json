@@ -16,5 +16,11 @@
     "bcp_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "USE_POLYPEPTIDES",
+      "default": "0"
+    }
+  ]
 }

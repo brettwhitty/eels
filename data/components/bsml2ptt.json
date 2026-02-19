@@ -23,5 +23,23 @@
     "ptt_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "PID_FEATTYPE",
+      "default": "transcript"
+    },
+    {
+      "name": "PID_FIELD",
+      "default": "id"
+    },
+    {
+      "name": "GENE_FEATTYPE",
+      "default": ""
+    },
+    {
+      "name": "GENE_FIELD",
+      "default": ""
+    }
+  ]
 }

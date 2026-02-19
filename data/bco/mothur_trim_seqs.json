@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/mothur_trim_seqs",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/mothur_trim_seqs",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "mothur_trim_seqs_v1",
   "provenance_domain": {
-    "name": "Ergatis mothur_trim_seqs Component",
+    "name": "Ergatis Component: mothur_trim_seqs",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.219677",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "utility component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,77 @@
         "step_number": 1,
         "name": "trim seqs",
         "description": "Execute trim seqs",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/mothur_trim_seqs"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/mothur_trim_seqs"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "trim seqs",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/mothur"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "MAXIMUM_LENGTH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MINIMUM_LENGTH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FLIP",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAXIMUM_HOMOPOLYMER_LENGTH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAXIMUM_AMBIGUOUS_BASES",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "Q_AVERAGE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "CONFIG_OPTIONS",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

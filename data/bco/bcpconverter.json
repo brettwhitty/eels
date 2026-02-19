@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bcpconverter",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bcpconverter",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bcpconverter_v1",
   "provenance_domain": {
-    "name": "Ergatis bcpconverter Component",
+    "name": "Ergatis Component: bcpconverter",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.182603",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "file / conversion component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    ""
   ],
   "description_domain": {
     "keywords": [
@@ -33,23 +34,61 @@
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bcpconverter"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bcpconverter"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.bcp_output_list"
-        }
+          "uri": "bcp_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "INPUT_FORMAT",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "INPUT_FILE_EXTENSION",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "INDIR",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OUTPUT_FORMAT",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OUTPUT_FILE_EXTENSION",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "TABLE",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

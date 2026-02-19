@@ -21,5 +21,19 @@
     "fsa_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MIN_ORF_LENGTH",
+      "default": "300"
+    },
+    {
+      "name": "TABLE",
+      "default": "0"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

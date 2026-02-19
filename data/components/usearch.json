@@ -31,5 +31,15 @@
     "usearch_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ALGORITHM",
+      "default": "[cluster_fast|cluster_smallmem|derep_fullength|derep_prefix|usearch_global|usearch_local|sortbylength]"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": ""
+    }
+  ]
 }

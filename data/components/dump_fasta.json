@@ -34,5 +34,47 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SERVER",
+      "default": "jabba"
+    },
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD_FILE",
+      "default": ""
+    },
+    {
+      "name": "LINKER_SEQUENCE",
+      "default": "NNNNNCACACACTTAATTAATTAAGTGTGTGNNNNN"
+    },
+    {
+      "name": "CONTIG_STRING",
+      "default": "contig"
+    },
+    {
+      "name": "CONTIG_ID_REPLACEMENT",
+      "default": "gene"
+    },
+    {
+      "name": "OTHER_TBL2ASN_OPTS",
+      "default": ""
+    },
+    {
+      "name": "SPLIT_NUM",
+      "default": "10"
+    },
+    {
+      "name": "MIN_CONTIG_LEN",
+      "default": "200"
+    }
+  ]
 }

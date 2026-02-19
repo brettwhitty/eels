@@ -21,5 +21,15 @@
     "txt_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "WINDOW_SIZE",
+      "default": "5000"
+    },
+    {
+      "name": "SHIFT",
+      "default": "1000"
+    }
+  ]
 }

@@ -14,5 +14,19 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "SEQLIMIT",
+      "default": "50000"
+    },
+    {
+      "name": "FAUX_FASTA",
+      "default": ""
+    },
+    {
+      "name": "FAUX_NAMES",
+      "default": ""
+    }
+  ]
 }

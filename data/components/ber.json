@@ -64,5 +64,55 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MAX_E_VALUE",
+      "default": "1e-5"
+    },
+    {
+      "name": "MAX_P_VALUE",
+      "default": "1e-5"
+    },
+    {
+      "name": "MAX_NUM_HITS",
+      "default": "150"
+    },
+    {
+      "name": "MAX_NUM_HITS_PER_REGION",
+      "default": "0"
+    },
+    {
+      "name": "MIN_NUM_EXPERIMENTAL",
+      "default": "0"
+    },
+    {
+      "name": "BP_OFFSET",
+      "default": "300"
+    },
+    {
+      "name": "ADDITIONAL_MINIDB_FASTA",
+      "default": ""
+    },
+    {
+      "name": "ADDITIONAL_BLAST_HITS_LIST",
+      "default": ""
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_RAW_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "PROJECT_ABBREVIATION",
+      "default": "parse"
+    }
+  ]
 }

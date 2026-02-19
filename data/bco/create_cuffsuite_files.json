@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/create_cuffsuite_files",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/create_cuffsuite_files",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "create_cuffsuite_files_v1",
   "provenance_domain": {
-    "name": "Ergatis create_cuffsuite_files Component",
+    "name": "Ergatis Component: create_cuffsuite_files",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.192699",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "Generates cuffcompare and cuffdiff input list files"
   ],
   "description_domain": {
     "keywords": [
@@ -32,16 +33,44 @@
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/create_cuffsuite_files"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/create_cuffsuite_files"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "GTFFILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "GTF_LISTFILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "SAM_LISTFILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "--v",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

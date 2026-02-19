@@ -19,5 +19,39 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "R_BIN_DIR",
+      "default": "$;R_BIN$;"
+    },
+    {
+      "name": "R_PARAMS",
+      "default": ""
+    },
+    {
+      "name": "R_SCRIPT",
+      "default": "$;R_SCRIPT_PATH$;"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": ""
+    },
+    {
+      "name": "LFC",
+      "default": ""
+    },
+    {
+      "name": "FDR",
+      "default": ""
+    },
+    {
+      "name": "GENE_COL",
+      "default": ""
+    },
+    {
+      "name": "RPKM_COL",
+      "default": ""
+    }
+  ]
 }

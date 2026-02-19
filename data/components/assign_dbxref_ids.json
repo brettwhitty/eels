@@ -19,5 +19,55 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD_FILE",
+      "default": ""
+    },
+    {
+      "name": "DB_NAME",
+      "default": "NCBI_locus_tag"
+    },
+    {
+      "name": "ID_PREFIX_MAP",
+      "default": ""
+    },
+    {
+      "name": "FEATURE_TYPE",
+      "default": "gene"
+    },
+    {
+      "name": "ORGANISM_ID",
+      "default": ""
+    },
+    {
+      "name": "ASSIGN_MISSING",
+      "default": "0"
+    },
+    {
+      "name": "VERSION",
+      "default": "public_locus"
+    },
+    {
+      "name": "ZERO_PAD",
+      "default": "4"
+    },
+    {
+      "name": "MOLECULE_TYPE",
+      "default": "assembly"
+    }
+  ]
 }

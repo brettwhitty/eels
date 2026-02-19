@@ -21,5 +21,19 @@
     "results_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "PROPERTY_FILE",
+      "default": ""
+    },
+    {
+      "name": "RDP_DIR",
+      "default": "/usr/local/bioinf/rdp_classifier"
+    },
+    {
+      "name": "JAVA_MX",
+      "default": "400m"
+    }
+  ]
 }

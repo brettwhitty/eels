@@ -21,5 +21,19 @@
     "seq_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ID_COLUMN_NUM",
+      "default": "1"
+    },
+    {
+      "name": "INPUT_FORMAT",
+      "default": ""
+    },
+    {
+      "name": "FILTER_MODE",
+      "default": "exclude"
+    }
+  ]
 }

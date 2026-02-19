@@ -21,5 +21,23 @@
     "vcf_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "REF_SEQUENCE",
+      "default": ""
+    },
+    {
+      "name": "FILTER",
+      "default": ""
+    },
+    {
+      "name": "MIN_COVERAGE",
+      "default": ""
+    },
+    {
+      "name": "MIN_BASE_QUALITY",
+      "default": ""
+    }
+  ]
 }

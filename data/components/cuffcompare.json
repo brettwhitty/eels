@@ -19,5 +19,27 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ANNOTATION_FILE",
+      "default": ""
+    },
+    {
+      "name": "PREFIX",
+      "default": "cuffcmp"
+    },
+    {
+      "name": "CUFFLINKS_BIN_DIR",
+      "default": "$;CUFFCOMPARE_BIN$;"
+    },
+    {
+      "name": "OTHER_PARAMS",
+      "default": "-R"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

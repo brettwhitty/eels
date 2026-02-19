@@ -31,5 +31,19 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "INPUT_FASTA_LIST_FILE",
+      "default": ""
+    },
+    {
+      "name": "INPUT_BSML_LIST_FILE",
+      "default": ""
+    }
+  ]
 }

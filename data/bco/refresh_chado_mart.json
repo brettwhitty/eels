@@ -1,48 +1,157 @@
 {
-  "object_id": "https://example.org/bco/ergatis/refresh_chado_mart",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/refresh_chado_mart",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "refresh_chado_mart_v1",
   "provenance_domain": {
-    "name": "Ergatis refresh_chado_mart Component",
+    "name": "Ergatis Component: refresh_chado_mart",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.237085",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "database / manipulation component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
       "database",
       "manipulation"
     ],
-    "pipeline_steps": []
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          0
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 2,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          1
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 3,
+        "name": "bcpdir2iterator",
+        "description": "Convert using bcpdir2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          2
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 4,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          3
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/refresh_chado_mart"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/refresh_chado_mart"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "DATABASE",
+      "value": "$;PROJECT$;",
+      "step": "1"
+    },
+    {
+      "param": "SERVER",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "RDBMS",
+      "value": "sybase",
+      "step": "1"
+    },
+    {
+      "param": "USERNAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "GZIP_BCP",
+      "value": "1",
+      "step": "1"
+    },
+    {
+      "param": "BLAST_ANALYSIS_ID",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "CLUSTER_ANALYSIS_ID",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PROGRAM",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "BCP_BATCH_SIZE",
+      "value": "30000",
+      "step": "1"
+    },
+    {
+      "param": "USE_CM_BLAST",
+      "value": "0",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -29,5 +29,15 @@
     "results_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CONTROL_FILE",
+      "default": ""
+    },
+    {
+      "name": "GROUP_SIZE",
+      "default": "1000000"
+    }
+  ]
 }

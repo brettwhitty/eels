@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/glk2bsml",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/glk2bsml",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "glk2bsml_v1",
   "provenance_domain": {
-    "name": "Ergatis glk2bsml Component",
+    "name": "Ergatis Component: glk2bsml",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.207822",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "database / extraction component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,55 +34,119 @@
         "step_number": 1,
         "name": "DTD validation",
         "description": "Execute DTD validation",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "profileBSMLFile",
         "description": "Execute profileBSMLFile",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
-        "name": "glk2bsml",
-        "description": "Convert using glk2bsml",
-        "version": "unknown",
+        "name": "create_legacy2bsml_iterator_list",
+        "description": "Convert using create_legacy2bsml_iterator_list",
+        "version": "unspecified",
         "prerequisite": [
           2
+        ],
+        "input_list": [],
+        "output_list": [
+          {
+            "uri": "$;TMP_DIR$;/glk2bsml.list"
+          }
         ]
+      },
+      {
+        "step_number": 4,
+        "name": "glk2bsml",
+        "description": "Convert using glk2bsml",
+        "version": "unspecified",
+        "prerequisite": [
+          3
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/glk2bsml"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/glk2bsml"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "DTD validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      },
+      {
+        "name": "profileBSMLFile",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/profileBSMLFile"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.fasta_output_list"
-        }
+          "uri": "fasta_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "USERNAME",
+      "value": "access",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "access",
+      "step": "1"
+    },
+    {
+      "param": "SERVER",
+      "value": "SYBTIGR",
+      "step": "1"
+    },
+    {
+      "param": "ID_GEN_VERSION",
+      "value": "0",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -39,5 +39,19 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DISPLAY_TYPE",
+      "default": "B"
+    },
+    {
+      "name": "HMM_EVALUE_CUTOFF",
+      "default": "1e-3"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    }
+  ]
 }

@@ -21,5 +21,15 @@
     "sff_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "RAW_SFF",
+      "default": ""
+    },
+    {
+      "name": "CONFIG_PARAMS",
+      "default": ""
+    }
+  ]
 }

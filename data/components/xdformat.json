@@ -14,5 +14,19 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "SEQ_TYPE",
+      "default": "p"
+    },
+    {
+      "name": "PRECISION",
+      "default": "4"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": "-I -k"
+    }
+  ]
 }

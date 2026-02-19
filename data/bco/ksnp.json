@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/ksnp",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/ksnp",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "ksnp_v1",
   "provenance_domain": {
-    "name": "Ergatis ksnp Component",
+    "name": "Ergatis Component: ksnp",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.211901",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "SNP component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,112 +33,221 @@
         "step_number": 1,
         "name": "create output directory",
         "description": "Execute create output directory",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "merge contigs",
         "description": "Execute merge contigs",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "parse reference fasta header",
         "description": "Execute parse reference fasta header",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "merge input and reference",
         "description": "Execute merge input and reference",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "ksnp",
         "description": "Execute ksnp",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 6,
         "name": "create raw output",
         "description": "Execute create raw output",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           5
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 7,
         "name": "convert ksnp to nucmer output",
         "description": "Execute convert ksnp to nucmer output",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           6
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 8,
         "name": "convert nucmer output to snp add gene info",
         "description": "Execute convert nucmer output to snp add gene info",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           7
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 9,
         "name": "remove temp dir",
         "description": "Execute remove temp dir",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           8
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 10,
         "name": "remove fsplit dir",
         "description": "Execute remove fsplit dir",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           9
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/ksnp"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/ksnp"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "create output directory",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "merge contigs",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/ksnp_merge_reference"
+        }
+      },
+      {
+        "name": "parse reference fasta header",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;KSNP_DIR$;/genome_names.pl"
+        }
+      },
+      {
+        "name": "merge input and reference",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cat"
+        }
+      },
+      {
+        "name": "ksnp",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;KSNP_EXEC$;"
+        }
+      },
+      {
+        "name": "create raw output",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mv"
+        }
+      },
+      {
+        "name": "convert ksnp to nucmer output",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/ksnp_to_addgeneinfo"
+        }
+      },
+      {
+        "name": "convert nucmer output to snp add gene info",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/ksnp-add-gene-info"
+        }
+      },
+      {
+        "name": "remove temp dir",
+        "version": "unspecified",
+        "uri": {
+          "uri": "rm"
+        }
+      },
+      {
+        "name": "remove fsplit dir",
+        "version": "unspecified",
+        "uri": {
+          "uri": "rm"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.raw_output_list"
-        }
+          "uri": "raw_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "Kmer",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "REFERENCE_GENBANK",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

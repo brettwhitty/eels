@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/selfsim",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/selfsim",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "selfsim_v1",
   "provenance_domain": {
-    "name": "Ergatis selfsim Component",
+    "name": "Ergatis Component: selfsim",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.242400",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "LGT component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "Perform chi-squared analysis to find lateral gene transfer in eukaryotic assemblies"
   ],
   "description_domain": {
     "keywords": [
@@ -32,31 +33,59 @@
         "step_number": 1,
         "name": "selfsim",
         "description": "Execute selfsim",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/selfsim"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/selfsim"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "selfsim",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/selfsim"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.txt_output_list"
-        }
+          "uri": "txt_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "WINDOW_SIZE",
+      "value": "5000",
+      "step": "1"
+    },
+    {
+      "param": "SHIFT",
+      "value": "1000",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

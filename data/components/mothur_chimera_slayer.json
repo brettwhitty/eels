@@ -19,5 +19,31 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "3000"
+  "group_count": "3000",
+  "parameters": [
+    {
+      "name": "MINSIM",
+      "default": "90"
+    },
+    {
+      "name": "MINCOV",
+      "default": "70"
+    },
+    {
+      "name": "BOOTITERS",
+      "default": "100"
+    },
+    {
+      "name": "MINBOOTSUPPORT",
+      "default": "90"
+    },
+    {
+      "name": "DIVERGENCE",
+      "default": "1.007"
+    },
+    {
+      "name": "SPLIT",
+      "default": "T"
+    }
+  ]
 }

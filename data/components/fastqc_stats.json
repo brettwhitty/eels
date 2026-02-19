@@ -19,5 +19,15 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "FASTQC_BIN_DIR",
+      "default": "$;FASTQC_BIN$;"
+    },
+    {
+      "name": "OTHER_PARAMETERS",
+      "default": ""
+    }
+  ]
 }

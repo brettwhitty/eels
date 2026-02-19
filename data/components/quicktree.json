@@ -39,5 +39,23 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "INPUT_TYPE",
+      "default": "a"
+    },
+    {
+      "name": "QUICKTREE_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_RAW_OUTPUT",
+      "default": "1"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "1"
+    }
+  ]
 }

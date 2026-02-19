@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/rdp_classifier",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/rdp_classifier",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "rdp_classifier_v1",
   "provenance_domain": {
-    "name": "Ergatis rdp_classifier Component",
+    "name": "Ergatis Component: rdp_classifier",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.236873",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "phylogeny component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,31 +33,64 @@
         "step_number": 1,
         "name": "RDP classifier",
         "description": "Execute RDP classifier",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/rdp_classifier"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/rdp_classifier"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "RDP classifier",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;JAVA_EXEC$;"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.results_output_list"
-        }
+          "uri": "results_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "PROPERTY_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "RDP_DIR",
+      "value": "/usr/local/bioinf/rdp_classifier",
+      "step": "1"
+    },
+    {
+      "param": "JAVA_MX",
+      "value": "400m",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

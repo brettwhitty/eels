@@ -39,5 +39,23 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OUTPUT_FORMAT",
+      "default": "sco"
+    },
+    {
+      "name": "PRODIGAL_OPTS",
+      "default": "-c"
+    },
+    {
+      "name": "TRANSLATION_TABLE",
+      "default": ""
+    },
+    {
+      "name": "PROJECT_ABBREVIATION",
+      "default": ""
+    }
+  ]
 }

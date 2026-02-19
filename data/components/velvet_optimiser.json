@@ -16,5 +16,23 @@
     "contig_output_list"
   ],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "VELVET_PATH",
+      "default": "$;VELVET_INSTALL_DIR$;"
+    },
+    {
+      "name": "START_HASH_LENGTH",
+      "default": "19"
+    },
+    {
+      "name": "END_HASH_LENGTH",
+      "default": "31"
+    },
+    {
+      "name": "OTHER_OPTIMISER_OPTS",
+      "default": "-a yes"
+    }
+  ]
 }

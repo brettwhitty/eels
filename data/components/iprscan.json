@@ -83,5 +83,15 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SEQ_TYPE",
+      "default": "p"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "1"
+    }
+  ]
 }

@@ -51,5 +51,27 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OUTPUT_FLAG",
+      "default": "-msf"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "ANALYSIS_CONF",
+      "default": "$;REPOSITORY_ROOT$;/workflow/runtime/$;COMPONENT_NAME$;/$;PIPELINEID$;_$;OUTPUT_TOKEN$;/$;COMPONENT_NAME$;.$;OUTPUT_TOKEN$;.final.config"
+    },
+    {
+      "name": "DESCRIPTION",
+      "default": "none"
+    },
+    {
+      "name": "COMPRESS_RAW_OUTPUT",
+      "default": "1"
+    }
+  ]
 }

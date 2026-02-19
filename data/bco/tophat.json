@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/tophat",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/tophat",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "tophat_v1",
   "provenance_domain": {
-    "name": "Ergatis tophat Component",
+    "name": "Ergatis Component: tophat",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.249720",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "generates tophat alignment for the input sequence file(s) against the given reference index file."
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,197 @@
         "step_number": 1,
         "name": "tophat",
         "description": "Execute tophat",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/tophat"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/tophat"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "tophat",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/tophat"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "BOWTIE_BIN_DIR",
+      "value": "$;BOWTIE_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "SAMTOOLS_BIN_DIR",
+      "value": "$;SAMTOOLS_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "TOPHAT_BIN_DIR",
+      "value": "$;TOPHAT_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "MATE_INNER_DIST",
+      "value": "200",
+      "step": "1"
+    },
+    {
+      "param": "MATE_STD_DEV",
+      "value": "20",
+      "step": "1"
+    },
+    {
+      "param": "MIN_ANCHOR",
+      "value": "8",
+      "step": "1"
+    },
+    {
+      "param": "SPLICE_MISMATCHES",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "MIN_INTRON_LENGTH",
+      "value": "50",
+      "step": "1"
+    },
+    {
+      "param": "MAX_INTRON_LENGTH",
+      "value": "500000",
+      "step": "1"
+    },
+    {
+      "param": "MAX_INSERTION_LENGTH",
+      "value": "3",
+      "step": "1"
+    },
+    {
+      "param": "MAX_DELETION_LENGTH",
+      "value": "3",
+      "step": "1"
+    },
+    {
+      "param": "NUMBER_THREADS",
+      "value": "1",
+      "step": "1"
+    },
+    {
+      "param": "MAX_MULTIHITS",
+      "value": "20",
+      "step": "1"
+    },
+    {
+      "param": "LIBRARY_TYPE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "BOWTIE_MODE",
+      "value": "v",
+      "step": "1"
+    },
+    {
+      "param": "READ_MISMATCHES",
+      "value": "2",
+      "step": "1"
+    },
+    {
+      "param": "SEGMENT_MISMATCHES",
+      "value": "2",
+      "step": "1"
+    },
+    {
+      "param": "SEGMENT_LENGTH",
+      "value": "25",
+      "step": "1"
+    },
+    {
+      "param": "READ_GAP_LENGTH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "READ_EDIT_DIST",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MIN_COVERAGE_INTRON",
+      "value": "50",
+      "step": "1"
+    },
+    {
+      "param": "MAX_COVERAGE_INTRON",
+      "value": "20000",
+      "step": "1"
+    },
+    {
+      "param": "MIN_SEGMENT_INTRON",
+      "value": "50",
+      "step": "1"
+    },
+    {
+      "param": "MAX_SEGMENT_INTRON",
+      "value": "500000",
+      "step": "1"
+    },
+    {
+      "param": "RAW_JUNCS_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ANNOTATION_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "TRANSCRIPTOME_INDEX_PREFIX",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "REF_INSERTIONS_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "REF_DELETIONS_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_PARAMETERS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "--v",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

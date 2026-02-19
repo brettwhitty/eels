@@ -23,5 +23,43 @@
     "bsml_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BAM_FILE",
+      "default": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/test.sorted.bam"
+    },
+    {
+      "name": "STRANDED",
+      "default": "0"
+    },
+    {
+      "name": "OUTPUT_STUB",
+      "default": "test"
+    },
+    {
+      "name": "GFF3_FILE",
+      "default": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/gasalab49.gff"
+    },
+    {
+      "name": "FEATURE_TYPE",
+      "default": "CDS"
+    },
+    {
+      "name": "GENOME_ONLY",
+      "default": ""
+    },
+    {
+      "name": "FEATURES_ONLY",
+      "default": ""
+    },
+    {
+      "name": "TOTAL_MAPPED_READS",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": ""
+    }
+  ]
 }

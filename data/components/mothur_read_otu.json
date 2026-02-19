@@ -22,5 +22,19 @@
     "shared_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OTU_FORMAT",
+      "default": "[ list|sabund|rabund|shared ]"
+    },
+    {
+      "name": "LABEL",
+      "default": ""
+    },
+    {
+      "name": "CONFIG_OPTIONS",
+      "default": ""
+    }
+  ]
 }

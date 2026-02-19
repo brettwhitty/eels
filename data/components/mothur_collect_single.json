@@ -27,5 +27,19 @@
     "ace_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OTU_FORMAT",
+      "default": "[ rabund|sabund|list ]"
+    },
+    {
+      "name": "READ_OTU_OPTIONS",
+      "default": ""
+    },
+    {
+      "name": "CONFIG_OPTIONS",
+      "default": ""
+    }
+  ]
 }

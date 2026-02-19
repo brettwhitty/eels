@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/replace_defline_with_locusID",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/replace_defline_with_locusID",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "replace_defline_with_locusID_v1",
   "provenance_domain": {
-    "name": "Ergatis replace_defline_with_locusID Component",
+    "name": "Ergatis Component: replace_defline_with_locusID",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.238164",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "utility component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "Concanate the content of all files in an input file list into a single output file"
   ],
   "description_domain": {
     "keywords": [
@@ -32,16 +33,23 @@
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/replace_defline_with_locusID"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/replace_defline_with_locusID"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

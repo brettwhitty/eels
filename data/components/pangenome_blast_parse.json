@@ -23,5 +23,23 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "COVERAGE_CUTOFF",
+      "default": "50"
+    },
+    {
+      "name": "SIMILARITY_CUTOFF",
+      "default": "50"
+    },
+    {
+      "name": "DB_LIST",
+      "default": ""
+    },
+    {
+      "name": "ORGANISM_TO_DB_MAPPING",
+      "default": ""
+    }
+  ]
 }

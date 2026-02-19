@@ -40,5 +40,39 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SEARCH_MODE",
+      "default": "imperfect"
+    },
+    {
+      "name": "INDEL_SCORE",
+      "default": "-5"
+    },
+    {
+      "name": "MISMATCH_SCORE",
+      "default": "-5"
+    },
+    {
+      "name": "MINSCORE",
+      "default": "6"
+    },
+    {
+      "name": "MINLENGTH",
+      "default": "0"
+    },
+    {
+      "name": "MINUNITLEN",
+      "default": "1"
+    },
+    {
+      "name": "MAXUNITLEN",
+      "default": "10"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

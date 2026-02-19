@@ -21,5 +21,6 @@
     "results_output_list"
   ],
   "has_iterator": true,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": []
 }

@@ -21,5 +21,35 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "NCBITAX",
+      "default": "/local/db/repository/ncbi/blast/20110831_122720/taxonomy/taxdump/"
+    },
+    {
+      "name": "GI2TAX",
+      "default": "/local/db/repository/ncbi/blast/20110831_122720/taxonomy/gi_taxid_nucl.dmp"
+    },
+    {
+      "name": "HOST",
+      "default": "tettelin-lx.igs.umaryland.edu"
+    },
+    {
+      "name": "TAXONDB",
+      "default": "gi2taxon"
+    },
+    {
+      "name": "TAXONCOLL",
+      "default": "gi2taxonnuc_20110831_122720"
+    },
+    {
+      "name": "OVERWRITE",
+      "default": "1"
+    },
+    {
+      "name": "IDX_DIRECTORY",
+      "default": "$;TMP_DIR$;"
+    }
+  ]
 }

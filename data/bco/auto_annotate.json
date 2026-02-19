@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/auto_annotate",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/auto_annotate",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "auto_annotate_v1",
   "provenance_domain": {
-    "name": "Ergatis auto_annotate Component",
+    "name": "Ergatis Component: auto_annotate",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.180874",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "functional prediction component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,49 +33,123 @@
         "step_number": 1,
         "name": "auto annotate compute",
         "description": "Execute auto annotate compute",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "dtd validation",
         "description": "Execute dtd validation",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/auto_annotate"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/auto_annotate"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "auto annotate compute",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/auto_annotate"
+        }
+      },
+      {
+        "name": "dtd validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "HMM_ANALYSIS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "BER_ANALYSIS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "HMM_INFO_DB",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PANDA_HEADER_OFFSETS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PANDA_HEADER_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ROLE_INFO_DB",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PERCENT_ID_CUTOFF",
+      "value": "35",
+      "step": "1"
+    },
+    {
+      "param": "LENGTH_CUTOFF",
+      "value": "80",
+      "step": "1"
+    },
+    {
+      "param": "COMPRESS_BSML_OUTPUT",
+      "value": "0",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

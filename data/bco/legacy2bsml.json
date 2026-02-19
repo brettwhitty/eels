@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/legacy2bsml",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/legacy2bsml",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "legacy2bsml_v1",
   "provenance_domain": {
-    "name": "Ergatis legacy2bsml Component",
+    "name": "Ergatis Component: legacy2bsml",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.212398",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "database / extraction component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,64 +34,172 @@
         "step_number": 1,
         "name": "Create the FASTA output directory",
         "description": "Execute Create the FASTA output directory",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "DTD validation",
         "description": "Execute DTD validation",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "profileBSMLFile",
         "description": "Execute profileBSMLFile",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
-        "name": "legacy2bsml",
-        "description": "Convert using legacy2bsml",
-        "version": "unknown",
+        "name": "create_legacy2bsml_iterator_list",
+        "description": "Convert using create_legacy2bsml_iterator_list",
+        "version": "unspecified",
         "prerequisite": [
           3
+        ],
+        "input_list": [],
+        "output_list": [
+          {
+            "uri": "$;TMP_DIR$;/legacy2bsml.list"
+          }
         ]
+      },
+      {
+        "step_number": 5,
+        "name": "legacy2bsml",
+        "description": "Convert using legacy2bsml",
+        "version": "unspecified",
+        "prerequisite": [
+          4
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/legacy2bsml"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/legacy2bsml"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "Create the FASTA output directory",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "DTD validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      },
+      {
+        "name": "profileBSMLFile",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/profileBSMLFile"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.fasta_output_list"
-        }
+          "uri": "fasta_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "USERNAME",
+      "value": "access",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "access",
+      "step": "1"
+    },
+    {
+      "param": "RDBMS",
+      "value": "Sybase",
+      "step": "1"
+    },
+    {
+      "param": "HOST",
+      "value": "SYBTIGR",
+      "step": "1"
+    },
+    {
+      "param": "MODE",
+      "value": "2",
+      "step": "1"
+    },
+    {
+      "param": "IDGEN_IDENTIFIER_VERSION",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "EMAIL",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "NO_DIE_NULL_SEQUENCES",
+      "value": "1",
+      "step": "1"
+    },
+    {
+      "param": "BSML_DTD",
+      "value": "$;DOCS_DIR$;/bsml3_1.dtd",
+      "step": "1"
+    },
+    {
+      "param": "INPUT_ID_MAPPING_DIRECTORIES",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "INPUT_ID_MAPPING_FILES",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

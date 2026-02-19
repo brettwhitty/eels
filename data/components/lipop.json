@@ -39,5 +39,15 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CUTOFF",
+      "default": "-3"
+    },
+    {
+      "name": "PROJECT_ABBR",
+      "default": "$;PROJECT$;"
+    }
+  ]
 }

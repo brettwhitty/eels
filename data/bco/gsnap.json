@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/gsnap",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/gsnap",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "gsnap_v1",
   "provenance_domain": {
-    "name": "Ergatis gsnap Component",
+    "name": "Ergatis Component: gsnap",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.208045",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "alignment component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "runs the slice-aware GSNAP aligner after setting up a GMAP database"
   ],
   "description_domain": {
     "keywords": [
@@ -32,23 +33,86 @@
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/gsnap"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/gsnap"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "REFERENCE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_GMAP_SETUP_OPTIONS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "READS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_MISMATCHES",
+      "value": "3",
+      "step": "1"
+    },
+    {
+      "param": "INDEL_PENALTY",
+      "value": "1000",
+      "step": "1"
+    },
+    {
+      "param": "INDEL_END_LENGTH",
+      "value": "3",
+      "step": "1"
+    },
+    {
+      "param": "MAX_PAIRED_LENGTH",
+      "value": "1000",
+      "step": "1"
+    },
+    {
+      "param": "EXPECTED_PAIRED_LENGTH",
+      "value": "200",
+      "step": "1"
+    },
+    {
+      "param": "THREADS",
+      "value": "1",
+      "step": "1"
+    },
+    {
+      "param": "MAX_PATHS",
+      "value": "100",
+      "step": "1"
+    },
+    {
+      "param": "OUTPUT_FORMAT",
+      "value": "sam",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

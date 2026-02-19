@@ -16,5 +16,23 @@
     "frg_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "LIBRARY",
+      "default": ""
+    },
+    {
+      "name": "FASTQ_TYPE",
+      "default": "illumina"
+    },
+    {
+      "name": "INSERT_SIZE",
+      "default": ""
+    },
+    {
+      "name": "ORIENTATION",
+      "default": "innie"
+    }
+  ]
 }

@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/gff3_to_gbrowse",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/gff3_to_gbrowse",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "gff3_to_gbrowse_v1",
   "provenance_domain": {
-    "name": "Ergatis gff3_to_gbrowse Component",
+    "name": "Ergatis Component: gff3_to_gbrowse",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.206918",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "file / conversion component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,24 +34,82 @@
         "step_number": 1,
         "name": "gff32GBrowse",
         "description": "Execute gff32GBrowse",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/gff3_to_gbrowse"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/gff3_to_gbrowse"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "gff32GBrowse",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;PYTHON_EXEC$; $;BIN_DIR$;/gff3_to_gbrowse.py"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "GBROWSE_CONF_DIRECTORY",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "GBROWSE_MASTER_CONF",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "GBROWSE_CONF_TEMPLATE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ORGANISM",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "HOSTNAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "DB_NAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "USERNAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bowtie_build",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bowtie_build",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bowtie_build_v1",
   "provenance_domain": {
-    "name": "Ergatis bowtie_build Component",
+    "name": "Ergatis Component: bowtie_build",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.185687",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "generates bowtie index files for the given reference fasta file"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,62 @@
         "step_number": 1,
         "name": "bowtie_build",
         "description": "Execute bowtie_build",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bowtie_build"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bowtie_build"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "bowtie_build",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/bowtie_build"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "BOWTIE_BIN_DIR",
+      "value": "$;BOWTIE_BUILD_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "BOWTIE_INDEX_PREFIX",
+      "value": "ref",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_PARAMETERS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "--v",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -39,5 +39,47 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CDS",
+      "default": "on"
+    },
+    {
+      "name": "SPECIES",
+      "default": ""
+    },
+    {
+      "name": "SPLIT_SIZE",
+      "default": "350000"
+    },
+    {
+      "name": "STRAND",
+      "default": "both"
+    },
+    {
+      "name": "GENEMODEL",
+      "default": "partial"
+    },
+    {
+      "name": "MAXTRACKS",
+      "default": ""
+    },
+    {
+      "name": "EXTRINSIC_CONFIG_FILE",
+      "default": "$;AUGUSTUS_CONFIG_PATH$;/extrinsic/extrinsic.cfg"
+    },
+    {
+      "name": "AUGUSTUS_CONFIG_PATH",
+      "default": "$;AUGUSTUS_DIR$;/config"
+    },
+    {
+      "name": "AUGUSTUS_BINARY_PATH",
+      "default": "$;AUGUSTUS_DIR$;/bin/augustus"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

@@ -16,5 +16,19 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "LINES_PER_FILE",
+      "default": ""
+    },
+    {
+      "name": "NUM_FILES",
+      "default": "150"
+    },
+    {
+      "name": "PREFIX",
+      "default": "split_file"
+    }
+  ]
 }

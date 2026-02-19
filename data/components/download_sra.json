@@ -16,5 +16,31 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "FTP_PATH",
+      "default": "ftp-trace.ncbi.nih.gov"
+    },
+    {
+      "name": "RUN_ID",
+      "default": ""
+    },
+    {
+      "name": "FETCH_METADATA",
+      "default": "1"
+    },
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "NUM_RETRIES",
+      "default": ""
+    }
+  ]
 }

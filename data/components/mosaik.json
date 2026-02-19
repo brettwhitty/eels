@@ -16,5 +16,79 @@
     "bsml_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "FR",
+      "default": ""
+    },
+    {
+      "name": "FR2",
+      "default": ""
+    },
+    {
+      "name": "FQ",
+      "default": ""
+    },
+    {
+      "name": "FQ2",
+      "default": ""
+    },
+    {
+      "name": "Q",
+      "default": ""
+    },
+    {
+      "name": "Q2",
+      "default": ""
+    },
+    {
+      "name": "ST",
+      "default": "illumina"
+    },
+    {
+      "name": "OTHER_BUILD_OPTS",
+      "default": ""
+    },
+    {
+      "name": "HS",
+      "default": "15"
+    },
+    {
+      "name": "MM",
+      "default": "2"
+    },
+    {
+      "name": "M",
+      "default": "all"
+    },
+    {
+      "name": "MHP",
+      "default": "100"
+    },
+    {
+      "name": "ACT",
+      "default": "20"
+    },
+    {
+      "name": "P",
+      "default": "1"
+    },
+    {
+      "name": "OTHER_ALIGN_OPTS",
+      "default": ""
+    },
+    {
+      "name": "OTHER_SORT_OPTS",
+      "default": ""
+    },
+    {
+      "name": "FORM",
+      "default": "ace"
+    },
+    {
+      "name": "OTHER_ASSEMBLER_OPTS",
+      "default": ""
+    }
+  ]
 }

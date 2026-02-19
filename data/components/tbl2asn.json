@@ -49,5 +49,35 @@
     "discrpt_output_list"
   ],
   "has_iterator": true,
-  "group_count": "50"
+  "group_count": "50",
+  "parameters": [
+    {
+      "name": "ORGANISM",
+      "default": ""
+    },
+    {
+      "name": "ASN_TEMPLATE",
+      "default": ""
+    },
+    {
+      "name": "GENERATE_GENBANK_FILES",
+      "default": "T"
+    },
+    {
+      "name": "PERFORM_VALIDATION",
+      "default": "T"
+    },
+    {
+      "name": "CODON_TABLE",
+      "default": "11"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "FASTA_INPUT_LIST",
+      "default": ""
+    }
+  ]
 }

@@ -40,5 +40,15 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "AT_MIN_LENGTH",
+      "default": "8"
+    },
+    {
+      "name": "GC_MIN_LENGTH",
+      "default": "8"
+    }
+  ]
 }

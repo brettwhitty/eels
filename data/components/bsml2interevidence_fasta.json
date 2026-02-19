@@ -23,5 +23,15 @@
     "fsa_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "LENGTH_CUTOFF",
+      "default": "100"
+    },
+    {
+      "name": "EVIDENCE_LIST",
+      "default": ""
+    }
+  ]
 }

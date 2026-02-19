@@ -14,5 +14,23 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "INCLUDE_TRANSCRIPT_LEVEL",
+      "default": "0"
+    },
+    {
+      "name": "LOG",
+      "default": ""
+    },
+    {
+      "name": "CHECK_PIPELINEID",
+      "default": "$;PIPELINEID$;"
+    },
+    {
+      "name": "CHECK_REPOSITORY_ROOT",
+      "default": "$;REPOSITORY_ROOT$;"
+    }
+  ]
 }

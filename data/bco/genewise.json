@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/genewise",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/genewise",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "genewise_v1",
   "provenance_domain": {
-    "name": "Ergatis genewise Component",
+    "name": "Ergatis Component: genewise",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.205122",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "feature prediction / genes component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,37 +34,85 @@
         "step_number": 1,
         "name": "prepare for genewise",
         "description": "Execute prepare for genewise",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/genewise"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/genewise"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "prepare for genewise",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/prepare_for_genewise_best_loc"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.raw_output_list"
-        }
+          "uri": "raw_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "OTHER_OPTS",
+      "value": "-sum -pretty",
+      "step": "1"
+    },
+    {
+      "param": "WORK_DIR",
+      "value": "$;OUTPUT_DIRECTORY$;/work_dir",
+      "step": "1"
+    },
+    {
+      "param": "PADDING_LENGTH",
+      "value": "500",
+      "step": "1"
+    },
+    {
+      "param": "MIN_CHAIN_SCORE",
+      "value": "50",
+      "step": "1"
+    },
+    {
+      "param": "NUM_TIERS",
+      "value": "3",
+      "step": "1"
+    },
+    {
+      "param": "MIN_PERCENT_ALIGN_CHAIN",
+      "value": "70",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

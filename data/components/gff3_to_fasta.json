@@ -21,5 +21,15 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "TYPE",
+      "default": "cds"
+    },
+    {
+      "name": "SEQUENCE_TYPE",
+      "default": "0"
+    }
+  ]
 }

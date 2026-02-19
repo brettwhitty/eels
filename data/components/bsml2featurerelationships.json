@@ -21,5 +21,19 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "ADD_ASSEMBLY",
+      "default": "1"
+    },
+    {
+      "name": "ADD_FEATURE_COORDINATES",
+      "default": "transcript"
+    },
+    {
+      "name": "OUTPUT_ORDER",
+      "default": "polypeptide,CDS,transcript"
+    }
+  ]
 }

@@ -22,5 +22,55 @@
     "faa_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CODON_TABLE",
+      "default": "11"
+    },
+    {
+      "name": "FRAMES",
+      "default": "0"
+    },
+    {
+      "name": "MIN_ORF_SIZE",
+      "default": "180"
+    },
+    {
+      "name": "MAX_ORF_SIZE",
+      "default": "0"
+    },
+    {
+      "name": "MIN_UNMASKED_SIZE",
+      "default": "150"
+    },
+    {
+      "name": "BEGINNING_AS_START",
+      "default": "1"
+    },
+    {
+      "name": "END_AS_STOP",
+      "default": "1"
+    },
+    {
+      "name": "ASSUME_STOPS",
+      "default": "0"
+    },
+    {
+      "name": "FULL_ORFS",
+      "default": "0"
+    },
+    {
+      "name": "FORCE_METHIONINE",
+      "default": "0"
+    },
+    {
+      "name": "HEADER_ADDITIONS",
+      "default": ""
+    },
+    {
+      "name": "GZIP_OUTPUT",
+      "default": "1"
+    }
+  ]
 }

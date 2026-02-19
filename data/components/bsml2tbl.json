@@ -23,5 +23,23 @@
     "tbl_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "EXPORT_MRNA_FEATURES",
+      "default": "0"
+    },
+    {
+      "name": "ALL_EC_NUMBERS",
+      "default": "0"
+    },
+    {
+      "name": "PERCENT_N_CUTOFF",
+      "default": "10"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

@@ -14,5 +14,35 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "DATABASE",
+      "default": ""
+    },
+    {
+      "name": "DATABASE_TYPE",
+      "default": "sybase"
+    },
+    {
+      "name": "NAMESPACE",
+      "default": "0"
+    },
+    {
+      "name": "BATCHSIZE",
+      "default": "30000"
+    }
+  ]
 }

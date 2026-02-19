@@ -39,5 +39,51 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "RDBMS",
+      "default": "sybase"
+    },
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "GZIP_BCP",
+      "default": "1"
+    },
+    {
+      "name": "BLAST_ANALYSIS_ID",
+      "default": ""
+    },
+    {
+      "name": "CLUSTER_ANALYSIS_ID",
+      "default": ""
+    },
+    {
+      "name": "PROGRAM",
+      "default": ""
+    },
+    {
+      "name": "BCP_BATCH_SIZE",
+      "default": "30000"
+    },
+    {
+      "name": "USE_CM_BLAST",
+      "default": "0"
+    }
+  ]
 }

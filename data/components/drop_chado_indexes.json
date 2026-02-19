@@ -27,5 +27,27 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "RDBMS",
+      "default": "sybase"
+    }
+  ]
 }

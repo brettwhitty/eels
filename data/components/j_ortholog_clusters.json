@@ -16,5 +16,35 @@
     "fasta_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "PVALCUT",
+      "default": "1e-5"
+    },
+    {
+      "name": "PCOVERAGE_CUTOFF",
+      "default": "70"
+    },
+    {
+      "name": "PIDENTITY_CUTOFF",
+      "default": ""
+    },
+    {
+      "name": "PSIMILARITY_CUTOFF",
+      "default": ""
+    },
+    {
+      "name": "MAX_MULTI_ALIGNMENT",
+      "default": "100"
+    },
+    {
+      "name": "JACCARD_CUTOFF",
+      "default": "0.0"
+    },
+    {
+      "name": "USE_FEATURE_IDS_IN_FASTA",
+      "default": "0"
+    }
+  ]
 }

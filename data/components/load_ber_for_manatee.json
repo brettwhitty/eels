@@ -18,5 +18,39 @@
     "raw_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DB_USERNAME",
+      "default": ""
+    },
+    {
+      "name": "DB_PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "DB_HOST",
+      "default": ""
+    },
+    {
+      "name": "DB_NAME",
+      "default": ""
+    },
+    {
+      "name": "BER_OUTPUT_DIRECTORY",
+      "default": ""
+    },
+    {
+      "name": "DESTINATION_DIRECTORY",
+      "default": ""
+    },
+    {
+      "name": "LOCAL_DIRECTORY",
+      "default": ""
+    },
+    {
+      "name": "BER_FILE_DESTINATION_SERVER",
+      "default": ""
+    }
+  ]
 }

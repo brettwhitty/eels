@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/update_euk_model_sequences",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/update_euk_model_sequences",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "update_euk_model_sequences_v1",
   "provenance_domain": {
-    "name": "Ergatis update_euk_model_sequences Component",
+    "name": "Ergatis Component: update_euk_model_sequences",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.251662",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "database modification component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,84 @@
         "step_number": 1,
         "name": "deriveCDSSequences",
         "description": "Execute deriveCDSSequences",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 2,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          1
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 3,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          2
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/update_euk_model_sequences"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/update_euk_model_sequences"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "deriveCDSSequences",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/deriveCDSSequences"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "USERNAME",
+      "value": "access",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "access",
+      "step": "1"
+    },
+    {
+      "param": "SERVER",
+      "value": "SYBTIGR",
+      "step": "1"
+    },
+    {
+      "param": "RDBMS",
+      "value": "sybase",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -39,5 +39,31 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ORGANISM_TYPE",
+      "default": "P"
+    },
+    {
+      "name": "CHLOROPLAST_PREDICTION_CUTOFF",
+      "default": "0.00"
+    },
+    {
+      "name": "SECRETORY_PATHWAY_PREDICTION_CUTOFF",
+      "default": "0.00"
+    },
+    {
+      "name": "MITOCHONDRIAL_PREDICTION_CUTOFF",
+      "default": "0.00"
+    },
+    {
+      "name": "OTHER_LOCATION_PREDICTION_CUTOFF",
+      "default": "0.00"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

@@ -19,5 +19,131 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BOWTIE_BIN_DIR",
+      "default": "$;BOWTIE_BIN$;"
+    },
+    {
+      "name": "SAMTOOLS_BIN_DIR",
+      "default": "$;SAMTOOLS_BIN$;"
+    },
+    {
+      "name": "TOPHAT_BIN_DIR",
+      "default": "$;TOPHAT_BIN$;"
+    },
+    {
+      "name": "MATE_INNER_DIST",
+      "default": "200"
+    },
+    {
+      "name": "MATE_STD_DEV",
+      "default": "20"
+    },
+    {
+      "name": "MIN_ANCHOR",
+      "default": "8"
+    },
+    {
+      "name": "SPLICE_MISMATCHES",
+      "default": "0"
+    },
+    {
+      "name": "MIN_INTRON_LENGTH",
+      "default": "50"
+    },
+    {
+      "name": "MAX_INTRON_LENGTH",
+      "default": "500000"
+    },
+    {
+      "name": "MAX_INSERTION_LENGTH",
+      "default": "3"
+    },
+    {
+      "name": "MAX_DELETION_LENGTH",
+      "default": "3"
+    },
+    {
+      "name": "NUMBER_THREADS",
+      "default": "1"
+    },
+    {
+      "name": "MAX_MULTIHITS",
+      "default": "20"
+    },
+    {
+      "name": "LIBRARY_TYPE",
+      "default": ""
+    },
+    {
+      "name": "BOWTIE_MODE",
+      "default": "v"
+    },
+    {
+      "name": "READ_MISMATCHES",
+      "default": "2"
+    },
+    {
+      "name": "SEGMENT_MISMATCHES",
+      "default": "2"
+    },
+    {
+      "name": "SEGMENT_LENGTH",
+      "default": "25"
+    },
+    {
+      "name": "READ_GAP_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "READ_EDIT_DIST",
+      "default": ""
+    },
+    {
+      "name": "MIN_COVERAGE_INTRON",
+      "default": "50"
+    },
+    {
+      "name": "MAX_COVERAGE_INTRON",
+      "default": "20000"
+    },
+    {
+      "name": "MIN_SEGMENT_INTRON",
+      "default": "50"
+    },
+    {
+      "name": "MAX_SEGMENT_INTRON",
+      "default": "500000"
+    },
+    {
+      "name": "RAW_JUNCS_FILE",
+      "default": ""
+    },
+    {
+      "name": "ANNOTATION_FILE",
+      "default": ""
+    },
+    {
+      "name": "TRANSCRIPTOME_INDEX_PREFIX",
+      "default": ""
+    },
+    {
+      "name": "REF_INSERTIONS_FILE",
+      "default": ""
+    },
+    {
+      "name": "REF_DELETIONS_FILE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_PARAMETERS",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

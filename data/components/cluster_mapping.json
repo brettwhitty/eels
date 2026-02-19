@@ -14,5 +14,35 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "50"
+  "group_count": "50",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": "access"
+    },
+    {
+      "name": "PASSWORD",
+      "default": "access"
+    },
+    {
+      "name": "RDBMS",
+      "default": "Sybase"
+    },
+    {
+      "name": "SERVER",
+      "default": "SYBPROD"
+    },
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "ANALYSIS_ID1",
+      "default": ""
+    },
+    {
+      "name": "ANALYSIS_ID2",
+      "default": ""
+    }
+  ]
 }

@@ -27,5 +27,27 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "DATABASE_TYPE",
+      "default": "sybase"
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "GZIP_SQL",
+      "default": "0"
+    },
+    {
+      "name": "GZIP_BCP",
+      "default": "0"
+    }
+  ]
 }

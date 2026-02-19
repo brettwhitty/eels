@@ -17,5 +17,19 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CONFIG_OPTIONS",
+      "default": ""
+    },
+    {
+      "name": "REFERENCE_GENOME",
+      "default": ""
+    },
+    {
+      "name": "REFERENCE_GENOME_MAP",
+      "default": ""
+    }
+  ]
 }

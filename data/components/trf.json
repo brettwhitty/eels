@@ -43,5 +43,43 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MATCH",
+      "default": "2"
+    },
+    {
+      "name": "MISMATCH",
+      "default": "7"
+    },
+    {
+      "name": "DELTA",
+      "default": "7"
+    },
+    {
+      "name": "PM",
+      "default": "80"
+    },
+    {
+      "name": "PI",
+      "default": "10"
+    },
+    {
+      "name": "MINSCORE",
+      "default": "50"
+    },
+    {
+      "name": "MAXPERIOD",
+      "default": "500"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    }
+  ]
 }

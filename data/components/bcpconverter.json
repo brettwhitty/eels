@@ -16,5 +16,31 @@
     "bcp_output_list"
   ],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "INPUT_FORMAT",
+      "default": ""
+    },
+    {
+      "name": "INPUT_FILE_EXTENSION",
+      "default": ""
+    },
+    {
+      "name": "INDIR",
+      "default": ""
+    },
+    {
+      "name": "OUTPUT_FORMAT",
+      "default": ""
+    },
+    {
+      "name": "OUTPUT_FILE_EXTENSION",
+      "default": ""
+    },
+    {
+      "name": "TABLE",
+      "default": ""
+    }
+  ]
 }

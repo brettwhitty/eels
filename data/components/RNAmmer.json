@@ -41,5 +41,23 @@
     "hmmreport_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "KINGDOM",
+      "default": "bac"
+    },
+    {
+      "name": "MOLECULES",
+      "default": "lsu,tsu,ssu"
+    },
+    {
+      "name": "PROJECT_ABBREVIATION",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "ARGS",
+      "default": ""
+    }
+  ]
 }

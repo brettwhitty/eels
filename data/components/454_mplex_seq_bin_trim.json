@@ -17,5 +17,35 @@
     "discarded_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BARCODE_FILE",
+      "default": "/usr/local/projects/16SrRNA_454Multiplex/barcodes/barcodes-v1.txt"
+    },
+    {
+      "name": "MAX_BARCODE_OFFSET",
+      "default": "4"
+    },
+    {
+      "name": "REVERSE_PRIMER",
+      "default": "CATGCTGCCTCCCGTAGGAGT"
+    },
+    {
+      "name": "MAX_EDIT_DIST",
+      "default": "2"
+    },
+    {
+      "name": "FORWARD_PRIMER",
+      "default": "CTGAGCCAGGATCAAACTCT"
+    },
+    {
+      "name": "TRIM",
+      "default": "all"
+    },
+    {
+      "name": "MIN_LENGTH",
+      "default": "200"
+    }
+  ]
 }

@@ -1,48 +1,229 @@
 {
-  "object_id": "https://example.org/bco/ergatis/initdb",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/initdb",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "initdb_v1",
   "provenance_domain": {
-    "name": "Ergatis initdb Component",
+    "name": "Ergatis Component: initdb",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.210254",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "database / manipulation component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
       "database",
       "manipulation"
     ],
-    "pipeline_steps": []
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          0
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 2,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          1
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 3,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          2
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 4,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          3
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 5,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          4
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 6,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          5
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 7,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          6
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 8,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          7
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 9,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          8
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 10,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          9
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 11,
+        "name": "ddl2iterator",
+        "description": "Convert using ddl2iterator",
+        "version": "unspecified",
+        "prerequisite": [
+          10
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/initdb"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/initdb"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "DATABASE",
+      "value": "$;PROJECT$;",
+      "step": "1"
+    },
+    {
+      "param": "SERVER",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ADMIN_USER",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ADMIN_PASS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PARTITION",
+      "value": "1",
+      "step": "1"
+    },
+    {
+      "param": "RDBMS",
+      "value": "[postgresql|mysql|oracle|sybase]",
+      "step": "1"
+    },
+    {
+      "param": "NAMESPACE",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "BATCHSIZE",
+      "value": "30000",
+      "step": "1"
+    },
+    {
+      "param": "ALLOW_DUPLICATES",
+      "value": "1",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

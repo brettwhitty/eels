@@ -39,5 +39,23 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "HMM_FILE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_RAW_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "INPUT_SEQ_CLASS",
+      "default": "assembly"
+    }
+  ]
 }

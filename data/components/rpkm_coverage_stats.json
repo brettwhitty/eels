@@ -19,5 +19,31 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BEDTOOLS_BIN_DIR",
+      "default": "$;BEDTOOLS_BIN$;"
+    },
+    {
+      "name": "SAMTOOLS_BIN_DIR",
+      "default": "$;SAMTOOLS_BIN$;"
+    },
+    {
+      "name": "FEATURE_ID",
+      "default": ""
+    },
+    {
+      "name": "ATTRIBUTE_ID",
+      "default": ""
+    },
+    {
+      "name": "GROUPBY_ID",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

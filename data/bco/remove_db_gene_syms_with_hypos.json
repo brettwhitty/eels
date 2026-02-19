@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/remove_db_gene_syms_with_hypos",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/remove_db_gene_syms_with_hypos",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "remove_db_gene_syms_with_hypos_v1",
   "provenance_domain": {
-    "name": "Ergatis remove_db_gene_syms_with_hypos Component",
+    "name": "Ergatis Component: remove_db_gene_syms_with_hypos",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.237281",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "utility component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "Remove EC numbers and gene symbols that have hypothetical gene product names"
   ],
   "description_domain": {
     "keywords": [
@@ -32,33 +33,85 @@
         "step_number": 1,
         "name": "remove_hypothetical_ec",
         "description": "Execute remove_hypothetical_ec",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "remove_db_gene_syms_with_hypotheticals",
         "description": "Execute remove_db_gene_syms_with_hypotheticals",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/remove_db_gene_syms_with_hypos"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/remove_db_gene_syms_with_hypos"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "remove_hypothetical_ec",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/remove_hypothetical_ec"
+        }
+      },
+      {
+        "name": "remove_db_gene_syms_with_hypotheticals",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/remove_db_gene_syms_with_hypos"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "HOST",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "USERNAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "UPDATE",
+      "value": "1",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

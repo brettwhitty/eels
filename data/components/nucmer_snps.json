@@ -29,5 +29,31 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BREAKLEN",
+      "default": "200"
+    },
+    {
+      "name": "MINCLUSTER",
+      "default": "65"
+    },
+    {
+      "name": "DIAGFACTOR",
+      "default": "0.12"
+    },
+    {
+      "name": "MAXGAP",
+      "default": "90"
+    },
+    {
+      "name": "MINMATCH",
+      "default": "20"
+    },
+    {
+      "name": "SHOW_SNPS_OPTS",
+      "default": "-C"
+    }
+  ]
 }

@@ -81,5 +81,47 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "ADMIN_USER",
+      "default": ""
+    },
+    {
+      "name": "ADMIN_PASS",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD_FILE",
+      "default": ""
+    },
+    {
+      "name": "PARTITION",
+      "default": "1"
+    },
+    {
+      "name": "RDBMS",
+      "default": "[postgresql|mysql|oracle|sybase]"
+    },
+    {
+      "name": "NAMESPACE",
+      "default": "0"
+    },
+    {
+      "name": "BATCHSIZE",
+      "default": "30000"
+    },
+    {
+      "name": "ALLOW_DUPLICATES",
+      "default": "1"
+    }
+  ]
 }

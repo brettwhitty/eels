@@ -46,5 +46,43 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "EXPECT",
+      "default": "1e-5"
+    },
+    {
+      "name": "FILTER",
+      "default": "none"
+    },
+    {
+      "name": "DATABASE_MATCHES",
+      "default": "150"
+    },
+    {
+      "name": "DESCRIPTIONS",
+      "default": "150"
+    },
+    {
+      "name": "GSPMAX",
+      "default": "5"
+    },
+    {
+      "name": "FILTER_HSPS_FOR_STATS",
+      "default": "1"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_RAW_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    }
+  ]
 }

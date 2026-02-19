@@ -29,5 +29,63 @@
     "only_changed_bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BER_EVIDENCE",
+      "default": ""
+    },
+    {
+      "name": "CHARACTERIZED_DB",
+      "default": "$;CHAR_DB$;"
+    },
+    {
+      "name": "DB_USERNAME",
+      "default": ""
+    },
+    {
+      "name": "DB_PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "HMM_CODING_DB",
+      "default": "$;HMM_LIB_DB$;"
+    },
+    {
+      "name": "BER_EXTENSION",
+      "default": "300"
+    },
+    {
+      "name": "PERCENT_IDENTITY_CUTOFF",
+      "default": "60"
+    },
+    {
+      "name": "P_VALUE_CUTOFF",
+      "default": "1e-30"
+    },
+    {
+      "name": "CHARACTERIZED_VOTE_BONUS",
+      "default": "4"
+    },
+    {
+      "name": "MIN_VOTE_CUTOFF",
+      "default": "2"
+    },
+    {
+      "name": "RBS_SLIDING_WINDOW_SIZE",
+      "default": "6"
+    },
+    {
+      "name": "RBS_AG_PERCENT_CUTOFF",
+      "default": "75"
+    },
+    {
+      "name": "BSML_INPUT_FILE",
+      "default": ""
+    },
+    {
+      "name": "BSML_INPUT_LIST",
+      "default": ""
+    }
+  ]
 }

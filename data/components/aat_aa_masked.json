@@ -88,5 +88,47 @@
     "nap_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DPS_OPTS",
+      "default": "-f 100 -i 30 -a 2000"
+    },
+    {
+      "name": "MATRIX",
+      "default": "/usr/local/common/BS"
+    },
+    {
+      "name": "EXT_OPTS",
+      "default": ""
+    },
+    {
+      "name": "FILTER_OPTS",
+      "default": "-c 20"
+    },
+    {
+      "name": "NAP_OPTS",
+      "default": ""
+    },
+    {
+      "name": "CUTOFF_IDENTITY",
+      "default": ""
+    },
+    {
+      "name": "CUTOFF_SIMILARITY",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "1"
+    },
+    {
+      "name": "COMPRESS_BTAB_OUTPUT",
+      "default": "1"
+    },
+    {
+      "name": "COMPRESS_NAP_OUTPUT",
+      "default": "1"
+    }
+  ]
 }

@@ -39,5 +39,11 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OTHER_OPTS",
+      "default": "--libdir=$;TMHMM_LIB$;"
+    }
+  ]
 }

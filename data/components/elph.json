@@ -25,5 +25,27 @@
     "motif_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MOTIF_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "ITERATOR_NUM",
+      "default": "10"
+    },
+    {
+      "name": "MAX_LOOP",
+      "default": "500"
+    },
+    {
+      "name": "ITER_SIGNIFIGANCE",
+      "default": "1000"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

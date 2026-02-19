@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/nucmer_snps",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/nucmer_snps",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "nucmer_snps_v1",
   "provenance_domain": {
-    "name": "Ergatis nucmer_snps Component",
+    "name": "Ergatis Component: nucmer_snps",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.225400",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "alignment / multiple component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,49 +34,115 @@
         "step_number": 1,
         "name": "NUCmer",
         "description": "Execute NUCmer",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "delta-filter",
         "description": "Execute delta-filter",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "show-snps",
         "description": "Execute show-snps",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/nucmer_snps"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/nucmer_snps"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "NUCmer",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/usr/local/common/nucmer"
+        }
+      },
+      {
+        "name": "delta-filter",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/usr/local/common/delta-filter"
+        }
+      },
+      {
+        "name": "show-snps",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/usr/local/common/show-snps"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "BREAKLEN",
+      "value": "200",
+      "step": "1"
+    },
+    {
+      "param": "MINCLUSTER",
+      "value": "65",
+      "step": "1"
+    },
+    {
+      "param": "DIAGFACTOR",
+      "value": "0.12",
+      "step": "1"
+    },
+    {
+      "param": "MAXGAP",
+      "value": "90",
+      "step": "1"
+    },
+    {
+      "param": "MINMATCH",
+      "value": "20",
+      "step": "1"
+    },
+    {
+      "param": "SHOW_SNPS_OPTS",
+      "value": "-C",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

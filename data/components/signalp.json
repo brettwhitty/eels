@@ -70,5 +70,27 @@
     "gnu_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ORGANISM_TYPE",
+      "default": "euk"
+    },
+    {
+      "name": "PREDICTION_METHOD",
+      "default": "best"
+    },
+    {
+      "name": "TRUNCATED_LENGTH",
+      "default": "70"
+    },
+    {
+      "name": "COMPRESS_RAW_OUTPUT",
+      "default": "1"
+    },
+    {
+      "name": "ARGS",
+      "default": ""
+    }
+  ]
 }

@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/combine_ncRNA_alignments",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/combine_ncRNA_alignments",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "combine_ncRNA_alignments_v1",
   "provenance_domain": {
-    "name": "Ergatis combine_ncRNA_alignments Component",
+    "name": "Ergatis Component: combine_ncRNA_alignments",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.191465",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     " component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [],
@@ -30,61 +31,100 @@
         "step_number": 1,
         "name": "combine_ncRNA_alignments",
         "description": "Execute combine_ncRNA_alignments",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "dtd validation",
         "description": "Execute dtd validation",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/combine_ncRNA_alignments"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/combine_ncRNA_alignments"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "combine_ncRNA_alignments",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/combine_ncRNA_alignemnts"
+        }
+      },
+      {
+        "name": "dtd validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.btab_output_list"
-        }
+          "uri": "btab_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.raw_output_list"
-        }
+          "uri": "raw_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "PROJECT_NAME",
+      "value": "$;PROJECT$;",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_BSML_LISTS",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

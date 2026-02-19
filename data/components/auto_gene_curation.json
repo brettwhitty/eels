@@ -42,5 +42,27 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BER_INPUT",
+      "default": ""
+    },
+    {
+      "name": "HMM_INPUT",
+      "default": ""
+    },
+    {
+      "name": "HMM_INFO_DB",
+      "default": ""
+    },
+    {
+      "name": "NAMES_DUMP",
+      "default": "$;REPOSITORY_ROOT$;/data_dbs/taxdump/names.dmp"
+    },
+    {
+      "name": "NODES_DUMP",
+      "default": "$;REPOSITORY_ROOT$;/data_dbs/taxdump/nodes.dmp"
+    }
+  ]
 }

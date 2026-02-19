@@ -14,5 +14,31 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "DATABASE",
+      "default": ""
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "ASSEMBLY",
+      "default": ""
+    },
+    {
+      "name": "COORD",
+      "default": ""
+    }
+  ]
 }

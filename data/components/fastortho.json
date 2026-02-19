@@ -14,5 +14,35 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MAX_E_VALUE",
+      "default": "1e-5"
+    },
+    {
+      "name": "MIN_PERCENT_ID",
+      "default": "0.0"
+    },
+    {
+      "name": "MIN_PERCENT_MATCH",
+      "default": "0.0"
+    },
+    {
+      "name": "INFLATION",
+      "default": "1.5"
+    },
+    {
+      "name": "NUM_CPUS",
+      "default": "1"
+    },
+    {
+      "name": "MIXED_GENOMES",
+      "default": "1"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "''"
+    }
+  ]
 }

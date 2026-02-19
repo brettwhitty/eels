@@ -23,5 +23,31 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "FASTQ",
+      "default": "0"
+    },
+    {
+      "name": "HLGT",
+      "default": "0"
+    },
+    {
+      "name": "HOST",
+      "default": ""
+    },
+    {
+      "name": "COMBINE_MATES",
+      "default": "0"
+    },
+    {
+      "name": "PAIRED",
+      "default": "1"
+    },
+    {
+      "name": "ASSUME_UNIQ",
+      "default": "0"
+    }
+  ]
 }

@@ -14,5 +14,15 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "IDENTITY_PERCENTAGE",
+      "default": "30"
+    },
+    {
+      "name": "READ_LENGTH_COVERAGE",
+      "default": "80"
+    }
+  ]
 }

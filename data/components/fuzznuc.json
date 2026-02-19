@@ -40,5 +40,19 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "COMPLEMENT_SEARCH",
+      "default": "N"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "PATTERN_NAME",
+      "default": ""
+    }
+  ]
 }

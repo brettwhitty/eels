@@ -1,47 +1,88 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bam2sam",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bam2sam",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bam2sam_v1",
   "provenance_domain": {
-    "name": "Ergatis bam2sam Component",
+    "name": "Ergatis Component: bam2sam",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.181970",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "converts SAM files to indexed BAM"
   ],
   "description_domain": {
     "keywords": [
       "RNA-Seq"
     ],
-    "pipeline_steps": []
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "bam2sam",
+        "description": "Convert using bam2sam",
+        "version": "unspecified",
+        "prerequisite": [
+          0
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bam2sam"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bam2sam"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "VIEW_OPTIONS",
+      "value": "-h",
+      "step": "1"
+    },
+    {
+      "param": "SORT_OPTIONS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "INPUT_BAM_FILE",
+      "value": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/sam2bam/185_default/test.name_sorted.bam",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

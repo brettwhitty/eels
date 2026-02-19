@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/assign_dbxref_ids",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/assign_dbxref_ids",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "assign_dbxref_ids_v1",
   "provenance_domain": {
-    "name": "Ergatis assign_dbxref_ids Component",
+    "name": "Ergatis Component: assign_dbxref_ids",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.180420",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "utility component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "Assign ID prefixes to dbxref table in database"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,102 @@
         "step_number": 1,
         "name": "assign dbxref IDs",
         "description": "Execute assign dbxref IDs",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/assign_dbxref_ids"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/assign_dbxref_ids"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "assign dbxref IDs",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/assign_dbxref_ids"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "SERVER",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "USERNAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "DB_NAME",
+      "value": "NCBI_locus_tag",
+      "step": "1"
+    },
+    {
+      "param": "ID_PREFIX_MAP",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FEATURE_TYPE",
+      "value": "gene",
+      "step": "1"
+    },
+    {
+      "param": "ORGANISM_ID",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ASSIGN_MISSING",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "VERSION",
+      "value": "public_locus",
+      "step": "1"
+    },
+    {
+      "param": "ZERO_PAD",
+      "value": "4",
+      "step": "1"
+    },
+    {
+      "param": "MOLECULE_TYPE",
+      "value": "assembly",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -22,5 +22,31 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OTHER_OPTS",
+      "default": "-sum -pretty"
+    },
+    {
+      "name": "WORK_DIR",
+      "default": "$;OUTPUT_DIRECTORY$;/work_dir"
+    },
+    {
+      "name": "PADDING_LENGTH",
+      "default": "500"
+    },
+    {
+      "name": "MIN_CHAIN_SCORE",
+      "default": "50"
+    },
+    {
+      "name": "NUM_TIERS",
+      "default": "3"
+    },
+    {
+      "name": "MIN_PERCENT_ALIGN_CHAIN",
+      "default": "70"
+    }
+  ]
 }

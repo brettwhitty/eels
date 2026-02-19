@@ -36,5 +36,15 @@
     "gbk_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "NUM_SEQS",
+      "default": "1000"
+    },
+    {
+      "name": "CUTOFF",
+      "default": "180"
+    }
+  ]
 }

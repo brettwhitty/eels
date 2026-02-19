@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bepipred",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bepipred",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bepipred_v1",
   "provenance_domain": {
-    "name": "Ergatis bepipred Component",
+    "name": "Ergatis Component: bepipred",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.182805",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "functional prediction component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,82 +33,149 @@
         "step_number": 1,
         "name": "replace fasta headers",
         "description": "Execute replace fasta headers",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "bepipred",
         "description": "Execute bepipred",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "fix output file",
         "description": "Execute fix output file",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "dtd validation",
         "description": "Execute dtd validation",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "bepipred2bsml",
         "description": "Convert using bepipred2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
+        ],
+        "input_list": [
+          {
+            "uri": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw"
+          }
+        ],
+        "output_list": [
+          {
+            "uri": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+          }
         ]
       },
       {
         "step_number": 6,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           5
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bepipred"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bepipred"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "replace fasta headers",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/replace_fasta_headers.pl"
+        }
+      },
+      {
+        "name": "bepipred",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/local/projects/STREP/bepipred-1.0b/bepipred"
+        }
+      },
+      {
+        "name": "fix output file",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/replace_fasta_headers.pl"
+        }
+      },
+      {
+        "name": "dtd validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.raw_output_list"
-        }
+          "uri": "raw_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "THRESHOLD",
+      "value": "0.35",
+      "step": "1"
+    },
+    {
+      "param": "LEAVE_FASTA_HEADERS",
+      "value": "0",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

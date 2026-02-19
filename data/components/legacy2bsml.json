@@ -44,5 +44,51 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "50"
+  "group_count": "50",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": "access"
+    },
+    {
+      "name": "PASSWORD",
+      "default": "access"
+    },
+    {
+      "name": "RDBMS",
+      "default": "Sybase"
+    },
+    {
+      "name": "HOST",
+      "default": "SYBTIGR"
+    },
+    {
+      "name": "MODE",
+      "default": "2"
+    },
+    {
+      "name": "IDGEN_IDENTIFIER_VERSION",
+      "default": "0"
+    },
+    {
+      "name": "EMAIL",
+      "default": ""
+    },
+    {
+      "name": "NO_DIE_NULL_SEQUENCES",
+      "default": "1"
+    },
+    {
+      "name": "BSML_DTD",
+      "default": "$;DOCS_DIR$;/bsml3_1.dtd"
+    },
+    {
+      "name": "INPUT_ID_MAPPING_DIRECTORIES",
+      "default": ""
+    },
+    {
+      "name": "INPUT_ID_MAPPING_FILES",
+      "default": ""
+    }
+  ]
 }

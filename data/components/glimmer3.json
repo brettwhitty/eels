@@ -39,5 +39,31 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "TRAINING_SEQ",
+      "default": ""
+    },
+    {
+      "name": "ICM",
+      "default": "$;OUTPUT_DIRECTORY$;/$;COMPONENT_NAME$;.icm"
+    },
+    {
+      "name": "LONG_ORFS_OPTS",
+      "default": "-n -t 1.15"
+    },
+    {
+      "name": "GLIMMER3_OPTS",
+      "default": ""
+    },
+    {
+      "name": "START_CODON_USAGE",
+      "default": ""
+    },
+    {
+      "name": "PROJECT_ABBREVIATION",
+      "default": "$;PROJECT$;"
+    }
+  ]
 }

@@ -39,5 +39,23 @@
     "gff3_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "PARAM_FILE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_GFF3_OUTPUT",
+      "default": "1"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "1"
+    }
+  ]
 }

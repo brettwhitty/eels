@@ -22,5 +22,19 @@
     "replicate_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "LENGTH_DIFFERENCE",
+      "default": "10"
+    },
+    {
+      "name": "PREFIX_LENGTH",
+      "default": "8"
+    },
+    {
+      "name": "STAGEDATA",
+      "default": "$;REPOSITORY_ROOT$;/output_repository/uclust/$;PIPELINEID$;_default/uclust.sorted.list"
+    }
+  ]
 }

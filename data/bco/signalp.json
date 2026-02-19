@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/signalp",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/signalp",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "signalp_v1",
   "provenance_domain": {
-    "name": "Ergatis signalp Component",
+    "name": "Ergatis Component: signalp",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.243427",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "functional prediction component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,139 +33,227 @@
         "step_number": 1,
         "name": "Create scratch dir for signalp output",
         "description": "Execute Create scratch dir for signalp output",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "Run signalp",
         "description": "Execute Run signalp",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "Rename signalp graphics files",
         "description": "Execute Rename signalp graphics files",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "dtd validation",
         "description": "Execute dtd validation",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "signalp2bsml",
         "description": "Convert using signalp2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
+        ],
+        "input_list": [
+          {
+            "uri": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.raw"
+          }
+        ],
+        "output_list": [
+          {
+            "uri": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+          }
         ]
       },
       {
         "step_number": 6,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           5
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 7,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           6
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 8,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           7
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 9,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           8
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/signalp"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/signalp"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "Create scratch dir for signalp output",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "Run signalp",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;SIGNALP_EXEC$;"
+        }
+      },
+      {
+        "name": "Rename signalp graphics files",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/signalp_graphics_rename"
+        }
+      },
+      {
+        "name": "dtd validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.btab_output_list"
-        }
+          "uri": "btab_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.raw_output_list"
-        }
+          "uri": "raw_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.gif_output_list"
-        }
+          "uri": "gif_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.eps_output_list"
-        }
+          "uri": "eps_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.ps_output_list"
-        }
+          "uri": "ps_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.gnu_output_list"
-        }
+          "uri": "gnu_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "ORGANISM_TYPE",
+      "value": "euk",
+      "step": "1"
+    },
+    {
+      "param": "PREDICTION_METHOD",
+      "value": "best",
+      "step": "1"
+    },
+    {
+      "param": "TRUNCATED_LENGTH",
+      "value": "70",
+      "step": "1"
+    },
+    {
+      "param": "COMPRESS_RAW_OUTPUT",
+      "value": "1",
+      "step": "1"
+    },
+    {
+      "param": "ARGS",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -21,5 +21,15 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MODEL",
+      "default": "est2genome"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": "--showtargetgff 1"
+    }
+  ]
 }

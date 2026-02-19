@@ -21,5 +21,23 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "VIEW_OPTIONS",
+      "default": "-h"
+    },
+    {
+      "name": "SORT_OPTIONS",
+      "default": ""
+    },
+    {
+      "name": "INPUT_BAM_FILE",
+      "default": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/sam2bam/185_default/test.name_sorted.bam"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": ""
+    }
+  ]
 }

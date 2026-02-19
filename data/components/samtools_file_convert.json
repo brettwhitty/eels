@@ -19,5 +19,27 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "REFERENCE_FASTA",
+      "default": ""
+    },
+    {
+      "name": "SAMTOOLS_BIN_DIR",
+      "default": "$;SAMTOOLS_BIN$;"
+    },
+    {
+      "name": "SAMTOOLS_VIEW_PARAMETERS",
+      "default": ""
+    },
+    {
+      "name": "SAMTOOLS_SORT_PARAMETERS",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

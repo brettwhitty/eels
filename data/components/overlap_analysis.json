@@ -28,5 +28,23 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CUTOFF",
+      "default": "60"
+    },
+    {
+      "name": "SEQUENCE_CLASS",
+      "default": "assembly"
+    },
+    {
+      "name": "RNA_BSML",
+      "default": ""
+    },
+    {
+      "name": "EVIDENCE_BSML",
+      "default": ""
+    }
+  ]
 }

@@ -40,5 +40,15 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DIMOB_PATH",
+      "default": "/usr/local/bin/dimob.pl"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": "--hmmer2"
+    }
+  ]
 }

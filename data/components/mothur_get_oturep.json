@@ -19,5 +19,23 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DIST_FORMAT",
+      "default": "[ phylip|column ]"
+    },
+    {
+      "name": "LABEL",
+      "default": ""
+    },
+    {
+      "name": "SORTED",
+      "default": ""
+    },
+    {
+      "name": "LARGE",
+      "default": ""
+    }
+  ]
 }

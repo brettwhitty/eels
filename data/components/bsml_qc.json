@@ -21,5 +21,19 @@
     "summary_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CHECK_DUP_POLYPEPTIDE",
+      "default": "0"
+    },
+    {
+      "name": "CHECK_PARTIAL",
+      "default": "0"
+    },
+    {
+      "name": "USE_PATHEMA_ASMBL_ID",
+      "default": "0"
+    }
+  ]
 }

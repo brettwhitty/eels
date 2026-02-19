@@ -16,5 +16,19 @@
     "bsml_output_list"
   ],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "ANNOTATE_ON",
+      "default": "transcript"
+    },
+    {
+      "name": "HMM_INFO",
+      "default": ""
+    },
+    {
+      "name": "BER_INFO",
+      "default": ""
+    }
+  ]
 }

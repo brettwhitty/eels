@@ -33,5 +33,35 @@
     "fsa_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "TABLE",
+      "default": "0"
+    },
+    {
+      "name": "FRAME",
+      "default": "1"
+    },
+    {
+      "name": "MULTIFASTA_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "SEQS_PER_FASTA",
+      "default": "100"
+    },
+    {
+      "name": "REGIONS",
+      "default": ""
+    },
+    {
+      "name": "PROJECT_NAME",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "CLEANUP",
+      "default": "0"
+    }
+  ]
 }

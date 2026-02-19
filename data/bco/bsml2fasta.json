@@ -1,55 +1,150 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bsml2fasta",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bsml2fasta",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bsml2fasta_v1",
   "provenance_domain": {
-    "name": "Ergatis bsml2fasta Component",
+    "name": "Ergatis Component: bsml2fasta",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.186144",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "file / conversion component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
       "file",
       "conversion"
     ],
-    "pipeline_steps": []
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "bsml2fasta",
+        "description": "Convert using bsml2fasta",
+        "version": "unspecified",
+        "prerequisite": [
+          0
+        ],
+        "input_list": [],
+        "output_list": [
+          {
+            "uri": "'$;OUTPUT_DIRECTORY$;/$;OUTPUT_FILE$;'"
+          }
+        ]
+      }
+    ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bsml2fasta"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bsml2fasta"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.output_list"
-        }
+          "uri": "output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "FORMAT",
+      "value": "single",
+      "step": "1"
+    },
+    {
+      "param": "SPLIT_MULTIFASTA",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "SEQS_PER_FASTA",
+      "value": "100",
+      "step": "1"
+    },
+    {
+      "param": "CLASS_FILTER",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "HEADER_CLASS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PARSE_ELEMENT",
+      "value": "sequence",
+      "step": "1"
+    },
+    {
+      "param": "ROLE_EXCLUDE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ROLE_INCLUDE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "BP_EXTENSION",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "COORDS",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "USE_FEATURE_IDS_IN_FASTA",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "USE_SEQUENCE_IDS_IN_FASTA",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "OUTPUT_SUFFIX",
+      "value": "fsa",
+      "step": "1"
+    },
+    {
+      "param": "OUTPUT_SUBDIR_SIZE",
+      "value": "20000",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

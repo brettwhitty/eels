@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/mothur_get_oturep",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/mothur_get_oturep",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "mothur_get_oturep_v1",
   "provenance_domain": {
-    "name": "Ergatis mothur_get_oturep Component",
+    "name": "Ergatis Component: mothur_get_oturep",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.218457",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "utility component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,62 @@
         "step_number": 1,
         "name": "get oturep",
         "description": "Execute get oturep",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/mothur_get_oturep"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/mothur_get_oturep"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "get oturep",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/mothur"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "DIST_FORMAT",
+      "value": "[ phylip|column ]",
+      "step": "1"
+    },
+    {
+      "param": "LABEL",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "SORTED",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "LARGE",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -19,5 +19,31 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "HOST",
+      "default": ""
+    },
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD_FILE",
+      "default": ""
+    },
+    {
+      "name": "EC_DAT_FILE",
+      "default": "/local/db/expasy/enzyme/latest/enzyme.dat"
+    },
+    {
+      "name": "NO_CHANGE",
+      "default": "0"
+    }
+  ]
 }

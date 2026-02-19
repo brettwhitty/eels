@@ -50,5 +50,27 @@
     "amos_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "FILE_FORMAT",
+      "default": "[-fasta|-fastq|-fasta.gz|-fastq.gz|-eland|-gerald| ]"
+    },
+    {
+      "name": "READ_TYPE",
+      "default": "[-short|-shortPaired|-short2|-shortPaired2|-long|-longPaired]"
+    },
+    {
+      "name": "HASH_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "VELVETH_OPTS",
+      "default": ""
+    },
+    {
+      "name": "VELVETG_OPTS",
+      "default": ""
+    }
+  ]
 }

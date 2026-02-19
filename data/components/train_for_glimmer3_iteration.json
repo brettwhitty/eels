@@ -14,5 +14,15 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OUTPUT_PWM",
+      "default": "$;OUTPUT_DIRECTORY$;/all.motif"
+    },
+    {
+      "name": "GLIMMER3_OUTPUT_TOKEN",
+      "default": "default"
+    }
+  ]
 }

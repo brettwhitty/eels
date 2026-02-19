@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/usearch",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/usearch",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "usearch_v1",
   "provenance_domain": {
-    "name": "Ergatis usearch Component",
+    "name": "Ergatis Component: usearch",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.251858",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "clustering component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    ""
   ],
   "description_domain": {
     "keywords": [
@@ -32,61 +33,107 @@
         "step_number": 1,
         "name": "create output directory",
         "description": "Execute create output directory",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "usearch",
         "description": "Execute usearch",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "extract stats",
         "description": "Execute extract stats",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/usearch"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/usearch"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "create output directory",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "usearch",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;USEARCH_EXEC$;"
+        }
+      },
+      {
+        "name": "extract stats",
+        "version": "unspecified",
+        "uri": {
+          "uri": "tail -10 $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.stderr >> $;OUTPUT_DIRECTORY$;/stats.txt;"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.fasta_output_list"
-        }
+          "uri": "fasta_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.clusters_output_list"
-        }
+          "uri": "clusters_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.usearch_output_list"
-        }
+          "uri": "usearch_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "ALGORITHM",
+      "value": "[cluster_fast|cluster_smallmem|derep_fullength|derep_prefix|usearch_global|usearch_local|sortbylength]",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

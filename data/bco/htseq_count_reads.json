@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/htseq_count_reads",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/htseq_count_reads",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "htseq_count_reads_v1",
   "provenance_domain": {
-    "name": "Ergatis htseq_count_reads Component",
+    "name": "Ergatis Component: htseq_count_reads",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.209635",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "alignment component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "uses the HTseq Python package to count reads aligning to features"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,72 @@
         "step_number": 1,
         "name": "HTSeq counting",
         "description": "Execute HTSeq counting",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/htseq_count_reads"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/htseq_count_reads"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "HTSeq counting",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/htseq_count_reads.sh"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "GTF_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "COUNT_MODE",
+      "value": "union",
+      "step": "1"
+    },
+    {
+      "param": "COUNTING_FEATURE",
+      "value": "exon",
+      "step": "1"
+    },
+    {
+      "param": "MIN_ALIGN_QUAL",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "IS_STRANDED",
+      "value": "no",
+      "step": "1"
+    },
+    {
+      "param": "ID_ATTRIBUTE",
+      "value": "gene_id",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

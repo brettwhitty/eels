@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/metagenemark",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/metagenemark",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "metagenemark_v1",
   "provenance_domain": {
-    "name": "Ergatis metagenemark Component",
+    "name": "Ergatis Component: metagenemark",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.216446",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "feature prediction / genes component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,31 +34,59 @@
         "step_number": 1,
         "name": "metagenemark",
         "description": "Execute metagenemark",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/metagenemark"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/metagenemark"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "metagenemark",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;METAGENEMARK_EXEC$;"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.gff_output_list"
-        }
+          "uri": "gff_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "TRAINING_MODEL",
+      "value": "$;MGM_DEFAULT_MODEL$;",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_OPTS",
+      "value": "-a -d",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

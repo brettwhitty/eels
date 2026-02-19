@@ -14,5 +14,31 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ALIGNMENT",
+      "default": ""
+    },
+    {
+      "name": "PAIRED_END_FILE",
+      "default": ""
+    },
+    {
+      "name": "CHRM_SIZE_FILE",
+      "default": ""
+    },
+    {
+      "name": "CHRM_SEQUENCE_DIR",
+      "default": ""
+    },
+    {
+      "name": "MIN_SPLICE_SUPPORT_READS",
+      "default": "1"
+    },
+    {
+      "name": "OTHER_SCRIPTURE_OPTIONS",
+      "default": ""
+    }
+  ]
 }

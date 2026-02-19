@@ -32,5 +32,31 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ORGANISM_TO_PREFIX_MAPPING",
+      "default": "/dev/null"
+    },
+    {
+      "name": "GENERATE_NEW_SEQ_IDS",
+      "default": "1"
+    },
+    {
+      "name": "SKIP_UNKNOWN_DBXREF",
+      "default": "0"
+    },
+    {
+      "name": "SKIP_INCOMPLETE_FEATURE_GROUPS",
+      "default": "1"
+    },
+    {
+      "name": "UNIQUE_FEATURE_TAGS",
+      "default": "locus_tag,protein_id,systematic_id,gene"
+    },
+    {
+      "name": "TRANSLATE_EMPTY_CDS",
+      "default": "0"
+    }
+  ]
 }

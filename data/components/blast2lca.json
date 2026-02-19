@@ -23,5 +23,35 @@
     "output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "NCBITAX",
+      "default": "/local/db/repository/ncbi/blast/20120414_001321/taxonomy/taxdump/"
+    },
+    {
+      "name": "GI2TAX",
+      "default": "/local/db/repository/ncbi/blast/20120414_001321/taxonomy/gi_taxid_nucl.dmp"
+    },
+    {
+      "name": "HOST",
+      "default": "revan.igs.umaryland.edu:10001"
+    },
+    {
+      "name": "TAXONDB",
+      "default": "gi2taxon"
+    },
+    {
+      "name": "TAXONCOLL",
+      "default": "gi2taxonnuc"
+    },
+    {
+      "name": "EVALUE_CUTOFF",
+      "default": "1"
+    },
+    {
+      "name": "BEST_BLAST_HIT",
+      "default": "1"
+    }
+  ]
 }

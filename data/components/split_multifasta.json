@@ -25,5 +25,23 @@
     "output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SEQS_PER_FILE",
+      "default": "1"
+    },
+    {
+      "name": "TOTAL_FILES",
+      "default": ""
+    },
+    {
+      "name": "FILES_PER_DIRECTORY",
+      "default": "0"
+    },
+    {
+      "name": "COMPRESS_OUTPUT",
+      "default": "0"
+    }
+  ]
 }

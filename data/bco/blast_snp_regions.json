@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/blast_snp_regions",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/blast_snp_regions",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "blast_snp_regions_v1",
   "provenance_domain": {
-    "name": "Ergatis blast_snp_regions Component",
+    "name": "Ergatis Component: blast_snp_regions",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.184193",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "SNP component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,46 +33,88 @@
         "step_number": 1,
         "name": "ncbi-blastn",
         "description": "Execute ncbi-blastn",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "parse raw BLAST results",
         "description": "Execute parse raw BLAST results",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/blast_snp_regions"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/blast_snp_regions"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "ncbi-blastn",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/blast_snp_regions"
+        }
+      },
+      {
+        "name": "parse raw BLAST results",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/parse_snp_blast"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.raw_output_list"
-        }
+          "uri": "raw_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.parsed_output_list"
-        }
+          "uri": "parsed_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "EXPECT",
+      "value": "0.0001",
+      "step": "1"
+    },
+    {
+      "param": "FILTER",
+      "value": "F",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_OPTS",
+      "value": "-m 0",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

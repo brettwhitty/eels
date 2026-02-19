@@ -21,5 +21,23 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "VIEW_OPTIONS",
+      "default": "-bS"
+    },
+    {
+      "name": "SORT_OPTIONS",
+      "default": ""
+    },
+    {
+      "name": "INPUT_SAM_FILE",
+      "default": "/local/projects/ifx_core/rna_seq/tcreasy/prok_test_data/s_pyogenese/sam/test.sam"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": ""
+    }
+  ]
 }

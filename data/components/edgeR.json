@@ -19,5 +19,27 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ANNOTATION_FILE",
+      "default": ""
+    },
+    {
+      "name": "R_BIN_DIR",
+      "default": "$;R_BIN$;"
+    },
+    {
+      "name": "R_PARAMS",
+      "default": ""
+    },
+    {
+      "name": "R_SCRIPT",
+      "default": "$;R_SCRIPT_PATH$;"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

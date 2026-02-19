@@ -47,5 +47,15 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "THRESHOLD",
+      "default": "0.35"
+    },
+    {
+      "name": "LEAVE_FASTA_HEADERS",
+      "default": "0"
+    }
+  ]
 }

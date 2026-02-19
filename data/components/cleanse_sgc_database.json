@@ -47,5 +47,15 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": "tanjad"
+    },
+    {
+      "name": "PASSWORD",
+      "default": "tanjad9"
+    }
+  ]
 }

@@ -23,5 +23,11 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "WORDSIZE",
+      "default": "16"
+    }
+  ]
 }

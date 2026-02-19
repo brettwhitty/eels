@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/cleanse_sgc_database",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/cleanse_sgc_database",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "cleanse_sgc_database_v1",
   "provenance_domain": {
-    "name": "Ergatis cleanse_sgc_database Component",
+    "name": "Ergatis Component: cleanse_sgc_database",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.190130",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "database / manipulation component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,87 +34,178 @@
         "step_number": 1,
         "name": "Create database output directory",
         "description": "Execute Create database output directory",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "rewrite_seqs.dbi",
         "description": "Execute rewrite_seqs.dbi",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "sgc_GC_content_load.spl",
         "description": "Execute sgc_GC_content_load.spl",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "molwt_update.dbi",
         "description": "Execute molwt_update.dbi",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "signalP_update.dbi",
         "description": "Execute signalP_update.dbi",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 6,
         "name": "lipoprotein_update.dbi",
         "description": "Execute lipoprotein_update.dbi",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           5
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 7,
         "name": "tm_update.dbi",
         "description": "Execute tm_update.dbi",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           6
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 8,
         "name": "omp_update.dbi",
         "description": "Execute omp_update.dbi",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           7
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/cleanse_sgc_database"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/cleanse_sgc_database"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "Create database output directory",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "rewrite_seqs.dbi",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/rewrite_seqs"
+        }
+      },
+      {
+        "name": "sgc_GC_content_load.spl",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/sgc_GC_content_load"
+        }
+      },
+      {
+        "name": "molwt_update.dbi",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/molwt_update"
+        }
+      },
+      {
+        "name": "signalP_update.dbi",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/signalP_update"
+        }
+      },
+      {
+        "name": "lipoprotein_update.dbi",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/lipoprotein_update"
+        }
+      },
+      {
+        "name": "tm_update.dbi",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/tm_update"
+        }
+      },
+      {
+        "name": "omp_update.dbi",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/omp_update"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "USERNAME",
+      "value": "tanjad",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "tanjad9",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

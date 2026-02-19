@@ -32,5 +32,43 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "HMM_ANALYSIS",
+      "default": ""
+    },
+    {
+      "name": "BER_ANALYSIS",
+      "default": ""
+    },
+    {
+      "name": "HMM_INFO_DB",
+      "default": ""
+    },
+    {
+      "name": "PANDA_HEADER_OFFSETS",
+      "default": ""
+    },
+    {
+      "name": "PANDA_HEADER_FILE",
+      "default": ""
+    },
+    {
+      "name": "ROLE_INFO_DB",
+      "default": ""
+    },
+    {
+      "name": "PERCENT_ID_CUTOFF",
+      "default": "35"
+    },
+    {
+      "name": "LENGTH_CUTOFF",
+      "default": "80"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    }
+  ]
 }

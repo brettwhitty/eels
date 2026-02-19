@@ -16,5 +16,27 @@
     "frg_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "LIBRARY",
+      "default": ""
+    },
+    {
+      "name": "LINKER",
+      "default": ""
+    },
+    {
+      "name": "TRIM",
+      "default": "hard"
+    },
+    {
+      "name": "CLEAR",
+      "default": "454"
+    },
+    {
+      "name": "INSERT_SIZE",
+      "default": ""
+    }
+  ]
 }

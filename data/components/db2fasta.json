@@ -23,5 +23,35 @@
     "fasta_output_list"
   ],
   "has_iterator": false,
-  "group_count": "50"
+  "group_count": "50",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": "access"
+    },
+    {
+      "name": "PASSWORD",
+      "default": "access"
+    },
+    {
+      "name": "RDBMS",
+      "default": "Sybase"
+    },
+    {
+      "name": "SERVER",
+      "default": "SYBPROD"
+    },
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "SINGLE",
+      "default": "0"
+    },
+    {
+      "name": "SCHEMA",
+      "default": "chado"
+    }
+  ]
 }

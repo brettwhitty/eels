@@ -16,5 +16,23 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "INPUT_COMMAND",
+      "default": "touch $;ITER_FILE_PATH$;"
+    },
+    {
+      "name": "INPUT_ARGS",
+      "default": ""
+    },
+    {
+      "name": "COMMAND_STDOUT",
+      "default": "$;TMP_DIR$;/runcommand.stdout"
+    },
+    {
+      "name": "COMMAND_STDERR",
+      "default": "$;TMP_DIR$;/runcommand.stderr"
+    }
+  ]
 }

@@ -14,5 +14,31 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": "access"
+    },
+    {
+      "name": "PASSWORD",
+      "default": "access"
+    },
+    {
+      "name": "DATABASE",
+      "default": ""
+    },
+    {
+      "name": "SERVER",
+      "default": "SYBTIGR"
+    },
+    {
+      "name": "DATABASE_TYPE",
+      "default": "sybase"
+    },
+    {
+      "name": "BATCHSIZE",
+      "default": "30000"
+    }
+  ]
 }

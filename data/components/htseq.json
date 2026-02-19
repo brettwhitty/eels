@@ -19,5 +19,43 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "PYTHON_BIN_DIR",
+      "default": "$;PYTHON_BIN$;"
+    },
+    {
+      "name": "PYTHON_LIB_DIR",
+      "default": "$;PYTHON_LIB$;"
+    },
+    {
+      "name": "MODE",
+      "default": "union"
+    },
+    {
+      "name": "TYPE",
+      "default": "exon"
+    },
+    {
+      "name": "MIN_QUAL",
+      "default": "0"
+    },
+    {
+      "name": "STRANDED",
+      "default": "no"
+    },
+    {
+      "name": "ATTRIBUTE_ID",
+      "default": "gene_id"
+    },
+    {
+      "name": "OTHER_PARAMS",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

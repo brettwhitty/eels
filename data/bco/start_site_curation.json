@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/start_site_curation",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/start_site_curation",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "start_site_curation_v1",
   "provenance_domain": {
-    "name": "Ergatis start_site_curation Component",
+    "name": "Ergatis Component: start_site_curation",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.247387",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "functional prediction component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,46 +33,136 @@
         "step_number": 1,
         "name": "dtd validation",
         "description": "Execute dtd validation",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/start_site_curation"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/start_site_curation"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "dtd validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.only_changed_bsml_output_list"
-        }
+          "uri": "only_changed_bsml_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "BER_EVIDENCE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "CHARACTERIZED_DB",
+      "value": "$;CHAR_DB$;",
+      "step": "1"
+    },
+    {
+      "param": "DB_USERNAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "DB_PASSWORD",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "HMM_CODING_DB",
+      "value": "$;HMM_LIB_DB$;",
+      "step": "1"
+    },
+    {
+      "param": "BER_EXTENSION",
+      "value": "300",
+      "step": "1"
+    },
+    {
+      "param": "PERCENT_IDENTITY_CUTOFF",
+      "value": "60",
+      "step": "1"
+    },
+    {
+      "param": "P_VALUE_CUTOFF",
+      "value": "1e-30",
+      "step": "1"
+    },
+    {
+      "param": "CHARACTERIZED_VOTE_BONUS",
+      "value": "4",
+      "step": "1"
+    },
+    {
+      "param": "MIN_VOTE_CUTOFF",
+      "value": "2",
+      "step": "1"
+    },
+    {
+      "param": "RBS_SLIDING_WINDOW_SIZE",
+      "value": "6",
+      "step": "1"
+    },
+    {
+      "param": "RBS_AG_PERCENT_CUTOFF",
+      "value": "75",
+      "step": "1"
+    },
+    {
+      "param": "BSML_INPUT_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "BSML_INPUT_LIST",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

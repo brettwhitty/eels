@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/cufflinks",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/cufflinks",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "cufflinks_v1",
   "provenance_domain": {
-    "name": "Ergatis cufflinks Component",
+    "name": "Ergatis Component: cufflinks",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.194416",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "generates cufflinks isoform identification analysis for the given SAM or BAM alignment file"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,152 @@
         "step_number": 1,
         "name": "cufflinks",
         "description": "Execute cufflinks",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/cufflinks"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/cufflinks"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "cufflinks",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/cufflinks"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "ANNOTATION_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "LIBRARY_TYPE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FRAG_LEN_MEAN",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FRAG_LEN_STD_DEV",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_MLE_ITERATIONS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_BUNDLE_FRAGS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "LABEL",
+      "value": "CUFF",
+      "step": "1"
+    },
+    {
+      "param": "MIN_ISOFORM_FRACTION",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PRE_mRNA_FRACTION",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MIN_INTRON_LEN",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_INTRON_LEN",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "JUNC_ALPHA",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "SMALL_ANCHOR_FRACTION",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MIN_FRAGS_PER_TRANSFRAG",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OVERHANG_TOLERANCE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_BUNDLE_LENGTH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "TRIM3_AVGCOV_THRESH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "TRIM3_DROPOFF_FRAC",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "NUM_THREADS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "CUFFLINKS_BIN_DIR",
+      "value": "$;CUFFLINKS_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_PARAMS",
+      "value": "--quiet",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "--v",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

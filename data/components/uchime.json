@@ -19,5 +19,15 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "3000"
+  "group_count": "3000",
+  "parameters": [
+    {
+      "name": "MINH",
+      "default": "0.3"
+    },
+    {
+      "name": "MINDIVERGENCE",
+      "default": "0.5"
+    }
+  ]
 }

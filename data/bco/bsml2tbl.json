@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bsml2tbl",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bsml2tbl",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bsml2tbl_v1",
   "provenance_domain": {
-    "name": "Ergatis bsml2tbl Component",
+    "name": "Ergatis Component: bsml2tbl",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.187600",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "file / conversion component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,9 +34,19 @@
         "step_number": 1,
         "name": "bsml2tbl",
         "description": "Convert using bsml2tbl",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           0
+        ],
+        "input_list": [
+          {
+            "uri": "$;I_FILE_PATH$;"
+          }
+        ],
+        "output_list": [
+          {
+            "uri": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.tbl"
+          }
         ]
       }
     ]
@@ -43,23 +54,51 @@
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bsml2tbl"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bsml2tbl"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.tbl_output_list"
-        }
+          "uri": "tbl_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "EXPORT_MRNA_FEATURES",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "ALL_EC_NUMBERS",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "PERCENT_N_CUTOFF",
+      "value": "10",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_OPTS",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -20,5 +20,23 @@
     "single_paired_bam_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DONOR_FILE_LIST",
+      "default": ""
+    },
+    {
+      "name": "RECIPIENT_FILE_LIST",
+      "default": ""
+    },
+    {
+      "name": "DONOR_FILE",
+      "default": ""
+    },
+    {
+      "name": "RECIPIENT_FILE",
+      "default": ""
+    }
+  ]
 }

@@ -16,5 +16,27 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "GENETORRENT_BIN",
+      "default": "/home/ksieber/bin/"
+    },
+    {
+      "name": "CGHUB_KEY",
+      "default": "/local/projects-t3/HLGT/TCGA/key_dir/cghub.key"
+    },
+    {
+      "name": "TCGA_ID",
+      "default": ""
+    },
+    {
+      "name": "NUM_RETRIES",
+      "default": ""
+    },
+    {
+      "name": "RATE_LIMIT",
+      "default": "200"
+    }
+  ]
 }

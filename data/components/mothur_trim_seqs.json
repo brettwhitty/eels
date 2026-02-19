@@ -19,5 +19,35 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MAXIMUM_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "MINIMUM_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "FLIP",
+      "default": ""
+    },
+    {
+      "name": "MAXIMUM_HOMOPOLYMER_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "MAXIMUM_AMBIGUOUS_BASES",
+      "default": ""
+    },
+    {
+      "name": "Q_AVERAGE",
+      "default": ""
+    },
+    {
+      "name": "CONFIG_OPTIONS",
+      "default": ""
+    }
+  ]
 }

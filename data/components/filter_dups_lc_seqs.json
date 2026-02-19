@@ -29,5 +29,27 @@
     "bam_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "PREFIX",
+      "default": ""
+    },
+    {
+      "name": "RM_DUPLICATES",
+      "default": "1"
+    },
+    {
+      "name": "RM_LOW_COMPLEXITY",
+      "default": "1"
+    },
+    {
+      "name": "LC_METHOD",
+      "default": "dust"
+    },
+    {
+      "name": "LC_THRESHOLD",
+      "default": "7"
+    }
+  ]
 }

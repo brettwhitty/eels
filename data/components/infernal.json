@@ -39,5 +39,35 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OTHER_OPTS",
+      "default": "--cut_tc"
+    },
+    {
+      "name": "SEQUENCE_LIST",
+      "default": ""
+    },
+    {
+      "name": "ANNOT_BSML_LIST",
+      "default": ""
+    },
+    {
+      "name": "HMM_CM_TABLE",
+      "default": ""
+    },
+    {
+      "name": "CM_FILE",
+      "default": "$;CM_FILE_PATH$;"
+    },
+    {
+      "name": "STOCKHOLM_PATH",
+      "default": "$;RFAM_STOCKHOLM_DIR$;"
+    },
+    {
+      "name": "DEFAULT_TYPE",
+      "default": ""
+    }
+  ]
 }

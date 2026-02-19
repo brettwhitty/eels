@@ -18,5 +18,15 @@
     "paired_table_output_list"
   ],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "QIIME_PATH",
+      "default": "/opt/opt-packages/qiime-1.8/qiime-1.8.0-release"
+    },
+    {
+      "name": "REFERENCE_FASTA",
+      "default": "/mnt/staging/data/clovr-greengenes-db/rep_set/97_otus.fasta"
+    }
+  ]
 }

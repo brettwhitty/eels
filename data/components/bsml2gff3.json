@@ -23,5 +23,15 @@
     "gff3_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "GBROWSE",
+      "default": ""
+    },
+    {
+      "name": "GBROWSE_DBXREF_MAP",
+      "default": ""
+    }
+  ]
 }

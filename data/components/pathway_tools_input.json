@@ -18,5 +18,39 @@
     "raw_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DATABASE",
+      "default": ""
+    },
+    {
+      "name": "DB_HOST",
+      "default": ""
+    },
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD_FILE",
+      "default": ""
+    },
+    {
+      "name": "LOCUS_DB",
+      "default": ""
+    },
+    {
+      "name": "ORGANISM_NAME",
+      "default": ""
+    },
+    {
+      "name": "TAXON_ID",
+      "default": ""
+    }
+  ]
 }

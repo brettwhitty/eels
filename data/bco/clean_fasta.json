@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/clean_fasta",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/clean_fasta",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "clean_fasta_v1",
   "provenance_domain": {
-    "name": "Ergatis clean_fasta Component",
+    "name": "Ergatis Component: clean_fasta",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.189883",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "utility component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -32,67 +33,131 @@
         "step_number": 1,
         "name": "create clean_fasta directory",
         "description": "Execute create clean_fasta directory",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "remove CR line breaks",
         "description": "Execute remove CR line breaks",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "clean_fasta",
         "description": "Execute clean_fasta",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "create cf directory",
         "description": "Execute create cf directory",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "replace_gaps_in_nucleotides",
         "description": "Execute replace_gaps_in_nucleotides",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/clean_fasta"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/clean_fasta"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "create clean_fasta directory",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "remove CR line breaks",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/usr/bin/perl"
+        }
+      },
+      {
+        "name": "clean_fasta",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/clean_fasta"
+        }
+      },
+      {
+        "name": "create cf directory",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "replace_gaps_in_nucleotides",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/replace_nuc_gaps"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.output_list"
-        }
+          "uri": "output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "CONFIG_OPTIONS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "NUCLEOTIDE",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

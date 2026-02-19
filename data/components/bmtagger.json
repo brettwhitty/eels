@@ -29,5 +29,23 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "REFERENCE_BITMASK",
+      "default": ""
+    },
+    {
+      "name": "REFERENCE_SRPRISM",
+      "default": ""
+    },
+    {
+      "name": "INPUT_FORMAT",
+      "default": ""
+    },
+    {
+      "name": "INPUT_CLASS",
+      "default": ""
+    }
+  ]
 }

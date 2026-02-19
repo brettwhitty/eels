@@ -16,5 +16,23 @@
     "tab_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ANNOTATE_ON",
+      "default": "transcript"
+    },
+    {
+      "name": "BSML_FEATURE_LOOKUP_LIST",
+      "default": ""
+    },
+    {
+      "name": "EVIDENCE_TYPE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_PARSER_OPTIONS",
+      "default": ""
+    }
+  ]
 }

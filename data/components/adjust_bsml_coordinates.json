@@ -25,5 +25,15 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MAP_DIR",
+      "default": ""
+    },
+    {
+      "name": "BSML_LIST",
+      "default": "$;INPUT_FILE_LIST$;"
+    }
+  ]
 }

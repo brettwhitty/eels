@@ -57,5 +57,95 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD_FILE",
+      "default": ""
+    },
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "RDBMS",
+      "default": "[postgresql|mysql|sybase|oracle]"
+    },
+    {
+      "name": "SKIP_LOAD",
+      "default": "0"
+    },
+    {
+      "name": "REFRESH_INDEXES",
+      "default": "1"
+    },
+    {
+      "name": "READONLYCACHE",
+      "default": "1"
+    },
+    {
+      "name": "AUTOGEN_FEAT",
+      "default": "0"
+    },
+    {
+      "name": "AUTOGEN_SEQ",
+      "default": "0"
+    },
+    {
+      "name": "INSERT_NEW",
+      "default": "1"
+    },
+    {
+      "name": "UPDATE",
+      "default": "0"
+    },
+    {
+      "name": "SEQUENCE_TYPE",
+      "default": "[assembly|supercontig]"
+    },
+    {
+      "name": "EMAIL",
+      "default": "$;USERNAME$;"
+    },
+    {
+      "name": "GZIP_BCP",
+      "default": "1"
+    },
+    {
+      "name": "BCP_BATCH_SIZE",
+      "default": "30000"
+    },
+    {
+      "name": "EXCLUDE_CLASSES",
+      "default": "none"
+    },
+    {
+      "name": "SORT_CHUNK_SIZE",
+      "default": "10000000"
+    },
+    {
+      "name": "CHECKSUM_FILENAMES",
+      "default": "0"
+    },
+    {
+      "name": "NO_EXEC_QUOTA_CHECK",
+      "default": "1"
+    },
+    {
+      "name": "NO_ASSERT_FEATURE_FILE",
+      "default": "1"
+    }
+  ]
 }

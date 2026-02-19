@@ -38,5 +38,15 @@
     "breadth_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MIN_COVERAGE",
+      "default": "10"
+    },
+    {
+      "name": "OUTPUT_PREFIX",
+      "default": ""
+    }
+  ]
 }

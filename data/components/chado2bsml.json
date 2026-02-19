@@ -40,5 +40,39 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "5"
+  "group_count": "5",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    },
+    {
+      "name": "DATABASE_TYPE",
+      "default": "sybase"
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "IGNORE_GO",
+      "default": ""
+    },
+    {
+      "name": "IGNORE_EVCODES",
+      "default": ""
+    },
+    {
+      "name": "IGNORE_NON_GO",
+      "default": ""
+    },
+    {
+      "name": "POLYPEPTIDES_ONLY",
+      "default": ""
+    }
+  ]
 }

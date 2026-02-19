@@ -19,5 +19,39 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SEARCH_ALGORITHM",
+      "default": "[ kmer|blast|suffix ]"
+    },
+    {
+      "name": "KSIZE",
+      "default": "8"
+    },
+    {
+      "name": "ALIGN_ALGORITHM",
+      "default": "[ needleman|gotoh|blastn ]"
+    },
+    {
+      "name": "MATCH_VALUE",
+      "default": "1"
+    },
+    {
+      "name": "MISMATCH_VALUE",
+      "default": "-1"
+    },
+    {
+      "name": "GAPOPEN_VALUE",
+      "default": "-2"
+    },
+    {
+      "name": "GAPEXTEND_VALUE",
+      "default": "-1"
+    },
+    {
+      "name": "FLIP",
+      "default": "t"
+    }
+  ]
 }

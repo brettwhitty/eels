@@ -19,5 +19,95 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ANNOTATION_FILE",
+      "default": ""
+    },
+    {
+      "name": "LIBRARY_TYPE",
+      "default": ""
+    },
+    {
+      "name": "FRAG_LEN_MEAN",
+      "default": ""
+    },
+    {
+      "name": "FRAG_LEN_STD_DEV",
+      "default": ""
+    },
+    {
+      "name": "MAX_MLE_ITERATIONS",
+      "default": ""
+    },
+    {
+      "name": "MAX_BUNDLE_FRAGS",
+      "default": ""
+    },
+    {
+      "name": "LABEL",
+      "default": "CUFF"
+    },
+    {
+      "name": "MIN_ISOFORM_FRACTION",
+      "default": ""
+    },
+    {
+      "name": "PRE_mRNA_FRACTION",
+      "default": ""
+    },
+    {
+      "name": "MIN_INTRON_LEN",
+      "default": ""
+    },
+    {
+      "name": "MAX_INTRON_LEN",
+      "default": ""
+    },
+    {
+      "name": "JUNC_ALPHA",
+      "default": ""
+    },
+    {
+      "name": "SMALL_ANCHOR_FRACTION",
+      "default": ""
+    },
+    {
+      "name": "MIN_FRAGS_PER_TRANSFRAG",
+      "default": ""
+    },
+    {
+      "name": "OVERHANG_TOLERANCE",
+      "default": ""
+    },
+    {
+      "name": "MAX_BUNDLE_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "TRIM3_AVGCOV_THRESH",
+      "default": ""
+    },
+    {
+      "name": "TRIM3_DROPOFF_FRAC",
+      "default": ""
+    },
+    {
+      "name": "NUM_THREADS",
+      "default": ""
+    },
+    {
+      "name": "CUFFLINKS_BIN_DIR",
+      "default": "$;CUFFLINKS_BIN$;"
+    },
+    {
+      "name": "OTHER_PARAMS",
+      "default": "--quiet"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

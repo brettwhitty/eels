@@ -19,5 +19,15 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "SAMTOOLS_BIN_DIR",
+      "default": "$;SAMTOOLS_BIN$;"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

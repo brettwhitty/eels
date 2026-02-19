@@ -19,5 +19,31 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "GTF_FILE",
+      "default": ""
+    },
+    {
+      "name": "COUNT_MODE",
+      "default": "union"
+    },
+    {
+      "name": "COUNTING_FEATURE",
+      "default": "exon"
+    },
+    {
+      "name": "MIN_ALIGN_QUAL",
+      "default": "0"
+    },
+    {
+      "name": "IS_STRANDED",
+      "default": "no"
+    },
+    {
+      "name": "ID_ATTRIBUTE",
+      "default": "gene_id"
+    }
+  ]
 }

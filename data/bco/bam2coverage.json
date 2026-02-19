@@ -1,54 +1,120 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bam2coverage",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bam2coverage",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bam2coverage_v1",
   "provenance_domain": {
-    "name": "Ergatis bam2coverage Component",
+    "name": "Ergatis Component: bam2coverage",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.181773",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "aligns reads against a single reference file contining one or more contigs"
   ],
   "description_domain": {
     "keywords": [
       "RNA-Seq"
     ],
-    "pipeline_steps": []
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "bam2coverage",
+        "description": "Convert using bam2coverage",
+        "version": "unspecified",
+        "prerequisite": [
+          0
+        ],
+        "input_list": [],
+        "output_list": []
+      }
+    ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bam2coverage"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bam2coverage"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
+    "script_driver": "Ergatis Workflow Engine",
     "software_prerequisites": [],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "BAM_FILE",
+      "value": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/test.sorted.bam",
+      "step": "1"
+    },
+    {
+      "param": "STRANDED",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "OUTPUT_STUB",
+      "value": "test",
+      "step": "1"
+    },
+    {
+      "param": "GFF3_FILE",
+      "value": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/gasalab49.gff",
+      "step": "1"
+    },
+    {
+      "param": "FEATURE_TYPE",
+      "value": "CDS",
+      "step": "1"
+    },
+    {
+      "param": "GENOME_ONLY",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FEATURES_ONLY",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "TOTAL_MAPPED_READS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -40,5 +40,19 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "REPEAT_DEF",
+      "default": "-lib $;SIMPLE_REPEAT_LIB$;"
+    },
+    {
+      "name": "CUTOFF",
+      "default": "225"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": "-q"
+    }
+  ]
 }

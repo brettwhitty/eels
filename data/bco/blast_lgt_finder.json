@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/blast_lgt_finder",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/blast_lgt_finder",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "blast_lgt_finder_v1",
   "provenance_domain": {
-    "name": "Ergatis blast_lgt_finder Component",
+    "name": "Ergatis Component: blast_lgt_finder",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.183787",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "LGT component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "Take best blast hits and find LGT for the given donor/host lineages"
   ],
   "description_domain": {
     "keywords": [
@@ -32,33 +33,120 @@
         "step_number": 1,
         "name": "Filter BLAST for best hits",
         "description": "Execute Filter BLAST for best hits",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "Find LGT",
         "description": "Execute Find LGT",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/blast_lgt_finder"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/blast_lgt_finder"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "Filter BLAST for best hits",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/filter_lgt_best_hit"
+        }
+      },
+      {
+        "name": "Find LGT",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/lgt_finder"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "NCBITAX",
+      "value": "/local/db/repository/ncbi/blast/20120414_001321/taxonomy/taxdump/",
+      "step": "1"
+    },
+    {
+      "param": "GI2TAX",
+      "value": "/local/db/repository/ncbi/blast/20120414_001321/taxonomy/gi_taxid_nucl.dmp",
+      "step": "1"
+    },
+    {
+      "param": "HOST",
+      "value": "revan.igs.umaryland.edu:10001",
+      "step": "1"
+    },
+    {
+      "param": "TAXONDB",
+      "value": "gi2taxon",
+      "step": "1"
+    },
+    {
+      "param": "TAXONCOLL",
+      "value": "gi2taxonnuc",
+      "step": "1"
+    },
+    {
+      "param": "MAPPING_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "HOST_LINEAGE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "DONOR_LINEAGE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FILTER_LINEAGE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FILTER_MIN_OVERLAP",
+      "value": "50",
+      "step": "1"
+    },
+    {
+      "param": "MIN_LENGTH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_OVERLAP",
+      "value": "0",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -21,5 +21,35 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "INFO_FILE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "BTAB_LIST",
+      "default": ""
+    },
+    {
+      "name": "ARAGORN_LIST",
+      "default": ""
+    },
+    {
+      "name": "TRNA_SCAN_LIST",
+      "default": ""
+    },
+    {
+      "name": "POLYPEPTIDE_MULTI_FSA",
+      "default": ""
+    },
+    {
+      "name": "PHAGE_FINDER_DIR",
+      "default": "/usr/local/devel/ANNOTATION/phage_finder"
+    }
+  ]
 }

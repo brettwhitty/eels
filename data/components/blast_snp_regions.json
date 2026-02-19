@@ -26,5 +26,19 @@
     "parsed_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "EXPECT",
+      "default": "0.0001"
+    },
+    {
+      "name": "FILTER",
+      "default": "F"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": "-m 0"
+    }
+  ]
 }

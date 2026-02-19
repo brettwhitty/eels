@@ -28,5 +28,55 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OTHER_BSML_LISTS",
+      "default": ""
+    },
+    {
+      "name": "COGS_BSML_LIST",
+      "default": ""
+    },
+    {
+      "name": "COG_LOOKUP",
+      "default": "/usr/local/db/common/ncbi_cogs/whog.1"
+    },
+    {
+      "name": "NOG_MEMBERS",
+      "default": ""
+    },
+    {
+      "name": "NOG_DESCRIPTION",
+      "default": ""
+    },
+    {
+      "name": "NOG_BSML_LIST",
+      "default": ""
+    },
+    {
+      "name": "LOCUS_PREFIX",
+      "default": ""
+    },
+    {
+      "name": "ORGANISM",
+      "default": ""
+    },
+    {
+      "name": "TRANSLATION_TABLE",
+      "default": "11"
+    },
+    {
+      "name": "CDS_FASTA",
+      "default": ""
+    },
+    {
+      "name": "POLYPEPTIDE_FASTA",
+      "default": ""
+    },
+    {
+      "name": "SOURCENAME",
+      "default": ""
+    }
+  ]
 }

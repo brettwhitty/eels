@@ -19,5 +19,71 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BOWTIE_BIN_DIR",
+      "default": "$;BOWTIE_BIN$;"
+    },
+    {
+      "name": "SAMTOOLS_BIN_DIR",
+      "default": "$;SAMTOOLS_BIN$;"
+    },
+    {
+      "name": "MODE",
+      "default": "v"
+    },
+    {
+      "name": "NUM_MISMATCHES",
+      "default": "2"
+    },
+    {
+      "name": "FILE_TYPE",
+      "default": "fastq"
+    },
+    {
+      "name": "SEED_LENGTH",
+      "default": ""
+    },
+    {
+      "name": "MIN_INSERT",
+      "default": ""
+    },
+    {
+      "name": "MAX_INSERT",
+      "default": ""
+    },
+    {
+      "name": "LIBRARY_TYPE",
+      "default": ""
+    },
+    {
+      "name": "NUM_HITS",
+      "default": ""
+    },
+    {
+      "name": "MAX_MULTIHITS",
+      "default": ""
+    },
+    {
+      "name": "REPORT_MULTIHITS",
+      "default": ""
+    },
+    {
+      "name": "UNMAPPED_READS",
+      "default": "unmapped_sequence.txt"
+    },
+    {
+      "name": "NUM_THREADS",
+      "default": ""
+    },
+    {
+      "name": "OTHER_PARAMETERS",
+      "default": "--sam"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

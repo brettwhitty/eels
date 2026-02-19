@@ -14,5 +14,23 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "REPO_ROOT",
+      "default": ""
+    },
+    {
+      "name": "PIPELINE_ID",
+      "default": ""
+    },
+    {
+      "name": "PIPELINE_NAME",
+      "default": ""
+    },
+    {
+      "name": "FLATTEN",
+      "default": ""
+    }
+  ]
 }

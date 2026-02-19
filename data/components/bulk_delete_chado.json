@@ -45,5 +45,43 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "DATABASE_TYPE",
+      "default": "sybase"
+    },
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "ANALYSIS_ID",
+      "default": ""
+    },
+    {
+      "name": "ALGORITHM",
+      "default": ""
+    },
+    {
+      "name": "FEATURE_ID",
+      "default": ""
+    },
+    {
+      "name": "IS_OBSOLETE",
+      "default": ""
+    },
+    {
+      "name": "ORGANISM_ID",
+      "default": ""
+    },
+    {
+      "name": "BCP_BATCH_SIZE",
+      "default": "30000"
+    }
+  ]
 }

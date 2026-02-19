@@ -47,5 +47,39 @@
     "m8_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "EXPECT",
+      "default": "1e-5"
+    },
+    {
+      "name": "MAX_TARGET_SEQS",
+      "default": "150"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_RAW_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "FILTER_HSPS_FOR_STATS",
+      "default": "1"
+    },
+    {
+      "name": "SPLIT_BSML",
+      "default": "0"
+    },
+    {
+      "name": "SPLIT_BTAB",
+      "default": "0"
+    }
+  ]
 }

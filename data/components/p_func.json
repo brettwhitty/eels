@@ -29,5 +29,39 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OUTPUT_FILE_BASE_NAME",
+      "default": ""
+    },
+    {
+      "name": "SOURCE_BSML_FILE",
+      "default": ""
+    },
+    {
+      "name": "FEATURE_RELATIONSHIP_FILE",
+      "default": ""
+    },
+    {
+      "name": "PSEUDOMOLECULE_FILE",
+      "default": ""
+    },
+    {
+      "name": "SORT_BIN",
+      "default": "/bin/sort"
+    },
+    {
+      "name": "ROLES_DB_DIR",
+      "default": "$;TIGR_ROLES_DB_DIR$;"
+    },
+    {
+      "name": "EC_DAT_FILE",
+      "default": "$;ENZYME_DAT$;"
+    },
+    {
+      "name": "HYPOTHETICAL",
+      "default": ""
+    }
+  ]
 }

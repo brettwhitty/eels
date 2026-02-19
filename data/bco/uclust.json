@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/uclust",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/uclust",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "uclust_v1",
   "provenance_domain": {
-    "name": "Ergatis uclust Component",
+    "name": "Ergatis Component: uclust",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.250990",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "clustering component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    ""
   ],
   "description_domain": {
     "keywords": [
@@ -32,79 +33,143 @@
         "step_number": 1,
         "name": "sort",
         "description": "Execute sort",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "cluster",
         "description": "Execute cluster",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "convert to fasta",
         "description": "Execute convert to fasta",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "format fasta",
         "description": "Execute format fasta",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "format clustering file",
         "description": "Execute format clustering file",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/uclust"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/uclust"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "sort",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+        }
+      },
+      {
+        "name": "cluster",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+        }
+      },
+      {
+        "name": "convert to fasta",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+        }
+      },
+      {
+        "name": "format fasta",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;BIN_DIR$;/format_uclust_fasta_ids"
+        }
+      },
+      {
+        "name": "format clustering file",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cd $;TMP_DIR$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$; ; $;UCLUST_EXEC$;"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.fasta_output_list"
-        }
+          "uri": "fasta_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.cluster_output_list"
-        }
+          "uri": "cluster_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.sorted_output_list"
-        }
+          "uri": "sorted_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "IDENTITY_THRESHOLD",
+      "value": "0.90",
+      "step": "1"
+    },
+    {
+      "param": "SORT_ALGORITHM",
+      "value": "[ sort|mergesort ]",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

@@ -78,5 +78,43 @@
     "gap2_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "DDS_OPTS",
+      "default": "-f 100 -i 30 -o 75 -p 70 -a 2000"
+    },
+    {
+      "name": "DATABASE_PATH",
+      "default": ""
+    },
+    {
+      "name": "GAP2_DATABASE_PATH",
+      "default": "$;DATABASE_PATH$;"
+    },
+    {
+      "name": "EXT_OPTS",
+      "default": ""
+    },
+    {
+      "name": "FILTER_OPTS",
+      "default": "-c 10"
+    },
+    {
+      "name": "GAP2_OPTS",
+      "default": ""
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "1"
+    },
+    {
+      "name": "COMPRESS_BTAB_OUTPUT",
+      "default": "1"
+    },
+    {
+      "name": "COMPRESS_GAP2_OUTPUT",
+      "default": "1"
+    }
+  ]
 }

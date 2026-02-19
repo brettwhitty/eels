@@ -37,5 +37,35 @@
     "sam_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MIN_SEED_LENGTH",
+      "default": "19"
+    },
+    {
+      "name": "MISMATCH_PENALTY",
+      "default": "4"
+    },
+    {
+      "name": "GAP_OPEN_PENALTY",
+      "default": "6"
+    },
+    {
+      "name": "GAP_EXTN_PENALTY",
+      "default": "1"
+    },
+    {
+      "name": "ALIGNMENT_SCORE_THRESH",
+      "default": "30"
+    },
+    {
+      "name": "MAX_THREADS",
+      "default": "1"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

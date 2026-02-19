@@ -33,5 +33,31 @@
     "fsa_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MASK_CHARACTER",
+      "default": "X"
+    },
+    {
+      "name": "ANALYSIS_TYPES",
+      "default": ""
+    },
+    {
+      "name": "FEATURE_CLASSES",
+      "default": ""
+    },
+    {
+      "name": "SOFTMASK",
+      "default": "0"
+    },
+    {
+      "name": "RANDOM",
+      "default": "0"
+    },
+    {
+      "name": "COMPRESS_BSML",
+      "default": "1"
+    }
+  ]
 }

@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/dump_table",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/dump_table",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "dump_table_v1",
   "provenance_domain": {
-    "name": "Ergatis dump_table Component",
+    "name": "Ergatis Component: dump_table",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.196993",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "utility component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "Dump a database into a tbl file and prepares it for GenBank submission"
   ],
   "description_domain": {
     "keywords": [
@@ -32,132 +33,309 @@
         "step_number": 1,
         "name": "dump table",
         "description": "Execute dump table",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "create sbt and cmt files",
         "description": "Execute create sbt and cmt files",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "copy discrep file",
         "description": "Execute copy discrep file",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "delete overlapping genes",
         "description": "Execute delete overlapping genes",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "dump table",
         "description": "Execute dump table",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 6,
         "name": "fix gene symbols in tbl",
         "description": "Execute fix gene symbols in tbl",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           5
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 7,
         "name": "create agp",
         "description": "Execute create agp",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           6
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 8,
         "name": "remove tbl file",
         "description": "Execute remove tbl file",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           7
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 9,
         "name": "move tbl file",
         "description": "Execute move tbl file",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           8
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 10,
         "name": "move fsa file",
         "description": "Execute move fsa file",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           9
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 11,
         "name": "move agp file",
         "description": "Execute move agp file",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           10
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 12,
         "name": "wrap_tbl2asn",
         "description": "Convert using wrap_tbl2asn",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           11
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 13,
         "name": "wrap_tbl2asn",
         "description": "Convert using wrap_tbl2asn",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           12
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/dump_table"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/dump_table"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "dump table",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dump_table"
+        }
+      },
+      {
+        "name": "create sbt and cmt files",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/prepare_sbt_cmt"
+        }
+      },
+      {
+        "name": "copy discrep file",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/bin/cp"
+        }
+      },
+      {
+        "name": "delete overlapping genes",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/deleteOverlappingGenes"
+        }
+      },
+      {
+        "name": "dump table",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dump_table"
+        }
+      },
+      {
+        "name": "fix gene symbols in tbl",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/fix_gene_symbols"
+        }
+      },
+      {
+        "name": "create agp",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/format_velvet_assembled_AGP"
+        }
+      },
+      {
+        "name": "remove tbl file",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/bin/rm"
+        }
+      },
+      {
+        "name": "move tbl file",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/bin/mv"
+        }
+      },
+      {
+        "name": "move fsa file",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/bin/mv"
+        }
+      },
+      {
+        "name": "move agp file",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/bin/mv"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "SERVER",
+      "value": "manatee-db",
+      "step": "1"
+    },
+    {
+      "param": "USERNAME",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "PASSWORD_FILE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "DELETE_URL",
+      "value": "http://manatee.igs.umaryland.edu/tigr-scripts/chado_prok_manatee/delete_gene.cgi",
+      "step": "1"
+    },
+    {
+      "param": "LINKER_SEQUENCE",
+      "value": "NNNNNCACACACTTAATTAATTAAGTGTGTGNNNNN",
+      "step": "1"
+    },
+    {
+      "param": "CONTIG_STRING",
+      "value": "contig",
+      "step": "1"
+    },
+    {
+      "param": "DB_NAME",
+      "value": "NCBI_locus_tag",
+      "step": "1"
+    },
+    {
+      "param": "CONTIG_ID_REPLACEMENT",
+      "value": "gene",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_TBL2ASN_OPTS",
+      "value": "-c bf",
+      "step": "1"
+    },
+    {
+      "param": "ARGS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "SPLIT_NUM",
+      "value": "10",
+      "step": "1"
+    },
+    {
+      "param": "MIN_CONTIG_LEN",
+      "value": "200",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

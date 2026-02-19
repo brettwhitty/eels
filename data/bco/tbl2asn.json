@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/tbl2asn",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/tbl2asn",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "tbl2asn_v1",
   "provenance_domain": {
-    "name": "Ergatis tbl2asn Component",
+    "name": "Ergatis Component: tbl2asn",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.248940",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "file / conversion component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,85 +34,178 @@
         "step_number": 1,
         "name": "Create the tbl2asn output directory",
         "description": "Execute Create the tbl2asn output directory",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "Fix locus name",
         "description": "Execute Fix locus name",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "Fix GenBank",
         "description": "Execute Fix GenBank",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "Move GenBank",
         "description": "Execute Move GenBank",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "prepare_for_tbl2asn",
         "description": "Convert using prepare_for_tbl2asn",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 6,
+        "name": "$;TBL2ASN_EXEC$;",
+        "description": "Convert using $;TBL2ASN_EXEC$;",
+        "version": "unspecified",
+        "prerequisite": [
+          5
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/tbl2asn"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/tbl2asn"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "Create the tbl2asn output directory",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mkdir"
+        }
+      },
+      {
+        "name": "Fix locus name",
+        "version": "unspecified",
+        "uri": {
+          "uri": "perl"
+        }
+      },
+      {
+        "name": "Fix GenBank",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/fix_gbk"
+        }
+      },
+      {
+        "name": "Move GenBank",
+        "version": "unspecified",
+        "uri": {
+          "uri": "/bin/mv "
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.sqn_output_list"
-        }
+          "uri": "sqn_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.gbf_output_list"
-        }
+          "uri": "gbf_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.val_output_list"
-        }
+          "uri": "val_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.discrpt_output_list"
-        }
+          "uri": "discrpt_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "ORGANISM",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ASN_TEMPLATE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "GENERATE_GENBANK_FILES",
+      "value": "T",
+      "step": "1"
+    },
+    {
+      "param": "PERFORM_VALIDATION",
+      "value": "T",
+      "step": "1"
+    },
+    {
+      "param": "CODON_TABLE",
+      "value": "11",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_OPTS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FASTA_INPUT_LIST",
+      "value": "",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

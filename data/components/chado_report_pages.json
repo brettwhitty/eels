@@ -14,5 +14,31 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "5"
+  "group_count": "5",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": "chado_admin"
+    },
+    {
+      "name": "PASSWORD",
+      "default": "chado_admin99"
+    },
+    {
+      "name": "DATABASE",
+      "default": "$;PROJECT$;"
+    },
+    {
+      "name": "DATABASE_TYPE",
+      "default": "sybase"
+    },
+    {
+      "name": "SERVER",
+      "default": "SYBPROD"
+    },
+    {
+      "name": "MODEL_LIST_FILE",
+      "default": ""
+    }
+  ]
 }

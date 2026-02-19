@@ -39,5 +39,15 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "ISO",
+      "default": "/usr/local/annotation/GeneFinding/species/aedes/genezilla/grape.iso"
+    },
+    {
+      "name": "OTHER_OPTS",
+      "default": ""
+    }
+  ]
 }

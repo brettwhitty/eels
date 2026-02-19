@@ -48,5 +48,47 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "OTHER_OPTS",
+      "default": "-c"
+    },
+    {
+      "name": "COMPRESS_BSML_OUTPUT",
+      "default": "0"
+    },
+    {
+      "name": "THRESHOLD_CUTOFF",
+      "default": "0"
+    },
+    {
+      "name": "SEARCH_WINDOW",
+      "default": "1000"
+    },
+    {
+      "name": "MODEL_NAME",
+      "default": ""
+    },
+    {
+      "name": "MODEL_MOL_TYPE",
+      "default": "aa"
+    },
+    {
+      "name": "MODEL_MOL_CLASS",
+      "default": "polypeptide"
+    },
+    {
+      "name": "QUERY_MOL_TYPE",
+      "default": "aa"
+    },
+    {
+      "name": "QUERY_MOL_CLASS",
+      "default": "polypeptide"
+    },
+    {
+      "name": "LEAVE_FASTA_HEADERS",
+      "default": "0"
+    }
+  ]
 }

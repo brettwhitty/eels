@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/fastx_trimming",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/fastx_trimming",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "fastx_trimming_v1",
   "provenance_domain": {
-    "name": "Ergatis fastx_trimming Component",
+    "name": "Ergatis Component: fastx_trimming",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.200141",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "generates trimmed FastX sequences for the given input FastX file"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,67 @@
         "step_number": 1,
         "name": "fastx_trimming",
         "description": "Execute fastx_trimming",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/fastx_trimming"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/fastx_trimming"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "fastx_trimming",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/fastx_trimming"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "FASTX_BIN_DIR",
+      "value": "$;FASTX_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "QUALITY_STRING",
+      "value": "33",
+      "step": "1"
+    },
+    {
+      "param": "FIRST_BASE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "LAST_BASE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "--qs --z --v",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

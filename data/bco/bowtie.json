@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/bowtie",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/bowtie",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "bowtie_v1",
   "provenance_domain": {
-    "name": "Ergatis bowtie Component",
+    "name": "Ergatis Component: bowtie",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.185387",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "generates bowtie alignment for the input sequence file(s) against the given reference index file."
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,122 @@
         "step_number": 1,
         "name": "bowtie",
         "description": "Execute bowtie",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/bowtie"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/bowtie"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "bowtie",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/bowtie"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "BOWTIE_BIN_DIR",
+      "value": "$;BOWTIE_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "SAMTOOLS_BIN_DIR",
+      "value": "$;SAMTOOLS_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "MODE",
+      "value": "v",
+      "step": "1"
+    },
+    {
+      "param": "NUM_MISMATCHES",
+      "value": "2",
+      "step": "1"
+    },
+    {
+      "param": "FILE_TYPE",
+      "value": "fastq",
+      "step": "1"
+    },
+    {
+      "param": "SEED_LENGTH",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MIN_INSERT",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_INSERT",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "LIBRARY_TYPE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "NUM_HITS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_MULTIHITS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "REPORT_MULTIHITS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "UNMAPPED_READS",
+      "value": "unmapped_sequence.txt",
+      "step": "1"
+    },
+    {
+      "param": "NUM_THREADS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_PARAMETERS",
+      "value": "--sam",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "--v",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

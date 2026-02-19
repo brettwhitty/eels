@@ -16,5 +16,51 @@
     "bsml_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "REFERENCE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_GMAP_SETUP_OPTIONS",
+      "default": ""
+    },
+    {
+      "name": "READS",
+      "default": ""
+    },
+    {
+      "name": "MAX_MISMATCHES",
+      "default": "3"
+    },
+    {
+      "name": "INDEL_PENALTY",
+      "default": "1000"
+    },
+    {
+      "name": "INDEL_END_LENGTH",
+      "default": "3"
+    },
+    {
+      "name": "MAX_PAIRED_LENGTH",
+      "default": "1000"
+    },
+    {
+      "name": "EXPECTED_PAIRED_LENGTH",
+      "default": "200"
+    },
+    {
+      "name": "THREADS",
+      "default": "1"
+    },
+    {
+      "name": "MAX_PATHS",
+      "default": "100"
+    },
+    {
+      "name": "OUTPUT_FORMAT",
+      "default": "sam"
+    }
+  ]
 }

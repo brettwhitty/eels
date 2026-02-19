@@ -23,5 +23,63 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "FORMAT",
+      "default": "single"
+    },
+    {
+      "name": "SPLIT_MULTIFASTA",
+      "default": "0"
+    },
+    {
+      "name": "SEQS_PER_FASTA",
+      "default": "100"
+    },
+    {
+      "name": "CLASS_FILTER",
+      "default": ""
+    },
+    {
+      "name": "HEADER_CLASS",
+      "default": ""
+    },
+    {
+      "name": "PARSE_ELEMENT",
+      "default": "sequence"
+    },
+    {
+      "name": "ROLE_EXCLUDE",
+      "default": ""
+    },
+    {
+      "name": "ROLE_INCLUDE",
+      "default": ""
+    },
+    {
+      "name": "BP_EXTENSION",
+      "default": ""
+    },
+    {
+      "name": "COORDS",
+      "default": "0"
+    },
+    {
+      "name": "USE_FEATURE_IDS_IN_FASTA",
+      "default": "0"
+    },
+    {
+      "name": "USE_SEQUENCE_IDS_IN_FASTA",
+      "default": "0"
+    },
+    {
+      "name": "OUTPUT_SUFFIX",
+      "default": "fsa"
+    },
+    {
+      "name": "OUTPUT_SUBDIR_SIZE",
+      "default": "20000"
+    }
+  ]
 }

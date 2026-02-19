@@ -19,5 +19,51 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "LABEL",
+      "default": ""
+    },
+    {
+      "name": "NUM_THREADS",
+      "default": ""
+    },
+    {
+      "name": "MIN_ALIGNMENT_COUNT",
+      "default": ""
+    },
+    {
+      "name": "FDR",
+      "default": ""
+    },
+    {
+      "name": "LIBRARY_TYPE",
+      "default": ""
+    },
+    {
+      "name": "MAX_MLE_ITERATIONS",
+      "default": ""
+    },
+    {
+      "name": "MIN_ISOFORM_FRACTION",
+      "default": ""
+    },
+    {
+      "name": "MAX_BUNDLE_FRAGS",
+      "default": ""
+    },
+    {
+      "name": "CUFFLINKS_BIN_DIR",
+      "default": "$;CUFFDIFF_BIN$;"
+    },
+    {
+      "name": "OTHER_PARAMS",
+      "default": "-q"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

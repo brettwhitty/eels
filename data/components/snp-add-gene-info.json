@@ -29,5 +29,15 @@
     "raw_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "REFERENCE_GENBANK",
+      "default": ""
+    },
+    {
+      "name": "QUERY_FASTA_LIST",
+      "default": ""
+    }
+  ]
 }

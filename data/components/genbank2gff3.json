@@ -23,5 +23,23 @@
     "bsml_output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "GENBANK_FILE",
+      "default": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/NC_000117.1.gb"
+    },
+    {
+      "name": "GFF3_FILE",
+      "default": "/local/projects/ifx_core/rna_seq/tcreasy/rna_seq/output_repository/bowtie/37_default/NC_000117.1.rRNA.gff3"
+    },
+    {
+      "name": "FEAT_TYPE",
+      "default": "CDS"
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": ""
+    }
+  ]
 }

@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/cuffdiff",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/cuffdiff",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "cuffdiff_v1",
   "provenance_domain": {
-    "name": "Ergatis cuffdiff Component",
+    "name": "Ergatis Component: cuffdiff",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.194029",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "RNA-Seq component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "generates cuffdiff analysis for the given annotation GTF file and sam filelist"
   ],
   "description_domain": {
     "keywords": [
@@ -32,24 +33,97 @@
         "step_number": 1,
         "name": "cuffdiff",
         "description": "Execute cuffdiff",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/cuffdiff"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/cuffdiff"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "cuffdiff",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/cuffdiff"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": []
+  },
+  "parametric_domain": [
+    {
+      "param": "LABEL",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "NUM_THREADS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MIN_ALIGNMENT_COUNT",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "FDR",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "LIBRARY_TYPE",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_MLE_ITERATIONS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MIN_ISOFORM_FRACTION",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "MAX_BUNDLE_FRAGS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "CUFFLINKS_BIN_DIR",
+      "value": "$;CUFFDIFF_BIN$;",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_PARAMS",
+      "value": "-q",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_ARGS",
+      "value": "--v",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

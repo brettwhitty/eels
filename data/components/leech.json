@@ -21,5 +21,19 @@
     "results_output_list"
   ],
   "has_iterator": true,
-  "group_count": "2"
+  "group_count": "2",
+  "parameters": [
+    {
+      "name": "XAXIS_NAME",
+      "default": ""
+    },
+    {
+      "name": "YAXIS_NAME",
+      "default": ""
+    },
+    {
+      "name": "TYPE",
+      "default": "l"
+    }
+  ]
 }

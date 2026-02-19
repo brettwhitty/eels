@@ -19,5 +19,27 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "FASTX_BIN_DIR",
+      "default": "$;FASTX_BIN$;"
+    },
+    {
+      "name": "QUALITY_STRING",
+      "default": "33"
+    },
+    {
+      "name": "FIRST_BASE",
+      "default": ""
+    },
+    {
+      "name": "LAST_BASE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--qs --z --v"
+    }
+  ]
 }

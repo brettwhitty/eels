@@ -19,5 +19,23 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "BOWTIE_BIN_DIR",
+      "default": "$;BOWTIE_BUILD_BIN$;"
+    },
+    {
+      "name": "BOWTIE_INDEX_PREFIX",
+      "default": "ref"
+    },
+    {
+      "name": "OTHER_PARAMETERS",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

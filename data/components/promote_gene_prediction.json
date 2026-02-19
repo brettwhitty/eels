@@ -32,5 +32,19 @@
     "bsml_output_list"
   ],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "CDS_FASTA",
+      "default": ""
+    },
+    {
+      "name": "POLYPEPTIDE_FASTA",
+      "default": ""
+    },
+    {
+      "name": "PROJECT_ABBREVIATION",
+      "default": "$;PROJECT$;"
+    }
+  ]
 }

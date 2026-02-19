@@ -16,5 +16,19 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "STRAIN_NAME",
+      "default": ""
+    },
+    {
+      "name": "FORMAT",
+      "default": "fasta"
+    },
+    {
+      "name": "LINKER_SEQUENCE",
+      "default": ""
+    }
+  ]
 }

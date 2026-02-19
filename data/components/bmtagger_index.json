@@ -14,5 +14,19 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "MAX_AMBIGUITIES",
+      "default": "0"
+    },
+    {
+      "name": "WORD_SIZE",
+      "default": "18"
+    },
+    {
+      "name": "MEMORY_REQUIRED",
+      "default": "8704"
+    }
+  ]
 }

@@ -1,27 +1,28 @@
 {
-  "object_id": "https://example.org/bco/ergatis/ber",
-  "spec_version": "1.4.0",
-  "etag": "generated",
+  "object_id": "https://eels.gnomatix.com/bco/ber",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "ber_v1",
   "provenance_domain": {
-    "name": "Ergatis ber Component",
+    "name": "Ergatis Component: ber",
     "version": "1.0",
     "created": "2003-01-01T00:00:00Z",
-    "modified": "2026-02-19T01:19:43.183059",
+    "modified": "2026-02-19T02:42:28Z",
     "contributors": [
       {
-        "name": "TIGR/JCVI/IGS Bioinformatics Team",
-        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences",
         "contribution": [
           "createdBy",
           "authoredBy"
-        ]
+        ],
+        "name": "TIGR/JCVI/IGS Bioinformatics Team",
+        "affiliation": "The Institute for Genomic Research / J. Craig Venter Institute / Institute for Genome Sciences"
       }
     ],
     "license": "Artistic-2.0"
   },
   "usability_domain": [
     "alignment / pairwise component",
-    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines"
+    "Production-grade genome annotation from TIGR/JCVI/IGS Gold-Standard pipelines",
+    "none"
   ],
   "description_domain": {
     "keywords": [
@@ -33,124 +34,273 @@
         "step_number": 1,
         "name": "filter hits",
         "description": "Execute filter hits",
-        "version": "unknown",
-        "prerequisite": []
+        "version": "unspecified",
+        "prerequisite": [],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 2,
         "name": "filter additional hits",
         "description": "Execute filter additional hits",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           1
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 3,
         "name": "append to filtered hits",
         "description": "Execute append to filtered hits",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           2
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 4,
         "name": "append to mini db",
         "description": "Execute append to mini db",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           3
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 5,
         "name": "praze",
         "description": "Execute praze",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           4
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 6,
         "name": "fix praze output",
         "description": "Execute fix praze output",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           5
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 7,
         "name": "rename fixed praze output",
         "description": "Execute rename fixed praze output",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           6
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 8,
         "name": "dtd validation",
         "description": "Execute dtd validation",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           7
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       },
       {
         "step_number": 9,
         "name": "berbtab2bsml",
         "description": "Convert using berbtab2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           8
+        ],
+        "input_list": [],
+        "output_list": [
+          {
+            "uri": "$;OUTPUT_DIRECTORY$;/$;ITERATOR_NAME$;/g$;GROUP_NUMBER$;/$;I_FILE_BASE$;.$;COMPONENT_NAME$;.bsml"
+          }
         ]
       },
       {
         "step_number": 10,
         "name": "analysis2bsml",
         "description": "Convert using analysis2bsml",
-        "version": "unknown",
+        "version": "unspecified",
         "prerequisite": [
           9
-        ]
+        ],
+        "input_list": [],
+        "output_list": []
       }
     ]
   },
   "execution_domain": {
     "script": [
       {
-        "uri": "ergatis://component/ber"
+        "uri": {
+          "uri": "https://ergatis.sourceforge.net/component/ber"
+        }
       }
     ],
-    "script_driver": "TIGR Workflow Engine",
-    "software_prerequisites": [],
+    "script_driver": "Ergatis Workflow Engine",
+    "software_prerequisites": [
+      {
+        "name": "filter hits",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/ber_blast_hit_selector"
+        }
+      },
+      {
+        "name": "filter additional hits",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/extract_blast_hits_by_id"
+        }
+      },
+      {
+        "name": "append to filtered hits",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cat"
+        }
+      },
+      {
+        "name": "append to mini db",
+        "version": "unspecified",
+        "uri": {
+          "uri": "cat"
+        }
+      },
+      {
+        "name": "praze",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;PRAZE_EXEC$;"
+        }
+      },
+      {
+        "name": "fix praze output",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/add_pvalue_to_praze_output"
+        }
+      },
+      {
+        "name": "rename fixed praze output",
+        "version": "unspecified",
+        "uri": {
+          "uri": "mv"
+        }
+      },
+      {
+        "name": "dtd validation",
+        "version": "unspecified",
+        "uri": {
+          "uri": "$;BIN_DIR$;/dtdValid.pl"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [],
     "output_subdomain": [
       {
-        "mediatype": "application/xml",
         "uri": {
-          "filename": "output.bsml_output_list"
-        }
+          "uri": "bsml_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.btab_output_list"
-        }
+          "uri": "btab_output_list"
+        },
+        "mediatype": "text/plain"
       },
       {
-        "mediatype": "text/plain",
         "uri": {
-          "filename": "output.raw_output_list"
-        }
+          "uri": "raw_output_list"
+        },
+        "mediatype": "text/plain"
       }
     ]
+  },
+  "parametric_domain": [
+    {
+      "param": "MAX_E_VALUE",
+      "value": "1e-5",
+      "step": "1"
+    },
+    {
+      "param": "MAX_P_VALUE",
+      "value": "1e-5",
+      "step": "1"
+    },
+    {
+      "param": "MAX_NUM_HITS",
+      "value": "150",
+      "step": "1"
+    },
+    {
+      "param": "MAX_NUM_HITS_PER_REGION",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "MIN_NUM_EXPERIMENTAL",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "BP_OFFSET",
+      "value": "300",
+      "step": "1"
+    },
+    {
+      "param": "ADDITIONAL_MINIDB_FASTA",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "ADDITIONAL_BLAST_HITS_LIST",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "OTHER_OPTS",
+      "value": "",
+      "step": "1"
+    },
+    {
+      "param": "COMPRESS_RAW_OUTPUT",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "COMPRESS_BSML_OUTPUT",
+      "value": "0",
+      "step": "1"
+    },
+    {
+      "param": "PROJECT_ABBREVIATION",
+      "value": "parse",
+      "step": "1"
+    }
+  ],
+  "error_domain": {
+    "empirical_error": {},
+    "algorithmic_error": {}
   }
 }

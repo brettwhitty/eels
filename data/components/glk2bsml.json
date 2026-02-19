@@ -40,5 +40,23 @@
     "fasta_output_list"
   ],
   "has_iterator": true,
-  "group_count": "50"
+  "group_count": "50",
+  "parameters": [
+    {
+      "name": "USERNAME",
+      "default": "access"
+    },
+    {
+      "name": "PASSWORD",
+      "default": "access"
+    },
+    {
+      "name": "SERVER",
+      "default": "SYBTIGR"
+    },
+    {
+      "name": "ID_GEN_VERSION",
+      "default": "0"
+    }
+  ]
 }

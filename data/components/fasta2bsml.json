@@ -23,5 +23,23 @@
     "output_list"
   ],
   "has_iterator": false,
-  "group_count": ""
+  "group_count": "",
+  "parameters": [
+    {
+      "name": "FORMAT",
+      "default": "single"
+    },
+    {
+      "name": "CLASS",
+      "default": "assembly"
+    },
+    {
+      "name": "GENUS",
+      "default": ""
+    },
+    {
+      "name": "SPECIES",
+      "default": ""
+    }
+  ]
 }

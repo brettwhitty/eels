@@ -19,5 +19,39 @@
   },
   "output_formats": [],
   "has_iterator": true,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "GBROWSE_CONF_DIRECTORY",
+      "default": ""
+    },
+    {
+      "name": "GBROWSE_MASTER_CONF",
+      "default": ""
+    },
+    {
+      "name": "GBROWSE_CONF_TEMPLATE",
+      "default": ""
+    },
+    {
+      "name": "ORGANISM",
+      "default": ""
+    },
+    {
+      "name": "HOSTNAME",
+      "default": ""
+    },
+    {
+      "name": "DB_NAME",
+      "default": ""
+    },
+    {
+      "name": "USERNAME",
+      "default": ""
+    },
+    {
+      "name": "PASSWORD",
+      "default": ""
+    }
+  ]
 }

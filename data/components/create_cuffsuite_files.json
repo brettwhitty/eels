@@ -14,5 +14,23 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "GTFFILE",
+      "default": ""
+    },
+    {
+      "name": "GTF_LISTFILE",
+      "default": ""
+    },
+    {
+      "name": "SAM_LISTFILE",
+      "default": ""
+    },
+    {
+      "name": "OTHER_ARGS",
+      "default": "--v"
+    }
+  ]
 }

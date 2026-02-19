@@ -14,5 +14,19 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "150"
+  "group_count": "150",
+  "parameters": [
+    {
+      "name": "MIN_COVERAGE",
+      "default": "0.9"
+    },
+    {
+      "name": "MIN_PERC_ID",
+      "default": "0.9"
+    },
+    {
+      "name": "ALGORITHM",
+      "default": "nucmer"
+    }
+  ]
 }

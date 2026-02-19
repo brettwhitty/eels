@@ -39,5 +39,23 @@
   },
   "output_formats": [],
   "has_iterator": false,
-  "group_count": "1"
+  "group_count": "1",
+  "parameters": [
+    {
+      "name": "SERVER",
+      "default": ""
+    },
+    {
+      "name": "DATABASE",
+      "default": ""
+    },
+    {
+      "name": "DATABASE_TYPE",
+      "default": "sybase"
+    },
+    {
+      "name": "BCP_EXTENSION",
+      "default": "out"
+    }
+  ]
 }
