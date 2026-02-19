@@ -1,0 +1,19 @@
+{
+   "license" : "",
+   "biotoolsID" : "priam_search",
+   "name" : "PRIAM search",
+   "description" : "Sequence search utility to annotate enzyme genes and generate draft metabolic networks.",
+   "homepage" : "http://priam.prabi.fr/REL_MAR15/index_mar15.html",
+   "function" : [
+      {
+         "operation" : [
+            "Analysis"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "topic" : [
+      "Biology"
+   ]
+}

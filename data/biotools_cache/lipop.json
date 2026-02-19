@@ -1,0 +1,34 @@
+{
+   "function" : [
+      {
+         "operation" : [
+            "Protein signal peptide detection"
+         ],
+         "output" : [
+            {
+               "term" : "Sequence report",
+               "format" : [
+                  "GFF"
+               ]
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            }
+         ]
+      }
+   ],
+   "license" : "Other",
+   "homepage" : "http://cbs.dtu.dk/services/LipoP",
+   "name" : "LipoP",
+   "topic" : [
+      "Sequence analysis",
+      "Membrane and lipoproteins"
+   ],
+   "biotoolsID" : "lipop",
+   "description" : "Predictions of lipoproteins and discrimination between lipoprotein signal peptides, other signal peptides and n-terminal membrane helices in Gram-negative bacteria."
+}

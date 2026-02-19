@@ -1,0 +1,19 @@
+{
+   "name" : "Glimmer",
+   "topic" : [
+      "Gene structure"
+   ],
+   "description" : "System for finding genes in microbial DNA, especially the genomes of bacteria, archaea, and viruses. It uses interpolated Markov models (IMMs) to identify the coding regions and distinguish them from noncoding DNA.",
+   "biotoolsID" : "glimmer",
+   "function" : [
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Gene prediction"
+         ]
+      }
+   ],
+   "homepage" : "https://ccb.jhu.edu/software/glimmer/",
+   "license" : ""
+}

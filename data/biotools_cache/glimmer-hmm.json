@@ -1,0 +1,21 @@
+{
+   "function" : [
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Gene prediction",
+            "Ab-initio gene prediction"
+         ]
+      }
+   ],
+   "homepage" : "https://ccb.jhu.edu/software/glimmerhmm/",
+   "topic" : [
+      "Gene structure",
+      "Genomics"
+   ],
+   "license" : "Artistic-1.0",
+   "biotoolsID" : "glimmer-hmm",
+   "name" : "Glimmer-HMM",
+   "description" : "A new gene finder based on a Generalized Hidden Markov Model. Although the gene finder conforms to the overall mathematical framework of a GHMM, additionally it incorporates splice site models adapted from the GeneSplicer program and a decision tree adapted from GlimmerM. It also utilizes Interpolated Markov Models for the coding and noncoding models . Currently, GlimmerHMM's GHMM structure includes introns of each phase, intergenic regions, and four types of exons."
+}

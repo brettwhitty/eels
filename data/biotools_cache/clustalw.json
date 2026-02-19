@@ -1,0 +1,33 @@
+{
+   "topic" : [
+      "Sequence analysis"
+   ],
+   "biotoolsID" : "clustalw",
+   "description" : "Multiple sequence alignment software. Old deprecated versions. Even older versions were CLUSTAL and CLUSTAL V (ClustalV).",
+   "name" : "Clustal 1.8 (Clustal W, Clustal X)",
+   "homepage" : "http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/",
+   "license" : "",
+   "function" : [
+      {
+         "operation" : [
+            "Multiple sequence alignment"
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "FASTA"
+               ],
+               "term" : "Sequence alignment"
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            }
+         ]
+      }
+   ]
+}

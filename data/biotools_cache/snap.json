@@ -1,0 +1,21 @@
+{
+   "function" : [
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Gene prediction"
+         ]
+      }
+   ],
+   "license" : "",
+   "homepage" : "https://korflab.ucdavis.edu/software.html",
+   "name" : "SNAP",
+   "topic" : [
+      "DNA",
+      "DNA polymorphism",
+      "Genetics"
+   ],
+   "description" : "The Semi-HMM-based Nucleic Acid Parser is a gene prediction tool.",
+   "biotoolsID" : "snap"
+}

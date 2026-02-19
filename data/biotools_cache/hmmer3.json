@@ -1,0 +1,361 @@
+{
+   "biotoolsID" : "hmmer3",
+   "topic" : [
+      "Sequence analysis",
+      "Sequence sites, features and motifs",
+      "Gene and protein families"
+   ],
+   "description" : "This tool is used for searching sequence databases for homologs of protein sequences, and for making protein sequence alignments. It implements methods using probabilistic models called profile hidden Markov models. The new HMMER3 project, HMMER is now as fast as BLAST for protein search.",
+   "name" : "HMMER3",
+   "homepage" : "http://hmmer.org/",
+   "license" : "Other",
+   "function" : [
+      {
+         "operation" : [
+            "Formatting"
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Sequence alignment"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Sequence alignment"
+            }
+         ]
+      },
+      {
+         "output" : [
+            {
+               "term" : "Alignment",
+               "format" : [
+                  "Stockholm format"
+               ]
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Sequence set"
+            },
+            {
+               "format" : [],
+               "term" : "Hidden Markov model"
+            }
+         ],
+         "operation" : [
+            "Multiple sequence alignment"
+         ]
+      },
+      {
+         "output" : [
+            {
+               "term" : "Hidden Markov model",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Sequence alignment"
+            }
+         ],
+         "operation" : [
+            "Sequence profile generation"
+         ]
+      },
+      {
+         "operation" : [
+            "Format validation",
+            "Conversion"
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "HMMER format"
+               ],
+               "term" : "Hidden Markov model"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "HMMER3"
+               ],
+               "term" : "Hidden Markov model"
+            }
+         ]
+      },
+      {
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Sequence"
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Hidden Markov model",
+               "format" : []
+            }
+         ],
+         "operation" : [
+            "Sequence generation"
+         ]
+      },
+      {
+         "operation" : [
+            "Data retrieval"
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Hidden Markov model"
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Hidden Markov model"
+            },
+            {
+               "term" : "Keyword",
+               "format" : []
+            }
+         ]
+      },
+      {
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Hidden Markov model"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Position frequency matrix",
+               "format" : []
+            }
+         ],
+         "operation" : [
+            "Statistical calculation"
+         ]
+      },
+      {
+         "operation" : [
+            "Database search"
+         ],
+         "input" : [],
+         "output" : []
+      },
+      {
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Report"
+            },
+            {
+               "format" : [],
+               "term" : "Data index"
+            }
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "HMMER3"
+               ],
+               "term" : "Hidden Markov model"
+            }
+         ],
+         "operation" : [
+            "Formatting"
+         ]
+      },
+      {
+         "operation" : [
+            "Database search"
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Database search results"
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Protein sequence",
+               "format" : [
+                  "EMBL format",
+                  "GenBank format",
+                  "UniProtKB format",
+                  "FASTA"
+               ]
+            },
+            {
+               "format" : [],
+               "term" : "Database metadata"
+            }
+         ]
+      },
+      {
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Hidden Markov model"
+            },
+            {
+               "format" : [],
+               "term" : "Sequence set"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Database search results"
+            }
+         ],
+         "operation" : [
+            "Database search"
+         ]
+      },
+      {
+         "output" : [
+            {
+               "term" : "Report",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Hidden Markov model",
+               "format" : []
+            }
+         ],
+         "operation" : [
+            "Probabilistic sequence generation",
+            "Statistical calculation"
+         ]
+      },
+      {
+         "output" : [
+            {
+               "term" : "Report",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Hidden Markov model"
+            }
+         ],
+         "operation" : [
+            "Statistical calculation"
+         ]
+      },
+      {
+         "operation" : [
+            "Sequence database search"
+         ],
+         "output" : [
+            {
+               "term" : "Sequence search results",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Protein sequence"
+            },
+            {
+               "term" : "Sequence set (protein)",
+               "format" : []
+            }
+         ]
+      },
+      {
+         "operation" : [
+            "Formatting"
+         ],
+         "output" : [
+            {
+               "term" : "Sequence",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "term" : "DNA sequence",
+               "format" : []
+            }
+         ]
+      },
+      {
+         "operation" : [
+            "Sequence database search"
+         ],
+         "input" : [
+            {
+               "term" : "Nucleic acid sequence",
+               "format" : []
+            },
+            {
+               "format" : [],
+               "term" : "Sequence set (nucleic acid)"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Sequence search results",
+               "format" : []
+            }
+         ]
+      },
+      {
+         "operation" : [
+            "Database search"
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Database search results"
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Nucleic acid sequence"
+            },
+            {
+               "term" : "Hidden Markov model",
+               "format" : []
+            }
+         ]
+      },
+      {
+         "operation" : [
+            "Sequence database search"
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Sequence search results"
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Protein sequence",
+               "format" : []
+            },
+            {
+               "format" : [],
+               "term" : "Sequence set (protein)"
+            }
+         ]
+      }
+   ]
+}

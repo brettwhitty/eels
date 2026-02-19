@@ -1,0 +1,53 @@
+{
+   "license" : "Other",
+   "homepage" : "https://www.drive5.com/muscle/",
+   "function" : [
+      {
+         "operation" : [
+            "Multiple sequence alignment"
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "nbrf/pir",
+                  "FASTA",
+                  "GCG",
+                  "PHYLIP format",
+                  "EMBL format",
+                  "GenBank format"
+               ],
+               "term" : "DNA sequence"
+            },
+            {
+               "term" : "RNA sequence",
+               "format" : [
+                  "nbrf/pir",
+                  "FASTA",
+                  "GCG",
+                  "PHYLIP format",
+                  "EMBL format",
+                  "GenBank format"
+               ]
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Sequence alignment",
+               "format" : [
+                  "ClustalW format",
+                  "HTML",
+                  "PHYLIP format",
+                  "GCG MSF",
+                  "FASTA"
+               ]
+            }
+         ]
+      }
+   ],
+   "topic" : [
+      "Sequence analysis"
+   ],
+   "description" : "This tool performs multiple sequence alignments of nucleotide or amino acid sequences.",
+   "biotoolsID" : "muscle",
+   "name" : "MUSCLE"
+}

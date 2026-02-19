@@ -1,0 +1,19 @@
+{
+   "homepage" : "http://exon.gatech.edu/GeneMark/",
+   "license" : "",
+   "function" : [
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Gene prediction"
+         ]
+      }
+   ],
+   "biotoolsID" : "genemark",
+   "topic" : [
+      "Gene structure"
+   ],
+   "description" : "A family of gene prediction programs: Gene Prediction in Bacteria, Archaea, Metagenomes and Metatranscriptomes; Gene Prediction in Eukaryotes; Gene Prediction in Transcripts; Gene Prediction in Viruses, Phages and Plasmids.",
+   "name" : "GeneMark"
+}

@@ -1,0 +1,19 @@
+{
+   "license" : "",
+   "biotoolsID" : "fgenesh",
+   "name" : "FGENESH",
+   "description" : "HMM-based gene structure prediction (multiple genes, both chains); Program for predicting multiple genes in genomic DNA sequences.",
+   "homepage" : "http://nhjy.hzau.edu.cn/kech/swxxx/jakj/dianzi/Bioinf6/GeneFinding/GeneFinding2.htm",
+   "function" : [
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Gene prediction"
+         ]
+      }
+   ],
+   "topic" : [
+      "Gene structure"
+   ]
+}

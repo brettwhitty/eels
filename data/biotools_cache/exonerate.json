@@ -1,0 +1,23 @@
+{
+   "function" : [
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Pairwise sequence alignment",
+            "Protein threading",
+            "Genome alignment"
+         ]
+      }
+   ],
+   "homepage" : "http://www.ebi.ac.uk/%7Eguy/exonerate",
+   "license" : "GPL-3.0",
+   "name" : "Exonerate",
+   "topic" : [
+      "Sequence analysis",
+      "Sequence sites, features and motifs",
+      "Molecular interactions, pathways and networks"
+   ],
+   "description" : "A tool for pairwise sequence alignment. It enables alignment for DNA-DNA and DNA-protein pairs and also gapped and ungapped alignment.",
+   "biotoolsID" : "exonerate"
+}

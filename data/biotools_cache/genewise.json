@@ -1,0 +1,34 @@
+{
+   "name" : "GeneWise (EBI)",
+   "description" : "Compare a protein sequence to a genomic DNA sequence, allowing for introns and frameshifting errors.",
+   "license" : "",
+   "biotoolsID" : "genewise",
+   "topic" : [
+      "Sequence analysis"
+   ],
+   "homepage" : "https://www.ebi.ac.uk/jdispatcher/psa/genewise",
+   "function" : [
+      {
+         "input" : [
+            {
+               "term" : "Protein sequence",
+               "format" : []
+            },
+            {
+               "format" : [],
+               "term" : "DNA sequence"
+            }
+         ],
+         "operation" : [
+            "Pairwise sequence alignment",
+            "Local alignment"
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Sequence alignment (pair)"
+            }
+         ]
+      }
+   ]
+}

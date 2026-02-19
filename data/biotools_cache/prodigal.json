@@ -1,0 +1,20 @@
+{
+   "function" : [
+      {
+         "operation" : [
+            "Genome annotation"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "homepage" : "https://github.com/hyattpd/Prodigal",
+   "license" : "GPL-3.0",
+   "name" : "Prodigal",
+   "topic" : [
+      "Genomics",
+      "Sequence analysis"
+   ],
+   "biotoolsID" : "prodigal",
+   "description" : "Fast, reliable protein-coding gene prediction for prokaryotic genomes."
+}

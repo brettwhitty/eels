@@ -1,0 +1,21 @@
+{
+   "name" : "FastTree",
+   "description" : "Infers approximately-maximum-likelihood phylogenetic trees from alignments of nucleotide or protein sequences.",
+   "license" : "",
+   "biotoolsID" : "fasttree",
+   "topic" : [
+      "Phylogenetics",
+      "Sequence analysis"
+   ],
+   "homepage" : "https://www.microbesonline.org/fasttree/",
+   "function" : [
+      {
+         "input" : [],
+         "operation" : [
+            "Phylogenetic tree generation (from molecular sequences)",
+            "Phylogenetic tree generation (maximum likelihood and Bayesian methods)"
+         ],
+         "output" : []
+      }
+   ]
+}

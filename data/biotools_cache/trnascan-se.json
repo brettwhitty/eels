@@ -1,0 +1,22 @@
+{
+   "topic" : [
+      "RNA",
+      "Genomics",
+      "Sequence analysis"
+   ],
+   "biotoolsID" : "trnascan-se",
+   "description" : "A program for improved detection of transfer RNA genes in genomic sequence.",
+   "name" : "Trnascan-SE",
+   "homepage" : "http://trna.ucsc.edu/tRNAscan-SE/",
+   "license" : "",
+   "function" : [
+      {
+         "operation" : [
+            "tRNA gene prediction",
+            "Sequence feature detection"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ]
+}

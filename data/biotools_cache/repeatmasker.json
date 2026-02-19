@@ -1,0 +1,20 @@
+{
+   "name" : "RepeatMasker",
+   "description" : "A program that screens DNA sequences for interspersed repeats and low complexity DNA sequences. The output of the program is a detailed annotation of the repeats that are present in the query sequence as well as a modified version of the query sequence in which all the annotated repeats have been masked (default: replaced by Ns).",
+   "topic" : [
+      "Sequence analysis",
+      "Sequence composition, complexity and repeats"
+   ],
+   "biotoolsID" : "repeatmasker",
+   "function" : [
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Genome annotation"
+         ]
+      }
+   ],
+   "license" : "OSL-2.1",
+   "homepage" : "http://www.repeatmasker.org/"
+}

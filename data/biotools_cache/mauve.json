@@ -1,0 +1,22 @@
+{
+   "description" : "Mauve Genome Alignment software, for comparing two or more draft or finished genomes",
+   "topic" : [
+      "Genomics",
+      "Transcriptomics"
+   ],
+   "biotoolsID" : "mauve",
+   "name" : "Mauve",
+   "license" : "GPL-3.0",
+   "homepage" : "http://darlinglab.org/mauve",
+   "function" : [
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Sequence alignment comparison",
+            "Visualisation",
+            "Sequence assembly validation"
+         ]
+      }
+   ]
+}

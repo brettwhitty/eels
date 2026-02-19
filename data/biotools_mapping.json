@@ -1,0 +1,4881 @@
+{
+   "biotools" : {
+      "HMMER2" : {
+         "biotoolsID" : "HMMER2",
+         "description" : "Older version of the HMMER3 program (https://bio.tools/hmmer3) used for searching sequence databases for sequence homologs, and for making sequence alignments.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Database search",
+                  "Protein feature detection"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://hmmer.org/",
+         "license" : "BSD-3-Clause",
+         "name" : "HMMER2",
+         "topic" : [
+            "Sequence sites, features and motifs"
+         ]
+      },
+      "Infernal" : {
+         "biotoolsID" : "infernal",
+         "description" : "Infernal (\"INFERence of RNA ALignment\") is for searching DNA sequence databases for RNA structure and sequence similarities. It is an implementation of a special case of profile stochastic context-free grammars called covariance models (CMs). A CM is like a sequence profile, but it scores a combination of sequence consensus and RNA secondary structure consensus, so in many cases, it is more capable of identifying RNA homologs that conserve their secondary structure more than their primary sequence.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "Sequence profile format"
+                     ],
+                     "term" : "Sequence profile"
+                  }
+               ],
+               "operation" : [
+                  "Nucleic acid feature detection"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Database search results"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://eddylab.org/infernal/",
+         "license" : "BSD-3-Clause",
+         "name" : "Infernal",
+         "topic" : [
+            "Sequence sites, features and motifs",
+            "Structural genomics"
+         ]
+      },
+      "amos" : {
+         "biotoolsID" : "amos",
+         "description" : "AMOS is a Modular, Open-Source whole genome assembler.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence assembly visualisation",
+                  "Formatting",
+                  "Sequence assembly",
+                  "Sequence assembly validation"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://amos.sourceforge.net/",
+         "license" : "",
+         "name" : "AMOS",
+         "topic" : [
+            "Genomics",
+            "Sequence assembly"
+         ]
+      },
+      "aragorn" : {
+         "biotoolsID" : "aragorn",
+         "description" : "ARAGORN detects tRNA, mtRNA info about tmRNA, and tmRNA genes",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://www.ansikte.se/ARAGORN/",
+         "license" : "Not licensed",
+         "name" : "aragorn",
+         "topic" : [
+            "Functional, regulatory and non-coding RNA",
+            "Genomics"
+         ]
+      },
+      "augustus" : {
+         "biotoolsID" : "augustus",
+         "description" : "AUGUSTUS is a eukaryotic gene prediction tool. It can integrate evidence, e.g. from RNA-Seq, ESTs, proteomics, but can also predict genes ab initio. The PPX extension to AUGUSTUS can take a protein sequence multiple sequence alignment as input to find new members of the family in a genome. It can be run through a web interface (see https://bio.tools/webaugustus), or downloaded and run locally.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            },
+            {
+               "input" : [],
+               "operation" : [
+                  "Ab-initio gene prediction"
+               ],
+               "output" : []
+            },
+            {
+               "input" : [],
+               "operation" : [
+                  "Homology-based gene prediction"
+               ],
+               "output" : []
+            },
+            {
+               "input" : [],
+               "operation" : [
+                  "Homology-based gene prediction"
+               ],
+               "output" : []
+            },
+            {
+               "input" : [],
+               "operation" : [
+                  "Operation"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://bioinf.uni-greifswald.de/augustus",
+         "license" : "Artistic-1.0",
+         "name" : "AUGUSTUS",
+         "topic" : [
+            "Gene transcripts",
+            "Gene and protein families"
+         ]
+      },
+      "bepipred" : {
+         "biotoolsID" : "bepipred",
+         "description" : "Prediction of the location of linear B-cell epitopes.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Epitope mapping"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "GFF"
+                     ],
+                     "term" : "Protein features"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cbs.dtu.dk/services/BepiPred/",
+         "license" : "Other",
+         "name" : "BepiPred",
+         "topic" : [
+            "Protein binding sites"
+         ]
+      },
+      "blast" : {
+         "biotoolsID" : "blast",
+         "description" : "A tool that finds regions of similarity between biological sequences. The program compares nucleotide or protein sequences to sequence databases and calculates the statistical significance.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Sequence similarity search",
+                  "Sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "BLAST XML results format",
+                        "BLAST XML v2 results format",
+                        "TSV",
+                        "CSV",
+                        "ASN.1 sequence format",
+                        "JSON",
+                        "Binary format",
+                        "Textual format"
+                     ],
+                     "term" : "Sequence search results"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "license" : "",
+         "name" : "BLAST",
+         "topic" : [
+            "Sequence analysis",
+            "Bioinformatics"
+         ]
+      },
+      "blast2go" : {
+         "biotoolsID" : "blast2go",
+         "description" : "Bioinformatics platform for high-quality functional annotation and analysis of genomic datasets. It allows analyzing and visualizing newly sequenced genomes by combining state-of-the-art methodologies, standard resources and algorithms. It allows to gain biological insights fast and easy even for completely novel genomes. Perform out-of-the-box the entire workflow of functional annotation of your transcriptomic datasets including its analysis and biological interpretation.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence alignment (nucleic acid)"
+                  }
+               ],
+               "operation" : [
+                  "Gene functional annotation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Over-representation data"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "https://www.blast2go.com/",
+         "license" : "",
+         "name" : "Blast2GO",
+         "topic" : [
+            "Nucleic acid sites, features and motifs"
+         ]
+      },
+      "bmtagger" : {
+         "biotoolsID" : "bmtagger",
+         "description" : "Best Match Tagger for removing contaminant reads from metagenomics datasets",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Data filtering"
+               ],
+               "output" : []
+            },
+            {
+               "input" : [],
+               "operation" : [
+                  "Read pre-processing"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "https://ftp.ncbi.nlm.nih.gov/pub/agarwala/bmtagger/",
+         "license" : "",
+         "name" : "bmtagger",
+         "topic" : [
+            "Metagenomics"
+         ]
+      },
+      "bowtie" : {
+         "biotoolsID" : "bowtie",
+         "description" : "Bowtie is an ultrafast, memory-efficient short read aligner.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "HTML",
+                        "FASTA"
+                     ],
+                     "term" : "Data"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ-solexa",
+                        "FASTQ-sanger",
+                        "FASTQ-illumina"
+                     ],
+                     "term" : "Data"
+                  }
+               ],
+               "operation" : [
+                  "Sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "SAM"
+                     ],
+                     "term" : "Sequence trace"
+                  },
+                  {
+                     "format" : [
+                        "Textual format"
+                     ],
+                     "term" : "Data"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ"
+                     ],
+                     "term" : "Data"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://bowtie-bio.sourceforge.net/index.shtml",
+         "license" : "",
+         "name" : "Bowtie",
+         "topic" : [
+            "Mapping",
+            "Genomics",
+            "Sequencing",
+            "Sequence assembly"
+         ]
+      },
+      "bwa" : {
+         "biotoolsID" : "bwa",
+         "description" : "Fast, accurate, memory-efficient aligner for short and long sequencing reads",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Genome indexing"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Genome index"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Genome index"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Alignment"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA search results format"
+                     ],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Read mapping",
+                  "Sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence coordinates"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ"
+                     ],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Generation",
+                  "Sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "SAM"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Generation",
+                  "Sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "SAM"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence alignment"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "license" : "MIT",
+         "name" : "BWA",
+         "topic" : [
+            "Mapping"
+         ]
+      },
+      "clustalw" : {
+         "biotoolsID" : "clustalw",
+         "description" : "Multiple sequence alignment software. Old deprecated versions. Even older versions were CLUSTAL and CLUSTAL V (ClustalV).",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Multiple sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/",
+         "license" : "",
+         "name" : "Clustal 1.8 (Clustal W, Clustal X)",
+         "topic" : [
+            "Sequence analysis"
+         ]
+      },
+      "crossbow" : {
+         "biotoolsID" : "crossbow",
+         "description" : "Crossbow is a cloud-computing software tool that combines the aligner BOWTIE, the SNP caller SoapSNP and an accurate genotyper.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Genotyping",
+                  "SNP detection",
+                  "Read mapping",
+                  "Service composition"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://bowtie-bio.sourceforge.net/crossbow/index.shtml",
+         "license" : "",
+         "name" : "Crossbow",
+         "topic" : [
+            "Genomics",
+            "Mapping",
+            "Genetic variation"
+         ]
+      },
+      "cufflinks" : {
+         "biotoolsID" : "cufflinks",
+         "description" : "Cufflinks assembles transcripts and estimates their abundances in RNA-Seq samples. It accepts aligned RNA-Seq reads and assembles the alignments into a parsimonious set of transcripts. Cufflinks then estimates the relative abundances of these transcripts based on how many reads support each one.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "BAM",
+                        "SAM"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ],
+               "operation" : [
+                  "RNA-seq time series data analysis",
+                  "Transcriptome assembly"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "GTF"
+                     ],
+                     "term" : "Sequence assembly report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Gene transcript report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Gene expression data"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "GTF"
+                     ],
+                     "term" : "Sequence assembly report"
+                  }
+               ],
+               "operation" : [
+                  "Sequence comparison",
+                  "DNA transcription"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Statistical estimate score"
+                  },
+                  {
+                     "format" : [
+                        "GTF"
+                     ],
+                     "term" : "Report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Gene transcript report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Gene transcript report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Report"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "Textual format"
+                     ],
+                     "term" : "ID list"
+                  }
+               ],
+               "operation" : [
+                  "Aggregation"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "GTF"
+                     ],
+                     "term" : "Sequence assembly report"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "BAM",
+                        "SAM"
+                     ],
+                     "term" : "Alignment"
+                  },
+                  {
+                     "format" : [
+                        "GFF",
+                        "GTF"
+                     ],
+                     "term" : "Annotation track"
+                  }
+               ],
+               "operation" : [
+                  "RNA-seq read count analysis",
+                  "Gene expression analysis"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Gene expression profile"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "GFF",
+                        "GTF"
+                     ],
+                     "term" : "Annotation track"
+                  },
+                  {
+                     "format" : [
+                        "BAM",
+                        "SAM"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ],
+               "operation" : [
+                  "Gene expression comparison"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Gene report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Report"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "GFF",
+                        "GTF"
+                     ],
+                     "term" : "Annotation track"
+                  },
+                  {
+                     "format" : [
+                        "BAM",
+                        "SAM"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ],
+               "operation" : [
+                  "Standardisation and normalisation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Gene expression data"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cole-trapnell-lab.github.io/cufflinks",
+         "license" : "BSL-1.0",
+         "name" : "Cufflinks",
+         "topic" : [
+            "RNA splicing",
+            "Transcriptomics",
+            "RNA-Seq"
+         ]
+      },
+      "cummerbund" : {
+         "biotoolsID" : "cummerbund",
+         "description" : "Allows for persistent storage, access, exploration, and manipulation of Cufflinks high-throughput sequencing data. In addition, provides numerous plotting functions for commonly used visualizations.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence analysis",
+                  "Sequence visualisation"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://bioconductor.org/packages/release/bioc/html/cummeRbund.html",
+         "license" : "Artistic-2.0",
+         "name" : "cummeRbund",
+         "topic" : [
+            "Sequencing"
+         ]
+      },
+      "deseq" : {
+         "biotoolsID" : "deseq",
+         "description" : "Estimate variance-mean dependence in count data from high-throughput sequencing assays and test for differential expression based on a model using the negative binomial distribution.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "Textual format"
+                     ],
+                     "term" : "Data"
+                  }
+               ],
+               "operation" : [
+                  "Differential gene expression analysis"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "PDF"
+                     ],
+                     "term" : "Data"
+                  },
+                  {
+                     "format" : [
+                        "Textual format"
+                     ],
+                     "term" : "Data"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://bioconductor.org/packages/release/bioc/html/DESeq.html",
+         "license" : "GPL-3.0",
+         "name" : "DESeq",
+         "topic" : [
+            "Gene expression"
+         ]
+      },
+      "edger" : {
+         "biotoolsID" : "edger",
+         "description" : "Differential expression analysis of RNA-seq expression profiles with biological replication. Implements a range of statistical methodology based on the negative binomial distributions, including empirical Bayes estimation, exact tests, generalized linear models and quasi-likelihood tests. As well as RNA-seq, it be applied to differential signal analysis of other types of genomic data that produce counts, including ChIP-seq, SAGE and CAGE.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "Sequence record format"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Differential gene expression analysis"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "Textual format",
+                        "Image format"
+                     ],
+                     "term" : "Plot"
+                  },
+                  {
+                     "format" : [
+                        "Textual format",
+                        "Image format"
+                     ],
+                     "term" : "P-value"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://bioconductor.org/packages/release/bioc/html/edgeR.html",
+         "license" : "GPL-2.0",
+         "name" : "edgeR",
+         "topic" : [
+            "Genetics",
+            "RNA-Seq",
+            "ChIP-seq"
+         ]
+      },
+      "emboss" : {
+         "biotoolsID" : "emboss",
+         "description" : "Diverse suite of tools for sequence analysis; many programs analagous to GCG; context-sensitive help for each tool.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence analysis",
+                  "Local alignment",
+                  "Sequence alignment analysis",
+                  "Global alignment",
+                  "Sequence alignment"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://emboss.bioinformatics.nl/",
+         "license" : "",
+         "name" : "EMBOSS",
+         "topic" : [
+            "Molecular biology",
+            "Sequence analysis",
+            "Biology"
+         ]
+      },
+      "exonerate" : {
+         "biotoolsID" : "exonerate",
+         "description" : "A tool for pairwise sequence alignment. It enables alignment for DNA-DNA and DNA-protein pairs and also gapped and ungapped alignment.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Pairwise sequence alignment",
+                  "Protein threading",
+                  "Genome alignment"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://www.ebi.ac.uk/%7Eguy/exonerate",
+         "license" : "GPL-3.0",
+         "name" : "Exonerate",
+         "topic" : [
+            "Sequence analysis",
+            "Sequence sites, features and motifs",
+            "Molecular interactions, pathways and networks"
+         ]
+      },
+      "fastqc" : {
+         "biotoolsID" : "fastqc",
+         "description" : "This tool aims to provide a QC report which can spot problems or biases which originate either in the sequencer or in the starting library material. It can be run in one of two modes. It can either run as a stand alone interactive application for the immediate analysis of small numbers of FastQ files, or it can be run in a non-interactive mode where it would be suitable for integrating into a larger analysis pipeline for the systematic processing of large numbers of files.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTQ-like format (text)",
+                        "SAM",
+                        "FASTQ",
+                        "BAM"
+                     ],
+                     "term" : "Raw sequence"
+                  }
+               ],
+               "operation" : [
+                  "Sequence composition calculation",
+                  "Sequencing quality control",
+                  "Statistical calculation"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "HTML"
+                     ],
+                     "term" : "Sequence report"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/",
+         "license" : "GPL-3.0",
+         "name" : "FastQC",
+         "topic" : [
+            "Sequencing",
+            "Data quality management",
+            "Sequence analysis"
+         ]
+      },
+      "fasttree" : {
+         "biotoolsID" : "fasttree",
+         "description" : "Infers approximately-maximum-likelihood phylogenetic trees from alignments of nucleotide or protein sequences.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Phylogenetic tree generation (from molecular sequences)",
+                  "Phylogenetic tree generation (maximum likelihood and Bayesian methods)"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "https://www.microbesonline.org/fasttree/",
+         "license" : "",
+         "name" : "FastTree",
+         "topic" : [
+            "Phylogenetics",
+            "Sequence analysis"
+         ]
+      },
+      "fgenesh" : {
+         "biotoolsID" : "fgenesh",
+         "description" : "HMM-based gene structure prediction (multiple genes, both chains); Program for predicting multiple genes in genomic DNA sequences.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://nhjy.hzau.edu.cn/kech/swxxx/jakj/dianzi/Bioinf6/GeneFinding/GeneFinding2.htm",
+         "license" : "",
+         "name" : "FGENESH",
+         "topic" : [
+            "Gene structure"
+         ]
+      },
+      "geneid" : {
+         "biotoolsID" : "geneid",
+         "description" : "Ab initio gene finding program used to predict genes along DNA sequences in a large set of organisms.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Nucleic acid sequence"
+                  }
+               ],
+               "operation" : [
+                  "Genome annotation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Nucleic acid features"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://genome.crg.es/software/geneid/index.html",
+         "license" : "GPL-3.0",
+         "name" : "Geneid",
+         "topic" : [
+            "Nucleic acid sites, features and motifs",
+            "Sequence analysis",
+            "DNA",
+            "Gene structure",
+            "Molecular genetics"
+         ]
+      },
+      "genemark" : {
+         "biotoolsID" : "genemark",
+         "description" : "A family of gene prediction programs: Gene Prediction in Bacteria, Archaea, Metagenomes and Metatranscriptomes; Gene Prediction in Eukaryotes; Gene Prediction in Transcripts; Gene Prediction in Viruses, Phages and Plasmids.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://exon.gatech.edu/GeneMark/",
+         "license" : "",
+         "name" : "GeneMark",
+         "topic" : [
+            "Gene structure"
+         ]
+      },
+      "genewise" : {
+         "biotoolsID" : "genewise",
+         "description" : "Compare a protein sequence to a genomic DNA sequence, allowing for introns and frameshifting errors.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Protein sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "DNA sequence"
+                  }
+               ],
+               "operation" : [
+                  "Pairwise sequence alignment",
+                  "Local alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence alignment (pair)"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "https://www.ebi.ac.uk/jdispatcher/psa/genewise",
+         "license" : "",
+         "name" : "GeneWise (EBI)",
+         "topic" : [
+            "Sequence analysis"
+         ]
+      },
+      "genezilla" : {
+         "biotoolsID" : "genezilla",
+         "description" : "Highly reconfigurable gene finder written in C++. Graph-theoretic representations of the high scoring open reading frames are provided, allowing for exploration of sub-optimal gene models. It utilizes Interpolated Markov Models (IMMs), Maximal Dependence Decomposition (MDD), and includes states for signal peptides, branch points, TATA boxes, CAP sites, and will soon model CpG islands as well.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "CpG island and isochore detection",
+                  "Gene prediction",
+                  "Differential gene expression analysis",
+                  "Genetic variation analysis"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://www.genezilla.org",
+         "license" : "",
+         "name" : "GeneZilla",
+         "topic" : [
+            "Transcription factors and regulatory sites",
+            "Gene transcripts",
+            "Zoology",
+            "Gene expression",
+            "Model organisms"
+         ]
+      },
+      "genscan" : {
+         "biotoolsID" : "genscan",
+         "description" : "Identify complete exon/intron structures of genes in genomic DNA. Novel features of the program include the capacity to predict multiple genes in a sequence, to deal with partial as well as complete genes, and to predict consistent sets of genes occurring on either or both DNA strands.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://genes.mit.edu/GENSCANinfo.html",
+         "license" : "",
+         "name" : "GENSCAN",
+         "topic" : [
+            "Molecular genetics",
+            "DNA",
+            "Gene structure"
+         ]
+      },
+      "glimmer" : {
+         "biotoolsID" : "glimmer",
+         "description" : "System for finding genes in microbial DNA, especially the genomes of bacteria, archaea, and viruses. It uses interpolated Markov models (IMMs) to identify the coding regions and distinguish them from noncoding DNA.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "https://ccb.jhu.edu/software/glimmer/",
+         "license" : "",
+         "name" : "Glimmer",
+         "topic" : [
+            "Gene structure"
+         ]
+      },
+      "glimmer-hmm" : {
+         "biotoolsID" : "glimmer-hmm",
+         "description" : "A new gene finder based on a Generalized Hidden Markov Model. Although the gene finder conforms to the overall mathematical framework of a GHMM, additionally it incorporates splice site models adapted from the GeneSplicer program and a decision tree adapted from GlimmerM. It also utilizes Interpolated Markov Models for the coding and noncoding models . Currently, GlimmerHMM's GHMM structure includes introns of each phase, intergenic regions, and four types of exons.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction",
+                  "Ab-initio gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "https://ccb.jhu.edu/software/glimmerhmm/",
+         "license" : "Artistic-1.0",
+         "name" : "Glimmer-HMM",
+         "topic" : [
+            "Gene structure",
+            "Genomics"
+         ]
+      },
+      "hmmer3" : {
+         "biotoolsID" : "hmmer3",
+         "description" : "This tool is used for searching sequence databases for homologs of protein sequences, and for making protein sequence alignments. It implements methods using probabilistic models called profile hidden Markov models. The new HMMER3 project, HMMER is now as fast as BLAST for protein search.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence alignment"
+                  }
+               ],
+               "operation" : [
+                  "Formatting"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence alignment"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence set"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Multiple sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "Stockholm format"
+                     ],
+                     "term" : "Alignment"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence alignment"
+                  }
+               ],
+               "operation" : [
+                  "Sequence profile generation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "HMMER format"
+                     ],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Format validation",
+                  "Conversion"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "HMMER3"
+                     ],
+                     "term" : "Hidden Markov model"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Sequence generation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Keyword"
+                  }
+               ],
+               "operation" : [
+                  "Data retrieval"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Statistical calculation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Position frequency matrix"
+                  }
+               ]
+            },
+            {
+               "input" : [],
+               "operation" : [
+                  "Database search"
+               ],
+               "output" : []
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "HMMER3"
+                     ],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Formatting"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Report"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Data index"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "EMBL format",
+                        "GenBank format",
+                        "UniProtKB format",
+                        "FASTA"
+                     ],
+                     "term" : "Protein sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Database metadata"
+                  }
+               ],
+               "operation" : [
+                  "Database search"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Database search results"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Sequence set"
+                  }
+               ],
+               "operation" : [
+                  "Database search"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Database search results"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Probabilistic sequence generation",
+                  "Statistical calculation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Report"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Statistical calculation"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Report"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Protein sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Sequence set (protein)"
+                  }
+               ],
+               "operation" : [
+                  "Sequence database search"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence search results"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "DNA sequence"
+                  }
+               ],
+               "operation" : [
+                  "Formatting"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Nucleic acid sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Sequence set (nucleic acid)"
+                  }
+               ],
+               "operation" : [
+                  "Sequence database search"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence search results"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Nucleic acid sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Hidden Markov model"
+                  }
+               ],
+               "operation" : [
+                  "Database search"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Database search results"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Protein sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Sequence set (protein)"
+                  }
+               ],
+               "operation" : [
+                  "Sequence database search"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence search results"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://hmmer.org/",
+         "license" : "Other",
+         "name" : "HMMER3",
+         "topic" : [
+            "Sequence analysis",
+            "Sequence sites, features and motifs",
+            "Gene and protein families"
+         ]
+      },
+      "interpro" : {
+         "biotoolsID" : "interpro",
+         "description" : "Protein families, domains, regions, repeats and sites in which identifiable features found in known proteins can be applied to new protein sequences.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "InterPro accession"
+                  }
+               ],
+               "operation" : [
+                  "Query and retrieval"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "HTML"
+                     ],
+                     "term" : "Protein signature"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://www.ebi.ac.uk/interpro/",
+         "license" : "",
+         "name" : "InterPro",
+         "topic" : [
+            "Gene and protein families",
+            "Proteins",
+            "Sequence composition, complexity and repeats"
+         ]
+      },
+      "lipop" : {
+         "biotoolsID" : "lipop",
+         "description" : "Predictions of lipoproteins and discrimination between lipoprotein signal peptides, other signal peptides and n-terminal membrane helices in Gram-negative bacteria.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Protein signal peptide detection"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "GFF"
+                     ],
+                     "term" : "Sequence report"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cbs.dtu.dk/services/LipoP",
+         "license" : "Other",
+         "name" : "LipoP",
+         "topic" : [
+            "Sequence analysis",
+            "Membrane and lipoproteins"
+         ]
+      },
+      "mauve" : {
+         "biotoolsID" : "mauve",
+         "description" : "Mauve Genome Alignment software, for comparing two or more draft or finished genomes",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence alignment comparison",
+                  "Visualisation",
+                  "Sequence assembly validation"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://darlinglab.org/mauve",
+         "license" : "GPL-3.0",
+         "name" : "Mauve",
+         "topic" : [
+            "Genomics",
+            "Transcriptomics"
+         ]
+      },
+      "metagenemark" : {
+         "biotoolsID" : "metagenemark",
+         "description" : "MetaGeneMark is a tool for gene prediction in metagenomes, utilizing metagenome parameters and gene prediction.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://exon.gatech.edu/GeneMark/meta_gmhmmp.cgi",
+         "license" : "",
+         "name" : "MetaGeneMark",
+         "topic" : [
+            "Metagenomics",
+            "Genetics"
+         ]
+      },
+      "mothur" : {
+         "biotoolsID" : "mothur",
+         "description" : "Open-source, platform-independent, community-supported software for describing and comparing microbial communities",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "DNA barcoding",
+                  "Sequencing quality control",
+                  "Sequence clustering",
+                  "Taxonomic classification",
+                  "Visualisation",
+                  "Sequence read processing",
+                  "Phylogenetic analysis"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://mothur.org/",
+         "license" : "GPL-3.0",
+         "name" : "mothur",
+         "topic" : [
+            "Microbial ecology",
+            "Taxonomy",
+            "Sequence analysis",
+            "Phylogeny"
+         ]
+      },
+      "mummer" : {
+         "biotoolsID" : "mummer",
+         "description" : "MUMmer is a modular system for the rapid whole genome alignment of finished or draft sequence. Basically it is a ultra-fast alignment of large-scale DNA and protein sequences",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence alignment",
+                  "Read mapping"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://mummer.sourceforge.net/",
+         "license" : "Artistic-2.0",
+         "name" : "MUMmer",
+         "topic" : [
+            "Genomics",
+            "Mapping",
+            "Sequencing"
+         ]
+      },
+      "muscle" : {
+         "biotoolsID" : "muscle",
+         "description" : "This tool performs multiple sequence alignments of nucleotide or amino acid sequences.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "nbrf/pir",
+                        "FASTA",
+                        "GCG",
+                        "PHYLIP format",
+                        "EMBL format",
+                        "GenBank format"
+                     ],
+                     "term" : "DNA sequence"
+                  },
+                  {
+                     "format" : [
+                        "nbrf/pir",
+                        "FASTA",
+                        "GCG",
+                        "PHYLIP format",
+                        "EMBL format",
+                        "GenBank format"
+                     ],
+                     "term" : "RNA sequence"
+                  }
+               ],
+               "operation" : [
+                  "Multiple sequence alignment"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "ClustalW format",
+                        "HTML",
+                        "PHYLIP format",
+                        "GCG MSF",
+                        "FASTA"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "https://www.drive5.com/muscle/",
+         "license" : "Other",
+         "name" : "MUSCLE",
+         "topic" : [
+            "Sequence analysis"
+         ]
+      },
+      "priam_search" : {
+         "biotoolsID" : "priam_search",
+         "description" : "Sequence search utility to annotate enzyme genes and generate draft metabolic networks.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Analysis"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://priam.prabi.fr/REL_MAR15/index_mar15.html",
+         "license" : "",
+         "name" : "PRIAM search",
+         "topic" : [
+            "Biology"
+         ]
+      },
+      "prodigal" : {
+         "biotoolsID" : "prodigal",
+         "description" : "Fast, reliable protein-coding gene prediction for prokaryotic genomes.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Genome annotation"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "https://github.com/hyattpd/Prodigal",
+         "license" : "GPL-3.0",
+         "name" : "Prodigal",
+         "topic" : [
+            "Genomics",
+            "Sequence analysis"
+         ]
+      },
+      "ps_scan" : {
+         "biotoolsID" : "ps_scan",
+         "description" : "ps_scan (ScanProsite tool) is a perl program used to scan one or several patterns, rules and/or profiles from PROSITE against one or several protein sequnces in Swiss-Prot or FASTA format. It requires two compiled external programs from the PFTOOLS package : Ã¢ÂÂpfscanÃ¢ÂÂ used to scan a sequence against a profile library and Ã¢ÂÂpsa2msaÃ¢ÂÂ which is necessary for the Ã¢ÂÂ-o msaÃ¢ÂÂ output format only.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Protein sequence analysis"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://prosite.expasy.org/scanprosite/",
+         "license" : "GPL-3.0",
+         "name" : "ps_scan",
+         "topic" : [
+            "Proteomics"
+         ]
+      },
+      "psortb" : {
+         "biotoolsID" : "psortb",
+         "description" : "It is a high-precision localization prediction method for bacterial proteins. It has remained the most precise bacterial protein subcellular localization (SCL) predictor. ÃÂ PSORTb version improved recall, higher proteome-scale prediction coverage, and new refined localization subcategories. It is the first SCL predictor specifically geared for all prokaryotes, including archaea and bacteria with atypical membrane/cell wall topologies.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Protein sequence analysis"
+               ],
+               "output" : []
+            },
+            {
+               "input" : [],
+               "operation" : [
+                  "Prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://www.psort.org/psortb/",
+         "license" : "",
+         "name" : "PSORTb",
+         "topic" : [
+            "Sequences",
+            "Proteins",
+            "Plant"
+         ]
+      },
+      "qiime" : {
+         "biotoolsID" : "qiime",
+         "description" : "Open-source bioinformatics pipeline for performing microbiome analysis from raw DNA sequencing data. The pipeline is designed to take users from raw sequencing data generated on the Illumina or other platforms through publication quality graphics and statistics. This includes demultiplexing and quality filtering, OTU picking, taxonomic assignment, and phylogenetic reconstruction, and diversity analyses and visualizations.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Analysis"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://qiime.org/",
+         "license" : "",
+         "name" : "QIIME",
+         "topic" : [
+            "Biology"
+         ]
+      },
+      "rapsearch" : {
+         "biotoolsID" : "rapsearch",
+         "description" : "Fast protein similarity search tool for short reads that utilizes a reduced amino acid alphabet and suffix array to detect seeds of flexible length.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence alignment"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://omics.informatics.indiana.edu/mg/RAPSearch2/",
+         "license" : "GPL-3.0",
+         "name" : "RAPSearch",
+         "topic" : [
+            "Metagenomics"
+         ]
+      },
+      "repeatmasker" : {
+         "biotoolsID" : "repeatmasker",
+         "description" : "A program that screens DNA sequences for interspersed repeats and low complexity DNA sequences. The output of the program is a detailed annotation of the repeats that are present in the query sequence as well as a modified version of the query sequence in which all the annotated repeats have been masked (default: replaced by Ns).",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Genome annotation"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://www.repeatmasker.org/",
+         "license" : "OSL-2.1",
+         "name" : "RepeatMasker",
+         "topic" : [
+            "Sequence analysis",
+            "Sequence composition, complexity and repeats"
+         ]
+      },
+      "rnammer" : {
+         "biotoolsID" : "rnammer",
+         "description" : "Prediction of 5S/8S, 16S/18S, and 23S/28S ribosomal RNA in full genome sequences.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Nucleic acid feature detection"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "GFF"
+                     ],
+                     "term" : "Protein features"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cbs.dtu.dk/services/RNAmmer/",
+         "license" : "Other",
+         "name" : "RNAmmer",
+         "topic" : [
+            "Sequence sites, features and motifs"
+         ]
+      },
+      "samtools" : {
+         "biotoolsID" : "samtools",
+         "description" : "SAMtools and BCFtools are widely used programs for processing and analysing high-throughput sequencing data. They include tools for file format conversion and manipulation, sorting, querying, statistics, variant calling, and effect analysis amongst other methods.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "CRAM",
+                        "SAM",
+                        "BAM"
+                     ],
+                     "term" : "Sequence trace"
+                  }
+               ],
+               "operation" : [
+                  "Data filtering",
+                  "Visualisation",
+                  "Data formatting",
+                  "Indexing",
+                  "Data parsing",
+                  "Data sorting",
+                  "Data editing"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "CRAM",
+                        "SAM",
+                        "BAM"
+                     ],
+                     "term" : "Sequence trace"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://www.htslib.org/",
+         "license" : "MIT",
+         "name" : "SAMtools",
+         "topic" : [
+            "Mapping",
+            "Sequence analysis",
+            "Sequencing",
+            "Rare diseases"
+         ]
+      },
+      "signalp" : {
+         "biotoolsID" : "signalp",
+         "description" : "Prediction of the presence and location of signal peptide cleavage sites in amino acid sequences from different organisms.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Protein signal peptide detection",
+                  "Protein cleavage site prediction"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "GFF"
+                     ],
+                     "term" : "Protein features"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Sequence report"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cbs.dtu.dk/services/SignalP/",
+         "license" : "Other",
+         "name" : "SignalP",
+         "topic" : [
+            "Protein sites, features and motifs"
+         ]
+      },
+      "snap" : {
+         "biotoolsID" : "snap",
+         "description" : "The Semi-HMM-based Nucleic Acid Parser is a gene prediction tool.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Gene prediction"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "https://korflab.ucdavis.edu/software.html",
+         "license" : "",
+         "name" : "SNAP",
+         "topic" : [
+            "DNA",
+            "DNA polymorphism",
+            "Genetics"
+         ]
+      },
+      "soapdenovo" : {
+         "biotoolsID" : "soapdenovo",
+         "description" : "SOAPdenovo, a short read de novo assembly tool, is a package for assembling short oligonucleotide into contigs and scaffolds.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence assembly"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://soap.genomics.org.cn/soapdenovo.html",
+         "license" : "GPL-3.0",
+         "name" : "SOAPdenovo",
+         "topic" : [
+            "Sequence assembly"
+         ]
+      },
+      "spades" : {
+         "biotoolsID" : "spades",
+         "description" : "St. Petersburg genome assembler Ã¢ÂÂ is intended for both standard isolates and single-cell MDA bacteria assemblies. SPAdes 3.9 works with Illumina or IonTorrent reads and is capable of providing hybrid assemblies using PacBio, Oxford Nanopore and Sanger reads. Additional contigs can be provided and can be used as long reads.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTQ"
+                     ],
+                     "term" : "Data"
+                  },
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence alignment"
+                  }
+               ],
+               "operation" : [
+                  "Genome assembly"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "TSV"
+                     ],
+                     "term" : "Data"
+                  },
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence alignment"
+                  },
+                  {
+                     "format" : [
+                        "TSV"
+                     ],
+                     "term" : "Data"
+                  },
+                  {
+                     "format" : [
+                        "Textual format"
+                     ],
+                     "term" : "Data"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cab.spbu.ru/software/spades/",
+         "license" : "GPL-2.0",
+         "name" : "SPAdes",
+         "topic" : [
+            "Sequence assembly"
+         ]
+      },
+      "targetp" : {
+         "biotoolsID" : "targetp",
+         "description" : "Prediction of the subcellular location of eukaryotic proteins.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Protein cleavage site prediction"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "Textual format"
+                     ],
+                     "term" : "Protein features"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cbs.dtu.dk/services/TargetP/",
+         "license" : "Other",
+         "name" : "TargetP",
+         "topic" : [
+            "Protein sites, features and motifs"
+         ]
+      },
+      "tmhmm" : {
+         "biotoolsID" : "tmhmm",
+         "description" : "Prediction of transmembrane helices in proteins.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Transmembrane protein prediction"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "GFF"
+                     ],
+                     "term" : "Protein features"
+                  },
+                  {
+                     "format" : [
+                        "Binary format"
+                     ],
+                     "term" : "Sequence report"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://cbs.dtu.dk/services/TMHMM/",
+         "license" : "Other",
+         "name" : "TMHMM",
+         "topic" : [
+            "Membrane and lipoproteins",
+            "Proteomics",
+            "Protein modifications",
+            "Protein folds and structural domains",
+            "Protein secondary structure"
+         ]
+      },
+      "tophat" : {
+         "biotoolsID" : "tophat",
+         "description" : "Program that aligns RNA-Seq reads to a genome in order to identify exon-exon splice junctions. It is built on the ultrafast short read mapping program Bowtie. A stable SAMtools version is now packaged with the program.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Genome identifier"
+                  },
+                  {
+                     "format" : [
+                        "FASTQ",
+                        "FASTA"
+                     ],
+                     "term" : "Sequence set (nucleic acid)"
+                  }
+               ],
+               "operation" : [
+                  "Splice site prediction",
+                  "Read mapping"
+               ],
+               "output" : [
+                  {
+                     "format" : [
+                        "SAM"
+                     ],
+                     "term" : "Sequence alignment"
+                  },
+                  {
+                     "format" : [
+                        "BED"
+                     ],
+                     "term" : "Annotation track"
+                  },
+                  {
+                     "format" : [
+                        "BED"
+                     ],
+                     "term" : "Annotation track"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "http://ccb.jhu.edu/software/tophat/index.shtml",
+         "license" : "",
+         "name" : "TopHat",
+         "topic" : [
+            "RNA-Seq",
+            "Mapping",
+            "Rare diseases"
+         ]
+      },
+      "trf" : {
+         "biotoolsID" : "trf",
+         "description" : "Tandem Repeats Finder. Find tandem repeats in DNA sequences without the need to specify either the pattern or pattern size. It uses the method of k-tuple matching to avoid the need for full scale alignment matrix computations. It requires no a priori knowledge of the pattern, pattern size or number of copies. There are no restrictions on the size of the repeats that can be detected. It determines a consensus pattern for the smallest repetitive unit in the tandem repeat.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Repeat sequence detection"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://tandem.bu.edu/trf/trf.html",
+         "license" : "Other",
+         "name" : "TRF",
+         "topic" : [
+            "Sequence analysis",
+            "Sequence composition, complexity and repeats"
+         ]
+      },
+      "trnascan-se" : {
+         "biotoolsID" : "trnascan-se",
+         "description" : "A program for improved detection of transfer RNA genes in genomic sequence.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "tRNA gene prediction",
+                  "Sequence feature detection"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://trna.ucsc.edu/tRNAscan-SE/",
+         "license" : "",
+         "name" : "Trnascan-SE",
+         "topic" : [
+            "RNA",
+            "Genomics",
+            "Sequence analysis"
+         ]
+      },
+      "usearch" : {
+         "biotoolsID" : "usearch",
+         "description" : "Algorithm designed to enable high-throughput, sensitive search of very large sequence databases.",
+         "function" : [
+            {
+               "input" : [],
+               "operation" : [
+                  "Sequence analysis"
+               ],
+               "output" : []
+            }
+         ],
+         "homepage" : "http://www.drive5.com/usearch/",
+         "license" : "",
+         "name" : "USEARCH",
+         "topic" : [
+            "DNA",
+            "Sequence analysis",
+            "Sequencing"
+         ]
+      },
+      "velvet" : {
+         "biotoolsID" : "velvet",
+         "description" : "A de novo genomic assembler specially designed for short read sequencing technologies, such as Solexa or 454 or SOLiD.",
+         "function" : [
+            {
+               "input" : [
+                  {
+                     "format" : [
+                        "BAM",
+                        "SAM",
+                        "FASTQ",
+                        "FASTA"
+                     ],
+                     "term" : "Sequence"
+                  }
+               ],
+               "operation" : [
+                  "Formatting"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Resource metadata"
+                  }
+               ]
+            },
+            {
+               "input" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence"
+                  },
+                  {
+                     "format" : [],
+                     "term" : "Resource metadata"
+                  }
+               ],
+               "operation" : [
+                  "De-novo assembly"
+               ],
+               "output" : [
+                  {
+                     "format" : [],
+                     "term" : "Sequence assembly"
+                  }
+               ]
+            }
+         ],
+         "homepage" : "https://github.com/dzerbino/velvet",
+         "license" : "GPL-3.0",
+         "name" : "Velvet",
+         "topic" : [
+            "Sequence assembly"
+         ]
+      }
+   },
+   "mapping" : [
+      {
+         "bio_tools_url" : "https://bio.tools/rapsearch",
+         "biotoolsID" : "rapsearch",
+         "component" : "RAPSearch2",
+         "homepage" : "http://omics.informatics.indiana.edu/mg/RAPSearch2/",
+         "matched" : true,
+         "tool_name" : "RAPSearch",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{RAPSEARCH_EXEC}}",
+               "idx" : 0,
+               "name" : "RAPSearch2"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/rnammer",
+         "biotoolsID" : "rnammer",
+         "component" : "RNAmmer",
+         "homepage" : "http://cbs.dtu.dk/services/RNAmmer/",
+         "matched" : true,
+         "tool_name" : "RNAmmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{RNAMMER_EXEC}}",
+               "idx" : 0,
+               "name" : "RNAmmer"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/spades",
+         "biotoolsID" : "spades",
+         "component" : "SPAdes",
+         "homepage" : "http://cab.spbu.ru/software/spades/",
+         "matched" : true,
+         "tool_name" : "SPAdes",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_spades",
+               "idx" : 2,
+               "name" : "run SPAdes"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/amos",
+         "biotoolsID" : "amos",
+         "component" : "amoscmp",
+         "homepage" : "http://amos.sourceforge.net/",
+         "matched" : true,
+         "tool_name" : "AMOS",
+         "tool_steps" : []
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/emboss",
+         "biotoolsID" : "emboss",
+         "component" : "antigenic",
+         "homepage" : "http://emboss.bioinformatics.nl/",
+         "matched" : true,
+         "tool_name" : "EMBOSS",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "/usr/local/packages/EMBOSS/bin/antigenic",
+               "idx" : 0,
+               "name" : "antigenic"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/aragorn",
+         "biotoolsID" : "aragorn",
+         "component" : "aragorn",
+         "homepage" : "http://www.ansikte.se/ARAGORN/",
+         "matched" : true,
+         "tool_name" : "aragorn",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{ARAGORN_EXEC}}",
+               "idx" : 0,
+               "name" : "aragorn"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/augustus",
+         "biotoolsID" : "augustus",
+         "component" : "augustus",
+         "homepage" : "http://bioinf.uni-greifswald.de/augustus",
+         "matched" : true,
+         "tool_name" : "AUGUSTUS",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{AUGUSTUS_BINARY_PATH}}",
+               "idx" : 0,
+               "name" : "augustus"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "bam2bigwig",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/bam2bigwig",
+               "idx" : 0,
+               "name" : "bam2bigwig"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "bam2coverage",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/bam2coverage",
+               "idx" : 2,
+               "name" : "bam2coverage"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "bam2sam",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/bam2sam",
+               "idx" : 2,
+               "name" : "bam2sam"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "bam_merge",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/bam_merge",
+               "idx" : 0,
+               "name" : "bam_merge"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bepipred",
+         "biotoolsID" : "bepipred",
+         "component" : "bepipred",
+         "homepage" : "http://cbs.dtu.dk/services/BepiPred/",
+         "matched" : true,
+         "tool_name" : "BepiPred",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/replace_fasta_headers.pl",
+               "idx" : 0,
+               "name" : "replace fasta headers"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "/local/projects/STREP/bepipred-1.0b/bepipred",
+               "idx" : 1,
+               "name" : "bepipred"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/replace_fasta_headers.pl",
+               "idx" : 2,
+               "name" : "fix output file"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast2go",
+         "biotoolsID" : "blast2go",
+         "component" : "blast2go",
+         "homepage" : "https://www.blast2go.com/",
+         "matched" : true,
+         "tool_name" : "Blast2GO",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "java",
+               "idx" : 0,
+               "name" : "blast2go"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "blastn_plus",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_blast_plus",
+               "idx" : 0,
+               "name" : "run blastn+"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "blastp_plus",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_blast_plus",
+               "idx" : 0,
+               "name" : "run blastp+"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bmtagger",
+         "biotoolsID" : "bmtagger",
+         "component" : "bmtagger",
+         "homepage" : "https://ftp.ncbi.nlm.nih.gov/pub/agarwala/bmtagger/",
+         "matched" : true,
+         "tool_name" : "bmtagger",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_bmtagger",
+               "idx" : 2,
+               "name" : "bmtagger"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bmtagger",
+         "biotoolsID" : "bmtagger",
+         "component" : "bmtagger_index",
+         "homepage" : "https://ftp.ncbi.nlm.nih.gov/pub/agarwala/bmtagger/",
+         "matched" : true,
+         "tool_name" : "bmtagger",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BMTOOL_EXEC}}",
+               "idx" : 0,
+               "name" : "Make index for bmfilter"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{SRPRISM_EXEC}}",
+               "idx" : 1,
+               "name" : "Make index for srprism"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{MAKEBLASTDB_EXEC}}",
+               "idx" : 2,
+               "name" : "Make blastdb for BLAST"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bowtie",
+         "biotoolsID" : "bowtie",
+         "component" : "bowtie",
+         "homepage" : "http://bowtie-bio.sourceforge.net/index.shtml",
+         "matched" : true,
+         "tool_name" : "Bowtie",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/bowtie",
+               "idx" : 0,
+               "name" : "bowtie"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bowtie",
+         "biotoolsID" : "bowtie",
+         "component" : "bowtie_build",
+         "homepage" : "http://bowtie-bio.sourceforge.net/index.shtml",
+         "matched" : true,
+         "tool_name" : "Bowtie",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/bowtie_build",
+               "idx" : 0,
+               "name" : "bowtie_build"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bwa",
+         "biotoolsID" : "bwa",
+         "component" : "bwa",
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "matched" : true,
+         "tool_name" : "BWA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/bwa_wrapper",
+               "idx" : 2,
+               "name" : "BWA Execution"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bwa",
+         "biotoolsID" : "bwa",
+         "component" : "bwa_align",
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "matched" : true,
+         "tool_name" : "BWA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "sh {{BWA_ALIGN_EXEC}}",
+               "idx" : 4,
+               "name" : "BWA Execution"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bwa",
+         "biotoolsID" : "bwa",
+         "component" : "bwa_index",
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "matched" : true,
+         "tool_name" : "BWA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "sh {{BWA_INDEX_EXEC}}",
+               "idx" : 4,
+               "name" : "BWA Execution"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bwa",
+         "biotoolsID" : "bwa",
+         "component" : "bwa_mem",
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "matched" : true,
+         "tool_name" : "BWA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BWA_EXEC}}",
+               "idx" : 4,
+               "name" : "BWA Execution"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "",
+         "biotoolsID" : "celera_assembler",
+         "component" : "celera-assembler",
+         "homepage" : "",
+         "matched" : false,
+         "tool_name" : "celera_assembler",
+         "tool_steps" : []
+      },
+      {
+         "bio_tools_url" : "",
+         "biotoolsID" : "celera_assembler",
+         "component" : "celera-assembler-distributed",
+         "homepage" : "",
+         "matched" : false,
+         "tool_name" : "celera_assembler",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/runCA_wrapper",
+               "idx" : 2,
+               "name" : "runCA"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/clustalw",
+         "biotoolsID" : "clustalw",
+         "component" : "clustalw",
+         "homepage" : "http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/",
+         "matched" : true,
+         "tool_name" : "Clustal 1.8 (Clustal W, Clustal X)",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "cp",
+               "idx" : 0,
+               "name" : "relocate query file"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{CLUSTALW_EXEC}}",
+               "idx" : 1,
+               "name" : "clustalw"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/validate_clustalw_output",
+               "idx" : 2,
+               "name" : "validate clustalw output"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/MSF2Bsml",
+               "idx" : 3,
+               "name" : "msf2bsml"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/qiime",
+         "biotoolsID" : "qiime",
+         "component" : "core_qiime",
+         "homepage" : "http://qiime.org/",
+         "matched" : true,
+         "tool_name" : "QIIME",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/pick_open_reference_otus",
+               "idx" : 2,
+               "name" : "pick open-reference otus"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/make_otu_heatmap_html",
+               "idx" : 5,
+               "name" : "make_otu_heatmap_html_file"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/summarize_taxa",
+               "idx" : 7,
+               "name" : "summarizing taxa analysis (phyla)"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+               "idx" : 8,
+               "name" : "reformatting phyla assignment matrix"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+               "idx" : 9,
+               "name" : "reformatting classes assignment matrix"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+               "idx" : 10,
+               "name" : "reformatting orders assignment matrix"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+               "idx" : 11,
+               "name" : "reformatting families assignment matrix"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/summarize_taxa",
+               "idx" : 12,
+               "name" : "summarizing taxa analysis (genus)"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "perl {{BIN_DIR}}/Create_Qiime_tables.pl",
+               "idx" : 13,
+               "name" : "reformatting genera assignment matrix"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/beta_diversity_through_plots",
+               "idx" : 16,
+               "name" : "create beta diversity and PCoA plots"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/crossbow",
+         "biotoolsID" : "crossbow",
+         "component" : "crossbow",
+         "homepage" : "http://bowtie-bio.sourceforge.net/crossbow/index.shtml",
+         "matched" : true,
+         "tool_name" : "Crossbow",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HADOOP_EXEC}}",
+               "idx" : 2,
+               "name" : "upload input file to HFS"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HADOOP_EXEC}}",
+               "idx" : 3,
+               "name" : "create reference directory on HFS"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HADOOP_EXEC}}",
+               "idx" : 4,
+               "name" : "upload reference jar to HFS"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{CROSSBOW_EXEC}}",
+               "idx" : 5,
+               "name" : "crossbow"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HADOOP_EXEC}}",
+               "idx" : 6,
+               "name" : "download crossbow output"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/cufflinks",
+         "biotoolsID" : "cufflinks",
+         "component" : "cuffcompare",
+         "homepage" : "http://cole-trapnell-lab.github.io/cufflinks",
+         "matched" : true,
+         "tool_name" : "Cufflinks",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/cuffcompare",
+               "idx" : 0,
+               "name" : "cuffcompare"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/cufflinks",
+         "biotoolsID" : "cufflinks",
+         "component" : "cuffdiff",
+         "homepage" : "http://cole-trapnell-lab.github.io/cufflinks",
+         "matched" : true,
+         "tool_name" : "Cufflinks",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/cuffdiff",
+               "idx" : 0,
+               "name" : "cuffdiff"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/cufflinks",
+         "biotoolsID" : "cufflinks",
+         "component" : "cuffdiff_filter",
+         "homepage" : "http://cole-trapnell-lab.github.io/cufflinks",
+         "matched" : true,
+         "tool_name" : "Cufflinks",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/cuffdiff_filter",
+               "idx" : 0,
+               "name" : "cuffdiff_filter"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/cufflinks",
+         "biotoolsID" : "cufflinks",
+         "component" : "cufflinks",
+         "homepage" : "http://cole-trapnell-lab.github.io/cufflinks",
+         "matched" : true,
+         "tool_name" : "Cufflinks",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/cufflinks",
+               "idx" : 0,
+               "name" : "cufflinks"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/cummerbund",
+         "biotoolsID" : "cummerbund",
+         "component" : "cummerbund",
+         "homepage" : "http://bioconductor.org/packages/release/bioc/html/cummeRbund.html",
+         "matched" : true,
+         "tool_name" : "cummeRbund",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/cummerbund",
+               "idx" : 0,
+               "name" : "cummerbund"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/deseq",
+         "biotoolsID" : "deseq",
+         "component" : "deseq",
+         "homepage" : "http://bioconductor.org/packages/release/bioc/html/DESeq.html",
+         "matched" : true,
+         "tool_name" : "DESeq",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/deseq",
+               "idx" : 0,
+               "name" : "deseq"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/edger",
+         "biotoolsID" : "edger",
+         "component" : "edgeR",
+         "homepage" : "http://bioconductor.org/packages/release/bioc/html/edgeR.html",
+         "matched" : true,
+         "tool_name" : "edgeR",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/edgeR",
+               "idx" : 0,
+               "name" : "edgeR"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/exonerate",
+         "biotoolsID" : "exonerate",
+         "component" : "exonerate",
+         "homepage" : "http://www.ebi.ac.uk/%7Eguy/exonerate",
+         "matched" : true,
+         "tool_name" : "Exonerate",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{EXONERATE_EXEC}}",
+               "idx" : 0,
+               "name" : "exonerate"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/fasttree",
+         "biotoolsID" : "fasttree",
+         "component" : "fast_tree",
+         "homepage" : "https://www.microbesonline.org/fasttree/",
+         "matched" : true,
+         "tool_name" : "FastTree",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{FASTTREE_EXEC}}",
+               "idx" : 0,
+               "name" : "fast_tree"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "",
+         "biotoolsID" : "fastortho",
+         "component" : "fastortho_distributed",
+         "homepage" : "",
+         "matched" : false,
+         "tool_name" : "fastortho",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{FASTORTHO_BIN}}/FastOrtho",
+               "idx" : 0,
+               "name" : "run FastOrtho"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/fastqc",
+         "biotoolsID" : "fastqc",
+         "component" : "fastqc_stats",
+         "homepage" : "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/",
+         "matched" : true,
+         "tool_name" : "FastQC",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/fastqc_stats",
+               "idx" : 0,
+               "name" : "fastqc_stats"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/fgenesh",
+         "biotoolsID" : "fgenesh",
+         "component" : "fgenesh",
+         "homepage" : "http://nhjy.hzau.edu.cn/kech/swxxx/jakj/dianzi/Bioinf6/GeneFinding/GeneFinding2.htm",
+         "matched" : true,
+         "tool_name" : "FGENESH",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{FGENESH_EXEC}}",
+               "idx" : 0,
+               "name" : "fgenesh"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "formatdb",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/formatdb",
+               "idx" : 1,
+               "name" : "formatdb"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/geneid",
+         "biotoolsID" : "geneid",
+         "component" : "geneid",
+         "homepage" : "http://genome.crg.es/software/geneid/index.html",
+         "matched" : true,
+         "tool_name" : "Geneid",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{GENEID_EXEC}}",
+               "idx" : 0,
+               "name" : "geneid"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/genemark",
+         "biotoolsID" : "genemark",
+         "component" : "genemark",
+         "homepage" : "http://exon.gatech.edu/GeneMark/",
+         "matched" : true,
+         "tool_name" : "GeneMark",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{GMHMME3_EXEC}}",
+               "idx" : 0,
+               "name" : "genemark"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "mv",
+               "idx" : 1,
+               "name" : "migrate output file"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/genemark",
+         "biotoolsID" : "genemark",
+         "component" : "genemark-es",
+         "homepage" : "http://exon.gatech.edu/GeneMark/",
+         "matched" : true,
+         "tool_name" : "GeneMark",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_genemark-es",
+               "idx" : 0,
+               "name" : "genemark"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/genewise",
+         "biotoolsID" : "genewise",
+         "component" : "genewise",
+         "homepage" : "https://www.ebi.ac.uk/jdispatcher/psa/genewise",
+         "matched" : true,
+         "tool_name" : "GeneWise (EBI)",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/prepare_for_genewise_best_loc",
+               "idx" : 0,
+               "name" : "prepare for genewise"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/genezilla",
+         "biotoolsID" : "genezilla",
+         "component" : "genezilla",
+         "homepage" : "http://www.genezilla.org",
+         "matched" : true,
+         "tool_name" : "GeneZilla",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{GENEZILLA_EXEC}}",
+               "idx" : 0,
+               "name" : "genezilla"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/genscan",
+         "biotoolsID" : "genscan",
+         "component" : "genscan",
+         "homepage" : "http://genes.mit.edu/GENSCANinfo.html",
+         "matched" : true,
+         "tool_name" : "GENSCAN",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{GENSCAN_EXEC}}",
+               "idx" : 0,
+               "name" : "genscan"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/genscan",
+         "biotoolsID" : "genscan",
+         "component" : "genscan-plus",
+         "homepage" : "http://genes.mit.edu/GENSCANinfo.html",
+         "matched" : true,
+         "tool_name" : "GENSCAN",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{GENSCAN_PLUS_EXEC}}",
+               "idx" : 0,
+               "name" : "genscan-plus"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/emboss",
+         "biotoolsID" : "emboss",
+         "component" : "getorf",
+         "homepage" : "http://emboss.bioinformatics.nl/",
+         "matched" : true,
+         "tool_name" : "EMBOSS",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{EMBOSS_BIN}}/getorf",
+               "idx" : 0,
+               "name" : "Run EMBOSS getorf"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/glimmer",
+         "biotoolsID" : "glimmer",
+         "component" : "glimmer3",
+         "homepage" : "https://ccb.jhu.edu/software/glimmer/",
+         "matched" : true,
+         "tool_name" : "Glimmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{GLIMMER3_DIR}}/bin/glimmer3",
+               "idx" : 0,
+               "name" : "glimmer3"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/glimmer",
+         "biotoolsID" : "glimmer",
+         "component" : "glimmer3_cloud",
+         "homepage" : "https://ccb.jhu.edu/software/glimmer/",
+         "matched" : true,
+         "tool_name" : "Glimmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/train_for_glimmer3",
+               "idx" : 3,
+               "name" : "train_for_glimmer"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "/opt/vappio-scripts/syncdata.sh --synchronous",
+               "idx" : 4,
+               "name" : "sync staging directory"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/glimmer-hmm",
+         "biotoolsID" : "glimmer-hmm",
+         "component" : "glimmerHMM",
+         "homepage" : "https://ccb.jhu.edu/software/glimmerhmm/",
+         "matched" : true,
+         "tool_name" : "Glimmer-HMM",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{GLIMMERHMM_EXEC}}",
+               "idx" : 0,
+               "name" : "glimmerHMM"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/hmmer3",
+         "biotoolsID" : "hmmer3",
+         "component" : "hmmer",
+         "homepage" : "http://hmmer.org/",
+         "matched" : true,
+         "tool_name" : "HMMER3",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HMMLS_EXEC}}",
+               "idx" : 0,
+               "name" : "hmmls"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/HMMER2",
+         "biotoolsID" : "HMMER2",
+         "component" : "hmmls",
+         "homepage" : "http://hmmer.org/",
+         "matched" : true,
+         "tool_name" : "HMMER2",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/replace_fasta_headers.pl",
+               "idx" : 0,
+               "name" : "replace fasta headers"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HMMLS_EXEC}}",
+               "idx" : 1,
+               "name" : "hmmls"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/replace_fasta_headers.pl",
+               "idx" : 2,
+               "name" : "fix output file"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/HMMER2",
+         "biotoolsID" : "HMMER2",
+         "component" : "hmmpfam",
+         "homepage" : "http://hmmer.org/",
+         "matched" : true,
+         "tool_name" : "HMMER2",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HMMPFAM_EXEC}}",
+               "idx" : 0,
+               "name" : "hmmpfam"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/hmmpfam2htab",
+               "idx" : 1,
+               "name" : "hmmpfam2htab"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/hmmer3",
+         "biotoolsID" : "hmmer3",
+         "component" : "hmmpfam3",
+         "homepage" : "http://hmmer.org/",
+         "matched" : true,
+         "tool_name" : "HMMER3",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{HMMSCAN_EXEC}}",
+               "idx" : 0,
+               "name" : "hmmpfam3"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/hmmpfam32htab",
+               "idx" : 1,
+               "name" : "hmmpfam32htab"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/infernal",
+         "biotoolsID" : "infernal",
+         "component" : "infernal",
+         "homepage" : "http://eddylab.org/infernal/",
+         "matched" : true,
+         "tool_name" : "Infernal",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_cmsearch",
+               "idx" : 0,
+               "name" : "infernal"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bwa",
+         "biotoolsID" : "bwa",
+         "component" : "lgt_build_bwa_index",
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "matched" : true,
+         "tool_name" : "BWA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_build_index",
+               "idx" : 2,
+               "name" : "lgt_build_index"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bwa",
+         "biotoolsID" : "bwa",
+         "component" : "lgt_bwa",
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "matched" : true,
+         "tool_name" : "BWA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_bwa",
+               "idx" : 2,
+               "name" : "BWA alignment"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_filter_reads",
+               "idx" : 3,
+               "name" : "Filter reads"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/bwa",
+         "biotoolsID" : "bwa",
+         "component" : "lgt_bwa_fq",
+         "homepage" : "http://bio-bwa.sourceforge.net",
+         "matched" : true,
+         "tool_name" : "BWA",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_bwa",
+               "idx" : 2,
+               "name" : "BWA Execution"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_bwa",
+               "idx" : 3,
+               "name" : "BWA Execution"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_bwa_post_process",
+               "idx" : 4,
+               "name" : "POST PROCESSING"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_bwa_zip.sh",
+               "idx" : 5,
+               "name" : "ZIP FILES"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/lgt_bwa_rm.sh",
+               "idx" : 6,
+               "name" : "REMOVE FASTQ FILES"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/lipop",
+         "biotoolsID" : "lipop",
+         "component" : "lipop",
+         "homepage" : "http://cbs.dtu.dk/services/LipoP",
+         "matched" : true,
+         "tool_name" : "LipoP",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{LIPOP_EXEC}}",
+               "idx" : 0,
+               "name" : "lipop"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "megablast",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{MEGABLAST_EXEC}}",
+               "idx" : 0,
+               "name" : "megablast"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/metagenemark",
+         "biotoolsID" : "metagenemark",
+         "component" : "metagene",
+         "homepage" : "http://exon.gatech.edu/GeneMark/meta_gmhmmp.cgi",
+         "matched" : true,
+         "tool_name" : "MetaGeneMark",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{METAGENE_EXEC}}",
+               "idx" : 0,
+               "name" : "metagene"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/get_seq_by_metagene",
+               "idx" : 2,
+               "name" : "get_seq_by_metagene"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/metagenemark",
+         "biotoolsID" : "metagenemark",
+         "component" : "metagenemark",
+         "homepage" : "http://exon.gatech.edu/GeneMark/meta_gmhmmp.cgi",
+         "matched" : true,
+         "tool_name" : "MetaGeneMark",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{METAGENEMARK_EXEC}}",
+               "idx" : 0,
+               "name" : "metagenemark"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_align_seqs",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "align seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_chimera_slayer",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "chimera slayer"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_classify_seqs",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "classify seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_cluster",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "cluster"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_collect_single",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "collect single"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_dist_seqs",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "align seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_filter_seqs",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "align seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_get_oturep",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "get oturep"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_rarefaction_single",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "rarefaction single"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_read_otu",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "read otu"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_screen_seqs",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "screen seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_summary",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "align seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_tree_shared",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "tree shared"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_trim_seqs",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "trim seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_unique_seq_limit",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur_unique_seq_limit.pl",
+               "idx" : 0,
+               "name" : "mothur check for unique seq limit"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mothur",
+         "biotoolsID" : "mothur",
+         "component" : "mothur_unique_seqs",
+         "homepage" : "http://mothur.org/",
+         "matched" : true,
+         "tool_name" : "mothur",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/mothur",
+               "idx" : 0,
+               "name" : "unique seqs"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "",
+         "biotoolsID" : "mugsy",
+         "component" : "mugsyalign",
+         "homepage" : "",
+         "matched" : false,
+         "tool_name" : "mugsy",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/replace_maf_ids",
+               "idx" : 3,
+               "name" : "Replace organism ids in maf"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "/bin/mv",
+               "idx" : 4,
+               "name" : "Move file"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "",
+         "biotoolsID" : "mugsy",
+         "component" : "mugsyalign_distributed_work",
+         "homepage" : "",
+         "matched" : false,
+         "tool_name" : "mugsy",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{MUGSY_EXEC}}",
+               "idx" : 0,
+               "name" : "run mugsy"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/muscle",
+         "biotoolsID" : "muscle",
+         "component" : "muscle",
+         "homepage" : "https://www.drive5.com/muscle/",
+         "matched" : true,
+         "tool_name" : "MUSCLE",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "cp",
+               "idx" : 1,
+               "name" : "relocate query file"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{MUSCLE_EXEC}}",
+               "idx" : 2,
+               "name" : "muscle"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/validate_clustalw_output",
+               "idx" : 3,
+               "name" : "validate muscle output"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/MSF2Bsml",
+               "idx" : 4,
+               "name" : "msf2bsml"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "ncbi-blastall",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTALL_EXEC}}",
+               "idx" : 0,
+               "name" : "ncbi-blastall"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "ncbi-blastn",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTALL_EXEC}}",
+               "idx" : 0,
+               "name" : "ncbi-blastn"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "ncbi-blastn_compress",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "zcat -f {{I_FILE_PATH}} | {{BLASTALL_EXEC}}",
+               "idx" : 0,
+               "name" : "ncbi-blastn_compress"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "ncbi-blastp",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTALL_EXEC}}",
+               "idx" : 1,
+               "name" : "ncbi-blastp"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "ncbi-blastx",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTALL_EXEC}}",
+               "idx" : 0,
+               "name" : "ncbi-blastx"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "ncbi-tblastn",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTALL_EXEC}}",
+               "idx" : 1,
+               "name" : "ncbi-tblastn"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "ncbi-tblastx",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTALL_EXEC}}",
+               "idx" : 0,
+               "name" : "ncbi-tblastx"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mummer",
+         "biotoolsID" : "mummer",
+         "component" : "nucmer",
+         "homepage" : "http://mummer.sourceforge.net/",
+         "matched" : true,
+         "tool_name" : "MUMmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{NUCMER_EXEC}}",
+               "idx" : 2,
+               "name" : "nucmer"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{COORDS_EXEC}}",
+               "idx" : 3,
+               "name" : "create coordinates file"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mummer",
+         "biotoolsID" : "mummer",
+         "component" : "nucmer-snp2merged",
+         "homepage" : "http://mummer.sourceforge.net/",
+         "matched" : true,
+         "tool_name" : "MUMmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/nucmer-snp2merged",
+               "idx" : 1,
+               "name" : "nucmer-snp2merged"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/mummer",
+         "biotoolsID" : "mummer",
+         "component" : "nucmer_snps",
+         "homepage" : "http://mummer.sourceforge.net/",
+         "matched" : true,
+         "tool_name" : "MUMmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "/usr/local/common/nucmer",
+               "idx" : 0,
+               "name" : "NUCmer"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "/usr/local/common/delta-filter",
+               "idx" : 1,
+               "name" : "delta-filter"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "/usr/local/common/show-snps",
+               "idx" : 2,
+               "name" : "show-snps"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/emboss",
+         "biotoolsID" : "emboss",
+         "component" : "pepstats",
+         "homepage" : "http://emboss.bioinformatics.nl/",
+         "matched" : true,
+         "tool_name" : "EMBOSS",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/pepstats.sh",
+               "idx" : 0,
+               "name" : "pepstats"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/priam_search",
+         "biotoolsID" : "priam_search",
+         "component" : "priam_ec_assignment",
+         "homepage" : "http://priam.prabi.fr/REL_MAR15/index_mar15.html",
+         "matched" : true,
+         "tool_name" : "PRIAM search",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/assign_ec_from_rps",
+               "idx" : 0,
+               "name" : "priam_ec_assignment"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/prodigal",
+         "biotoolsID" : "prodigal",
+         "component" : "prodigal",
+         "homepage" : "https://github.com/hyattpd/Prodigal",
+         "matched" : true,
+         "tool_name" : "Prodigal",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{PRODIGAL_EXEC}}",
+               "idx" : 0,
+               "name" : "prodigal"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/ps_scan",
+         "biotoolsID" : "ps_scan",
+         "component" : "ps_scan",
+         "homepage" : "http://prosite.expasy.org/scanprosite/",
+         "matched" : true,
+         "tool_name" : "ps_scan",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{PS_SCAN_EXEC}}",
+               "idx" : 0,
+               "name" : "ps_scan"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/glimmer",
+         "biotoolsID" : "glimmer",
+         "component" : "pseudomolecule2glimmer3",
+         "homepage" : "https://ccb.jhu.edu/software/glimmer/",
+         "matched" : true,
+         "tool_name" : "Glimmer",
+         "tool_steps" : []
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "psiblast",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{PSIBLAST_EXEC}}",
+               "idx" : 0,
+               "name" : "psiblast"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/psortb",
+         "biotoolsID" : "psortb",
+         "component" : "psortb",
+         "homepage" : "http://www.psort.org/psortb/",
+         "matched" : true,
+         "tool_name" : "PSORTb",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{PSORTB_EXE}}",
+               "idx" : 0,
+               "name" : "tmhmm"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/repeatmasker",
+         "biotoolsID" : "repeatmasker",
+         "component" : "repeatmasker",
+         "homepage" : "http://www.repeatmasker.org/",
+         "matched" : true,
+         "tool_name" : "RepeatMasker",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{REPEATMASKER_EXEC}}",
+               "idx" : 0,
+               "name" : "repeatmasker"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "rpsblast",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{RPSBLAST_EXEC}}",
+               "idx" : 0,
+               "name" : "rpsblast"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/rnammer",
+         "biotoolsID" : "rnammer",
+         "component" : "rrna_hmm_fs",
+         "homepage" : "http://cbs.dtu.dk/services/RNAmmer/",
+         "matched" : true,
+         "tool_name" : "RNAmmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/rrna_hmm_fs",
+               "idx" : 0,
+               "name" : "rRNA_hmm_fs"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "env",
+               "idx" : 1,
+               "name" : "check env variables"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "sam2bam",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/sam2bam",
+               "idx" : 2,
+               "name" : "sam2bam"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "samtools_alignment_stats",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/samtools_alignment_stats",
+               "idx" : 0,
+               "name" : "samtools_alignment_stats"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "samtools_file_convert",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/samtools_file_convert",
+               "idx" : 0,
+               "name" : "samtools_file_convert"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "samtools_merge",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : []
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/samtools",
+         "biotoolsID" : "samtools",
+         "component" : "samtools_reference_index",
+         "homepage" : "http://www.htslib.org/",
+         "matched" : true,
+         "tool_name" : "SAMtools",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/samtools_reference_index",
+               "idx" : 0,
+               "name" : "samtools_reference_index"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/signalp",
+         "biotoolsID" : "signalp",
+         "component" : "signalp",
+         "homepage" : "http://cbs.dtu.dk/services/SignalP/",
+         "matched" : true,
+         "tool_name" : "SignalP",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{SIGNALP_EXEC}}",
+               "idx" : 1,
+               "name" : "Run signalp"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/signalp_graphics_rename",
+               "idx" : 2,
+               "name" : "Rename signalp graphics files"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/snap",
+         "biotoolsID" : "snap",
+         "component" : "snap",
+         "homepage" : "https://korflab.ucdavis.edu/software.html",
+         "matched" : true,
+         "tool_name" : "SNAP",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{SNAP_EXEC}}",
+               "idx" : 0,
+               "name" : "snap"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/soapdenovo",
+         "biotoolsID" : "soapdenovo",
+         "component" : "soapdenovo",
+         "homepage" : "http://soap.genomics.org.cn/soapdenovo.html",
+         "matched" : true,
+         "tool_name" : "SOAPdenovo",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/soapdenovo",
+               "idx" : 1,
+               "name" : "soapdenovo"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/trnascan-se",
+         "biotoolsID" : "trnascan-se",
+         "component" : "tRNAscan-SE",
+         "homepage" : "http://trna.ucsc.edu/tRNAscan-SE/",
+         "matched" : true,
+         "tool_name" : "Trnascan-SE",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "export TMPDIR={{TMP_DIR}}; perl -I {{TRNASCAN_LIB}} {{TRNASCANSE_EXEC}}",
+               "idx" : 0,
+               "name" : "tRNAscan-SE"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/trnascan-se",
+         "biotoolsID" : "trnascan-se",
+         "component" : "tRNAscan-SE_compress",
+         "homepage" : "http://trna.ucsc.edu/tRNAscan-SE/",
+         "matched" : true,
+         "tool_name" : "Trnascan-SE",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{TRNASCANSE_EXEC}}",
+               "idx" : 0,
+               "name" : "tRNAscan-SE_compress"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/targetp",
+         "biotoolsID" : "targetp",
+         "component" : "targetp",
+         "homepage" : "http://cbs.dtu.dk/services/TargetP/",
+         "matched" : true,
+         "tool_name" : "TargetP",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{TARGETP_EXEC}}",
+               "idx" : 0,
+               "name" : "targetp"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "tblastn_plus",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_blast_plus",
+               "idx" : 0,
+               "name" : "run tblastn+"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/tmhmm",
+         "biotoolsID" : "tmhmm",
+         "component" : "tmhmm",
+         "homepage" : "http://cbs.dtu.dk/services/TMHMM/",
+         "matched" : true,
+         "tool_name" : "TMHMM",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{TMHMM_EXEC}}",
+               "idx" : 0,
+               "name" : "tmhmm"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/tophat",
+         "biotoolsID" : "tophat",
+         "component" : "tophat",
+         "homepage" : "http://ccb.jhu.edu/software/tophat/index.shtml",
+         "matched" : true,
+         "tool_name" : "TopHat",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/tophat",
+               "idx" : 0,
+               "name" : "tophat"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/glimmer",
+         "biotoolsID" : "glimmer",
+         "component" : "train_for_glimmer3_iteration",
+         "homepage" : "https://ccb.jhu.edu/software/glimmer/",
+         "matched" : true,
+         "tool_name" : "Glimmer",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/train_for_glimmer3_iteration",
+               "idx" : 2,
+               "name" : "train for glimmer3 iteration"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/trf",
+         "biotoolsID" : "trf",
+         "component" : "trf",
+         "homepage" : "http://tandem.bu.edu/trf/trf.html",
+         "matched" : true,
+         "tool_name" : "TRF",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/trf_wrapper",
+               "idx" : 0,
+               "name" : "trf"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "find",
+               "idx" : 1,
+               "name" : "relocate output"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/usearch",
+         "biotoolsID" : "usearch",
+         "component" : "usearch",
+         "homepage" : "http://www.drive5.com/usearch/",
+         "matched" : true,
+         "tool_name" : "USEARCH",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{USEARCH_EXEC}}",
+               "idx" : 1,
+               "name" : "usearch"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "tail -10 {{TMP_DIR}}/{{ITERATOR_NAME}}/g{{GROUP_NUMBER}}/{{I_FILE_BASE}}.stderr >> {{OUTPUT_DIRECTORY}}/stats.txt;",
+               "idx" : 2,
+               "name" : "extract stats"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/velvet",
+         "biotoolsID" : "velvet",
+         "component" : "velvet",
+         "homepage" : "https://github.com/dzerbino/velvet",
+         "matched" : true,
+         "tool_name" : "Velvet",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{VELVETH_EXEC}}",
+               "idx" : 2,
+               "name" : "velveth"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/velveth_post_processing",
+               "idx" : 3,
+               "name" : "velveth post-processing"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/velvetg_pre_processing",
+               "idx" : 4,
+               "name" : "velvetg pre-processing"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{VELVETG_EXEC}}",
+               "idx" : 5,
+               "name" : "velvetg"
+            },
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/velvetg_post_processing",
+               "idx" : 6,
+               "name" : "velvetg post-processing"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/velvet",
+         "biotoolsID" : "velvet",
+         "component" : "velvet_optimiser",
+         "homepage" : "https://github.com/dzerbino/velvet",
+         "matched" : true,
+         "tool_name" : "Velvet",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BIN_DIR}}/run_velvet_optimiser",
+               "idx" : 2,
+               "name" : "run velvet optimiser"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "wu-blastn",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "/usr/local/bin/blastn",
+               "idx" : 0,
+               "name" : "wu-blastn"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "wu-blastp",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTP_EXEC}}",
+               "idx" : 0,
+               "name" : "wu-blastp"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "wu-blastx",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{BLASTX_EXEC}}",
+               "idx" : 0,
+               "name" : "wu-blastx"
+            }
+         ]
+      },
+      {
+         "bio_tools_url" : "https://bio.tools/blast",
+         "biotoolsID" : "blast",
+         "component" : "wu-tblastn",
+         "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+         "matched" : true,
+         "tool_name" : "BLAST",
+         "tool_steps" : [
+            {
+               "category" : "tool_execution",
+               "executable" : "{{TBLASTN_EXEC}}",
+               "idx" : 0,
+               "name" : "wu-tblastn"
+            }
+         ]
+      }
+   ],
+   "summary" : {
+      "biotools_found" : 55,
+      "mapped_components" : 126,
+      "total_components" : 383,
+      "unique_biotools" : 58,
+      "unmapped_components" : 257
+   },
+   "unmapped" : [
+      "454_mplex_seq_bin_trim",
+      "aat_aa",
+      "aat_aa_masked",
+      "aat_na",
+      "aat_na_masked",
+      "adjust_bsml_coordinates",
+      "alien_hunter",
+      "align_bowtie_stats",
+      "align_tophat_split_stats",
+      "align_tophat_stats",
+      "assert_disjoint_clusters",
+      "assign_dbxref_ids",
+      "assign_taxa",
+      "auto_annotate",
+      "auto_gene_curation",
+      "backupdb",
+      "basic_alignment_stats",
+      "bcpconverter",
+      "ber",
+      "blast2lca",
+      "blast_lgt_finder",
+      "blast_seq_screen",
+      "blast_snp_regions",
+      "bsml2chado",
+      "bsml2fasta",
+      "bsml2featurerelationships",
+      "bsml2gff3",
+      "bsml2interevidence_fasta",
+      "bsml2mugsymap",
+      "bsml2ptt",
+      "bsml2tbl",
+      "bsml_qc",
+      "btab2taxon",
+      "bulk_delete_chado",
+      "celera2hawkeye",
+      "chado2bsml",
+      "chado2flatfile",
+      "chado_report_pages",
+      "clean_fasta",
+      "cleanse_sgc_database",
+      "clovr_16S_rdptables",
+      "clovr_metagenomics_prep",
+      "clovr_metagenomics_tables",
+      "cluster_mapping",
+      "combine_ncRNA_alignments",
+      "complete_study_stage",
+      "concatenate_files",
+      "condor_cogs_search",
+      "create_amoscmp_input",
+      "create_cuffsuite_files",
+      "create_db_list_file",
+      "create_map_file",
+      "create_paired_list_file",
+      "create_pseudomolecules",
+      "curate_common_names",
+      "cvtermpath_closure",
+      "db2bsml",
+      "db2fasta",
+      "delete_bcp",
+      "delete_by_bcp",
+      "download_sra",
+      "download_tcga",
+      "drop_chado_indexes",
+      "dump_fasta",
+      "dump_table",
+      "elph",
+      "error_detector",
+      "expression_plots",
+      "extract_assembly_stats",
+      "extract_snp_regions",
+      "fasta2bsml",
+      "fastaToBsmlWorkingGeneModels",
+      "fastortho",
+      "fastq_to_CA",
+      "fastx_quality_stats",
+      "fastx_trimming",
+      "fetch_genbank",
+      "filter_bogus_genes",
+      "filter_deseq",
+      "filter_dups_lc_seqs",
+      "filter_fastq",
+      "filter_lgt_class_c_genes",
+      "filter_merged_table",
+      "filter_sequences_by_id",
+      "find_homopolymers",
+      "fix_gene_symbols",
+      "formatdb_snp",
+      "fuzznuc",
+      "genbank2bsml",
+      "genbank2fasta",
+      "genbank2gff3",
+      "genbank2gtf",
+      "get_bam_coverage_dx",
+      "gff3_to_annotab",
+      "gff3_to_fasta",
+      "gff3_to_gbrowse",
+      "gkpstore2fastq",
+      "glk2bsml",
+      "gsnap",
+      "histogram_stacked",
+      "htseq",
+      "htseq_count_reads",
+      "identify_human_contaminants",
+      "initdb",
+      "insert_pmarks_in_scaffolds",
+      "intergenic_analysis",
+      "iprscan",
+      "islandpath",
+      "j_ortholog_clusters",
+      "j_ortholog_clusters_distributed_work",
+      "jaccard",
+      "ksnp",
+      "leech",
+      "legacy2bsml",
+      "lgt_bwa_post_process",
+      "lgt_create_validated_bam",
+      "lgt_mpileup",
+      "lipoprotein_motif",
+      "load_ber_for_manatee",
+      "make_circleator_figure",
+      "make_comparative_circleator_figure",
+      "make_snp_lists",
+      "map_snp_query_pos",
+      "mask_by_analysis",
+      "metastats",
+      "mosaik",
+      "move_to_scratch",
+      "mpileup",
+      "mugsy_callsnps",
+      "mugsy_callsnps_distributed",
+      "mugsy_concat_fasta",
+      "mugsycog",
+      "mugsycog_distributed_work",
+      "mugsyprep",
+      "mumi-reduce",
+      "mummer",
+      "mumsgraph",
+      "ngap",
+      "noop",
+      "nucmer-delta-filter",
+      "nucmer-show-snps",
+      "obo2chado",
+      "open_reading_frames",
+      "order_paired_list",
+      "outer_membrane_domain",
+      "overlap_analysis",
+      "overlap_analysis_distributed",
+      "p_func",
+      "pangenome_blast_parse",
+      "pangenome_do_analysis",
+      "pangenome_do_analysis_distributed_work",
+      "pangenome_fix_headers",
+      "pangenome_make_graphs",
+      "pangenome_make_pangenome",
+      "pangenome_make_pangenome_distributed_work",
+      "pangenome_make_profile",
+      "pangenome_make_profile_distributed_work",
+      "pangenome_make_table",
+      "pangenome_make_table_distributed_work",
+      "pangenome_merge_results",
+      "pangenome_merge_results_distributed_work",
+      "panther",
+      "parallel_sort",
+      "parse_evidence",
+      "parse_for_ncRNAs",
+      "parse_mpileup_for_positions",
+      "pathway_tools_input",
+      "percent_gc",
+      "percent_mapped_stats",
+      "phage_finder",
+      "phat",
+      "phobos",
+      "phylip_dnadist",
+      "pick_otus_through_otu_table",
+      "piecharts",
+      "pileup_to_wig",
+      "pipeline_summary",
+      "pipeline_summary_cloud",
+      "pmarks2bsml",
+      "predict_operons",
+      "predict_prokaryotic_gene_function",
+      "predotar",
+      "prepare_paired_ends_for_velvet",
+      "preserve_reads_in_fastq",
+      "profile_bsml",
+      "profile_gff3",
+      "prok_pipeline_check",
+      "prokpipe_consistency_checks",
+      "promote_gene_prediction",
+      "qiime_fasta_mothur_cnvr",
+      "qiime_fastq_mothur_cnvr",
+      "quicktree",
+      "rdp_classifier",
+      "refresh_chado_mart",
+      "remove_db_gene_syms_with_hypos",
+      "remove_indices_and_constraints",
+      "remove_subset_of_gis",
+      "replace_defline_with_locusID",
+      "resistome",
+      "restore_indices_and_constraints",
+      "restoredb",
+      "rotate_molecule",
+      "rpkm_coverage_stats",
+      "run_command",
+      "runsql",
+      "sam2fasta",
+      "sam2lca",
+      "sam2lca_distributed",
+      "samtools_merge_distributed_work",
+      "scp_files",
+      "scripture",
+      "seg",
+      "selfsim",
+      "sff_to_CA",
+      "sfffile",
+      "sffinfo",
+      "sighunt",
+      "skiff",
+      "snp-add-gene-info",
+      "snp_verify",
+      "solsnp",
+      "sort_sam_by_name",
+      "split_fasta",
+      "split_fasta_fastq",
+      "split_fastq",
+      "split_file",
+      "split_multifasta",
+      "split_paired_files",
+      "sra2fastq",
+      "stap_aligner",
+      "stap_classifier",
+      "start_site_curation",
+      "start_site_curation_distributed",
+      "summarize_mugsy_comparative_pipeline",
+      "summarize_mugsy_comparative_pipeline_distributed",
+      "tabula_rasa",
+      "tag_data",
+      "tbl2asn",
+      "translate_sequence",
+      "truncate_chado_mart",
+      "uchime",
+      "uclust",
+      "uclust_remove_replicates",
+      "update_ec_numbers",
+      "update_euk_model_sequences",
+      "validate_asn",
+      "validate_bsml",
+      "validate_chado_records",
+      "validate_euk_records",
+      "validate_fasta",
+      "validate_genbank",
+      "validate_gff3",
+      "validate_sgc_records",
+      "wait",
+      "wga_maf2tree",
+      "wrapper_align",
+      "xdformat"
+   ]
+}

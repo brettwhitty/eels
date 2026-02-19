@@ -1,0 +1,21 @@
+{
+   "license" : "",
+   "biotoolsID" : "usearch",
+   "description" : "Algorithm designed to enable high-throughput, sensitive search of very large sequence databases.",
+   "name" : "USEARCH",
+   "homepage" : "http://www.drive5.com/usearch/",
+   "function" : [
+      {
+         "operation" : [
+            "Sequence analysis"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "topic" : [
+      "DNA",
+      "Sequence analysis",
+      "Sequencing"
+   ]
+}

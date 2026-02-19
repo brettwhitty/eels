@@ -1,0 +1,43 @@
+{
+   "homepage" : "http://cbs.dtu.dk/services/TMHMM/",
+   "license" : "Other",
+   "function" : [
+      {
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Protein features",
+               "format" : [
+                  "GFF"
+               ]
+            },
+            {
+               "term" : "Sequence report",
+               "format" : [
+                  "Binary format"
+               ]
+            }
+         ],
+         "operation" : [
+            "Transmembrane protein prediction"
+         ]
+      }
+   ],
+   "description" : "Prediction of transmembrane helices in proteins.",
+   "topic" : [
+      "Membrane and lipoproteins",
+      "Proteomics",
+      "Protein modifications",
+      "Protein folds and structural domains",
+      "Protein secondary structure"
+   ],
+   "biotoolsID" : "tmhmm",
+   "name" : "TMHMM"
+}

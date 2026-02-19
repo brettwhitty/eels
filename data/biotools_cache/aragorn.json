@@ -1,0 +1,20 @@
+{
+   "license" : "Not licensed",
+   "homepage" : "http://www.ansikte.se/ARAGORN/",
+   "function" : [
+      {
+         "operation" : [
+            "Gene prediction"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "topic" : [
+      "Functional, regulatory and non-coding RNA",
+      "Genomics"
+   ],
+   "description" : "ARAGORN detects tRNA, mtRNA info about tmRNA, and tmRNA genes",
+   "biotoolsID" : "aragorn",
+   "name" : "aragorn"
+}

@@ -1,0 +1,25 @@
+{
+   "homepage" : "http://emboss.bioinformatics.nl/",
+   "license" : "",
+   "function" : [
+      {
+         "operation" : [
+            "Sequence analysis",
+            "Local alignment",
+            "Sequence alignment analysis",
+            "Global alignment",
+            "Sequence alignment"
+         ],
+         "input" : [],
+         "output" : []
+      }
+   ],
+   "topic" : [
+      "Molecular biology",
+      "Sequence analysis",
+      "Biology"
+   ],
+   "description" : "Diverse suite of tools for sequence analysis; many programs analagous to GCG; context-sensitive help for each tool.",
+   "biotoolsID" : "emboss",
+   "name" : "EMBOSS"
+}

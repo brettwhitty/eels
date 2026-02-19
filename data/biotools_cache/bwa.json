@@ -1,0 +1,169 @@
+{
+   "topic" : [
+      "Mapping"
+   ],
+   "description" : "Fast, accurate, memory-efficient aligner for short and long sequencing reads",
+   "biotoolsID" : "bwa",
+   "name" : "BWA",
+   "license" : "MIT",
+   "homepage" : "http://bio-bwa.sourceforge.net",
+   "function" : [
+      {
+         "operation" : [
+            "Genome indexing"
+         ],
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Genome index",
+               "format" : []
+            }
+         ]
+      },
+      {
+         "operation" : [
+            "Sequence alignment"
+         ],
+         "output" : [
+            {
+               "term" : "Alignment",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Genome index"
+            },
+            {
+               "format" : [
+                  "FASTQ"
+               ],
+               "term" : "Sequence"
+            }
+         ]
+      },
+      {
+         "output" : [
+            {
+               "term" : "Sequence coordinates",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA search results format"
+               ]
+            },
+            {
+               "format" : [
+                  "FASTQ"
+               ],
+               "term" : "Sequence"
+            }
+         ],
+         "operation" : [
+            "Read mapping",
+            "Sequence alignment"
+         ]
+      },
+      {
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            },
+            {
+               "format" : [
+                  "FASTQ"
+               ],
+               "term" : "Sequence"
+            },
+            {
+               "format" : [],
+               "term" : "Sequence"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "SAM"
+               ],
+               "term" : "Sequence alignment"
+            }
+         ],
+         "operation" : [
+            "Generation",
+            "Sequence alignment"
+         ]
+      },
+      {
+         "input" : [
+            {
+               "format" : [
+                  "FASTA"
+               ],
+               "term" : "Sequence"
+            },
+            {
+               "term" : "Sequence",
+               "format" : []
+            },
+            {
+               "format" : [
+                  "FASTQ"
+               ],
+               "term" : "Sequence"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "SAM"
+               ],
+               "term" : "Sequence alignment"
+            }
+         ],
+         "operation" : [
+            "Generation",
+            "Sequence alignment"
+         ]
+      },
+      {
+         "output" : [
+            {
+               "term" : "Sequence alignment",
+               "format" : []
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            },
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTQ"
+               ]
+            }
+         ],
+         "operation" : [
+            "Sequence alignment"
+         ]
+      }
+   ]
+}

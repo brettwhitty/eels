@@ -1,0 +1,19 @@
+{
+   "function" : [
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Protein sequence analysis"
+         ]
+      }
+   ],
+   "license" : "GPL-3.0",
+   "homepage" : "http://prosite.expasy.org/scanprosite/",
+   "name" : "ps_scan",
+   "topic" : [
+      "Proteomics"
+   ],
+   "description" : "ps_scan (ScanProsite tool) is a perl program used to scan one or several patterns, rules and/or profiles from PROSITE against one or several protein sequnces in Swiss-Prot or FASTA format. It requires two compiled external programs from the PFTOOLS package : âpfscanâ used to scan a sequence against a profile library and âpsa2msaâ which is necessary for the â-o msaâ output format only.",
+   "biotoolsID" : "ps_scan"
+}

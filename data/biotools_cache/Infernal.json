@@ -1,0 +1,32 @@
+{
+   "license" : "BSD-3-Clause",
+   "homepage" : "http://eddylab.org/infernal/",
+   "function" : [
+      {
+         "operation" : [
+            "Nucleic acid feature detection"
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "Sequence profile format"
+               ],
+               "term" : "Sequence profile"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Database search results"
+            }
+         ]
+      }
+   ],
+   "description" : "Infernal (\"INFERence of RNA ALignment\") is for searching DNA sequence databases for RNA structure and sequence similarities. It is an implementation of a special case of profile stochastic context-free grammars called covariance models (CMs). A CM is like a sequence profile, but it scores a combination of sequence consensus and RNA secondary structure consensus, so in many cases, it is more capable of identifying RNA homologs that conserve their secondary structure more than their primary sequence.",
+   "topic" : [
+      "Sequence sites, features and motifs",
+      "Structural genomics"
+   ],
+   "biotoolsID" : "infernal",
+   "name" : "Infernal"
+}

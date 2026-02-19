@@ -1,0 +1,33 @@
+{
+   "homepage" : "http://cbs.dtu.dk/services/RNAmmer/",
+   "license" : "Other",
+   "function" : [
+      {
+         "operation" : [
+            "Nucleic acid feature detection"
+         ],
+         "output" : [
+            {
+               "term" : "Protein features",
+               "format" : [
+                  "GFF"
+               ]
+            }
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "FASTA"
+               ],
+               "term" : "Sequence"
+            }
+         ]
+      }
+   ],
+   "biotoolsID" : "rnammer",
+   "topic" : [
+      "Sequence sites, features and motifs"
+   ],
+   "description" : "Prediction of 5S/8S, 16S/18S, and 23S/28S ribosomal RNA in full genome sequences.",
+   "name" : "RNAmmer"
+}

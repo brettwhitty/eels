@@ -1,0 +1,20 @@
+{
+   "function" : [
+      {
+         "input" : [],
+         "operation" : [
+            "Sequence analysis",
+            "Sequence visualisation"
+         ],
+         "output" : []
+      }
+   ],
+   "homepage" : "http://bioconductor.org/packages/release/bioc/html/cummeRbund.html",
+   "topic" : [
+      "Sequencing"
+   ],
+   "biotoolsID" : "cummerbund",
+   "license" : "Artistic-2.0",
+   "description" : "Allows for persistent storage, access, exploration, and manipulation of Cufflinks high-throughput sequencing data. In addition, provides numerous plotting functions for commonly used visualizations.",
+   "name" : "cummeRbund"
+}

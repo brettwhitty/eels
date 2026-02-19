@@ -1,0 +1,19 @@
+{
+   "function" : [
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Sequence assembly"
+         ]
+      }
+   ],
+   "homepage" : "http://soap.genomics.org.cn/soapdenovo.html",
+   "topic" : [
+      "Sequence assembly"
+   ],
+   "biotoolsID" : "soapdenovo",
+   "license" : "GPL-3.0",
+   "name" : "SOAPdenovo",
+   "description" : "SOAPdenovo, a short read de novo assembly tool, is a package for assembling short oligonucleotide into contigs and scaffolds."
+}

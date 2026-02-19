@@ -1,0 +1,20 @@
+{
+   "topic" : [
+      "Sequence sites, features and motifs"
+   ],
+   "biotoolsID" : "HMMER2",
+   "description" : "Older version of the HMMER3 program (https://bio.tools/hmmer3) used for searching sequence databases for sequence homologs, and for making sequence alignments.",
+   "name" : "HMMER2",
+   "license" : "BSD-3-Clause",
+   "homepage" : "http://hmmer.org/",
+   "function" : [
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Database search",
+            "Protein feature detection"
+         ]
+      }
+   ]
+}

@@ -1,0 +1,28 @@
+{
+   "description" : "Open-source, platform-independent, community-supported software for describing and comparing microbial communities",
+   "topic" : [
+      "Microbial ecology",
+      "Taxonomy",
+      "Sequence analysis",
+      "Phylogeny"
+   ],
+   "biotoolsID" : "mothur",
+   "name" : "mothur",
+   "homepage" : "http://mothur.org/",
+   "license" : "GPL-3.0",
+   "function" : [
+      {
+         "operation" : [
+            "DNA barcoding",
+            "Sequencing quality control",
+            "Sequence clustering",
+            "Taxonomic classification",
+            "Visualisation",
+            "Sequence read processing",
+            "Phylogenetic analysis"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ]
+}

@@ -1,0 +1,26 @@
+{
+   "description" : "Best Match Tagger for removing contaminant reads from metagenomics datasets",
+   "name" : "bmtagger",
+   "license" : "",
+   "biotoolsID" : "bmtagger",
+   "topic" : [
+      "Metagenomics"
+   ],
+   "homepage" : "https://ftp.ncbi.nlm.nih.gov/pub/agarwala/bmtagger/",
+   "function" : [
+      {
+         "operation" : [
+            "Data filtering"
+         ],
+         "output" : [],
+         "input" : []
+      },
+      {
+         "input" : [],
+         "operation" : [
+            "Read pre-processing"
+         ],
+         "output" : []
+      }
+   ]
+}

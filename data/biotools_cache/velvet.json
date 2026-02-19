@@ -1,0 +1,59 @@
+{
+   "name" : "Velvet",
+   "topic" : [
+      "Sequence assembly"
+   ],
+   "biotoolsID" : "velvet",
+   "description" : "A de novo genomic assembler specially designed for short read sequencing technologies, such as Solexa or 454 or SOLiD.",
+   "function" : [
+      {
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "BAM",
+                  "SAM",
+                  "FASTQ",
+                  "FASTA"
+               ]
+            }
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Sequence"
+            },
+            {
+               "format" : [],
+               "term" : "Resource metadata"
+            }
+         ],
+         "operation" : [
+            "Formatting"
+         ]
+      },
+      {
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Sequence assembly"
+            }
+         ],
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Sequence"
+            },
+            {
+               "format" : [],
+               "term" : "Resource metadata"
+            }
+         ],
+         "operation" : [
+            "De-novo assembly"
+         ]
+      }
+   ],
+   "license" : "GPL-3.0",
+   "homepage" : "https://github.com/dzerbino/velvet"
+}

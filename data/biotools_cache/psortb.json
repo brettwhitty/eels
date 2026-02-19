@@ -1,0 +1,28 @@
+{
+   "name" : "PSORTb",
+   "topic" : [
+      "Sequences",
+      "Proteins",
+      "Plant"
+   ],
+   "description" : "It is a high-precision localization prediction method for bacterial proteins. It has remained the most precise bacterial protein subcellular localization (SCL) predictor. Â PSORTb version improved recall, higher proteome-scale prediction coverage, and new refined localization subcategories. It is the first SCL predictor specifically geared for all prokaryotes, including archaea and bacteria with atypical membrane/cell wall topologies.",
+   "biotoolsID" : "psortb",
+   "function" : [
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Protein sequence analysis"
+         ]
+      },
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Prediction"
+         ]
+      }
+   ],
+   "homepage" : "http://www.psort.org/psortb/",
+   "license" : ""
+}

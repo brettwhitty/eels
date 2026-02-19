@@ -1,0 +1,198 @@
+{
+   "name" : "Cufflinks",
+   "biotoolsID" : "cufflinks",
+   "topic" : [
+      "RNA splicing",
+      "Transcriptomics",
+      "RNA-Seq"
+   ],
+   "description" : "Cufflinks assembles transcripts and estimates their abundances in RNA-Seq samples. It accepts aligned RNA-Seq reads and assembles the alignments into a parsimonious set of transcripts. Cufflinks then estimates the relative abundances of these transcripts based on how many reads support each one.",
+   "function" : [
+      {
+         "operation" : [
+            "RNA-seq time series data analysis",
+            "Transcriptome assembly"
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "GTF"
+               ],
+               "term" : "Sequence assembly report"
+            },
+            {
+               "format" : [],
+               "term" : "Gene transcript report"
+            },
+            {
+               "format" : [],
+               "term" : "Gene expression data"
+            }
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "BAM",
+                  "SAM"
+               ],
+               "term" : "Sequence alignment"
+            }
+         ]
+      },
+      {
+         "input" : [
+            {
+               "format" : [
+                  "GTF"
+               ],
+               "term" : "Sequence assembly report"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Statistical estimate score",
+               "format" : []
+            },
+            {
+               "format" : [
+                  "GTF"
+               ],
+               "term" : "Report"
+            },
+            {
+               "term" : "Gene transcript report",
+               "format" : []
+            },
+            {
+               "term" : "Gene transcript report",
+               "format" : []
+            },
+            {
+               "format" : [],
+               "term" : "Report"
+            }
+         ],
+         "operation" : [
+            "Sequence comparison",
+            "DNA transcription"
+         ]
+      },
+      {
+         "operation" : [
+            "Aggregation"
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "Textual format"
+               ],
+               "term" : "ID list"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Sequence assembly report",
+               "format" : [
+                  "GTF"
+               ]
+            }
+         ]
+      },
+      {
+         "input" : [
+            {
+               "format" : [
+                  "BAM",
+                  "SAM"
+               ],
+               "term" : "Alignment"
+            },
+            {
+               "format" : [
+                  "GFF",
+                  "GTF"
+               ],
+               "term" : "Annotation track"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Gene expression profile"
+            }
+         ],
+         "operation" : [
+            "RNA-seq read count analysis",
+            "Gene expression analysis"
+         ]
+      },
+      {
+         "output" : [
+            {
+               "term" : "Gene report",
+               "format" : []
+            },
+            {
+               "term" : "Report",
+               "format" : []
+            },
+            {
+               "format" : [],
+               "term" : "Report"
+            },
+            {
+               "format" : [],
+               "term" : "Report"
+            }
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "GFF",
+                  "GTF"
+               ],
+               "term" : "Annotation track"
+            },
+            {
+               "format" : [
+                  "BAM",
+                  "SAM"
+               ],
+               "term" : "Sequence alignment"
+            }
+         ],
+         "operation" : [
+            "Gene expression comparison"
+         ]
+      },
+      {
+         "operation" : [
+            "Standardisation and normalisation"
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "GFF",
+                  "GTF"
+               ],
+               "term" : "Annotation track"
+            },
+            {
+               "format" : [
+                  "BAM",
+                  "SAM"
+               ],
+               "term" : "Sequence alignment"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Gene expression data",
+               "format" : []
+            }
+         ]
+      }
+   ],
+   "license" : "BSL-1.0",
+   "homepage" : "http://cole-trapnell-lab.github.io/cufflinks"
+}

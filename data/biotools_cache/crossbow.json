@@ -1,0 +1,24 @@
+{
+   "biotoolsID" : "crossbow",
+   "license" : "",
+   "description" : "Crossbow is a cloud-computing software tool that combines the aligner BOWTIE, the SNP caller SoapSNP and an accurate genotyper.",
+   "name" : "Crossbow",
+   "function" : [
+      {
+         "operation" : [
+            "Genotyping",
+            "SNP detection",
+            "Read mapping",
+            "Service composition"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "homepage" : "http://bowtie-bio.sourceforge.net/crossbow/index.shtml",
+   "topic" : [
+      "Genomics",
+      "Mapping",
+      "Genetic variation"
+   ]
+}

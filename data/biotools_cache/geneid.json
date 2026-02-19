@@ -1,0 +1,33 @@
+{
+   "license" : "GPL-3.0",
+   "biotoolsID" : "geneid",
+   "name" : "Geneid",
+   "description" : "Ab initio gene finding program used to predict genes along DNA sequences in a large set of organisms.",
+   "homepage" : "http://genome.crg.es/software/geneid/index.html",
+   "function" : [
+      {
+         "input" : [
+            {
+               "term" : "Nucleic acid sequence",
+               "format" : []
+            }
+         ],
+         "output" : [
+            {
+               "format" : [],
+               "term" : "Nucleic acid features"
+            }
+         ],
+         "operation" : [
+            "Genome annotation"
+         ]
+      }
+   ],
+   "topic" : [
+      "Nucleic acid sites, features and motifs",
+      "Sequence analysis",
+      "DNA",
+      "Gene structure",
+      "Molecular genetics"
+   ]
+}

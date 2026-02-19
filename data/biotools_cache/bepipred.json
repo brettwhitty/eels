@@ -1,0 +1,33 @@
+{
+   "topic" : [
+      "Protein binding sites"
+   ],
+   "function" : [
+      {
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Protein features",
+               "format" : [
+                  "GFF"
+               ]
+            }
+         ],
+         "operation" : [
+            "Epitope mapping"
+         ]
+      }
+   ],
+   "homepage" : "http://cbs.dtu.dk/services/BepiPred/",
+   "name" : "BepiPred",
+   "description" : "Prediction of the location of linear B-cell epitopes.",
+   "license" : "Other",
+   "biotoolsID" : "bepipred"
+}

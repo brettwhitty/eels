@@ -1,0 +1,48 @@
+{
+   "topic" : [
+      "Gene transcripts",
+      "Gene and protein families"
+   ],
+   "biotoolsID" : "augustus",
+   "description" : "AUGUSTUS is a eukaryotic gene prediction tool. It can integrate evidence, e.g. from RNA-Seq, ESTs, proteomics, but can also predict genes ab initio. The PPX extension to AUGUSTUS can take a protein sequence multiple sequence alignment as input to find new members of the family in a genome. It can be run through a web interface (see https://bio.tools/webaugustus), or downloaded and run locally.",
+   "name" : "AUGUSTUS",
+   "license" : "Artistic-1.0",
+   "homepage" : "http://bioinf.uni-greifswald.de/augustus",
+   "function" : [
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Gene prediction"
+         ]
+      },
+      {
+         "operation" : [
+            "Ab-initio gene prediction"
+         ],
+         "input" : [],
+         "output" : []
+      },
+      {
+         "output" : [],
+         "input" : [],
+         "operation" : [
+            "Homology-based gene prediction"
+         ]
+      },
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Homology-based gene prediction"
+         ]
+      },
+      {
+         "operation" : [
+            "Operation"
+         ],
+         "input" : [],
+         "output" : []
+      }
+   ]
+}

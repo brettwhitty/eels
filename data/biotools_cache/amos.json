@@ -1,0 +1,23 @@
+{
+   "topic" : [
+      "Genomics",
+      "Sequence assembly"
+   ],
+   "description" : "AMOS is a Modular, Open-Source whole genome assembler.",
+   "biotoolsID" : "amos",
+   "name" : "AMOS",
+   "license" : "",
+   "homepage" : "http://amos.sourceforge.net/",
+   "function" : [
+      {
+         "input" : [],
+         "output" : [],
+         "operation" : [
+            "Sequence assembly visualisation",
+            "Formatting",
+            "Sequence assembly",
+            "Sequence assembly validation"
+         ]
+      }
+   ]
+}

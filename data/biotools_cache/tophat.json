@@ -1,0 +1,53 @@
+{
+   "name" : "TopHat",
+   "topic" : [
+      "RNA-Seq",
+      "Mapping",
+      "Rare diseases"
+   ],
+   "description" : "Program that aligns RNA-Seq reads to a genome in order to identify exon-exon splice junctions. It is built on the ultrafast short read mapping program Bowtie. A stable SAMtools version is now packaged with the program.",
+   "biotoolsID" : "tophat",
+   "function" : [
+      {
+         "input" : [
+            {
+               "format" : [],
+               "term" : "Genome identifier"
+            },
+            {
+               "format" : [
+                  "FASTQ",
+                  "FASTA"
+               ],
+               "term" : "Sequence set (nucleic acid)"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Sequence alignment",
+               "format" : [
+                  "SAM"
+               ]
+            },
+            {
+               "term" : "Annotation track",
+               "format" : [
+                  "BED"
+               ]
+            },
+            {
+               "term" : "Annotation track",
+               "format" : [
+                  "BED"
+               ]
+            }
+         ],
+         "operation" : [
+            "Splice site prediction",
+            "Read mapping"
+         ]
+      }
+   ],
+   "license" : "",
+   "homepage" : "http://ccb.jhu.edu/software/tophat/index.shtml"
+}

@@ -1,0 +1,20 @@
+{
+   "description" : "MetaGeneMark is a tool for gene prediction in metagenomes, utilizing metagenome parameters and gene prediction.",
+   "topic" : [
+      "Metagenomics",
+      "Genetics"
+   ],
+   "biotoolsID" : "metagenemark",
+   "name" : "MetaGeneMark",
+   "license" : "",
+   "homepage" : "http://exon.gatech.edu/GeneMark/meta_gmhmmp.cgi",
+   "function" : [
+      {
+         "operation" : [
+            "Gene prediction"
+         ],
+         "input" : [],
+         "output" : []
+      }
+   ]
+}

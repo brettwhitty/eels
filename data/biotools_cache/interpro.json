@@ -1,0 +1,33 @@
+{
+   "topic" : [
+      "Gene and protein families",
+      "Proteins",
+      "Sequence composition, complexity and repeats"
+   ],
+   "biotoolsID" : "interpro",
+   "description" : "Protein families, domains, regions, repeats and sites in which identifiable features found in known proteins can be applied to new protein sequences.",
+   "name" : "InterPro",
+   "license" : "",
+   "homepage" : "http://www.ebi.ac.uk/interpro/",
+   "function" : [
+      {
+         "input" : [
+            {
+               "format" : [],
+               "term" : "InterPro accession"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Protein signature",
+               "format" : [
+                  "HTML"
+               ]
+            }
+         ],
+         "operation" : [
+            "Query and retrieval"
+         ]
+      }
+   ]
+}

@@ -1,0 +1,22 @@
+{
+   "name" : "MUMmer",
+   "description" : "MUMmer is a modular system for the rapid whole genome alignment of finished or draft sequence. Basically it is a ultra-fast alignment of large-scale DNA and protein sequences",
+   "topic" : [
+      "Genomics",
+      "Mapping",
+      "Sequencing"
+   ],
+   "biotoolsID" : "mummer",
+   "function" : [
+      {
+         "operation" : [
+            "Sequence alignment",
+            "Read mapping"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "license" : "Artistic-2.0",
+   "homepage" : "http://mummer.sourceforge.net/"
+}

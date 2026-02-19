@@ -1,0 +1,57 @@
+{
+   "biotoolsID" : "spades",
+   "topic" : [
+      "Sequence assembly"
+   ],
+   "description" : "St. Petersburg genome assembler â is intended for both standard isolates and single-cell MDA bacteria assemblies. SPAdes 3.9 works with Illumina or IonTorrent reads and is capable of providing hybrid assemblies using PacBio, Oxford Nanopore and Sanger reads. Additional contigs can be provided and can be used as long reads.",
+   "name" : "SPAdes",
+   "license" : "GPL-2.0",
+   "homepage" : "http://cab.spbu.ru/software/spades/",
+   "function" : [
+      {
+         "operation" : [
+            "Genome assembly"
+         ],
+         "output" : [
+            {
+               "term" : "Data",
+               "format" : [
+                  "TSV"
+               ]
+            },
+            {
+               "format" : [
+                  "FASTA"
+               ],
+               "term" : "Sequence alignment"
+            },
+            {
+               "term" : "Data",
+               "format" : [
+                  "TSV"
+               ]
+            },
+            {
+               "term" : "Data",
+               "format" : [
+                  "Textual format"
+               ]
+            }
+         ],
+         "input" : [
+            {
+               "term" : "Data",
+               "format" : [
+                  "FASTQ"
+               ]
+            },
+            {
+               "format" : [
+                  "FASTA"
+               ],
+               "term" : "Sequence alignment"
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,57 @@
+{
+   "function" : [
+      {
+         "operation" : [
+            "Sequence alignment"
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "HTML",
+                  "FASTA"
+               ],
+               "term" : "Data"
+            },
+            {
+               "format" : [
+                  "FASTQ-solexa",
+                  "FASTQ-sanger",
+                  "FASTQ-illumina"
+               ],
+               "term" : "Data"
+            }
+         ],
+         "output" : [
+            {
+               "term" : "Sequence trace",
+               "format" : [
+                  "SAM"
+               ]
+            },
+            {
+               "term" : "Data",
+               "format" : [
+                  "Textual format"
+               ]
+            },
+            {
+               "format" : [
+                  "FASTQ"
+               ],
+               "term" : "Data"
+            }
+         ]
+      }
+   ],
+   "license" : "",
+   "homepage" : "http://bowtie-bio.sourceforge.net/index.shtml",
+   "name" : "Bowtie",
+   "biotoolsID" : "bowtie",
+   "topic" : [
+      "Mapping",
+      "Genomics",
+      "Sequencing",
+      "Sequence assembly"
+   ],
+   "description" : "Bowtie is an ultrafast, memory-efficient short read aligner."
+}

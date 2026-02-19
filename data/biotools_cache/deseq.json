@@ -1,0 +1,39 @@
+{
+   "homepage" : "http://bioconductor.org/packages/release/bioc/html/DESeq.html",
+   "function" : [
+      {
+         "input" : [
+            {
+               "format" : [
+                  "Textual format"
+               ],
+               "term" : "Data"
+            }
+         ],
+         "operation" : [
+            "Differential gene expression analysis"
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "PDF"
+               ],
+               "term" : "Data"
+            },
+            {
+               "term" : "Data",
+               "format" : [
+                  "Textual format"
+               ]
+            }
+         ]
+      }
+   ],
+   "topic" : [
+      "Gene expression"
+   ],
+   "license" : "GPL-3.0",
+   "biotoolsID" : "deseq",
+   "description" : "Estimate variance-mean dependence in count data from high-throughput sequencing assays and test for differential expression based on a model using the negative binomial distribution.",
+   "name" : "DESeq"
+}

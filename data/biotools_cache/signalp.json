@@ -1,0 +1,38 @@
+{
+   "homepage" : "http://cbs.dtu.dk/services/SignalP/",
+   "license" : "Other",
+   "function" : [
+      {
+         "operation" : [
+            "Protein signal peptide detection",
+            "Protein cleavage site prediction"
+         ],
+         "output" : [
+            {
+               "term" : "Protein features",
+               "format" : [
+                  "GFF"
+               ]
+            },
+            {
+               "format" : [],
+               "term" : "Sequence report"
+            }
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "FASTA"
+               ],
+               "term" : "Sequence"
+            }
+         ]
+      }
+   ],
+   "topic" : [
+      "Protein sites, features and motifs"
+   ],
+   "biotoolsID" : "signalp",
+   "description" : "Prediction of the presence and location of signal peptide cleavage sites in amino acid sequences from different organisms.",
+   "name" : "SignalP"
+}

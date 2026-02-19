@@ -1,0 +1,42 @@
+{
+   "topic" : [
+      "Sequence analysis",
+      "Bioinformatics"
+   ],
+   "description" : "A tool that finds regions of similarity between biological sequences. The program compares nucleotide or protein sequences to sequence databases and calculates the statistical significance.",
+   "biotoolsID" : "blast",
+   "name" : "BLAST",
+   "license" : "",
+   "homepage" : "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+   "function" : [
+      {
+         "input" : [
+            {
+               "term" : "Sequence",
+               "format" : [
+                  "FASTA"
+               ]
+            }
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "BLAST XML results format",
+                  "BLAST XML v2 results format",
+                  "TSV",
+                  "CSV",
+                  "ASN.1 sequence format",
+                  "JSON",
+                  "Binary format",
+                  "Textual format"
+               ],
+               "term" : "Sequence search results"
+            }
+         ],
+         "operation" : [
+            "Sequence similarity search",
+            "Sequence alignment"
+         ]
+      }
+   ]
+}

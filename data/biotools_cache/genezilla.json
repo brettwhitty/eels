@@ -1,0 +1,26 @@
+{
+   "topic" : [
+      "Transcription factors and regulatory sites",
+      "Gene transcripts",
+      "Zoology",
+      "Gene expression",
+      "Model organisms"
+   ],
+   "function" : [
+      {
+         "operation" : [
+            "CpG island and isochore detection",
+            "Gene prediction",
+            "Differential gene expression analysis",
+            "Genetic variation analysis"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "homepage" : "http://www.genezilla.org",
+   "description" : "Highly reconfigurable gene finder written in C++. Graph-theoretic representations of the high scoring open reading frames are provided, allowing for exploration of sub-optimal gene models. It utilizes Interpolated Markov Models (IMMs), Maximal Dependence Decomposition (MDD), and includes states for signal peptides, branch points, TATA boxes, CAP sites, and will soon model CpG islands as well.",
+   "name" : "GeneZilla",
+   "license" : "",
+   "biotoolsID" : "genezilla"
+}

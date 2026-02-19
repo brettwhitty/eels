@@ -1,0 +1,21 @@
+{
+   "biotoolsID" : "genscan",
+   "license" : "",
+   "name" : "GENSCAN",
+   "description" : "Identify complete exon/intron structures of genes in genomic DNA. Novel features of the program include the capacity to predict multiple genes in a sequence, to deal with partial as well as complete genes, and to predict consistent sets of genes occurring on either or both DNA strands.",
+   "function" : [
+      {
+         "operation" : [
+            "Gene prediction"
+         ],
+         "output" : [],
+         "input" : []
+      }
+   ],
+   "homepage" : "http://genes.mit.edu/GENSCANinfo.html",
+   "topic" : [
+      "Molecular genetics",
+      "DNA",
+      "Gene structure"
+   ]
+}

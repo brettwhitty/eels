@@ -1,0 +1,46 @@
+{
+   "topic" : [
+      "Mapping",
+      "Sequence analysis",
+      "Sequencing",
+      "Rare diseases"
+   ],
+   "biotoolsID" : "samtools",
+   "description" : "SAMtools and BCFtools are widely used programs for processing and analysing high-throughput sequencing data. They include tools for file format conversion and manipulation, sorting, querying, statistics, variant calling, and effect analysis amongst other methods.",
+   "name" : "SAMtools",
+   "license" : "MIT",
+   "homepage" : "http://www.htslib.org/",
+   "function" : [
+      {
+         "input" : [
+            {
+               "format" : [
+                  "CRAM",
+                  "SAM",
+                  "BAM"
+               ],
+               "term" : "Sequence trace"
+            }
+         ],
+         "output" : [
+            {
+               "format" : [
+                  "CRAM",
+                  "SAM",
+                  "BAM"
+               ],
+               "term" : "Sequence trace"
+            }
+         ],
+         "operation" : [
+            "Data filtering",
+            "Visualisation",
+            "Data formatting",
+            "Indexing",
+            "Data parsing",
+            "Data sorting",
+            "Data editing"
+         ]
+      }
+   ]
+}

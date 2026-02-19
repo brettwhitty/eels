@@ -1,0 +1,33 @@
+{
+   "topic" : [
+      "Protein sites, features and motifs"
+   ],
+   "function" : [
+      {
+         "operation" : [
+            "Protein cleavage site prediction"
+         ],
+         "output" : [
+            {
+               "term" : "Protein features",
+               "format" : [
+                  "Textual format"
+               ]
+            }
+         ],
+         "input" : [
+            {
+               "format" : [
+                  "FASTA"
+               ],
+               "term" : "Sequence"
+            }
+         ]
+      }
+   ],
+   "homepage" : "http://cbs.dtu.dk/services/TargetP/",
+   "name" : "TargetP",
+   "description" : "Prediction of the subcellular location of eukaryotic proteins.",
+   "license" : "Other",
+   "biotoolsID" : "targetp"
+}
