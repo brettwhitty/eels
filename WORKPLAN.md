@@ -10,11 +10,12 @@ Extract institutional knowledge from Ergatis bioinformatics workflow system and 
 
 ## Completed (Phase 1)
 
-✅ **Converter Catalog** - Extracted metadata from 67 `*2bsml.pl` converter scripts  
+✅ **BSML Converter Catalog** - Extracted metadata from 67 `*2bsml.pl` converter scripts  
 ✅ **Repository Analysis** - Documented structure of source and install directories  
 ✅ **Architecture Documentation** - Analyzed workflow XML hierarchy from `doc/workflowxml.txt`  
 ✅ **Contributor Extraction** - Identified 28 contributors from source code  
-✅ **CONTRIBUTORS.md** - Created attribution document recognizing all authors
+✅ **CONTRIBUTORS.md** - Created attribution document recognizing all authors  
+✅ **Component Anatomy** - Complete walkthrough of `wait` component structure
 
 ## Phase 2: Component Analysis
 

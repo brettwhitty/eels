@@ -5,10 +5,10 @@
 ### Completed
 
 ✅ Created `eellms` directory structure
-✅ Built converter metadata extraction script
-✅ Extracted metadata from 67 `*2bsml.pl` converter scripts
+✅ Built BSML converter metadata extraction script
+✅ Extracted metadata from 67 `*2bsml.pl` BSML converter scripts
 ✅ Generated structured JSON catalog (`data/converter_catalog.json`)
-✅ Created markdown summary (`docs/CONVERTER_CATALOG.md`)
+✅ Created markdown summary (`docs/BSML_CONVERTER_CATALOG.md`)
 
 ### Findings
 

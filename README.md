@@ -2,6 +2,8 @@
 
 Systematic extraction and documentation of Ergatis component knowledge using LLM-assisted analysis.
 
+!["EELS!"](assets/images/eels-banner-m.png "EELS!")
+
 ## Goal
 
 Extract the institutional knowledge encoded in Ergatis components, workflows, and engineering
