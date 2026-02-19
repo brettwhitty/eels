@@ -2,7 +2,7 @@
 
 **Project:** Ergatis Extended Lifetime Support - Knowledge Extraction
 **Date:** 2026-02-18
-**Lead:** Brett Whitty
+**Lead:** Brett Whitty <brett@gnomatix.com> (GNOMATIX)
 
 ## Objective
 
