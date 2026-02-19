@@ -194,7 +194,14 @@ This is **software engineering for bioinformatics workflows**, not DevOps script
 - `doc/workflowxml.txt` - Original architecture documentation
 - 362 component JSON files - Complete component library
 - 56 workflow templates - Production pipelines
+
+### Academic References
+
 - Yu, J. & Buyya, R. (2005). "A Taxonomy of Workflow Management Systems for Grid Computing." arXiv:cs/0503025
   - Grid workflow taxonomy and classification
   - Context for Ergatis as Grid workflow system
   - https://arxiv.org/abs/cs/0503025
+
+- Singh, G., Kesselman, C. & Deelman, E. (2005). "Optimizing Grid-Based Workflow Execution." Journal of Grid Computing, 3, 201-219.
+  - Grid workflow optimization and execution
+  - DOI: 10.1007/s10723-005-9011-7
