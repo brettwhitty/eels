@@ -1,0 +1,80 @@
+QUICKTREE2BSML(1)                                                          User Contributed Perl Documentation                                                         QUICKTREE2BSML(1)
+
+NAME
+       qiucktree2bsml.pl - Convert output from quicktree to BSML.
+
+SYNOPSIS
+       USAGE: quicktree2bsml.pl
+                   --quicktree_output=/path/to/output/of/quicktree
+                   --quicktree_input=/path/to/input/of/quicktree
+                   --output=/path/to/output.bsml
+                 [ --log=/path/to/some.log
+                   --debug=4
+                 ]
+
+OPTIONS
+       --quicktree_input,-i
+           Input multiple sequence alignment file, used as quicktree input.  Alternatively,
+           this may be the distance matrix used as input.  If the input is a MSA file, the
+           alignment is stored in the bsml.  If only given a distance matrix, we can at the
+           moment only store the sequence ids, with no seq-data-import and no alignment info.
+
+       --quicktree_output,-j
+           Quicktree output in Newick (New Hampshire) format.
+
+       --output,-o
+           The full path to the BSML file that will be created.
+
+       --debug
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --log,-l
+           Log file
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       Converts a Stockholm formatted Multiple Sequence alignment (or distance matrix) and the Newick formatted output of quicktree from that alignment into BSML.
+
+INPUT
+       Input consists of two files:
+
+       The first file is the quicktree input, either a Stockholm format alignment file which has a format like this:
+
+       # STOCKHOLM 1.0 #=GF ID    GP120 #=GF AC    PF00516 #=GF DE    Envelope glycoprotein GP120 #=GF GA    -267.6 -267.6 #=GF NC    -267.7 -267.7 #=GF TC    -267.6 -267.6
+
+       ENV_SIVM1/24-528  QYVTVFYGVPAWRNATIPLFCATKNR.......DTWGTTQCLPDNDDYSE ENV_HV2NZ/24-502  QFVTVFYGIPAWRNASIPLFCATKNR.......DTWGTIQCLPDNDDYQE ENV_HV2G1/23-502
+       QYVTVFYGVPVWRNASIPLFCATKNR.......DTWGTIQCKPDNDDYQE ENV_HV2D1/24-501  QYVTVFYGIPAWRNASIPLFCATKNR.......DTWGTIQCLPDNDDYQE
+
+       ENV_SIVM1/24-528  LALN.VTESFDAWE..NTVTEQAIEDVWQLFETSIKPCVKLSPLCITMRC ENV_HV2NZ/24-502  ITLN.VTEAFDAWN..NTVTEQAVEDVWNLFETSIKPCVKLTPLCVAMNC ENV_HV2G1/23-502
+       ITLN.VTEAFDAWD..NTVTEQAVEDVWSLFETSIKPCVKLTPLCVAMSC ENV_HV2D1/24-501  ITLN.VTEAFDAWD..NTVTEQAIEDVWRLFETSIKPCVKLTPLCVAMNC
+
+       ENV_SIVM1/24-528  NKSETDKWGLTKSSTTTASTTTTTTAKSV.......ETRDIVNETSPCVV ENV_HV2NZ/24-502  TR...........N.....MTTWTGRTDT.......QNITIINDTS.HAR ENV_HV2G1/23-502
+       N........STTNN.....TTT...TGST.......TGMSEINETS.PSY ENV_HV2D1/24-501  NITSGTTATPSP........................PNITIIDENSTCIG
+
+       ENV_SIVM1/24-528  TSRNKR ENV_HV2NZ/24-502  Q.RHTR ENV_HV2G1/23-502  V.RNKR ENV_HV2D1/24-501  V.RNKR
+
+       ... or a distance matrix, something like this:
+
+       ENV_SIVM1/   0.00000   0.27848   0.24948   0.28059 ENV_HV2NZ/   0.27848   0.00000   0.19533   0.19313 ENV_HV2G1/   0.24948   0.19533   0.00000   0.16094 ENV_HV2D1/   0.28059
+       0.19313   0.16094   0.00000
+
+       The second file contains the quicktree output, in New Hampshire (Newick) format.  Newick trees look something like:
+
+           (
+           got_3002_ORFB02050_polypeptide:0.77227,
+           (
+           ntrc01_2_NTORF1325_polypeptide:0.01364,
+           ntru01_1_NTORF1351_polypeptide:0.01953)
+           :0.02066,
+           (
+           ntrp01_2_NTORF0805_polypeptide:0.01970,
+           ntrt01_1_NTORF0807_polypeptide:0.03244)
+           :0.02309);
+
+CONTACT
+           Jason Inman
+           jinman@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                      QUICKTREE2BSML(1)

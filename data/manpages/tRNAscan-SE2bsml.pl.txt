@@ -1,0 +1,84 @@
+TRNASCAN-SE2BSML(1)                                                        User Contributed Perl Documentation                                                       TRNASCAN-SE2BSML(1)
+
+NAME
+       tRNAscan-SE2bsml.pl - convert tRNAcan-SE output to BSML
+
+SYNOPSIS
+       USAGE: tRNAscan-SE2bsml.pl
+               --input=/path/to/tRNAscanfile
+               --output=/path/to/output.bsml
+               --fasta_input=/path/to/fastafile
+               --id_repository=/path/to/id_repository
+               --project=aa1
+               [ --gzip_output=1
+                 --log=/path/to/logfile
+                 --debug=3
+               ]
+
+OPTIONS
+       --input,-i
+           Input file file from a tRNAscan-SE search.
+
+       --output,-o
+           Output BSML file (will be created, must not exist)
+
+       --fasta_input,-a
+           The input file that was used as input for the tRNAscan-SE run
+
+       --id_repository,-r
+           Path to the project's id repository
+
+       --gzip_output,-g
+           Optional. A non-zero value will make compressed output.
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --project,-p
+           Required. Project ID.  Used in creating feature ids.
+           If 'aa1' is passed, repeat feature IDs created are like aa1.repeat_region.4231.1
+           If 'parse' is passed, will parse from already present ids.
+
+       --log,-l
+           Log file
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the output from a tRNAscan-SE search into BSML.
+
+INPUT
+       tRNAscan-SE can be run using multiple input sequences simultaneously, and this script supports parsing single or multiple input result sets.  Usual tRNAscan-SE output looks
+       like:
+
+           Sequence                tRNA            Bounds          tRNA    Anti    Intron Bounds   Cove
+           Name            tRNA #  Begin           End             Type    Codon   Begin   End     Score
+           --------        ------  ----            ------          ----    -----   -----   ----    ------
+           51595           1       101064          101137          Asn     GTT     0       0       82.29
+           51595           2       705796          705868          Ala     AGC     0       0       68.12
+           ...
+           51595           13      3488675         3488743         Pseudo  GTA     0       0       22.49
+           51595           14      3493468         3493555         Ser     GCT     3493506 3493513 40.19
+
+       You can elimate the headers in the original tRNAscan-SE output file by running tRNAscan-SE using the -b option.  If they are present, they should be ignored by this script.
+
+       You define the input file using the --input option.  This file does not need any special file extension.
+
+OUTPUT
+       After parsing the input file, a file specified by the --output option is created.  This script will fail if it already exists.  The file is created, and temporary IDs are
+       created for each result element.  They are only unique to the document, and will need to be replaced before any database insertion.
+
+       Base positions from the input file are renumbered so that positions start at zero.  The current output elements from tRNAscan-SE that are not represented in the BSML file are:
+
+           tRNA type
+           Anti Codon
+           Cove Score
+
+       These need to be included later.
+
+CONTACT
+           Jason Inman
+           jinman@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                    TRNASCAN-SE2BSML(1)

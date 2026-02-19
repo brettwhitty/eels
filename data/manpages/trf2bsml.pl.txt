@@ -1,0 +1,76 @@
+TRF2BSML(1)                                                                User Contributed Perl Documentation                                                               TRF2BSML(1)
+
+NAME
+       trf2bsml.pl - convert Tandem Repeat Finder (trf) output to BSML
+
+SYNOPSIS
+       USAGE: trf2bsml.pl
+                   --input=/path/to/somefile.dat
+                   --output=/path/to/output.bsml
+                   --id_repository=/path/to/valid/id_repository
+                  [--fasta_input=/path/to/trf/input.fsa
+                   --gzip_output=1
+                   --project=aa1 ]
+
+OPTIONS
+       --input,-i
+           Input .dat file from a RepeatMasker search.
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --log,-l
+           Log file
+
+       --output,-o
+           Output BSML file (will be created, must not exist)
+
+       --project,-p
+           Project ID.  Used in creating feature ids.  Defaults to 'unknown' if
+           not passed and is unable to parse from input file name.
+
+       --id_repository
+           Used in the generation of ids.
+
+       --gzip_output,-g
+           [OPTIONAL] A non-zero value will result in compressed bsml output.  If there is no .gz extension on
+           the output file name, one will be added.
+
+       --fasta_input,-f
+           [OPTIONAL] The file used as input for the trf run.
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the output from a RepeatMasker search into BSML.
+
+INPUT
+       trf can be run using a query file with one or many input sequences, and this script supports parsing single or multiple input result sets.  trf generates a few output files, but
+       the space-delimited ".dat" file is used here.  A usual trf .dat file looks like (wide-window):
+
+           Sequence: cpa1.assem.1
+
+           Parameters: 2 7 7 80 10 50 500
+
+           34540 34614 3 25.0 3 82 15 93 68 1 30 0 0.98 AGA AGAAGAAGAAGAAGAAGAAGAAAACGAAGAAGAAGAAGAAAGAAAAGAAGAAGAAGAGAGAGAAGAAGAAAAAGA
+           35458 35499 3 13.7 3 95 5 75 64 0 2 33 1.07 ATA ATAATGAATAATAATAATAATAATAATAATAATAATAATAAT
+           37239 37288 3 16.3 3 95 4 91 32 2 0 66 1.03 TTA TTATTATTATTATTATTATTATTATTATTATTATTATTATTATTCATTAT
+           48180 48226 3 15.3 3 95 4 85 65 0 2 31 1.04 ATA ATAATGAATAATAATAATAATAATAATAATAATAATAATAATAATAA
+           51008 51037 3 9.7 3 92 7 51 33 0 0 66 0.92 ATT ATTATTATTATTATTATTATTATTTATTAT 1   21    (0)    7
+
+       The header rows should be ignored by this script.
+
+       You define the input file using the --input option.  This file does not need any special file extension.
+
+OUTPUT
+       After parsing the input file, a file specified by the --output option is created.  This script will fail if it already exists.  The file is created, and temporary IDs are
+       created for each result element.
+
+       Base positions from the input file are renumbered so that positions start at zero.
+
+CONTACT
+           Joshua Orvis
+           jorvis@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                            TRF2BSML(1)

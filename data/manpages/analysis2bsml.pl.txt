@@ -1,0 +1,42 @@
+ANALYSIS2BSML(1)                                                           User Contributed Perl Documentation                                                          ANALYSIS2BSML(1)
+
+NAME
+       analysis2bsml.pl - add analysis parameters to a BSML result doc
+
+SYNOPSIS
+           USAGE:  analysis2bsml.pl --bsml_file=/path/to/some/output.bsml
+                                    --conf=/path/to/some/pipeline.config
+                                  [ --ergatis_control_file=/path/to/ergatis_install.ini ]
+                                  [ --componenturl=/path/to/some/pipeline.xml ]
+                                  [ --pipelineurl=/path/to/some/pipeline0.xml ]
+                                  [ --debug debug_level  ]
+                                  [ --log log_file ]
+                                  [ --analysis_id=some_id ]
+
+OPTIONS
+       •   --debug,-d Debug level.  Use a large number to turn on verbose debugging.
+
+       •   --analysis_id,-a  Analysis  id  (optional).   If  given, will be the id attribute for the Analysis element created or appended to.  If the value 'first' is passed, the first
+           Analysis element will be used.  If not given, the Analysis element will be created with no id attribute.
+
+       •   --log,-l Log file
+
+       •   --help,-h This help message
+
+       •   --ergatis_control_file,-e Control file defining software versions for ergatis install.
+
+       •   --componenturl,-u Stores component url in <Analysis>
+
+       •   --pipelineurl,-p Store pipeline.xml url in <Analysis>
+
+DESCRIPTION
+       This script is used to record the parameters of an analysis into the BSML file that the analysis created.  This is done to ensure that each of  the  run-time  settings  for  the
+       analysis are recorded for informational purposes or to re-run the analysis.
+
+POD ERRORS
+       Hey! The above document had some coding errors, which are explained below:
+
+       Around line 20:
+           '=item' outside of any '=over'
+
+perl v5.22.1                                                                           2017-11-14                                                                       ANALYSIS2BSML(1)

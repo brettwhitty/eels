@@ -1,0 +1,92 @@
+GENSCAN2BSML(1)                                                            User Contributed Perl Documentation                                                           GENSCAN2BSML(1)
+
+NAME
+       genscan2bsml.pl - convert genscan output to BSML
+
+SYNOPSIS
+       USAGE: genscan2bsml.pl
+               --input_file=/path/to/genscan.raw.file
+               --output=/path/to/output.bsml
+               --project=aa1
+               --fasta_input=/path/to/somefile.fsa
+               --id_repository=/path/to/repository
+               --sourcename=sourcename
+               --programversion='current'
+
+OPTIONS
+       --input_file,-f
+           Input file file from a genscan run.  -i, --input_list, will take in a list
+           of input files, all of which will be stored in a single output bsml.
+
+       --output,-o
+           Output BSML file (will be created, must not exist)
+
+       --project,-p
+           Project ID.  Used in creating feature ids.
+
+       --fasta_input,-a
+           Needed to create a Seq-data-import element referencing this path.
+
+       --id_repository,-r
+           path to --project's id_repository
+
+       --programversion,-v
+           Version string to be used as value for the analysis attribute 'programversion'
+
+       --sourcename,-s
+           Sourcename string to be used as value for the analysis attribute 'sourcename'
+           Due to a silly hack in analysis2bsml.pl, you might need to put /dummy/dir at
+           the end of it.
+
+       --log,-l
+           Log file
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the output from a genscan search into BSML.
+
+INPUT
+       You define the input file using the --input_file option.  This file does not need any special file extension.  The regular prediction output of genscan looks like this:
+       (Excluding header lines)
+
+       Gn.Ex Type S .Begin ...End .Len Fr Ph I/Ac Do/T CodRg P.... Tscr..  ----- ---- - ------ ------ ---- -- -- ---- ---- ----- ----- ------
+
+        1.01 Term +   5651   6289  639  1  0   81   35   400 0.481  34.31
+        1.02 PlyA +   6539   6544    6                              -2.62
+
+        2.00 Prom +   6570   6609   40                              -6.39
+        2.01 Init +   8942   9175  234  1  0   66   57   714 0.999  67.88
+        2.02 Intr +   9209  11608 2400  1  0    9    6  2378 0.397 225.56
+        2.03 Intr +  11642  12440  799  1  1   50  -60   947 0.007  74.06
+        2.04 Intr +  12604  12679   76  2  1   43   87    13 0.006  -2.13
+        2.05 Term +  13098  13374  277  0  1   51   46   232 0.275  14.16
+        2.06 PlyA +  13643  13648    6                               0.77
+
+       which has the general format shown below.  (Taken from
+        http://genome.imim.es/courses/Bioinformatics2003_genefinding/results/genscan.html)
+
+       Gn.Ex : gene number, exon number (for reference) Type  : Init = Initial exon (ATG to 5' splice site)
+               Intr = Internal exon (3' splice site to 5' splice site)
+               Term = Terminal exon (3' splice site to stop codon)
+               Sngl = Single-exon gene (ATG to stop)
+               Prom = Promoter (TATA box / initation site)
+               PlyA = poly-A signal (consensus: AATAAA) S     : DNA strand (+ = input strand; - = opposite strand) Begin : beginning of exon or signal (numbered on input strand) End
+       : end point of exon or signal (numbered on input strand) Len   : length of exon or signal (bp) Fr    : reading frame (a forward strand codon ending at x has frame x mod 3) Ph
+       : net phase of exon (exon length modulo 3) I/Ac  : initiation signal or 3' splice site score (tenth bit units) Do/T  : 5' splice site or termination signal score (tenth bit
+       units) CodRg : coding region score (tenth bit units) P     : probability of exon (sum over all parses containing exon) Tscr  : exon score (depends on length, I/Ac, Do/T and
+       CodRg scores)
+
+OUTPUT
+       Base positions from the input file are renumbered so that positions start at zero and reflect interbase numbering.  Also, the stop coordinates of each terminal CDS is extended
+       3bp to include the stop codon.
+
+CONTACT
+           Jason Inman
+           jinman@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                        GENSCAN2BSML(1)

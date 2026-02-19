@@ -1,0 +1,27 @@
+PE2BSML(1)                                                                 User Contributed Perl Documentation                                                                PE2BSML(1)
+
+NAME
+       dummy.pl - do nothing
+
+SYNOPSIS
+       USAGE:  dummy.pl --debug debug_level --log log_file
+
+OPTIONS
+       •   --debug,-d Debug level.  Use a large number to turn on verbose debugging.
+
+       •   --log,-l Log file
+
+       •   --gzip_output,-g Optional.  Compresses bsml output.
+
+       •   --class,-c ref/comp sequence class type. Default is 'assembly'
+
+       •   --help,-h This help message
+
+DESCRIPTION
+POD ERRORS
+       Hey! The above document had some coding errors, which are explained below:
+
+       Around line 17:
+           '=item' outside of any '=over'
+
+perl v5.22.1                                                                           2017-11-14                                                                             PE2BSML(1)

@@ -1,0 +1,77 @@
+MREPS2BSML(1)                                                              User Contributed Perl Documentation                                                             MREPS2BSML(1)
+
+NAME
+       mreps2bsml.pl - convert mreps output to BSML
+
+SYNOPSIS
+       USAGE: mreps2bsml.pl
+                   --input=/path/to/somefile.dat
+                   --output=/path/to/output.bsml
+                 [ --project=aa1 ]
+
+OPTIONS
+       --input,-i
+           Input .raw file from an mreps search.
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --log,-l
+           Log file
+
+       --output,-o
+           Output BSML file (will be created, must not exist)
+
+       --project,-p
+           Project ID.  Used in creating feature ids.  Defaults to 'unknown' if
+           not passed.
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the output from an mreps search into BSML.
+
+INPUT
+       mreps output is to stdout.  mreps2bsml works on the captured output of mreps, an example of which appears below:
+
+        *****************************************************************************
+        *                              mreps 2.5                                    *
+        *                                                                           *
+        *                Finding tandem repeats in DNA sequences                    *
+        *                                                                           *
+        *                      http://www.loria.fr/mreps/                           *
+        *****************************************************************************
+
+       Processing sequence 'ThisIsAHeader'
+
+       * Processing window [1 : 2216158] *
+
+       Warning: symbols N in your sequence has been replaced randomly by {A,C,G,T}. This might have created artefact repetitions.
+
+          from   ->       to  :         size    <per.>  [exp.]          err-rate       sequence
+        ---------------------------------------------------------------------------------------------
+            158  ->       215 :         58      <1>     [58.00]         0.333          T A A A T C T T T A G C C T A A T T T T A T T T T A T T T T G T T T T T A T T A T T T A T T T A A A A C T T T T A A
+            171  ->       205 :         35      <4>     [8.75]          0.226          TAAT TTTA TTTT ATTT TGTT TTTA TTAT TTAT TTA
+            171  ->       196 :         26      <5>     [5.20]          0.190          TAATT TTATT TTATT TTGTT TTTAT T
+            395  ->       419 :         25      <4>     [6.25]          0.238          TGTA TATT TAAT TAAT TAAT TATT A
+
+       The header rows should be ignored by this script.
+
+       Not all columns described in the header are seperated by tabs.  The columns as described by the headers: 1) 1-based start 2) 1-based end 3) size of the entire repeat region 4)
+       period - size of the repeat unit 5) exponent - number of repet units in the region 6) error rate - lower means more significant 7) repeat sequence, with spaces seperating units
+       of the repeat
+
+       You define the input file using the --input option.  This file does not need any special file extension.
+
+OUTPUT
+       After parsing the input file, a file specified by the --output option is created.  This script will fail if it already exists.  The file is created, and temporary IDs are
+       created for each result element.
+
+       Base positions from the input file are renumbered so that positions start at zero.
+
+CONTACT
+           Jason Inman
+           jinman@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                          MREPS2BSML(1)

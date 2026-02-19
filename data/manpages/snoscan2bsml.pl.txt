@@ -1,0 +1,60 @@
+SNOSCAN2BSML(1)                                                            User Contributed Perl Documentation                                                           SNOSCAN2BSML(1)
+
+NAME
+       snoscan2bsml.pl - converts snoscan output to BSML
+
+SYNOPSIS
+           USAGE: snoscan2bsml.pl
+                   --input=/path/to/snoscanfile
+                   --output=/path/to/output.bsml
+                [  --project=projectName
+                   --class=class of sequence
+                   --degug=integer(level of debug)
+                   --fasta_file=input file to snoscan
+                ]
+
+OPTIONS
+       --input_file,-i
+           Input file from the snoscan search.
+
+       --output_file,-o
+           The file will be created
+
+       --class,-c
+           This is used by the workflow (for Id purporses)
+
+       --project,-p
+           Project ID. Used in creating feature IDs.  Defaults to unknown
+           if not passed.
+
+       --command_id
+           The command passed in from the workflow
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --log,-l
+           Log file
+
+       --help,-h
+           This help message.
+
+DESCRIPTION
+       snoscan2bsml.pl will take an output file from snoscan, sorted or raw, and convert the format to BSML.
+
+INPUT
+       The input is defined with --input_file and should be an output file from the program snoscan.  For an example, see
+
+       http://lowelab.ucsc.edu/snoscan/snoscanReadme.html
+
+OUTPUT
+       After parsing the input file, a file specified by the --output option will be generated (this file should not exist already).  Temporary ID's will be created for each result
+       element and are only unique to this document.
+
+       Base positions are renumbered to start at zero and represent interbase numbering.
+
+CONTACT
+           Kevin Galens
+           kgalens@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                        SNOSCAN2BSML(1)

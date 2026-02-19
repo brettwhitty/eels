@@ -1,0 +1,50 @@
+ISLANDPATH2BSML(1)                                                         User Contributed Perl Documentation                                                        ISLANDPATH2BSML(1)
+
+NAME
+       islandpath2bsml.pl - convert islandpath output to BSML
+
+SYNOPSIS
+       USAGE: islandpath2bsml.pl
+               --input=/path/to/somefile.out
+               --output=/path/to/output.bsml
+             [ --project=aa1 ]
+
+OPTIONS
+       --input,-i
+           Input .out file from a Islandpath search.
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --log,-l
+           Log file
+
+       --output,-o
+           Output BSML file (will be created, or overwritten)
+
+       --project,-p
+           Project ID.  Used in creating feature ids.  Defaults to whatever the prefix of the
+           input file is (i.e. spntigr4.assembly.1.1 would be spntigr4).
+
+       --id_repository,-r
+           Required for creating feature identifiers.  Each project should have
+           its own id_repository directory - use the full path to it here.
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the output from an Islandpath run into BSML.
+
+INPUT
+       You define the input file using the --input option.  This file does not need any special file extension.
+
+OUTPUT
+       After parsing the input file, a file specified by the --output option is created.  The file is created, and temporary IDs are created for each result element.  They are globally
+       unique, but will need to be replaced before any database insertion.
+
+CONTACT
+           David Riley
+           driley@som.umaryland.edu
+
+perl v5.22.1                                                                           2017-11-14                                                                     ISLANDPATH2BSML(1)

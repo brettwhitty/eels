@@ -1,0 +1,71 @@
+LIPOP2BSML(1)                                                              User Contributed Perl Documentation                                                             LIPOP2BSML(1)
+
+NAME
+       lipop2bsml.pl - Takes raw lipop output (short) and prints to bsml
+
+SYNOPSIS
+        USAGE: lipop2bsml.pl
+              --input_file=/path/to/some/lipop.raw
+              --input_fasta=/path/to/polypeptide.fsa
+              --id_repository=/path/to/valid_id_repo/
+              --project=db1
+              --output=/path/to/lipop.bsml
+            [ --analysis_id=lipoP_analysis
+              --sourcename=/path/to/all_output_dir
+              --log=/path/to/file.log
+              --debug=4
+              --help
+            ]
+
+OPTIONS
+       --input_file,-i
+           Raw output from a LipoP run (using the -short option)
+
+       --input_fasta,-f
+           The input fasta file used to generate the lipop output
+
+       --id_repository,-d
+           A valid id repository (used for Ergatis::IdGenerator)
+
+       --project,-p
+           The project (database name).  Used in id generation
+
+       --output,-o
+           Path to the output bsml file
+
+       --analysis_id,-a
+           Optional. Default = lipoP_analysis
+
+       --sourcename,-s
+           Optional. Path to where the output for the analysis was located (raw output).
+           Default is parse the directory from the input_file (and traverse 2 dirs up)
+
+       --log,-l
+           Logfile.
+
+       --help,-h
+           Print this message
+
+DESCRIPTION
+           Example input:
+
+           # gnmM04c.polypeptide.451723460.1 SpII score=34.6562 margin=19.0125 cleavage=19-20 Pos+2=S
+
+           Example output:
+
+           <Sequence id="gnmM04c.polypeptide.451723460.1" title="gnmM04c.polypeptide.451723460.1" ...>
+             <Feature id="gnmM04c.lipoprotein_signal_peptide.3458954893.1" ...>
+                <Interval-loc startpos="0" endpos="19" complement="0">
+             </Feature>
+             <Feature id="gnmM04c.cleavage_site.54890549.1" ...>
+                <Site-loc sitepos="19" complement="0"></Site-loc>
+             </Feature>
+           </Sequence>
+
+INPUT Describe the input
+OUTPUT Describe the output
+CONTACT
+           Kevin Galens
+           kgalens@som.umaryland.edu
+
+perl v5.22.1                                                                           2017-11-14                                                                          LIPOP2BSML(1)

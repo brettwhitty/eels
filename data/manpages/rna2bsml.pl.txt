@@ -1,0 +1,46 @@
+RNA2BSML(1)                                                                User Contributed Perl Documentation                                                               RNA2BSML(1)
+
+NAME
+       rna2bsml - Produces RNA/repeat BSML documents
+
+SYNOPSIS
+       USAGE:  rna2bsml -D database -G genus -S species -f infile [-d debug_level] [-h] [-l log4perl] [-o outdir] [-s schema] [-t dtd] -y orgtype -z ftype
+
+OPTIONS
+       --database,-D
+                   Legacy organism database name e.g. "tba1"
+
+       --genus,-G
+                   Legacy organism database name e.g. "tba1"
+
+       --infile,-f
+                   Tab-delimited file containing the feature data
+
+       --debug_level,-d
+                   Optional -- Coati::Logger log4perl logging level.  Default debug_level is 0
+
+       --help,-h
+                   Print this help
+
+       --log4perl,-l
+                   Optional -- Coati::Logger log4perl log file.  Default is /tmp/rna2bsml.pl.log
+
+       --outdir,-o
+                   Optional -- Directory to write BSML gene model documents.  Default directory is current working directory
+
+       --schema,-s
+                   Optional -- Schema to validate against. If blank validate to inline schema
+
+       --dtd,-t
+                   Optional -- DTD validation via the DTD validator
+
+       --orgtype,-y
+                   organism type e.g. euk, prok or ntprok
+
+       --ftype,-z
+                   feature type either 'rna', 'te', or 'repeat'
+
+DESCRIPTION
+           rna2bsml creates RNA/repeat BSML documents
+
+perl v5.22.1                                                                           2017-11-14                                                                            RNA2BSML(1)

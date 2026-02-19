@@ -1,0 +1,93 @@
+TWINSCAN2BSML(1)                                                           User Contributed Perl Documentation                                                          TWINSCAN2BSML(1)
+
+NAME
+       twinscan2bsml.pl - convert twinscan GTF output to BSML
+
+SYNOPSIS
+       USAGE: twinscan2bsml.pl
+               --input_file=/path/to/twinscan.raw.file
+               --output=/path/to/output.bsml
+               --project=aa1
+               --fasta_input=/path/to/somefile.fsa
+               --id_repository=/path/to/repository
+               --sourcename=sourcename
+               --programversion='current'
+
+OPTIONS
+       --input_file,-f
+           Input file file from a twinscan run.  -i, --input_list, will take in a list
+           of input files, all of which will be stored in a single output bsml.
+
+       --output,-o
+           Output BSML file (will be created, must not exist)
+
+       --project,-p
+           Project ID.  Used in creating feature ids.
+
+       --fasta_input,-a
+           Needed to create a Seq-data-import element referencing this path.
+
+       --id_repository,-r
+           path to --project's id_repository
+
+       --programversion,-v
+           Version string to be used as value for the analysis attribute 'programversion'
+
+       --sourcename,-s
+           Sourcename string to be used as value for the analysis attribute 'sourcename'
+           Due to a silly hack in analysis2bsml.pl, you might need to put /dummy/dir at
+           the end of it.
+
+       --log,-l
+           Log file
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the output from a twinscan search into BSML.
+
+INPUT
+       You define the input file using the --input_file option.  This file does not need any special file extension.  The regular output of twinscan, less about a dozen comment lines
+       of header, looks like this:
+
+       eda1.assembly.1.1.0.seq iscan   CDS 62 293      6764    +       1       gene_id "eda1.assembly.1.1.0.seq.001"; transcript_id "eda1.assembly.1.1.0.seq.001.1";
+       eda1.assembly.1.1.0.seq iscan   stop_codon      294     296     .       +       0       gene_id "eda1.assembly.1.1.0.seq.001"; transcript_id "eda1.assembly.1.1.0.seq.001.1";
+       eda1.assembly.1.1.0.seq iscan   start_codon     460     462     .       +       0       gene_id "eda1.assembly.1.1.0.seq.002"; transcript_id "eda1.assembly.1.1.0.seq.002.1";
+       eda1.assembly.1.1.0.seq iscan   CDS 460 502     903     +       0       gene_id "eda1.assembly.1.1.0.seq.002"; transcript_id "eda1.assembly.1.1.0.seq.002.1";
+       eda1.assembly.1.1.0.seq iscan   CDS 513 565     427     +       2       gene_id "eda1.assembly.1.1.0.seq.002"; transcript_id "eda1.assembly.1.1.0.seq.002.1";
+       eda1.assembly.1.1.0.seq iscan   stop_codon      566     568     .       +       0       gene_id "eda1.assembly.1.1.0.seq.002"; transcript_id "eda1.assembly.1.1.0.seq.002.1";
+       eda1.assembly.1.1.0.seq iscan   start_codon     742     744     .       +       0       gene_id "eda1.assembly.1.1.0.seq.003"; transcript_id "eda1.assembly.1.1.0.seq.003.1";
+       eda1.assembly.1.1.0.seq iscan   CDS 742 802     411     +       0       gene_id "eda1.assembly.1.1.0.seq.003"; transcript_id "eda1.assembly.1.1.0.seq.003.1";
+       eda1.assembly.1.1.0.seq iscan   CDS 826 926     2058    +       2       gene_id "eda1.assembly.1.1.0.seq.003"; transcript_id "eda1.assembly.1.1.0.seq.003.1";
+       eda1.assembly.1.1.0.seq iscan   stop_codon      927     929     .       +       0       gene_id "eda1.assembly.1.1.0.seq.003"; transcript_id "eda1.assembly.1.1.0.seq.003.1";
+       eda1.assembly.1.1.0.seq iscan   stop_codon      1016    1018    .       -       0       gene_id "eda1.assembly.1.1.0.seq.004"; transcript_id "eda1.assembly.1.1.0.seq.004.1";
+       eda1.assembly.1.1.0.seq iscan   CDS 1019        1146    890     -       2       gene_id "eda1.assembly.1.1.0.seq.004"; transcript_id "eda1.assembly.1.1.0.seq.004.1";
+
+       which has the general format of:
+
+           <seqname> <source> <feature> <start> <end> <score> <strand> <frame> [attributes]
+
+       where attributes contains:
+           "gene_id", referring to the source input sequence followed by a unique gene id.
+           "transcript_id", referring to the gene_id followed by a transcript id, which will
+               always be '.1' for twinscan, until multiple predictions per gene (that is,
+               alternative splices) are implemented.
+
+       This script currently assumes that the input GTF file only contains the output from the analysis of a single FASTA sequence.
+
+       Also it should be noted that all transcripts will have, at a minimum, 2 rows: a CDS and a stop_codon.  If there are at least 2 CDS predictions, an additional start_codon is
+       added to the results.
+
+OUTPUT
+       Base positions from the input file are renumbered so that positions start at zero and reflect interbase numbering.  Also, the stop coordinates of each terminal CDS is extended
+       3bp to include the stop codon.
+
+CONTACT
+           Jason Inman
+           jinman@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                       TWINSCAN2BSML(1)

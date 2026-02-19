@@ -1,0 +1,23 @@
+TCOV2BSML(1)                                                               User Contributed Perl Documentation                                                              TCOV2BSML(1)
+
+NAME
+       tcov2bsml.pl  - convert tcov files into BSML documents
+
+SYNOPSIS
+       USAGE:  tcov2bsml.pl -t tcov_file -b bsml_repository_path -o output_file_bsml      -d database -a assembly_id
+
+OPTIONS
+       •   --tcov,-t [REQUIRED] file containing tcov data
+
+       •   --output,-o [REQUIRED] output BSML file containing coverage information
+
+       •   --bsml_repository,-b [REQUIRED] filepath to the bsml repository
+
+       •   --chunk_size,-c [OPTIONAL] optional chunk size (default is 1000 bases)
+
+       •   --help,-h This help message
+
+DESCRIPTION
+       tcov2bsml.pl is designed to convert information in tcov files (coverage data) into BSML documents.
+
+perl v5.22.1                                                                           2017-11-14                                                                           TCOV2BSML(1)

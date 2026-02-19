@@ -1,0 +1,29 @@
+BLASTBTAB2BSML(1)                                                          User Contributed Perl Documentation                                                         BLASTBTAB2BSML(1)
+
+NAME
+       blastbtab2bsml.pl  - convert info stored in btab files into BSML documents
+
+SYNOPSIS
+       USAGE:  blastbtab2bsml.pl -b btab_dir -o blastp.bsml
+
+OPTIONS
+       •   --output,-o [REQUIRED] output BSML file containing bit_score information
+
+       •   --btab_dir,-b [REQUIRED] Dir containing btab files
+
+       •   --max_hsp_count,-m Maximum number of HSPs stored per alignment
+
+       •   --class,-c The ref/comp sequence type.  Default is 'assembly'
+
+       •   --gzip,-z gzip bsml output
+
+       •   --help,-h This help message
+
+DESCRIPTION
+       blastbtab2bsml.pl is designed to convert information in btab files into BSML documents.
+
+       NOTE:
+
+       Calling the script name with NO flags/options or --help will display the syntax requirement.
+
+perl v5.22.1                                                                           2017-11-14                                                                      BLASTBTAB2BSML(1)

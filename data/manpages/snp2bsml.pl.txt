@@ -1,0 +1,57 @@
+SNP2BSML(1)                                                                User Contributed Perl Documentation                                                               SNP2BSML(1)
+
+NAME
+       snp2bsml.pl - convert clustered snp output information from show-snps to bsml
+
+SYNOPSIS
+       usage: snp2bsml.pl [ --input|-i=/path/to/show-snps_clustered_output ]
+                  [ --output|-o=/path/to/snp_data.bsml ]
+                    --project
+                  [ --log|-l=/path/to/logfile ]
+                  [ --debug|-d=debug_level ]
+                  [ --moltype|-m=molecule_type ]
+                  [ --seqdata|-s=sequence_data ]
+
+OPTIONS
+       --input, -i
+           Clustered output from show-snps tool from MUMer suite
+
+       --output, -o
+           BSML multiple sequence alignment file for SNP representation
+
+       --project
+           Project name
+
+       --id_repository
+           Path to project id repository
+
+       --log, -l
+           Log file
+
+       --debug, -D
+           Debug level
+
+       --moltype, -m
+           Molecule type (nucleotide, protein)
+           Defaults to nucleotide
+
+       --seqdata, -s
+           SNP sequence data, in tab delimited format, containing:
+           sequence_id, position, orientation, base_call
+
+       --help, -h
+           This help message
+
+DESCRIPTION
+       This script will parse out clustered output from show-snps tool from the MUMer package and create a multiple sequence alignment BSML representation for the SNP data.
+
+INPUT
+       The input for this script is the output from show-snps tool from the MUMer package, in tab delimited format.
+
+OUTPUT
+       The output for this script is the BSML multiple sequence alignment representation of the SNP data.
+
+CONTACT
+       Ed Lee (elee@tigr.org)
+
+perl v5.22.1                                                                           2017-11-14                                                                            SNP2BSML(1)

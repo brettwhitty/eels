@@ -1,0 +1,39 @@
+PSORTB2BSML(1)                                                             User Contributed Perl Documentation                                                            PSORTB2BSML(1)
+
+NAME
+       psortb2bsml.pl - convert psortb output to BSML
+
+SYNOPSIS
+       USAGE: psortb2bsml.pl --input=/path/to/psortb_out.raw --output=/path/to/output.bsml
+
+OPTIONS
+       --input,-i
+           Input file file from a psortb run.
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --log,-l
+           Log file
+
+       --output,-o
+           Output BSML file (will be created, must not exist)
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the output from psortb into BSML.
+
+INPUT
+       Pepstats can be run using multiple input sequences simultaneously, and this script will support this.
+
+       You define the input file using the --input option.  This file does not need any special file extension.
+
+OUTPUT
+       After parsing the input file, a file specified by the --output option is created.  This script will fail if it already exists.
+
+CONTACT
+       Brett Whitty bwhitty@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                         PSORTB2BSML(1)

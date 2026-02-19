@@ -1,0 +1,74 @@
+IPRSCAN2BSML(1)                                                            User Contributed Perl Documentation                                                           IPRSCAN2BSML(1)
+
+NAME
+       iprscan2bsml.pl - convert iprscan btab output to BSML
+
+SYNOPSIS
+       USAGE: iprscan2bsml.pl
+           --input=/path/to/somefile.iprscan.raw
+           --output=/path/to/somefile.iprscan.bsml
+         [ --fasta_input=/path/to/iprscan/input.fsa
+           --gzip_output=1 ]
+
+OPTIONS
+       --input,-i
+           Input tab-delimited file from an iprscan search.
+
+       --query_file_path,-q
+           Full path to FASTA file containing query sequence.  This allows the creation
+           of a Sequence element in BSML even if there are no matches.
+
+       --debug,-d
+           Debug level.  Use a large number to turn on verbose debugging.
+
+       --gzip_output,-g
+           Optional.  Non-zero value will give you a compressed bsml file. If output
+           does not contain a .gz extension, it will be added automatically.
+
+       --log,-l
+           Log file
+
+       --output,-o
+           Output BSML file
+
+       --help,-h
+           This help message
+
+DESCRIPTION
+       This script is used to convert the tab-delimited output from a nap search into BSML.
+
+INPUT
+       The input to this component is the btab file created by the iprscan executable.  This file is 14-column, tab-delimited text document.  The input must be a nap btab output from a
+       single search.  Fromthe documentation, the raw output looks like this:
+
+           ------
+           NF00181542      0A5FDCE74AB7C3AD        272     HMMPIR  PIRSF001424     Prephenate dehydratase  1       270     6.5e-141        T       06-Oct-2004         IPR008237       Prephenate dehydratase with ACT region  Molecular Function:prephenate dehydratase activity (GO:0004664), Biological Process:L-phenylalanine biosynthesis (GO:0009094)
+           ------
+
+           Where: NF00181542:             is the id of the input sequence.
+                  27A9BBAC0587AB84:       is the crc64 (checksum) of the proteic sequence (supposed to be unique).
+                  272:                    is the length of the sequence (in AA).
+                  HMMPIR:                 is the anaysis method launched.
+                  PIRSF001424:            is the database members entry for this match.
+                  Prephenate dehydratase: is the database member description for the entry.
+                  1:                      is the start of the domain match.
+                  270:                    is the end of the domain match.
+                  6.5e-141:               is the evalue of the match (reported by member database anayling method).
+                  T:                      is the status of the match (T: true, ?: unknown).
+                  06-Oct-2004:            is the date of the run.
+                  IPR008237:              is the corresponding InterPro entry (if iprlookup requested by the user).
+                  Prephenate dehydratase with ACT region:                           is the description of the InterPro entry.
+                  Molecular Function:prephenate dehydratase activity (GO:0004664):  is the GO (gene ontology) description for the InterPro entry.
+
+       Illegal characters will be removed from the IDs for the query sequence (column 0) and subject hit (column 5) if necessary to create legal XML id names.  For each element, the
+       original, unmodified name will be stored in the "title" attribute of the Sequence element.  You should make sure that your ids don't begin with a number.  This script will
+       successfully create a BSML document regardless of your ID names, but the resulting document may not pass DTD validation.
+
+OUTPUT
+       The BSML file to be created is defined using the --output option.  If the file already exists it will be overwritten.
+
+CONTACT
+           Joshua Orvis
+           jorvis@tigr.org
+
+perl v5.22.1                                                                           2017-11-14                                                                        IPRSCAN2BSML(1)
