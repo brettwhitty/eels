@@ -68,8 +68,8 @@ const maxClass = classEntries[0]?.[1] || 1;
 
 // --- Output ---
 console.log(`\n${c.bold}${c.cyan}  ╔══════════════════════════════════════════════════════════════════════╗${c.reset}`);
-console.log(`${c.bold}${c.cyan}  ║${c.reset}${c.bold}   EELS — Ergatis Extended Lifetime Support                          ${c.cyan}║${c.reset}`);
-console.log(`${c.bold}${c.cyan}  ║${c.reset}${c.dim}   Preserving 20+ years of bioinformatics workflow engineering        ${c.cyan}║${c.reset}`);
+console.log(`${c.bold}${c.cyan}  ║${c.reset}${c.bold}   EELS — Ergatis Extended Lifetime Support                         ${c.bold}${c.cyan}║${c.reset}`);
+console.log(`${c.bold}${c.cyan}  ║${c.reset}${c.dim}   Preserving 20+ years of bioinformatics workflow engineering       ${c.bold}${c.cyan}║${c.reset}`);
 console.log(`${c.bold}${c.cyan}  ╚══════════════════════════════════════════════════════════════════════╝${c.reset}`);
 
 console.log(header('SOURCE DATA'));
