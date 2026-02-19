@@ -1,19 +1,2 @@
-# Temporary files
-*.log
-*.tmp
-*.pyc
-__pycache__/
-.DS_Store
-
-# Editor files
-*~
-*.swp
-*.swo
-.vscode/
-.idea/
-
-# Python
-*.egg-info/
-dist/
-build/
 ergatis-eels-devel
+ergatis-eels-devel/**
