@@ -205,3 +205,7 @@ This is **software engineering for bioinformatics workflows**, not DevOps script
 - Singh, G., Kesselman, C. & Deelman, E. (2005). "Optimizing Grid-Based Workflow Execution." Journal of Grid Computing, 3, 201-219.
   - Grid workflow optimization and execution
   - DOI: 10.1007/s10723-005-9011-7
+
+- Chen, J. & Yang, Y. (2009). "Grid and Workflows." In: Encyclopedia of Database Systems. Springer.
+  - Grid workflow management systems overview
+  - DOI: 10.1007/978-0-387-39940-9_1472
