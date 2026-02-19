@@ -4,9 +4,10 @@
    "steps" : [
       {
          "category" : "tool_execution",
-         "executable" : "split",
+         "executable" : "/bin/env split",
          "idx" : 0,
-         "name" : "split"
+         "name" : "split",
+         "run_type" : "RunUnixCommand"
       }
    ]
 }

@@ -4,15 +4,17 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "create output directory"
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "create temp directory"
+         "name" : "create temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -22,9 +24,10 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "sort",
+         "executable" : "/bin/env sort",
          "idx" : 3,
-         "name" : "sort seqlens"
+         "name" : "sort seqlens",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -34,21 +37,24 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "sort",
+         "executable" : "/bin/env sort",
          "idx" : 5,
-         "name" : "sort mummertab"
+         "name" : "sort mummertab",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "join",
+         "executable" : "/bin/env join",
          "idx" : 6,
-         "name" : "join tab"
+         "name" : "join tab",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "echo",
+         "executable" : "/bin/env echo",
          "idx" : 7,
-         "name" : "create list"
+         "name" : "create list",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -70,15 +76,17 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "gvpr",
+         "executable" : "/bin/env gvpr",
          "idx" : 11,
-         "name" : "print components"
+         "name" : "print components",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "sort",
+         "executable" : "/bin/env sort",
          "idx" : 12,
-         "name" : "sort clusters"
+         "name" : "sort clusters",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

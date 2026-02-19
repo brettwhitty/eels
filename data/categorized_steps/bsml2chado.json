@@ -4,27 +4,31 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "create output directory"
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "create temp directory"
+         "name" : "create temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 2,
-         "name" : "create cache directory"
+         "name" : "create cache directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 3,
-         "name" : "create parse temp directory"
+         "name" : "create parse temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -58,15 +62,17 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "cat",
+         "executable" : "/bin/env cat",
          "idx" : 10,
-         "name" : "trim dups files"
+         "name" : "trim dups files",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "echo",
+         "executable" : "/bin/env echo",
          "idx" : 11,
-         "name" : "create tables list"
+         "name" : "create tables list",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
@@ -88,15 +94,17 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 16,
-         "name" : "mkdir splitchecksums"
+         "name" : "mkdir splitchecksums",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "split",
+         "executable" : "/bin/env split",
          "idx" : 17,
-         "name" : "split"
+         "name" : "split",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
@@ -106,9 +114,10 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 19,
-         "name" : "create sort_checksums temp directory"
+         "name" : "create sort_checksums temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
@@ -148,15 +157,17 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 27,
-         "name" : "create splitoffsets directory"
+         "name" : "create splitoffsets directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "split",
+         "executable" : "/bin/env split",
          "idx" : 28,
-         "name" : "split"
+         "name" : "split",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
@@ -196,9 +207,10 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 36,
-         "name" : "create output directory"
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

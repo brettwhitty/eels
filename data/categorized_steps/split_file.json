@@ -4,9 +4,10 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "create output directory"
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -16,9 +17,10 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "find",
+         "executable" : "/bin/env find",
          "idx" : 2,
-         "name" : "Create file list"
+         "name" : "Create file list",
+         "run_type" : "RunUnixCommand"
       }
    ]
 }

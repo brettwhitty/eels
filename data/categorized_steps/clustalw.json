@@ -4,9 +4,10 @@
    "steps" : [
       {
          "category" : "tool_execution",
-         "executable" : "cp",
+         "executable" : "/bin/env cp",
          "idx" : 0,
-         "name" : "relocate query file"
+         "name" : "relocate query file",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

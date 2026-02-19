@@ -4,15 +4,17 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "create output directory"
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "create temp directory"
+         "name" : "create temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -22,21 +24,24 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "sort",
+         "executable" : "/bin/env sort",
          "idx" : 3,
-         "name" : "sort large GI list"
+         "name" : "sort large GI list",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "sort",
+         "executable" : "/bin/env sort",
          "idx" : 4,
-         "name" : "sort small GI list"
+         "name" : "sort small GI list",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "comm",
+         "executable" : "/bin/env comm",
          "idx" : 5,
-         "name" : "Suppress subset of GI"
+         "name" : "Suppress subset of GI",
+         "run_type" : "RunUnixCommand"
       }
    ]
 }

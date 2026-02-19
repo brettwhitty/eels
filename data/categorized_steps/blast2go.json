@@ -4,9 +4,10 @@
    "steps" : [
       {
          "category" : "tool_execution",
-         "executable" : "java",
+         "executable" : "/bin/env java",
          "idx" : 0,
-         "name" : "blast2go"
+         "name" : "blast2go",
+         "run_type" : "RunUnixCommand"
       }
    ]
 }

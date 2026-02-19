@@ -10,9 +10,10 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "env",
+         "executable" : "/bin/env env",
          "idx" : 1,
-         "name" : "check env variables"
+         "name" : "check env variables",
+         "run_type" : "RunUnixCommand"
       }
    ]
 }

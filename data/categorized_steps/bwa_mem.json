@@ -1,39 +1,43 @@
 {
-  "component": "bwa_mem",
-  "source_file": "bwa_mem.i1.json",
-  "steps": [
-    {
-      "category": "infrastructure",
-      "executable": "mkdir",
-      "idx": 0,
-      "name": "create output directory"
-    },
-    {
-      "category": "infrastructure",
-      "executable": "mkdir",
-      "idx": 1,
-      "name": "create temp directory"
-    },
-    {
-      "category": "infrastructure",
-      "executable": "mkdir",
-      "idx": 2,
-      "name": "create output directory"
-    },
-    {
-      "category": "infrastructure",
-      "executable": "mkdir",
-      "idx": 3,
-      "name": "create temp directory"
-    },
-    {
-      "category": "tool_execution",
-      "executable": "{{BWA_EXEC}}",
-      "idx": 4,
-      "name": "BWA Execution",
-      "run_type": "RunDistributedCommand"
-    }
-  ],
-  "default_run_type": "RunUnixCommand",
-  "run_type_note": "RunUnixCommand = bash shell execution via TIGR-Workflow config; RunDistributedCommand = grid/cluster submission"
+   "component" : "bwa_mem",
+   "default_run_type" : "RunUnixCommand",
+   "run_type_note" : "RunUnixCommand = bash shell execution via TIGR-Workflow config; RunDistributedCommand = grid/cluster submission",
+   "source_file" : "bwa_mem.i1.json",
+   "steps" : [
+      {
+         "category" : "infrastructure",
+         "executable" : "/bin/env mkdir",
+         "idx" : 0,
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "/bin/env mkdir",
+         "idx" : 1,
+         "name" : "create temp directory",
+         "run_type" : "RunUnixCommand"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "/bin/env mkdir",
+         "idx" : 2,
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
+      },
+      {
+         "category" : "infrastructure",
+         "executable" : "/bin/env mkdir",
+         "idx" : 3,
+         "name" : "create temp directory",
+         "run_type" : "RunUnixCommand"
+      },
+      {
+         "category" : "tool_execution",
+         "executable" : "{{BWA_EXEC}}",
+         "idx" : 4,
+         "name" : "BWA Execution",
+         "run_type" : "RunDistributedCommand"
+      }
+   ]
 }

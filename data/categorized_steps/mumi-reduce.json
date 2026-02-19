@@ -4,15 +4,17 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "Create the toplevel output directory."
+         "name" : "Create the toplevel output directory.",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "Create a temporary working directory on the scratch partition."
+         "name" : "Create a temporary working directory on the scratch partition.",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
@@ -52,9 +54,10 @@
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 10,
-         "name" : "Create a directory in which to store all final MUMi scores."
+         "name" : "Create a directory in which to store all final MUMi scores.",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

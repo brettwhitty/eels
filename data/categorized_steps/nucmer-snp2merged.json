@@ -4,9 +4,10 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "create output directory"
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

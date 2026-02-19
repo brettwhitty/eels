@@ -4,15 +4,17 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "Create the temp output directories"
+         "name" : "Create the temp output directories",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "Create the output directories"
+         "name" : "Create the output directories",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

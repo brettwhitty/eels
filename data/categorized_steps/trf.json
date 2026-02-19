@@ -10,9 +10,10 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "find",
+         "executable" : "/bin/env find",
          "idx" : 1,
-         "name" : "relocate output"
+         "name" : "relocate output",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "converter",

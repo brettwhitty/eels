@@ -28,9 +28,10 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "cp",
+         "executable" : "/bin/env cp",
          "idx" : 4,
-         "name" : "relocate query seq"
+         "name" : "relocate query seq",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -40,45 +41,52 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "rm",
+         "executable" : "/bin/env rm",
          "idx" : 6,
-         "name" : "remove temp query seq"
+         "name" : "remove temp query seq",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "rm",
+         "executable" : "/bin/env rm",
          "idx" : 7,
-         "name" : "remove raw dps output"
+         "name" : "remove raw dps output",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "rm",
+         "executable" : "/bin/env rm",
          "idx" : 8,
-         "name" : "remove raw ext output"
+         "name" : "remove raw ext output",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "rm",
+         "executable" : "/bin/env rm",
          "idx" : 9,
-         "name" : "remove raw ext collapsed output"
+         "name" : "remove raw ext collapsed output",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "rm",
+         "executable" : "/bin/env rm",
          "idx" : 10,
-         "name" : "remove raw filter output"
+         "name" : "remove raw filter output",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "touch",
+         "executable" : "/bin/env touch",
          "idx" : 11,
-         "name" : "ensure btab existence"
+         "name" : "ensure btab existence",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
-         "executable" : "mv",
+         "executable" : "/bin/env mv",
          "idx" : 12,
-         "name" : "relocate btab"
+         "name" : "relocate btab",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "converter",

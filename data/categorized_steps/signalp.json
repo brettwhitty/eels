@@ -4,9 +4,10 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "Create scratch dir for signalp output"
+         "name" : "Create scratch dir for signalp output",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

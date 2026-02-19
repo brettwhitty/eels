@@ -4,15 +4,17 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "mkdir"
+         "name" : "mkdir",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "mkdir"
+         "name" : "mkdir",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",

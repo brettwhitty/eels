@@ -4,15 +4,17 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "create output directory"
+         "name" : "create output directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "create temp directory"
+         "name" : "create temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
@@ -28,9 +30,10 @@
       },
       {
          "category" : "tool_execution",
-         "executable" : "rm",
+         "executable" : "/bin/env rm",
          "idx" : 4,
-         "name" : "cleanup afg file"
+         "name" : "cleanup afg file",
+         "run_type" : "RunUnixCommand"
       }
    ]
 }

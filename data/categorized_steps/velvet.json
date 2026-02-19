@@ -4,15 +4,17 @@
    "steps" : [
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 0,
-         "name" : "create velveth temp directory"
+         "name" : "create velveth temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "infrastructure",
-         "executable" : "mkdir",
+         "executable" : "/bin/env mkdir",
          "idx" : 1,
-         "name" : "create velvetg temp directory"
+         "name" : "create velvetg temp directory",
+         "run_type" : "RunUnixCommand"
       },
       {
          "category" : "tool_execution",
