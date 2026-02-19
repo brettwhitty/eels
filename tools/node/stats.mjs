@@ -67,10 +67,13 @@ const classEntries = Object.entries(classes).sort((a, b) => b[1] - a[1]);
 const maxClass = classEntries[0]?.[1] || 1;
 
 // --- Output ---
-console.log(`\n${c.bold}${c.cyan}  ╔══════════════════════════════════════════════════════════════════════╗${c.reset}`);
-console.log(`${c.bold}${c.cyan}  ║${c.reset}${c.bold}   EELS — Ergatis Extended Lifetime Support                         ${c.bold}${c.cyan}║${c.reset}`);
-console.log(`${c.bold}${c.cyan}  ║${c.reset}${c.dim}   Preserving 20+ years of bioinformatics workflow engineering       ${c.bold}${c.cyan}║${c.reset}`);
-console.log(`${c.bold}${c.cyan}  ╚══════════════════════════════════════════════════════════════════════╝${c.reset}`);
+const boxW = 70;
+const l1 = '   EELS \u2014 Ergatis Extended Lifetime Support'.padEnd(boxW);
+const l2 = '   Preserving 20+ years of bioinformatics workflow engineering'.padEnd(boxW);
+console.log(`\n${c.bold}${c.cyan}  \u2554${'═'.repeat(boxW)}\u2557${c.reset}`);
+console.log(`${c.bold}${c.cyan}  \u2551${c.reset}${c.bold}${l1}${c.bold}${c.cyan}\u2551${c.reset}`);
+console.log(`${c.bold}${c.cyan}  \u2551${c.reset}${c.dim}${l2}${c.bold}${c.cyan}\u2551${c.reset}`);
+console.log(`${c.bold}${c.cyan}  \u255a${'═'.repeat(boxW)}\u255d${c.reset}`);
 
 console.log(header('SOURCE DATA'));
 console.log(`  ${c.bold}${c.green}${fmt(components)}${c.reset} component configurations`);
