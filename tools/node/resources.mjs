@@ -45,39 +45,64 @@ if (listTypes) {
     if (desc) console.log(`        ${chalk.dim(desc)}`);
   }
 
-  // Show the critical ones: external tools that must be installed
-  console.log(header('EXTERNAL TOOL EXECUTABLES (must be installed)'));
-  const execs = data.resources.filter(r => r.type === 'tool_executable').sort((a, b) => b.num_components - a.num_components);
-  for (const r of execs) {
-    console.log(`  ${chalk.yellow(r.resource.padEnd(30))} ${chalk.dim(`${r.num_components} component${r.num_components > 1 ? 's' : ''}: ${r.components.slice(0, 5).join(', ')}${r.components.length > 5 ? ' ...' : ''}`)}`);
+  // Template var subtypes
+  const tvars = data.resources.filter(r => r.type === 'template_var');
+  const subs = {};
+  for (const r of tvars) (subs[r.subtype] ??= []).push(r);
+  console.log(header('TEMPLATE VARIABLES BY SUBTYPE'));
+  for (const [sub, entries] of Object.entries(subs).sort((a, b) => b[1].length - a[1].length)) {
+    console.log(`  ${chalk.bold(String(entries.length).padStart(4))}  ${chalk.yellow(sub)}`);
   }
 
-  console.log(header('REFERENCE DATABASES'));
-  const dbs = data.resources.filter(r => r.type === 'database');
-  for (const r of dbs) {
-    const origPath = r.original_paths[0] || '';
+  // Hardcoded literal paths that need attention
+  console.log(header('HARDCODED DATABASE PATHS'));
+  for (const r of data.resources.filter(r => r.type === 'database')) {
     console.log(`  ${chalk.cyan(r.resource)}`);
-    console.log(`    ${chalk.dim(origPath)} ${chalk.dim(`(${r.components.join(', ')})`)}`);
+    console.log(`    ${chalk.dim(r.original_paths[0])} ${chalk.dim(`(${r.components.join(', ')})`)}`);
   }
 
-  console.log(header('INSTITUTIONAL PACKAGE INSTALLS (need remapping)'));
-  const pkgs = data.resources.filter(r => r.type === 'package_install');
-  for (const r of pkgs) {
+  console.log(header('HARDCODED PACKAGE INSTALLS (need remapping)'));
+  for (const r of data.resources.filter(r => r.type === 'package_install')) {
     console.log(`  ${chalk.magenta(r.resource)}`);
     console.log(`    ${chalk.dim(r.original_paths[0])} → ${chalk.dim(r.note)}`);
   }
 
-  console.log(`\n${chalk.dim('  Use --type <type> to filter, e.g.: node resources.mjs --type tool_executable')}\n`);
+  console.log(`\n${chalk.dim('  --types          list types only')}`);
+  console.log(`${chalk.dim('  --type TYPE      filter (e.g. --type database, --type template_var, --type executable)')}\n`);
 } else {
   // Filtered view
-  const items = data.resources.filter(r => r.type.toLowerCase().includes(typeFilter));
-  console.log(header(`${typeFilter.toUpperCase()} (${items.length} resources)`));
-  for (const r of items) {
-    console.log(`\n  ${chalk.bold.green(r.resource)}`);
-    console.log(`    ${chalk.dim('Type:')} ${r.type}`);
-    console.log(`    ${chalk.dim('Note:')} ${r.note}`);
-    if (r.original_paths.length) console.log(`    ${chalk.dim('Paths:')} ${r.original_paths.join(', ')}`);
-    console.log(`    ${chalk.dim('Components:')} ${r.components.join(', ')}`);
+  const subtypes = ['executable','bin_dir','path','directory','library','install','other'];
+  let items;
+  // Check top-level type first, then subtype
+  const byType = data.resources.filter(r => r.type === typeFilter);
+  if (byType.length > 0) {
+    items = byType;
+  } else if (subtypes.includes(typeFilter)) {
+    items = data.resources.filter(r => r.subtype === typeFilter);
+  } else {
+    items = [];
+  }
+
+  if (items.length === 0) {
+    console.log(`\n  No resources matching "${typeFilter}"\n`);
+  } else if (items[0].subtype) {
+    // Template vars grouped by subtype
+    const groups = {};
+    for (const r of items) (groups[r.subtype || 'other'] ??= []).push(r);
+    for (const [sub, entries] of Object.entries(groups).sort((a, b) => b[1].length - a[1].length)) {
+      console.log(header(`${sub.toUpperCase()} (${entries.length})`));
+      for (const r of entries) {
+        console.log(`  ${chalk.yellow(r.resource.padEnd(35))} ${chalk.dim(r.components.join(', '))}`);
+      }
+    }
+  } else {
+    console.log(header(`${typeFilter.toUpperCase()} (${items.length} resources)`));
+    for (const r of items) {
+      console.log(`\n  ${chalk.bold.green(r.resource)}`);
+      console.log(`    ${chalk.dim('Note:')} ${r.note}`);
+      if (r.original_paths.length) console.log(`    ${chalk.dim('Paths:')} ${r.original_paths.join(', ')}`);
+      console.log(`    ${chalk.dim('Components:')} ${r.components.join(', ')}`);
+    }
   }
   console.log();
 }

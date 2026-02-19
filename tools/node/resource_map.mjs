@@ -107,16 +107,17 @@ function classifyAbsPath(p) {
 
 function classifyTemplateVar(v) {
   const name = v.replace(/^\{\{|\}\}$/g, '').replace(/^\$;|\$;$/g, '');
-  if (name.match(/_EXEC$/)) return { type: 'tool_executable', resource: name, note: 'External tool binary — must be installed' };
-  if (name.match(/_BIN$/)) return { type: 'tool_bin_dir', resource: name, note: 'Tool binary directory' };
-  if (name.match(/_BIN_DIR$/)) return { type: 'tool_bin_dir', resource: name, note: 'Tool binary directory' };
-  if (name.match(/_PATH$/)) return { type: 'tool_or_data_path', resource: name, note: 'Tool or data path — check component docs' };
-  if (name.match(/_DIR$/)) return { type: 'directory', resource: name, note: 'Directory reference' };
-  if (name.match(/_DB$/)) return { type: 'database', resource: name, note: 'Database reference' };
-  if (name.match(/_LIB$/)) return { type: 'library', resource: name, note: 'Library/model directory' };
-  if (name.match(/_INSTALL$/)) return { type: 'package_install', resource: name, note: 'Software installation directory' };
-  if (name.match(/_HOME$/)) return { type: 'package_install', resource: name, note: 'Software home directory' };
-  return { type: 'parameter', resource: name, note: 'Template variable' };
+  const hb = `{{${name}}}`;
+  let subtype;
+  if (name.match(/_EXEC$/)) subtype = 'executable';
+  else if (name.match(/_BIN_DIR$|_BIN$/)) subtype = 'bin_dir';
+  else if (name.match(/_PATH$/)) subtype = 'path';
+  else if (name.match(/_DIR$/)) subtype = 'directory';
+  else if (name.match(/_DB$/)) subtype = 'database';
+  else if (name.match(/_LIB$/)) subtype = 'library';
+  else if (name.match(/_INSTALL$|_HOME$/)) subtype = 'install';
+  else subtype = 'other';
+  return { type: 'template_var', subtype, resource: hb, note: `Runtime config variable (${subtype})` };
 }
 
 // ── Build resource map ───────────────────────────────────────────────
@@ -160,6 +161,7 @@ for (const [key, r] of resources) {
     num_components: r.components.size,
     components: [...r.components].sort(),
   };
+  if (r.subtype) entry.subtype = r.subtype;
   output.resources.push(entry);
   byType[r.type] = (byType[r.type] || 0) + 1;
 }
@@ -170,11 +172,8 @@ output.summary = {
   by_type: byType,
   runtime_categories: {
     'ergatis_script': 'Scripts from Ergatis install bin/ directory — included with Ergatis',
-    'tool_executable': 'External tool binaries referenced via template variables — must be installed separately',
-    'tool_bin_dir': 'Directories containing external tool binaries',
-    'tool_or_data_path': 'Paths that may reference tools or data files',
-    'package_install': 'Software installation directories (TIGR institutional paths)',
-    'database': 'Reference databases required at runtime',
+    'package_install': 'Hardcoded TIGR/JCVI/IGS software installation paths — need remapping',
+    'database': 'Hardcoded reference database paths',
     'os_binary': 'Standard OS/system binaries (perl, sort, mv, etc.)',
     'project_data': 'Project-specific paths baked into configs — test/example data, not runtime deps',
     'os_special': 'Standard OS special files (/dev/null)',
@@ -182,9 +181,7 @@ output.summary = {
     'package_config': 'Tool configuration files relative to package install',
     'url_fragment': 'URL fragments parsed as filesystem paths',
     'user_path': 'User home directory paths — should be parameterized',
-    'directory': 'Generic directory references',
-    'library': 'Library/model file directories',
-    'parameter': 'Other template variable references',
+    'template_var': 'Runtime config variables ({{VAR}}) — resolved from Ergatis global/component config',
   },
 };
 

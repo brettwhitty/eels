@@ -1,33 +1,25 @@
 {
   "description": "Runtime resource dependency map for Ergatis components",
-  "generated": "2026-02-19T21:30:37.121Z",
+  "generated": "2026-02-19T21:35:36.228Z",
   "summary": {
     "total_resources": 598,
     "by_type": {
       "project_data": 11,
-      "database": 12,
-      "tool_or_data_path": 15,
+      "database": 10,
+      "template_var": 153,
       "package_install": 13,
       "package_config": 1,
       "ergatis_script": 383,
-      "directory": 10,
       "os_binary": 22,
-      "tool_bin_dir": 14,
       "os_special": 1,
       "ergatis_runtime": 2,
       "user_path": 1,
-      "url_fragment": 1,
-      "library": 4,
-      "tool_executable": 91,
-      "parameter": 17
+      "url_fragment": 1
     },
     "runtime_categories": {
       "ergatis_script": "Scripts from Ergatis install bin/ directory — included with Ergatis",
-      "tool_executable": "External tool binaries referenced via template variables — must be installed separately",
-      "tool_bin_dir": "Directories containing external tool binaries",
-      "tool_or_data_path": "Paths that may reference tools or data files",
-      "package_install": "Software installation directories (TIGR institutional paths)",
-      "database": "Reference databases required at runtime",
+      "package_install": "Hardcoded TIGR/JCVI/IGS software installation paths — need remapping",
+      "database": "Hardcoded reference database paths",
       "os_binary": "Standard OS/system binaries (perl, sort, mv, etc.)",
       "project_data": "Project-specific paths baked into configs — test/example data, not runtime deps",
       "os_special": "Standard OS special files (/dev/null)",
@@ -35,9 +27,7 @@
       "package_config": "Tool configuration files relative to package install",
       "url_fragment": "URL fragments parsed as filesystem paths",
       "user_path": "User home directory paths — should be parameterized",
-      "directory": "Generic directory references",
-      "library": "Library/model file directories",
-      "parameter": "Other template variable references"
+      "template_var": "Runtime config variables ({{VAR}}) — resolved from Ergatis global/component config"
     }
   },
   "resources": [
@@ -155,30 +145,6 @@
     },
     {
       "type": "database",
-      "resource": "CHAR_DB",
-      "note": "Database reference",
-      "original_paths": [
-        "$;CHAR_DB$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "start_site_curation"
-      ]
-    },
-    {
-      "type": "database",
-      "resource": "HMM_LIB_DB",
-      "note": "Database reference",
-      "original_paths": [
-        "$;HMM_LIB_DB$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "start_site_curation"
-      ]
-    },
-    {
-      "type": "database",
       "resource": "expasy/enzyme/latest/enzyme.dat",
       "note": "TIGR /local/db — local node database cache",
       "original_paths": [
@@ -187,475 +153,6 @@
       "num_components": 1,
       "components": [
         "update_ec_numbers"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "BIN_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "$;BIN_DIR$;",
-        "{{BIN_DIR}}"
-      ],
-      "num_components": 340,
-      "components": [
-        "454_mplex_seq_bin_trim",
-        "RAPSearch2",
-        "RNAmmer",
-        "SPAdes",
-        "aat_aa",
-        "aat_aa_masked",
-        "aat_na",
-        "aat_na_masked",
-        "adjust_bsml_coordinates",
-        "align_bowtie_stats",
-        "align_tophat_split_stats",
-        "align_tophat_stats",
-        "amoscmp",
-        "antigenic",
-        "aragorn",
-        "assert_disjoint_clusters",
-        "assign_dbxref_ids",
-        "assign_taxa",
-        "augustus",
-        "auto_annotate",
-        "auto_gene_curation",
-        "backupdb",
-        "bam2bigwig",
-        "bam2coverage",
-        "bam2sam",
-        "bam_merge",
-        "bcpconverter",
-        "bepipred",
-        "ber",
-        "blast2lca",
-        "blast_lgt_finder",
-        "blast_seq_screen",
-        "blast_snp_regions",
-        "blastn_plus",
-        "blastp_plus",
-        "bmtagger",
-        "bowtie",
-        "bowtie_build",
-        "bsml2chado",
-        "bsml2fasta",
-        "bsml2featurerelationships",
-        "bsml2gff3",
-        "bsml2interevidence_fasta",
-        "bsml2mugsymap",
-        "bsml2ptt",
-        "bsml2tbl",
-        "bsml_qc",
-        "btab2taxon",
-        "bulk_delete_chado",
-        "bwa",
-        "celera-assembler",
-        "celera-assembler-distributed",
-        "chado2bsml",
-        "chado2flatfile",
-        "chado_report_pages",
-        "clean_fasta",
-        "cleanse_sgc_database",
-        "clovr_16S_rdptables",
-        "clovr_metagenomics_prep",
-        "clovr_metagenomics_tables",
-        "clustalw",
-        "cluster_mapping",
-        "combine_ncRNA_alignments",
-        "complete_study_stage",
-        "condor_cogs_search",
-        "core_qiime",
-        "create_amoscmp_input",
-        "create_cuffsuite_files",
-        "create_db_list_file",
-        "create_map_file",
-        "create_paired_list_file",
-        "create_pseudomolecules",
-        "crossbow",
-        "cuffcompare",
-        "cuffdiff",
-        "cuffdiff_filter",
-        "cufflinks",
-        "cummerbund",
-        "curate_common_names",
-        "cvtermpath_closure",
-        "db2bsml",
-        "db2fasta",
-        "delete_bcp",
-        "delete_by_bcp",
-        "deseq",
-        "download_sra",
-        "download_tcga",
-        "drop_chado_indexes",
-        "dump_fasta",
-        "dump_table",
-        "edgeR",
-        "error_detector",
-        "expression_plots",
-        "extract_assembly_stats",
-        "extract_snp_regions",
-        "fasta2bsml",
-        "fastaToBsmlWorkingGeneModels",
-        "fastortho",
-        "fastq_to_CA",
-        "fastqc_stats",
-        "fastx_quality_stats",
-        "fastx_trimming",
-        "fetch_genbank",
-        "fgenesh",
-        "filter_bogus_genes",
-        "filter_deseq",
-        "filter_dups_lc_seqs",
-        "filter_fastq",
-        "filter_lgt_class_c_genes",
-        "filter_merged_table",
-        "filter_sequences_by_id",
-        "find_homopolymers",
-        "fix_gene_symbols",
-        "formatdb",
-        "formatdb_snp",
-        "fuzznuc",
-        "genbank2bsml",
-        "genbank2fasta",
-        "genbank2gff3",
-        "genbank2gtf",
-        "geneid",
-        "genemark",
-        "genemark-es",
-        "genewise",
-        "genezilla",
-        "genscan",
-        "genscan-plus",
-        "gff3_to_annotab",
-        "gff3_to_fasta",
-        "gff3_to_gbrowse",
-        "gkpstore2fastq",
-        "glimmer3",
-        "glimmer3_cloud",
-        "glimmerHMM",
-        "glk2bsml",
-        "hmmls",
-        "hmmpfam",
-        "hmmpfam3",
-        "htseq",
-        "htseq_count_reads",
-        "identify_human_contaminants",
-        "infernal",
-        "initdb",
-        "insert_pmarks_in_scaffolds",
-        "intergenic_analysis",
-        "iprscan",
-        "islandpath",
-        "j_ortholog_clusters",
-        "j_ortholog_clusters_distributed_work",
-        "jaccard",
-        "ksnp",
-        "legacy2bsml",
-        "lgt_build_bwa_index",
-        "lgt_bwa",
-        "lgt_bwa_fq",
-        "lgt_bwa_post_process",
-        "lgt_create_validated_bam",
-        "lgt_mpileup",
-        "lipop",
-        "lipoprotein_motif",
-        "load_ber_for_manatee",
-        "make_circleator_figure",
-        "make_comparative_circleator_figure",
-        "make_snp_lists",
-        "map_snp_query_pos",
-        "mask_by_analysis",
-        "metagene",
-        "mothur_align_seqs",
-        "mothur_chimera_slayer",
-        "mothur_classify_seqs",
-        "mothur_cluster",
-        "mothur_collect_single",
-        "mothur_dist_seqs",
-        "mothur_filter_seqs",
-        "mothur_get_oturep",
-        "mothur_rarefaction_single",
-        "mothur_read_otu",
-        "mothur_screen_seqs",
-        "mothur_summary",
-        "mothur_tree_shared",
-        "mothur_trim_seqs",
-        "mothur_unique_seq_limit",
-        "mothur_unique_seqs",
-        "move_to_scratch",
-        "mpileup",
-        "mugsy_callsnps",
-        "mugsy_callsnps_distributed",
-        "mugsy_concat_fasta",
-        "mugsyalign",
-        "mugsycog",
-        "mugsycog_distributed_work",
-        "mugsyprep",
-        "mumi-reduce",
-        "mummer",
-        "mumsgraph",
-        "muscle",
-        "ncbi-blastall",
-        "ncbi-blastn",
-        "ncbi-blastn_compress",
-        "ncbi-blastp",
-        "ncbi-blastx",
-        "ncbi-tblastn",
-        "ncbi-tblastx",
-        "ngap",
-        "nucmer-snp2merged",
-        "obo2chado",
-        "open_reading_frames",
-        "order_paired_list",
-        "outer_membrane_domain",
-        "overlap_analysis",
-        "overlap_analysis_distributed",
-        "p_func",
-        "pangenome_blast_parse",
-        "pangenome_do_analysis",
-        "pangenome_do_analysis_distributed_work",
-        "pangenome_fix_headers",
-        "pangenome_make_graphs",
-        "pangenome_make_pangenome",
-        "pangenome_make_pangenome_distributed_work",
-        "pangenome_make_profile",
-        "pangenome_make_profile_distributed_work",
-        "pangenome_make_table",
-        "pangenome_make_table_distributed_work",
-        "pangenome_merge_results",
-        "pangenome_merge_results_distributed_work",
-        "panther",
-        "parse_evidence",
-        "parse_for_ncRNAs",
-        "parse_mpileup_for_positions",
-        "pathway_tools_input",
-        "pepstats",
-        "percent_gc",
-        "percent_mapped_stats",
-        "phage_finder",
-        "phat",
-        "phobos",
-        "phylip_dnadist",
-        "pick_otus_through_otu_table",
-        "pileup_to_wig",
-        "pipeline_summary",
-        "pipeline_summary_cloud",
-        "pmarks2bsml",
-        "predict_operons",
-        "predict_prokaryotic_gene_function",
-        "predotar",
-        "prepare_paired_ends_for_velvet",
-        "preserve_reads_in_fastq",
-        "priam_ec_assignment",
-        "prodigal",
-        "profile_bsml",
-        "profile_gff3",
-        "prok_pipeline_check",
-        "prokpipe_consistency_checks",
-        "promote_gene_prediction",
-        "ps_scan",
-        "pseudomolecule2glimmer3",
-        "psiblast",
-        "qiime_fasta_mothur_cnvr",
-        "qiime_fastq_mothur_cnvr",
-        "quicktree",
-        "refresh_chado_mart",
-        "remove_db_gene_syms_with_hypos",
-        "remove_indices_and_constraints",
-        "remove_subset_of_gis",
-        "repeatmasker",
-        "replace_defline_with_locusID",
-        "resistome",
-        "restore_indices_and_constraints",
-        "restoredb",
-        "rotate_molecule",
-        "rpkm_coverage_stats",
-        "rpsblast",
-        "rrna_hmm_fs",
-        "run_command",
-        "runsql",
-        "sam2bam",
-        "sam2fasta",
-        "sam2lca",
-        "sam2lca_distributed",
-        "samtools_alignment_stats",
-        "samtools_file_convert",
-        "samtools_merge",
-        "samtools_reference_index",
-        "scp_files",
-        "scripture",
-        "seg",
-        "selfsim",
-        "sff_to_CA",
-        "sfffile",
-        "sffinfo",
-        "sighunt",
-        "signalp",
-        "snap",
-        "snp-add-gene-info",
-        "snp_verify",
-        "soapdenovo",
-        "sort_sam_by_name",
-        "split_fasta",
-        "split_fasta_fastq",
-        "split_fastq",
-        "split_file",
-        "split_multifasta",
-        "split_paired_files",
-        "sra2fastq",
-        "start_site_curation",
-        "start_site_curation_distributed",
-        "summarize_mugsy_comparative_pipeline",
-        "summarize_mugsy_comparative_pipeline_distributed",
-        "tRNAscan-SE",
-        "tRNAscan-SE_compress",
-        "tabula_rasa",
-        "tag_data",
-        "targetp",
-        "tbl2asn",
-        "tblastn_plus",
-        "tmhmm",
-        "tophat",
-        "train_for_glimmer3_iteration",
-        "translate_sequence",
-        "trf",
-        "truncate_chado_mart",
-        "uclust",
-        "uclust_remove_replicates",
-        "update_ec_numbers",
-        "update_euk_model_sequences",
-        "validate_bsml",
-        "validate_chado_records",
-        "validate_euk_records",
-        "validate_fasta",
-        "validate_genbank",
-        "validate_gff3",
-        "validate_sgc_records",
-        "velvet",
-        "velvet_optimiser",
-        "wait",
-        "wrapper_align",
-        "wu-blastn",
-        "wu-blastp",
-        "wu-blastx",
-        "wu-tblastn"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "TMP_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "$;TMP_DIR$;",
-        "{{TMP_DIR}}"
-      ],
-      "num_components": 6,
-      "components": [
-        "btab2taxon",
-        "run_command",
-        "tRNAscan-SE",
-        "tag_data",
-        "uclust",
-        "usearch"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "DOCS_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "$;DOCS_DIR$;"
-      ],
-      "num_components": 2,
-      "components": [
-        "db2bsml",
-        "legacy2bsml"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "VELVET_INSTALL_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "$;VELVET_INSTALL_DIR$;"
-      ],
-      "num_components": 2,
-      "components": [
-        "prepare_paired_ends_for_velvet",
-        "velvet_optimiser"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "MUGSY_MAPPING_INSTALL_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "{{MUGSY_MAPPING_INSTALL_DIR}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "mugsy_callsnps",
-        "mugsycog_distributed_work"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "AUGUSTUS_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "$;AUGUSTUS_DIR$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "augustus"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "RFAM_STOCKHOLM_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "$;RFAM_STOCKHOLM_DIR$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "infernal"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "TIGR_ROLES_DB_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "$;TIGR_ROLES_DB_DIR$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "p_func"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "KSNP_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "{{KSNP_DIR}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "ksnp"
-      ]
-    },
-    {
-      "type": "directory",
-      "resource": "PHYLOMARK_DIR",
-      "note": "Directory reference",
-      "original_paths": [
-        "{{PHYLOMARK_DIR}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "wga_maf2tree"
       ]
     },
     {
@@ -5669,54 +5166,6 @@
       ]
     },
     {
-      "type": "library",
-      "resource": "PYTHON_LIB",
-      "note": "Library/model directory",
-      "original_paths": [
-        "$;PYTHON_LIB$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "htseq"
-      ]
-    },
-    {
-      "type": "library",
-      "resource": "SIMPLE_REPEAT_LIB",
-      "note": "Library/model directory",
-      "original_paths": [
-        "$;SIMPLE_REPEAT_LIB$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "repeatmasker"
-      ]
-    },
-    {
-      "type": "library",
-      "resource": "TMHMM_LIB",
-      "note": "Library/model directory",
-      "original_paths": [
-        "$;TMHMM_LIB$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "tmhmm"
-      ]
-    },
-    {
-      "type": "library",
-      "resource": "TRNASCAN_LIB",
-      "note": "Library/model directory",
-      "original_paths": [
-        "{{TRNASCAN_LIB}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "tRNAscan-SE"
-      ]
-    },
-    {
       "type": "os_binary",
       "resource": "mv",
       "note": "System binary",
@@ -6168,214 +5617,6 @@
       ]
     },
     {
-      "type": "parameter",
-      "resource": "OUTPUT_DIRECTORY",
-      "note": "Template variable",
-      "original_paths": [
-        "{{OUTPUT_DIRECTORY}}"
-      ],
-      "num_components": 3,
-      "components": [
-        "mugsyprep",
-        "usearch",
-        "wga_maf2tree"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "ITERATOR_NAME",
-      "note": "Template variable",
-      "original_paths": [
-        "{{ITERATOR_NAME}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "uclust",
-        "usearch"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "GROUP_NUMBER",
-      "note": "Template variable",
-      "original_paths": [
-        "{{GROUP_NUMBER}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "uclust",
-        "usearch"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "INPUT_FILE_LIST",
-      "note": "Template variable",
-      "original_paths": [
-        "{{INPUT_FILE_LIST}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "concatenate_files"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "OUTPUT_FILE",
-      "note": "Template variable",
-      "original_paths": [
-        "{{OUTPUT_FILE}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "concatenate_files"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "MUGSY_MAP_FILE",
-      "note": "Template variable",
-      "original_paths": [
-        "{{MUGSY_MAP_FILE}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mugsycog"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "MUGSY_INDEX",
-      "note": "Template variable",
-      "original_paths": [
-        "{{MUGSY_INDEX}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mugsycog_distributed_work"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "GENOMIC_MULTIFASTA",
-      "note": "Template variable",
-      "original_paths": [
-        "{{GENOMIC_MULTIFASTA}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mugsycog_distributed_work"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "GENOMIC_FASTA_COPY",
-      "note": "Template variable",
-      "original_paths": [
-        "{{GENOMIC_FASTA_COPY}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mugsycog_distributed_work"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "COMPONENT_NAME",
-      "note": "Template variable",
-      "original_paths": [
-        "{{COMPONENT_NAME}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "phat"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "DNADIST_SORT",
-      "note": "Template variable",
-      "original_paths": [
-        "{{DNADIST_SORT}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "phylip_dnadist"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "PSORTB_EXE",
-      "note": "Template variable",
-      "original_paths": [
-        "{{PSORTB_EXE}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "psortb"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "INPUT_COMMAND",
-      "note": "Template variable",
-      "original_paths": [
-        "{{INPUT_COMMAND}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "run_command"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "PIPELINE_NAME",
-      "note": "Template variable",
-      "original_paths": [
-        "{{PIPELINE_NAME}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "tag_data"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "PIPELINEID",
-      "note": "Template variable",
-      "original_paths": [
-        "{{PIPELINEID}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "tag_data"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "I_FILE_BASE",
-      "note": "Template variable",
-      "original_paths": [
-        "{{I_FILE_BASE}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "usearch"
-      ]
-    },
-    {
-      "type": "parameter",
-      "resource": "NEWICK_UTILITIES",
-      "note": "Template variable",
-      "original_paths": [
-        "{{NEWICK_UTILITIES}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "wga_maf2tree"
-      ]
-    },
-    {
       "type": "project_data",
       "resource": "/usr/local/projects/16SrRNA_454Multiplex/barcodes/barcodes-v1.txt",
       "note": "TIGR project-specific path",
@@ -6508,9 +5749,362 @@
       ]
     },
     {
-      "type": "tool_bin_dir",
-      "resource": "SAMTOOLS_BIN",
-      "note": "Tool binary directory",
+      "type": "template_var",
+      "resource": "{{BIN_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "$;BIN_DIR$;",
+        "{{BIN_DIR}}"
+      ],
+      "num_components": 340,
+      "components": [
+        "454_mplex_seq_bin_trim",
+        "RAPSearch2",
+        "RNAmmer",
+        "SPAdes",
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked",
+        "adjust_bsml_coordinates",
+        "align_bowtie_stats",
+        "align_tophat_split_stats",
+        "align_tophat_stats",
+        "amoscmp",
+        "antigenic",
+        "aragorn",
+        "assert_disjoint_clusters",
+        "assign_dbxref_ids",
+        "assign_taxa",
+        "augustus",
+        "auto_annotate",
+        "auto_gene_curation",
+        "backupdb",
+        "bam2bigwig",
+        "bam2coverage",
+        "bam2sam",
+        "bam_merge",
+        "bcpconverter",
+        "bepipred",
+        "ber",
+        "blast2lca",
+        "blast_lgt_finder",
+        "blast_seq_screen",
+        "blast_snp_regions",
+        "blastn_plus",
+        "blastp_plus",
+        "bmtagger",
+        "bowtie",
+        "bowtie_build",
+        "bsml2chado",
+        "bsml2fasta",
+        "bsml2featurerelationships",
+        "bsml2gff3",
+        "bsml2interevidence_fasta",
+        "bsml2mugsymap",
+        "bsml2ptt",
+        "bsml2tbl",
+        "bsml_qc",
+        "btab2taxon",
+        "bulk_delete_chado",
+        "bwa",
+        "celera-assembler",
+        "celera-assembler-distributed",
+        "chado2bsml",
+        "chado2flatfile",
+        "chado_report_pages",
+        "clean_fasta",
+        "cleanse_sgc_database",
+        "clovr_16S_rdptables",
+        "clovr_metagenomics_prep",
+        "clovr_metagenomics_tables",
+        "clustalw",
+        "cluster_mapping",
+        "combine_ncRNA_alignments",
+        "complete_study_stage",
+        "condor_cogs_search",
+        "core_qiime",
+        "create_amoscmp_input",
+        "create_cuffsuite_files",
+        "create_db_list_file",
+        "create_map_file",
+        "create_paired_list_file",
+        "create_pseudomolecules",
+        "crossbow",
+        "cuffcompare",
+        "cuffdiff",
+        "cuffdiff_filter",
+        "cufflinks",
+        "cummerbund",
+        "curate_common_names",
+        "cvtermpath_closure",
+        "db2bsml",
+        "db2fasta",
+        "delete_bcp",
+        "delete_by_bcp",
+        "deseq",
+        "download_sra",
+        "download_tcga",
+        "drop_chado_indexes",
+        "dump_fasta",
+        "dump_table",
+        "edgeR",
+        "error_detector",
+        "expression_plots",
+        "extract_assembly_stats",
+        "extract_snp_regions",
+        "fasta2bsml",
+        "fastaToBsmlWorkingGeneModels",
+        "fastortho",
+        "fastq_to_CA",
+        "fastqc_stats",
+        "fastx_quality_stats",
+        "fastx_trimming",
+        "fetch_genbank",
+        "fgenesh",
+        "filter_bogus_genes",
+        "filter_deseq",
+        "filter_dups_lc_seqs",
+        "filter_fastq",
+        "filter_lgt_class_c_genes",
+        "filter_merged_table",
+        "filter_sequences_by_id",
+        "find_homopolymers",
+        "fix_gene_symbols",
+        "formatdb",
+        "formatdb_snp",
+        "fuzznuc",
+        "genbank2bsml",
+        "genbank2fasta",
+        "genbank2gff3",
+        "genbank2gtf",
+        "geneid",
+        "genemark",
+        "genemark-es",
+        "genewise",
+        "genezilla",
+        "genscan",
+        "genscan-plus",
+        "gff3_to_annotab",
+        "gff3_to_fasta",
+        "gff3_to_gbrowse",
+        "gkpstore2fastq",
+        "glimmer3",
+        "glimmer3_cloud",
+        "glimmerHMM",
+        "glk2bsml",
+        "hmmls",
+        "hmmpfam",
+        "hmmpfam3",
+        "htseq",
+        "htseq_count_reads",
+        "identify_human_contaminants",
+        "infernal",
+        "initdb",
+        "insert_pmarks_in_scaffolds",
+        "intergenic_analysis",
+        "iprscan",
+        "islandpath",
+        "j_ortholog_clusters",
+        "j_ortholog_clusters_distributed_work",
+        "jaccard",
+        "ksnp",
+        "legacy2bsml",
+        "lgt_build_bwa_index",
+        "lgt_bwa",
+        "lgt_bwa_fq",
+        "lgt_bwa_post_process",
+        "lgt_create_validated_bam",
+        "lgt_mpileup",
+        "lipop",
+        "lipoprotein_motif",
+        "load_ber_for_manatee",
+        "make_circleator_figure",
+        "make_comparative_circleator_figure",
+        "make_snp_lists",
+        "map_snp_query_pos",
+        "mask_by_analysis",
+        "metagene",
+        "mothur_align_seqs",
+        "mothur_chimera_slayer",
+        "mothur_classify_seqs",
+        "mothur_cluster",
+        "mothur_collect_single",
+        "mothur_dist_seqs",
+        "mothur_filter_seqs",
+        "mothur_get_oturep",
+        "mothur_rarefaction_single",
+        "mothur_read_otu",
+        "mothur_screen_seqs",
+        "mothur_summary",
+        "mothur_tree_shared",
+        "mothur_trim_seqs",
+        "mothur_unique_seq_limit",
+        "mothur_unique_seqs",
+        "move_to_scratch",
+        "mpileup",
+        "mugsy_callsnps",
+        "mugsy_callsnps_distributed",
+        "mugsy_concat_fasta",
+        "mugsyalign",
+        "mugsycog",
+        "mugsycog_distributed_work",
+        "mugsyprep",
+        "mumi-reduce",
+        "mummer",
+        "mumsgraph",
+        "muscle",
+        "ncbi-blastall",
+        "ncbi-blastn",
+        "ncbi-blastn_compress",
+        "ncbi-blastp",
+        "ncbi-blastx",
+        "ncbi-tblastn",
+        "ncbi-tblastx",
+        "ngap",
+        "nucmer-snp2merged",
+        "obo2chado",
+        "open_reading_frames",
+        "order_paired_list",
+        "outer_membrane_domain",
+        "overlap_analysis",
+        "overlap_analysis_distributed",
+        "p_func",
+        "pangenome_blast_parse",
+        "pangenome_do_analysis",
+        "pangenome_do_analysis_distributed_work",
+        "pangenome_fix_headers",
+        "pangenome_make_graphs",
+        "pangenome_make_pangenome",
+        "pangenome_make_pangenome_distributed_work",
+        "pangenome_make_profile",
+        "pangenome_make_profile_distributed_work",
+        "pangenome_make_table",
+        "pangenome_make_table_distributed_work",
+        "pangenome_merge_results",
+        "pangenome_merge_results_distributed_work",
+        "panther",
+        "parse_evidence",
+        "parse_for_ncRNAs",
+        "parse_mpileup_for_positions",
+        "pathway_tools_input",
+        "pepstats",
+        "percent_gc",
+        "percent_mapped_stats",
+        "phage_finder",
+        "phat",
+        "phobos",
+        "phylip_dnadist",
+        "pick_otus_through_otu_table",
+        "pileup_to_wig",
+        "pipeline_summary",
+        "pipeline_summary_cloud",
+        "pmarks2bsml",
+        "predict_operons",
+        "predict_prokaryotic_gene_function",
+        "predotar",
+        "prepare_paired_ends_for_velvet",
+        "preserve_reads_in_fastq",
+        "priam_ec_assignment",
+        "prodigal",
+        "profile_bsml",
+        "profile_gff3",
+        "prok_pipeline_check",
+        "prokpipe_consistency_checks",
+        "promote_gene_prediction",
+        "ps_scan",
+        "pseudomolecule2glimmer3",
+        "psiblast",
+        "qiime_fasta_mothur_cnvr",
+        "qiime_fastq_mothur_cnvr",
+        "quicktree",
+        "refresh_chado_mart",
+        "remove_db_gene_syms_with_hypos",
+        "remove_indices_and_constraints",
+        "remove_subset_of_gis",
+        "repeatmasker",
+        "replace_defline_with_locusID",
+        "resistome",
+        "restore_indices_and_constraints",
+        "restoredb",
+        "rotate_molecule",
+        "rpkm_coverage_stats",
+        "rpsblast",
+        "rrna_hmm_fs",
+        "run_command",
+        "runsql",
+        "sam2bam",
+        "sam2fasta",
+        "sam2lca",
+        "sam2lca_distributed",
+        "samtools_alignment_stats",
+        "samtools_file_convert",
+        "samtools_merge",
+        "samtools_reference_index",
+        "scp_files",
+        "scripture",
+        "seg",
+        "selfsim",
+        "sff_to_CA",
+        "sfffile",
+        "sffinfo",
+        "sighunt",
+        "signalp",
+        "snap",
+        "snp-add-gene-info",
+        "snp_verify",
+        "soapdenovo",
+        "sort_sam_by_name",
+        "split_fasta",
+        "split_fasta_fastq",
+        "split_fastq",
+        "split_file",
+        "split_multifasta",
+        "split_paired_files",
+        "sra2fastq",
+        "start_site_curation",
+        "start_site_curation_distributed",
+        "summarize_mugsy_comparative_pipeline",
+        "summarize_mugsy_comparative_pipeline_distributed",
+        "tRNAscan-SE",
+        "tRNAscan-SE_compress",
+        "tabula_rasa",
+        "tag_data",
+        "targetp",
+        "tbl2asn",
+        "tblastn_plus",
+        "tmhmm",
+        "tophat",
+        "train_for_glimmer3_iteration",
+        "translate_sequence",
+        "trf",
+        "truncate_chado_mart",
+        "uclust",
+        "uclust_remove_replicates",
+        "update_ec_numbers",
+        "update_euk_model_sequences",
+        "validate_bsml",
+        "validate_chado_records",
+        "validate_euk_records",
+        "validate_fasta",
+        "validate_genbank",
+        "validate_gff3",
+        "validate_sgc_records",
+        "velvet",
+        "velvet_optimiser",
+        "wait",
+        "wrapper_align",
+        "wu-blastn",
+        "wu-blastp",
+        "wu-blastx",
+        "wu-tblastn"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SAMTOOLS_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
       "original_paths": [
         "$;SAMTOOLS_BIN$;"
       ],
@@ -6524,175 +6118,13 @@
         "samtools_file_convert",
         "samtools_reference_index",
         "tophat"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "R_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;R_BIN$;"
       ],
-      "num_components": 4,
-      "components": [
-        "cummerbund",
-        "deseq",
-        "edgeR",
-        "expression_plots"
-      ]
+      "subtype": "bin_dir"
     },
     {
-      "type": "tool_bin_dir",
-      "resource": "BEDTOOLS_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;BEDTOOLS_BIN$;"
-      ],
-      "num_components": 3,
-      "components": [
-        "bam2bigwig",
-        "percent_mapped_stats",
-        "rpkm_coverage_stats"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "BOWTIE_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;BOWTIE_BIN$;"
-      ],
-      "num_components": 2,
-      "components": [
-        "bowtie",
-        "tophat"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "FASTX_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;FASTX_BIN$;"
-      ],
-      "num_components": 2,
-      "components": [
-        "fastx_quality_stats",
-        "fastx_trimming"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "BOWTIE_BUILD_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;BOWTIE_BUILD_BIN$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "bowtie_build"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "CUFFCOMPARE_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;CUFFCOMPARE_BIN$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "cuffcompare"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "CUFFDIFF_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;CUFFDIFF_BIN$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "cuffdiff"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "CUFFLINKS_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;CUFFLINKS_BIN$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "cufflinks"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "FASTQC_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;FASTQC_BIN$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "fastqc_stats"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "PYTHON_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;PYTHON_BIN$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "htseq"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "TOPHAT_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "$;TOPHAT_BIN$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "tophat"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "FASTORTHO_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "{{FASTORTHO_BIN}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "fastortho_distributed"
-      ]
-    },
-    {
-      "type": "tool_bin_dir",
-      "resource": "EMBOSS_BIN",
-      "note": "Tool binary directory",
-      "original_paths": [
-        "{{EMBOSS_BIN}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "getorf"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BLASTALL_EXEC",
-      "note": "External tool binary — must be installed",
+      "type": "template_var",
+      "resource": "{{BLASTALL_EXEC}}",
+      "note": "Runtime config variable (executable)",
       "original_paths": [
         "{{BLASTALL_EXEC}}"
       ],
@@ -6705,1107 +6137,48 @@
         "ncbi-blastx",
         "ncbi-tblastn",
         "ncbi-tblastx"
-      ]
+      ],
+      "subtype": "executable"
     },
     {
-      "type": "tool_executable",
-      "resource": "EXT_EXEC",
-      "note": "External tool binary — must be installed",
+      "type": "template_var",
+      "resource": "{{TMP_DIR}}",
+      "note": "Runtime config variable (directory)",
       "original_paths": [
-        "{{EXT_EXEC}}"
+        "$;TMP_DIR$;",
+        "{{TMP_DIR}}"
       ],
-      "num_components": 4,
+      "num_components": 6,
       "components": [
-        "aat_aa",
-        "aat_aa_masked",
-        "aat_na",
-        "aat_na_masked"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "EXT_COLLAPSE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{EXT_COLLAPSE_EXEC}}"
-      ],
-      "num_components": 4,
-      "components": [
-        "aat_aa",
-        "aat_aa_masked",
-        "aat_na",
-        "aat_na_masked"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "FILTER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{FILTER_EXEC}}"
-      ],
-      "num_components": 4,
-      "components": [
-        "aat_aa",
-        "aat_aa_masked",
-        "aat_na",
-        "aat_na_masked"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "DPS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{DPS_EXEC}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "aat_aa",
-        "aat_aa_masked"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "NAP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{NAP_EXEC}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "aat_aa",
-        "aat_aa_masked"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "DDS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{DDS_EXEC}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "aat_na",
-        "aat_na_masked"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SAMTOOLS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{SAMTOOLS_EXEC}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "basic_alignment_stats",
-        "samtools_merge_distributed_work"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "HMMLS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{HMMLS_EXEC}}"
-      ],
-      "num_components": 2,
-      "components": [
-        "hmmer",
-        "hmmls"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "TRNASCANSE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{TRNASCANSE_EXEC}}"
-      ],
-      "num_components": 2,
-      "components": [
+        "btab2taxon",
+        "run_command",
         "tRNAscan-SE",
-        "tRNAscan-SE_compress"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SOAPDENOVO_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "$;SOAPDENOVO_EXEC$;"
-      ],
-      "num_components": 1,
-      "components": [
-        "soapdenovo"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "RAPSEARCH_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{RAPSEARCH_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "RAPSearch2"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "RNAMMER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{RNAMMER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "RNAmmer"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "ALIEN_HUNTER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{ALIEN_HUNTER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "alien_hunter"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "ARAGORN_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{ARAGORN_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "aragorn"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PRAZE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PRAZE_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "ber"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BMTOOL_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BMTOOL_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "bmtagger_index"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SRPRISM_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{SRPRISM_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "bmtagger_index"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MAKEBLASTDB_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MAKEBLASTDB_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "bmtagger_index"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BWA_ALIGN_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BWA_ALIGN_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "bwa_align"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BWA_INDEX_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BWA_INDEX_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "bwa_index"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BWA_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BWA_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "bwa_mem"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "TOAMOS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{TOAMOS_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "celera2hawkeye"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BANK_TRANSACT_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BANK_TRANSACT_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "celera2hawkeye"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "CLUSTALW_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{CLUSTALW_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "clustalw"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "HADOOP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{HADOOP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "crossbow"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "CROSSBOW_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{CROSSBOW_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "crossbow"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "ELPH_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{ELPH_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "elph"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "EXONERATE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{EXONERATE_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "exonerate"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "FASTTREE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{FASTTREE_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "fast_tree"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "FGENESH_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{FGENESH_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "fgenesh"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "FUZZNUC_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{FUZZNUC_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "fuzznuc"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GENEID_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GENEID_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "geneid"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GENEZILLA_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GENEZILLA_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "genezilla"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GENSCAN_PLUS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GENSCAN_PLUS_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "genscan-plus"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GENSCAN_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GENSCAN_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "genscan"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BAM_COVERAGE_DX_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BAM_COVERAGE_DX_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "get_bam_coverage_dx"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PYTHON_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PYTHON_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "gff3_to_gbrowse"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GLIMMERHMM_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GLIMMERHMM_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "glimmerHMM"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GMAP_SETUP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GMAP_SETUP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "gsnap"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GSNAP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GSNAP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "gsnap"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "HMMPFAM_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{HMMPFAM_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "hmmpfam"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "HMMSCAN_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{HMMSCAN_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "hmmpfam3"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "IPRSCAN_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{IPRSCAN_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "iprscan"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "KSNP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{KSNP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "ksnp"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "LIPOP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{LIPOP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "lipop"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MEGABLAST_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MEGABLAST_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "megablast"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "METAGENE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{METAGENE_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "metagene"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "METAGENEMARK_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{METAGENEMARK_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "metagenemark"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MOSAIK_BUILD_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MOSAIK_BUILD_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mosaik"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MOSAIK_ALIGNER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MOSAIK_ALIGNER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mosaik"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MOSAIK_SORT_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MOSAIK_SORT_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mosaik"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MOSAIK_ASSEMBLER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MOSAIK_ASSEMBLER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mosaik"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MOSAIK_TEXT_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MOSAIK_TEXT_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mosaik"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MUGSY_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MUGSY_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mugsyalign_distributed_work"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MUMI_SCORE_AGGREGATOR_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MUMI_SCORE_AGGREGATOR_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mumi-reduce"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MUMI_CLUSTERING_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MUMI_CLUSTERING_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mumi-reduce"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "GENERATE_REDUCED_DB_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{GENERATE_REDUCED_DB_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "mumi-reduce"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "MUSCLE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{MUSCLE_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "muscle"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "DELTA_FILTER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{DELTA_FILTER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "nucmer-delta-filter"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SHOW_SNPS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{SHOW_SNPS_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "nucmer-show-snps"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "NUCMER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{NUCMER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "nucmer"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "COORDS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{COORDS_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "nucmer"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PANTHER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PANTHER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "panther"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "FULLPHAT_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{FULLPHAT_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "phat"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PHOBOS_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PHOBOS_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "phobos"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PREDOTAR_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PREDOTAR_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "predotar"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PRODIGAL_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PRODIGAL_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "prodigal"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PS_SCAN_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PS_SCAN_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "ps_scan"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "PSIBLAST_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{PSIBLAST_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "psiblast"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "QUICKTREE_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{QUICKTREE_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "quicktree"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "JAVA_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{JAVA_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "rdp_classifier"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "REPEATMASKER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{REPEATMASKER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "repeatmasker"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "RPSBLAST_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{RPSBLAST_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "rpsblast"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SEG_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{SEG_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "seg"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SIGNALP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{SIGNALP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "signalp"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SNAP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{SNAP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "snap"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "SOLSNP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{SOLSNP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "solsnp"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "STAP_ALIGNER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{STAP_ALIGNER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "stap_aligner"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "STAP_CLASSIFIER_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{STAP_CLASSIFIER_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "stap_classifier"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "TARGETP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{TARGETP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "targetp"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "TMHMM_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{TMHMM_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "tmhmm"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "UCHIME_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{UCHIME_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "uchime"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "UCLUST_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{UCLUST_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "uclust"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "USEARCH_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{USEARCH_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
+        "tag_data",
+        "uclust",
         "usearch"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "VELVETH_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{VELVETH_EXEC}}"
       ],
-      "num_components": 1,
-      "components": [
-        "velvet"
-      ]
+      "subtype": "directory"
     },
     {
-      "type": "tool_executable",
-      "resource": "VELVETG_EXEC",
-      "note": "External tool binary — must be installed",
+      "type": "template_var",
+      "resource": "{{R_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
       "original_paths": [
-        "{{VELVETG_EXEC}}"
+        "$;R_BIN$;"
       ],
-      "num_components": 1,
+      "num_components": 4,
       "components": [
-        "velvet"
-      ]
+        "cummerbund",
+        "deseq",
+        "edgeR",
+        "expression_plots"
+      ],
+      "subtype": "bin_dir"
     },
     {
-      "type": "tool_executable",
-      "resource": "BLASTP_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BLASTP_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "wu-blastp"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "BLASTX_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{BLASTX_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "wu-blastx"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "TBLASTN_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{TBLASTN_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "wu-tblastn"
-      ]
-    },
-    {
-      "type": "tool_executable",
-      "resource": "XDFORMAT_EXEC",
-      "note": "External tool binary — must be installed",
-      "original_paths": [
-        "{{XDFORMAT_EXEC}}"
-      ],
-      "num_components": 1,
-      "components": [
-        "xdformat"
-      ]
-    },
-    {
-      "type": "tool_or_data_path",
-      "resource": "R_SCRIPT_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{R_SCRIPT_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "$;R_SCRIPT_PATH$;"
       ],
@@ -7815,12 +6188,61 @@
         "deseq",
         "edgeR",
         "expression_plots"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "DATABASE_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{EXT_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{EXT_EXEC}}"
+      ],
+      "num_components": 4,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{EXT_COLLAPSE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{EXT_COLLAPSE_EXEC}}"
+      ],
+      "num_components": 4,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FILTER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{FILTER_EXEC}}"
+      ],
+      "num_components": 4,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked",
+        "aat_na",
+        "aat_na_masked"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{DATABASE_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "$;DATABASE_PATH$;"
       ],
@@ -7829,12 +6251,99 @@
         "aat_aa",
         "aat_na",
         "aat_na_masked"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "ITER_FILE_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{BEDTOOLS_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;BEDTOOLS_BIN$;"
+      ],
+      "num_components": 3,
+      "components": [
+        "bam2bigwig",
+        "percent_mapped_stats",
+        "rpkm_coverage_stats"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{OUTPUT_DIRECTORY}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{OUTPUT_DIRECTORY}}"
+      ],
+      "num_components": 3,
+      "components": [
+        "mugsyprep",
+        "usearch",
+        "wga_maf2tree"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BOWTIE_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;BOWTIE_BIN$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "bowtie",
+        "tophat"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{DOCS_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "$;DOCS_DIR$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "db2bsml",
+        "legacy2bsml"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FASTX_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;FASTX_BIN$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "fastx_quality_stats",
+        "fastx_trimming"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{VELVET_INSTALL_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "$;VELVET_INSTALL_DIR$;"
+      ],
+      "num_components": 2,
+      "components": [
+        "prepare_paired_ends_for_velvet",
+        "velvet_optimiser"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{ITER_FILE_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "$;ITER_FILE_PATH$;"
       ],
@@ -7842,151 +6351,1785 @@
       "components": [
         "run_command",
         "tabula_rasa"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "AUGUSTUS_CONFIG_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{DPS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{DPS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{NAP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{NAP_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_aa",
+        "aat_aa_masked"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{DDS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{DDS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "aat_na",
+        "aat_na_masked"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SAMTOOLS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{SAMTOOLS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "basic_alignment_stats",
+        "samtools_merge_distributed_work"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{HMMLS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{HMMLS_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "hmmer",
+        "hmmls"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MUGSY_MAPPING_INSTALL_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "{{MUGSY_MAPPING_INSTALL_DIR}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "mugsy_callsnps",
+        "mugsycog_distributed_work"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TRNASCANSE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{TRNASCANSE_EXEC}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "tRNAscan-SE",
+        "tRNAscan-SE_compress"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{ITERATOR_NAME}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{ITERATOR_NAME}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "uclust",
+        "usearch"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GROUP_NUMBER}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{GROUP_NUMBER}}"
+      ],
+      "num_components": 2,
+      "components": [
+        "uclust",
+        "usearch"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{AUGUSTUS_CONFIG_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "$;AUGUSTUS_CONFIG_PATH$;"
       ],
       "num_components": 1,
       "components": [
         "augustus"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "CM_FILE_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{AUGUSTUS_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "$;AUGUSTUS_DIR$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "augustus"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BOWTIE_BUILD_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;BOWTIE_BUILD_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "bowtie_build"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{CUFFCOMPARE_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;CUFFCOMPARE_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "cuffcompare"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{CUFFDIFF_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;CUFFDIFF_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "cuffdiff"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{CUFFLINKS_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;CUFFLINKS_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "cufflinks"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FASTQC_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;FASTQC_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastqc_stats"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PYTHON_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;PYTHON_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "htseq"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PYTHON_LIB}}",
+      "note": "Runtime config variable (library)",
+      "original_paths": [
+        "$;PYTHON_LIB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "htseq"
+      ],
+      "subtype": "library"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{CM_FILE_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "$;CM_FILE_PATH$;"
       ],
       "num_components": 1,
       "components": [
         "infernal"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "PROSITE_DAT_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{RFAM_STOCKHOLM_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "$;RFAM_STOCKHOLM_DIR$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "infernal"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TIGR_ROLES_DB_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "$;TIGR_ROLES_DB_DIR$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "p_func"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PROSITE_DAT_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "$;PROSITE_DAT_PATH$;"
       ],
       "num_components": 1,
       "components": [
         "ps_scan"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "AUGUSTUS_BINARY_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{SIMPLE_REPEAT_LIB}}",
+      "note": "Runtime config variable (library)",
+      "original_paths": [
+        "$;SIMPLE_REPEAT_LIB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "repeatmasker"
+      ],
+      "subtype": "library"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SOAPDENOVO_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "$;SOAPDENOVO_EXEC$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "soapdenovo"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{CHAR_DB}}",
+      "note": "Runtime config variable (database)",
+      "original_paths": [
+        "$;CHAR_DB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "start_site_curation"
+      ],
+      "subtype": "database"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{HMM_LIB_DB}}",
+      "note": "Runtime config variable (database)",
+      "original_paths": [
+        "$;HMM_LIB_DB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "start_site_curation"
+      ],
+      "subtype": "database"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TMHMM_LIB}}",
+      "note": "Runtime config variable (library)",
+      "original_paths": [
+        "$;TMHMM_LIB$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "tmhmm"
+      ],
+      "subtype": "library"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TOPHAT_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "$;TOPHAT_BIN$;"
+      ],
+      "num_components": 1,
+      "components": [
+        "tophat"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{RAPSEARCH_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{RAPSEARCH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "RAPSearch2"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{RNAMMER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{RNAMMER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "RNAmmer"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{ALIEN_HUNTER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{ALIEN_HUNTER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "alien_hunter"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{ARAGORN_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{ARAGORN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "aragorn"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{AUGUSTUS_BINARY_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{AUGUSTUS_BINARY_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "augustus"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "HIST_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{PRAZE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PRAZE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ber"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BMTOOL_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BMTOOL_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bmtagger_index"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SRPRISM_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{SRPRISM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bmtagger_index"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MAKEBLASTDB_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MAKEBLASTDB_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bmtagger_index"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BWA_ALIGN_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BWA_ALIGN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bwa_align"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BWA_INDEX_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BWA_INDEX_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bwa_index"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BWA_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BWA_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "bwa_mem"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TOAMOS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{TOAMOS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "celera2hawkeye"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BANK_TRANSACT_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BANK_TRANSACT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "celera2hawkeye"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{CLUSTALW_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{CLUSTALW_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "clustalw"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{INPUT_FILE_LIST}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{INPUT_FILE_LIST}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "concatenate_files"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{OUTPUT_FILE}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{OUTPUT_FILE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "concatenate_files"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{HADOOP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{HADOOP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "crossbow"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{CROSSBOW_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{CROSSBOW_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "crossbow"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{ELPH_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{ELPH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "elph"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{EXONERATE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{EXONERATE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "exonerate"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FASTTREE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{FASTTREE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fast_tree"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FASTORTHO_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "{{FASTORTHO_BIN}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fastortho_distributed"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FGENESH_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{FGENESH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fgenesh"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FUZZNUC_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{FUZZNUC_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "fuzznuc"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GENEID_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GENEID_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "geneid"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GENEZILLA_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GENEZILLA_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "genezilla"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GENSCAN_PLUS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GENSCAN_PLUS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "genscan-plus"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GENSCAN_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GENSCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "genscan"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BAM_COVERAGE_DX_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BAM_COVERAGE_DX_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "get_bam_coverage_dx"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{EMBOSS_BIN}}",
+      "note": "Runtime config variable (bin_dir)",
+      "original_paths": [
+        "{{EMBOSS_BIN}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "getorf"
+      ],
+      "subtype": "bin_dir"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PYTHON_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PYTHON_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "gff3_to_gbrowse"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GLIMMERHMM_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GLIMMERHMM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "glimmerHMM"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GMAP_SETUP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GMAP_SETUP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "gsnap"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GSNAP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GSNAP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "gsnap"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{HIST_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{HIST_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "histogram_stacked"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "DIMOB_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{HMMPFAM_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{HMMPFAM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{HMMSCAN_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{HMMSCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "hmmpfam3"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{IPRSCAN_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{IPRSCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "iprscan"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{DIMOB_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{DIMOB_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "islandpath"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "METASTATS_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{KSNP_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "{{KSNP_DIR}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{KSNP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{KSNP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ksnp"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{LIPOP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{LIPOP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "lipop"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MEGABLAST_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MEGABLAST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "megablast"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{METAGENE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{METAGENE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "metagene"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{METAGENEMARK_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{METAGENEMARK_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "metagenemark"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{METASTATS_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{METASTATS_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "metastats"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "I_FILE_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{MOSAIK_BUILD_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MOSAIK_BUILD_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MOSAIK_ALIGNER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MOSAIK_ALIGNER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MOSAIK_SORT_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MOSAIK_SORT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MOSAIK_ASSEMBLER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MOSAIK_ASSEMBLER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MOSAIK_TEXT_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MOSAIK_TEXT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mosaik"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MUGSY_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MUGSY_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsyalign_distributed_work"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MUGSY_MAP_FILE}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{MUGSY_MAP_FILE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MUGSY_INDEX}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{MUGSY_INDEX}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GENOMIC_MULTIFASTA}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{GENOMIC_MULTIFASTA}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GENOMIC_FASTA_COPY}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{GENOMIC_FASTA_COPY}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mugsycog_distributed_work"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MUMI_SCORE_AGGREGATOR_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MUMI_SCORE_AGGREGATOR_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumi-reduce"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MUMI_CLUSTERING_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MUMI_CLUSTERING_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumi-reduce"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{GENERATE_REDUCED_DB_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{GENERATE_REDUCED_DB_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "mumi-reduce"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{MUSCLE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{MUSCLE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "muscle"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{I_FILE_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{I_FILE_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "ncbi-blastn_compress"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "QIIME_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{DELTA_FILTER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{DELTA_FILTER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer-delta-filter"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SHOW_SNPS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{SHOW_SNPS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer-show-snps"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{NUCMER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{NUCMER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{COORDS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{COORDS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "nucmer"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PANTHER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PANTHER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "panther"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{FULLPHAT_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{FULLPHAT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phat"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{COMPONENT_NAME}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{COMPONENT_NAME}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phat"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PHOBOS_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PHOBOS_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phobos"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{DNADIST_SORT}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{DNADIST_SORT}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "phylip_dnadist"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{QIIME_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{QIIME_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "pick_otus_through_otu_table"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "PIECHART_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{PIECHART_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{PIECHART_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "piecharts"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "SKIFF_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{PREDOTAR_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PREDOTAR_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "predotar"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PRODIGAL_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PRODIGAL_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "prodigal"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PS_SCAN_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PS_SCAN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "ps_scan"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PSIBLAST_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{PSIBLAST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "psiblast"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PSORTB_EXE}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{PSORTB_EXE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "psortb"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{QUICKTREE_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{QUICKTREE_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "quicktree"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{JAVA_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{JAVA_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "rdp_classifier"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{REPEATMASKER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{REPEATMASKER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "repeatmasker"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{RPSBLAST_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{RPSBLAST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "rpsblast"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{INPUT_COMMAND}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{INPUT_COMMAND}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "run_command"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SEG_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{SEG_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "seg"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SIGNALP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{SIGNALP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "signalp"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SKIFF_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{SKIFF_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "skiff"
-      ]
+      ],
+      "subtype": "path"
     },
     {
-      "type": "tool_or_data_path",
-      "resource": "RASTERIZER_PATH",
-      "note": "Tool or data path — check component docs",
+      "type": "template_var",
+      "resource": "{{SNAP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{SNAP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "snap"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{SOLSNP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{SOLSNP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "solsnp"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{STAP_ALIGNER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{STAP_ALIGNER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "stap_aligner"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{STAP_CLASSIFIER_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{STAP_CLASSIFIER_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "stap_classifier"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TRNASCAN_LIB}}",
+      "note": "Runtime config variable (library)",
+      "original_paths": [
+        "{{TRNASCAN_LIB}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tRNAscan-SE"
+      ],
+      "subtype": "library"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PIPELINE_NAME}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{PIPELINE_NAME}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tag_data"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PIPELINEID}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{PIPELINEID}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tag_data"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TARGETP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{TARGETP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "targetp"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TMHMM_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{TMHMM_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "tmhmm"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{UCHIME_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{UCHIME_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "uchime"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{UCLUST_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{UCLUST_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "uclust"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{USEARCH_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{USEARCH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "usearch"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{I_FILE_BASE}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{I_FILE_BASE}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "usearch"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{VELVETH_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{VELVETH_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{VELVETG_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{VELVETG_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "velvet"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{PHYLOMARK_DIR}}",
+      "note": "Runtime config variable (directory)",
+      "original_paths": [
+        "{{PHYLOMARK_DIR}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ],
+      "subtype": "directory"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{NEWICK_UTILITIES}}",
+      "note": "Runtime config variable (other)",
+      "original_paths": [
+        "{{NEWICK_UTILITIES}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wga_maf2tree"
+      ],
+      "subtype": "other"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{RASTERIZER_PATH}}",
+      "note": "Runtime config variable (path)",
       "original_paths": [
         "{{RASTERIZER_PATH}}"
       ],
       "num_components": 1,
       "components": [
         "wga_maf2tree"
-      ]
+      ],
+      "subtype": "path"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BLASTP_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BLASTP_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wu-blastp"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{BLASTX_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{BLASTX_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wu-blastx"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{TBLASTN_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{TBLASTN_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "wu-tblastn"
+      ],
+      "subtype": "executable"
+    },
+    {
+      "type": "template_var",
+      "resource": "{{XDFORMAT_EXEC}}",
+      "note": "Runtime config variable (executable)",
+      "original_paths": [
+        "{{XDFORMAT_EXEC}}"
+      ],
+      "num_components": 1,
+      "components": [
+        "xdformat"
+      ],
+      "subtype": "executable"
     },
     {
       "type": "url_fragment",
