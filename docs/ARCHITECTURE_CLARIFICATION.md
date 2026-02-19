@@ -151,7 +151,7 @@ To run a component you need:
 - Workflows compose components
 - Components compose tools
 - Reusable at every level
-- Proper subworkflow composition (lacking in modern tools)
+- Proper subworkflow composition
 
 ## What I Got Wrong
 

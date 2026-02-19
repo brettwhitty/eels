@@ -240,11 +240,6 @@ This maps naturally to:
 - Mathematical foundation
 - Familiar to Perl developers (Data::Dumper-like)
 
-**vs CWL/WDL:**
-- Simpler syntax
-- Direct execution semantics
-- No type system overhead
-
 ## Implementation Notes
 
 The parser uses recursive descent to handle nested structures:

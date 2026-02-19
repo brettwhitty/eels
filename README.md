@@ -47,61 +47,55 @@ This is production-tested, FDA-approved software representing institutional know
 - Ergatis Lite specification → `docs/ERGATIS_LITE_SPEC.md`
 - Contributor attribution → `CONTRIBUTORS.md`
 
-### Archive Complete
+### In Progress
 
-**All objectives achieved:**
-- 1,623 files preserved
-- 68,421 lines of data and documentation
-- Complete extraction, translation, and documentation
-
-See `ARCHIVE.md` for complete archive documentation.
-See `STATUS.md` for detailed completion tracking.
-
-**Phase 4: BSML Schema** - Document XML structure and semantics
-**Phase 5: Translation Strategy** - Map primitives to modern formats
-**Phase 6: Proof-of-Concept** - Working translations (CWL/Nextflow/WDL)
-**Phase 7: Final Documentation** - Complete knowledge preservation
-
-See `NEXT_STEPS.md` for detailed plan.
+Work is ongoing. See `docs/ARCHITECTURE_CLARIFICATION.md` for current understanding.
 
 ## Repository Structure
 
 ```
 eels/
-├── data/                    # Structured metadata (JSON)
-│   ├── components/          # 362 component definitions
-│   ├── manpages/            # 65 converter manpages
-│   ├── component_summary.json
-│   ├── iterator_catalog.json
-│   ├── workflow_catalog.json
-│   ├── utility_catalog.json # 472 utility scripts
-│   └── converter_catalog.json
-├── docs/                    # Generated documentation
-│   ├── converters/          # Deep converter analysis
+├── data/                        # Source data (Ergatis extractions)
+│   ├── components/              # 362 component configs (Brett, 2017)
+│   ├── component_templates/     # Component workflow templates (parsed XML)
+│   ├── converters/              # 65 converter definitions (from manpages)
+│   ├── converter_catalog.json   # All converters (91)
+│   ├── utility_catalog.json     # Utility scripts (472)
+│   ├── iterator_catalog.json    # Iterator patterns
+│   ├── workflow_catalog.json    # Workflow catalog
+│   └── contributors.json       # Attribution (28)
+│
+├── generated/                   # Generated/derivative data
+│   ├── bco/                     # Component BCO files (362)
+│   ├── cwl/                     # CWL tool definitions (399)
+│   └── ergatis_lite/            # Ergatis Lite notation (362)
+│
+├── ergatis_lite/                # Ergatis Lite source code (Brett, 2007)
+│
+├── docs/                        # Documentation
+│   ├── ARCHITECTURE_CLARIFICATION.md
+│   ├── ERGATIS_ARCHITECTURE.md
 │   ├── COMPONENT_ANATOMY.md
+│   ├── BSML_SCHEMA.md
+│   ├── ERGATIS_LITE_SPEC.md
 │   ├── CONVERTER_REFERENCE.md
-│   └── BSML_CONVERTER_CATALOG.md
-├── CONTRIBUTORS.md          # Attribution
-├── NEXT_STEPS.md           # Remaining work
-├── STATUS.md               # Progress tracking
-└── WORKPLAN.md             # Original plan
-
+│   ├── TRANSLATION_GUIDE.md
+│   ├── TRANSLATION_STRATEGY.md
+│   └── BCO_MAPPING.md
+│
+├── CONTRIBUTORS.md
+├── PHILOSOPHY.md
+└── README.md
 ```
 
 ## Source Material
 
-- **Ergatis source:** `~/repos/eels/ergatis-eels-devel/ergatis-git/`
-- **Components:** 371 directories in `components/`
-- **Scripts:** 472 Perl scripts in `src/perl/` (91 converters, 381 utilities)
-- **Workflows:** 56 templates in `workflow/` (108 XML files)
-- **Documentation:** `doc/workflowxml.txt`, POD in scripts
+- **Ergatis source:** `ergatis-eels-devel/ergatis-git/`
+- **Components:** `components/` (configs) + `workflow/` (templates)
+- **Scripts:** Perl scripts in `src/perl/` (converters + utilities)
+- **Ergatis Lite:** Brett Whitty, JCVI, 2007
 
 ## Project Context
 
 **Lead:** Brett Whitty (GNOMATIX), original TIGR developer  
-**Started:** 2026-02-18  
-**Status:** Phase 5 in progress (translation formats)
-
-This is a multi-month knowledge preservation effort. Current focus is systematic extraction and documentation.
-
-**See:** `PROJECT_SUMMARY.md` for complete project overview
+**Started:** 2026-02-18

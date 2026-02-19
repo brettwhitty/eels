@@ -95,11 +95,10 @@ Prokaryotic Annotation Pipeline:
 }
 ```
 
-**Why not CWL/Nextflow/WDL for workflows?**
-- CWL: Only for individual tool configs, not workflow composition
-- Nextflow: No proper workflow/subflow concepts to represent Ergatis hierarchy
-- WDL: Similar limitations
-- Ergatis Lite + BCO: Properly capture the workflow/component/tool hierarchy
+**Why Ergatis Lite + BCO for workflows?**
+- Ergatis Lite: Captures the hierarchical composition (serial/parallel/component nesting)
+- BCO: Captures provenance, parameters, and regulatory compliance
+- CWL: Used for individual tool configs only
 
 ## Translation Workflow
 

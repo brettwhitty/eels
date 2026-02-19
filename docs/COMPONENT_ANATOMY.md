@@ -323,30 +323,6 @@ steps:
       time: time
 ```
 
-## Nextflow Equivalent
-
-```groovy
-process wait {
-  input:
-    path input_file
-    val time
-  
-  output:
-    path "*.stdout"
-    path "*.stderr"
-  
-  script:
-  """
-  spin_wait --time ${time} > ${input_file.baseName}.wait.stdout 2> ${input_file.baseName}.wait.stderr
-  """
-}
-
-workflow {
-  Channel.fromPath(params.input_files)
-    | wait(params.time)
-}
-```
-
 ## Workflow Architecture
 
 ### 6-Level XML Hierarchy

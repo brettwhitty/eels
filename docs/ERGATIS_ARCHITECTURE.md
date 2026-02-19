@@ -2,7 +2,7 @@
 
 ## Core Concept: Workflows Compose Subworkflows
 
-Ergatis is built on **hierarchical composition**, not scatter/gather map-reduce.
+Ergatis is built on **hierarchical composition**.
 
 ### Three-Level Hierarchy
 
@@ -50,24 +50,9 @@ Workflow (Pipeline)
 5. Merge component (combine annotations)
 6. BSML2Chado component (database load)
 
-## This is NOT Map-Reduce
-
-**Map-reduce / scatter-gather:**
-- Split data into chunks
-- Process chunks in parallel
-- Reduce/gather results
-- Cloud-based, ephemeral compute
-
-**Ergatis:**
-- Hierarchical workflow composition
-- Subworkflows (components) are reusable units
-- Big iron HPC/HTPC
-- Persistent infrastructure
-- Complex multi-step biology, not log processing
-
 ## Parallelization in Ergatis
 
-Parallelization happens **within** components via iterators, not at workflow level.
+Parallelization happens **within** components via iterators.
 
 **Iterator pattern:**
 - Component receives list of 1000 input files
@@ -75,28 +60,11 @@ Parallelization happens **within** components via iterators, not at workflow lev
 - Each group processes ~7 files serially
 - Results aggregated after completion
 
-**This is batch processing on HPC**, not cloud scatter/gather.
+This is batch processing on HPC with persistent infrastructure.
 
-## Why Modern Workflow Languages Fail
+## Ergatis Lite
 
-### Nextflow
-- No proper subworkflow composition
-- Designed for scatter/gather patterns
-- Can't represent component as reusable subworkflow unit
-
-### WDL
-- Similar limitations
-- Task/workflow model doesn't match component/pipeline hierarchy
-
-### CWL
-- CommandLineTool: Good for individual tools ✓
-- Workflow: Flat composition, no subworkflow concept ✗
-- Can't represent component as reusable unit
-
-## What Works
-
-### Ergatis Lite
-**Designed for this** - Mathematical notation for hierarchical composition
+Mathematical notation for hierarchical composition.
 
 **Workflow:**
 ```
@@ -180,7 +148,6 @@ This is **software engineering for bioinformatics workflows**, not DevOps script
 **Don't flatten:**
 - Don't convert components to flat workflow steps
 - Don't lose the subworkflow abstraction
-- Don't map to scatter/gather patterns
 
 **Preserve the knowledge:**
 - Components are reusable units (like functions)
