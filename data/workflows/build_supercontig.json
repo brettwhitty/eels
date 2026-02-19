@@ -1,0 +1,54 @@
+{
+  "file": "ergatis-git/workflow/build_supercontig/build_supercontig-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "build_supercontig workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output repository",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_output",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Execute build_supercontig",
+      "command_type": "RunJavaUnixCommand",
+      "config": "build_supercontig",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create bsml list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_bsml_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "store_config_params",
+      "command_type": "RunJavaUnixCommand",
+      "config": "store_config_params",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "DTD validation",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dtd_validation",
+      "level": 1
+    }
+  ],
+  "step_count": 7
+}

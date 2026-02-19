@@ -1,0 +1,137 @@
+{
+  "file": "ergatis-git/workflow/coverage/coverage-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "coverage workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Archive compute output",
+      "command_type": "RunJavaUnixCommand",
+      "config": "archive_output",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output repository",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_output",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Set workflowdocs permissions",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_workflowdocs_permissions",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "copy the contig file to the temp directory",
+      "command_type": "RunJavaUnixCommand",
+      "config": "copy_contig_to_temp",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "copy the qual file to the temp directory",
+      "command_type": "RunJavaUnixCommand",
+      "config": "copy_qual_to_temp",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "copy the seq file to the temp directory",
+      "command_type": "RunJavaUnixCommand",
+      "config": "copy_seq_to_temp",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterator list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterator_list_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create groups",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_groups_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterative subflow",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterative_subflow1",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "Iterated subflow",
+      "execution": "parallel",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create file list for checksums",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_checksum_file_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Generate checksums",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_checksum",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create file list for checksums.sum",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_checksum_sum_file_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create checksums.sum",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_checksum_sum",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Set workflowdocs permissions",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_workflowdocs_permissions",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Set permissions for scratch area",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_scratch_permissions",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Set permissions for output",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_output_permissions",
+      "level": 1
+    }
+  ],
+  "step_count": 19
+}

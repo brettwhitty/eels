@@ -1,0 +1,60 @@
+{
+  "file": "ergatis-git/workflow/split_fasta/split_fasta-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "split_fasta workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output repository",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_output",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterator list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterator_list_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create groups",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_groups_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterative subflow",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterative_subflow1",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "Iterated subflow",
+      "execution": "parallel",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Merge list files",
+      "command_type": "RunJavaUnixCommand",
+      "config": "merge_list_files",
+      "level": 1
+    }
+  ],
+  "step_count": 8
+}

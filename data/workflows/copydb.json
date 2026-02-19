@@ -1,0 +1,794 @@
+{
+  "file": "ergatis-git/workflow/copydb/copydb-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "backupdb workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "create_scratch_source",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_scratch_source",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create_zero_scratch_source",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_zero_scratch_source",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create_scratch_target",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_scratch_target",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create_zero_scratch_target",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_zero_scratch_target",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "revoke_public_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "revoke_public_1",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "Backup database 1 tables",
+      "execution": "parallel",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "tableinfo_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "tableinfo_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "project_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "project_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "db_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "db_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cv_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cv_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "dbxref_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dbxref_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvterm_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "dbxrefprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dbxrefprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvtermprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "synonym_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "synonym_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pubprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pubprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pub_relationship_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_relationship_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pub_dbxref_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_dbxref_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pubauthor_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pubauthor_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "organism_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organism_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "organismprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organismprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "organism_dbxref_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organism_dbxref_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvtermpath_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermpath_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvtermsynonym_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermsynonym_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvterm_relationship_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_relationship_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvterm_dbxref_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_dbxref_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "featureprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "featureprop_pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureprop_pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_synonym_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_synonym_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_dbxref_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_dbxref_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvtermprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvtermprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_dbxref_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_dbxref_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "featureloc_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureloc_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relationship_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationship_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relationship_pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationship_pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relationshipprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationshipprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relprop_pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relprop_pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "analysis_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysis_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "analysisprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysisprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "analysisfeature_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysisfeature_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylotree_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylotree_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylotree_pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylotree_pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_dbxref_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_dbxref_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_pub_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_pub_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_organism_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_organism_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonodeprop_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonodeprop_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_relationship_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_relationship_1",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "archive_bcp_files_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "archive_bcp_files_1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "grant_public_1",
+      "command_type": "RunJavaUnixCommand",
+      "config": "grant_public_1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "revoke_public_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "revoke_public_2",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "Backup database 2 tables",
+      "execution": "parallel",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "tableinfo_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "tableinfo_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "project_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "project_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "db_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "db_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cv_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cv_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "dbxref_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dbxref_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvterm_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "dbxrefprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dbxrefprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvtermprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "synonym_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "synonym_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pubprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pubprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pub_relationship_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_relationship_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pub_dbxref_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_dbxref_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "pubauthor_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pubauthor_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "organism_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organism_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "organismprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organismprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "organism_dbxref_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organism_dbxref_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvtermpath_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermpath_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvtermsynonym_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermsynonym_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvterm_relationship_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_relationship_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "cvterm_dbxref_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_dbxref_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "featureprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "featureprop_pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureprop_pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_synonym_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_synonym_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_dbxref_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_dbxref_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_cvtermprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvtermprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_dbxref_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_dbxref_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "featureloc_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureloc_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relationship_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationship_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relationship_pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationship_pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relationshipprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationshipprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "feature_relprop_pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relprop_pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "analysis_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysis_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "analysisprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysisprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "analysisfeature_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysisfeature_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylotree_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylotree_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylotree_pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylotree_pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_dbxref_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_dbxref_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_pub_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_pub_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_organism_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_organism_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonodeprop_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonodeprop_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "phylonode_relationship_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_relationship_2",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "archive_bcp_files_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "archive_bcp_files_2",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "drop_target_tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "drop_target_tables",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create_all_tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_all_tables",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "partition",
+      "command_type": "RunJavaUnixCommand",
+      "config": "partition",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "load_tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "load_tables",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "rebuild_indexes",
+      "command_type": "RunJavaUnixCommand",
+      "config": "rebuild_indexes",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "grant_public_2",
+      "command_type": "RunJavaUnixCommand",
+      "config": "grant_public_2",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "check_logfiles",
+      "command_type": "RunJavaUnixCommand",
+      "config": "check_logfiles",
+      "level": 1
+    }
+  ],
+  "step_count": 113
+}

@@ -1,0 +1,74 @@
+{
+  "file": "ergatis-git/workflow/hmmsmart/hmmsmart-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "hmmsmart workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output directory",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_output_directory",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterator list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterator_list_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create groups",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_groups_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterative subflow",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterative_subflow1",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "Iterated subflow",
+      "execution": "parallel",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create bsml list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_bsml_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create raw list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_raw_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "create htab list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_htab_list",
+      "level": 1
+    }
+  ],
+  "step_count": 10
+}

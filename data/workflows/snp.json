@@ -1,0 +1,144 @@
+{
+  "file": "ergatis-git/workflow/snp/snp-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "snps workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Set workflowdocs permissions",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_workflowdocs_permissions",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "run snps pipeline",
+      "execution": "serial",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "make_reference_fasta",
+      "command_type": "RunJavaUnixCommand",
+      "config": "make_reference_fasta",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "make_query_fasta",
+      "command_type": "RunJavaUnixCommand",
+      "config": "make_query_fasta",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "nucmer",
+      "command_type": "RunJavaUnixCommand",
+      "config": "nucmer",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "show_tiling",
+      "command_type": "RunJavaUnixCommand",
+      "config": "show_tiling",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "snp_extract_fasta",
+      "command_type": "RunJavaUnixCommand",
+      "config": "snp_extract_fasta",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "mummer",
+      "command_type": "RunJavaUnixCommand",
+      "config": "mummer",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "mgaps",
+      "command_type": "RunJavaUnixCommand",
+      "config": "mgaps",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "combineMUMS",
+      "command_type": "RunJavaUnixCommand",
+      "config": "combineMUMS",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "SNP_Analysis",
+      "command_type": "RunJavaUnixCommand",
+      "config": "SNP_Analysis",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "store_config_parameters",
+      "command_type": "RunJavaUnixCommand",
+      "config": "store_config_parameters",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "dtd_validation",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dtd_validation",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "create_checksum_file_list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_checksum_file_list",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "create_checksum",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_checksum",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "set_output_permissions",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_output_permissions",
+      "level": 2
+    },
+    {
+      "type": "command",
+      "name": "Set workflowdocs permissions",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_workflowdocs_permissions",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Set permissions for scratch area",
+      "command_type": "RunJavaUnixCommand",
+      "config": "set_scratch_permissions",
+      "level": 1
+    }
+  ],
+  "step_count": 20
+}

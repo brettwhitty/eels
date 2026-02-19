@@ -1,0 +1,81 @@
+{
+  "file": "ergatis-git/workflow/pangenome/pangenome-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "pangenome workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create output repository",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_output",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Parse genome BSML",
+      "command_type": "RunDistributedCommand",
+      "config": "pangenome_query_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterator list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterator_list_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create groups",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_groups_subflow1",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create iterative subflow",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_iterative_subflow1",
+      "level": 1
+    },
+    {
+      "type": "commandSet",
+      "name": "Iterated subflow",
+      "execution": "parallel",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create serialized data list",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_serialized_data_list",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Merge pangenome data",
+      "command_type": "RunDistributedCommand",
+      "config": "pangenome_merge_results",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Do pangenome analysis",
+      "command_type": "RunDistributedCommand",
+      "config": "pangenome_do_analysis",
+      "level": 1
+    }
+  ],
+  "step_count": 11
+}

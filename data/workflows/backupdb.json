@@ -1,0 +1,705 @@
+{
+  "file": "ergatis-git/workflow/backupdb/backupdb-master_template.xml",
+  "steps": [
+    {
+      "type": "commandSet",
+      "name": "backupdb workflow",
+      "execution": "serial",
+      "level": 0
+    },
+    {
+      "type": "command",
+      "name": "Create scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_compute_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "Create zero scratch space",
+      "command_type": "RunJavaUnixCommand",
+      "config": "create_zero_scratch",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "all_auxiliary_tables",
+      "command_type": "RunJavaUnixCommand",
+      "config": "all_auxiliary_tables",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "tableinfo",
+      "command_type": "RunJavaUnixCommand",
+      "config": "tableinfo",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_tableinfo",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_tableinfo",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "project",
+      "command_type": "RunJavaUnixCommand",
+      "config": "project",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_project",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_project",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "db",
+      "command_type": "RunJavaUnixCommand",
+      "config": "db",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_db",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_db",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "cv",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cv",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_cv",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_cv",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "cvterm",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_cvterm",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_cvterm",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "dbxrefprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "dbxrefprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_dbxrefprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_dbxrefprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "cvtermprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_cvtermprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_cvtermprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "synonym",
+      "command_type": "RunJavaUnixCommand",
+      "config": "synonym",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_synonym",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_synonym",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "pubprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pubprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_pubprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_pubprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "pub_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_pub_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_pub_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "pub_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pub_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_pub_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_pub_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "pubauthor",
+      "command_type": "RunJavaUnixCommand",
+      "config": "pubauthor",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_pubauthor",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_pubauthor",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "organism",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organism",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_organism",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_organism",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "organismprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organismprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_organismprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_organismprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "organism_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "organism_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_organism_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_organism_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "cvtermpath",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermpath",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_cvtermpath",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_cvtermpath",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "cvtermsynonym",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvtermsynonym",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_cvtermsynonym",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_cvtermsynonym",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "cvterm_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_cvterm_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_cvterm_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "cvterm_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "cvterm_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_cvterm_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_cvterm_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "featureprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_featureprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_featureprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "featureprop_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureprop_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_featureprop_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_featureprop_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_synonym",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_synonym",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_synonym",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_synonym",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_cvterm",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_cvterm",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_cvterm_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_cvterm_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_cvterm_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvterm_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_cvterm_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_cvterm_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_cvtermprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_cvtermprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_cvtermprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_cvtermprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "featureloc",
+      "command_type": "RunJavaUnixCommand",
+      "config": "featureloc",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_featureloc",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_featureloc",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_relationship_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationship_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_relationship_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_relationship_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_relationshipprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relationshipprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_relationshipprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_relationshipprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "feature_relprop_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "feature_relprop_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_feature_relprop_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_feature_relprop_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "analysis",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysis",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_analysis",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_analysis",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "analysisprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysisprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_analysisprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_analysisprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "analysisfeature",
+      "command_type": "RunJavaUnixCommand",
+      "config": "analysisfeature",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_analysisfeature",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_analysisfeature",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylotree",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylotree",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylotree",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylotree",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylotree_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylotree_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylotree_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylotree_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylonode",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylonode",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylonode",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylonode_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylonode_dbxref",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylonode_dbxref",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylonode_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylonode_pub",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylonode_pub",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylonode_organism",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_organism",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylonode_organism",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylonode_organism",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylonodeprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonodeprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylonodeprop",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylonodeprop",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "phylonode_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "phylonode_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "gzip_phylonode_relationship",
+      "command_type": "RunJavaUnixCommand",
+      "config": "gzip_phylonode_relationship",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "check_logfiles",
+      "command_type": "RunJavaUnixCommand",
+      "config": "check_logfiles",
+      "level": 1
+    },
+    {
+      "type": "command",
+      "name": "archive_bcp_files",
+      "command_type": "RunJavaUnixCommand",
+      "config": "archive_bcp_files",
+      "level": 1
+    }
+  ],
+  "step_count": 100
+}
