@@ -293,9 +293,7 @@ workflow/runtime/wait/12345_default/
 - Modular composition
 - Dynamic workflow generation
 
-## Comparison to Modern Workflows
-
-### CWL Equivalent
+## CWL Equivalent
 
 ```yaml
 class: CommandLineTool
@@ -325,7 +323,7 @@ steps:
       time: time
 ```
 
-### Nextflow Equivalent
+## Nextflow Equivalent
 
 ```groovy
 process wait {
@@ -348,22 +346,6 @@ workflow {
     | wait(params.time)
 }
 ```
-
-### Key Differences
-
-**Ergatis:**
-- XML-based
-- Placeholder variable expansion
-- File-based subflows
-- Explicit directory structure
-- Two-phase (template → instantiation → execution)
-
-**Modern:**
-- YAML/DSL-based
-- Type systems
-- Direct execution
-- Implicit output handling
-- Single-phase (definition → execution)
 
 ## Workflow Architecture
 
@@ -407,19 +389,14 @@ Based on `ergatis-git/doc/workflowxml.txt`:
 
 ### Key Characteristics
 
-**What Works Well:**
 1. **Modular templates** - Reusable iterator patterns
 2. **Flexible batching** - GROUP_COUNT + max_elements controls distribution
 3. **Standard directory structure** - Predictable output locations
 4. **Variable inheritance** - Project → Component → Iterator
 5. **File-based subflows** - Composable workflow fragments
-
-**Complexity:**
-1. **Two-phase execution** - Template expansion before execution
-2. **Placeholder syntax** - `$;KEY$;` verbose but explicit
-3. **XML verbosity** - Many files for simple operations
-4. **Runtime generation** - Component/iterator XML created during execution
-5. **Manual wiring** - No automatic output→input matching
+6. **Two-phase execution** - Template expansion before execution
+7. **Placeholder syntax** - `$;KEY$;` for variable substitution
+8. **Runtime generation** - Component/iterator XML created during execution
 
 ## Files for Reference
 
