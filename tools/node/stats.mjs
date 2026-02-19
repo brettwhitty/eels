@@ -2,6 +2,7 @@
 // stats.mjs — Terminal dashboard summarizing the EELS repository artifacts
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, resolve } from 'path';
+import { box, header, barLine, stat, divider, chalk } from './lib/display.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const load = f => JSON.parse(readFileSync(join(root, f), 'utf8'));
@@ -9,26 +10,6 @@ const count = (dir, ext) => {
   try { return readdirSync(join(root, dir)).filter(f => f.endsWith(ext)).length; }
   catch { return 0; }
 };
-const fsize = f => {
-  try { return statSync(join(root, f)).size; }
-  catch { return 0; }
-};
-const fmt = n => String(n).padStart(5);
-const bar = (n, max, w = 30) => {
-  const filled = Math.round((n / max) * w);
-  return '█'.repeat(filled) + '░'.repeat(w - filled);
-};
-
-// ANSI colors
-const c = {
-  reset: '\x1b[0m', bold: '\x1b[1m', dim: '\x1b[2m',
-  red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m',
-  blue: '\x1b[34m', magenta: '\x1b[35m', cyan: '\x1b[36m', white: '\x1b[37m',
-  bgBlue: '\x1b[44m', bgMagenta: '\x1b[45m',
-};
-
-const line = (ch = '─', w = 72) => c.dim + ch.repeat(w) + c.reset;
-const header = text => `\n${c.bold}${c.bgBlue}${c.white} ${text.padEnd(70)} ${c.reset}`;
 
 // --- Data ---
 const components = count('data/components', '.json');
@@ -55,86 +36,61 @@ const biotoolsMapped = biotools.mapping.filter(m => m.matched).length;
 const edamMapped = edam.mapping.length;
 const iterComps = Object.keys(iterators).length;
 
-// Tool categories
-const toolCats = {};
-for (const t of tools) {
-  toolCats[t.category_id] = (toolCats[t.category_id] || 0) + 1;
-}
-
-// Component classifications
-const classes = summary.components_by_classification;
-const classEntries = Object.entries(classes).sort((a, b) => b[1] - a[1]);
-const maxClass = classEntries[0]?.[1] || 1;
-
 // --- Output ---
-const boxW = 80;
-const l1 = '   EELS \u2014 Ergatis Extended Lifetime Support'.padEnd(boxW);
-const l2 = '   Preserving the Golden Age of Open Source Bioinformatics Engineering'.padEnd(boxW);
-console.log(`\n${c.bold}${c.cyan}  \u2554${'═'.repeat(boxW)}\u2557${c.reset}`);
-console.log(`${c.bold}${c.cyan}  \u2551${c.reset}${c.bold}${l1}${c.reset}${c.bold}${c.cyan}\u2551${c.reset}`);
-console.log(`${c.bold}${c.cyan}  \u2551${c.reset}${c.dim}${l2}${c.reset}${c.bold}${c.cyan}\u2551${c.reset}`);
-console.log(`${c.bold}${c.cyan}  \u255a${'═'.repeat(boxW)}\u255d${c.reset}`);
+console.log('\n' + box(
+  'EELS — Ergatis Extended Lifetime Support',
+  'Preserving the Golden Age of Open Source Bioinformatics Engineering'
+));
 
 console.log(header('SOURCE DATA'));
-console.log(`  ${c.bold}${c.green}${fmt(components)}${c.reset} component configurations`);
-console.log(`  ${c.bold}${c.green}${fmt(stepFiles)}${c.reset} categorized workflow step files`);
-console.log(`  ${c.bold}${c.green}${fmt(tools.length)}${c.reset} tool executables cataloged`);
-console.log(`  ${c.bold}${c.green}${fmt(pipelines.length)}${c.reset} production pipeline templates`);
-console.log(`  ${c.bold}${c.green}${fmt(databases.length)}${c.reset} reference databases`);
-console.log(`  ${c.bold}${c.green}${fmt(Object.keys(converters).length)}${c.reset} converter mappings`);
+console.log(stat(components, 'component configurations'));
+console.log(stat(stepFiles, 'categorized workflow step files'));
+console.log(stat(tools.length, 'tool executables cataloged'));
+console.log(stat(pipelines.length, 'production pipeline templates'));
+console.log(stat(databases.length, 'reference databases'));
+console.log(stat(Object.keys(converters).length, 'converter mappings'));
 
 console.log(header('GENERATED ARTIFACTS'));
-console.log(`  ${c.dim}Documentation:${c.reset}`);
-console.log(`    ${c.yellow}${fmt(docYamls)}${c.reset} component doc YAML files`);
-console.log(`    ${c.yellow}${fmt(bcoComps)}${c.reset} component BioCompute Objects    ${c.yellow}${fmt(bcoPipes)}${c.reset} pipeline BCOs`);
-console.log(`  ${c.dim}Workflow Languages:${c.reset}`);
-console.log(`    ${c.cyan}${fmt(cwlFiles)}${c.reset} CWL tool definitions`);
-console.log(`    ${c.cyan}${fmt(nfComps)}${c.reset} Nextflow component processes    ${c.cyan}${fmt(nfPipes)}${c.reset} pipeline workflows`);
-console.log(`    ${c.cyan}${fmt(liteComps)}${c.reset} Ergatis Lite components         ${c.cyan}${fmt(litePipes)}${c.reset} pipeline templates`);
+console.log(`  ${chalk.dim('Documentation:')}`);
+console.log(stat(docYamls, 'component doc YAML files', 'yellow'));
+console.log(`  ${chalk.yellow(String(bcoComps).padStart(5))} component BCOs              ${chalk.yellow(String(bcoPipes).padStart(5))} pipeline BCOs`);
+console.log(`  ${chalk.dim('Workflow Languages:')}`);
+console.log(stat(cwlFiles, 'CWL tool definitions', 'cyan'));
+console.log(`  ${chalk.cyan(String(nfComps).padStart(5))} Nextflow component processes ${chalk.cyan(String(nfPipes).padStart(5))} pipeline workflows`);
+console.log(`  ${chalk.cyan(String(liteComps).padStart(5))} Ergatis Lite components      ${chalk.cyan(String(litePipes).padStart(5))} pipeline templates`);
 
 console.log(header('REGISTRY MAPPINGS'));
-const btPct = Math.round(biotoolsMapped / components * 100);
-const edPct = Math.round(edamMapped / components * 100);
-const itPct = Math.round(iterComps / components * 100);
-console.log(`  bio.tools  ${c.green}${bar(biotoolsMapped, components)}${c.reset} ${fmt(biotoolsMapped)}/${components} (${btPct}%)`);
-console.log(`  EDAM       ${c.blue}${bar(edamMapped, components)}${c.reset} ${fmt(edamMapped)}/${components} (${edPct}%)`);
-console.log(`  Iterators  ${c.magenta}${bar(iterComps, components)}${c.reset} ${fmt(iterComps)}/${components} (${itPct}%)`);
+console.log(barLine('bio.tools', biotoolsMapped, components, { color: 'green' }));
+console.log(barLine('EDAM', edamMapped, components, { color: 'blue' }));
+console.log(barLine('Iterators', iterComps, components, { color: 'magenta' }));
 
 console.log(header('TOOL EXECUTABLES BY CATEGORY'));
-const catLabels = {
-  custom_perl: 'Custom Perl',
-  open_source: 'Open Source',
-  custom_binary: 'Custom Binary',
-  os_system: 'OS/System',
-  closed_source: 'Closed Source',
-};
+const toolCats = {};
+for (const t of tools) toolCats[t.category_id] = (toolCats[t.category_id] || 0) + 1;
+const catLabels = { custom_perl: 'Custom Perl', open_source: 'Open Source', custom_binary: 'Custom Binary', os_system: 'OS/System', closed_source: 'Closed Source' };
 const maxTool = Math.max(...Object.values(toolCats));
 for (const [id, n] of Object.entries(toolCats).sort((a, b) => b[1] - a[1])) {
-  const label = (catLabels[id] || id).padEnd(15);
-  console.log(`  ${label} ${c.yellow}${bar(n, maxTool, 25)}${c.reset} ${fmt(n)}`);
+  console.log(barLine(catLabels[id] || id, n, maxTool, { barWidth: 25, color: 'yellow', showTotal: false }));
 }
 
 console.log(header('COMPONENT CLASSIFICATIONS (top 15)'));
+const classEntries = Object.entries(summary.components_by_classification).sort((a, b) => b[1] - a[1]);
+const maxClass = classEntries[0]?.[1] || 1;
 for (const [cls, n] of classEntries.slice(0, 15)) {
-  const label = cls.padEnd(32);
-  console.log(`  ${label} ${c.green}${bar(n, maxClass, 20)}${c.reset} ${fmt(n)}`);
+  console.log(barLine(cls, n, maxClass, { labelWidth: 32, barWidth: 20, color: 'green', showTotal: false }));
 }
-if (classEntries.length > 15) {
-  console.log(`  ${c.dim}  ... and ${classEntries.length - 15} more categories${c.reset}`);
-}
+if (classEntries.length > 15) console.log(chalk.dim(`    ... and ${classEntries.length - 15} more categories`));
 
 console.log(header('PIPELINE TEMPLATES (by size)'));
 const sortedPipes = [...pipelines].sort((a, b) => b.num_components - a.num_components);
 const maxPipe = sortedPipes[0]?.num_components || 1;
 for (const p of sortedPipes.slice(0, 10)) {
-  const label = p.name.replace(/_/g, ' ').slice(0, 35).padEnd(36);
-  console.log(`  ${label} ${c.magenta}${bar(p.num_components, maxPipe, 18)}${c.reset} ${fmt(p.num_components)} steps`);
+  const label = p.name.replace(/_/g, ' ').slice(0, 35);
+  console.log(barLine(label, p.num_components, maxPipe, { labelWidth: 36, barWidth: 18, color: 'magenta', showTotal: false }) + ' steps');
 }
-if (sortedPipes.length > 10) {
-  console.log(`  ${c.dim}  ... and ${sortedPipes.length - 10} more pipelines${c.reset}`);
-}
+if (sortedPipes.length > 10) console.log(chalk.dim(`    ... and ${sortedPipes.length - 10} more pipelines`));
 
-console.log('\n' + line());
 const totalArtifacts = docYamls + bcoComps + bcoPipes + cwlFiles + nfComps + nfPipes + liteComps + litePipes;
-console.log(`  ${c.bold}Total: ${c.cyan}${components}${c.reset}${c.bold} components → ${c.yellow}${totalArtifacts}${c.reset}${c.bold} generated artifacts${c.reset}`);
-console.log(line() + '\n');
+console.log('\n' + divider());
+console.log(`  ${chalk.bold(`Total: ${chalk.cyan(components)} components → ${chalk.yellow(totalArtifacts)} generated artifacts`)}`);
+console.log(divider() + '\n');

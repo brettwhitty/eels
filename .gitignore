@@ -2,3 +2,4 @@ ergatis-eels-devel
 ergatis-eels-devel/**
 wiki/
 viewer/component_index.json
+node_modules/

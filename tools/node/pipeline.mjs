@@ -1,17 +1,12 @@
 #!/usr/bin/env node
 // pipeline.mjs — Pipeline composition diagrams (text and optional SVG)
 // Usage: node pipeline.mjs [pipeline_name] [--svg output.svg]
-import { readFileSync, writeFileSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { join, resolve } from 'path';
+import { pipelineGroup, chalk } from './lib/display.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const load = f => JSON.parse(readFileSync(join(root, f), 'utf8'));
-
-const c = {
-  reset: '\x1b[0m', bold: '\x1b[1m', dim: '\x1b[2m',
-  red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m',
-  blue: '\x1b[34m', magenta: '\x1b[35m', cyan: '\x1b[36m',
-};
 
 const args = process.argv.slice(2);
 const svgIdx = args.indexOf('--svg');
@@ -25,25 +20,23 @@ const btMap = {};
 for (const m of biotools.mapping) { if (m.matched) btMap[m.component] = m.tool_name; }
 
 if (!query) {
-  console.log(`\n${c.bold}${c.cyan}  Available Pipeline Templates${c.reset}\n`);
+  console.log(`\n${chalk.bold.cyan('  Available Pipeline Templates')}\n`);
   const sorted = [...pipelines].sort((a, b) => b.num_components - a.num_components);
   for (const p of sorted) {
-    console.log(`  ${c.green}${p.name.padEnd(45)}${c.reset} ${c.dim}${String(p.num_components).padStart(3)} components${c.reset}`);
+    console.log(`  ${chalk.green(p.name.padEnd(45))} ${chalk.dim(String(p.num_components).padStart(3) + ' components')}`);
   }
-  console.log(`\n${c.dim}  Usage: node pipeline.mjs <name> [--svg output.svg]${c.reset}\n`);
+  console.log(`\n${chalk.dim('  Usage: node pipeline.mjs <name> [--svg output.svg]')}\n`);
   process.exit(0);
 }
 
 const pipeline = pipelines.find(p => p.name.toLowerCase().includes(query));
 if (!pipeline) { console.error(`No pipeline matching "${query}"`); process.exit(1); }
 
-// Parse component instances: name.group format
 const instances = pipeline.components.map(c => {
   const parts = c.split('.');
   return { full: c, component: parts[0], group: parts.slice(1).join('.') || null };
 });
 
-// Group by group label
 const groups = {};
 for (const inst of instances) {
   const g = inst.group || 'ungrouped';
@@ -51,22 +44,17 @@ for (const inst of instances) {
   groups[g].push(inst);
 }
 
-// Text output
-console.log(`\n${c.bold}${c.cyan}  Pipeline: ${pipeline.name}${c.reset}`);
-console.log(`${c.dim}  ${instances.length} component instances, ${Object.keys(groups).length} groups${c.reset}\n`);
+console.log(`\n${chalk.bold.cyan(`  Pipeline: ${pipeline.name}`)}`);
+console.log(chalk.dim(`  ${instances.length} component instances, ${Object.keys(groups).length} groups\n`));
 
 let step = 0;
 for (const [group, insts] of Object.entries(groups)) {
-  console.log(`  ${c.bold}${c.magenta}┌─ ${group} ─${'─'.repeat(Math.max(0, 50 - group.length))}┐${c.reset}`);
-  for (const inst of insts) {
-    step++;
-    const bt = btMap[inst.component];
-    const btLabel = bt ? ` ${c.dim}[${bt}]${c.reset}` : '';
-    console.log(`  ${c.magenta}│${c.reset} ${c.dim}${String(step).padStart(2)}.${c.reset} ${c.green}${inst.component}${c.reset}${btLabel}`);
-  }
-  console.log(`  ${c.bold}${c.magenta}└${'─'.repeat(55)}┘${c.reset}`);
-  console.log(`  ${c.dim}  │${c.reset}`);
-  console.log(`  ${c.dim}  ▼${c.reset}`);
+  const steps = insts.map(inst => ({
+    num: ++step,
+    name: inst.component,
+    annotation: btMap[inst.component] || null,
+  }));
+  console.log(pipelineGroup(group, steps));
 }
 console.log();
 
@@ -75,7 +63,6 @@ if (svgOut) {
   const boxW = 500, boxH = 32, gap = 4, groupPad = 12, margin = 20;
   let y = margin;
   const elements = [];
-
   const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const groupColors = ['#e8f5e9', '#e3f2fd', '#fff3e0', '#fce4ec', '#f3e5f5', '#e0f7fa', '#fff9c4'];
   let gi = 0;
@@ -94,7 +81,6 @@ if (svgOut) {
       y += boxH + gap;
     }
     y += groupPad;
-    // Arrow
     elements.push(`<line x1="${margin + boxW / 2}" y1="${y - groupPad + 2}" x2="${margin + boxW / 2}" y2="${y + 8}" stroke="#999" stroke-width="2" marker-end="url(#arrow)"/>`);
     y += 16;
   }
@@ -108,5 +94,5 @@ if (svgOut) {
 ${elements.join('\n')}
 </svg>`;
   writeFileSync(svgOut, svg);
-  console.log(`  ${c.green}SVG written to ${svgOut}${c.reset}\n`);
+  console.log(`  ${chalk.green(`SVG written to ${svgOut}`)}\n`);
 }
