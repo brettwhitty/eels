@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ergatis Component Viewer</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+header { background: #1a1a2e; color: #fff; padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem; }
+header h1 { font-size: 1.4rem; font-weight: 500; }
+header span { font-size: 0.85rem; opacity: 0.7; }
+.container { display: flex; height: calc(100vh - 56px); }
+.sidebar { width: 320px; background: #fff; border-right: 1px solid #ddd; display: flex; flex-direction: column; }
+.search { padding: 0.75rem; border-bottom: 1px solid #ddd; }
+.search input { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; }
+.comp-list { flex: 1; overflow-y: auto; }
+.comp-item { padding: 0.5rem 0.75rem; border-bottom: 1px solid #eee; cursor: pointer; font-size: 0.85rem; }
+.comp-item:hover { background: #e8f0fe; }
+.comp-item.active { background: #1a73e8; color: #fff; }
+.comp-item .cat { font-size: 0.7rem; opacity: 0.6; }
+.main { flex: 1; overflow-y: auto; padding: 1.5rem; }
+.section { background: #fff; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.section h2 { font-size: 1rem; color: #1a1a2e; margin-bottom: 0.75rem; border-bottom: 2px solid #1a73e8; padding-bottom: 0.25rem; }
+.section h3 { font-size: 0.9rem; color: #555; margin: 0.75rem 0 0.25rem; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th { text-align: left; padding: 0.4rem 0.5rem; background: #f0f0f0; border-bottom: 2px solid #ddd; }
+td { padding: 0.35rem 0.5rem; border-bottom: 1px solid #eee; vertical-align: top; }
+.badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: 500; }
+.badge-tool { background: #e8f5e9; color: #2e7d32; }
+.badge-converter { background: #e3f2fd; color: #1565c0; }
+.badge-infra { background: #fff3e0; color: #e65100; }
+.badge-validation { background: #fce4ec; color: #c62828; }
+.badge-provenance { background: #f3e5f5; color: #6a1b9a; }
+.badge-compression { background: #e0e0e0; color: #424242; }
+.step-exe { font-family: monospace; font-size: 0.8rem; word-break: break-all; }
+.param-default { color: #888; font-style: italic; }
+.empty { text-align: center; padding: 3rem; color: #999; }
+.stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.stat { text-align: center; }
+.stat-num { font-size: 1.5rem; font-weight: 700; color: #1a73e8; }
+.stat-label { font-size: 0.75rem; color: #666; }
+a { color: #1a73e8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+#loading { text-align: center; padding: 3rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ergatis Component Viewer</h1>
+  <span id="comp-count"></span>
+</header>
+<div class="container">
+  <div class="sidebar">
+    <div class="search"><input type="text" id="filter" placeholder="Filter components..." autofocus></div>
+    <div class="comp-list" id="comp-list"></div>
+  </div>
+  <div class="main" id="main">
+    <div class="empty">Select a component from the sidebar</div>
+  </div>
+</div>
+<script>
+let components = {};
+let steps = {};
+let biotools = {};
+let edam = {};
+
+async function loadData() {
+  const base = location.pathname.replace(/\/viewer\/.*/, '');
+  try {
+    // Load component list
+    const compFiles = await fetch(base + '/data/components/').then(r => r.text());
+    // Parse directory listing or load index
+    // For simplicity, load the pre-built index
+    const resp = await fetch('component_index.json');
+    if (!resp.ok) throw new Error('component_index.json not found - run build_index.js first');
+    const data = await resp.json();
+    components = data.components || {};
+    steps = data.steps || {};
+    biotools = data.biotools || {};
+    edam = data.edam || {};
+    renderList();
+    document.getElementById('comp-count').textContent = Object.keys(components).length + ' components';
+  } catch(e) {
+    document.getElementById('main').innerHTML = '<div class="empty">Error: ' + e.message + '</div>';
+  }
+}
+
+function renderList(filter = '') {
+  const list = document.getElementById('comp-list');
+  const names = Object.keys(components).sort();
+  const lf = filter.toLowerCase();
+  list.innerHTML = names
+    .filter(n => !lf || n.toLowerCase().includes(lf))
+    .map(n => {
+      const c = components[n];
+      const cat = c.classification || '';
+      return `<div class="comp-item" onclick="showComponent('${n}')" id="ci-${n}">
+        ${n}<br><span class="cat">${cat}</span>
+      </div>`;
+    }).join('');
+}
+
+function showComponent(name) {
+  document.querySelectorAll('.comp-item.active').forEach(e => e.classList.remove('active'));
+  const el = document.getElementById('ci-' + name);
+  if (el) el.classList.add('active');
+
+  const c = components[name];
+  const s = steps[name] || {};
+  const bt = biotools[name];
+  const ed = edam[name];
+  const main = document.getElementById('main');
+
+  let html = '';
+
+  // Header
+  html += `<div class="section"><h2>${name}</h2>`;
+  if (c.classification) html += `<p>${c.classification}</p>`;
+  if (bt) html += `<p>bio.tools: <a href="https://bio.tools/${bt.id}" target="_blank">${bt.name || bt.id}</a></p>`;
+  if (ed) {
+    if (ed.operations) html += `<p>EDAM operations: ${ed.operations.join(', ')}</p>`;
+    if (ed.topics) html += `<p>EDAM topics: ${ed.topics.join(', ')}</p>`;
+  }
+  html += '</div>';
+
+  // Steps
+  if (s.steps && s.steps.length) {
+    html += '<div class="section"><h2>Workflow Steps</h2><table><tr><th>#</th><th>Name</th><th>Category</th><th>Executable</th></tr>';
+    s.steps.forEach((step, i) => {
+      const cat = step.category || 'unknown';
+      const badge = `badge-${cat.replace('tool_execution','tool')}`;
+      html += `<tr><td>${i}</td><td>${step.name || ''}</td>
+        <td><span class="badge ${badge}">${cat}</span></td>
+        <td class="step-exe">${step.executable || ''}</td></tr>`;
+    });
+    html += '</table></div>';
+  }
+
+  // Parameters
+  if (c.parameters && c.parameters.length) {
+    html += '<div class="section"><h2>Parameters</h2><table><tr><th>Name</th><th>Default</th></tr>';
+    c.parameters.forEach(p => {
+      const name = p.name || p.key || '';
+      const def = p.default || p.value || '';
+      if (!name.match(/^(PIPELINEID|OUTPUT_TOKEN|COMPONENT_NAME|WORKFLOW_REPOSITORY|OUTPUT_DIRECTORY|TMP_DIR|ITERATOR|GROUP_COUNT|NODISTRIB|DOCS_DIR|BIN_DIR|COMPONENT_CONFIG)/)) {
+        html += `<tr><td>${name}</td><td class="param-default">${def}</td></tr>`;
+      }
+    });
+    html += '</table></div>';
+  }
+
+  // Output formats
+  if (c.output_formats && c.output_formats.length) {
+    html += '<div class="section"><h2>Output Formats</h2><ul>';
+    c.output_formats.forEach(f => html += `<li>${f}</li>`);
+    html += '</ul></div>';
+  }
+
+  main.innerHTML = html;
+}
+
+document.getElementById('filter').addEventListener('input', e => renderList(e.target.value));
+loadData();
+</script>
+</body>
+</html>
