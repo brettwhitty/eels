@@ -1,0 +1,77 @@
+{
+  "description": "Ergatis component naming conventions and analysis",
+  "rules": {
+    "primary_name": "Defined by filename or id attribute, NOT the <name> XML element (which is free-text display name)",
+    "valid_chars": "[a-z_\\.\\-0-9]",
+    "regex": "^[a-z_\\.\\-0-9]+$",
+    "special_prefixes": "Names starting with [_.] are considered special naming",
+    "type_suffix": "/.\\.(\\S+)$/ where $1 matches an informal limited set of extensions (bsml, xml, raw, txt, ...) treated like MIME types for file type determination",
+    "convention_era": "Established during TIGR/JCVI 'Golden Age' development — developers agreed on lower_case_format"
+  },
+  "mixed_case_exceptions": [
+    {
+      "name": "RAPSearch2",
+      "reason": "upstream_tool_name"
+    },
+    {
+      "name": "RNAmmer",
+      "reason": "upstream_tool_name"
+    },
+    {
+      "name": "SPAdes",
+      "reason": "upstream_tool_name"
+    },
+    {
+      "name": "tRNAscan-SE",
+      "reason": "upstream_tool_name"
+    },
+    {
+      "name": "tRNAscan-SE_compress",
+      "reason": "upstream_tool_name"
+    },
+    {
+      "name": "glimmerHMM",
+      "reason": "upstream_tool_name"
+    },
+    {
+      "name": "edgeR",
+      "reason": "upstream_tool_name"
+    },
+    {
+      "name": "clovr_16S_rdptables",
+      "reason": "domain_term",
+      "note": "16S — SO ribosomal subunit term"
+    },
+    {
+      "name": "combine_ncRNA_alignments",
+      "reason": "domain_term",
+      "note": "ncRNA — SO sequence ontology term"
+    },
+    {
+      "name": "parse_for_ncRNAs",
+      "reason": "domain_term",
+      "note": "ncRNA — SO sequence ontology term"
+    },
+    {
+      "name": "fastq_to_CA",
+      "reason": "domain_term",
+      "note": "CA — Celera Assembler"
+    },
+    {
+      "name": "sff_to_CA",
+      "reason": "domain_term",
+      "note": "CA — Celera Assembler"
+    },
+    {
+      "name": "fastaToBsmlWorkingGeneModels",
+      "reason": "external_convention",
+      "note": "PRISM/Java naming convention (Jay Sundaram)"
+    },
+    {
+      "name": "replace_defline_with_locusID",
+      "reason": "domain_term",
+      "note": "locusID — CV term"
+    }
+  ],
+  "unexplained_violations": 0
+}
