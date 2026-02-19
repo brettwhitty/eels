@@ -1,6 +1,6 @@
-# EEL(L)S - Ergatis Extended Lifetime Support (LLM-assisted)
+# EELS - Ergatis Extended Lifetime Support
 
-Systematic extraction and documentation of Ergatis component knowledge using LLM-assisted analysis.
+Systematic extraction and documentation of Ergatis component knowledge.
 
 !["EELS!"](assets/images/eels-banner-m.png "EELS!")
 
