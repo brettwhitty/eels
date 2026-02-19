@@ -1,0 +1,2034 @@
+{
+  "RAPSearch2": {
+    "i1": {
+      "file": "RAPSearch2.i1.json",
+      "type": "serial",
+      "command_count": 7,
+      "has_nested": false
+    }
+  },
+  "RNAmmer": {
+    "i1": {
+      "file": "RNAmmer.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "aat_aa": {
+    "i1": {
+      "file": "aat_aa.i1.json",
+      "type": "serial",
+      "command_count": 18,
+      "has_nested": false
+    }
+  },
+  "aat_aa_masked": {
+    "i1": {
+      "file": "aat_aa_masked.i1.json",
+      "type": "serial",
+      "command_count": 18,
+      "has_nested": false
+    }
+  },
+  "aat_na": {
+    "i1": {
+      "file": "aat_na.i1.json",
+      "type": "serial",
+      "command_count": 15,
+      "has_nested": false
+    }
+  },
+  "aat_na_masked": {
+    "i1": {
+      "file": "aat_na_masked.i1.json",
+      "type": "serial",
+      "command_count": 15,
+      "has_nested": false
+    }
+  },
+  "adjust_bsml_coordinates": {
+    "i1": {
+      "file": "adjust_bsml_coordinates.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "alien_hunter": {
+    "i1": {
+      "file": "alien_hunter.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "align_bowtie_stats": {
+    "i1": {
+      "file": "align_bowtie_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "align_tophat_split_stats": {
+    "i1": {
+      "file": "align_tophat_split_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "align_tophat_stats": {
+    "i1": {
+      "file": "align_tophat_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "antigenic": {
+    "i1": {
+      "file": "antigenic.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "aragorn": {
+    "i1": {
+      "file": "aragorn.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "assign_dbxref_ids": {
+    "i1": {
+      "file": "assign_dbxref_ids.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "augustus": {
+    "i1": {
+      "file": "augustus.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "auto_annotate": {
+    "i1": {
+      "file": "auto_annotate.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "auto_gene_curation": {
+    "i1": {
+      "file": "auto_gene_curation.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "bam2bigwig": {
+    "i1": {
+      "file": "bam2bigwig.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bam_merge": {
+    "i1": {
+      "file": "bam_merge.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "basic_alignment_stats": {
+    "i1": {
+      "file": "basic_alignment_stats.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "bepipred": {
+    "i1": {
+      "file": "bepipred.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "ber": {
+    "i1": {
+      "file": "ber.i1.json",
+      "type": "serial",
+      "command_count": 13,
+      "has_nested": false
+    }
+  },
+  "blast2go": {
+    "i1": {
+      "file": "blast2go.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "blast2lca": {
+    "i1": {
+      "file": "blast2lca.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "blast_lgt_finder": {
+    "i1": {
+      "file": "blast_lgt_finder.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "blast_snp_regions": {
+    "i1": {
+      "file": "blast_snp_regions.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "blastn_plus": {
+    "i1": {
+      "file": "blastn_plus.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "blastp_plus": {
+    "i1": {
+      "file": "blastp_plus.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "bmtagger": {
+    "i1": {
+      "file": "bmtagger.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "bowtie": {
+    "i1": {
+      "file": "bowtie.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bowtie_build": {
+    "i1": {
+      "file": "bowtie_build.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bsml2gff3": {
+    "i1": {
+      "file": "bsml2gff3.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bsml2interevidence_fasta": {
+    "i1": {
+      "file": "bsml2interevidence_fasta.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bsml2mugsymap": {
+    "i1": {
+      "file": "bsml2mugsymap.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "bsml2ptt": {
+    "i1": {
+      "file": "bsml2ptt.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bsml2tbl": {
+    "i1": {
+      "file": "bsml2tbl.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bsml_qc": {
+    "i1": {
+      "file": "bsml_qc.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "btab2taxon": {
+    "i1": {
+      "file": "btab2taxon.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "bwa": {
+    "i1": {
+      "file": "bwa.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "bwa_align": {
+    "i1": {
+      "file": "bwa_align.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "bwa_index": {
+    "i1": {
+      "file": "bwa_index.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "bwa_mem": {
+    "i1": {
+      "file": "bwa_mem.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "chado2bsml": {
+    "i1": {
+      "file": "chado2bsml.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "clean_fasta": {
+    "i1": {
+      "file": "clean_fasta.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "cleanse_sgc_database": {
+    "i1": {
+      "file": "cleanse_sgc_database.i1.json",
+      "type": "serial",
+      "command_count": 8,
+      "has_nested": false
+    }
+  },
+  "clustalw": {
+    "i1": {
+      "file": "clustalw.i1.json",
+      "type": "serial",
+      "command_count": 7,
+      "has_nested": false
+    }
+  },
+  "combine_ncRNA_alignments": {
+    "i1": {
+      "file": "combine_ncRNA_alignments.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "condor_cogs_search": {
+    "i1": {
+      "file": "condor_cogs_search.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "cuffcompare": {
+    "i1": {
+      "file": "cuffcompare.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "cuffdiff": {
+    "i1": {
+      "file": "cuffdiff.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "cuffdiff_filter": {
+    "i1": {
+      "file": "cuffdiff_filter.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "cufflinks": {
+    "i1": {
+      "file": "cufflinks.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "cummerbund": {
+    "i1": {
+      "file": "cummerbund.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "curate_common_names": {
+    "i1": {
+      "file": "curate_common_names.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "db2bsml": {
+    "i1": {
+      "file": "db2bsml.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "deseq": {
+    "i1": {
+      "file": "deseq.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "dump_fasta": {
+    "i1": {
+      "file": "dump_fasta.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "dump_table": {
+    "i1": {
+      "file": "dump_table.i1.json",
+      "type": "serial",
+      "command_count": 13,
+      "has_nested": false
+    }
+  },
+  "edgeR": {
+    "i1": {
+      "file": "edgeR.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "elph": {
+    "i1": {
+      "file": "elph.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "exonerate": {
+    "i1": {
+      "file": "exonerate.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "expression_plots": {
+    "i1": {
+      "file": "expression_plots.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "extract_assembly_stats": {
+    "i1": {
+      "file": "extract_assembly_stats.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "extract_snp_regions": {
+    "i1": {
+      "file": "extract_snp_regions.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "fast_tree": {
+    "i1": {
+      "file": "fast_tree.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "fastaToBsmlWorkingGeneModels": {
+    "i1": {
+      "file": "fastaToBsmlWorkingGeneModels.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "fastqc_stats": {
+    "i1": {
+      "file": "fastqc_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "fastx_quality_stats": {
+    "i1": {
+      "file": "fastx_quality_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "fastx_trimming": {
+    "i1": {
+      "file": "fastx_trimming.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "fgenesh": {
+    "i1": {
+      "file": "fgenesh.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "filter_bogus_genes": {
+    "i1": {
+      "file": "filter_bogus_genes.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "filter_deseq": {
+    "i1": {
+      "file": "filter_deseq.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "filter_dups_lc_seqs": {
+    "i1": {
+      "file": "filter_dups_lc_seqs.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "filter_fastq": {
+    "i1": {
+      "file": "filter_fastq.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "filter_merged_table": {
+    "i1": {
+      "file": "filter_merged_table.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "filter_sequences_by_id": {
+    "i1": {
+      "file": "filter_sequences_by_id.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "find_homopolymers": {
+    "i1": {
+      "file": "find_homopolymers.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "fix_gene_symbols": {
+    "i1": {
+      "file": "fix_gene_symbols.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "formatdb_snp": {
+    "i1": {
+      "file": "formatdb_snp.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "fuzznuc": {
+    "i1": {
+      "file": "fuzznuc.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "genbank2bsml": {
+    "i1": {
+      "file": "genbank2bsml.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    },
+    "i2": {
+      "file": "genbank2bsml.i2.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "genbank2fasta": {
+    "i1": {
+      "file": "genbank2fasta.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "genbank2gtf": {
+    "i1": {
+      "file": "genbank2gtf.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "geneid": {
+    "i1": {
+      "file": "geneid.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "genemark-es": {
+    "i1": {
+      "file": "genemark-es.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "genemark": {
+    "i1": {
+      "file": "genemark.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "genewise": {
+    "i1": {
+      "file": "genewise.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    },
+    "i2": {
+      "file": "genewise.i2.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "genezilla": {
+    "i1": {
+      "file": "genezilla.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "genscan-plus": {
+    "i1": {
+      "file": "genscan-plus.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "genscan": {
+    "i1": {
+      "file": "genscan.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "getorf": {
+    "i1": {
+      "file": "getorf.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "gff3_to_annotab": {
+    "i1": {
+      "file": "gff3_to_annotab.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "gff3_to_fasta": {
+    "i1": {
+      "file": "gff3_to_fasta.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "gff3_to_gbrowse": {
+    "i1": {
+      "file": "gff3_to_gbrowse.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "gkpstore2fastq": {
+    "i1": {
+      "file": "gkpstore2fastq.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "glimmer3": {
+    "i1": {
+      "file": "glimmer3.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "glimmerHMM": {
+    "i1": {
+      "file": "glimmerHMM.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "glk2bsml": {
+    "i1": {
+      "file": "glk2bsml.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "histogram_stacked": {
+    "i1": {
+      "file": "histogram_stacked.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "hmmer": {
+    "i1": {
+      "file": "hmmer.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "hmmls": {
+    "i1": {
+      "file": "hmmls.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "hmmpfam": {
+    "i1": {
+      "file": "hmmpfam.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "hmmpfam3": {
+    "i1": {
+      "file": "hmmpfam3.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "htseq": {
+    "i1": {
+      "file": "htseq.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "htseq_count_reads": {
+    "i1": {
+      "file": "htseq_count_reads.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "infernal": {
+    "i1": {
+      "file": "infernal.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "intergenic_analysis": {
+    "i1": {
+      "file": "intergenic_analysis.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "iprscan": {
+    "i1": {
+      "file": "iprscan.i1.json",
+      "type": "serial",
+      "command_count": 15,
+      "has_nested": false
+    }
+  },
+  "islandpath": {
+    "i1": {
+      "file": "islandpath.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "jaccard": {
+    "i1": {
+      "file": "jaccard.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "ksnp": {
+    "i1": {
+      "file": "ksnp.i1.json",
+      "type": "serial",
+      "command_count": 10,
+      "has_nested": false
+    }
+  },
+  "leech": {
+    "i1": {
+      "file": "leech.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "legacy2bsml": {
+    "i1": {
+      "file": "legacy2bsml.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "lgt_build_bwa_index": {
+    "i1": {
+      "file": "lgt_build_bwa_index.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "lgt_bwa": {
+    "i1": {
+      "file": "lgt_bwa.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "lgt_bwa_fq": {
+    "i1": {
+      "file": "lgt_bwa_fq.i1.json",
+      "type": "serial",
+      "command_count": 7,
+      "has_nested": false
+    }
+  },
+  "lgt_create_validated_bam": {
+    "i1": {
+      "file": "lgt_create_validated_bam.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "lgt_mpileup": {
+    "i1": {
+      "file": "lgt_mpileup.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "lipop": {
+    "i1": {
+      "file": "lipop.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "lipoprotein_motif": {
+    "i1": {
+      "file": "lipoprotein_motif.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "make_comparative_circleator_figure": {
+    "i1": {
+      "file": "make_comparative_circleator_figure.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "make_snp_lists": {
+    "i1": {
+      "file": "make_snp_lists.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mask_by_analysis": {
+    "i1": {
+      "file": "mask_by_analysis.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "megablast": {
+    "i1": {
+      "file": "megablast.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "metagene": {
+    "i1": {
+      "file": "metagene.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "metagenemark": {
+    "i1": {
+      "file": "metagenemark.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "metastats": {
+    "i1": {
+      "file": "metastats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_align_seqs": {
+    "i1": {
+      "file": "mothur_align_seqs.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_chimera_slayer": {
+    "i1": {
+      "file": "mothur_chimera_slayer.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_classify_seqs": {
+    "i1": {
+      "file": "mothur_classify_seqs.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_cluster": {
+    "i1": {
+      "file": "mothur_cluster.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_collect_single": {
+    "i1": {
+      "file": "mothur_collect_single.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_dist_seqs": {
+    "i1": {
+      "file": "mothur_dist_seqs.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_filter_seqs": {
+    "i1": {
+      "file": "mothur_filter_seqs.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_get_oturep": {
+    "i1": {
+      "file": "mothur_get_oturep.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_rarefaction_single": {
+    "i1": {
+      "file": "mothur_rarefaction_single.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_read_otu": {
+    "i1": {
+      "file": "mothur_read_otu.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_screen_seqs": {
+    "i1": {
+      "file": "mothur_screen_seqs.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_summary": {
+    "i1": {
+      "file": "mothur_summary.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_tree_shared": {
+    "i1": {
+      "file": "mothur_tree_shared.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_trim_seqs": {
+    "i1": {
+      "file": "mothur_trim_seqs.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mothur_unique_seqs": {
+    "i1": {
+      "file": "mothur_unique_seqs.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "mpileup": {
+    "i1": {
+      "file": "mpileup.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "mummer": {
+    "i1": {
+      "file": "mummer.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "muscle": {
+    "i1": {
+      "file": "muscle.i1.json",
+      "type": "serial",
+      "command_count": 8,
+      "has_nested": false
+    }
+  },
+  "ncbi-blastall": {
+    "i1": {
+      "file": "ncbi-blastall.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "ncbi-blastn": {
+    "i1": {
+      "file": "ncbi-blastn.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "ncbi-blastn_compress": {
+    "i1": {
+      "file": "ncbi-blastn_compress.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "ncbi-blastp": {
+    "i1": {
+      "file": "ncbi-blastp.i1.json",
+      "type": "serial",
+      "command_count": 7,
+      "has_nested": false
+    }
+  },
+  "ncbi-blastx": {
+    "i1": {
+      "file": "ncbi-blastx.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "ncbi-tblastn": {
+    "i1": {
+      "file": "ncbi-tblastn.i1.json",
+      "type": "serial",
+      "command_count": 7,
+      "has_nested": false
+    }
+  },
+  "ncbi-tblastx": {
+    "i1": {
+      "file": "ncbi-tblastx.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "ngap": {
+    "i1": {
+      "file": "ngap.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "nucmer-delta-filter": {
+    "i1": {
+      "file": "nucmer-delta-filter.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "nucmer-show-snps": {
+    "i1": {
+      "file": "nucmer-show-snps.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "nucmer-snp2merged": {
+    "i1": {
+      "file": "nucmer-snp2merged.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "nucmer": {
+    "i1": {
+      "file": "nucmer.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "nucmer_snps": {
+    "i1": {
+      "file": "nucmer_snps.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "open_reading_frames": {
+    "i1": {
+      "file": "open_reading_frames.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "outer_membrane_domain": {
+    "i1": {
+      "file": "outer_membrane_domain.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "overlap_analysis": {
+    "i1": {
+      "file": "overlap_analysis.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "p_func": {
+    "i1": {
+      "file": "p_func.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "pangenome_blast_parse": {
+    "i1": {
+      "file": "pangenome_blast_parse.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "pangenome_do_analysis": {
+    "i1": {
+      "file": "pangenome_do_analysis.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "pangenome_fix_headers": {
+    "i1": {
+      "file": "pangenome_fix_headers.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "pangenome_make_graphs": {
+    "i1": {
+      "file": "pangenome_make_graphs.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "panther": {
+    "i1": {
+      "file": "panther.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "parallel_sort": {
+    "i1": {
+      "file": "parallel_sort.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    },
+    "i2": {
+      "file": "parallel_sort.i2.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "parse_for_ncRNAs": {
+    "i1": {
+      "file": "parse_for_ncRNAs.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "parse_mpileup_for_positions": {
+    "i1": {
+      "file": "parse_mpileup_for_positions.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "pepstats": {
+    "i1": {
+      "file": "pepstats.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "percent_gc": {
+    "i1": {
+      "file": "percent_gc.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "percent_mapped_stats": {
+    "i1": {
+      "file": "percent_mapped_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "phage_finder": {
+    "i1": {
+      "file": "phage_finder.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "phat": {
+    "i1": {
+      "file": "phat.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "phobos": {
+    "i1": {
+      "file": "phobos.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "phylip_dnadist": {
+    "i1": {
+      "file": "phylip_dnadist.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "piecharts": {
+    "i1": {
+      "file": "piecharts.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "pileup_to_wig": {
+    "i1": {
+      "file": "pileup_to_wig.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "pipeline_summary": {
+    "i1": {
+      "file": "pipeline_summary.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "pmarks2bsml": {
+    "i1": {
+      "file": "pmarks2bsml.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "predict_operons": {
+    "i1": {
+      "file": "predict_operons.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "predotar": {
+    "i1": {
+      "file": "predotar.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "preserve_reads_in_fastq": {
+    "i1": {
+      "file": "preserve_reads_in_fastq.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "priam_ec_assignment": {
+    "i1": {
+      "file": "priam_ec_assignment.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "prodigal": {
+    "i1": {
+      "file": "prodigal.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "profile_bsml": {
+    "i1": {
+      "file": "profile_bsml.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "profile_gff3": {
+    "i1": {
+      "file": "profile_gff3.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "promote_gene_prediction": {
+    "i1": {
+      "file": "promote_gene_prediction.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "ps_scan": {
+    "i1": {
+      "file": "ps_scan.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "pseudomolecule2glimmer3": {
+    "i1": {
+      "file": "pseudomolecule2glimmer3.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "psiblast": {
+    "i1": {
+      "file": "psiblast.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "psortb": {
+    "i1": {
+      "file": "psortb.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "quicktree": {
+    "i1": {
+      "file": "quicktree.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "rdp_classifier": {
+    "i1": {
+      "file": "rdp_classifier.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "remove_db_gene_syms_with_hypos": {
+    "i1": {
+      "file": "remove_db_gene_syms_with_hypos.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "repeatmasker": {
+    "i1": {
+      "file": "repeatmasker.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "rpkm_coverage_stats": {
+    "i1": {
+      "file": "rpkm_coverage_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "rpsblast": {
+    "i1": {
+      "file": "rpsblast.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "rrna_hmm_fs": {
+    "i1": {
+      "file": "rrna_hmm_fs.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "samtools_alignment_stats": {
+    "i1": {
+      "file": "samtools_alignment_stats.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "samtools_file_convert": {
+    "i1": {
+      "file": "samtools_file_convert.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "samtools_reference_index": {
+    "i1": {
+      "file": "samtools_reference_index.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "seg": {
+    "i1": {
+      "file": "seg.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "selfsim": {
+    "i1": {
+      "file": "selfsim.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "sfffile": {
+    "i1": {
+      "file": "sfffile.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "sffinfo": {
+    "i1": {
+      "file": "sffinfo.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "sighunt": {
+    "i1": {
+      "file": "sighunt.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "signalp": {
+    "i1": {
+      "file": "signalp.i1.json",
+      "type": "serial",
+      "command_count": 11,
+      "has_nested": false
+    }
+  },
+  "skiff": {
+    "i1": {
+      "file": "skiff.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "snap": {
+    "i1": {
+      "file": "snap.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "snp-add-gene-info": {
+    "i1": {
+      "file": "snp-add-gene-info.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "snp_verify": {
+    "i1": {
+      "file": "snp_verify.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "soapdenovo": {
+    "i1": {
+      "file": "soapdenovo.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "solsnp": {
+    "i1": {
+      "file": "solsnp.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "sort_sam_by_name": {
+    "i1": {
+      "file": "sort_sam_by_name.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "split_fasta": {
+    "i1": {
+      "file": "split_fasta.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "split_fasta_fastq": {
+    "i1": {
+      "file": "split_fasta_fastq.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "split_fastq": {
+    "i1": {
+      "file": "split_fastq.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "split_multifasta": {
+    "i1": {
+      "file": "split_multifasta.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "sra2fastq": {
+    "i1": {
+      "file": "sra2fastq.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "stap_aligner": {
+    "i1": {
+      "file": "stap_aligner.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "stap_classifier": {
+    "i1": {
+      "file": "stap_classifier.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "start_site_curation": {
+    "i1": {
+      "file": "start_site_curation.i1.json",
+      "type": "serial",
+      "command_count": 2,
+      "has_nested": false
+    }
+  },
+  "tRNAscan-SE": {
+    "i1": {
+      "file": "tRNAscan-SE.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "tRNAscan-SE_compress": {
+    "i1": {
+      "file": "tRNAscan-SE_compress.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "tabula_rasa": {
+    "i1": {
+      "file": "tabula_rasa.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "targetp": {
+    "i1": {
+      "file": "targetp.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "tbl2asn": {
+    "i1": {
+      "file": "tbl2asn.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "tblastn_plus": {
+    "i1": {
+      "file": "tblastn_plus.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "tmhmm": {
+    "i1": {
+      "file": "tmhmm.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "tophat": {
+    "i1": {
+      "file": "tophat.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "translate_sequence": {
+    "i1": {
+      "file": "translate_sequence.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "trf": {
+    "i1": {
+      "file": "trf.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "uchime": {
+    "i1": {
+      "file": "uchime.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "uclust": {
+    "i1": {
+      "file": "uclust.i1.json",
+      "type": "serial",
+      "command_count": 5,
+      "has_nested": false
+    }
+  },
+  "uclust_remove_replicates": {
+    "i1": {
+      "file": "uclust_remove_replicates.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "update_ec_numbers": {
+    "i1": {
+      "file": "update_ec_numbers.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "update_euk_model_sequences": {
+    "i1": {
+      "file": "update_euk_model_sequences.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "usearch": {
+    "i1": {
+      "file": "usearch.i1.json",
+      "type": "serial",
+      "command_count": 3,
+      "has_nested": false
+    }
+  },
+  "validate_asn": {
+    "i1": {
+      "file": "validate_asn.i1.json",
+      "type": "serial",
+      "command_count": 4,
+      "has_nested": false
+    }
+  },
+  "validate_bsml": {
+    "i1": {
+      "file": "validate_bsml.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "validate_fasta": {
+    "i1": {
+      "file": "validate_fasta.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "validate_genbank": {
+    "i1": {
+      "file": "validate_genbank.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "validate_gff3": {
+    "i1": {
+      "file": "validate_gff3.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "velvet": {
+    "i1": {
+      "file": "velvet.i1.json",
+      "type": "serial",
+      "command_count": 7,
+      "has_nested": false
+    }
+  },
+  "wait": {
+    "i1": {
+      "file": "wait.i1.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    },
+    "i2": {
+      "file": "wait.i2.json",
+      "type": "serial",
+      "command_count": 1,
+      "has_nested": false
+    }
+  },
+  "wu-blastn": {
+    "i1": {
+      "file": "wu-blastn.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "wu-blastp": {
+    "i1": {
+      "file": "wu-blastp.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "wu-blastx": {
+    "i1": {
+      "file": "wu-blastx.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  },
+  "wu-tblastn": {
+    "i1": {
+      "file": "wu-tblastn.i1.json",
+      "type": "serial",
+      "command_count": 6,
+      "has_nested": false
+    }
+  }
+}
